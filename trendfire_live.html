@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrendFire F&O — Live</title>
+<style>
+  :root {
+    --bg: #0a0e1a; --panel: #0f1420; --panel2: #131a2a; --border: #1f2940;
+    --text: #e8ecf5; --text-soft: #8892a8; --text-dim: #5c6680;
+    --blue: #3b82f6; --blue-dim: rgba(59,130,246,0.12);
+    --green: #22c55e; --green-dim: rgba(34,197,94,0.12);
+    --red: #ef4444; --red-dim: rgba(239,68,68,0.12);
+    --amber: #f59e0b; --amber-dim: rgba(245,158,11,0.12);
+    --purple: #a78bfa; --purple-dim: rgba(167,139,250,0.12);
+    --cyan: #22d3ee; --cyan-dim: rgba(34,211,238,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; display: flex; min-height: 100vh; }
+  .sidebar { width: 220px; background: var(--panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px 12px; flex-shrink: 0; }
+  .brand { display: flex; align-items: center; gap: 8px; padding: 0 8px 20px; font-weight: 700; font-size: 17px; }
+  .brand .flame { color: var(--red); font-size: 20px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; color: var(--text-soft); cursor: pointer; font-size: 13.5px; margin-bottom: 2px; }
+  .nav-item.active { background: var(--blue-dim); color: var(--blue); font-weight: 600; }
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid var(--border); gap: 16px; flex-wrap: wrap; }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .status-pill { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-soft); }
+  .status-pill .led { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  .timestamp { font-size: 12.5px; color: var(--text-dim); }
+  .refresh-btn { background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 14px; font-size: 13px; color: var(--text-soft); cursor: pointer; }
+  .content { padding: 24px; flex: 1; }
+  .error-banner { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; color: var(--red); font-size: 13.5px; display: none; }
+  .scan-status { background: var(--green-dim); border: 1px solid rgba(34,197,94,0.25); border-radius: 10px; padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; flex-wrap: wrap; gap: 8px; }
+  .scan-status-left { display: flex; align-items: center; gap: 10px; color: var(--green); font-size: 13.5px; font-weight: 500; }
+  .scan-status-right { color: var(--text-soft); font-size: 12.5px; }
+  .category-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 24px; }
+  .cat-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .cat-label { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+  .cat-value { font-size: 28px; font-weight: 700; }
+  .section-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .section-sub { font-size: 12.5px; color: var(--text-dim); margin-bottom: 14px; }
+  .breadth-panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 12.5px; font-weight: 600; border: 1px solid; }
+  .two-col { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .panel-title { font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; color: var(--text-dim); font-weight: 500; padding: 6px 8px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+  td { padding: 9px 8px; font-size: 13px; border-bottom: 1px solid var(--border); }
+  .sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .sector-tile { border-radius: 10px; padding: 12px 14px; border: 1px solid; }
+  .sector-tile .name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+  .loading { color: var(--text-dim); font-size: 13px; padding: 20px; text-align: center; }
+  @media (max-width: 900px) { .sidebar { display: none; } .category-grid { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand"><span class="flame">&#128293;</span> TrendFire F&amp;O</div>
+  <div class="nav-item active">F&amp;O Scanner</div>
+  <div class="nav-item">Sector Rotation</div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="status-pill"><span class="led"></span> <span id="conn-status">Connecting to VM&hellip;</span></div>
+      <div class="timestamp" id="fno-timestamp">&mdash;</div>
+    </div>
+    <button class="refresh-btn" onclick="loadAll()">&#8635; Refresh now</button>
+  </div>
+
+  <div class="content">
+    <div class="error-banner" id="error-banner"></div>
+
+    <div class="scan-status">
+      <div class="scan-status-left" id="scan-summary">&#8987; Loading&hellip;</div>
+      <div class="scan-status-right" id="scan-time"></div>
+    </div>
+
+    <div class="category-grid" id="category-grid">
+      <div class="loading">Loading F&amp;O scan&hellip;</div>
+    </div>
+
+    <div class="breadth-panel">
+      <div class="section-title">Market Breadth</div>
+      <div class="section-sub" id="breadth-sub">&mdash;</div>
+      <div class="pill-row" id="breadth-pills"></div>
+    </div>
+
+    <div class="section-title">Sector OI Rotation</div>
+    <div class="section-sub">Live futures OI buildup grouped by sector, from the VM's oitracker &mdash; with confidence scoring</div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-title">Smart Money Leaderboard</div>
+        <table><thead><tr><th>Rank</th><th>Sector</th><th>Bias</th><th>Conviction</th></tr></thead>
+        <tbody id="leaderboard-body"><tr><td colspan="4" class="loading">Loading&hellip;</td></tr></tbody></table>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Sector Heatmap</div>
+        <div class="sector-grid" id="sector-heatmap"><div class="loading">Loading&hellip;</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const VM_BASE = "http://35.192.150.224:8000";
+const SECTOR_MAP = {"HDFCBANK":"Banking","ICICIBANK":"Banking","SBIN":"Banking","AXISBANK":"Banking","KOTAKBANK":"Banking","INDUSINDBK":"Banking","BANDHANBNK":"Banking","FEDERALBNK":"Banking","IDFCFIRSTB":"Banking","PNB":"Banking","BANKBARODA":"Banking","CANBK":"Banking","YESBANK":"Banking","AUBANK":"Banking","DCBBANK":"Banking","RBLBANK":"Banking","KARURVYSYA":"Banking","BAJFINANCE":"NBFC","BAJAJFINSV":"NBFC","CHOLAFIN":"NBFC","MUTHOOTFIN":"NBFC","LICHSGFIN":"NBFC","SHRIRAMFIN":"NBFC","M&MFIN":"NBFC","MANAPPURAM":"NBFC","POONAWALLA":"NBFC","IIFL":"NBFC","TCS":"IT","INFY":"IT","WIPRO":"IT","HCLTECH":"IT","TECHM":"IT","LTM":"IT","MPHASIS":"IT","COFORGE":"IT","PERSISTENT":"IT","OFSS":"IT","KPITTECH":"IT","MINDTREE":"IT","HEXAWARE":"IT","LTTS":"IT","NIIT":"IT","RELIANCE":"Energy","ONGC":"Energy","BPCL":"Energy","IOC":"Energy","GAIL":"Energy","POWERGRID":"Energy","NTPC":"Energy","TATAPOWER":"Energy","ADANIGREEN":"Energy","ADANIPOWER":"Energy","TORNTPOWER":"Energy","CESC":"Energy","NHPC":"Energy","SJVN":"Energy","IREDA":"Energy","MARUTI":"Auto","TATAMOTORS":"Auto","BAJAJ-AUTO":"Auto","EICHERMOT":"Auto","FORCEMOT":"Auto","HYUNDAI":"Auto","HEROMOTOCO":"Auto","ASHOKLEY":"Auto","TVSMOTOR":"Auto","MOTHERSON":"Auto","BOSCHLTD":"Auto","BHARATFORG":"Auto","EXIDEIND":"Auto","AMARAJABAT":"Auto","SUNDARMFIN":"Auto","CRAFTSMAN":"Auto","TIINDIA":"Auto","SUNPHARMA":"Pharma","DRREDDY":"Pharma","CIPLA":"Pharma","DIVISLAB":"Pharma","AUROPHARMA":"Pharma","LUPIN":"Pharma","TORNTPHARM":"Pharma","ALKEM":"Pharma","BIOCON":"Pharma","LALPATHLAB":"Pharma","METROPOLIS":"Pharma","ABBOTINDIA":"Pharma","GLENMARK":"Pharma","IPCALAB":"Pharma","PFIZER":"Pharma","ITC":"FMCG","HINDUNILVR":"FMCG","NESTLEIND":"FMCG","BRITANNIA":"FMCG","GODFRYPHLP":"FMCG","DABUR":"FMCG","MARICO":"FMCG","GODREJCP":"FMCG","COLPAL":"FMCG","EMAMILTD":"FMCG","TATACONSUM":"FMCG","VARUNBEV":"FMCG","RADICO":"FMCG","UBL":"FMCG","VBL":"FMCG","TATASTEEL":"Metals","JSWSTEEL":"Metals","HINDALCO":"Metals","VEDL":"Metals","COALINDIA":"Metals","NMDC":"Metals","SAIL":"Metals","NATIONALUM":"Metals","HINDZINC":"Metals","APLAPOLLO":"Metals","WELCORP":"Metals","RATNAMANI":"Metals","LT":"Infra","SIEMENS":"Infra","ABB":"Infra","BHEL":"Infra","CONCOR":"Infra","ADANIENT":"Infra","ADANIPORTS":"Infra","CUMMINSIND":"Infra","THERMAX":"Infra","HAL":"Infra","BEL":"Infra","IRCON":"Infra","RVNL":"Infra","GRSE":"Infra","COCHINSHIP":"Infra","MAZAGON":"Infra","TITAGARH":"Infra","ULTRACEMCO":"Cement","SHREECEM":"Cement","AMBUJACEM":"Cement","ACC":"Cement","RAMCOCEM":"Cement","JKCEMENT":"Cement","DALMIA":"Cement","STARCEMENT":"Cement","BHARTIARTL":"Telecom","IDEA":"Telecom","TATACOMM":"Telecom","RAILTEL":"Telecom","DLF":"Real Estate","GODREJPROP":"Real Estate","OBEROIRLTY":"Real Estate","LODHA":"Real Estate","PRESTIGE":"Real Estate","BRIGADE":"Real Estate","SOBHA":"Real Estate","PHOENIXLTD":"Real Estate","MAHLIFE":"Real Estate","TITAN":"Consumer","HAVELLS":"Consumer","VOLTAS":"Consumer","WHIRLPOOL":"Consumer","VMM":"Consumer","DIXON":"Consumer","VGUARD":"Consumer","KALYANKJIL":"Consumer","MANYAVAR":"Consumer","CROMPTON":"Consumer","ORIENTELEC":"Consumer","AMBER":"Consumer","PIDILITIND":"Chemicals","SRF":"Chemicals","DEEPAKNTR":"Chemicals","NAVINFLUOR":"Chemicals","ATUL":"Chemicals","GALAXYSURF":"Chemicals","TATACHEM":"Chemicals","GNFC":"Chemicals","INDIGO":"Aviation","IRCTC":"Travel","LEMONTREE":"Hotels","IHCL":"Hotels","EIH":"Hotels","CHALET":"Hotels","HDFCLIFE":"Insurance","SBILIFE":"Insurance","ICICIPRULI":"Insurance","GICRE":"Insurance","NIACL":"Insurance","ICICIGI":"Insurance","BSE":"Exchange","MCX":"Exchange","CDSL":"Exchange","CAMS":"Exchange","MOTILALOFS":"Exchange","NAM-INDIA":"Exchange","ANGELONE":"Exchange","POLICYBAZAAR":"Exchange","PAYTM":"Exchange"};
+
+const CATS = [
+  {trade: "🏆 Prime Setup", label: "Prime Setup", color: "#f59e0b"},
+  {trade: "✅ Confirmed Bullish", label: "Confirmed Bullish", color: "#22c55e"},
+  {trade: "🎯 Consolidating", label: "Consolidating", color: "#a78bfa"},
+  {trade: "⚠️ Extended (Gaining)", label: "Extended (Gaining)", color: "#f59e0b"},
+  {trade: "⏳ Building Momentum", label: "Building Momentum", color: "#22d3ee"},
+  {trade: "❌ Avoid", label: "Avoid", color: "#ef4444"},
+];
+
+function showError(msg) {
+  const el = document.getElementById('error-banner');
+  el.style.display = 'block';
+  el.innerHTML = msg;
+  document.getElementById('conn-status').textContent = 'Connection failed';
+  document.querySelector('.led').style.background = '#ef4444';
+}
+
+async function loadAll() {
+  document.getElementById('error-banner').style.display = 'none';
+  try {
+    const [fnoRes, oiRes] = await Promise.all([
+      fetch(VM_BASE + "/fno_scan_results.json"),
+      fetch(VM_BASE + "/latest_oi_status.json"),
+    ]);
+    if (!fnoRes.ok || !oiRes.ok) throw new Error("VM returned an error response");
+    const fno = await fnoRes.json();
+    const oi = await oiRes.json();
+
+    document.getElementById('conn-status').textContent = 'Connected to VM';
+    document.querySelector('.led').style.background = '#22c55e';
+
+    renderFno(fno);
+    renderSectors(oi);
+  } catch (err) {
+    showError(
+      "Could not reach the VM (" + err.message + "). This usually means either: " +
+      "(1) <code>priority_server.py</code> on the VM needs the CORS-enabled update, or " +
+      "(2) you're opening this file from your computer and the browser is blocking the request &mdash; " +
+      "try hosting this HTML file somewhere (GitHub Pages, Vercel, etc.) instead of opening it directly."
+    );
+  }
+}
+
+function renderFno(fno) {
+  document.getElementById('fno-timestamp').textContent = "Scan generated: " + fno.generated_at;
+  document.getElementById('scan-summary').innerHTML =
+    (fno.status === "success" ? "&#10003; " : "&#9888; ") +
+    fno.symbols_scanned + " stocks scanned &middot; " + fno.symbols_failed + " failed";
+  document.getElementById('scan-time').textContent =
+    "took " + fno.scan_duration_seconds + "s (computed on the VM)";
+
+  const rows = fno.results || [];
+  const counts = {};
+  CATS.forEach(c => counts[c.trade] = 0);
+  let greenN = 0;
+  rows.forEach(r => {
+    if (counts.hasOwnProperty(r.Trade)) counts[r.Trade]++;
+    if ((r._pct_change || 0) > 0) greenN++;
+  });
+
+  document.getElementById('category-grid').innerHTML = CATS.map(c => `
+    <div class="cat-card">
+      <div class="cat-label" style="color:${c.color}">${c.label}</div>
+      <div class="cat-value" style="color:${c.color}">${counts[c.trade]}</div>
+    </div>
+  `).join('');
+
+  const bullish = greenN > rows.length / 2;
+  document.getElementById('breadth-sub').innerHTML =
+    "(" + rows.length + " stocks) &middot; <strong style='color:" + (bullish ? "#22c55e" : "#ef4444") + "'>" +
+    (bullish ? "Bullish Bias" : "Bearish Bias") + "</strong>";
+  document.getElementById('breadth-pills').innerHTML = CATS.map(c => `
+    <div class="pill" style="background:${c.color}22;color:${c.color};border-color:${c.color}44">${c.label} ${counts[c.trade]}</div>
+  `).join('');
+}
+
+function renderSectors(oi) {
+  const symbols = oi.symbols || {};
+  const bySector = {};
+  Object.entries(symbols).forEach(([stock, info]) => {
+    const sector = SECTOR_MAP[stock];
+    if (!sector) return;
+    if (!bySector[sector]) bySector[sector] = [];
+    bySector[sector].push(info);
+  });
+
+  const sectorRows = Object.entries(bySector).map(([sector, items]) => {
+    const total = items.length;
+    const bullish = items.filter(i => i.status_code === "long_buildup").length;
+    const longs = items.filter(i => i.status_code === "long_buildup");
+    const smartMoneyScore = longs.length
+      ? Math.round(longs.reduce((s, i) => s + (i.confidence_score || 0), 0) / longs.length * 10) / 10
+      : 0;
+    const bullPct = total ? (bullish / total) * 100 : 0;
+    return { sector, total, bullish, bullPct, smartMoneyScore };
+  }).filter(r => r.total >= 2);
+
+  const byScore = [...sectorRows].sort((a, b) => b.smartMoneyScore - a.smartMoneyScore);
+  const leaderboard = byScore.filter(r => r.smartMoneyScore > 0).slice(0, 8);
+
+  document.getElementById('leaderboard-body').innerHTML = leaderboard.length
+    ? leaderboard.map((r, i) => `
+      <tr><td>${i+1}</td><td>${r.sector}</td>
+      <td style="color:${r.bullPct >= 50 ? '#22c55e' : '#ef4444'}">${r.bullPct >= 50 ? 'Bullish' : 'Bearish'}</td>
+      <td style="font-weight:700;color:#22c55e">${r.smartMoneyScore}</td></tr>
+    `).join('')
+    : '<tr><td colspan="4" class="loading">None right now &mdash; no sector has a high-conviction Long Buildup at the moment.</td></tr>';
+
+  const byBull = [...sectorRows].sort((a, b) => b.bullPct - a.bullPct);
+  document.getElementById('sector-heatmap').innerHTML = byBull.slice(0, 9).map(r => {
+    const bullish = r.bullPct >= 50;
+    const color = bullish ? "#22c55e" : "#ef4444";
+    return `<div class="sector-tile" style="background:${color}1f;border-color:${color}44">
+      <div class="name" style="color:${color}">${r.sector}</div>
+      <div style="color:${color};font-size:12.5px;font-weight:600">${r.bullish}/${r.total} bullish</div>
+    </div>`;
+  }).join('');
+}
+
+loadAll();
+setInterval(loadAll, 90000);
+</script>
+</body>
+</html>
