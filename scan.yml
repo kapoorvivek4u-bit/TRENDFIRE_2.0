@@ -1,6 +1,7 @@
 # Place this file at: .github/workflows/scan.yml
 name: Setups scan
 
+
 on:
   schedule:
     - cron: "50 4-9 * * 1-5"   # 10:20 to 15:20 IST, once an hour (Hourly states)
