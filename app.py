@@ -147,6 +147,47 @@ st.markdown(
     f'<div style="height:6px;border-radius:3px;width:{bar}%;background:{GREEN}"></div></div>',
     unsafe_allow_html=True)
 
+with st.expander("What the words mean"):
+    st.markdown("""
+**Setups (the buttons at the top)**
+- **Squeeze** (Squeeze Break): Weekly is bullish. Daily is coiled in a squeeze with momentum below zero. The aim is to catch it before it breaks out.
+- **Swing** (Swing Pullback): Daily is in an impulse and Hourly has dipped. The aim is to join a moving stock on a short dip. Suits 3 to 5 day holds.
+- **Trend** (Trend Pullback): Monthly and Weekly are in an impulse and Daily has dipped. Suits holds of one to three weeks.
+
+**Stages (where the stock is)**
+- **Watch**: the dip or coil is still in progress. Momentum is still falling. No trigger yet.
+- **Ready**: momentum has just turned up. This is the entry stage.
+- **Triggered**: price has already closed above the trigger level. The turn is confirmed, so you are a little late.
+- **Running**: in an impulse with no dip to buy.
+- **Stretched**: far above its 20-day average. Chasing here is risky.
+- **Fading**: was bullish, and Daily momentum has fallen for several days.
+
+**Trend tag (from Monthly)**
+- **With trend**: Monthly momentum is above zero.
+- **Early turn**: Monthly is below zero but rising.
+- **Counter-trend**: Monthly is below zero and falling. Smaller size or skip.
+
+**Grade (volume and OI, as of the last close)**
+- **A**: volume and OI both support the setup.
+- **B**: one of the two supports it.
+- **C**: neither does.
+- **Warning**: OI rose while price fell in the dip. That means fresh shorts.
+
+**M, W, D, H (Monthly, Weekly, Daily, Hourly momentum)**
+- **Bullish**: above zero and rising.
+- **Topping**: above zero and falling.
+- **Bearish**: below zero and falling.
+- **Bottoming**: below zero and rising.
+- **Impulse**: Bullish, with price above a rising 20 EMA and the 20 EMA above the 50.
+
+**The numbers on each row**
+- **Pullback 41%**: the dip has given back 41% of the last up-move. The page accepts 20% to 75%.
+- **Volume 0.6x in pullback**: volume in the dip is 0.6 times the volume in the up-move. Lower is better.
+- **OI +4% in up-leg, +1% in pullback**: change in futures open interest in each part.
+- **Above 1,904**: the trigger. A close above this level confirms the turn.
+- **Stop**: just below the low of the dip.
+""")
+
 if ready:
     show_rows(ready)
 if held:
