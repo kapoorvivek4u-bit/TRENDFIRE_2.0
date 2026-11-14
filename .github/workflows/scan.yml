@@ -1,0 +1,41 @@
+name: Setups scan
+
+on:
+  schedule:
+    - cron: "50 4-9 * * 1-5"
+    - cron: "45 10 * * 1-5"
+    - cron: "0 14 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: setups-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: pip install yfinance pandas numpy requests
+
+      - name: Run scan
+        run: python "setups scan.py"
+
+      - name: Save results to the repo
+        run: |
+          git config user.name "setups-bot"
+          git config user.email "setups-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Setups scan $(date -u +%FT%H:%MZ)"
+          git pull --rebase
+          git push
