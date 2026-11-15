@@ -1,4 +1,4 @@
-"""TrendFire Setups - one light page. Reads data/setups.json; does no scanning itself."""
+"""TrendFire Setups - F&O and Equity views. Reads the scan results; does no scanning itself."""
 import datetime as dt
 import html
 import json
@@ -6,7 +6,14 @@ import os
 
 import streamlit as st
 
-DATA = os.path.join("data", "setups.json")
+PAGES = {
+    "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
+            "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback"],
+            "who": "F&O stocks"},
+    "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
+               "setups": ["All", "Squeeze Break", "Trend Pullback"],
+               "who": "these midcaps and smallcaps"},
+}
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
@@ -32,8 +39,8 @@ st.markdown(f"""<style>
 
 
 @st.cache_data(ttl=120)
-def load(mtime):
-    with open(DATA) as f:
+def load(path, mtime):
+    with open(path) as f:
         return json.load(f)
 
 
@@ -65,8 +72,8 @@ def row_html(r):
     states = " · ".join(f"{k} {e(v)}" for k, v in r["states"].items())
     detail = e(r.get("detail", ""))
     if r["grade"] == "Warning":
-        detail += (f'<br><span style="color:{RED};font-weight:600">'
-                   "OI rose while price fell: short build-up</span>")
+        why = r.get("warning_text") or "OI rose while price fell: short build-up"
+        detail += f'<br><span style="color:{RED};font-weight:600">{e(why)}</span>'
     if r.get("trigger") is None:
         left = "No trigger yet"
     elif r["stage"] == "Triggered":
@@ -97,13 +104,16 @@ def names_html(names):
     return f'<div class="tf-names">{links}</div>'
 
 
+page = st.radio("Market", list(PAGES), horizontal=True, label_visibility="collapsed")
+P = PAGES[page]
+DATA, EQUITY = P["file"], page == "Equity"
 if not os.path.exists(DATA):
-    st.title("Setups")
-    st.info("No scan results yet. Run the 'Setups scan' workflow once from the "
+    st.title(f"{page} Setups")
+    st.info(f"No scan results yet. Run the '{P['workflow']}' workflow once from the "
             "GitHub Actions tab.")
     st.stop()
 
-res = load(os.path.getmtime(DATA))
+res = load(DATA, os.path.getmtime(DATA))
 m = res["market"]
 gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
 age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
@@ -112,15 +122,14 @@ st.markdown(
     f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
     f'border-bottom:2px solid {INK};padding-bottom:10px">'
     f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
-    f'Setups</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
+    f'{html.escape(page)} Setups</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
     f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
 if age_days >= 3:
     st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                "GitHub for a failed run.")
 
-choice = st.radio("Setup", ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback"],
-                  horizontal=True, label_visibility="collapsed",
-                  format_func=lambda x: x.split()[0])
+choice = st.radio("Setup", P["setups"], horizontal=True, label_visibility="collapsed",
+                  format_func=lambda x: x.split()[0], key=f"setup_{page}")
 rows = [r for r in res["rows"] if choice == "All" or r["setup"] == choice]
 ready = [r for r in rows if r["stage"] == "Ready"]
 held = []
@@ -133,7 +142,7 @@ headline = ("No stocks are Ready right now." if n == 0 else
             "1 stock is Ready." if n == 1 else f"{n} stocks are Ready.")
 market = "Market data unavailable."
 if m["weekly_bull_pct"] is not None:
-    market = (f"{m['regime']} market: {m['weekly_bull_pct']}% of F&O stocks are "
+    market = (f"{m['regime']} market: {m['weekly_bull_pct']}% of {P['who']} are "
               f"bullish on Weekly")
     if m["monthly_bull_pct"] is not None:
         market += f" and {m['monthly_bull_pct']}% on Monthly"
@@ -147,12 +156,32 @@ st.markdown(
     f'<div style="height:6px;border-radius:3px;width:{bar}%;background:{GREEN}"></div></div>',
     unsafe_allow_html=True)
 
+SWING_DEF = ("- **Swing** (Swing Pullback): Daily is in an impulse and Hourly has dipped. "
+             "The aim is to join a moving stock on a short dip. Suits 3 to 5 day holds.\n")
+if EQUITY:
+    GRADE_DEF = """**Grade (volume and delivery, as of the last close)**
+- **A**: volume and delivery both support the setup.
+- **B**: one of the two supports it.
+- **C**: neither does.
+- **Warning**: volume in the dip is heavier than in the up-move. That points to selling pressure."""
+    THIRD_DEF = ("- **Delivery 55% vs 40% before**: delivery share in the last 10 days "
+                 "against the 30 days before. Higher is better.")
+    TF_DEF = "**M, W, D (Monthly, Weekly, Daily momentum)**"
+else:
+    GRADE_DEF = """**Grade (volume and OI, as of the last close)**
+- **A**: volume and OI both support the setup.
+- **B**: one of the two supports it.
+- **C**: neither does.
+- **Warning**: OI rose while price fell in the dip. That means fresh shorts."""
+    THIRD_DEF = ("- **OI +4% in up-leg, +1% in pullback**: change in futures open "
+                 "interest in each part.")
+    TF_DEF = "**M, W, D, H (Monthly, Weekly, Daily, Hourly momentum)**"
+
 with st.expander("What the words mean"):
-    st.markdown("""
+    st.markdown(f"""
 **Setups (the buttons at the top)**
 - **Squeeze** (Squeeze Break): Weekly is bullish. Daily is coiled in a squeeze with momentum below zero. The aim is to catch it before it breaks out.
-- **Swing** (Swing Pullback): Daily is in an impulse and Hourly has dipped. The aim is to join a moving stock on a short dip. Suits 3 to 5 day holds.
-- **Trend** (Trend Pullback): Monthly and Weekly are in an impulse and Daily has dipped. Suits holds of one to three weeks.
+{"" if EQUITY else SWING_DEF}- **Trend** (Trend Pullback): Monthly and Weekly are in an impulse and Daily has dipped. Suits holds of one to three weeks.
 
 **Stages (where the stock is)**
 - **Watch**: the dip or coil is still in progress. Momentum is still falling. No trigger yet.
@@ -167,13 +196,9 @@ with st.expander("What the words mean"):
 - **Early turn**: Monthly is below zero but rising.
 - **Counter-trend**: Monthly is below zero and falling. Smaller size or skip.
 
-**Grade (volume and OI, as of the last close)**
-- **A**: volume and OI both support the setup.
-- **B**: one of the two supports it.
-- **C**: neither does.
-- **Warning**: OI rose while price fell in the dip. That means fresh shorts.
+{GRADE_DEF}
 
-**M, W, D, H (Monthly, Weekly, Daily, Hourly momentum)**
+{TF_DEF}
 - **Bullish**: above zero and rising.
 - **Topping**: above zero and falling.
 - **Bearish**: below zero and falling.
@@ -183,7 +208,7 @@ with st.expander("What the words mean"):
 **The numbers on each row**
 - **Pullback 41%**: the dip has given back 41% of the last up-move. The page accepts 20% to 75%.
 - **Volume 0.6x in pullback**: volume in the dip is 0.6 times the volume in the up-move. Lower is better.
-- **OI +4% in up-leg, +1% in pullback**: change in futures open interest in each part.
+{THIRD_DEF}
 - **Above 1,904**: the trigger. A close above this level confirms the turn.
 - **Stop**: just below the low of the dip.
 """)
@@ -214,8 +239,15 @@ if choice == "All":
 
 for note in res.get("notes", []):
     st.caption(f"Note: {note}")
-st.caption(
-    f"{res['stocks']} F&O stocks scanned. Grade uses volume and OI as of the F&O file "
-    f"for {res['oi_asof']}. Daily, Weekly and Monthly use completed days; Hourly uses "
-    "completed bars and refreshes about once an hour. Ready sightings are saved for "
-    "the scorecard. Watchlist only, not investment advice.")
+if EQUITY:
+    st.caption(
+        f"{res['stocks']} stocks scanned: midcaps and smallcaps outside F&O with average "
+        f"turnover above Rs 10 crore. Grade uses volume and delivery as of {res['oi_asof']}. "
+        "Updated once a day after the close. Smallcaps can hit circuits and gap, so a "
+        "stop may not be honoured. Watchlist only, not investment advice.")
+else:
+    st.caption(
+        f"{res['stocks']} F&O stocks scanned. Grade uses volume and OI as of the F&O file "
+        f"for {res['oi_asof']}. Daily, Weekly and Monthly use completed days; Hourly uses "
+        "completed bars and refreshes about once an hour. Ready sightings are saved for "
+        "the scorecard. Watchlist only, not investment advice.")
