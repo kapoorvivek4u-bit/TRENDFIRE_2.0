@@ -1,0 +1,276 @@
+{
+ "generated_ist": "2026-11-15 06:32",
+ "oi_asof": "2026-11-13",
+ "stocks": 256,
+ "market": {
+  "weekly_bull_pct": 25,
+  "monthly_bull_pct": 44,
+  "vix": null,
+  "regime": "Weak"
+ },
+ "rows": [
+  {
+   "symbol": "GABRIEL",
+   "close": 1552.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Triggered",
+   "detail": "Squeeze 6 days \u00b7 Up/down volume 4.1x \u00b7 Delivery 34% vs 32% before",
+   "grade": "A",
+   "trigger": 1690.0,
+   "stop": 1347.3
+  },
+  {
+   "symbol": "ABDL",
+   "close": 757.7,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Triggered",
+   "detail": "Squeeze 13 days \u00b7 Up/down volume 2.0x \u00b7 Delivery 45% vs 42% before",
+   "grade": "A",
+   "trigger": 768.0,
+   "stop": 674.65
+  },
+  {
+   "symbol": "PINELABS",
+   "close": 176.44,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bullish",
+    "D": "Bullish"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Triggered",
+   "detail": "Squeeze 6 days \u00b7 Up/down volume 2.3x \u00b7 Delivery 35% vs 30% before",
+   "grade": "A",
+   "trigger": 178.58,
+   "stop": 150.96
+  },
+  {
+   "symbol": "CHENNPETRO",
+   "close": 1428.2,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Watch",
+   "detail": "Squeeze 15 days \u00b7 Up/down volume 1.2x \u00b7 Delivery 30% vs 24% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1397.6
+  },
+  {
+   "symbol": "PTCIL",
+   "close": 24365.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Ready",
+   "detail": "Squeeze 8 days, 10 bars to flip \u00b7 Up/down volume 1.0x \u00b7 Delivery 43% vs 37% before",
+   "grade": "B",
+   "trigger": 25415.0,
+   "stop": 23408.09
+  },
+  {
+   "symbol": "SHRIPISTON",
+   "close": 4291.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Watch",
+   "detail": "Squeeze 8 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 53% vs 50% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 4194.19
+  },
+  {
+   "symbol": "CYIENT",
+   "close": 1104.9,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Watch",
+   "detail": "Squeeze 8 days \u00b7 Up/down volume 1.1x \u00b7 Delivery 48% vs 36% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1069.86
+  },
+  {
+   "symbol": "WHIRLPOOL",
+   "close": 829.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Bottoming"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Ready",
+   "detail": "Squeeze 13 days, 1 bars to flip \u00b7 Up/down volume 0.9x \u00b7 Delivery 33% vs 28% before",
+   "grade": "B",
+   "trigger": 868.0,
+   "stop": 804.34
+  },
+  {
+   "symbol": "TBOTEK",
+   "close": 1614.3,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Topping",
+    "D": "Bullish"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Triggered",
+   "detail": "Squeeze 7 days \u00b7 Up/down volume 2.9x \u00b7 Delivery 48% vs 54% before",
+   "grade": "B",
+   "trigger": 1634.9,
+   "stop": 1495.1
+  },
+  {
+   "symbol": "CRAFTSMAN",
+   "close": 11077.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Ready",
+   "detail": "Squeeze 7 days, 2 bars to flip \u00b7 Up/down volume 1.0x \u00b7 Delivery 48% vs 52% before",
+   "grade": "C",
+   "trigger": 11178.0,
+   "stop": 10054.85
+  },
+  {
+   "symbol": "GESHIP",
+   "close": 1518.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Bottoming"
+   },
+   "setup": "Trend Pullback",
+   "stage": "Ready",
+   "detail": "Pullback 67% \u00b7 Volume 1.1x in pullback \u00b7 Delivery 49% vs 51% before",
+   "grade": "C",
+   "trigger": 1527.9,
+   "stop": 1406.08
+  },
+  {
+   "symbol": "CPPLUS",
+   "close": 4148.0,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "setup": "Squeeze Break",
+   "stage": "Triggered",
+   "detail": "Squeeze 2 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 47% vs 54% before",
+   "grade": "C",
+   "trigger": 4418.6,
+   "stop": 3612.06
+  }
+ ],
+ "others": {
+  "Running": [
+   "ACMESOLAR",
+   "ACUTAAS",
+   "AETHER",
+   "AFFLE",
+   "AIIL",
+   "ANTHEM",
+   "BEML",
+   "CEATLTD",
+   "CEMPRO",
+   "CUPID",
+   "EMAMILTD",
+   "ENGINERSIN",
+   "FLUOROCHEM",
+   "FRACTAL",
+   "GLAND",
+   "GRAPHITE",
+   "GROWW",
+   "HONASA",
+   "IIFL",
+   "JKCEMENT",
+   "JSWCEMENT",
+   "JSWINFRA",
+   "JYOTICNC",
+   "KPRMILL",
+   "LALPATHLAB",
+   "LEMONTREE",
+   "LENSKART",
+   "LGEINDIA",
+   "LINDEINDIA",
+   "MEDANTA",
+   "MEESHO",
+   "MGL",
+   "MINDACORP",
+   "MRPL",
+   "NH",
+   "NUVAMA",
+   "ONESOURCE",
+   "POONAWALLA",
+   "PPLPHARMA",
+   "PVRINOX",
+   "RKFORGE",
+   "RUBICON",
+   "SANSERA",
+   "SHYAMMETL",
+   "SYNGENE",
+   "TATACOMM",
+   "URBANCO",
+   "WELSPUNLIV",
+   "ZENTEC"
+  ],
+  "Stretched": [
+   "ANURAS",
+   "ASAHIINDIA",
+   "EMCURE",
+   "SAILIFE"
+  ],
+  "Fading": [
+   "BHARTIHEXA",
+   "BSOFT",
+   "FSL",
+   "HBLENGINE",
+   "IGIL",
+   "IPCALAB",
+   "LTTS",
+   "PFOCUS",
+   "ZENSARTECH"
+  ]
+ },
+ "notes": []
+}
