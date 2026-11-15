@@ -1,0 +1,49 @@
+name: Unusual scan
+
+on:
+  schedule:
+    - cron: "55 4-9 * * 1-5"
+    - cron: "50 10 * * 1-5"
+    - cron: "20 14 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: unusual-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: pip install yfinance pandas numpy requests
+
+      - name: Run unusual scan
+        run: |
+          for f in "unusual_scan.py" "unusual scan.py" "unusual_scan"; do
+            if [ -f "$f" ]; then python "$f"; exit $?; fi
+          done
+          echo "unusual scan file not found"; exit 1
+
+      - name: Save results to the repo
+        run: |
+          git config user.name "setups-bot"
+          git config user.email "setups-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && exit 0
+          git commit -m "Unusual scan $(date -u +%FT%H:%MZ)"
+          for i in 1 2 3 4; do
+            git pull --rebase && git push && exit 0
+            sleep 7
+          done
+          exit 1
