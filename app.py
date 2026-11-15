@@ -19,8 +19,9 @@ PAGES = {
                 "Equity": {"file": os.path.join("data", "unusual_equity.json"),
                            "workflow": "Equity scan"}},
     "Breakout": {"file": os.path.join("data", "breakout.json"), "workflow": "Equity scan"},
+    "Sectors": {"file": os.path.join("data", "sectors.json"), "workflow": "Sector scan"},
 }
-ALL_FILES = ([PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout")]
+ALL_FILES = ([PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 OWNER = "Vivek Kapoor"          # name shown beside the Refresh button
@@ -86,6 +87,28 @@ def grade_badge(g):
 
 
 UNUSUAL = {}          # symbol -> its row on the Unusual page, for the market in view
+SECTORS = {}          # symbol -> {"sector", "stage"} from the sector scan
+STAGE_COLOR = {"Leading": GREEN, "Improving": BLUE, "Weakening": "#8a5300", "Lagging": RED}
+
+
+def load_sector_tags():
+    path = PAGES["Sectors"]["file"]
+    if not os.path.exists(path):
+        return {}
+    try:
+        return load(path, os.path.getmtime(path)).get("map", {})
+    except Exception:
+        return {}
+
+
+def sector_html(sym):
+    t = SECTORS.get(sym)
+    if not t or not t.get("sector"):
+        return ""
+    stage = t.get("stage") or ""
+    tail = (f' · <span style="color:{STAGE_COLOR.get(stage, MUTED)};font-weight:600">'
+            f'{html.escape(stage)}</span>' if stage else "")
+    return f'<div class="tf-small">Sector: {html.escape(t["sector"])}{tail}</div>'
 
 
 def load_unusual_map(market):
@@ -127,7 +150,7 @@ def row_html(r):
         f'{e(r["symbol"])}</a>{grade_badge(r["grade"])}</div>'
         f'<div class="tf-set">{e(r["setup"])} · '
         f'<span style="color:{tcol}">{e(trend)}</span></div>'
-        f'<div class="tf-small">{states}</div>'
+        f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
         f'<div class="tf-small">{detail}</div>'
         f'<div class="tf-lvl"><span>{left}</span>'
         + (f'<span style="color:{RED}">Stop {money(r["stop"])}</span>'
@@ -165,6 +188,11 @@ def unusual_row(r):
         ctx.append(e(r["vs_high"]))
     if r.get("setup"):
         ctx.append("On Setups: " + e(r["setup"]))
+    t = SECTORS.get(r["symbol"])
+    if t and t.get("sector"):
+        ctx.append(f"Sector: {e(t['sector'])}"
+                   + (f" · <span style=\"color:{STAGE_COLOR.get(t['stage'], MUTED)};"
+                      f"font-weight:600\">{e(t['stage'])}</span>" if t.get("stage") else ""))
     return (
         '<div class="tf-row"><div class="tf-top">'
         f'<a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
@@ -414,6 +442,126 @@ Grade A is not a guarantee. The grade is as of the last close, and every thresho
                "Watchlist only, not investment advice.")
 
 
+def render_sectors(P):
+    path = P["file"]
+    if not os.path.exists(path):
+        st.title("Sectors")
+        st.info(f"No scan results yet. Run the '{P['workflow']}' workflow once from the "
+                "GitHub Actions tab.")
+        return
+    res = load(path, os.path.getmtime(path))
+    e = html.escape
+    gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
+    age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
+    st.markdown(
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
+        f'border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Sectors</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
+        f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
+    if age_days >= 3:
+        st.warning(f"These results are {age_days} days old. Check the Actions tab on "
+                   "GitHub for a failed run.")
+    secs = res["sectors"]
+    lead = [x["name"] for x in secs if x["stage"] == "Leading"]
+    headline = ("No sector is Leading right now." if not lead else
+                f"1 sector is Leading: {lead[0]}." if len(lead) == 1 else
+                f"{len(lead)} sectors are Leading: {', '.join(lead)}.")
+    nf = res["nifty"]
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'color:{INK};margin:6px 0 6px">{e(headline)}</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">Nifty is '
+        f'{nf["r1"]:+.1f}% over 1 month and {nf["r3"]:+.1f}% over 3 months. Each sector '
+        'below is measured against it, using that sector\'s F&amp;O stocks.</div>',
+        unsafe_allow_html=True)
+    with st.expander("What the words mean"):
+        st.markdown("""
+**The four stages** compare a sector with Nifty.
+- **Leading**: beating Nifty, and the lead is growing.
+- **Weakening**: still beating Nifty, but the lead is shrinking.
+- **Lagging**: trailing Nifty, and falling further behind.
+- **Improving**: trailing Nifty, but catching up.
+
+Sectors usually move round in that order: Improving, Leading, Weakening, Lagging. Improving is often the early sign of the next leader.
+
+**How it is measured.** Each sector's F&O stocks are averaged with equal weight. That line is divided by Nifty. Above its own 50-day average means the sector is beating Nifty. The change in that over the last 10 days says whether the lead is growing or shrinking.
+
+**1M and 3M** are the sector's return over 1 and 3 months, minus Nifty's.
+
+**Wk bull** is the share of the sector's F&O stocks with Weekly momentum above zero.
+
+**Top stocks** in each sector are its strongest by return against Nifty over 1 and 3 months, blended. A green line shows when a stock is also on another page today.
+
+**Sector names** come from NSE's Nifty 500 list. Banks and PSU Banks are split out of Finance. Sectors with fewer than 3 F&O stocks are listed at the bottom, not ranked.
+
+The sector line on every stock row elsewhere on the site comes from this page.
+""")
+    def pct(x):
+        return "n/a" if x is None else f"{x:+.1f}%"
+    head = ("<tr><th style='text-align:left'>Sector</th><th style='text-align:left'>Stage</th>"
+            "<th>1M</th><th>3M</th><th>Wk bull</th></tr>")
+    body = "".join(
+        f"<tr><td>{e(x['name'])}</td>"
+        f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
+        f"<td class='n'>{pct(x['rs1'])}</td><td class='n'>{pct(x['rs3'])}</td>"
+        f"<td class='n'>{x['wk_bull']}%</td></tr>" for x in secs)
+    st.markdown(
+        f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
+        f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
+        f"color:{MUTED};font-weight:600;text-align:right;padding:6px 4px;"
+        f"border-bottom:2px solid {INK}}}"
+        f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE}}}"
+        f".tf-sec td.n{{text-align:right;font-family:{MONO}}}</style>"
+        f"<div style='overflow-x:auto;margin:6px 0 4px'><table class='tf-sec'>{head}{body}"
+        "</table></div>", unsafe_allow_html=True)
+
+    on_site = {}
+    for key in ("F&O", "Equity"):
+        p_ = PAGES[key]["file"]
+        if os.path.exists(p_):
+            r_ = load(p_, os.path.getmtime(p_))
+            for row in r_.get("rows", []) + r_.get("overspill", []):
+                if row.get("stage") in ("Ready", "Triggered", "Watch"):
+                    on_site.setdefault(row["symbol"], []).append(
+                        f'{row["setup"]} · {row["stage"]} ({row["grade"]})')
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:600;margin-top:18px">Top stocks by sector</div>',
+                unsafe_allow_html=True)
+    for x in secs:
+        label = (f"{x['name']} · {x['stage']} · 1M {pct(x['rs1'])} vs Nifty · "
+                 f"{x['n']} stocks")
+        with st.expander(label, expanded=x["stage"] == "Leading"):
+            rows_html = []
+            for t in x["top"]:
+                tags = on_site.get(t["symbol"])
+                rows_html.append(
+                    '<div class="tf-row"><div class="tf-top">'
+                    f'<a class="tf-sym" href="{chart_link(t["symbol"])}" target="_blank">'
+                    f'{e(t["symbol"])}</a><span class="tf-lvl">{money(t["close"])}</span></div>'
+                    f'<div class="tf-small">W {e(t["states"]["W"])} · D {e(t["states"]["D"])}'
+                    f' · 1M {pct(t["rs1"])} · 3M {pct(t["rs3"])} vs Nifty</div>'
+                    + (f'<div class="tf-small" style="color:{GREEN};font-weight:600">'
+                       f'On the site: {e("; ".join(tags))}</div>' if tags else "")
+                    + '</div>')
+            st.markdown(f'<div class="tf-small">{x["wk_bull"]}% of its stocks bullish on '
+                        f'Weekly, {x["d_bull"]}% on Daily.</div>'
+                        '<div class="tf-grid">' + "".join(rows_html) + '</div>',
+                        unsafe_allow_html=True)
+    if res.get("unranked"):
+        k = len(res["unranked"])
+        with st.expander(f"Not ranked · {k} small group{'' if k == 1 else 's'}"):
+            st.markdown("".join(
+                f'<div class="tf-small" style="margin:4px 0"><b>{e(u["name"])}</b> '
+                f'({u["n"]}): {names_html(u["members"])}</div>' for u in res["unranked"]),
+                unsafe_allow_html=True)
+    for note in res.get("notes", []):
+        st.caption(f"Note: {note}")
+    st.caption(f"F&O stocks, Daily bars as of {res['asof']}. Updated once a day after the "
+               "close. Stages are relative to Nifty, not a forecast. Watchlist only, not "
+               "investment advice.")
+
+
 def file_stamp():
     return tuple(os.path.getmtime(p) if os.path.exists(p) else 0 for p in ALL_FILES)
 
@@ -437,6 +585,10 @@ with st.container(horizontal=True, horizontal_alignment="distribute",
                 f'color:{INK};text-align:right">{html.escape(OWNER)}</div>',
                 unsafe_allow_html=True)
 watch_for_new_scans()
+SECTORS.update(load_sector_tags())
+if page == "Sectors":
+    render_sectors(PAGES[page])
+    st.stop()
 if page == "A list":
     render_alist()
     st.stop()
