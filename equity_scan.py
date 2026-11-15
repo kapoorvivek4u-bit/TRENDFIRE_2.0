@@ -66,8 +66,42 @@ def load_engine():
                        "be in the same folder.")
 
 
+def load_unusual():
+    """The Unusual scan file, if it is in the repo, whatever its name."""
+    for name in ("unusual_scan.py", "unusual scan.py", "unusual_scan"):
+        if os.path.exists(name) and "def daily_events(" in open(name, encoding="utf-8").read():
+            loader = importlib.machinery.SourceFileLoader("tf_unusual", name)
+            spec = importlib.util.spec_from_loader("tf_unusual", loader)
+            mod = importlib.util.module_from_spec(spec)
+            loader.exec_module(mod)
+            return mod
+    return None
+
+
 E = load_engine()
 CFG = E.CFG
+
+
+def equity_unusual(U, symbols, daily, dl_by, setups):
+    """Unusual activity on Daily bars only: volume patterns, range, gap, delivery."""
+    cal = U.trading_days({}, daily)
+    rows = []
+    for s in symbols:
+        d = daily.get(s)
+        try:
+            r = U.analyse_unusual(s, d, None, None, dl_by.get(s), cal)
+        except Exception as e:
+            print(f"[warn] unusual {s}: {e}")
+            continue
+        if not r:
+            continue
+        if "states" in r:
+            r["states"] = {"M": E.tf_view(E.to_monthly(d), 1)["state"], **r["states"]}
+        if s in setups:
+            r["setup"] = setups[s]
+        rows.append(r)
+    rows.sort(key=lambda r: (-r["score"], r["symbol"]))
+    return rows
 
 
 # ------------------------------------------------------------------- logic
@@ -313,6 +347,18 @@ def main_live():
         c[r["stage"]] = c.get(r["stage"], 0) + 1
     print(f"{res['stocks']} stocks | {c} | market {res['market']}")
 
+    U = load_unusual()
+    if U is None:
+        print("[info] unusual scan file not in the repo; equity unusual list skipped.")
+        return
+    setups = {r["symbol"]: f"{r['setup']} · {r['stage']}" for r in res["rows"]}
+    urows = equity_unusual(U, symbols, daily, dl_by, setups)
+    with open(os.path.join(CFG["data_dir"], "unusual_equity.json"), "w") as f:
+        json.dump({"generated_ist": res["generated_ist"], "oi_asof": res["oi_asof"],
+                   "stocks": len(symbols), "rows": urows, "notes": []}, f, indent=1)
+    print(f"unusual: {len(urows)} flagged | top: "
+          + ", ".join(f"{r['symbol']} {r['score']}" for r in urows[:8]))
+
 
 # ---------------------------------------------------------------- selftest
 def selftest():
@@ -384,6 +430,28 @@ def selftest():
                          "2026-11-13", None, [])
     assert res["stocks"] == 1 and len(res["rows"]) == 1
     json.dumps(res)
+
+    # 7) unusual activity on daily bars only (needs the unusual scan file alongside)
+    U = load_unusual()
+    if U is None:
+        print("unusual scan file not found here; step 7 skipped")
+    else:
+        quiet = U._daily(days, seed=2)
+        loud = U._daily(days, seed=3)
+        j = len(loud) - 1
+        px = loud["Close"].iloc[j - 1]
+        loud.iloc[j, [loud.columns.get_loc(x) for x in ("Open", "High", "Low", "Close", "Volume")]] = \
+            [px, px * 1.002, px * 0.96, px * 1.001, loud["Volume"].iloc[j] * 4]
+        dlv = pd.DataFrame({"date": days[-30:], "deliv_per": [40.0] * 29 + [65.0],
+                            "close": [100.0] * 29 + [102.0]})
+        out = equity_unusual(U, ["QUIET", "LOUD"], {"QUIET": quiet, "LOUD": loud},
+                             {"LOUD": dlv}, {"LOUD": "Trend Pullback · Watch"})
+        print(json.dumps(out, indent=1))
+        assert [r["symbol"] for r in out] == ["LOUD"], out
+        assert list(out[0]["states"]) == ["M", "W", "D"] and out[0]["setup"].startswith("Trend")
+        texts = " | ".join(e["text"] for e in out[0]["events"])
+        assert "flush absorbed" in texts and "Delivery 65% vs 40% usual" in texts
+        assert "hour" not in texts and "OI" not in texts
     print("\nSELFTEST PASSED")
     return res
 
