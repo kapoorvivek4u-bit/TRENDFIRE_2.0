@@ -1,0 +1,168 @@
+{
+ "generated_ist": "2026-11-15 12:37",
+ "oi_asof": "2026-11-13",
+ "stocks": 256,
+ "market": {
+  "weekly_bull_pct": 25,
+  "monthly_bull_pct": 44,
+  "vix": null,
+  "regime": "Weak"
+ },
+ "broke": [],
+ "setting": [
+  {
+   "symbol": "ABDL",
+   "close": 757.7,
+   "trend": "",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 78.1,
+   "grade": "A",
+   "trigger": 768.0,
+   "stop": null,
+   "detail": "1.3% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 92 \u00b7 Delivery 45% vs 42% before"
+  },
+  {
+   "symbol": "LTTS",
+   "close": 4247.2,
+   "trend": "Early turn",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 68.1,
+   "grade": "B",
+   "trigger": 4347.4,
+   "stop": null,
+   "detail": "2.3% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 84 \u00b7 Delivery 41% vs 37% before"
+  },
+  {
+   "symbol": "PVRINOX",
+   "close": 1641.2,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Bullish",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 66.5,
+   "grade": "B",
+   "trigger": 1675.0,
+   "stop": null,
+   "detail": "2.0% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 98 \u00b7 Delivery 55% vs 47% before"
+  },
+  {
+   "symbol": "SANSERA",
+   "close": 4708.4,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 64.0,
+   "grade": "B",
+   "trigger": 4844.0,
+   "stop": null,
+   "detail": "2.8% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 53% vs 46% before"
+  },
+  {
+   "symbol": "GLAND",
+   "close": 3334.1,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 53.5,
+   "grade": "C",
+   "trigger": 3374.0,
+   "stop": null,
+   "detail": "1.2% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 98 \u00b7 Delivery 52% vs 55% before"
+  },
+  {
+   "symbol": "SHYAMMETL",
+   "close": 1315.9,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 51.0,
+   "grade": "C",
+   "trigger": 1347.0,
+   "stop": null,
+   "detail": "2.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 98 \u00b7 Delivery 47% vs 55% before"
+  },
+  {
+   "symbol": "CRAFTSMAN",
+   "close": 11077.0,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "stage": "Ready",
+   "score": 48.6,
+   "grade": "C",
+   "trigger": 11289.0,
+   "stop": null,
+   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 83 \u00b7 Delivery 48% vs 52% before"
+  },
+  {
+   "symbol": "GRAPHITE",
+   "close": 799.95,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 48.6,
+   "grade": "C",
+   "trigger": 804.0,
+   "stop": null,
+   "detail": "0.5% below the breakout level \u00b7 Base 16% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 73 \u00b7 Delivery 42% vs 37% before"
+  },
+  {
+   "symbol": "TATACOMM",
+   "close": 1772.9,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 41.7,
+   "grade": "C",
+   "trigger": 1779.0,
+   "stop": null,
+   "detail": "0.3% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 72 \u00b7 Delivery 60% vs 51% before"
+  }
+ ],
+ "notes": []
+}
