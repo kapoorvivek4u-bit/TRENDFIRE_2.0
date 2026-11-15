@@ -48,7 +48,8 @@ UCFG = {
     "oi_mult": 2.5,               # ... and it must be this many times the stock's usual
     "deliv_mult": 1.4, "deliv_pts": 10.0,
     "age_weight": [1.0, 0.7, 0.5],
-    "min_score": 2.0,
+    "min_score": 3.0,             # score needed to be listed
+    "moved_atr": 2.0,             # price move over the window, in normal day-ranges, that counts as "moved"
 }
 
 
@@ -276,6 +277,16 @@ def analyse_unusual(sym, d, hr, tables, dl, cal):
         last = float(hr["Close"].iloc[-1]) if hr is not None and len(hr) else float(c[-1])
         hi20 = float(d["High"].values[-21:-1].max())
         row["close"] = round(last, 2)
+        W = UCFG["daily_window"]
+        h_, l_ = d["High"].values.astype(float), d["Low"].values.astype(float)
+        ref = float(c[-(W + 1)])
+        pc = np.roll(c, 1)
+        tr = np.maximum(h_ - l_, np.maximum(np.abs(h_ - pc), np.abs(l_ - pc)))
+        atr = float(np.mean(tr[-(W + 14):-W]))
+        move = last / ref - 1
+        row["move_pct"] = round(move * 100, 1)
+        row["moved"] = bool(abs(move) * ref >= UCFG["moved_atr"] * atr
+                            or any(e["src"] in ("range", "gap") for e in events))
         row["vs_high"] = ("At a 20-day high" if last >= hi20
                           else f"{(1 - last / hi20) * 100:.1f}% below its 20-day high")
         D, Wk = E.tf_view(d, 3), E.tf_view(E.to_weekly(d), 3)
@@ -436,6 +447,24 @@ def selftest():
     print(json.dumps(r, indent=1))
     assert r["score"] > a[0] and r["bias"] == "Buying" and r["events"][0]["when"] == "Fri 13"
     assert set(r["states"]) == {"W", "D"} and "20-day high" in r["vs_high"]
+    assert r["moved"] is True
+
+    # 7) quiet case: absorption today plus an OI build-up, price barely moved
+    dq = d.copy()
+    i = len(dq) - 1
+    dq.iloc[i, dq.columns.get_loc("Volume")] *= 3
+    mid = dq["Close"].iloc[i - 1]
+    dq.iloc[i, [dq.columns.get_loc(x) for x in ("Open", "High", "Low", "Close")]] = \
+        [mid, mid * 1.001, mid * 0.999, mid * 1.0005]
+    q = analyse_unusual("JUMP", dq, None, tables, None, cal)
+    print(json.dumps(q, indent=1))
+    assert q is not None and q["moved"] is False and abs(q["move_pct"]) < 2, q
+    assert any("absorption" in e["text"] for e in q["events"])
+
+    # 8) a single ordinary 2x volume day is no longer enough to be listed
+    d1 = d.copy()
+    d1.iloc[-1, d1.columns.get_loc("Volume")] *= 2.2
+    assert analyse_unusual("ONE", d1, None, None, None, cal) is None
     print("\nSELFTEST PASSED")
     return r
 
