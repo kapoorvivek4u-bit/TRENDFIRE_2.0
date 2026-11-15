@@ -104,6 +104,9 @@ def row_html(r):
         left = f"Triggered above {money(r['trigger'])}"
     else:
         left = f"Above {money(r['trigger'])}"
+    if r.get("also"):
+        detail += (f'<br><span style="color:{GREEN};font-weight:600">Also grade A: '
+                   f'{e("; ".join(r["also"]))}</span>')
     u = UNUSUAL.get(r["symbol"])
     if u:
         ev = u["events"][0]
@@ -327,6 +330,82 @@ The main risk is a failed breakout: price falls back into the base. That happens
         "Watchlist only, not investment advice.")
 
 
+def render_alist():
+    """Every grade A row on the site, in one place."""
+    sources = (("F&O", PAGES["F&O"]["file"], ("rows", "overspill")),
+               ("Equity", PAGES["Equity"]["file"], ("rows",)),
+               ("Equity", PAGES["Breakout"]["file"], ("broke", "setting")))
+    found, stamps, markets = [], {}, {}
+    for market, path, keys in sources:
+        if not os.path.exists(path):
+            continue
+        res = load(path, os.path.getmtime(path))
+        stamps.setdefault(market, res["generated_ist"])
+        if res.get("market"):
+            markets.setdefault(market, res["market"])
+        for k in keys:
+            found += [dict(r, market=market) for r in res.get(k, []) if r.get("grade") == "A"]
+    for mk in ("F&O", "Equity"):
+        UNUSUAL.update(load_unusual_map(mk))
+    st.markdown(
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
+        f'border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'A list</span><span class="tf-small">'
+        + html.escape(" · ".join(f"{k} {v[5:]}" for k, v in stamps.items()) or "no scans yet")
+        + '</span></div>', unsafe_allow_html=True)
+    if not stamps:
+        st.info("No scan results yet. Run the scans once from the GitHub Actions tab.")
+        return
+    stage_rank = {"Ready": 0, "Triggered": 1, "Watch": 2}
+    t_rank = {"With trend": 0, "Early turn": 1, "": 2, "Counter-trend": 3}
+    merged = {}
+    for r in sorted(found, key=lambda r: stage_rank.get(r["stage"], 9)):
+        key = (r["market"], r["symbol"])
+        if key in merged:
+            merged[key]["also"].append(f'{r["setup"]} · {r["stage"]}')
+        else:
+            merged[key] = dict(r, setup=f'{r["market"]} · {r["setup"]}', also=[])
+    rows = sorted(merged.values(),
+                  key=lambda r: (-len(r["also"]), t_rank.get(r.get("trend") or "", 2), r["symbol"]))
+    by = {k: [r for r in rows if r["stage"] == k] for k in stage_rank}
+    n = len(by["Ready"])
+    headline = ("No grade A stock is Ready right now." if n == 0 else
+                "1 grade A stock is Ready." if n == 1 else f"{n} grade A stocks are Ready.")
+    line = " ".join(f"{k}: {m['regime'].lower()} market, {m['weekly_bull_pct']}% bullish on Weekly."
+                    for k, m in markets.items() if m.get("weekly_bull_pct") is not None)
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'color:{INK};margin:6px 0 6px">{headline}</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(line)}</div>',
+        unsafe_allow_html=True)
+    with st.expander("What this page is"):
+        st.markdown("""
+Every stock graded **A** anywhere on the site, gathered here: the F&O setups (Squeeze, Swing, Trend), Overspill, the Equity setups, and Breakout.
+
+- **A** means the price pattern qualified and both supporting checks passed: volume and OI for F&O, volume and delivery for Equity. On Breakout it is the top score band.
+- Each row starts with where it comes from, such as "F&O · Hourly Overspill".
+- A stock that is grade A on two setups is shown once, with an "Also grade A" line, and is listed first.
+- **Ready** is the entry stage. **Triggered** has already turned. **Watch** has not turned yet.
+- For Breakout, Ready means close to its breakout level, and Triggered means it has broken out.
+- The Unusual page is not part of this list, because it uses scores, not grades. Its line still appears on a row when the stock shows unusual activity.
+
+Grade A is not a guarantee. The grade is as of the last close, and every threshold is a starting value.
+""")
+    if by["Ready"]:
+        show_rows(by["Ready"])
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:600;margin-top:18px">Other stages</div>', unsafe_allow_html=True)
+    for stage in ("Triggered", "Watch"):
+        with st.expander(f"{stage} · {len(by[stage])}"):
+            if by[stage]:
+                show_rows(by[stage])
+            else:
+                st.caption("None.")
+    st.caption("Grade A rows from F&O Setups, Overspill, Equity Setups and Breakout. "
+               "Watchlist only, not investment advice.")
+
+
 def file_stamp():
     return tuple(os.path.getmtime(p) if os.path.exists(p) else 0 for p in ALL_FILES)
 
@@ -340,10 +419,14 @@ def watch_for_new_scans():
         st.rerun()
 
 
-page = st.radio("Market", list(PAGES), horizontal=True, label_visibility="collapsed")
+page = st.radio("Market", ["A list"] + list(PAGES), horizontal=True,
+                label_visibility="collapsed")
 if st.button("Refresh"):
     st.cache_data.clear()
 watch_for_new_scans()
+if page == "A list":
+    render_alist()
+    st.stop()
 if page == "Unusual":
     render_unusual(PAGES[page])
     st.stop()
