@@ -3,7 +3,7 @@
 TrendFire Setups - equity scan (midcaps and smallcaps outside F&O).
 
 Uses the same engine as the F&O scan, on Daily bars only:
-  setup : Squeeze Break | Trend Pullback
+  setup : Squeeze Break | Trend Pullback (Weekly impulse + Daily dip; Monthly is a tag)
   stage : Watch | Ready | Triggered   (else Running | Stretched | Fading)
   trend : With trend | Early turn | Counter-trend
   grade : A | B | C | Warning   (volume + delivery %, last close)
@@ -130,7 +130,9 @@ def analyse_equity(sym, d, dl):
     deliv_ok, deliv_txt = delivery_check(dl)
     cands = []
 
-    if M["impulse"] and W["impulse"]:
+    # Weekly impulse + Daily dip. Monthly is NOT a gate here: it only sets the tag,
+    # so recent listings and stocks whose Monthly has paused are still listed.
+    if W["impulse"]:
         pb = E.find_pullback(D["h"], D["l"], D["c"], D["ind"]["atr"], **CFG["daily"])
         if pb:
             stage, level = E.turn_stage(D["h"], D["c"], D["ind"]["mom"], pb)
@@ -401,6 +403,22 @@ def selftest():
 
     # 3) no delivery history -> at most grade B
     assert analyse_equity("DEMO", d.iloc[:len(d) - cut], None)["grade"] == "B"
+
+    # 3b) Monthly no longer gates Trend Pullback: a recent listing still qualifies
+    young = d.iloc[-300:]
+    y = analyse_equity("YOUNG", young.iloc[:len(young) - cut], dl)
+    print("recent listing:", y["setup"], "|", y["stage"], "| tag:", repr(y["trend"]),
+          "| M:", y["states"]["M"])
+    assert y["setup"] == "Trend Pullback" and y["states"]["M"] == "No data" and y["trend"] == ""
+    #     ... and so does a stock recovering from a long fall (Monthly not yet an impulse)
+    fall = 300 * np.exp(np.cumsum(np.full(900, -0.0012)))
+    rec = d["Close"].values[-220:] / d["Close"].values[-220] * fall[679]
+    turn_c = np.concatenate([fall[:680], rec])
+    t = E._bars(turn_c, days, noise=0.006, vol=vol)
+    tr_ = analyse_equity("TURN", t.iloc[:len(t) - cut], dl)
+    print("after a long fall:", tr_["setup"], "|", tr_["stage"], "| tag:", tr_["trend"],
+          "| M:", tr_["states"]["M"])
+    assert tr_["setup"] == "Trend Pullback" and tr_["states"]["M"] != "Impulse", tr_
 
     # 4) cash bhavcopy reader (NSE pads its columns with spaces)
     csv = ("SYMBOL, SERIES, DATE1, CLOSE_PRICE, TURNOVER_LACS, DELIV_QTY, DELIV_PER\n"
