@@ -23,6 +23,7 @@ PAGES = {
 ALL_FILES = ([PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout")]
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
+OWNER = "Vivek Kapoor"          # name shown beside the Refresh button
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
@@ -33,6 +34,14 @@ st.set_page_config(page_title="Setups", layout="centered")
 st.markdown(f"""<style>
 .block-container {{max-width: 480px; padding: 1.2rem 1rem 3rem;}}
 #MainMenu, footer, header {{visibility: hidden;}}
+.tf-grid {{display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 36px;
+  border-bottom: 1px solid {RULE};}}
+@media (min-width: 900px) {{
+  .block-container {{max-width: 1180px; padding: 1.6rem 2rem 3rem;}}
+  .tf-grid {{grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));}}
+  .tf-small {{font-size: 13px !important;}}
+  .tf-set, .tf-ev {{font-size: 14px !important;}}
+}}
 .tf-row {{border-top: 1px solid {RULE}; padding: 11px 0; line-height: 1.45;}}
 .tf-top {{display: flex; justify-content: space-between; align-items: center;}}
 .tf-sym {{font-family: {MONO}; font-size: 17px; font-weight: 600; color: {INK} !important;}}
@@ -128,8 +137,7 @@ def row_html(r):
 
 
 def show_rows(rows):
-    st.markdown("".join(row_html(r) for r in rows)
-                + f'<div style="border-top:1px solid {RULE}"></div>',
+    st.markdown('<div class="tf-grid">' + "".join(row_html(r) for r in rows) + '</div>',
                 unsafe_allow_html=True)
 
 
@@ -231,12 +239,12 @@ The Equity view uses Daily bars only, so it has no hourly or OI events.
 This page says something is happening. It does not say the move will continue. Check the chart.
 """)
     if rows:
-        st.markdown("".join(unusual_row(r) for r in rows[:15])
-                    + f'<div style="border-top:1px solid {RULE}"></div>',
-                    unsafe_allow_html=True)
+        st.markdown('<div class="tf-grid">' + "".join(unusual_row(r) for r in rows[:15])
+                    + '</div>', unsafe_allow_html=True)
         if len(rows) > 15:
             with st.expander(f"{len(rows) - 15} more, weaker"):
-                st.markdown("".join(unusual_row(r) for r in rows[15:]), unsafe_allow_html=True)
+                st.markdown('<div class="tf-grid">' + "".join(unusual_row(r) for r in rows[15:])
+                            + '</div>', unsafe_allow_html=True)
     elif total:
         st.caption("None in this view.")
     for note in res.get("notes", []):
@@ -421,8 +429,13 @@ def watch_for_new_scans():
 
 page = st.radio("Market", ["A list"] + list(PAGES), horizontal=True,
                 label_visibility="collapsed")
-if st.button("Refresh"):
-    st.cache_data.clear()
+with st.container(horizontal=True, horizontal_alignment="distribute",
+                  vertical_alignment="center"):
+    if st.button("Refresh"):
+        st.cache_data.clear()
+    st.markdown(f'<div style="font-family:Georgia,serif;font-size:18px;font-weight:600;'
+                f'color:{INK};text-align:right">{html.escape(OWNER)}</div>',
+                unsafe_allow_html=True)
 watch_for_new_scans()
 if page == "A list":
     render_alist()
