@@ -41,6 +41,15 @@ ECFG = {
     "deliv_lift": 1.05,           # last 10 days' delivery % vs the 30 days before
     "heavy_dip": 1.3,             # dip volume vs up-leg volume that earns a Warning
     "backfill_days": 75, "keep_days": 150,
+    # base breakout
+    "bo_base_bars": 15,           # length of the base, in days
+    "bo_max_depth": 0.20,         # base no deeper than this
+    "bo_min_rvol": 1.5,           # breakout-day volume vs 50-day average
+    "bo_max_ext": 0.06,           # not more than this above the breakout level
+    "bo_max_risk": 0.08,          # stop no further than this
+    "bo_near": 0.03,              # "setting up" = within this of the breakout level
+    "bo_min_rs": 0.70,            # relative-strength percentile in the group
+    "bo_days": 3,                 # breakouts from the last N sessions are listed
 }
 CASH_URL = "https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_{d}.csv"
 INDEX_URLS = [
@@ -201,6 +210,103 @@ def analyse_equity(sym, d, dl):
     return row
 
 
+def clamp(x, lo=0.0, hi=1.0):
+    return float(max(lo, min(hi, x)))
+
+
+def rs_percentiles(daily):
+    """Rank of each stock's blended 3-month and 6-month return within the group."""
+    rows = {}
+    for s, df in daily.items():
+        c = df["Close"].values
+        if len(c) >= 130:
+            rows[s] = 0.5 * (c[-1] / c[-64] - 1) + 0.5 * (c[-1] / c[-127] - 1)
+    return pd.Series(rows, dtype=float).rank(pct=True)
+
+
+def analyse_breakout(sym, d, rs, dl):
+    """A strong stock leaving a tight base on volume, or about to. None otherwise."""
+    if d is None or len(d) < 210 or rs is None or np.isnan(rs) or rs < ECFG["bo_min_rs"]:
+        return None
+    h, l, c, v = (d[k].values.astype(float) for k in ("High", "Low", "Close", "Volume"))
+    n, B = len(c), ECFG["bo_base_bars"]
+    sma50, sma50_old, sma200 = c[-50:].mean(), c[-70:-20].mean(), c[-200:].mean()
+    high252 = h[-252:].max()
+    if not (c[-1] > sma50 > sma200 and sma50 > sma50_old and c[-1] >= 0.8 * high252):
+        return None
+
+    def base(i):                       # the B days before day i
+        bh, bl = h[i - B:i].max(), l[i - B:i].min()
+        vol50 = v[i - 50:i].mean()
+        return bh, (bh - bl) / bh, vol50, (v[i - 10:i].mean() / vol50 if vol50 > 0 else np.nan)
+
+    deliv_ok, deliv_txt = delivery_check(dl)
+    p_common = lambda depth, dry: (
+        25 * clamp((rs - 0.7) / 0.3) + 15 * clamp((c[-1] / high252 - 0.8) / 0.2)
+        + 15 * clamp((0.20 - depth) / 0.12) + 10 * clamp((1 - dry) / 0.4)
+        + (10 if deliv_ok else 0))
+    M, W, D = E.tf_view(E.to_monthly(d), 1), E.tf_view(E.to_weekly(d), 3), E.tf_view(d, 3)
+    trend = {"Bullish": "With trend", "Topping": "With trend",
+             "Bottoming": "Early turn", "Bearish": "Counter-trend"}.get(M["state"], "")
+    show = lambda x: "Impulse" if x["impulse"] else x["state"]
+    row = {"symbol": sym, "close": round(float(c[-1]), 2), "trend": trend,
+           "setup": "Base Breakout", "states": {"M": show(M), "W": show(W), "D": show(D)}}
+
+    for k in range(ECFG["bo_days"]):   # did it break out in the last few sessions?
+        i = n - 1 - k
+        bh, depth, vol50, dry = base(i)
+        rng = h[i] - l[i]
+        pos = (c[i] - l[i]) / rng if rng > 0 else 0.0
+        rvol = v[i] / vol50 if vol50 > 0 else 0.0
+        if not (depth <= ECFG["bo_max_depth"] and c[i] > bh >= c[i - 1]
+                and rvol >= ECFG["bo_min_rvol"] and pos >= 0.5):
+            continue
+        stop = min(l[i], l[i - 1]) * 0.995
+        if ((c[i + 1:] <= bh).any() or c[-1] / bh - 1 > ECFG["bo_max_ext"]
+                or not 0 < (c[-1] - stop) / c[-1] <= ECFG["bo_max_risk"]):
+            return None                # failed, extended, or stop too far
+        score = p_common(depth, dry) + 20 * clamp((rvol - 1) / 2) + 5 * clamp((pos - 0.5) / 0.5)
+        row.update({
+            "stage": "Triggered", "score": round(score, 1),
+            "grade": "A" if score >= 70 else "B" if score >= 55 else "C",
+            "trigger": round(float(bh), 2), "stop": round(float(stop), 2),
+            "detail": " · ".join([
+                f"Broke out {d.index[i].strftime('%a %d')}", f"Volume {rvol:.1f}x",
+                f"Base {depth * 100:.0f}% deep", f"RS {rs * 100:.0f}", deliv_txt])})
+        return row
+
+    bh, depth, vol50, dry = base(n)    # not broken out: is it close to the level?
+    gap = 1 - c[-1] / bh
+    if depth <= ECFG["bo_max_depth"] and 0 <= gap <= ECFG["bo_near"]:
+        score = p_common(depth, dry) * 100 / 75
+        row.update({
+            "stage": "Ready", "score": round(score, 1),
+            "grade": "A" if score >= 70 else "B" if score >= 55 else "C",
+            "trigger": round(float(bh), 2), "stop": None,
+            "detail": " · ".join([
+                f"{gap * 100:.1f}% below the breakout level", f"Base {depth * 100:.0f}% deep",
+                f"Volume in base {dry:.1f}x usual", f"RS {rs * 100:.0f}", deliv_txt])})
+        return row
+    return None
+
+
+def breakout_scan(symbols, daily, dl_by):
+    rs = rs_percentiles(daily)
+    rows = []
+    for s in symbols:
+        try:
+            r = analyse_breakout(s, daily.get(s), rs.get(s), dl_by.get(s))
+        except Exception as e:
+            print(f"[warn] breakout {s}: {e}")
+            continue
+        if r:
+            rows.append(r)
+    rank = {"A": 0, "B": 1, "C": 2}
+    rows.sort(key=lambda r: (rank[r["grade"]], -r["score"], r["symbol"]))
+    return ([r for r in rows if r["stage"] == "Triggered"],
+            [r for r in rows if r["stage"] == "Ready"])
+
+
 def pick_universe(hist, index_syms, fo_syms, notes):
     """Liquid, normally traded stocks outside F&O."""
     latest = hist["date"].max()
@@ -349,6 +455,13 @@ def main_live():
         c[r["stage"]] = c.get(r["stage"], 0) + 1
     print(f"{res['stocks']} stocks | {c} | market {res['market']}")
 
+    broke, setting = breakout_scan(symbols, daily, dl_by)
+    with open(os.path.join(CFG["data_dir"], "breakout.json"), "w") as f:
+        json.dump({"generated_ist": res["generated_ist"], "oi_asof": res["oi_asof"],
+                   "stocks": len(symbols), "market": res["market"],
+                   "broke": broke, "setting": setting, "notes": []}, f, indent=1)
+    print(f"breakout: {len(broke)} broke out, {len(setting)} setting up")
+
     U = load_unusual()
     if U is None:
         print("[info] unusual scan file not in the repo; equity unusual list skipped.")
@@ -448,6 +561,41 @@ def selftest():
                          "2026-11-13", None, [])
     assert res["stocks"] == 1 and len(res["rows"]) == 1
     json.dumps(res)
+
+    # 6b) base breakout: strong stock, tight base, then a close above it on volume
+    n_ = 400
+    bdays = pd.bdate_range(end="2026-11-13", periods=n_)
+    trend_ = 100 * np.exp(np.cumsum(np.full(n_ - 18, 0.003)))
+    base_ = trend_[-1] * (1 + 0.01 * np.sin(np.arange(15)))
+    bo_ = np.array([base_.max() * 1.03, base_.max() * 1.035, base_.max() * 1.04])
+    cl = np.concatenate([trend_, base_, bo_])
+    vv = np.full(n_, 1e6)
+    vv[-18:-3] = 6e5
+    vv[-3] = 3e6
+    b = E._bars(cl, bdays, noise=0.004, vol=vv)
+    b.iloc[-3, b.columns.get_loc("Low")] = cl[-3] * 0.985
+    r0 = analyse_breakout("BO", b.iloc[:-2], 0.92, dl)       # the breakout day itself
+    r2 = analyse_breakout("BO", b, 0.92, dl)                 # two days later, still holding
+    print(json.dumps(r2, indent=1))
+    for r_ in (r0, r2):
+        assert r_ and r_["stage"] == "Triggered" and r_["stop"] < r_["trigger"] < r_["close"], r_
+    assert r0["detail"].startswith("Broke out Wed 11") and r2["detail"] == r0["detail"]
+    setup_ = analyse_breakout("BO", b.iloc[:-3], 0.92, dl)   # the day before: setting up
+    assert setup_ and setup_["stage"] == "Ready" and setup_["stop"] is None, setup_
+    assert setup_["trigger"] >= setup_["close"]
+    assert analyse_breakout("BO", b, 0.55, dl) is None       # weak relative strength
+    failed = b.copy()
+    failed.iloc[-1, failed.columns.get_loc("Close")] = base_.max() * 0.99
+    assert analyse_breakout("BO", failed, 0.92, dl) is None  # fell back into the base
+    ext = b.copy()
+    ext.iloc[-1, [ext.columns.get_loc(x) for x in ("High", "Close")]] = base_.max() * 1.12
+    assert analyse_breakout("BO", ext, 0.92, dl) is None     # too far above the level
+    assert analyse_breakout("FLAT", E._bars(np.full(n_, 100.0), bdays), 0.92, dl) is None
+    group = {"BO": b}
+    for q_ in range(4):                # four weaker stocks so BO ranks at the top
+        group[f"W{q_}"] = E._bars(100 * np.exp(np.cumsum(np.full(n_, -0.0005 * (q_ + 1)))), bdays)
+    br, st_ = breakout_scan(list(group), group, {"BO": dl})
+    assert [r_["symbol"] for r_ in br] == ["BO"] and st_ == [], (br, st_)
 
     # 7) unusual activity on daily bars only (needs the unusual scan file alongside)
     U = load_unusual()
