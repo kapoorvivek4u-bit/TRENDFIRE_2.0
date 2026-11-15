@@ -159,7 +159,7 @@ def unusual_row(r):
 
 def render_unusual(cfg):
     market = st.radio("Stocks", list(cfg), horizontal=True, label_visibility="collapsed",
-                      key="unusual_market")
+                      key="unusual_market", format_func=lambda x: f"{x} stocks")
     P, equity = cfg[market], market == "Equity"
     path = P["file"]
     if not os.path.exists(path):
@@ -210,7 +210,7 @@ def render_unusual(cfg):
 
 **The number on the right** is the score. Different kinds of evidence add up. The latest session counts fully, the one before 0.7, and the one before that 0.5. A stock needs 3 or more to be listed.
 
-**Quiet**: unusual volume, OI, or delivery while price has NOT yet made a big move (less than two normal day-ranges over the last 3 sessions, with no wide-range day or gap). These are the early ones. Stocks outside Quiet have already moved.
+**Quiet**: unusual volume, OI, or delivery while price has NOT yet made a big move (a small change over the last 3 sessions, with no wide-range day or gap). These are the early ones. Stocks outside Quiet have already moved.
 
 **Buying, Selling, Mixed**: which way the events lean. A green bar beside an event leans to buying, red to selling, grey is neutral.
 
@@ -305,6 +305,12 @@ st.markdown(
 
 SWING_DEF = ("- **Swing** (Swing Pullback): Daily is in an impulse and Hourly has dipped. "
              "The aim is to join a moving stock on a short dip. Suits 3 to 5 day holds.\n")
+TREND_DEF = (
+    "- **Trend** (Trend Pullback): Weekly is in an impulse and Daily has dipped. Monthly "
+    "does not decide whether a stock is listed here. It only sets the tag, so check the "
+    "tag. Suits holds of one to three weeks." if EQUITY else
+    "- **Trend** (Trend Pullback): Monthly and Weekly are in an impulse and Daily has "
+    "dipped. Suits holds of one to three weeks.")
 if EQUITY:
     GRADE_DEF = """**Grade (volume and delivery, as of the last close)**
 - **A**: volume and delivery both support the setup.
@@ -328,7 +334,7 @@ with st.expander("What the words mean"):
     st.markdown(f"""
 **Setups (the buttons at the top)**
 - **Squeeze** (Squeeze Break): Weekly is bullish. Daily is coiled in a squeeze with momentum below zero. The aim is to catch it before it breaks out.
-{"" if EQUITY else SWING_DEF}- **Trend** (Trend Pullback): Monthly and Weekly are in an impulse and Daily has dipped. Suits holds of one to three weeks.
+{"" if EQUITY else SWING_DEF}{TREND_DEF}
 
 **Stages (where the stock is)**
 - **Watch**: the dip or coil is still in progress. Momentum is still falling. No trigger yet.
@@ -342,6 +348,7 @@ with st.expander("What the words mean"):
 - **With trend**: Monthly momentum is above zero.
 - **Early turn**: Monthly is below zero but rising.
 - **Counter-trend**: Monthly is below zero and falling. Smaller size or skip.
+- **Monthly n/a**: a recent listing without enough history for a Monthly reading.
 
 {GRADE_DEF}
 
