@@ -4,6 +4,7 @@ TrendFire Setups - scan engine (NSE F&O stocks).
 
 One engine for all four timeframes. Each stock gets:
   setup  : Squeeze Break | Swing Pullback | Trend Pullback
+           plus a separate list: Daily Overspill | Hourly Overspill (20-50 EMA zone)
   stage  : Watch | Ready | Triggered   (else Running | Stretched | Fading)
   trend  : With trend | Early turn | Counter-trend      (from Monthly)
   grade  : A | B | C | Warning                          (volume + OI, last close)
@@ -44,6 +45,9 @@ CFG = {
     "updown_vol": 1.2,                                 # squeeze: up-day vs down-day volume
     "oi_warn": 0.03, "px_warn": -0.005,                # short build-up in a pullback
     "oi_build": 0.03,                                  # squeeze: OI build-up over 5 days
+    "spill_bars": 8,                                   # overspill: touch of the 20 EMA within this many bars
+    "spill_from": 1.5,                                 # ... after trading this many ATRs above the 20 EMA
+    "spill_deep": 3.0,                                 # ... and no further than this many ATRs under the 50 EMA
     "stretch_atr": 3.0,                                # close this many ATRs above EMA20
     "healthy": 60, "weak": 40,                         # % of stocks bullish on Weekly
     "fo_backfill_days": 40, "fo_keep_days": 120,
@@ -87,7 +91,8 @@ def indicators(h, l, c):
     mom = rolling_linreg_end(c - ((hh + ll) / 2 + sma) / 2, n)
     return {"mom": mom, "sq": sq, "atr": atr,
             "ema20": s.ewm(span=20, adjust=False).mean().values,
-            "ema50": s.ewm(span=50, adjust=False).mean().values}
+            "ema50": s.ewm(span=50, adjust=False).mean().values,
+            "sma200": s.rolling(200).mean().values}
 
 
 def state_name(m, p):
@@ -134,6 +139,47 @@ def find_pullback(h, l, c, atr, look_high, look_leg, min_bars):
         return None
     return {"ih": ih, "il": il, "ipl": ipl, "high": float(h[ih]),
             "low": float(l[ipl]), "depth": float(depth), "bars": n - 1 - ih}
+
+
+def find_overspill(h, l, c, ind):
+    """Uptrend (20 EMA over 50 EMA over 200 SMA) where price has come back into
+    the 20-50 EMA zone, or spilled through it, and has not broken the trend."""
+    n = len(c)
+    e20, e50, s200, atr, mom = (ind[k] for k in ("ema20", "ema50", "sma200", "atr", "mom"))
+    S = CFG["spill_bars"]
+    if n < 215 or np.isnan(s200[-1]) or not atr[-1] > 0:
+        return None
+    # after a spill the 20 EMA can dip to the 50 EMA and the 50 EMA can flatten,
+    # so both get a little room; the 200 SMA must stay clearly below
+    if not (e20[-1] >= e50[-1] - atr[-1] and e50[-1] > s200[-1]
+            and e50[-1] >= e50[-11] - 0.75 * atr[-1] and c[-1] > s200[-1]):
+        return None
+    touched = np.where(l[-S:] <= e20[-S:])[0]
+    if not len(touched):
+        return None
+    last_touch = n - S + int(touched[-1])
+    a = max(0, last_touch - 40)
+    ih = a + int(np.argmax(h[a:last_touch + 1]))           # the high the dip started from
+    if ih >= last_touch or not h[ih] >= e20[ih] + CFG["spill_from"] * atr[ih]:
+        return None                                         # was not coming from strength
+    ipl = ih + 1 + int(np.argmin(l[ih + 1:]))              # lowest point of the dip
+    low = l[ipl]
+    if low < e50[ipl] - CFG["spill_deep"] * atr[ipl] or low <= s200[ipl]:
+        return None                                         # too deep: trend damaged
+    a2 = max(0, ih - 40)
+    il = a2 + int(np.argmin(l[a2:ih + 1]))
+    if ih - il < 3 or h[ih] <= l[il]:
+        return None
+    if c[-1] > e20[-1]:                                     # back above the 20 EMA
+        if n - 1 - last_touch > 3 or c[-1] - e20[-1] > atr[-1]:
+            return None                                     # bounced a while ago; moved on
+        stage = "Triggered" if c[-1] > c[-2] else "Watch"   # a down close is not a bounce yet
+    else:
+        stage = "Ready" if (c[-1] > h[-2] or mom[-1] > mom[-2]) else "Watch"
+    return {"stage": stage, "level": float(e20[-1]), "low": float(low),
+            "under50": float((e50[ipl] - low) / e50[ipl]),
+            "il": il, "ih": ih, "ipl": ipl,
+            "depth": float((h[ih] - low) / (h[ih] - l[il]))}
 
 
 def turn_stage(h, c, mom, pb):
@@ -246,7 +292,7 @@ def analyse(sym, d, hr, fo):
     cands = []
 
     # Trend Pullback: Monthly and Weekly impulse, Daily pullback
-    if M["impulse"] and W["impulse"]:
+    if W["impulse"]:
         p = CFG["daily"]
         pb = find_pullback(D["h"], D["l"], D["c"], D["ind"]["atr"], **p)
         if pb:
@@ -288,6 +334,31 @@ def analyse(sym, d, hr, fo):
            "w_bull": bool(W["ok"] and W["mom"] > 0),
            "m_bull": (bool(M["mom"] > 0) if M["ok"] else None)}
 
+    # Overspill: price back in the 20-50 EMA zone of an uptrend.
+    #   Daily  overspill needs Weekly bullish (Monthly is the tag).
+    #   Hourly overspill needs Weekly and Daily bullish.
+    spills = []
+    w_up = W["ok"] and W["mom"] > 0
+    for name, T, vol, idx, gate in (
+            ("Daily Overspill", D, d["Volume"].values.astype(float), d.index, w_up),
+            ("Hourly Overspill", H, slot_rvol(hr) if H["ok"] else None,
+             hr.index if H["ok"] else None, w_up and D["mom"] > 0)):
+        if not (gate and T["ok"]):
+            continue
+        sp = find_overspill(T["h"], T["l"], T["c"], T["ind"])
+        if not sp:
+            continue
+        vol_ok, oi_ok, warn, det = grade_pullback(vol, idx, sp, fo)
+        where = (f"Spilled {sp['under50'] * 100:.1f}% under the 50 EMA" if sp["under50"] > 0
+                 else "Dipped into the 20-50 EMA zone")
+        spills.append({
+            "symbol": sym, "close": row["close"], "trend": trend, "states": row["states"],
+            "setup": name, "stage": sp["stage"],
+            "detail": " · ".join([where] + det.split(" · ")[1:]),
+            "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
+            "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
+    row["overspill"] = spills
+
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
         setup, stage, level, stop, (vol_ok, oi_ok, warn, detail) = \
@@ -323,8 +394,9 @@ def build_result(rows, now, fo_asof, vix, notes):
               else "Weak" if w_pct < CFG["weak"] else "Mixed")
     g_rank = {"A": 0, "B": 1, "C": 2, "Warning": 3}
     t_rank = {"With trend": 0, "Early turn": 1, "": 2, "Counter-trend": 3}
-    setups = sorted([r for r in valid if r["setup"]],
-                    key=lambda r: (g_rank[r["grade"]], t_rank[r["trend"]], r["symbol"]))
+    order = lambda r: (g_rank[r["grade"]], t_rank[r["trend"]], r["symbol"])
+    spills = sorted([x for r in valid for x in r.pop("overspill", [])], key=order)
+    setups = sorted([r for r in valid if r["setup"]], key=order)
     others = {s: sorted(r["symbol"] for r in valid if not r["setup"] and r["stage"] == s)
               for s in ("Running", "Stretched", "Fading")}
     for r in setups:
@@ -334,7 +406,7 @@ def build_result(rows, now, fo_asof, vix, notes):
             "oi_asof": fo_asof, "stocks": len(valid),
             "market": {"weekly_bull_pct": w_pct, "monthly_bull_pct": m_pct,
                        "vix": vix, "regime": regime},
-            "rows": setups, "others": others, "notes": notes}
+            "rows": setups, "overspill": spills, "others": others, "notes": notes}
 
 
 # ------------------------------------------------------------------ network
@@ -487,7 +559,7 @@ def log_ready(res):
     rows = [{"date": day, "seen_ist": res["generated_ist"], "symbol": r["symbol"],
              "setup": r["setup"], "trend": r["trend"], "grade": r["grade"],
              "close": r["close"], "trigger": r["trigger"], "stop": r["stop"]}
-            for r in res["rows"] if r["stage"] == "Ready"]
+            for r in res["rows"] + res.get("overspill", []) if r["stage"] == "Ready"]
     if not rows:
         return
     new = pd.DataFrame(rows)
@@ -626,6 +698,46 @@ def selftest():
     assert res["stocks"] == 2 and len(res["rows"]) == 1
     assert res["market"]["weekly_bull_pct"] in (50, 100)
     json.dumps(res)
+
+    # 8b) overspill: uptrend, dip into the 20-50 EMA zone, bounce back over the 20 EMA
+    def spill_case(dip_total, noise, n_=700):
+        dd = pd.bdate_range(end="2026-11-13", periods=n_)
+        up_ = np.cumsum(np.full(n_ - 16, 0.0028))
+        dip_ = up_[-1] - np.linspace(0.012, dip_total, 7)
+        bounce_ = dip_[-1] + np.linspace(0.012, 0.11, 9)
+        return _bars(100 * np.exp(np.concatenate([up_, dip_, bounce_])), dd, noise=noise)
+
+    def spill_trace(df):
+        out = []
+        for cut in range(16, -1, -1):
+            T = tf_view(df.iloc[:len(df) - cut], 3)
+            sp = find_overspill(T["h"], T["l"], T["c"], T["ind"])
+            out.append("-" if sp is None else sp["stage"][0])
+        return "".join(out)
+
+    zone, deep, broken = spill_case(0.085, 0.006), spill_case(0.115, 0.012), spill_case(0.30, 0.012)
+    tz, td, tb = spill_trace(zone), spill_trace(deep), spill_trace(broken)
+    print("overspill traces:", tz, td, tb)
+    for t in (tz, td):                 # Watch, then Ready, then Triggered, then it moves on
+        core = t.strip("-")
+        assert core == "W" * core.count("W") + "R" * core.count("R") + "T" * core.count("T"), t
+        assert min(core.count(x) for x in "WRT") >= 1 and t.endswith("-"), t
+    assert "R" not in tb and "T" not in tb, tb          # a trend-breaking fall never qualifies
+    Tf = tf_view(flat, 3)
+    assert find_overspill(Tf["h"], Tf["l"], Tf["c"], Tf["ind"]) is None
+    at_ready = zone.iloc[:len(zone) - (16 - tz.index("R"))]
+    ro = analyse("SPILL", at_ready, None, None)
+    print(json.dumps(ro["overspill"], indent=1))
+    assert [x["setup"] for x in ro["overspill"]] == ["Daily Overspill"], ro
+    x = ro["overspill"][0]
+    assert x["stage"] == "Ready" and x["stop"] < x["close"] <= x["trigger"], x
+    res_o = build_result([ro], now, "2026-11-12", None, [])
+    assert len(res_o["overspill"]) == 1 and "overspill" not in json.dumps(res_o["rows"])
+    keep_dir, CFG["data_dir"] = CFG["data_dir"], __import__("tempfile").mkdtemp()
+    log_ready(res_o)
+    lg = pd.read_csv(os.path.join(CFG["data_dir"], "ready_log.csv"))
+    CFG["data_dir"] = keep_dir
+    assert lg["setup"].tolist() == ["Daily Overspill"], lg
 
     # 9) F&O file reader: futures OI summed across expiries, near-month price
     recs = [{"FinInstrmTp": "STF", "TckrSymb": "ABC", "XpryDt": "2026-12-29",
