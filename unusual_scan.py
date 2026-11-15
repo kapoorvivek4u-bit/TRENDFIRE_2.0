@@ -257,8 +257,7 @@ def score_events(events):
 
 
 def when_text(e):
-    return ("Today" if e["age"] == 0 else "Yesterday" if e["age"] == 1
-            else e["day"].strftime("%a"))
+    return e["day"].strftime("%a %d")
 
 
 def analyse_unusual(sym, d, hr, tables, dl, cal):
@@ -435,7 +434,7 @@ def selftest():
     assert a[0] == 2.0 and b[0] == 1.0 and a[1] == "Buying"
     r = analyse_unusual("JUMP", d3, hr2, tables, dl, cal)
     print(json.dumps(r, indent=1))
-    assert r["score"] > a[0] and r["bias"] == "Buying" and r["events"][0]["when"] == "Today"
+    assert r["score"] > a[0] and r["bias"] == "Buying" and r["events"][0]["when"] == "Fri 13"
     assert set(r["states"]) == {"W", "D"} and "20-day high" in r["vs_high"]
     print("\nSELFTEST PASSED")
     return r
