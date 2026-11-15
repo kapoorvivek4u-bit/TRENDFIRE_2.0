@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-15 06:32",
+ "generated_ist": "2026-11-15 12:19",
  "oi_asof": "2026-11-13",
  "stocks": 256,
  "market": {
@@ -24,6 +24,22 @@
    "grade": "A",
    "trigger": 1690.0,
    "stop": 1347.3
+  },
+  {
+   "symbol": "HBLENGINE",
+   "close": 799.55,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 43% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 38% vs 35% before",
+   "grade": "A",
+   "trigger": null,
+   "stop": 788.77
   },
   {
    "symbol": "ABDL",
@@ -120,6 +136,22 @@
    "grade": "B",
    "trigger": null,
    "stop": 1069.86
+  },
+  {
+   "symbol": "SUNTV",
+   "close": 646.7,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Bottoming"
+   },
+   "setup": "Trend Pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 48% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 30% vs 29% before",
+   "grade": "B",
+   "trigger": 617.75,
+   "stop": 564.22
   },
   {
    "symbol": "WHIRLPOOL",
@@ -264,7 +296,6 @@
    "BHARTIHEXA",
    "BSOFT",
    "FSL",
-   "HBLENGINE",
    "IGIL",
    "IPCALAB",
    "LTTS",
