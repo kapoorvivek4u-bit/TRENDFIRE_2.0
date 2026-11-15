@@ -13,7 +13,10 @@ PAGES = {
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
                "setups": ["All", "Squeeze Break", "Trend Pullback"],
                "who": "these midcaps and smallcaps"},
-    "Unusual": {"file": os.path.join("data", "unusual.json"), "workflow": "Unusual scan"},
+    "Unusual": {"F&O": {"file": os.path.join("data", "unusual.json"),
+                        "workflow": "Unusual scan"},
+                "Equity": {"file": os.path.join("data", "unusual_equity.json"),
+                           "workflow": "Equity scan"}},
 }
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
@@ -69,6 +72,19 @@ def grade_badge(g):
     return f'<span class="tf-grade" style="{style}">{html.escape(g)}</span>'
 
 
+UNUSUAL = {}          # symbol -> its row on the Unusual page, for the market in view
+
+
+def load_unusual_map(market):
+    path = PAGES["Unusual"][market]["file"]
+    if not os.path.exists(path):
+        return {}
+    try:
+        return {r["symbol"]: r for r in load(path, os.path.getmtime(path))["rows"]}
+    except Exception:
+        return {}
+
+
 def row_html(r):
     e = html.escape
     trend = r.get("trend") or "Monthly n/a"
@@ -84,6 +100,11 @@ def row_html(r):
         left = f"Triggered above {money(r['trigger'])}"
     else:
         left = f"Above {money(r['trigger'])}"
+    u = UNUSUAL.get(r["symbol"])
+    if u:
+        ev = u["events"][0]
+        detail += (f'<br><span style="color:{INK}">Unusual ({u["score"]:.1f}, '
+                   f'{e(u["bias"].lower())}): {e(ev["when"])} · {e(ev["text"])}</span>')
     return (
         '<div class="tf-row"><div class="tf-top">'
         f'<a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
@@ -133,7 +154,10 @@ def unusual_row(r):
         f'{events}<div class="tf-small" style="margin-top:4px">{"<br>".join(ctx)}</div></div>')
 
 
-def render_unusual(P):
+def render_unusual(cfg):
+    market = st.radio("Stocks", list(cfg), horizontal=True, label_visibility="collapsed",
+                      key="unusual_market")
+    P, equity = cfg[market], market == "Equity"
     path = P["file"]
     if not os.path.exists(path):
         st.title("Unusual activity")
@@ -161,9 +185,10 @@ def render_unusual(P):
     st.markdown(
         f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{headline}</div>'
-        f'<div style="font-size:14px;color:{INK};line-height:1.5">Covers the last few '
-        f'hours and the last two to three sessions. Strongest first.</div>',
-        unsafe_allow_html=True)
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">'
+        + ("Covers the last three sessions, on Daily bars only."
+           if equity else "Covers the last few hours and the last two to three sessions.")
+        + ' Strongest first.</div>', unsafe_allow_html=True)
     with st.expander("What the words mean"):
         st.markdown("""
 **What counts as unusual.** Every check compares the stock with its own recent history.
@@ -177,11 +202,13 @@ def render_unusual(P):
 - **OI in a day**: a one-day change in futures open interest that is large for this stock, after removing the market-wide change.
 - **Delivery vs usual**: delivery share well above the stock's normal.
 
-**The number on the right** is the score. Different kinds of evidence add up. Today counts fully, yesterday 0.7, two days ago 0.5. Two or more means at least one strong event.
+**The number on the right** is the score. Different kinds of evidence add up. The latest session counts fully, the one before 0.7, and the one before that 0.5. Two or more means at least one strong event.
 
 **Buying, Selling, Mixed**: which way the events lean. A green bar beside an event leans to buying, red to selling, grey is neutral.
 
-**W and D** are Weekly and Daily momentum: Bullish, Topping, Bearish, or Bottoming.
+**M, W and D** are Monthly, Weekly and Daily momentum: Bullish, Topping, Bearish, or Bottoming.
+
+The Equity view uses Daily bars only, so it has no hourly or OI events.
 
 This page says something is happening. It does not say the move will continue. Check the chart.
 """)
@@ -196,10 +223,17 @@ This page says something is happening. It does not say the move will continue. C
         st.caption("None with this lean.")
     for note in res.get("notes", []):
         st.caption(f"Note: {note}")
-    st.caption(
-        f"{res['stocks']} F&O stocks scanned. OI as of the F&O file for {res['oi_asof']}. "
-        "Refreshes about once an hour in market hours. Thresholds are starting values, "
-        "not tested ones. Watchlist only, not investment advice.")
+    if equity:
+        st.caption(
+            f"{res['stocks']} midcaps and smallcaps outside F&O scanned, as of "
+            f"{res['oi_asof']}. Daily volume, range, gap and delivery only: no hourly "
+            "data and no OI. Updated once a day after the close. Thresholds are starting "
+            "values, not tested ones. Watchlist only, not investment advice.")
+    else:
+        st.caption(
+            f"{res['stocks']} F&O stocks scanned. OI as of the F&O file for "
+            f"{res['oi_asof']}. Refreshes about once an hour in market hours. Thresholds "
+            "are starting values, not tested ones. Watchlist only, not investment advice.")
 
 
 page = st.radio("Market", list(PAGES), horizontal=True, label_visibility="collapsed")
@@ -215,6 +249,7 @@ if not os.path.exists(DATA):
     st.stop()
 
 res = load(DATA, os.path.getmtime(DATA))
+UNUSUAL.update(load_unusual_map(page))
 m = res["market"]
 gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
 age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
@@ -241,6 +276,9 @@ if m["regime"] == "Weak":
 n = len(ready)
 headline = ("No stocks are Ready right now." if n == 0 else
             "1 stock is Ready." if n == 1 else f"{n} stocks are Ready.")
+if n == 0 and held:
+    headline = (f"No grade A stock is Ready. {len(held)} lower-grade "
+                f"{'one is' if len(held) == 1 else 'ones are'} listed below.")
 market = "Market data unavailable."
 if m["weekly_bull_pct"] is not None:
     market = (f"{m['regime']} market: {m['weekly_bull_pct']}% of {P['who']} are "
