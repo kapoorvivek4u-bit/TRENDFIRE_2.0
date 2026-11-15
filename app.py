@@ -17,7 +17,10 @@ PAGES = {
                         "workflow": "Unusual scan"},
                 "Equity": {"file": os.path.join("data", "unusual_equity.json"),
                            "workflow": "Equity scan"}},
+    "Breakout": {"file": os.path.join("data", "breakout.json"), "workflow": "Equity scan"},
 }
+ALL_FILES = ([PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout")]
+             + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
@@ -114,7 +117,10 @@ def row_html(r):
         f'<div class="tf-small">{states}</div>'
         f'<div class="tf-small">{detail}</div>'
         f'<div class="tf-lvl"><span>{left}</span>'
-        f'<span style="color:{RED}">Stop {money(r["stop"])}</span></div></div>')
+        + (f'<span style="color:{RED}">Stop {money(r["stop"])}</span>'
+           if r.get("stop") is not None else
+           f'<span style="color:{MUTED}">Stop set on breakout</span>')
+        + '</div></div>')
 
 
 def show_rows(rows):
@@ -244,9 +250,104 @@ This page says something is happening. It does not say the move will continue. C
             "are starting values, not tested ones. Watchlist only, not investment advice.")
 
 
+def render_breakout(P):
+    path = P["file"]
+    if not os.path.exists(path):
+        st.title("Breakout")
+        st.info(f"No scan results yet. Run the '{P['workflow']}' workflow once from the "
+                "GitHub Actions tab.")
+        return
+    res = load(path, os.path.getmtime(path))
+    UNUSUAL.update(load_unusual_map("Equity"))
+    gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
+    age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
+    st.markdown(
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
+        f'border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Breakout</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
+        f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
+    if age_days >= 3:
+        st.warning(f"These results are {age_days} days old. Check the Actions tab on "
+                   "GitHub for a failed run.")
+    broke, setting = res["broke"], res["setting"]
+    n = len(broke)
+    headline = ("No stock broke out of a base in the last 3 sessions." if n == 0 else
+                "1 stock broke out of a base in the last 3 sessions." if n == 1 else
+                f"{n} stocks broke out of a base in the last 3 sessions.")
+    sub = (f"{len(setting)} more {'is' if len(setting) == 1 else 'are'} within 3% of "
+           "the breakout level.")
+    m = res.get("market") or {}
+    if m.get("regime") == "Weak":
+        sub += (f" Weak market: {m['weekly_bull_pct']}% of these stocks are bullish on "
+                "Weekly, and breakouts fail more often in a market like this.")
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'color:{INK};margin:6px 0 6px">{headline}</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(sub)}</div>',
+        unsafe_allow_html=True)
+    with st.expander("What the words mean"):
+        st.markdown("""
+**Base breakout**: a strong stock rests in a narrow range (the base), then closes above the top of it on heavy volume. You are buying strength, not a dip.
+
+**To be listed, a stock must be**
+- above its rising 50-day average, which is above the 200-day, and within 20% of its 52-week high;
+- in the top 30% of this group on 3 and 6 month returns (**RS 70 or more**);
+- in a base no deeper than 20% over the last 15 days.
+
+**Broke out**: closed above the base on at least 1.5x normal volume, in the upper half of the day's range, within the last 3 sessions, and has stayed above the level since. Dropped if it is more than 6% above the level or the stop is more than 8% away.
+
+**Setting up**: has not broken out, but is within 3% of the level. "Above 1,234" is the level to watch.
+
+**Stop**: just below the low of the breakout day. For Setting up there is no stop until it breaks out.
+
+**Grade**: A, B or C from relative strength, how tight the base is, volume drying up in the base, breakout volume, and delivery.
+
+**M, W, D** and the trend tag mean the same as on the Equity page.
+
+The main risk is a failed breakout: price falls back into the base. That happens more often in weak markets.
+""")
+    if broke:
+        show_rows(broke)
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:600;margin-top:18px">Not broken out yet</div>',
+                unsafe_allow_html=True)
+    with st.expander(f"Setting up · {len(setting)}"):
+        if setting:
+            show_rows(setting)
+        else:
+            st.caption("None.")
+    for note in res.get("notes", []):
+        st.caption(f"Note: {note}")
+    st.caption(
+        f"{res['stocks']} midcaps and smallcaps outside F&O scanned, as of {res['oi_asof']}. "
+        "Updated once a day after the close. Thresholds are starting values, not tested "
+        "ones. Smallcaps can hit circuits and gap, so a stop may not be honoured. "
+        "Watchlist only, not investment advice.")
+
+
+def file_stamp():
+    return tuple(os.path.getmtime(p) if os.path.exists(p) else 0 for p in ALL_FILES)
+
+
+@st.fragment(run_every="120s")
+def watch_for_new_scans():
+    """Every two minutes, reload the page if any scan has saved new results."""
+    now, seen = file_stamp(), st.session_state.get("file_stamp")
+    st.session_state["file_stamp"] = now
+    if seen is not None and seen != now:
+        st.rerun()
+
+
 page = st.radio("Market", list(PAGES), horizontal=True, label_visibility="collapsed")
+if st.button("Refresh"):
+    st.cache_data.clear()
+watch_for_new_scans()
 if page == "Unusual":
     render_unusual(PAGES[page])
+    st.stop()
+if page == "Breakout":
+    render_breakout(PAGES[page])
     st.stop()
 P = PAGES[page]
 DATA, EQUITY = P["file"], page == "Equity"
