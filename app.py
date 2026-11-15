@@ -8,7 +8,8 @@ import streamlit as st
 
 PAGES = {
     "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
-            "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback"],
+            "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback",
+                       "Overspill"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
                "setups": ["All", "Squeeze Break", "Trend Pullback"],
@@ -375,7 +376,14 @@ if age_days >= 3:
 
 choice = st.radio("Setup", P["setups"], horizontal=True, label_visibility="collapsed",
                   format_func=lambda x: x.split()[0], key=f"setup_{page}")
-rows = [r for r in res["rows"] if choice == "All" or r["setup"] == choice]
+SPILL = choice == "Overspill"
+if SPILL:
+    rows = res.get("overspill", [])
+    if "overspill" not in res:
+        st.caption("Overspill needs the updated F&O scan file. It will appear after the "
+                   "next scan with that file.")
+else:
+    rows = [r for r in res["rows"] if choice == "All" or r["setup"] == choice]
 ready = [r for r in rows if r["stage"] == "Ready"]
 held = []
 if m["regime"] == "Weak":
@@ -404,14 +412,21 @@ st.markdown(
     f'<div style="height:6px;border-radius:3px;width:{bar}%;background:{GREEN}"></div></div>',
     unsafe_allow_html=True)
 
+SPILL_DEF = "" if EQUITY else (
+    "- **Overspill** (its own list): in an uptrend, with the 20 EMA over the 50 EMA over "
+    "the 200 SMA, price comes back into the 20-50 EMA zone, sometimes spilling under the "
+    "50 EMA, then reclaims the 20 EMA. **Daily Overspill** needs Weekly bullish. "
+    "**Hourly Overspill** needs Weekly and Daily bullish. Watch means price is in the "
+    "zone, Ready means it has started to turn inside the zone, and Triggered means it "
+    "closed back above the 20 EMA. 'Above' is the 20 EMA level, and the stop is under "
+    "the low of the spill. A fall of more than 3 normal ranges under the 50 EMA, or "
+    "to the 200 SMA, is treated as trend damage and dropped.\n")
 SWING_DEF = ("- **Swing** (Swing Pullback): Daily is in an impulse and Hourly has dipped. "
              "The aim is to join a moving stock on a short dip. Suits 3 to 5 day holds.\n")
 TREND_DEF = (
     "- **Trend** (Trend Pullback): Weekly is in an impulse and Daily has dipped. Monthly "
     "does not decide whether a stock is listed here. It only sets the tag, so check the "
-    "tag. Suits holds of one to three weeks." if EQUITY else
-    "- **Trend** (Trend Pullback): Monthly and Weekly are in an impulse and Daily has "
-    "dipped. Suits holds of one to three weeks.")
+    "tag. Suits holds of one to three weeks.")
 if EQUITY:
     GRADE_DEF = """**Grade (volume and delivery, as of the last close)**
 - **A**: volume and delivery both support the setup.
@@ -436,6 +451,7 @@ with st.expander("What the words mean"):
 **Setups (the buttons at the top)**
 - **Squeeze** (Squeeze Break): Weekly is bullish. Daily is coiled in a squeeze with momentum below zero. The aim is to catch it before it breaks out.
 {"" if EQUITY else SWING_DEF}{TREND_DEF}
+{SPILL_DEF}
 
 **Stages (where the stock is)**
 - **Watch**: the dip or coil is still in progress. Momentum is still falling. No trigger yet.
