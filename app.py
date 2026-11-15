@@ -140,6 +140,9 @@ def unusual_row(r):
     ctx = []
     if r.get("states"):
         ctx.append(" · ".join(f"{k} {e(v)}" for k, v in r["states"].items()))
+    if r.get("move_pct") is not None:
+        ctx.append(f"Price {r['move_pct']:+.1f}% over the last 3 sessions"
+                   + ("" if r.get("moved") else " (quiet)"))
     if r.get("vs_high"):
         ctx.append(e(r["vs_high"]))
     if r.get("setup"):
@@ -176,9 +179,11 @@ def render_unusual(cfg):
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
-    lean = st.radio("Lean", ["All", "Buying", "Selling", "Mixed"], horizontal=True,
+    lean = st.radio("Lean", ["All", "Quiet", "Buying", "Selling", "Mixed"], horizontal=True,
                     label_visibility="collapsed", key="unusual_lean")
-    rows = [r for r in res["rows"] if lean == "All" or r["bias"] == lean]
+    quiet = [r for r in res["rows"] if r.get("moved") is False]
+    rows = (res["rows"] if lean == "All" else quiet if lean == "Quiet"
+            else [r for r in res["rows"] if r["bias"] == lean])
     total = len(res["rows"])
     headline = ("Nothing unusual right now." if total == 0 else
                 f"{total} of {res['stocks']} stocks show something unusual.")
@@ -188,7 +193,8 @@ def render_unusual(cfg):
         f'<div style="font-size:14px;color:{INK};line-height:1.5">'
         + ("Covers the last three sessions, on Daily bars only."
            if equity else "Covers the last few hours and the last two to three sessions.")
-        + ' Strongest first.</div>', unsafe_allow_html=True)
+        + f' Strongest first. {len(quiet)} of them have not made a big price move yet: '
+        'tap Quiet to see those.</div>', unsafe_allow_html=True)
     with st.expander("What the words mean"):
         st.markdown("""
 **What counts as unusual.** Every check compares the stock with its own recent history.
@@ -202,7 +208,9 @@ def render_unusual(cfg):
 - **OI in a day**: a one-day change in futures open interest that is large for this stock, after removing the market-wide change.
 - **Delivery vs usual**: delivery share well above the stock's normal.
 
-**The number on the right** is the score. Different kinds of evidence add up. The latest session counts fully, the one before 0.7, and the one before that 0.5. Two or more means at least one strong event.
+**The number on the right** is the score. Different kinds of evidence add up. The latest session counts fully, the one before 0.7, and the one before that 0.5. A stock needs 3 or more to be listed.
+
+**Quiet**: unusual volume, OI, or delivery while price has NOT yet made a big move (less than two normal day-ranges over the last 3 sessions, with no wide-range day or gap). These are the early ones. Stocks outside Quiet have already moved.
 
 **Buying, Selling, Mixed**: which way the events lean. A green bar beside an event leans to buying, red to selling, grey is neutral.
 
@@ -220,7 +228,7 @@ This page says something is happening. It does not say the move will continue. C
             with st.expander(f"{len(rows) - 15} more, weaker"):
                 st.markdown("".join(unusual_row(r) for r in rows[15:]), unsafe_allow_html=True)
     elif total:
-        st.caption("None with this lean.")
+        st.caption("None in this view.")
     for note in res.get("notes", []):
         st.caption(f"Note: {note}")
     if equity:
