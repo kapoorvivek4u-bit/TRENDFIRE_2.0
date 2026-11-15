@@ -4,6 +4,9 @@ import html
 import json
 import os
 
+import urllib.error
+import urllib.request
+
 import streamlit as st
 
 PAGES = {
@@ -220,8 +223,8 @@ def render_unusual(cfg):
         f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
         f'border-bottom:2px solid {INK};padding-bottom:10px">'
         f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
-        f'Unusual activity</span><span class="tf-small">{gen.strftime("%a %d %b")} · '
-        f'updated {gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
+        f'Unusual activity</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
+        f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
@@ -305,7 +308,7 @@ def render_breakout(P):
         f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
         f'border-bottom:2px solid {INK};padding-bottom:10px">'
         f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
-        f'Breakout</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
+        f'Breakout</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
@@ -388,7 +391,9 @@ def render_alist():
         f'border-bottom:2px solid {INK};padding-bottom:10px">'
         f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
         f'A list</span><span class="tf-small">'
-        + html.escape(" · ".join(f"{k} {v[5:]}" for k, v in stamps.items()) or "no scans yet")
+        + html.escape("Scanned: " + " · ".join(
+            f"{k} " + dt.datetime.strptime(v, "%Y-%m-%d %H:%M").strftime("%a %d %b %H:%M")
+            for k, v in stamps.items()) if stamps else "no scans yet")
         + '</span></div>', unsafe_allow_html=True)
     if not stamps:
         st.info("No scan results yet. Run the scans once from the GitHub Actions tab.")
@@ -457,7 +462,7 @@ def render_sectors(P):
         f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
         f'border-bottom:2px solid {INK};padding-bottom:10px">'
         f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
-        f'Sectors</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
+        f'Sectors</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
@@ -562,6 +567,85 @@ The sector line on every stock row elsewhere on the site comes from this page.
                "investment advice.")
 
 
+SCANS = {                      # what the button can start -> workflow file in .github/workflows
+    "F&O setups": "scan.yml",
+    "Equity, Breakout, Equity unusual": "equity.yml",
+    "Unusual (F&O)": "unusual.yml",
+    "Sectors": "sector.yml",
+}
+
+
+def secret(name, default=None):
+    try:
+        return st.secrets.get(name, default)
+    except Exception:
+        return default
+
+
+def github(method, path, body=None):
+    """Call the GitHub API with the token kept in the app's secrets. (status, json)"""
+    api = secret("GH_API", "https://api.github.com")
+    req = urllib.request.Request(
+        f"{api}/repos/{secret('GH_REPO', 'kapoorvivek4u-bit/TRENDFIRE_2.0')}{path}",
+        method=method, data=None if body is None else json.dumps(body).encode(),
+        headers={"Authorization": f"Bearer {secret('GH_TOKEN')}",
+                 "Accept": "application/vnd.github+json",
+                 "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "tradeready"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            raw = r.read()
+            return r.status, (json.loads(raw) if raw else {})
+    except urllib.error.HTTPError as e:
+        return e.code, {}
+    except Exception:
+        return 0, {}
+
+
+@st.cache_data(ttl=20)
+def last_run(workflow):
+    code, data = github("GET", f"/actions/workflows/{workflow}/runs?per_page=1")
+    runs = data.get("workflow_runs") or []
+    if code != 200 or not runs:
+        return None
+    r = runs[0]
+    when = dt.datetime.strptime(r["created_at"], "%Y-%m-%dT%H:%M:%SZ") \
+        .replace(tzinfo=dt.timezone.utc).astimezone(IST)
+    state = {"success": "finished", "failure": "failed", "cancelled": "cancelled"}.get(
+        r.get("conclusion"), "running" if r.get("status") != "completed" else r.get("conclusion"))
+    return f"{state}, started {when.strftime('%a %d %b %H:%M')}"
+
+
+def scan_panel():
+    if not secret("GH_TOKEN"):
+        st.caption("To start scans from here, add GH_TOKEN, GH_REPO and SCAN_PIN to the "
+                   "app's secrets on Streamlit. Until then, use the Actions tab on GitHub.")
+        return
+    which = st.selectbox("Scan", list(SCANS), key="scan_pick")
+    pin = st.text_input("PIN", type="password", key="scan_pin")
+    if st.button("Start scan", key="scan_go", type="primary"):
+        if str(pin) != str(secret("SCAN_PIN", "")) or not secret("SCAN_PIN"):
+            st.error("Wrong PIN.")
+        else:
+            code, _ = github("POST", f"/actions/workflows/{SCANS[which]}/dispatches",
+                             {"ref": "main"})
+            if code == 204:
+                last_run.clear()
+                st.success(f"{which} scan started. It takes about 2 to 10 minutes. The "
+                           "page reloads by itself when the new results arrive.")
+            else:
+                st.error({401: "GitHub refused the token. It may have expired: make a new "
+                               "one and update GH_TOKEN.",
+                          403: "The token is not allowed to start workflows. Give it "
+                               "'Actions: Read and write' on this repository.",
+                          404: f"GitHub could not find .github/workflows/{SCANS[which]} in "
+                               "the repo, or the token cannot see the repo.",
+                          422: "That workflow cannot be started by hand."}.get(
+                    code, f"Could not reach GitHub (code {code}). Try again shortly."))
+    for name, wf in SCANS.items():
+        info = last_run(wf)
+        st.caption(f"{name}: {info}" if info else f"{name}: no run found")
+
+
 def file_stamp():
     return tuple(os.path.getmtime(p) if os.path.exists(p) else 0 for p in ALL_FILES)
 
@@ -581,6 +665,8 @@ with st.container(horizontal=True, horizontal_alignment="distribute",
                   vertical_alignment="center"):
     if st.button("Refresh"):
         st.cache_data.clear()
+    with st.popover("Run scan"):
+        scan_panel()
     st.markdown(f'<div style="font-family:Georgia,serif;font-size:18px;font-weight:600;'
                 f'color:{INK};text-align:right">{html.escape(OWNER)}</div>',
                 unsafe_allow_html=True)
@@ -616,7 +702,7 @@ st.markdown(
     f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
     f'border-bottom:2px solid {INK};padding-bottom:10px">'
     f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
-    f'{html.escape(page)} Setups</span><span class="tf-small">{gen.strftime("%a %d %b")} · updated '
+    f'{html.escape(page)} Setups</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
     f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
 if age_days >= 3:
     st.warning(f"These results are {age_days} days old. Check the Actions tab on "
