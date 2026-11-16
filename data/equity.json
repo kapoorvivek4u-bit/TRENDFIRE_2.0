@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 23:27",
+ "generated_ist": "2026-11-16 23:30",
  "oi_asof": "2026-11-16",
  "stocks": 254,
  "market": {
@@ -1285,6 +1285,24 @@
    "stop": 1373.25
   },
   {
+   "symbol": "BBOX",
+   "close": 901.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Bottoming"
+   },
+   "old": "\u274c Avoid",
+   "ext": 1.6,
+   "setup": "Weekly Overspill",
+   "stage": "Triggered",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 29% vs 31% before",
+   "grade": "C",
+   "trigger": 824.14,
+   "stop": 707.73
+  },
+  {
    "symbol": "CRAFTSMAN",
    "close": 11134.0,
    "trend": "With trend",
@@ -1584,7 +1602,6 @@
  "old_labels": {
   "\u274c Avoid": [
    "AADHARHFC",
-   "AARTIIND",
    "AAVAS",
    "ABBOTINDIA",
    "ABREL",
@@ -1612,6 +1629,7 @@
    "BAJAJHFL",
    "BALKRISIND",
    "BATAINDIA",
+   "BBOX",
    "BELRISE",
    "BERGEPAINT",
    "BLS",
