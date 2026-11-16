@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 23:46",
+ "generated_ist": "2026-11-16 23:47",
  "oi_asof": "2026-11-16",
  "stocks": 218,
  "rows": [
@@ -627,7 +627,7 @@
    "events": [
     {
      "when": "Mon 16",
-     "text": "1 hour of unusual volume, peak 4.5x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 4.2x at 15:15, absorption",
      "side": 0
     },
     {
@@ -637,7 +637,7 @@
     },
     {
      "when": "Fri 13",
-     "text": "2 hours of unusual volume, peak 4.5x at 15:15, absorption",
+     "text": "2 hours of unusual volume, peak 4.2x at 15:15, absorption",
      "side": -1
     },
     {
@@ -662,7 +662,7 @@
    "events": [
     {
      "when": "Fri 13",
-     "text": "4 hours of unusual volume, peak 5.0x at 15:15, absorption",
+     "text": "4 hours of unusual volume, peak 4.8x at 15:15, absorption",
      "side": -1
     },
     {
@@ -866,36 +866,6 @@
    }
   },
   {
-   "symbol": "JUBLFOOD",
-   "score": 3.4,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Mon 16",
-     "text": "1 hour of unusual volume, peak 4.1x at 15:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Fri 13",
-     "text": "1 hour of unusual volume, peak 9.2x at 12:15, flush absorbed",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 2.1x usual",
-     "side": -1
-    }
-   ],
-   "close": 431.05,
-   "move_pct": -0.9,
-   "moved": false,
-   "vs_high": "5.9% below its 20-day high",
-   "states": {
-    "W": "Bearish",
-    "D": "Topping"
-   }
-  },
-  {
    "symbol": "RVNL",
    "score": 3.4,
    "bias": "Selling",
@@ -1000,6 +970,36 @@
     "D": "Bullish"
    },
    "setup": "Swing Pullback \u00b7 Watch"
+  },
+  {
+   "symbol": "JUBLFOOD",
+   "score": 3.1,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Mon 16",
+     "text": "1 hour of unusual volume, peak 3.6x at 15:15, absorption",
+     "side": 0
+    },
+    {
+     "when": "Fri 13",
+     "text": "1 hour of unusual volume, peak 9.2x at 12:15, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 2.1x usual",
+     "side": -1
+    }
+   ],
+   "close": 431.05,
+   "move_pct": -0.9,
+   "moved": false,
+   "vs_high": "5.9% below its 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Topping"
+   }
   },
   {
    "symbol": "ABB",
