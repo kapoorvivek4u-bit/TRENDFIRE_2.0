@@ -1,382 +1,75 @@
 {
- "generated_ist": "2026-11-16 15:07",
+ "generated_ist": "2026-11-16 15:19",
  "asof": "2026-11-13",
  "nifty": {
-  "r1": 11.6,
-  "r3": 3.4
+  "rw": 0.8,
+  "r2w": 9.4,
+  "r1": 11.5
  },
  "sectors": [
   {
    "name": "PSU Banks",
    "stage": "Leading",
    "n": 8,
-   "rs1": 2.6,
-   "rs3": 4.1,
+   "rw": 7.7,
+   "r2w": 2.2,
+   "r1": 2.6,
+   "idx_d": "Bullish",
    "wk_bull": 38,
    "d_bull": 100,
-   "ratio": 1.0412,
-   "mom": 0.016,
+   "ratio": 1.0378,
+   "mom": 0.057,
    "top": [
     {
      "symbol": "PNB",
      "close": 142.81,
-     "rs1": 11.0,
-     "rs3": 16.6,
+     "rw": 12.5,
+     "r2w": 5.9,
+     "r1": 11.0,
      "states": {
       "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "UNIONBANK",
-     "close": 203.0,
-     "rs1": 6.3,
-     "rs3": 5.1,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "BANKBARODA",
-     "close": 273.84,
-     "rs1": 3.3,
-     "rs3": 5.7,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "MAHABANK",
-     "close": 91.7,
-     "rs1": -2.1,
-     "rs3": 8.6,
-     "states": {
-      "W": "Bottoming",
       "D": "Impulse"
      }
     },
     {
      "symbol": "BANKINDIA",
      "close": 154.1,
-     "rs1": 3.2,
-     "rs3": 2.5,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Realty",
-   "stage": "Leading",
-   "n": 6,
-   "rs1": 1.2,
-   "rs3": 1.5,
-   "wk_bull": 17,
-   "d_bull": 100,
-   "ratio": 1.0229,
-   "mom": 0.0414,
-   "top": [
-    {
-     "symbol": "PHOENIXLTD",
-     "close": 2255.0,
-     "rs1": 7.0,
-     "rs3": 14.9,
+     "rw": 10.1,
+     "r2w": 4.2,
+     "r1": 3.2,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "DLF",
-     "close": 758.75,
-     "rs1": 2.6,
-     "rs3": 11.2,
+     "symbol": "BANKBARODA",
+     "close": 273.84,
+     "rw": 8.9,
+     "r2w": 4.1,
+     "r1": 3.4,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "UNIONBANK",
+     "close": 203.0,
+     "rw": 7.2,
+     "r2w": -0.6,
+     "r1": 6.4,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "PRESTIGE",
-     "close": 1650.0,
-     "rs1": -0.4,
-     "rs3": 0.3,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "LODHA",
-     "close": 1220.0,
-     "rs1": 0.2,
-     "rs3": -2.5,
-     "states": {
-      "W": "Bearish",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "GODREJPROP",
-     "close": 1854.9,
-     "rs1": 4.8,
-     "rs3": -11.4,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Auto",
-   "stage": "Improving",
-   "n": 16,
-   "rs1": -1.3,
-   "rs3": -5.4,
-   "wk_bull": 50,
-   "d_bull": 94,
-   "ratio": 0.9839,
-   "mom": 0.0008,
-   "top": [
-    {
-     "symbol": "ATHERENERG",
-     "close": 1945.0,
-     "rs1": 18.6,
-     "rs3": 20.5,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "UNOMINDA",
-     "close": 1388.0,
-     "rs1": 13.5,
-     "rs3": 9.2,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "SONACOMS",
-     "close": 919.0,
-     "rs1": 2.9,
-     "rs3": 10.8,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "BOSCHLTD",
-     "close": 49390.0,
-     "rs1": -1.6,
-     "rs3": 2.8,
-     "states": {
-      "W": "Topping",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "FORCEMOT",
-     "close": 19600.0,
-     "rs1": 2.6,
-     "rs3": -1.7,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Finance",
-   "stage": "Improving",
-   "n": 40,
-   "rs1": -5.7,
-   "rs3": -2.3,
-   "wk_bull": 18,
-   "d_bull": 92,
-   "ratio": 0.9854,
-   "mom": 0.0216,
-   "top": [
-    {
-     "symbol": "MOTILALOFS",
-     "close": 1220.0,
-     "rs1": 2.6,
-     "rs3": 32.0,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "MCX",
-     "close": 3720.0,
-     "rs1": 0.9,
-     "rs3": 21.8,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "PAYTM",
-     "close": 1939.9,
-     "rs1": 1.6,
-     "rs3": 17.0,
-     "states": {
-      "W": "Bullish",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "ANGELONE",
-     "close": 349.0,
-     "rs1": 1.0,
-     "rs3": 16.5,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "BSE",
-     "close": 3937.7,
-     "rs1": 5.1,
-     "rs3": 8.2,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Services",
-   "stage": "Improving",
-   "n": 5,
-   "rs1": -4.1,
-   "rs3": -4.8,
-   "wk_bull": 20,
-   "d_bull": 100,
-   "ratio": 0.9784,
-   "mom": 0.0081,
-   "top": [
-    {
-     "symbol": "ADANIPORTS",
-     "close": 1903.3,
-     "rs1": -3.6,
-     "rs3": 10.9,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "INDIGO",
-     "close": 5587.3,
-     "rs1": 4.8,
-     "rs3": 1.3,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "GMRAIRPORT",
-     "close": 99.0,
-     "rs1": -2.0,
-     "rs3": -8.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "DELHIVERY",
-     "close": 436.3,
-     "rs1": -6.8,
-     "rs3": -10.7,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "CONCOR",
-     "close": 442.15,
-     "rs1": -13.2,
-     "rs3": -17.1,
-     "states": {
-      "W": "Bearish",
-      "D": "Bullish"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Banks",
-   "stage": "Improving",
-   "n": 9,
-   "rs1": -7.1,
-   "rs3": -3.5,
-   "wk_bull": 22,
-   "d_bull": 89,
-   "ratio": 0.9672,
-   "mom": 0.0114,
-   "top": [
-    {
-     "symbol": "KOTAKBANK",
-     "close": 488.55,
-     "rs1": -0.3,
-     "rs3": 21.7,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "ICICIBANK",
-     "close": 1583.6,
-     "rs1": 4.9,
-     "rs3": 7.2,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "HDFCBANK",
-     "close": 804.0,
-     "rs1": 1.0,
-     "rs3": 6.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "AXISBANK",
-     "close": 1331.0,
-     "rs1": -6.6,
-     "rs3": 4.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "FEDERALBNK",
-     "close": 360.95,
-     "rs1": -2.0,
-     "rs3": -2.3,
+     "symbol": "SBIN",
+     "close": 1080.0,
+     "rw": 6.6,
+     "r2w": 1.7,
+     "r1": 1.4,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -386,60 +79,277 @@
   },
   {
    "name": "Consumer Durables",
-   "stage": "Improving",
+   "stage": "Leading",
    "n": 10,
-   "rs1": -4.9,
-   "rs3": -7.2,
+   "rw": 3.9,
+   "r2w": 0.9,
+   "r1": -4.9,
+   "idx_d": "Bullish",
    "wk_bull": 10,
    "d_bull": 100,
-   "ratio": 0.979,
-   "mom": 0.0251,
+   "ratio": 1.0154,
+   "mom": 0.0333,
    "top": [
     {
      "symbol": "KALYANKJIL",
      "close": 697.0,
-     "rs1": 10.5,
-     "rs3": 13.4,
+     "rw": 23.7,
+     "r2w": 25.9,
+     "r1": 10.6,
      "states": {
       "W": "Bullish",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "BLUESTARCO",
-     "close": 1587.2,
-     "rs1": -12.0,
-     "rs3": 3.1,
+     "symbol": "HAVELLS",
+     "close": 1161.0,
+     "rw": 7.9,
+     "r2w": 4.4,
+     "r1": -4.2,
      "states": {
       "W": "Bottoming",
-      "D": "Impulse"
+      "D": "Bullish"
      }
     },
     {
-     "symbol": "TITAN",
-     "close": 4844.9,
-     "rs1": -3.6,
-     "rs3": -8.4,
-     "states": {
-      "W": "Bearish",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "PGEL",
-     "close": 566.8,
-     "rs1": -3.4,
-     "rs3": -11.2,
+     "symbol": "VOLTAS",
+     "close": 1133.1,
+     "rw": 0.8,
+     "r2w": -0.6,
+     "r1": -2.6,
      "states": {
       "W": "Bottoming",
-      "D": "Impulse"
+      "D": "Bullish"
      }
     },
     {
      "symbol": "ASIANPAINT",
      "close": 2550.0,
-     "rs1": -4.2,
-     "rs3": -10.4,
+     "rw": 0.3,
+     "r2w": 1.4,
+     "r1": -4.2,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "PGEL",
+     "close": 566.8,
+     "rw": 2.5,
+     "r2w": -4.1,
+     "r1": -3.3,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Banks",
+   "stage": "Leading",
+   "n": 9,
+   "rw": 3.6,
+   "r2w": 0.3,
+   "r1": -7.0,
+   "idx_d": "Bullish",
+   "wk_bull": 22,
+   "d_bull": 89,
+   "ratio": 1.0011,
+   "mom": 0.0353,
+   "top": [
+    {
+     "symbol": "ICICIBANK",
+     "close": 1583.6,
+     "rw": 4.8,
+     "r2w": 4.8,
+     "r1": 4.9,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "HDFCBANK",
+     "close": 804.0,
+     "rw": 5.0,
+     "r2w": 8.3,
+     "r1": 1.1,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "KOTAKBANK",
+     "close": 488.55,
+     "rw": 3.9,
+     "r2w": -3.0,
+     "r1": -0.2,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "FEDERALBNK",
+     "close": 360.95,
+     "rw": 5.9,
+     "r2w": -5.6,
+     "r1": -1.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "AXISBANK",
+     "close": 1331.0,
+     "rw": 3.2,
+     "r2w": -0.7,
+     "r1": -6.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Finance",
+   "stage": "Leading",
+   "n": 40,
+   "rw": 3.4,
+   "r2w": 1.5,
+   "r1": -5.6,
+   "idx_d": "Bullish",
+   "wk_bull": 18,
+   "d_bull": 92,
+   "ratio": 1.0146,
+   "mom": 0.0288,
+   "top": [
+    {
+     "symbol": "MOTILALOFS",
+     "close": 1220.0,
+     "rw": 10.7,
+     "r2w": 14.3,
+     "r1": 2.7,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "MCX",
+     "close": 3720.0,
+     "rw": 9.8,
+     "r2w": 5.7,
+     "r1": 1.0,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "ANGELONE",
+     "close": 349.0,
+     "rw": 6.2,
+     "r2w": 9.4,
+     "r1": 1.1,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "PAYTM",
+     "close": 1939.9,
+     "rw": 8.1,
+     "r2w": 5.6,
+     "r1": 1.6,
+     "states": {
+      "W": "Bullish",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "BAJFINANCE",
+     "close": 1117.0,
+     "rw": 3.6,
+     "r2w": 9.6,
+     "r1": 2.2,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Chemicals",
+   "stage": "Improving",
+   "n": 7,
+   "rw": 2.2,
+   "r2w": -5.2,
+   "r1": -9.2,
+   "idx_d": "Bullish",
+   "wk_bull": 14,
+   "d_bull": 71,
+   "ratio": 0.9682,
+   "mom": 0.0266,
+   "top": [
+    {
+     "symbol": "NAVINFLUOR",
+     "close": 10002.0,
+     "rw": 12.3,
+     "r2w": 11.7,
+     "r1": 6.6,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "COROMANDEL",
+     "close": 1955.0,
+     "rw": 2.1,
+     "r2w": 4.3,
+     "r1": 2.0,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "UPL",
+     "close": 559.4,
+     "rw": 5.5,
+     "r2w": -6.2,
+     "r1": -4.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "PIDILITIND",
+     "close": 1525.7,
+     "rw": -2.6,
+     "r2w": -2.1,
+     "r1": -9.6,
+     "states": {
+      "W": "Bearish",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "SRF",
+     "close": 2475.0,
+     "rw": -1.2,
+     "r2w": -4.5,
+     "r1": -12.2,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -448,41 +358,348 @@
    ]
   },
   {
-   "name": "Construction",
+   "name": "Capital Goods",
    "stage": "Improving",
-   "n": 3,
-   "rs1": -6.1,
-   "rs3": -11.6,
-   "wk_bull": 0,
-   "d_bull": 100,
-   "ratio": 0.9576,
-   "mom": 0.0077,
+   "n": 26,
+   "rw": 1.3,
+   "r2w": -4.5,
+   "r1": -13.5,
+   "idx_d": "Bullish",
+   "wk_bull": 12,
+   "d_bull": 69,
+   "ratio": 0.9685,
+   "mom": 0.028,
    "top": [
     {
-     "symbol": "LT",
-     "close": 4143.8,
-     "rs1": 1.2,
-     "rs3": -0.4,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "NBCC",
-     "close": 79.0,
-     "rs1": -9.2,
-     "rs3": -17.7,
+     "symbol": "POWERINDIA",
+     "close": 31595.0,
+     "rw": 11.3,
+     "r2w": 2.9,
+     "r1": -7.0,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
      }
     },
     {
-     "symbol": "RVNL",
-     "close": 199.46,
-     "rs1": -10.5,
-     "rs3": -16.7,
+     "symbol": "ASHOKLEY",
+     "close": 169.2,
+     "rw": -1.4,
+     "r2w": 7.3,
+     "r1": 3.3,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "ENRIN",
+     "close": 3125.9,
+     "rw": 8.6,
+     "r2w": 1.8,
+     "r1": -11.4,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "GVT&D",
+     "close": 4420.0,
+     "rw": 5.9,
+     "r2w": -1.4,
+     "r1": -6.0,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "DATAPATTNS",
+     "close": 4268.0,
+     "rw": 7.0,
+     "r2w": -3.3,
+     "r1": -8.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Consumer Services",
+   "stage": "Improving",
+   "n": 9,
+   "rw": -0.0,
+   "r2w": -2.9,
+   "r1": -8.1,
+   "idx_d": "Bullish",
+   "wk_bull": 44,
+   "d_bull": 78,
+   "ratio": 0.9777,
+   "mom": 0.0022,
+   "top": [
+    {
+     "symbol": "INDHOTEL",
+     "close": 890.3,
+     "rw": 1.0,
+     "r2w": 0.5,
+     "r1": 11.5,
+     "states": {
+      "W": "Impulse",
+      "D": "Topping"
+     }
+    },
+    {
+     "symbol": "ETERNAL",
+     "close": 363.65,
+     "rw": 0.7,
+     "r2w": -1.8,
+     "r1": 2.0,
+     "states": {
+      "W": "Topping",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "TRENT",
+     "close": 3165.2,
+     "rw": 2.8,
+     "r2w": 1.2,
+     "r1": -5.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "NYKAA",
+     "close": 365.2,
+     "rw": 3.5,
+     "r2w": -5.9,
+     "r1": -3.4,
+     "states": {
+      "W": "Topping",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "VMM",
+     "close": 96.37,
+     "rw": 1.9,
+     "r2w": 1.9,
+     "r1": -12.1,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Realty",
+   "stage": "Weakening",
+   "n": 6,
+   "rw": 2.2,
+   "r2w": 4.1,
+   "r1": 1.3,
+   "idx_d": "Bullish",
+   "wk_bull": 17,
+   "d_bull": 100,
+   "ratio": 1.0361,
+   "mom": -0.0003,
+   "top": [
+    {
+     "symbol": "PHOENIXLTD",
+     "close": 2255.0,
+     "rw": 5.3,
+     "r2w": 5.1,
+     "r1": 7.0,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "GODREJPROP",
+     "close": 1854.9,
+     "rw": 1.4,
+     "r2w": 6.5,
+     "r1": 4.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "LODHA",
+     "close": 1220.0,
+     "rw": 3.0,
+     "r2w": 7.3,
+     "r1": 0.3,
+     "states": {
+      "W": "Bearish",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "PRESTIGE",
+     "close": 1650.0,
+     "rw": -0.3,
+     "r2w": 5.3,
+     "r1": -0.4,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "DLF",
+     "close": 758.75,
+     "rw": 1.1,
+     "r2w": -0.1,
+     "r1": 2.7,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Services",
+   "stage": "Weakening",
+   "n": 5,
+   "rw": 0.4,
+   "r2w": 0.4,
+   "r1": -4.0,
+   "idx_d": "Bullish",
+   "wk_bull": 20,
+   "d_bull": 100,
+   "ratio": 1.0039,
+   "mom": -0.0067,
+   "top": [
+    {
+     "symbol": "INDIGO",
+     "close": 5587.3,
+     "rw": 2.3,
+     "r2w": 10.1,
+     "r1": 4.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "GMRAIRPORT",
+     "close": 99.0,
+     "rw": -1.1,
+     "r2w": 4.0,
+     "r1": -1.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "DELHIVERY",
+     "close": 436.3,
+     "rw": 0.7,
+     "r2w": 0.4,
+     "r1": -6.7,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "ADANIPORTS",
+     "close": 1903.3,
+     "rw": 0.2,
+     "r2w": -7.7,
+     "r1": -3.5,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "CONCOR",
+     "close": 442.15,
+     "rw": -0.5,
+     "r2w": -4.4,
+     "r1": -13.2,
+     "states": {
+      "W": "Bearish",
+      "D": "Bullish"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Auto",
+   "stage": "Weakening",
+   "n": 16,
+   "rw": 0.1,
+   "r2w": -0.6,
+   "r1": -1.3,
+   "idx_d": "Bullish",
+   "wk_bull": 50,
+   "d_bull": 94,
+   "ratio": 1.0014,
+   "mom": -0.0161,
+   "top": [
+    {
+     "symbol": "ATHERENERG",
+     "close": 1945.0,
+     "rw": 8.6,
+     "r2w": 7.6,
+     "r1": 18.6,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "UNOMINDA",
+     "close": 1388.0,
+     "rw": 3.2,
+     "r2w": 18.2,
+     "r1": 13.6,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "M&M",
+     "close": 3333.0,
+     "rw": 5.8,
+     "r2w": 5.9,
+     "r1": 4.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "FORCEMOT",
+     "close": 19600.0,
+     "rw": 5.9,
+     "r2w": 6.9,
+     "r1": 2.7,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "MARUTI",
+     "close": 12854.0,
+     "rw": 0.8,
+     "r2w": 3.1,
+     "r1": 2.8,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -494,28 +711,21 @@
    "name": "Healthcare",
    "stage": "Lagging",
    "n": 16,
-   "rs1": -3.6,
-   "rs3": -1.2,
+   "rw": 0.9,
+   "r2w": -3.7,
+   "r1": -3.5,
+   "idx_d": "Bullish",
    "wk_bull": 38,
    "d_bull": 100,
-   "ratio": 0.9715,
-   "mom": -0.0371,
+   "ratio": 0.9877,
+   "mom": -0.0011,
    "top": [
     {
      "symbol": "DIVISLAB",
      "close": 11442.0,
-     "rs1": 11.7,
-     "rs3": 29.6,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "LAURUSLABS",
-     "close": 2424.0,
-     "rs1": 6.1,
-     "rs3": 27.6,
+     "rw": 12.1,
+     "r2w": 9.0,
+     "r1": 11.7,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -524,94 +734,93 @@
     {
      "symbol": "GLENMARK",
      "close": 2640.0,
-     "rs1": 5.0,
-     "rs3": 11.8,
+     "rw": 5.6,
+     "r2w": 3.5,
+     "r1": 5.1,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "DRREDDY",
-     "close": 1380.0,
-     "rs1": -0.3,
-     "rs3": 11.6,
+     "symbol": "LAURUSLABS",
+     "close": 2424.0,
+     "rw": 2.6,
+     "r2w": -1.4,
+     "r1": 6.2,
      "states": {
       "W": "Impulse",
-      "D": "Topping"
+      "D": "Impulse"
      }
     },
     {
      "symbol": "MANKIND",
      "close": 2640.0,
-     "rs1": -0.3,
-     "rs3": 5.1,
+     "rw": 4.1,
+     "r2w": -2.5,
+     "r1": -0.2,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "MAXHEALTH",
+     "close": 947.1,
+     "rw": 0.9,
+     "r2w": 1.9,
+     "r1": -1.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
      }
     }
    ]
   },
   {
-   "name": "Oil & Gas",
+   "name": "Construction",
    "stage": "Lagging",
-   "n": 9,
-   "rs1": -3.5,
-   "rs3": -2.7,
-   "wk_bull": 22,
-   "d_bull": 78,
-   "ratio": 0.9631,
-   "mom": -0.0205,
+   "n": 3,
+   "rw": 0.5,
+   "r2w": -0.9,
+   "r1": -6.0,
+   "idx_d": "Bullish",
+   "wk_bull": 0,
+   "d_bull": 100,
+   "ratio": 0.9955,
+   "mom": -0.0036,
    "top": [
     {
-     "symbol": "PETRONET",
-     "close": 324.05,
-     "rs1": 0.2,
-     "rs3": 12.3,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "GAIL",
-     "close": 188.0,
-     "rs1": 0.1,
-     "rs3": 2.2,
+     "symbol": "LT",
+     "close": 4143.8,
+     "rw": 1.6,
+     "r2w": -1.4,
+     "r1": 1.3,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "IOC",
-     "close": 144.04,
-     "rs1": 2.6,
-     "rs3": -1.0,
+     "symbol": "RVNL",
+     "close": 199.46,
+     "rw": 2.2,
+     "r2w": -2.2,
+     "r1": -10.4,
      "states": {
       "W": "Bottoming",
-      "D": "Impulse"
+      "D": "Bullish"
      }
     },
     {
-     "symbol": "RELIANCE",
-     "close": 1339.7,
-     "rs1": 3.3,
-     "rs3": -2.6,
+     "symbol": "NBCC",
+     "close": 79.0,
+     "rw": -2.4,
+     "r2w": 0.4,
+     "r1": -9.1,
      "states": {
       "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "HINDPETRO",
-     "close": 381.5,
-     "rs1": 4.4,
-     "rs3": -5.6,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
+      "D": "Bullish"
      }
     }
    ]
@@ -620,18 +829,21 @@
    "name": "Telecom",
    "stage": "Lagging",
    "n": 3,
-   "rs1": -5.2,
-   "rs3": -1.4,
+   "rw": 0.3,
+   "r2w": -4.8,
+   "r1": -5.1,
+   "idx_d": "Bullish",
    "wk_bull": 33,
    "d_bull": 100,
-   "ratio": 0.9613,
-   "mom": -0.0423,
+   "ratio": 0.976,
+   "mom": -0.0014,
    "top": [
     {
      "symbol": "BHARTIARTL",
      "close": 2106.0,
-     "rs1": 5.0,
-     "rs3": 4.8,
+     "rw": 1.6,
+     "r2w": -2.6,
+     "r1": 5.1,
      "states": {
       "W": "Impulse",
       "D": "Topping"
@@ -640,8 +852,9 @@
     {
      "symbol": "INDUSTOWER",
      "close": 396.0,
-     "rs1": -7.0,
-     "rs3": -0.2,
+     "rw": 2.6,
+     "r2w": -6.3,
+     "r1": -6.9,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -650,250 +863,9 @@
     {
      "symbol": "IDEA",
      "close": 12.57,
-     "rs1": -13.4,
-     "rs3": -10.3,
-     "states": {
-      "W": "Bearish",
-      "D": "Bullish"
-     }
-    }
-   ]
-  },
-  {
-   "name": "IT",
-   "stage": "Lagging",
-   "n": 13,
-   "rs1": -6.5,
-   "rs3": -2.9,
-   "wk_bull": 85,
-   "d_bull": 85,
-   "ratio": 0.9667,
-   "mom": -0.0936,
-   "top": [
-    {
-     "symbol": "TECHM",
-     "close": 1764.0,
-     "rs1": 2.7,
-     "rs3": 5.1,
-     "states": {
-      "W": "Impulse",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "WIPRO",
-     "close": 194.6,
-     "rs1": 3.6,
-     "rs3": 2.3,
-     "states": {
-      "W": "Bullish",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "COFORGE",
-     "close": 2028.0,
-     "rs1": -6.4,
-     "rs3": 9.1,
-     "states": {
-      "W": "Topping",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "TATAELXSI",
-     "close": 3835.0,
-     "rs1": 0.4,
-     "rs3": -0.1,
-     "states": {
-      "W": "Bullish",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "PERSISTENT",
-     "close": 6003.0,
-     "rs1": -11.3,
-     "rs3": 6.2,
-     "states": {
-      "W": "Topping",
-      "D": "Topping"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Construction Materials",
-   "stage": "Lagging",
-   "n": 4,
-   "rs1": -2.4,
-   "rs3": -8.2,
-   "wk_bull": 0,
-   "d_bull": 100,
-   "ratio": 0.966,
-   "mom": -0.0219,
-   "top": [
-    {
-     "symbol": "ULTRACEMCO",
-     "close": 12100.0,
-     "rs1": 1.0,
-     "rs3": -1.7,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "SHREECEM",
-     "close": 24655.0,
-     "rs1": -0.6,
-     "rs3": -7.0,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "AMBUJACEM",
-     "close": 381.45,
-     "rs1": -2.6,
-     "rs3": -12.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "GRASIM",
-     "close": 3034.0,
-     "rs1": -7.4,
-     "rs3": -11.7,
-     "states": {
-      "W": "Bearish",
-      "D": "Topping"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Power",
-   "stage": "Lagging",
-   "n": 8,
-   "rs1": -4.9,
-   "rs3": -7.2,
-   "wk_bull": 0,
-   "d_bull": 100,
-   "ratio": 0.949,
-   "mom": -0.0576,
-   "top": [
-    {
-     "symbol": "ADANIGREEN",
-     "close": 1403.0,
-     "rs1": -2.5,
-     "rs3": 1.9,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "ADANIPOWER",
-     "close": 205.67,
-     "rs1": -1.0,
-     "rs3": -4.1,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "JSWENERGY",
-     "close": 514.55,
-     "rs1": 0.2,
-     "rs3": -11.4,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "NHPC",
-     "close": 75.83,
-     "rs1": -8.4,
-     "rs3": -4.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "ADANIENSOL",
-     "close": 1438.5,
-     "rs1": -0.6,
-     "rs3": -13.5,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    }
-   ]
-  },
-  {
-   "name": "Consumer Services",
-   "stage": "Lagging",
-   "n": 9,
-   "rs1": -8.2,
-   "rs3": -6.7,
-   "wk_bull": 44,
-   "d_bull": 78,
-   "ratio": 0.9426,
-   "mom": -0.015,
-   "top": [
-    {
-     "symbol": "INDHOTEL",
-     "close": 890.3,
-     "rs1": 11.4,
-     "rs3": 19.5,
-     "states": {
-      "W": "Impulse",
-      "D": "Topping"
-     }
-    },
-    {
-     "symbol": "ETERNAL",
-     "close": 363.65,
-     "rs1": 1.9,
-     "rs3": 12.3,
-     "states": {
-      "W": "Topping",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "NYKAA",
-     "close": 365.2,
-     "rs1": -3.5,
-     "rs3": 7.9,
-     "states": {
-      "W": "Topping",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "TRENT",
-     "close": 3165.2,
-     "rs1": -5.6,
-     "rs3": 2.5,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "JUBLFOOD",
-     "close": 437.75,
-     "rs1": -8.6,
-     "rs3": -13.1,
+     "rw": -3.2,
+     "r2w": -5.7,
+     "r1": -13.3,
      "states": {
       "W": "Bearish",
       "D": "Bullish"
@@ -905,18 +877,21 @@
    "name": "FMCG",
    "stage": "Lagging",
    "n": 14,
-   "rs1": -8.1,
-   "rs3": -7.5,
+   "rw": -0.2,
+   "r2w": -2.8,
+   "r1": -8.1,
+   "idx_d": "Bullish",
    "wk_bull": 14,
    "d_bull": 93,
-   "ratio": 0.9577,
-   "mom": -0.0176,
+   "ratio": 0.9823,
+   "mom": -0.0002,
    "top": [
     {
      "symbol": "PATANJALI",
      "close": 421.0,
-     "rs1": 3.0,
-     "rs3": 16.0,
+     "rw": 1.8,
+     "r2w": 1.7,
+     "r1": 3.1,
      "states": {
       "W": "Bullish",
       "D": "Impulse"
@@ -925,18 +900,9 @@
     {
      "symbol": "MARICO",
      "close": 900.0,
-     "rs1": 3.4,
-     "rs3": 1.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "TATACONSUM",
-     "close": 1079.0,
-     "rs1": 0.8,
-     "rs3": -1.8,
+     "rw": 0.6,
+     "r2w": 2.7,
+     "r1": 3.5,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -945,20 +911,103 @@
     {
      "symbol": "ITC",
      "close": 285.0,
-     "rs1": -2.4,
-     "rs3": -0.2,
+     "rw": 1.4,
+     "r2w": -1.9,
+     "r1": -2.3,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "RADICO",
-     "close": 4605.0,
-     "rs1": -10.1,
-     "rs3": -1.9,
+     "symbol": "TATACONSUM",
+     "close": 1079.0,
+     "rw": -0.6,
+     "r2w": -3.7,
+     "r1": 0.9,
      "states": {
-      "W": "Topping",
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "UNITDSPR",
+     "close": 1416.8,
+     "rw": 0.8,
+     "r2w": 0.5,
+     "r1": -8.1,
+     "states": {
+      "W": "Bearish",
+      "D": "Bullish"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Oil & Gas",
+   "stage": "Lagging",
+   "n": 9,
+   "rw": -0.6,
+   "r2w": -2.1,
+   "r1": -3.4,
+   "idx_d": "Bullish",
+   "wk_bull": 22,
+   "d_bull": 78,
+   "ratio": 0.9734,
+   "mom": -0.0167,
+   "top": [
+    {
+     "symbol": "RELIANCE",
+     "close": 1339.7,
+     "rw": 1.2,
+     "r2w": 5.4,
+     "r1": 3.3,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "HINDPETRO",
+     "close": 381.5,
+     "rw": -0.4,
+     "r2w": 2.1,
+     "r1": 4.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "PETRONET",
+     "close": 324.05,
+     "rw": 1.5,
+     "r2w": 2.7,
+     "r1": 0.3,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "GAIL",
+     "close": 188.0,
+     "rw": 0.3,
+     "r2w": 4.4,
+     "r1": 0.2,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "IOC",
+     "close": 144.04,
+     "rw": -1.1,
+     "r2w": 1.1,
+     "r1": 2.7,
+     "states": {
+      "W": "Bottoming",
       "D": "Impulse"
      }
     }
@@ -968,38 +1017,43 @@
    "name": "Metals & Mining",
    "stage": "Lagging",
    "n": 10,
-   "rs1": -7.2,
-   "rs3": -9.6,
+   "rw": -0.9,
+   "r2w": -2.4,
+   "r1": -7.2,
+   "idx_d": "Bullish",
    "wk_bull": 20,
    "d_bull": 100,
-   "ratio": 0.9317,
-   "mom": -0.0062,
+   "ratio": 0.9782,
+   "mom": -0.0121,
    "top": [
-    {
-     "symbol": "JSWSTEEL",
-     "close": 1348.0,
-     "rs1": 3.0,
-     "rs3": 2.8,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
     {
      "symbol": "JINDALSTEL",
      "close": 1157.8,
-     "rs1": 0.7,
-     "rs3": 0.7,
+     "rw": -0.1,
+     "r2w": -0.2,
+     "r1": 0.7,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
      }
     },
     {
+     "symbol": "JSWSTEEL",
+     "close": 1348.0,
+     "rw": -1.3,
+     "r2w": -2.0,
+     "r1": 3.1,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
      "symbol": "TATASTEEL",
      "close": 186.68,
-     "rs1": -4.9,
-     "rs3": -3.2,
+     "rw": 1.8,
+     "r2w": 0.8,
+     "r1": -4.8,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -1008,147 +1062,222 @@
     {
      "symbol": "SAIL",
      "close": 176.2,
-     "rs1": -9.6,
-     "rs3": -2.2,
+     "rw": 1.5,
+     "r2w": 0.0,
+     "r1": -9.5,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
      }
     },
     {
-     "symbol": "HINDZINC",
-     "close": 554.85,
-     "rs1": -10.6,
-     "rs3": -8.5,
+     "symbol": "HINDALCO",
+     "close": 943.6,
+     "rw": -0.1,
+     "r2w": -2.9,
+     "r1": -6.9,
      "states": {
-      "W": "Bearish",
+      "W": "Bottoming",
       "D": "Bullish"
      }
     }
    ]
   },
   {
-   "name": "Chemicals",
+   "name": "Power",
    "stage": "Lagging",
-   "n": 7,
-   "rs1": -9.3,
-   "rs3": -7.8,
-   "wk_bull": 14,
-   "d_bull": 71,
-   "ratio": 0.9328,
-   "mom": -0.0348,
+   "n": 8,
+   "rw": -2.4,
+   "r2w": -6.6,
+   "r1": -4.9,
+   "idx_d": "Bullish",
+   "wk_bull": 0,
+   "d_bull": 100,
+   "ratio": 0.9662,
+   "mom": -0.0319,
    "top": [
     {
-     "symbol": "NAVINFLUOR",
-     "close": 10002.0,
-     "rs1": 6.6,
-     "rs3": 16.2,
+     "symbol": "ADANIPOWER",
+     "close": 205.67,
+     "rw": 0.1,
+     "r2w": -1.8,
+     "r1": -0.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "ADANIENSOL",
+     "close": 1438.5,
+     "rw": -1.3,
+     "r2w": -4.0,
+     "r1": -0.6,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "ADANIGREEN",
+     "close": 1403.0,
+     "rw": -1.6,
+     "r2w": -2.1,
+     "r1": -2.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "JSWENERGY",
+     "close": 514.55,
+     "rw": -2.4,
+     "r2w": -8.5,
+     "r1": 0.3,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "NTPC",
+     "close": 319.1,
+     "rw": -0.0,
+     "r2w": -6.6,
+     "r1": -8.9,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    }
+   ]
+  },
+  {
+   "name": "IT",
+   "stage": "Lagging",
+   "n": 13,
+   "rw": -2.8,
+   "r2w": -9.1,
+   "r1": -6.4,
+   "idx_d": "Topping",
+   "wk_bull": 85,
+   "d_bull": 85,
+   "ratio": 0.9376,
+   "mom": -0.0371,
+   "top": [
+    {
+     "symbol": "WIPRO",
+     "close": 194.6,
+     "rw": -2.7,
+     "r2w": -7.0,
+     "r1": 3.7,
+     "states": {
+      "W": "Bullish",
+      "D": "Topping"
+     }
+    },
+    {
+     "symbol": "KPITTECH",
+     "close": 552.0,
+     "rw": 1.5,
+     "r2w": -7.9,
+     "r1": -4.0,
+     "states": {
+      "W": "Bottoming",
+      "D": "Topping"
+     }
+    },
+    {
+     "symbol": "TATAELXSI",
+     "close": 3835.0,
+     "rw": -2.9,
+     "r2w": -8.6,
+     "r1": 0.4,
+     "states": {
+      "W": "Bullish",
+      "D": "Topping"
+     }
+    },
+    {
+     "symbol": "TECHM",
+     "close": 1764.0,
+     "rw": -4.0,
+     "r2w": -9.7,
+     "r1": 2.8,
      "states": {
       "W": "Impulse",
-      "D": "Impulse"
+      "D": "Topping"
      }
     },
     {
-     "symbol": "COROMANDEL",
-     "close": 1955.0,
-     "rs1": 1.9,
-     "rs3": -9.2,
+     "symbol": "COFORGE",
+     "close": 2028.0,
+     "rw": -3.2,
+     "r2w": -6.0,
+     "r1": -6.3,
      "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "UPL",
-     "close": 559.4,
-     "rs1": -4.9,
-     "rs3": -5.4,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "SOLARINDS",
-     "close": 19338.0,
-     "rs1": -15.3,
-     "rs3": -0.2,
-     "states": {
-      "W": "Bearish",
-      "D": "Bottoming"
-     }
-    },
-    {
-     "symbol": "SRF",
-     "close": 2475.0,
-     "rs1": -12.2,
-     "rs3": -7.7,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
+      "W": "Topping",
+      "D": "Topping"
      }
     }
    ]
   },
   {
-   "name": "Capital Goods",
+   "name": "Construction Materials",
    "stage": "Lagging",
-   "n": 26,
-   "rs1": -13.6,
-   "rs3": -12.8,
-   "wk_bull": 12,
-   "d_bull": 69,
-   "ratio": 0.9155,
-   "mom": -0.0171,
+   "n": 4,
+   "rw": -3.2,
+   "r2w": -2.9,
+   "r1": -2.3,
+   "idx_d": "Topping",
+   "wk_bull": 0,
+   "d_bull": 100,
+   "ratio": 0.9738,
+   "mom": -0.0513,
    "top": [
     {
-     "symbol": "APLAPOLLO",
-     "close": 2251.6,
-     "rs1": -8.5,
-     "rs3": 9.3,
-     "states": {
-      "W": "Topping",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "ASHOKLEY",
-     "close": 169.2,
-     "rs1": 3.3,
-     "rs3": -7.7,
+     "symbol": "ULTRACEMCO",
+     "close": 12100.0,
+     "rw": -2.0,
+     "r2w": -1.1,
+     "r1": 1.1,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
      }
     },
     {
-     "symbol": "GVT&D",
-     "close": 4420.0,
-     "rs1": -6.1,
-     "rs3": -3.1,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "BEL",
-     "close": 400.85,
-     "rs1": -6.1,
-     "rs3": -4.6,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "BHEL",
-     "close": 436.3,
-     "rs1": -12.9,
-     "rs3": 0.4,
+     "symbol": "SHREECEM",
+     "close": 24655.0,
+     "rw": -1.7,
+     "r2w": -2.8,
+     "r1": -0.5,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "AMBUJACEM",
+     "close": 381.45,
+     "rw": -2.4,
+     "r2w": -1.9,
+     "r1": -2.5,
+     "states": {
+      "W": "Bottoming",
+      "D": "Topping"
+     }
+    },
+    {
+     "symbol": "GRASIM",
+     "close": 3034.0,
+     "rw": -6.8,
+     "r2w": -5.9,
+     "r1": -7.3,
+     "states": {
+      "W": "Bearish",
+      "D": "Topping"
      }
     }
    ]
@@ -1173,11 +1302,11 @@
  "map": {
   "360ONE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ABB": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ACC": {
    "sector": "Construction Materials",
@@ -1189,15 +1318,15 @@
   },
   "AIAENG": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "APLAPOLLO": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "AUBANK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "AWL": {
    "sector": "FMCG",
@@ -1205,15 +1334,15 @@
   },
   "AADHARHFC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "AARTIIND": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "AAVAS": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ABBOTINDIA": {
    "sector": "Healthcare",
@@ -1221,7 +1350,7 @@
   },
   "ACE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ACUTAAS": {
    "sector": "Healthcare",
@@ -1241,7 +1370,7 @@
   },
   "ADANIPORTS": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ADANIPOWER": {
    "sector": "Power",
@@ -1253,19 +1382,19 @@
   },
   "ABCAPITAL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ABREL": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "ABSLAMC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CPPLUS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "AEGISLOG": {
    "sector": "Oil & Gas",
@@ -1277,11 +1406,11 @@
   },
   "AETHER": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "AFCONS": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "AFFLE": {
    "sector": "IT",
@@ -1301,11 +1430,11 @@
   },
   "ARE&M": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "AMBER": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "AMBUJACEM": {
    "sector": "Construction Materials",
@@ -1313,15 +1442,15 @@
   },
   "ANANDRATHI": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ANANTRAJ": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "ANGELONE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ANTHEM": {
    "sector": "Healthcare",
@@ -1329,11 +1458,11 @@
   },
   "ANURAS": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "APARINDS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "APOLLOHOSP": {
    "sector": "Healthcare",
@@ -1341,23 +1470,23 @@
   },
   "APOLLOTYRE": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "APTUS": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ASAHIINDIA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ASHOKLEY": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ASIANPAINT": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ASTERDM": {
    "sector": "Healthcare",
@@ -1365,15 +1494,15 @@
   },
   "ASTRAL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ATHERENERG": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ATUL": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "AUROPHARMA": {
    "sector": "Healthcare",
@@ -1381,7 +1510,7 @@
   },
   "AIIL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "AVANTIFEED": {
    "sector": "FMCG",
@@ -1389,55 +1518,55 @@
   },
   "DMART": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "AXISBANK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "AZAD": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BEML": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BLS": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BSE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BAGMANE": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "BAJAJ-AUTO": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "BAJFINANCE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BAJAJFINSV": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BAJAJHLDNG": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BAJAJHFL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BALKRISIND": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "BALRAMCHIN": {
    "sector": "FMCG",
@@ -1445,7 +1574,7 @@
   },
   "BANDHANBNK": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BANKBARODA": {
    "sector": "PSU Banks",
@@ -1461,15 +1590,15 @@
   },
   "BATAINDIA": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BELRISE": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "BERGEPAINT": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BHARATCOAL": {
    "sector": "Oil & Gas",
@@ -1477,19 +1606,19 @@
   },
   "BDL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BEL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BHARATFORG": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "BHEL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BPCL": {
    "sector": "Oil & Gas",
@@ -1505,7 +1634,7 @@
   },
   "GROWW": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BIOCON": {
    "sector": "Healthcare",
@@ -1521,19 +1650,19 @@
   },
   "BLUESTARCO": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "BOSCHLTD": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "FIRSTCRY": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "BRIGADE": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "BRITANNIA": {
    "sector": "FMCG",
@@ -1541,7 +1670,7 @@
   },
   "BIRET": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "CCL": {
    "sector": "FMCG",
@@ -1553,19 +1682,19 @@
   },
   "CGPOWER": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "CIEINDIA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "CRISIL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CANFINHOME": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CANBK": {
    "sector": "PSU Banks",
@@ -1573,7 +1702,7 @@
   },
   "CANHLIFE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CAPLIPOINT": {
    "sector": "Healthcare",
@@ -1581,15 +1710,15 @@
   },
   "CGCL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CARBORUNIV": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "CARTRADE": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "CASTROLIND": {
    "sector": "Oil & Gas",
@@ -1597,11 +1726,11 @@
   },
   "CEATLTD": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "CEMPRO": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "CENTRALBK": {
    "sector": "PSU Banks",
@@ -1609,15 +1738,15 @@
   },
   "CDSL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CMPDI": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "CHAMBLFERT": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "CHENNPETRO": {
    "sector": "Oil & Gas",
@@ -1625,15 +1754,15 @@
   },
   "CHOICEIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CHOLAHLDNG": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CHOLAFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CIPLA": {
    "sector": "Healthcare",
@@ -1641,7 +1770,7 @@
   },
   "CUB": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CLEANMAX": {
    "sector": "Power",
@@ -1649,7 +1778,7 @@
   },
   "CLEAN": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "COALINDIA": {
    "sector": "Oil & Gas",
@@ -1657,7 +1786,7 @@
   },
   "COCHINSHIP": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "COFORGE": {
    "sector": "IT",
@@ -1673,7 +1802,7 @@
   },
   "CAMS": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CONCORDBIO": {
    "sector": "Healthcare",
@@ -1681,27 +1810,27 @@
   },
   "CONCOR": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "COROMANDEL": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "CRAFTSMAN": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "CREDITACC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CROMPTON": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CUMMINSIND": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "CUPID": {
    "sector": "FMCG",
@@ -1713,7 +1842,7 @@
   },
   "DLF": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "DOMS": {
    "sector": "FMCG",
@@ -1729,23 +1858,23 @@
   },
   "DATAPATTNS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "DEEPAKFERT": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "DEEPAKNTR": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "DELHIVERY": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "DEVYANI": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "DIVISLAB": {
    "sector": "Healthcare",
@@ -1753,7 +1882,7 @@
   },
   "DIXON": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "LALPATHLAB": {
    "sector": "Healthcare",
@@ -1765,7 +1894,7 @@
   },
   "DUMMYHEG": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "EIDPARRY": {
    "sector": "FMCG",
@@ -1773,23 +1902,23 @@
   },
   "EIHOTEL": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "EMBASSY": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "EICHERMOT": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ELECON": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ELGIEQUIP": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "EMAMILTD": {
    "sector": "FMCG",
@@ -1801,55 +1930,55 @@
   },
   "EMMVEE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ENDURANCE": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ENGINERSIN": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "ESCORTS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ETERNAL": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "EXIDEIND": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "NYKAA": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "FEDERALBNK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "FACT": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "FINCABLES": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "FSL": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "FIVESTAR": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "FORCEMOT": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "FORTIS": {
    "sector": "Healthcare",
@@ -1865,27 +1994,27 @@
   },
   "GVT&D": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "GMRAIRPORT": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "GABRIEL": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "GALLANTT": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "GRSE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "GICRE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "GILLETTE": {
    "sector": "FMCG",
@@ -1909,7 +2038,7 @@
   },
   "GPIL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "GODFRYPHLP": {
    "sector": "FMCG",
@@ -1925,7 +2054,7 @@
   },
   "GODREJPROP": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "GRANULES": {
    "sector": "Healthcare",
@@ -1933,7 +2062,7 @@
   },
   "GRAPHITE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "GRASIM": {
    "sector": "Construction Materials",
@@ -1945,11 +2074,11 @@
   },
   "GESHIP": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "FLUOROCHEM": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "GMDCLTD": {
    "sector": "Metals & Mining",
@@ -1957,7 +2086,7 @@
   },
   "HBLENGINE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "HCLTECH": {
    "sector": "IT",
@@ -1965,23 +2094,23 @@
   },
   "HDBFS": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HDFCAMC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HDFCBANK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HDFCLIFE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HEGAM": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "HFCL": {
    "sector": "Telecom",
@@ -1989,11 +2118,11 @@
   },
   "HAVELLS": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HEROMOTOCO": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "HEXT": {
    "sector": "IT",
@@ -2001,7 +2130,7 @@
   },
   "HSCL": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "HINDALCO": {
    "sector": "Metals & Mining",
@@ -2009,7 +2138,7 @@
   },
   "HAL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "HINDCOPPER": {
    "sector": "Metals & Mining",
@@ -2029,11 +2158,11 @@
   },
   "POWERINDIA": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "HOMEFIRST": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HONASA": {
    "sector": "FMCG",
@@ -2041,63 +2170,63 @@
   },
   "HONAUT": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "HUDCO": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "HYUNDAI": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ICICIBANK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ICICILIFE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ICICIGI": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ICICIAMC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "IDBI": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "IDFCFIRSTB": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "IFCI": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "IIFL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "INOXINDIA": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "IRB": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "IRCON": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "ITCHOTELS": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ITC": {
    "sector": "FMCG",
@@ -2113,7 +2242,7 @@
   },
   "INDIAMART": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "INDIANB": {
    "sector": "PSU Banks",
@@ -2121,11 +2250,11 @@
   },
   "IEX": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "INDHOTEL": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "IOC": {
    "sector": "Oil & Gas",
@@ -2137,15 +2266,15 @@
   },
   "IRCTC": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "IRFC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "IREDA": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "IGL": {
    "sector": "Oil & Gas",
@@ -2157,11 +2286,11 @@
   },
   "INDUSINDBK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NAUKRI": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "INFY": {
    "sector": "IT",
@@ -2169,7 +2298,7 @@
   },
   "INOXWIND": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "INTELLECT": {
    "sector": "IT",
@@ -2177,11 +2306,11 @@
   },
   "INDIGO": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "IGIL": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "IKS": {
    "sector": "IT",
@@ -2197,15 +2326,15 @@
   },
   "JBMA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "JKTYRE": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "JMFINANCIL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "JSWCEMENT": {
    "sector": "Construction Materials",
@@ -2217,7 +2346,7 @@
   },
   "JSWINFRA": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "JSWSTEEL": {
    "sector": "Metals & Mining",
@@ -2233,11 +2362,11 @@
   },
   "J&KBANK": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "JINDALSAW": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "JSL": {
    "sector": "Metals & Mining",
@@ -2249,23 +2378,23 @@
   },
   "JIOFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "JUBLFOOD": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "JUBLINGREA": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "JWL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "JYOTICNC": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "KPRMILL": {
    "sector": "Textiles",
@@ -2273,7 +2402,7 @@
   },
   "KEI": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "KPITTECH": {
    "sector": "IT",
@@ -2281,47 +2410,47 @@
   },
   "KSB": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "KAJARIACER": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "KPIL": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "KALYANKJIL": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "KARURVYSYA": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "KAYNES": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "KEC": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "KFINTECH": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "KIRLOSBROS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "KIRLOSENG": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "KOTAKBANK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "KIMS": {
    "sector": "Healthcare",
@@ -2329,7 +2458,7 @@
   },
   "LTF": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "LTTS": {
    "sector": "IT",
@@ -2337,11 +2466,11 @@
   },
   "LGEINDIA": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "LICHSGFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "LTFOODS": {
    "sector": "FMCG",
@@ -2353,7 +2482,7 @@
   },
   "LT": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "LAURUSLABS": {
    "sector": "Healthcare",
@@ -2361,19 +2490,19 @@
   },
   "LEMONTREE": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "LENSKART": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "LICI": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "LINDEINDIA": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "LLOYDSME": {
    "sector": "Metals & Mining",
@@ -2381,7 +2510,7 @@
   },
   "LODHA": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "LUPIN": {
    "sector": "Healthcare",
@@ -2389,15 +2518,15 @@
   },
   "MMTC": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "MRF": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "MTARTECH": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "MGL": {
    "sector": "Oil & Gas",
@@ -2405,15 +2534,15 @@
   },
   "M&MFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "M&M": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "MANAPPURAM": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "MRPL": {
    "sector": "Oil & Gas",
@@ -2429,11 +2558,11 @@
   },
   "MARUTI": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "MFSL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "MAXHEALTH": {
    "sector": "Healthcare",
@@ -2441,23 +2570,23 @@
   },
   "MAZDOCK": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "MEESHO": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "MINDACORP": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "MSUMI": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "MOTILALOFS": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "MPHASIS": {
    "sector": "IT",
@@ -2465,11 +2594,11 @@
   },
   "MCX": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "MUTHOOTFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NATCOPHARM": {
    "sector": "Healthcare",
@@ -2477,11 +2606,11 @@
   },
   "NBCC": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "NCC": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "NHPC": {
    "sector": "Power",
@@ -2521,7 +2650,7 @@
   },
   "NAVINFLUOR": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "NESTLEIND": {
    "sector": "FMCG",
@@ -2537,11 +2666,11 @@
   },
   "NAM-INDIA": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NUVAMA": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NUVOCO": {
    "sector": "Construction Materials",
@@ -2549,7 +2678,7 @@
   },
   "OBEROIRLTY": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "ONGC": {
    "sector": "Oil & Gas",
@@ -2561,15 +2690,15 @@
   },
   "OLAELEC": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "OLECTRA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "PAYTM": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ONESOURCE": {
    "sector": "Healthcare",
@@ -2581,27 +2710,27 @@
   },
   "POLICYBZR": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "PCBL": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PGEL": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "PIIND": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PNBHOUSING": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "PTCIL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PVRINOX": {
    "sector": "Media",
@@ -2613,7 +2742,7 @@
   },
   "PARADEEP": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PATANJALI": {
    "sector": "FMCG",
@@ -2629,23 +2758,23 @@
   },
   "PHOENIXLTD": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "PWL": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PIDILITIND": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PINELABS": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "PIRAMALFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "PPLPHARMA": {
    "sector": "Healthcare",
@@ -2657,15 +2786,15 @@
   },
   "POLYCAB": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "POONAWALLA": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "PFC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "POWERGRID": {
    "sector": "Power",
@@ -2673,11 +2802,11 @@
   },
   "PREMIERENE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PRESTIGE": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "PFOCUS": {
    "sector": "Media",
@@ -2685,7 +2814,7 @@
   },
   "PRIVISCL": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "PNB": {
    "sector": "PSU Banks",
@@ -2693,23 +2822,23 @@
   },
   "RRKABEL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "RBLBANK": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "RECLTD": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "RHIM": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "RITES": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "RADICO": {
    "sector": "FMCG",
@@ -2717,7 +2846,7 @@
   },
   "RVNL": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "RAILTEL": {
    "sector": "Telecom",
@@ -2729,11 +2858,11 @@
   },
   "RKFORGE": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "REDINGTON": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "RELIANCE": {
    "sector": "Oil & Gas",
@@ -2749,11 +2878,11 @@
   },
   "SBICARD": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SBILIFE": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SJVN": {
    "sector": "Power",
@@ -2761,11 +2890,11 @@
   },
   "SHRIPISTON": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "SRF": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SAGILITY": {
    "sector": "IT",
@@ -2777,15 +2906,15 @@
   },
   "SAMMAANCAP": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "MOTHERSON": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "SANSERA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "SARDAEN": {
    "sector": "Metals & Mining",
@@ -2793,15 +2922,15 @@
   },
   "SCHAEFFLER": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "SCHNEIDER": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SCI": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "SHREECEM": {
    "sector": "Construction Materials",
@@ -2809,39 +2938,39 @@
   },
   "SHRIRAMFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SHYAMMETL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ENRIN": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SIEMENS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SIGNATURE": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "SOBHA": {
    "sector": "Realty",
-   "stage": "Leading"
+   "stage": "Weakening"
   },
   "SOLARINDS": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SONACOMS": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "STARHEALTH": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SBIN": {
    "sector": "PSU Banks",
@@ -2857,7 +2986,7 @@
   },
   "SUMICHEM": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SUNPHARMA": {
    "sector": "Healthcare",
@@ -2869,23 +2998,23 @@
   },
   "SUNDARMFIN": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SUPREMEIND": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SUZLON": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SWANCORP": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SWIGGY": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "SYNGENE": {
    "sector": "Healthcare",
@@ -2893,27 +3022,27 @@
   },
   "SYRMA": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TBOTEK": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TDPOWERSYS": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TVSMOTOR": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "TATACAP": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "TATACHEM": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TATACOMM": {
    "sector": "Telecom",
@@ -2933,15 +3062,15 @@
   },
   "TATAINVEST": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "TMCV": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TMPV": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "TATAPOWER": {
    "sector": "Power",
@@ -2965,11 +3094,11 @@
   },
   "TECHNOE": {
    "sector": "Construction",
-   "stage": "Improving"
+   "stage": "Lagging"
   },
   "TEGA": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TEJASNET": {
    "sector": "Telecom",
@@ -2977,15 +3106,15 @@
   },
   "TENNIND": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "THANGAMAYL": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NIACL": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "RAMCOCEM": {
    "sector": "Construction Materials",
@@ -2993,19 +3122,19 @@
   },
   "THERMAX": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TIMKEN": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TITAGARH": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TITAN": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "TORNTPHARM": {
    "sector": "Healthcare",
@@ -3017,11 +3146,11 @@
   },
   "TARIL": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TRENT": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TRIDENT": {
    "sector": "Textiles",
@@ -3029,11 +3158,11 @@
   },
   "TRITURBINE": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "TIINDIA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "UCOBANK": {
    "sector": "PSU Banks",
@@ -3041,15 +3170,15 @@
   },
   "UNOMINDA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "UPL": {
    "sector": "Chemicals",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "UTIAMC": {
    "sector": "Finance",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ULTRACEMCO": {
    "sector": "Construction Materials",
@@ -3069,11 +3198,11 @@
   },
   "URBANCO": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "USHAMART": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "VTL": {
    "sector": "Textiles",
@@ -3109,7 +3238,7 @@
   },
   "VMM": {
    "sector": "Consumer Services",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "IDEA": {
    "sector": "Telecom",
@@ -3117,15 +3246,15 @@
   },
   "VOLTAS": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "WAAREEENER": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "WELCORP": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "WELSPUNLIV": {
    "sector": "Textiles",
@@ -3133,7 +3262,7 @@
   },
   "WHIRLPOOL": {
    "sector": "Consumer Durables",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "WIPRO": {
    "sector": "IT",
@@ -3145,11 +3274,11 @@
   },
   "YESBANK": {
    "sector": "Banks",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ZFCVINDIA": {
    "sector": "Auto",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "ZEEL": {
    "sector": "Media",
@@ -3157,7 +3286,7 @@
   },
   "ZENTEC": {
    "sector": "Capital Goods",
-   "stage": "Lagging"
+   "stage": "Improving"
   },
   "ZENSARTECH": {
    "sector": "IT",
@@ -3173,7 +3302,7 @@
   },
   "ECLERX": {
    "sector": "Services",
-   "stage": "Improving"
+   "stage": "Weakening"
   },
   "UJJIVANSFB": {
    "sector": "Unclassified",
