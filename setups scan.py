@@ -4,7 +4,7 @@ TrendFire Setups - scan engine (NSE F&O stocks).
 
 One engine for all four timeframes. Each stock gets:
   setup  : Squeeze Break | Swing Pullback | Trend Pullback
-           plus a separate list: Daily Overspill | Hourly Overspill (20-50 EMA zone)
+           plus a separate list: Weekly | Daily | Hourly Overspill (20-50 EMA zone)
   stage  : Watch | Ready | Triggered   (else Running | Stretched | Fading)
   trend  : With trend | Early turn | Counter-trend      (from Monthly)
   grade  : A | B | C | Warning                          (volume + OI, last close)
@@ -118,6 +118,28 @@ def tf_view(df, k):
                    and ind["ema20"][-1] > ind["ema20"][-1 - k])
     return {"ok": True, "state": state_name(m, p), "impulse": impulse, "mom": m,
             "h": h, "l": l, "c": c, "ind": ind}
+
+
+OLD_LABELS = ["🏆 Prime Setup", "✅ Confirmed Bullish", "🎯 Consolidating",
+              "⚠️ Extended (Gaining)", "⏳ Building Momentum", "⚠️ Extended",
+              "⚠️ Extended (Weakening)", "❌ Avoid", "— Insufficient Data"]
+
+
+def old_trade_status(wVal, dVal, dValPrev, dSqzOn, hVal, hValPrev):
+    """TrendFire's original label, copied unchanged from get_trade_status()."""
+    if any(pd.isna(x) for x in [wVal, dVal, dValPrev, hVal, hValPrev]):
+        return "— Insufficient Data"
+    if wVal > 0:
+        if dVal < 0 and dVal >= dValPrev and dSqzOn: return "🏆 Prime Setup"
+        elif dVal > 0 and dVal > dValPrev:           return "✅ Confirmed Bullish"
+        elif dVal > 0 and dVal <= dValPrev:
+            if hVal < 0 and hVal < hValPrev:         return "⚠️ Extended (Weakening)"
+            elif hVal < 0 and hVal >= hValPrev:      return "🎯 Consolidating"
+            elif hVal > 0 and hVal > hValPrev:       return "⚠️ Extended (Gaining)"
+            else:                                    return "⚠️ Extended"
+        elif dVal < 0 and dVal >= dValPrev:          return "⏳ Building Momentum"
+        else:                                        return "❌ Avoid"
+    return "❌ Avoid"
 
 
 def find_pullback(h, l, c, atr, look_high, look_leg, min_bars):
@@ -329,10 +351,13 @@ def analyse(sym, d, hr, fo):
     trend = {"Bullish": "With trend", "Topping": "With trend",
              "Bottoming": "Early turn", "Bearish": "Counter-trend"}.get(M["state"], "")
     show = lambda v: "Impulse" if v["impulse"] else v["state"]
+    hm = H["ind"]["mom"] if H["ok"] else [np.nan, np.nan]
     row = {"symbol": sym, "close": round(close, 2), "trend": trend,
            "states": {"M": show(M), "W": show(W), "D": show(D), "H": show(H)},
            "w_bull": bool(W["ok"] and W["mom"] > 0),
-           "m_bull": (bool(M["mom"] > 0) if M["ok"] else None)}
+           "m_bull": (bool(M["mom"] > 0) if M["ok"] else None),
+           "old": old_trade_status(W["mom"], D["ind"]["mom"][-1], D["ind"]["mom"][-2],
+                                   bool(D["ind"]["sq"][-1]), hm[-1], hm[-2])}
 
     # Overspill: price back in the 20-50 EMA zone of an uptrend.
     #   Daily  overspill needs Weekly bullish (Monthly is the tag).
@@ -353,10 +378,36 @@ def analyse(sym, d, hr, fo):
                  else "Dipped into the 20-50 EMA zone")
         spills.append({
             "symbol": sym, "close": row["close"], "trend": trend, "states": row["states"],
-            "setup": name, "stage": sp["stage"],
+            "setup": name, "stage": sp["stage"], "old": row["old"],
             "detail": " · ".join([where] + det.split(" · ")[1:]),
             "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
             "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
+
+    # Weekly Overspill: the weekly chart dips into its 20-50 EMA zone while Monthly is
+    # bullish; the Daily turning up inside the zone is the entry signal.
+    if M["ok"] and M["mom"] > 0 and W["ok"]:
+        sp = find_overspill(W["h"], W["l"], W["c"], W["ind"])
+        if sp:
+            dm = D["ind"]["mom"]
+            daily_up = bool(dm[-1] > dm[-2])
+            stage = sp["stage"] if sp["stage"] == "Triggered" else (
+                "Ready" if daily_up else "Watch")
+            wk_vol = d["Volume"].astype(float).groupby(d.index.to_period("W-FRI")).sum()
+            wk_dates = to_weekly(d).index.to_timestamp(how="end")
+            vol_ok, oi_ok, warn, det = grade_pullback(wk_vol.values, wk_dates, sp, fo)
+            pull = oi_change(fo, pd.Timestamp(wk_dates[sp["ih"]]).normalize(),
+                             pd.Timestamp(wk_dates[-1]).normalize())
+            if not oi_ok and pull and not warn and pull[1] <= 0.03:
+                oi_ok = True        # up-leg older than the saved OI: a calm pullback counts
+            where = (f"Weekly spilled {sp['under50'] * 100:.1f}% under the 50 EMA"
+                     if sp["under50"] > 0 else "Weekly dipped into the 20-50 EMA zone")
+            spills.append({
+                "symbol": sym, "close": row["close"], "trend": trend, "states": row["states"],
+                "setup": "Weekly Overspill", "stage": stage, "old": row["old"],
+                "detail": " · ".join([where, "Daily turning up" if daily_up
+                                      else "Daily still falling"] + det.split(" · ")[1:]),
+                "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
+                "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
     row["overspill"] = spills
 
     if cands:
@@ -399,6 +450,11 @@ def build_result(rows, now, fo_asof, vix, notes):
     setups = sorted([r for r in valid if r["setup"]], key=order)
     others = {s: sorted(r["symbol"] for r in valid if not r["setup"] and r["stage"] == s)
               for s in ("Running", "Stretched", "Fading")}
+    old_labels = {}
+    for r in valid:
+        if r.get("old"):
+            old_labels.setdefault(r["old"], []).append(r["symbol"])
+    old_labels = {k: sorted(v) for k, v in old_labels.items()}
     for r in setups:
         r.pop("w_bull", None)
         r.pop("m_bull", None)
@@ -406,7 +462,8 @@ def build_result(rows, now, fo_asof, vix, notes):
             "oi_asof": fo_asof, "stocks": len(valid),
             "market": {"weekly_bull_pct": w_pct, "monthly_bull_pct": m_pct,
                        "vix": vix, "regime": regime},
-            "rows": setups, "overspill": spills, "others": others, "notes": notes}
+            "rows": setups, "overspill": spills, "others": others,
+            "old_labels": old_labels, "notes": notes}
 
 
 # ------------------------------------------------------------------ network
@@ -738,6 +795,36 @@ def selftest():
     lg = pd.read_csv(os.path.join(CFG["data_dir"], "ready_log.csv"))
     CFG["data_dir"] = keep_dir
     assert lg["setup"].tolist() == ["Daily Overspill"], lg
+
+    # 8c) weekly overspill: Monthly bullish, weekly dip into its 20-50 EMA zone, Daily turn
+    wk = np.cumsum(np.full(270, 0.007))
+    wk = np.concatenate([wk, wk[-1] - np.linspace(0.02, 0.15, 6)])
+    wk = np.concatenate([wk, wk[-1] + np.linspace(0.02, 0.12, 6)])
+    wdays = pd.bdate_range(end="2026-11-13", periods=len(wk) * 5)
+    wc = 100 * np.exp(np.repeat(wk, 5) + np.tile(np.linspace(-0.004, 0.004, 5), len(wk)))
+    wd = _bars(wc * (1 + np.random.default_rng(2).normal(0, 0.003, len(wc))), wdays, noise=0.006)
+    wseq = []
+    for cut in range(60, -1, -2):
+        wo = [x for x in analyse("WK", wd.iloc[:len(wd) - cut], None, None)["overspill"]
+              if x["setup"] == "Weekly Overspill"]
+        wseq.append(wo[0]["stage"][0] if wo else "-")
+    print("weekly overspill trace:", "".join(wseq))
+    assert "R" in wseq and "T" in wseq and wseq.index("W") < wseq.index("R") < wseq.index("T")
+    assert wseq[-1] == "-"                 # moved on after the bounce
+    flat_m = analyse("WK", wd.iloc[:-30], None, None)
+    assert all(x["stop"] < x["trigger"] for x in flat_m["overspill"])
+
+    # 8d) old TrendFire labels: same branches as get_trade_status()
+    nan = np.nan
+    cases = [((1, -1, -2, True, 1, 0), "🏆 Prime Setup"), ((1, -1, -2, False, 1, 0), "⏳ Building Momentum"),
+             ((1, 2, 1, False, 1, 0), "✅ Confirmed Bullish"), ((1, 2, 3, False, -2, -1), "⚠️ Extended (Weakening)"),
+             ((1, 2, 3, False, -1, -2), "🎯 Consolidating"), ((1, 2, 3, False, 2, 1), "⚠️ Extended (Gaining)"),
+             ((1, 2, 3, False, 1, 2), "⚠️ Extended"), ((1, -2, -1, True, 1, 0), "❌ Avoid"),
+             ((-1, 2, 1, False, 1, 0), "❌ Avoid"), ((1, 2, 1, False, nan, 0), "— Insufficient Data")]
+    for args, want in cases:
+        assert old_trade_status(*args) == want, (args, want)
+    assert ro["old"] in OLD_LABELS and res_o["old_labels"]
+    assert res_o["overspill"] and all(x["old"] == ro["old"] for x in res_o["overspill"])
 
     # 9) F&O file reader: futures OI summed across expiries, near-month price
     recs = [{"FinInstrmTp": "STF", "TckrSymb": "ABC", "XpryDt": "2026-12-29",
