@@ -740,12 +740,29 @@ if choice == "Old labels":
         st.caption("Old labels need the updated F&O scan file. They will appear after the "
                    "next scan.")
     else:
-        for lab in OLD_ORDER:
-            names = groups.get(lab, [])
-            if not names or lab.startswith("—"):
-                continue
-            with st.expander(f"{lab} · {len(names)}", expanded=lab == "🏆 Prime Setup"):
-                st.markdown(names_html(names), unsafe_allow_html=True)
+        labs = [l for l in OLD_ORDER if not l.startswith("—")]
+        pick = st.radio("Old label", labs, horizontal=True, label_visibility="collapsed",
+                        format_func=lambda l: f"{l} · {len(groups.get(l, []))}",
+                        key="old_label_pick")
+        names = groups.get(pick, [])
+        on_list = {}
+        for r in res["rows"] + res.get("overspill", []):
+            on_list.setdefault(r["symbol"], []).append(
+                f'{r["setup"]} {r["stage"]} ({r["grade"]})')
+        if not names:
+            st.caption("No stocks with this label right now.")
+        else:
+            e = html.escape
+            cards = "".join(
+                '<div class="tf-row"><div class="tf-top">'
+                f'<a class="tf-sym" href="{chart_link(n)}" target="_blank">{e(n)}</a></div>'
+                + (f'<div class="tf-small">On Setups: {e("; ".join(on_list[n]))}</div>'
+                   if n in on_list else "")
+                + sector_html(n) + '</div>'
+                for n in names)
+            st.markdown(f'<div class="tf-set" style="margin:6px 0">{len(names)} '
+                        f'{"stock" if len(names) == 1 else "stocks"}: {e(pick)}</div>'
+                        f'<div class="tf-grid">{cards}</div>', unsafe_allow_html=True)
     with st.expander("What the old labels mean"):
         st.markdown(OLD_DEF)
     st.caption("Watchlist only, not investment advice.")
