@@ -80,6 +80,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "BPCL": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "BRITANNIA": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -392,10 +396,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "RECLTD": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "RELIANCE": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -668,10 +668,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "COLPAL": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "CONCOR": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -816,11 +812,19 @@
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
+  "COLPAL": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
   "PAGEIND": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "PIIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "RECLTD": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
