@@ -4,7 +4,7 @@ TrendFire Setups - scan engine (NSE F&O stocks).
 
 One engine for all four timeframes. Each stock gets:
   setup  : Squeeze Break | Swing Pullback | Trend Pullback
-           plus a separate list: Daily Overspill | Hourly Overspill (20-50 EMA zone)
+           plus a separate list: Weekly | Daily | Hourly Overspill (20-50 EMA zone)
   stage  : Watch | Ready | Triggered   (else Running | Stretched | Fading)
   trend  : With trend | Early turn | Counter-trend      (from Monthly)
   grade  : A | B | C | Warning                          (volume + OI, last close)
@@ -357,6 +357,32 @@ def analyse(sym, d, hr, fo):
             "detail": " · ".join([where] + det.split(" · ")[1:]),
             "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
             "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
+
+    # Weekly Overspill: the weekly chart dips into its 20-50 EMA zone while Monthly is
+    # bullish; the Daily turning up inside the zone is the entry signal.
+    if M["ok"] and M["mom"] > 0 and W["ok"]:
+        sp = find_overspill(W["h"], W["l"], W["c"], W["ind"])
+        if sp:
+            dm = D["ind"]["mom"]
+            daily_up = bool(dm[-1] > dm[-2])
+            stage = sp["stage"] if sp["stage"] == "Triggered" else (
+                "Ready" if daily_up else "Watch")
+            wk_vol = d["Volume"].astype(float).groupby(d.index.to_period("W-FRI")).sum()
+            wk_dates = to_weekly(d).index.to_timestamp(how="end")
+            vol_ok, oi_ok, warn, det = grade_pullback(wk_vol.values, wk_dates, sp, fo)
+            pull = oi_change(fo, pd.Timestamp(wk_dates[sp["ih"]]).normalize(),
+                             pd.Timestamp(wk_dates[-1]).normalize())
+            if not oi_ok and pull and not warn and pull[1] <= 0.03:
+                oi_ok = True        # up-leg older than the saved OI: a calm pullback counts
+            where = (f"Weekly spilled {sp['under50'] * 100:.1f}% under the 50 EMA"
+                     if sp["under50"] > 0 else "Weekly dipped into the 20-50 EMA zone")
+            spills.append({
+                "symbol": sym, "close": row["close"], "trend": trend, "states": row["states"],
+                "setup": "Weekly Overspill", "stage": stage,
+                "detail": " · ".join([where, "Daily turning up" if daily_up
+                                      else "Daily still falling"] + det.split(" · ")[1:]),
+                "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
+                "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
     row["overspill"] = spills
 
     if cands:
@@ -738,6 +764,24 @@ def selftest():
     lg = pd.read_csv(os.path.join(CFG["data_dir"], "ready_log.csv"))
     CFG["data_dir"] = keep_dir
     assert lg["setup"].tolist() == ["Daily Overspill"], lg
+
+    # 8c) weekly overspill: Monthly bullish, weekly dip into its 20-50 EMA zone, Daily turn
+    wk = np.cumsum(np.full(270, 0.007))
+    wk = np.concatenate([wk, wk[-1] - np.linspace(0.02, 0.15, 6)])
+    wk = np.concatenate([wk, wk[-1] + np.linspace(0.02, 0.12, 6)])
+    wdays = pd.bdate_range(end="2026-11-13", periods=len(wk) * 5)
+    wc = 100 * np.exp(np.repeat(wk, 5) + np.tile(np.linspace(-0.004, 0.004, 5), len(wk)))
+    wd = _bars(wc * (1 + np.random.default_rng(2).normal(0, 0.003, len(wc))), wdays, noise=0.006)
+    wseq = []
+    for cut in range(60, -1, -2):
+        wo = [x for x in analyse("WK", wd.iloc[:len(wd) - cut], None, None)["overspill"]
+              if x["setup"] == "Weekly Overspill"]
+        wseq.append(wo[0]["stage"][0] if wo else "-")
+    print("weekly overspill trace:", "".join(wseq))
+    assert "R" in wseq and "T" in wseq and wseq.index("W") < wseq.index("R") < wseq.index("T")
+    assert wseq[-1] == "-"                 # moved on after the bounce
+    flat_m = analyse("WK", wd.iloc[:-30], None, None)
+    assert all(x["stop"] < x["trigger"] for x in flat_m["overspill"])
 
     # 9) F&O file reader: futures OI summed across expiries, near-month price
     recs = [{"FinInstrmTp": "STF", "TckrSymb": "ABC", "XpryDt": "2026-12-29",
