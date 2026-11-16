@@ -793,6 +793,9 @@ if SPILL:
                    "next scan with that file.")
 else:
     rows = [r for r in res["rows"] if choice == "All" or r["setup"] == choice]
+count = {g: sum(r["stage"] == g for r in rows) for g in ("Ready", "Watch", "Triggered")}
+view = st.radio("Stage", list(count), horizontal=True, label_visibility="collapsed",
+                format_func=lambda g: f"{g} · {count[g]}", key=f"stage_{page}")
 ready = [r for r in rows if r["stage"] == "Ready"]
 held = []
 if m["regime"] == "Weak":
@@ -805,6 +808,13 @@ headline = ("No stocks are Ready right now." if n == 0 else
 if n == 0 and held:
     headline = (f"No grade A stock is Ready. {len(held)} lower-grade "
                 f"{'one is' if len(held) == 1 else 'ones are'} listed below.")
+shown = [r for r in rows if r["stage"] == view]
+if view != "Ready":
+    k = len(shown)
+    headline = (f"No stocks are {'on Watch' if view == 'Watch' else 'Triggered'} right now."
+                if k == 0 else
+                f"{k} {'stock' if k == 1 else 'stocks'} "
+                + ("on Watch." if view == "Watch" else "Triggered."))
 market = "Market data unavailable."
 if m["weekly_bull_pct"] is not None:
     market = (f"{m['regime']} market: {m['weekly_bull_pct']}% of {P['who']} are "
@@ -907,22 +917,23 @@ with st.expander("What the words mean"):
 - **Old**: the label the old TrendFire site would give this stock. See the Old labels button for what each one means.
 """)
 
-if ready:
-    show_rows(ready)
-if held:
-    with st.expander(f"{len(held)} more Ready, hidden in a weak market (not grade A)"):
-        show_rows(held)
+if view == "Ready":
+    if ready:
+        show_rows(ready)
+    if held:
+        with st.expander(f"{len(held)} more Ready, hidden in a weak market (not grade A)"):
+            show_rows(held)
+else:
+    st.caption("Still dipping or coiling. These move to Ready when momentum turns up."
+               if view == "Watch" else
+               "Already closed above the trigger. The turn is confirmed, so you are a "
+               "little late.")
+    if shown:
+        show_rows(sorted(shown, key=lambda r: {"A": 0, "B": 1, "C": 2}.get(r["grade"], 3)))
 
-st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
-            f'font-weight:600;margin-top:18px">Other stages</div>', unsafe_allow_html=True)
-for stage in ("Triggered", "Watch"):
-    group = [r for r in rows if r["stage"] == stage]
-    with st.expander(f"{stage} · {len(group)}"):
-        if group:
-            show_rows(group)
-        else:
-            st.caption("None.")
 if choice == "All":
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:600;margin-top:18px">Other stages</div>', unsafe_allow_html=True)
     for stage in ("Running", "Stretched", "Fading"):
         names = res["others"].get(stage, [])
         with st.expander(f"{stage} · {len(names)}"):
