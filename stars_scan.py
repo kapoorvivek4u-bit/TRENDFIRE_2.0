@@ -260,6 +260,12 @@ def universe(get):
             df.columns = [c.strip().upper() for c in df.columns]
             syms |= set(df.loc[df["SERIES"].astype(str).str.strip().isin(["EQ", "BE", "BZ"]),
                                "SYMBOL"].astype(str).str.strip())
+            name_col = next((c for c in df.columns if "NAME" in c), None)
+            if name_col:                                  # company names, for the site's search
+                (pd.DataFrame({"symbol": df["SYMBOL"].astype(str).str.strip(),
+                               "name": df[name_col].astype(str).str.strip()})
+                 .drop_duplicates("symbol")
+                 .to_csv(os.path.join(DATA_DIR, "names.csv"), index=False))
         except Exception as e:
             print(f"[warn] equity list unreadable: {e}")
     for path, col in ((os.path.join(DATA_DIR, "equity_deliv.csv.gz"), "symbol"),
