@@ -82,6 +82,8 @@ def parse_index_list(raw):
     df = pd.read_csv(io.BytesIO(raw))
     df.columns = [c.strip() for c in df.columns]
     out = pd.DataFrame({"symbol": df["Symbol"].astype(str).str.strip()})
+    if "Company Name" in df.columns:
+        out["name"] = df["Company Name"].astype(str).str.strip()
     if "Industry" in df.columns:
         out["industry"] = df["Industry"].astype(str).str.strip()
     return out
@@ -126,7 +128,10 @@ def load_sector_map(session, notes):
                       got["pharma"]["symbol"].tolist() if "pharma" in got else None)
         if "pharma" not in got:
             notes.append("Pharma list unavailable: pharma stays inside Healthcare.")
-        pd.DataFrame({"symbol": list(m), "sector": list(m.values())}).to_csv(path, index=False)
+        names = (dict(zip(got["all"]["symbol"], got["all"]["name"]))
+                 if "name" in got["all"].columns else {})
+        pd.DataFrame({"symbol": list(m), "sector": list(m.values()),
+                      "name": [names.get(k, "") for k in m]}).to_csv(path, index=False)
         return m
     if os.path.exists(path):
         notes.append("Sector list not refreshed today; using the saved copy.")
