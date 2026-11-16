@@ -754,7 +754,10 @@ st.markdown(
 SPILL_DEF = "" if EQUITY else (
     "- **Overspill** (its own list): in an uptrend, with the 20 EMA over the 50 EMA over "
     "the 200 SMA, price comes back into the 20-50 EMA zone, sometimes spilling under the "
-    "50 EMA, then reclaims the 20 EMA. **Daily Overspill** needs Weekly bullish. "
+    "50 EMA, then reclaims the 20 EMA. **Weekly Overspill** is the pattern on the weekly "
+    "chart and needs Monthly bullish; it is Ready when the Daily turns up inside the "
+    "weekly zone, and its stop is wide because it sits under the weekly low. "
+    "**Daily Overspill** needs Weekly bullish. "
     "**Hourly Overspill** needs Weekly and Daily bullish. Watch means price is in the "
     "zone, Ready means it has started to turn inside the zone, and Triggered means it "
     "closed back above the 20 EMA. 'Above' is the 20 EMA level, and the stop is under "
