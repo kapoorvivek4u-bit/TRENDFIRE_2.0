@@ -14,7 +14,7 @@ import streamlit as st
 PAGES = {
     "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
             "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback",
-                       "Overspill", "Old labels"],
+                       "Overspill", "Old labels", "VK"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
                "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Old labels"],
@@ -34,6 +34,25 @@ INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
 AMBER = "#a15c00"
+VK_ORDER = ["BUY NOW", "ALMOST READY (Bullish)", "COMING CLOSE TO READY (Bullish)",
+            "SELL NOW", "ALMOST READY (Bearish)", "COMING CLOSE TO READY (Bearish)", "NO SIGNAL"]
+VK_COLOR = {"BUY NOW": GREEN, "ALMOST READY (Bullish)": GREEN,
+            "COMING CLOSE TO READY (Bullish)": AMBER, "SELL NOW": RED,
+            "ALMOST READY (Bearish)": RED, "COMING CLOSE TO READY (Bearish)": AMBER}
+VK_DEF = """Your VK System (GHOST OF YOTEI) dashboard, worked out for every F&O stock with the same rules as the Pine Script. The buttons are the final trade status (the bottom-right cell of the top table).
+
+**MA trend** per timeframe: Bullish = 20 EMA > 50 EMA > 200 SMA; Bearish = the reverse; otherwise Messy.
+**HTF bullish** = Weekly and Daily MA trend Bullish and Daily TTM above zero (bearish is the mirror).
+
+- **BUY NOW**: HTF bullish and Hourly TTM above zero.
+- **ALMOST READY (Bullish)**: HTF bullish, Hourly TTM below zero (dip on Hourly, buy on turn).
+- **COMING CLOSE TO READY (Bullish)**: M, W, D MA trends all Bullish, Weekly TTM above zero, Daily TTM still below zero.
+- **SELL NOW / ALMOST READY (Bearish) / COMING CLOSE TO READY (Bearish)**: the same, bearish.
+- **NO SIGNAL**: none of these.
+
+Each card also shows the VK SIGNAL (ALL 3 ALIGNED, W+D, CASCADE FORMING), the MA signal (ONLY BUY, Wait...), KYA KARNA HAI, and the Daily, Hourly and Confirmed remarks. Confirmed = the last 2 completed hourly bars both above zero.
+
+Small differences from TradingView are possible: the site uses completed bars only (TradingView also reads the bar still forming), there is no 15-minute row, and Monthly moving averages use about 5 years of history."""
 EXT_MAX = 4.0     # daily ranges above the 50 EMA that count as Extended (same as the scan)
 
 
@@ -179,6 +198,10 @@ def row_html(r):
                    if is_extended(r) else f'<br><span style="color:{MUTED}">{where}</span>')
     if r.get("old"):
         detail += f'<br><span style="color:{MUTED}">Old: {e(r["old"])}</span>'
+    if r.get("vk"):
+        v = r["vk"]
+        detail += (f'<br><span style="color:{VK_COLOR.get(v["final"], MUTED)};font-weight:600">'
+                   f'VK: {e(v["final"])}</span><span style="color:{MUTED}"> · {e(v["ma"])}</span>')
     u = UNUSUAL.get(r["symbol"])
     if u:
         ev = u["events"][0]
@@ -1215,6 +1238,46 @@ variants are all shown as Extended.
 - Building Momentum is close to **Trend** Ready (Daily dip turning up).
 - Confirmed Bullish is close to **Running**.
 - Extended is close to **Stretched** or **Fading**."""
+if choice == "VK":
+    groups = res.get("vk_labels")
+    if not groups:
+        st.caption("VK labels need the updated F&O scan file. They will appear after the "
+                   "next F&O scan.")
+    else:
+        labs = [l for l in VK_ORDER if l != "NO SIGNAL"] + ["NO SIGNAL"]
+        pick = st.radio("VK label", labs, horizontal=True, label_visibility="collapsed",
+                        format_func=lambda l: f"{l} · {len(groups.get(l, []))}",
+                        key="vk_label_pick")
+        on_list = {}
+        for r in res["rows"] + res.get("overspill", []):
+            on_list.setdefault(r["symbol"], []).append(
+                f'{r["setup"]} {r["stage"]} ({r["grade"]})')
+        items = groups.get(pick, [])
+        if not items:
+            st.caption("No stocks with this VK reading right now.")
+        else:
+            e = html.escape
+            cards = "".join(
+                '<div class="tf-row"><div class="tf-top">'
+                f'<a class="tf-sym" href="{chart_link(x["symbol"])}" target="_blank">'
+                f'{e(x["symbol"])}</a><span class="tf-lvl">{money(x["close"])}</span></div>'
+                f'<div class="tf-set">{e(x["signal"])} · <span style="color:{MUTED}">'
+                f'{e(x["ma"])}</span></div>'
+                f'<div class="tf-small">{" · ".join(f"{k} {e(v)}" for k, v in x["states"].items())}</div>'
+                f'<div class="tf-small" style="color:{INK}">{e(x["advice"])}</div>'
+                f'<div class="tf-small">Daily: {e(x["daily"])} · Hourly: {e(x["hourly"])} · '
+                f'{e(x["confirmed"])}</div>'
+                + (f'<div class="tf-small" style="color:{GREEN};font-weight:600">On Setups: '
+                   f'{e("; ".join(on_list[x["symbol"]]))}</div>' if x["symbol"] in on_list else "")
+                + sector_html(x["symbol"]) + '</div>'
+                for x in items)
+            st.markdown(f'<div class="tf-set" style="margin:6px 0">{len(items)} '
+                        f'{"stock" if len(items) == 1 else "stocks"}: {e(pick)}</div>'
+                        f'<div class="tf-grid">{cards}</div>', unsafe_allow_html=True)
+    with st.expander("What the VK words mean"):
+        st.markdown(VK_DEF)
+    st.caption("Watchlist only, not investment advice.")
+    st.stop()
 if choice == "Old labels":
     groups = res.get("old_labels")
     if not groups:
