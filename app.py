@@ -656,6 +656,379 @@ The sector line on every stock row elsewhere on the site comes from this page.
                "investment advice.")
 
 
+# ---------------------------------------------------------------- strategies
+STRAT_RULES = {
+    1: ("Sector Leader Swing", "F&O · 3-5 days",
+        "Buy a short hourly dip in a strong stock inside a strong sector.",
+        ["Market: Turning up with Daily breadth under 85% (full size), or No clear turn (half size)",
+         "Swing Pullback, stage Ready, grade A, With trend",
+         "Not Extended (under 4 ranges above the 50 EMA)",
+         "Sector Leading or Improving, its index Daily Bullish, Wk bull 50% or more"],
+        "Hourly close above the entry level. Book half at the 2R target, trail the rest under "
+        "hourly swing lows, exit by day 5 if it has not worked."),
+    2: ("Cooldown Buy", "F&O and Equity · 5-10 days",
+        "After an overheated rally, buy the leaders on their first daily pullback.",
+        ["Market: Daily breadth was 85% or more in the last 6 sessions and has cooled to 60-78%",
+         "Nifty Daily not Bearish",
+         "Trend Pullback or Daily Overspill, stage Ready, grade A",
+         "Under 2 ranges above the 50 EMA (near value)",
+         "Sector Leading or Weakening (was strong before the dip)"],
+        "Daily close above the entry level. Half at 2R, trail the rest under the 20 EMA."),
+    3: ("Squeeze Coil", "F&O and Equity · 3-10 days",
+        "Catch a coiled stock as momentum turns up, before the breakout.",
+        ["Market: No clear turn, or Turning up with Daily breadth under 70%",
+         "Squeeze Break, stage Ready, grade A or B",
+         "Sector Leading or Improving",
+         "Bonus: old label Prime Setup; Unusual page shows Buying"],
+        "Daily close above the 5-day high, ideally on above-normal volume. Half at 2R; exit "
+        "when the Daily turns Topping."),
+    4: ("Weekly Overspill Positional", "F&O and Equity · 2-4 weeks",
+        "Buy a long uptrend when the weekly chart dips into its 20-50 EMA zone and the Daily "
+        "turns up.",
+        ["Market: anything except Still falling",
+         "Weekly Overspill, stage Ready, grade A, With trend",
+         "Sector not Lagging",
+         "Bonus (Equity): delivery higher than before"],
+        "Accordion: one third now, one third on a daily close above the entry level, the last "
+        "third when Weekly momentum turns up. The stop is wide: size the first lot so it costs "
+        "your normal risk. Trail under the weekly 20 EMA."),
+    5: ("Unusual Activity Confluence", "F&O and Equity · 3-5 days",
+        "Big money showing up in a stock that is already on a setup.",
+        ["Market: anything except Still falling",
+         "Unusual page: bias Buying, score 4 or more",
+         "Also on a setup page, stage Watch or Ready, grade not Warning",
+         "Weekly Bullish or Impulse; sector Leading or Improving"],
+        "Enter when the setup is Ready, on its entry level. Watch-stage names are listed so "
+        "you can set alerts."),
+    6: ("Equity Base Breakout", "Equity · 8-10 days",
+        "Buy a midcap or smallcap breaking out of a tight base on volume.",
+        ["Market (Equity): Turning up with Daily breadth under 85%",
+         "Breakout page: Ready (close to the level), grade A",
+         "RS 80 or more, base 20% deep or less, volume in the base below usual",
+         "Sector Leading or Improving, or not classified"],
+        "Daily close above the breakout level on volume at least 1.5x usual; no volume, no "
+        "trade. Stop about one daily range below the level. Exit if it closes back inside the "
+        "base within 3 days."),
+}
+
+
+def gate_of(m):
+    """Market gate from a page's market block."""
+    h, t, nf = m.get("daily_bull_hist"), m.get("turn"), (m.get("nifty") or {}).get("state")
+    g = {"turn": t or "Unknown", "last": h[-1] if h else None, "hist": h,
+         "overheated": bool(h and t == "Turning up" and h[-1] >= 85),
+         "cooldown": bool(h and max(h[:-1]) >= 85 and 60 <= h[-1] <= 78
+                          and h[-1] < max(h[:-1]) and nf != "Bearish"),
+         "falling": t == "Falling"}
+    if g["overheated"]:
+        g["word"] = f"Overheated: {h[-1]}% of stocks already up on Daily"
+    elif t == "Turning up":
+        g["word"] = f"Turning up ({h[-1]}% up on Daily)"
+    elif t == "Falling":
+        g["word"] = "Still falling"
+    elif t == "No clear turn":
+        g["word"] = "No clear turn"
+    else:
+        g["word"] = "Market line not available yet"
+    return g
+
+
+def detail_num(r, pattern):
+    import re as _re
+    mt = _re.search(pattern, r.get("detail", ""))
+    return float(mt.group(1)) if mt else None
+
+
+def strategy_picks(data, sec_table):
+    """Apply each strategy's rules. Returns {n: {"open": bool, "why_closed": str,
+    "picks": [...], "blocked": [...]}} where blocked = names that pass every stock rule
+    but not the market gate."""
+    out = {}
+    sec = lambda s: SECTORS.get(s, {})
+    sec_ok = lambda s, ok: sec(s).get("stage") in ok
+    ext_under = lambda r, x: r.get("ext") is None or r["ext"] < x
+
+    def pick(n, r, market, size, checks, bonus=None, entry=None, stop=None):
+        entry = r.get("trigger") if entry is None else entry
+        stop = r.get("stop") if stop is None else stop
+        tgt = (entry + 2 * (entry - stop)) if entry and stop and entry > stop else None
+        return {"strategy": n, "symbol": r["symbol"], "market": market, "row": r,
+                "entry": entry, "stop": stop, "target": tgt, "size": size,
+                "checks": checks, "bonus": bonus or []}
+
+    fo, eq, bo = data.get("F&O"), data.get("Equity"), data.get("Breakout")
+    ufo, ueq = data.get("Unusual F&O", {}), data.get("Unusual Equity", {})
+    gf = gate_of(fo["market"]) if fo else None
+    ge = gate_of(eq["market"]) if eq else None
+
+    def rows(res, keys=("rows", "overspill")):
+        return [r for k in keys for r in (res or {}).get(k, [])]
+
+    def sector_line(s):
+        t = sec(s)
+        return (f"Sector {t['sector']} {t['stage']}" if t.get("sector") and t.get("stage")
+                else "Sector not ranked")
+
+    # 1. Sector Leader Swing (F&O)
+    res = {"picks": [], "blocked": []}
+    if gf:
+        open_ = not gf["falling"] and not gf["overheated"] and gf["turn"] in (
+            "Turning up", "No clear turn")
+        size = "Full size" if gf["turn"] == "Turning up" else "Half size"
+        for r in rows(fo, ("rows",)):
+            s = sec(r["symbol"])
+            st_ = sec_table.get(s.get("sector"), {})
+            if (r["setup"] == "Swing Pullback" and r["stage"] == "Ready" and r["grade"] == "A"
+                    and r.get("trend") == "With trend" and ext_under(r, 4.0)
+                    and s.get("stage") in ("Leading", "Improving")
+                    and st_.get("idx_d") == "Bullish" and st_.get("wk_bull", 0) >= 50):
+                p = pick(1, r, "F&O", size, [
+                    "Swing Pullback Ready · grade A · With trend",
+                    f"{r['ext']:.1f} ranges above the 50 EMA" if r.get("ext") is not None
+                    else "Extension n/a",
+                    f"{sector_line(r['symbol'])} · index Daily Bullish · Wk bull {st_['wk_bull']}%"],
+                    [f"Old: {r['old']}"] if r.get("old") else [])
+                (res["picks"] if open_ else res["blocked"]).append(p)
+        res["open"] = open_
+        res["gate"] = gf["word"]
+    out[1] = res
+
+    # 2. Cooldown Buy (both)
+    res = {"picks": [], "blocked": [], "open": False, "gate": ""}
+    for market, rs, g in (("F&O", fo, gf), ("Equity", eq, ge)):
+        if not g:
+            continue
+        for r in rows(rs):
+            if (r["setup"] in ("Trend Pullback", "Daily Overspill") and r["stage"] == "Ready"
+                    and r["grade"] == "A" and r.get("ext") is not None and r["ext"] < 2
+                    and sec_ok(r["symbol"], ("Leading", "Weakening"))):
+                p = pick(2, r, market, "Full size", [
+                    f"{r['setup']} Ready · grade A", f"{r['ext']:.1f} ranges above the 50 EMA",
+                    sector_line(r["symbol"])])
+                (res["picks"] if g["cooldown"] else res["blocked"]).append(p)
+    res["open"] = bool((gf and gf["cooldown"]) or (ge and ge["cooldown"]))
+    res["gate"] = ("Cooldown under way" if res["open"] else
+                   "Waiting for a cooldown: Daily breadth has not yet cooled from 85%+ to 60-78%")
+    out[2] = res
+
+    # 3. Squeeze Coil (both)
+    res = {"picks": [], "blocked": []}
+    opens = []
+    for market, rs, g, um in (("F&O", fo, gf, ufo), ("Equity", eq, ge, ueq)):
+        if not g:
+            continue
+        open_ = (g["turn"] == "No clear turn" or
+                 (g["turn"] == "Turning up" and (g["last"] or 100) < 70))
+        opens.append(open_)
+        for r in rows(rs, ("rows",)):
+            if (r["setup"] == "Squeeze Break" and r["stage"] == "Ready" and r["grade"] in ("A", "B")
+                    and sec_ok(r["symbol"], ("Leading", "Improving"))):
+                bonus = []
+                if r.get("old") == "🏆 Prime Setup":
+                    bonus.append("Old: 🏆 Prime Setup")
+                if um.get(r["symbol"], {}).get("bias") == "Buying":
+                    bonus.append("Unusual: Buying")
+                p = pick(3, r, market, "Full size" if r["grade"] == "A" else "Half size",
+                         [f"Squeeze Break Ready · grade {r['grade']}", sector_line(r["symbol"])],
+                         bonus)
+                (res["picks"] if open_ else res["blocked"]).append(p)
+    res["open"] = any(opens)
+    res["gate"] = ("Open" if all(opens) else "Open for one market only" if res["open"] else
+                   "Closed: works early in a turn, and Daily breadth is already 70% or more")
+    out[3] = res
+
+    # 4. Weekly Overspill Positional (both)
+    res = {"picks": [], "blocked": []}
+    for market, rs, g in (("F&O", fo, gf), ("Equity", eq, ge)):
+        if not g:
+            continue
+        for r in rs.get("overspill", []):
+            if (r["setup"] == "Weekly Overspill" and r["stage"] == "Ready" and r["grade"] == "A"
+                    and r.get("trend") == "With trend"
+                    and sec(r["symbol"]).get("stage") != "Lagging"):
+                bonus = []
+                d_now, d_before = (detail_num(r, r"Delivery (\d+)%"),
+                                   detail_num(r, r"vs (\d+)% before"))
+                if d_now and d_before and d_now > d_before:
+                    bonus.append(f"Delivery {d_now:.0f}% vs {d_before:.0f}% before")
+                p = pick(4, r, market, "Accordion: one third now", [
+                    "Weekly Overspill Ready · grade A · With trend", sector_line(r["symbol"])],
+                    bonus)
+                (res["blocked"] if g["falling"] else res["picks"]).append(p)
+    res["open"] = not (gf and gf["falling"])
+    res["gate"] = "Open" if res["open"] else "Closed: market still falling"
+    out[4] = res
+
+    # 5. Unusual Activity Confluence (both)
+    res = {"picks": [], "blocked": []}
+    for market, rs, g, um in (("F&O", fo, gf, ufo), ("Equity", eq, ge, ueq)):
+        if not g:
+            continue
+        by_sym = {}
+        for r in rows(rs):
+            if r["stage"] in ("Ready", "Watch") and r["grade"] != "Warning":
+                by_sym.setdefault(r["symbol"], []).append(r)
+        for sym, u in um.items():
+            w = (u.get("states") or {}).get("W", "")
+            if (u.get("bias") == "Buying" and u.get("score", 0) >= 4 and sym in by_sym
+                    and w in ("Bullish", "Impulse")
+                    and sec_ok(sym, ("Leading", "Improving"))):
+                r = sorted(by_sym[sym], key=lambda x: (x["stage"] != "Ready", x["grade"]))[0]
+                ev = u["events"][0]
+                p = pick(5, r, market, "Full size" if r["stage"] == "Ready" else "Alert only", [
+                    f"Unusual Buying · score {u['score']:.1f} · {ev['when']}: {ev['text']}",
+                    f"{r['setup']} {r['stage']} · grade {r['grade']}",
+                    f"Weekly {w} · {sector_line(sym)}"])
+                (res["blocked"] if g["falling"] else res["picks"]).append(p)
+    res["open"] = not (gf and gf["falling"])
+    res["gate"] = "Open" if res["open"] else "Closed: market still falling"
+    out[5] = res
+
+    # 6. Equity Base Breakout
+    res = {"picks": [], "blocked": []}
+    if bo:
+        g = ge or gate_of(bo.get("market", {}))
+        open_ = g["turn"] == "Turning up" and not g["overheated"]
+        for r in bo.get("setting", []):
+            rs_, base, vb = (detail_num(r, r"RS (\d+)"), detail_num(r, r"Base (\d+)% deep"),
+                             detail_num(r, r"Volume in base ([\d.]+)x"))
+            stg = sec(r["symbol"]).get("stage")
+            if (r["stage"] == "Ready" and r["grade"] == "A" and (rs_ or 0) >= 80
+                    and (base or 99) <= 20 and (vb or 9) < 1 and stg in (None, "", "Leading",
+                                                                         "Improving")):
+                p = pick(6, r, "Equity", "Full size", [
+                    f"Ready · grade A · RS {rs_:.0f}", f"Base {base:.0f}% deep · volume {vb:.1f}x "
+                    "usual in the base", sector_line(r["symbol"])])
+                (res["picks"] if open_ else res["blocked"]).append(p)
+        res["open"] = open_
+        res["gate"] = ("Open" if open_ else f"Closed: Equity market is {g['word']}")
+    out[6] = res
+    for v in out.values():
+        v.setdefault("open", False)
+        v.setdefault("gate", "No data yet")
+    return out
+
+
+def pick_html(p):
+    e = html.escape
+    r = p["row"]
+    lvl = (f'<span>Buy above {money(p["entry"])}</span>' if p.get("entry") else
+           '<span>No entry level yet</span>')
+    stop = (f'<span style="color:{RED}">Stop {money(p["stop"])}</span>' if p.get("stop")
+            else f'<span style="color:{MUTED}">Stop set on breakout</span>')
+    tgt = (f'<span style="color:{GREEN}">2R {money(p["target"])}</span>' if p.get("target")
+           else "")
+    checks = "".join(f'<div class="tf-small">✓ {e(c)}</div>' for c in p["checks"])
+    bonus = "".join(f'<div class="tf-small" style="color:{GREEN};font-weight:600">+ {e(b)}</div>'
+                    for b in p["bonus"])
+    return (
+        '<div class="tf-row"><div class="tf-top">'
+        f'<a class="tf-sym" href="{chart_link(p["symbol"])}" target="_blank">{e(p["symbol"])}</a>'
+        f'{grade_badge(r.get("grade", ""))}</div>'
+        f'<div class="tf-set">{e(p["market"])} · {e(r.get("setup", ""))} · '
+        f'<span style="color:{MUTED}">{e(p["size"])}</span></div>'
+        f'{checks}{bonus}'
+        f'<div class="tf-lvl">{lvl}{tgt}{stop}</div></div>')
+
+
+def render_strategies():
+    data = {}
+    for key, path in (("F&O", PAGES["F&O"]["file"]), ("Equity", PAGES["Equity"]["file"]),
+                      ("Breakout", PAGES["Breakout"]["file"]),
+                      ("Sectors", PAGES["Sectors"]["file"])):
+        if os.path.exists(path):
+            data[key] = load(path, os.path.getmtime(path))
+    data["Unusual F&O"] = load_unusual_map("F&O")
+    data["Unusual Equity"] = load_unusual_map("Equity")
+    sec_table = {s["name"]: s for s in data.get("Sectors", {}).get("sectors", [])}
+    stamps = " · ".join(
+        f"{k} " + dt.datetime.strptime(data[k]["generated_ist"], "%Y-%m-%d %H:%M").strftime(
+            "%a %d %b %H:%M") for k in ("F&O", "Equity") if k in data)
+    st.markdown(
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
+        f'border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Strategies</span><span class="tf-small">Scanned: {html.escape(stamps)}</span></div>',
+        unsafe_allow_html=True)
+    if "F&O" not in data:
+        st.info("No scan results yet.")
+        return
+    res = strategy_picks(data, sec_table)
+    total = sum(len(v["picks"]) for v in res.values())
+    headline = ("No trade passes every rule right now." if total == 0 else
+                "1 trade passes every rule." if total == 1 else
+                f"{total} trades pass every rule.")
+    lines = []
+    for k in ("F&O", "Equity"):
+        if k in data:
+            g = gate_of(data[k]["market"])
+            lines.append(f"{k} market: {g['word']}.")
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'color:{INK};margin:6px 0 6px">{headline}</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">'
+        f'{html.escape(" ".join(lines))}</div>', unsafe_allow_html=True)
+    with st.expander("How this page works"):
+        st.markdown("""
+Each strategy from the playbook is applied automatically to the latest scans. A stock shows here only when it passes **every** rule of that strategy, including the market gate. Lines marked **+** are bonus confirmations, not required.
+
+- **Buy above**: the entry level from the setup. Wait for a close above it (hourly for Strategy 1, daily for the rest).
+- **Stop**: from the setup. **2R**: the price where the gain is twice the risk; book half there.
+- **Size**: full, half, or accordion, from the market gate and the grade.
+- **Waiting on the market gate**: stocks that pass every stock rule but the market does not allow the strategy today. Useful as a watchlist; do not trade them yet.
+
+Rules are starting points, not tested results. Your own chart is the final check. Watchlist only, not investment advice.
+""")
+    for n, v in res.items():
+        name, hold, idea, rules, manage = STRAT_RULES[n]
+        cnt = len(v["picks"])
+        status_col = GREEN if v["open"] else MUTED
+        st.markdown(
+            f'<div style="margin-top:22px;border-top:2px solid {INK};padding-top:8px;'
+            f'display:flex;justify-content:space-between;align-items:baseline;gap:10px">'
+            f'<span style="font-family:Georgia,serif;font-size:19px;font-weight:700">'
+            f'{n}. {html.escape(name)}</span>'
+            f'<span class="tf-small">{html.escape(hold)}</span></div>'
+            f'<div class="tf-small">{html.escape(idea)}</div>'
+            f'<div class="tf-small" style="color:{status_col};font-weight:600;margin-top:2px">'
+            f'{"Gate open" if v["open"] else "Gate closed"} · {html.escape(v["gate"])} · '
+            f'{cnt} {"trade" if cnt == 1 else "trades"}</div>', unsafe_allow_html=True)
+        if v["picks"]:
+            st.markdown('<div class="tf-grid">' + "".join(pick_html(p) for p in v["picks"])
+                        + '</div>', unsafe_allow_html=True)
+        if v["blocked"]:
+            with st.expander(f"Waiting on the market gate · {len(v['blocked'])}"):
+                st.markdown('<div class="tf-grid">' + "".join(pick_html(p) for p in v["blocked"])
+                            + '</div>', unsafe_allow_html=True)
+        with st.expander("Rules"):
+            st.markdown("\n".join(f"- {x}" for x in rules) + f"\n\n**Manage:** {manage}")
+    with st.expander("Exits: signals on stocks you already hold"):
+        st.markdown("""
+| Site signal | Action |
+| --- | --- |
+| Stage Stretched, or the row shows Extended (red) | Book at least half; trail the rest tightly |
+| Stage Fading, or Daily turns Topping | Tighten the stop to the last daily low |
+| Old label from Confirmed Bullish to Extended (Weakening) | Book profits |
+| Old label turns Avoid (Weekly below zero) | Exit swings; positional trades get one more week |
+| Unusual page shows Selling | Exit or halve |
+| Sector turns Weakening or Lagging | No adds; tighten the stop |
+| Market line turns Still falling | Halve open swings; no new trades |
+| Grade drops to Warning | Exit |
+
+Risk the same amount on every trade; the stop sets the quantity. Never move a stop lower. A swing that has not moved in 5 days goes.
+""")
+    with st.expander("Daily routine"):
+        st.markdown("""
+1. **Evening, after 19:50** (all scans done, OI and delivery final): open this page first. Check the market lines and the trades listed.
+2. Open each name's chart; mark Buy above and Stop; set TradingView alerts.
+3. Check the Waiting lists and Watch stages for tomorrow's likely names.
+4. Check open positions against the Exits table.
+5. **Market hours:** F&O and Unusual refresh hourly from 10:20 to 15:20. Act only when an alert hits.
+6. **After 16:40:** Sectors refresh; glance at stage changes.
+""")
+    st.caption("Strategies applied to the latest scans. Watchlist only, not investment advice.")
+
+
 SCANS = {                      # what the button can start -> workflow file in .github/workflows
     "F&O setups": "scan.yml",
     "Equity, Breakout, Equity unusual": "equity.yml",
@@ -734,7 +1107,7 @@ def watch_for_new_scans():
         st.rerun()
 
 
-page = st.radio("Market", ["A list"] + list(PAGES), horizontal=True,
+page = st.radio("Market", ["Strategies", "A list"] + list(PAGES), horizontal=True,
                 label_visibility="collapsed")
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
@@ -765,6 +1138,9 @@ if page == "Sectors":
     st.stop()
 if page == "A list":
     render_alist()
+    st.stop()
+if page == "Strategies":
+    render_strategies()
     st.stop()
 if page == "Unusual":
     render_unusual(PAGES[page])
