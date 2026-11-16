@@ -1,35 +1,35 @@
 {
- "generated_ist": "2026-11-16 12:22",
+ "generated_ist": "2026-11-16 14:22",
  "oi_asof": "2026-11-13",
  "stocks": 218,
  "market": {
   "weekly_bull_pct": 25,
   "monthly_bull_pct": 51,
-  "vix": 15.8,
+  "vix": 15.7,
   "regime": "Weak"
  },
  "rows": [
   {
    "symbol": "ADANIPORTS",
-   "close": 1891.1,
+   "close": 1890.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
-   "old": "\ud83c\udfaf Consolidating",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 60% \u00b7 Volume 0.7x in pullback \u00b7 OI +4% in up-leg, +1% in pullback",
+   "stage": "Watch",
+   "detail": "Pullback 60% \u00b7 Volume 0.6x in pullback \u00b7 OI +4% in up-leg, +1% in pullback",
    "grade": "A",
-   "trigger": 1894.5,
+   "trigger": null,
    "stop": 1872.25
   },
   {
    "symbol": "FORCEMOT",
-   "close": 19318.0,
+   "close": 19255.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -40,14 +40,14 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 39% \u00b7 Volume 0.8x in pullback \u00b7 OI +13% in up-leg, -0% in pullback",
+   "detail": "Pullback 40% \u00b7 Volume 0.8x in pullback \u00b7 OI +13% in up-leg, -0% in pullback",
    "grade": "A",
    "trigger": null,
-   "stop": 19226.47
+   "stop": 19197.53
   },
   {
    "symbol": "GLENMARK",
-   "close": 2658.6,
+   "close": 2624.3,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -58,14 +58,14 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 20% \u00b7 Volume 0.4x in pullback \u00b7 OI +2% in up-leg, -0% in pullback",
+   "detail": "Pullback 22% \u00b7 Volume 0.4x in pullback \u00b7 OI +2% in up-leg, -0% in pullback",
    "grade": "A",
-   "trigger": 2686.3,
-   "stop": 2623.44
+   "trigger": 2638.0,
+   "stop": 2615.76
   },
   {
    "symbol": "INDIANB",
-   "close": 935.5,
+   "close": 929.55,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -76,14 +76,14 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 26% \u00b7 Volume 0.7x in pullback \u00b7 OI +29% in up-leg, +5% in pullback",
+   "detail": "Pullback 28% \u00b7 Volume 0.7x in pullback \u00b7 OI +29% in up-leg, +5% in pullback",
    "grade": "A",
    "trigger": null,
-   "stop": 927.14
+   "stop": 924.65
   },
   {
    "symbol": "JINDALSTEL",
-   "close": 1141.1,
+   "close": 1132.1,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -94,20 +94,38 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 39% \u00b7 Volume 0.5x in pullback \u00b7 OI +11% in up-leg, +0% in pullback",
+   "detail": "Pullback 40% \u00b7 Volume 0.5x in pullback \u00b7 OI +11% in up-leg, +0% in pullback",
    "grade": "A",
    "trigger": null,
-   "stop": 1127.14
+   "stop": 1125.05
+  },
+  {
+   "symbol": "NYKAA",
+   "close": 358.65,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 39% \u00b7 Volume 0.3x in pullback \u00b7 OI +16% in up-leg",
+   "grade": "A",
+   "trigger": null,
+   "stop": 357.58
   },
   {
    "symbol": "OIL",
-   "close": 437.35,
+   "close": 440.7,
    "trend": "With trend",
    "states": {
     "M": "Bullish",
     "W": "Topping",
     "D": "Bearish",
-    "H": "Bearish"
+    "H": "Bottoming"
    },
    "old": "\u274c Avoid",
    "setup": "Squeeze Break",
@@ -118,8 +136,44 @@
    "stop": 426.84
   },
   {
+   "symbol": "SONACOMS",
+   "close": 893.65,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 75% \u00b7 Volume 0.8x in pullback \u00b7 OI +3% in up-leg",
+   "grade": "A",
+   "trigger": null,
+   "stop": 891.11
+  },
+  {
+   "symbol": "UNOMINDA",
+   "close": 1342.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 21% \u00b7 Volume 0.7x in pullback \u00b7 OI +13% in up-leg, +6% in pullback",
+   "grade": "A",
+   "trigger": null,
+   "stop": 1335.42
+  },
+  {
    "symbol": "SHREECEM",
-   "close": 24745.0,
+   "close": 24750.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -130,14 +184,14 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 43% \u00b7 Volume 0.7x in pullback \u00b7 OI +17% in up-leg, +1% in pullback",
+   "detail": "Pullback 43% \u00b7 Volume 0.6x in pullback \u00b7 OI +17% in up-leg, +1% in pullback",
    "grade": "A",
    "trigger": null,
    "stop": 24455.99
   },
   {
    "symbol": "HINDPETRO",
-   "close": 381.9,
+   "close": 382.5,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -147,15 +201,15 @@
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 37% \u00b7 Volume 0.8x in pullback \u00b7 OI +2% in up-leg, -1% in pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 37% \u00b7 Volume 0.7x in pullback \u00b7 OI +2% in up-leg, -1% in pullback",
    "grade": "A",
    "trigger": 382.15,
    "stop": 379.49
   },
   {
-   "symbol": "RELIANCE",
-   "close": 1338.8,
+   "symbol": "INDUSTOWER",
+   "close": 393.2,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -166,32 +220,104 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 25% \u00b7 Volume 0.7x in pullback \u00b7 OI +7% in up-leg",
+   "detail": "Pullback 40% \u00b7 Volume 0.5x in pullback \u00b7 OI +2% in up-leg",
+   "grade": "A",
+   "trigger": null,
+   "stop": 391.47
+  },
+  {
+   "symbol": "RELIANCE",
+   "close": 1335.8,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 25% \u00b7 Volume 0.6x in pullback \u00b7 OI +7% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 1331.23
   },
   {
+   "symbol": "ABCAPITAL",
+   "close": 406.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 40% \u00b7 Volume 0.8x in pullback \u00b7 OI -8% in up-leg, +0% in pullback",
+   "grade": "B",
+   "trigger": null,
+   "stop": 401.89
+  },
+  {
    "symbol": "AUROPHARMA",
-   "close": 1824.5,
+   "close": 1806.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 33% \u00b7 Volume 1.1x in pullback \u00b7 OI +2% in up-leg, +3% in pullback",
+   "stage": "Watch",
+   "detail": "Pullback 33% \u00b7 Volume 1.0x in pullback \u00b7 OI +2% in up-leg, +3% in pullback",
    "grade": "B",
-   "trigger": 1819.0,
+   "trigger": null,
    "stop": 1782.83
   },
   {
+   "symbol": "BANKINDIA",
+   "close": 152.31,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 22% \u00b7 Volume 1.0x in pullback \u00b7 OI +9% in up-leg",
+   "grade": "B",
+   "trigger": null,
+   "stop": 151.13
+  },
+  {
+   "symbol": "BSE",
+   "close": 3881.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 24% \u00b7 Volume 0.5x in pullback \u00b7 OI -11% in up-leg",
+   "grade": "B",
+   "trigger": null,
+   "stop": 3868.35
+  },
+  {
    "symbol": "CUB",
-   "close": 233.51,
+   "close": 232.68,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -202,14 +328,14 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 24% \u00b7 Volume 0.9x in pullback \u00b7 OI +111% in up-leg, -2% in pullback",
+   "detail": "Pullback 24% \u00b7 Volume 1.0x in pullback \u00b7 OI +111% in up-leg, -2% in pullback",
    "grade": "B",
    "trigger": null,
    "stop": 230.58
   },
   {
    "symbol": "DIVISLAB",
-   "close": 11213.5,
+   "close": 10967.5,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -226,8 +352,8 @@
    "stop": 11167.62
   },
   {
-   "symbol": "JSWSTEEL",
-   "close": 1333.1,
+   "symbol": "FEDERALBNK",
+   "close": 361.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -238,14 +364,32 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 35% \u00b7 Volume 0.7x in pullback \u00b7 OI -17% in up-leg, -1% in pullback",
+   "detail": "Pullback 20% \u00b7 Volume 0.7x in pullback \u00b7 OI -18% in up-leg",
    "grade": "B",
    "trigger": null,
-   "stop": 1322.15
+   "stop": 360.38
+  },
+  {
+   "symbol": "JSWSTEEL",
+   "close": 1325.6,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 39% \u00b7 Volume 0.7x in pullback \u00b7 OI -17% in up-leg, -1% in pullback",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1318.46
   },
   {
    "symbol": "PAYTM",
-   "close": 1900.8,
+   "close": 1874.6,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -256,17 +400,35 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 27% \u00b7 Volume 1.8x in pullback \u00b7 OI +9% in up-leg",
+   "detail": "Pullback 33% \u00b7 Volume 1.7x in pullback \u00b7 OI +9% in up-leg",
    "grade": "B",
    "trigger": null,
-   "stop": 1884.02
+   "stop": 1868.46
   },
   {
-   "symbol": "SONACOMS",
-   "close": 903.55,
-   "trend": "With trend",
+   "symbol": "CDSL",
+   "close": 1424.5,
+   "trend": "Early turn",
    "states": {
-    "M": "Impulse",
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 29% \u00b7 Volume 1.5x in pullback \u00b7 OI +14% in up-leg",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1416.16
+  },
+  {
+   "symbol": "DLF",
+   "close": 751.75,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
     "W": "Impulse",
     "D": "Impulse",
     "H": "Bearish"
@@ -274,50 +436,14 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 62% \u00b7 Volume 0.9x in pullback \u00b7 OI +3% in up-leg",
-   "grade": "B",
-   "trigger": null,
-   "stop": 898.45
-  },
-  {
-   "symbol": "CDSL",
-   "close": 1436.6,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Topping"
-   },
-   "old": "\u274c Avoid",
-   "setup": "Swing Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 29% \u00b7 Volume 1.7x in pullback \u00b7 OI +14% in up-leg",
-   "grade": "B",
-   "trigger": null,
-   "stop": 1416.16
-  },
-  {
-   "symbol": "DLF",
-   "close": 755.4,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Impulse",
-    "D": "Impulse",
-    "H": "Topping"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "setup": "Swing Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 28% \u00b7 Volume 0.7x in pullback \u00b7 OI -4% in up-leg, +0% in pullback",
+   "detail": "Pullback 28% \u00b7 Volume 0.6x in pullback \u00b7 OI -4% in up-leg, +0% in pullback",
    "grade": "B",
    "trigger": null,
    "stop": 747.65
   },
   {
    "symbol": "ICICIBANK",
-   "close": 1590.7,
+   "close": 1581.9,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -335,25 +461,25 @@
   },
   {
    "symbol": "KFINTECH",
-   "close": 948.95,
+   "close": 932.35,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 26% \u00b7 Volume 0.6x in pullback \u00b7 OI -2% in up-leg",
+   "detail": "Pullback 33% \u00b7 Volume 0.6x in pullback \u00b7 OI -2% in up-leg",
    "grade": "B",
    "trigger": null,
-   "stop": 938.12
+   "stop": 929.14
   },
   {
    "symbol": "MPHASIS",
-   "close": 2421.8,
+   "close": 2421.2,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -371,7 +497,7 @@
   },
   {
    "symbol": "PETRONET",
-   "close": 327.25,
+   "close": 324.95,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -382,32 +508,32 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 33% \u00b7 Volume 1.5x in pullback \u00b7 OI +4% in up-leg, +2% in pullback",
+   "detail": "Pullback 33% \u00b7 Volume 1.4x in pullback \u00b7 OI +4% in up-leg, +2% in pullback",
    "grade": "B",
    "trigger": null,
    "stop": 322.0
   },
   {
-   "symbol": "PGEL",
-   "close": 548.1,
+   "symbol": "TRENT",
+   "close": 3186.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Bearish"
+    "H": "Bottoming"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 75% \u00b7 Volume 0.8x in pullback \u00b7 OI -1% in up-leg, +1% in pullback",
+   "stage": "Ready",
+   "detail": "Pullback 37% \u00b7 Volume 0.8x in pullback \u00b7 OI +0% in up-leg, +2% in pullback",
    "grade": "B",
-   "trigger": null,
-   "stop": 540.32
+   "trigger": 3198.6,
+   "stop": 3138.91
   },
   {
    "symbol": "ULTRACEMCO",
-   "close": 12282.0,
+   "close": 12257.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -424,8 +550,26 @@
    "stop": 12040.87
   },
   {
+   "symbol": "ATHERENERG",
+   "close": 1940.5,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 28% \u00b7 Volume 1.7x in pullback \u00b7 OI +15% in up-leg",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1935.62
+  },
+  {
    "symbol": "SAGILITY",
-   "close": 43.17,
+   "close": 43.22,
    "trend": "",
    "states": {
     "M": "No data",
@@ -442,8 +586,26 @@
    "stop": 41.67
   },
   {
+   "symbol": "BANKBARODA",
+   "close": 269.7,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 22% \u00b7 Volume 0.8x in pullback \u00b7 OI -4% in up-leg, -1% in pullback",
+   "grade": "B",
+   "trigger": null,
+   "stop": 268.6
+  },
+  {
    "symbol": "HDFCAMC",
-   "close": 2652.5,
+   "close": 2632.0,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -461,7 +623,7 @@
   },
   {
    "symbol": "IOC",
-   "close": 142.58,
+   "close": 142.48,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -472,32 +634,68 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 35% \u00b7 Volume 0.7x in pullback \u00b7 OI -5% in up-leg, +1% in pullback",
+   "detail": "Pullback 36% \u00b7 Volume 0.6x in pullback \u00b7 OI -5% in up-leg, +1% in pullback",
    "grade": "B",
-   "trigger": 142.9,
-   "stop": 142.14
+   "trigger": 142.93,
+   "stop": 142.01
   },
   {
    "symbol": "M&M",
-   "close": 3334.2,
+   "close": 3321.0,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
-   "stage": "Ready",
+   "stage": "Watch",
    "detail": "Pullback 24% \u00b7 Volume 0.4x in pullback \u00b7 OI -1% in up-leg, -3% in pullback",
    "grade": "B",
-   "trigger": 3339.5,
-   "stop": 3310.37
+   "trigger": null,
+   "stop": 3307.37
   },
   {
-   "symbol": "ABCAPITAL",
-   "close": 406.2,
+   "symbol": "ADANIGREEN",
+   "close": 1391.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Bullish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 53% \u00b7 Volume 1.8x in pullback \u00b7 OI -14% in up-leg, +1% in pullback",
+   "grade": "C",
+   "trigger": null,
+   "stop": 1377.34
+  },
+  {
+   "symbol": "APLAPOLLO",
+   "close": 2249.3,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "setup": "Swing Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 41% \u00b7 Volume 2.1x in pullback \u00b7 OI -16% in up-leg",
+   "grade": "C",
+   "trigger": null,
+   "stop": 2233.32
+  },
+  {
+   "symbol": "AXISBANK",
+   "close": 1336.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -508,50 +706,14 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 40% \u00b7 Volume 0.9x in pullback \u00b7 OI -8% in up-leg, +0% in pullback",
-   "grade": "C",
-   "trigger": null,
-   "stop": 401.89
-  },
-  {
-   "symbol": "ADANIGREEN",
-   "close": 1393.3,
-   "trend": "With trend",
-   "states": {
-    "M": "Bullish",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 53% \u00b7 Volume 1.8x in pullback \u00b7 OI -14% in up-leg, +1% in pullback",
-   "grade": "C",
-   "trigger": 1392.5,
-   "stop": 1377.34
-  },
-  {
-   "symbol": "AXISBANK",
-   "close": 1339.9,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "setup": "Swing Pullback",
-   "stage": "Ready",
    "detail": "Pullback 21% \u00b7 Volume 0.9x in pullback \u00b7 OI -8% in up-leg, -3% in pullback",
    "grade": "C",
-   "trigger": 1351.2,
+   "trigger": null,
    "stop": 1323.35
   },
   {
    "symbol": "BHEL",
-   "close": 428.6,
+   "close": 428.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -562,32 +724,32 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 30% \u00b7 Volume 1.0x in pullback \u00b7 OI -8% in up-leg",
+   "detail": "Pullback 30% \u00b7 Volume 0.9x in pullback \u00b7 OI -8% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 425.05
   },
   {
    "symbol": "PRESTIGE",
-   "close": 1630.2,
+   "close": 1621.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 41% \u00b7 Volume 1.5x in pullback \u00b7 OI -2% in up-leg",
+   "detail": "Pullback 41% \u00b7 Volume 1.2x in pullback \u00b7 OI -2% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 1615.76
   },
   {
    "symbol": "TVSMOTOR",
-   "close": 4462.1,
+   "close": 4440.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -598,14 +760,14 @@
    "old": "\ud83c\udfaf Consolidating",
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 44% \u00b7 Volume 1.1x in pullback \u00b7 OI -7% in up-leg, +2% in pullback",
+   "detail": "Pullback 58% \u00b7 Volume 1.1x in pullback \u00b7 OI -7% in up-leg, +2% in pullback",
    "grade": "C",
-   "trigger": 4492.6,
-   "stop": 4422.14
+   "trigger": 4455.2,
+   "stop": 4359.06
   },
   {
    "symbol": "INDIGO",
-   "close": 5510.3,
+   "close": 5496.8,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -616,14 +778,14 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 22% \u00b7 Volume 0.9x in pullback \u00b7 OI -15% in up-leg, -1% in pullback",
+   "detail": "Pullback 24% \u00b7 Volume 0.9x in pullback \u00b7 OI -15% in up-leg, -1% in pullback",
    "grade": "C",
    "trigger": null,
-   "stop": 5499.08
+   "stop": 5481.02
   },
   {
    "symbol": "NAUKRI",
-   "close": 1174.1,
+   "close": 1164.8,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -641,7 +803,7 @@
   },
   {
    "symbol": "PATANJALI",
-   "close": 408.15,
+   "close": 400.65,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -652,68 +814,32 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 38% \u00b7 Volume 0.9x in pullback \u00b7 OI -6% in up-leg, +1% in pullback",
+   "detail": "Pullback 48% \u00b7 Volume 0.9x in pullback \u00b7 OI -6% in up-leg, +1% in pullback",
    "grade": "C",
    "trigger": null,
-   "stop": 405.79
-  },
-  {
-   "symbol": "TRENT",
-   "close": 3191.9,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 37% \u00b7 Volume 0.9x in pullback \u00b7 OI +0% in up-leg, +2% in pullback",
-   "grade": "C",
-   "trigger": 3198.6,
-   "stop": 3138.91
+   "stop": 398.0
   },
   {
    "symbol": "ASHOKLEY",
-   "close": 169.76,
+   "close": 167.81,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 29% \u00b7 Volume 0.6x in pullback \u00b7 OI +3% in up-leg, +11% in pullback",
-   "grade": "Warning",
-   "trigger": 172.73,
-   "stop": 168.19
-  },
-  {
-   "symbol": "LAURUSLABS",
-   "close": 2322.4,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Impulse",
-    "H": "Bearish"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 64% \u00b7 Volume 1.0x in pullback \u00b7 OI +4% in up-leg, +6% in pullback",
+   "detail": "Pullback 32% \u00b7 Volume 0.6x in pullback \u00b7 OI +3% in up-leg, +11% in pullback",
    "grade": "Warning",
    "trigger": null,
-   "stop": 2274.64
+   "stop": 166.99
   },
   {
    "symbol": "LT",
-   "close": 4129.0,
+   "close": 4121.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -731,25 +857,25 @@
   },
   {
    "symbol": "MANKIND",
-   "close": 2644.6,
+   "close": 2619.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 33% \u00b7 Volume 0.8x in pullback \u00b7 OI -8% in up-leg, +3% in pullback",
+   "stage": "Watch",
+   "detail": "Pullback 37% \u00b7 Volume 0.7x in pullback \u00b7 OI -8% in up-leg, +3% in pullback",
    "grade": "Warning",
-   "trigger": 2647.5,
-   "stop": 2618.75
+   "trigger": null,
+   "stop": 2608.77
   },
   {
    "symbol": "MOTHERSON",
-   "close": 162.87,
+   "close": 160.81,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -760,40 +886,40 @@
    "old": "\u2705 Confirmed Bullish",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 43% \u00b7 Volume 0.5x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
+   "detail": "Pullback 56% \u00b7 Volume 0.5x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
    "grade": "Warning",
    "trigger": null,
-   "stop": 162.05
+   "stop": 159.98
   },
   {
    "symbol": "PHOENIXLTD",
-   "close": 2217.6,
+   "close": 2191.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 29% \u00b7 Volume 1.6x in pullback \u00b7 OI +8% in up-leg, +8% in pullback",
+   "detail": "Pullback 36% \u00b7 Volume 1.6x in pullback \u00b7 OI +8% in up-leg, +8% in pullback",
    "grade": "Warning",
    "trigger": null,
-   "stop": 2207.08
+   "stop": 2185.72
   },
   {
    "symbol": "TECHM",
-   "close": 1770.0,
+   "close": 1762.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Topping",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
-   "old": "\ud83c\udfaf Consolidating",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "setup": "Trend Pullback",
    "stage": "Watch",
    "detail": "Pullback 24% \u00b7 Volume 0.5x in pullback \u00b7 OI +0% in up-leg, +4% in pullback",
@@ -803,7 +929,7 @@
   },
   {
    "symbol": "CIPLA",
-   "close": 1394.1,
+   "close": 1392.3,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -814,7 +940,7 @@
    "old": "\u274c Avoid",
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 46% \u00b7 Volume 1.1x in pullback \u00b7 OI -1% in up-leg, +6% in pullback",
+   "detail": "Pullback 46% \u00b7 Volume 1.0x in pullback \u00b7 OI -1% in up-leg, +6% in pullback",
    "grade": "Warning",
    "trigger": null,
    "stop": 1387.32
@@ -823,7 +949,7 @@
  "overspill": [
   {
    "symbol": "ABCAPITAL",
-   "close": 406.2,
+   "close": 406.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -841,31 +967,31 @@
   },
   {
    "symbol": "ADANIPORTS",
-   "close": 1891.1,
+   "close": 1890.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Ready",
-   "old": "\ud83c\udfaf Consolidating",
-   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +3% in up-leg, +1% in pullback",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
+   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI +3% in up-leg, +1% in pullback",
    "grade": "A",
-   "trigger": 1910.44,
+   "trigger": 1907.37,
    "stop": 1872.25
   },
   {
    "symbol": "ADANIPOWER",
-   "close": 206.76,
+   "close": 204.14,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
     "D": "Bullish",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Weekly Overspill",
    "stage": "Triggered",
@@ -877,7 +1003,7 @@
   },
   {
    "symbol": "BAJAJ-AUTO",
-   "close": 10757.0,
+   "close": 10705.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -895,7 +1021,7 @@
   },
   {
    "symbol": "BHEL",
-   "close": 428.6,
+   "close": 428.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -913,7 +1039,7 @@
   },
   {
    "symbol": "FORCEMOT",
-   "close": 19318.0,
+   "close": 19255.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -926,12 +1052,12 @@
    "old": "\u2705 Confirmed Bullish",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI +12% in up-leg, -0% in pullback",
    "grade": "A",
-   "trigger": 19549.46,
-   "stop": 19226.47
+   "trigger": 19504.14,
+   "stop": 19197.53
   },
   {
    "symbol": "GLENMARK",
-   "close": 2658.6,
+   "close": 2624.3,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -940,16 +1066,16 @@
     "H": "Bottoming"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
+   "stage": "Ready",
    "old": "\u2705 Confirmed Bullish",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 OI +2% in up-leg, -0% in pullback",
    "grade": "A",
-   "trigger": 2648.59,
-   "stop": 2623.44
+   "trigger": 2645.23,
+   "stop": 2615.76
   },
   {
    "symbol": "GMRAIRPORT",
-   "close": 99.77,
+   "close": 100.58,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -967,17 +1093,17 @@
   },
   {
    "symbol": "HEROMOTOCO",
-   "close": 5375.5,
+   "close": 5336.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Topping",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "old": "\u26a0\ufe0f Extended",
    "detail": "Weekly spilled 7.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 OI -2% in pullback",
    "grade": "A",
    "trigger": 5262.88,
@@ -985,7 +1111,7 @@
   },
   {
    "symbol": "IDEA",
-   "close": 12.5,
+   "close": 12.44,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1003,7 +1129,7 @@
   },
   {
    "symbol": "INDIANB",
-   "close": 935.5,
+   "close": 929.55,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1012,16 +1138,16 @@
     "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
+   "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI +29% in up-leg, +5% in pullback",
    "grade": "A",
-   "trigger": 933.81,
-   "stop": 927.14
+   "trigger": 933.4,
+   "stop": 924.65
   },
   {
    "symbol": "JINDALSTEL",
-   "close": 1141.1,
+   "close": 1132.1,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1030,16 +1156,16 @@
     "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Ready",
+   "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Spilled 1.2% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI +5% in up-leg, +0% in pullback",
+   "detail": "Spilled 1.4% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI +5% in up-leg, +0% in pullback",
    "grade": "A",
-   "trigger": 1153.05,
-   "stop": 1127.14
+   "trigger": 1149.74,
+   "stop": 1125.05
   },
   {
    "symbol": "LUPIN",
-   "close": 1981.8,
+   "close": 1962.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1057,7 +1183,7 @@
   },
   {
    "symbol": "NYKAA",
-   "close": 361.25,
+   "close": 358.65,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1066,16 +1192,16 @@
     "H": "Topping"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
+   "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 OI +8% in up-leg",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 OI +8% in up-leg",
    "grade": "A",
-   "trigger": 360.57,
-   "stop": 358.58
+   "trigger": 360.44,
+   "stop": 357.58
   },
   {
    "symbol": "OFSS",
-   "close": 9934.5,
+   "close": 9881.5,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1093,13 +1219,13 @@
   },
   {
    "symbol": "PNBHOUSING",
-   "close": 1136.5,
+   "close": 1130.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bearish",
     "D": "Bottoming",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Weekly Overspill",
    "stage": "Triggered",
@@ -1110,8 +1236,26 @@
    "stop": 1050.59
   },
   {
+   "symbol": "SONACOMS",
+   "close": 893.65,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Overspill",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +3% in up-leg",
+   "grade": "A",
+   "trigger": 913.71,
+   "stop": 891.11
+  },
+  {
    "symbol": "TITAN",
-   "close": 4863.8,
+   "close": 4881.3,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1129,7 +1273,7 @@
   },
   {
    "symbol": "TORNTPHARM",
-   "close": 4700.5,
+   "close": 4670.1,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1147,7 +1291,7 @@
   },
   {
    "symbol": "UNOMINDA",
-   "close": 1355.1,
+   "close": 1342.1,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1158,50 +1302,14 @@
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI +13% in up-leg, +6% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.6x in pullback \u00b7 OI +13% in up-leg, +6% in pullback",
    "grade": "A",
-   "trigger": 1370.16,
-   "stop": 1344.31
+   "trigger": 1365.57,
+   "stop": 1335.42
   },
   {
    "symbol": "INFY",
-   "close": 1142.9,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bullish",
-    "D": "Topping",
-    "H": "Bottoming"
-   },
-   "setup": "Hourly Overspill",
-   "stage": "Ready",
-   "old": "\ud83c\udfaf Consolidating",
-   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +4% in up-leg, +0% in pullback",
-   "grade": "A",
-   "trigger": 1145.68,
-   "stop": 1132.73
-  },
-  {
-   "symbol": "PERSISTENT",
-   "close": 6004.5,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Topping",
-    "D": "Topping",
-    "H": "Topping"
-   },
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.6x in pullback \u00b7 OI +10% in up-leg, -4% in pullback",
-   "grade": "A",
-   "trigger": 5924.11,
-   "stop": 5882.21
-  },
-  {
-   "symbol": "TATAELXSI",
-   "close": 3768.3,
+   "close": 1140.2,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -1212,14 +1320,32 @@
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u26a0\ufe0f Extended (Weakening)",
-   "detail": "Spilled 2.2% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI +2% in up-leg, +0% in pullback",
+   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +4% in up-leg, +0% in pullback",
    "grade": "A",
-   "trigger": 3837.23,
-   "stop": 3748.09
+   "trigger": 1144.69,
+   "stop": 1132.73
+  },
+  {
+   "symbol": "PERSISTENT",
+   "close": 5950.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Topping",
+    "D": "Topping",
+    "H": "Bearish"
+   },
+   "setup": "Daily Overspill",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.6x in pullback \u00b7 OI +10% in up-leg, -4% in pullback",
+   "grade": "A",
+   "trigger": 5924.11,
+   "stop": 5882.21
   },
   {
    "symbol": "VEDL",
-   "close": 254.78,
+   "close": 252.99,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -1232,12 +1358,12 @@
    "old": "\u2705 Confirmed Bullish",
    "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +5% in up-leg, +1% in pullback",
    "grade": "A",
-   "trigger": 258.17,
+   "trigger": 257.32,
    "stop": 251.5
   },
   {
    "symbol": "ADANIENSOL",
-   "close": 1427.0,
+   "close": 1436.2,
    "trend": "With trend",
    "states": {
     "M": "Bullish",
@@ -1255,31 +1381,31 @@
   },
   {
    "symbol": "ANANDRATHI",
-   "close": 2389.2,
+   "close": 2382.6,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bullish",
     "D": "Topping",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
-   "old": "\u26a0\ufe0f Extended",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 OI -8% in up-leg",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI -8% in up-leg",
    "grade": "B",
-   "trigger": 2384.77,
+   "trigger": 2384.96,
    "stop": 2375.34
   },
   {
    "symbol": "AUBANK",
-   "close": 963.5,
+   "close": 966.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
     "D": "Bullish",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Weekly Overspill",
    "stage": "Ready",
@@ -1291,25 +1417,25 @@
   },
   {
    "symbol": "AUROPHARMA",
-   "close": 1824.5,
+   "close": 1806.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
+   "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 OI -0% in up-leg, +3% in pullback",
    "grade": "B",
-   "trigger": 1816.69,
+   "trigger": 1815.71,
    "stop": 1782.83
   },
   {
    "symbol": "BEL",
-   "close": 401.2,
+   "close": 400.15,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1327,7 +1453,7 @@
   },
   {
    "symbol": "CANBK",
-   "close": 132.95,
+   "close": 132.14,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1345,7 +1471,7 @@
   },
   {
    "symbol": "CUB",
-   "close": 233.51,
+   "close": 232.68,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1356,14 +1482,14 @@
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.9x in pullback \u00b7 OI +60% in up-leg, -2% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI +60% in up-leg, -2% in pullback",
    "grade": "B",
-   "trigger": 232.61,
+   "trigger": 232.66,
    "stop": 230.58
   },
   {
    "symbol": "CUB",
-   "close": 233.51,
+   "close": 232.68,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1381,13 +1507,13 @@
   },
   {
    "symbol": "CUMMINSIND",
-   "close": 4208.0,
+   "close": 4218.9,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
     "D": "Bottoming",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Weekly Overspill",
    "stage": "Ready",
@@ -1399,13 +1525,13 @@
   },
   {
    "symbol": "DATAPATTNS",
-   "close": 4183.5,
+   "close": 4179.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
     "D": "Bullish",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Weekly Overspill",
    "stage": "Triggered",
@@ -1417,7 +1543,7 @@
   },
   {
    "symbol": "DIVISLAB",
-   "close": 11213.5,
+   "close": 10967.5,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1428,38 +1554,38 @@
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.9x in pullback \u00b7 OI +16% in up-leg, -1% in pullback",
+   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 OI +16% in up-leg, -1% in pullback",
    "grade": "B",
-   "trigger": 11319.53,
-   "stop": 11112.23
+   "trigger": 11266.39,
+   "stop": 10932.09
   },
   {
    "symbol": "DRREDDY",
-   "close": 1387.0,
+   "close": 1377.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
    "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI +1% in up-leg",
    "grade": "B",
-   "trigger": 1383.29,
+   "trigger": 1382.48,
    "stop": 1373.15
   },
   {
    "symbol": "EICHERMOT",
-   "close": 7653.0,
+   "close": 7597.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
     "D": "Topping",
-    "H": "Bottoming"
+    "H": "Topping"
    },
    "setup": "Weekly Overspill",
    "stage": "Watch",
@@ -1471,7 +1597,7 @@
   },
   {
    "symbol": "GVT&D",
-   "close": 4341.5,
+   "close": 4307.9,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1489,7 +1615,7 @@
   },
   {
    "symbol": "HINDZINC",
-   "close": 549.45,
+   "close": 545.15,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1507,7 +1633,7 @@
   },
   {
    "symbol": "JINDALSTEL",
-   "close": 1141.1,
+   "close": 1132.1,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1525,7 +1651,7 @@
   },
   {
    "symbol": "KEI",
-   "close": 4027.9,
+   "close": 4016.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1543,13 +1669,13 @@
   },
   {
    "symbol": "LTF",
-   "close": 280.22,
+   "close": 277.96,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
     "D": "Bullish",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Weekly Overspill",
    "stage": "Ready",
@@ -1561,7 +1687,7 @@
   },
   {
    "symbol": "MOTHERSON",
-   "close": 162.87,
+   "close": 160.81,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1576,6 +1702,24 @@
    "grade": "B",
    "trigger": 155.28,
    "stop": 146.98
+  },
+  {
+   "symbol": "PAYTM",
+   "close": 1874.6,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "setup": "Hourly Overspill",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.6x in pullback \u00b7 OI +15% in up-leg",
+   "grade": "B",
+   "trigger": 1884.62,
+   "stop": 1868.46
   },
   {
    "symbol": "POLYCAB",
@@ -1597,7 +1741,7 @@
   },
   {
    "symbol": "POWERINDIA",
-   "close": 30855.0,
+   "close": 30865.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1615,7 +1759,7 @@
   },
   {
    "symbol": "SHRIRAMFIN",
-   "close": 978.85,
+   "close": 976.65,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1632,26 +1776,8 @@
    "stop": 808.48
   },
   {
-   "symbol": "SONACOMS",
-   "close": 903.55,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Impulse",
-    "H": "Bearish"
-   },
-   "setup": "Hourly Overspill",
-   "stage": "Watch",
-   "old": "\u2705 Confirmed Bullish",
-   "detail": "Spilled 1.2% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 OI +3% in up-leg",
-   "grade": "B",
-   "trigger": 917.81,
-   "stop": 898.45
-  },
-  {
    "symbol": "SUNPHARMA",
-   "close": 1879.6,
+   "close": 1868.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1669,17 +1795,17 @@
   },
   {
    "symbol": "ZYDUSLIFE",
-   "close": 1200.0,
+   "close": 1188.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
     "D": "Topping",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "old": "\ud83c\udfaf Consolidating",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.1x in pullback \u00b7 OI +16% in up-leg, -2% in pullback",
    "grade": "B",
    "trigger": 1186.14,
@@ -1687,43 +1813,43 @@
   },
   {
    "symbol": "DLF",
-   "close": 755.4,
+   "close": 751.75,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.6x in pullback \u00b7 OI -3% in up-leg, +0% in pullback",
    "grade": "B",
-   "trigger": 756.46,
+   "trigger": 755.86,
    "stop": 747.65
   },
   {
    "symbol": "INDHOTEL",
-   "close": 887.2,
+   "close": 882.8,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Impulse",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
-   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 OI -8% in up-leg, +3% in pullback",
    "grade": "B",
-   "trigger": 885.63,
+   "trigger": 885.44,
    "stop": 863.67
   },
   {
    "symbol": "MPHASIS",
-   "close": 2421.8,
+   "close": 2421.2,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -1740,44 +1866,26 @@
    "stop": 2359.27
   },
   {
-   "symbol": "PATANJALI",
-   "close": 408.15,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bullish",
-    "D": "Impulse",
-    "H": "Bearish"
-   },
-   "setup": "Hourly Overspill",
-   "stage": "Watch",
-   "old": "\u2705 Confirmed Bullish",
-   "detail": "Spilled 1.6% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI -5% in up-leg, +1% in pullback",
-   "grade": "B",
-   "trigger": 421.54,
-   "stop": 405.79
-  },
-  {
    "symbol": "PERSISTENT",
-   "close": 6004.5,
+   "close": 5950.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Topping",
     "D": "Topping",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
    "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "detail": "Spilled 1.9% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI -5% in up-leg, -4% in pullback",
    "grade": "B",
-   "trigger": 6016.7,
+   "trigger": 6006.93,
    "stop": 5888.2
   },
   {
    "symbol": "PETRONET",
-   "close": 327.25,
+   "close": 324.95,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -1786,16 +1894,16 @@
     "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
+   "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.5x in pullback \u00b7 OI +4% in up-leg, +2% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.4x in pullback \u00b7 OI +4% in up-leg, +2% in pullback",
    "grade": "B",
-   "trigger": 327.22,
+   "trigger": 326.97,
    "stop": 322.0
   },
   {
    "symbol": "WIPRO",
-   "close": 193.54,
+   "close": 192.1,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -1806,20 +1914,38 @@
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u26a0\ufe0f Extended (Weakening)",
-   "detail": "Spilled 1.6% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI -3% in up-leg, -1% in pullback",
+   "detail": "Spilled 1.7% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI -3% in up-leg, -1% in pullback",
    "grade": "B",
-   "trigger": 195.48,
-   "stop": 192.15
+   "trigger": 194.93,
+   "stop": 191.66
+  },
+  {
+   "symbol": "APLAPOLLO",
+   "close": 2249.3,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "setup": "Hourly Overspill",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 2.0x in pullback \u00b7 OI -10% in up-leg",
+   "grade": "C",
+   "trigger": 2244.69,
+   "stop": 2233.32
   },
   {
    "symbol": "ASHOKLEY",
-   "close": 169.76,
+   "close": 167.81,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
     "D": "Impulse",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Weekly Overspill",
    "stage": "Ready",
@@ -1831,7 +1957,7 @@
   },
   {
    "symbol": "GRASIM",
-   "close": 3054.8,
+   "close": 3074.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1849,7 +1975,7 @@
   },
   {
    "symbol": "HINDALCO",
-   "close": 937.75,
+   "close": 923.2,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1867,7 +1993,7 @@
   },
   {
    "symbol": "NAM-INDIA",
-   "close": 1087.2,
+   "close": 1076.9,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1885,7 +2011,7 @@
   },
   {
    "symbol": "TATASTEEL",
-   "close": 183.73,
+   "close": 182.07,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1903,7 +2029,7 @@
   },
   {
    "symbol": "TVSMOTOR",
-   "close": 4462.1,
+   "close": 4440.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1914,14 +2040,14 @@
    "setup": "Hourly Overspill",
    "stage": "Ready",
    "old": "\ud83c\udfaf Consolidating",
-   "detail": "Spilled 0.1% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 OI -7% in up-leg, +2% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 OI -7% in up-leg, +2% in pullback",
    "grade": "C",
-   "trigger": 4486.41,
-   "stop": 4422.14
+   "trigger": 4479.19,
+   "stop": 4359.06
   },
   {
    "symbol": "ABB",
-   "close": 6864.0,
+   "close": 6860.5,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1939,7 +2065,7 @@
   },
   {
    "symbol": "BHARATFORG",
-   "close": 1726.6,
+   "close": 1719.2,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1956,26 +2082,8 @@
    "stop": 1676.74
   },
   {
-   "symbol": "BOSCHLTD",
-   "close": 48930.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Topping",
-    "H": "Bearish"
-   },
-   "setup": "Hourly Overspill",
-   "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended (Weakening)",
-   "detail": "Spilled 1.7% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +1% in up-leg, +35% in pullback",
-   "grade": "Warning",
-   "trigger": 49726.99,
-   "stop": 48802.2
-  },
-  {
    "symbol": "CGPOWER",
-   "close": 815.9,
+   "close": 815.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1993,17 +2101,17 @@
   },
   {
    "symbol": "COFORGE",
-   "close": 2005.5,
+   "close": 1987.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
     "D": "Topping",
-    "H": "Topping"
+    "H": "Bearish"
    },
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI -34% in up-leg, +7% in pullback",
    "grade": "Warning",
    "trigger": 1999.49,
@@ -2011,7 +2119,7 @@
   },
   {
    "symbol": "HAL",
-   "close": 4769.1,
+   "close": 4775.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2029,7 +2137,7 @@
   },
   {
    "symbol": "HAL",
-   "close": 4769.1,
+   "close": 4775.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2047,17 +2155,17 @@
   },
   {
    "symbol": "HEROMOTOCO",
-   "close": 5375.5,
+   "close": 5336.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Topping",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "old": "\u26a0\ufe0f Extended",
    "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.9x in pullback \u00b7 OI -13% in up-leg, +12% in pullback",
    "grade": "Warning",
    "trigger": 5294.85,
@@ -2065,25 +2173,25 @@
   },
   {
    "symbol": "HEROMOTOCO",
-   "close": 5375.5,
+   "close": 5336.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Topping",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
-   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended",
    "detail": "Spilled 1.3% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 OI -3% in up-leg, +12% in pullback",
    "grade": "Warning",
-   "trigger": 5367.02,
+   "trigger": 5362.0,
    "stop": 5277.92
   },
   {
    "symbol": "MANAPPURAM",
-   "close": 300.95,
+   "close": 300.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2101,7 +2209,7 @@
   },
   {
    "symbol": "MOTHERSON",
-   "close": 162.87,
+   "close": 160.81,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2119,7 +2227,7 @@
   },
   {
    "symbol": "MOTHERSON",
-   "close": 162.87,
+   "close": 160.81,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2130,14 +2238,14 @@
    "setup": "Hourly Overspill",
    "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
-   "detail": "Spilled 0.6% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
    "grade": "Warning",
-   "trigger": 164.73,
-   "stop": 162.05
+   "trigger": 164.08,
+   "stop": 159.98
   },
   {
    "symbol": "NATIONALUM",
-   "close": 322.65,
+   "close": 319.6,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2155,13 +2263,13 @@
   },
   {
    "symbol": "OIL",
-   "close": 437.35,
+   "close": 440.7,
    "trend": "With trend",
    "states": {
     "M": "Bullish",
     "W": "Topping",
     "D": "Bearish",
-    "H": "Bearish"
+    "H": "Bottoming"
    },
    "setup": "Weekly Overspill",
    "stage": "Watch",
@@ -2173,7 +2281,7 @@
   },
   {
    "symbol": "RBLBANK",
-   "close": 382.6,
+   "close": 381.35,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2191,7 +2299,7 @@
   },
   {
    "symbol": "SAIL",
-   "close": 171.49,
+   "close": 168.95,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2209,7 +2317,7 @@
   },
   {
    "symbol": "SIEMENS",
-   "close": 3568.2,
+   "close": 3560.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2227,7 +2335,7 @@
   },
   {
    "symbol": "SOLARINDS",
-   "close": 18959.0,
+   "close": 18863.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2245,7 +2353,7 @@
   },
   {
    "symbol": "SYRMA",
-   "close": 1458.8,
+   "close": 1444.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2263,7 +2371,7 @@
   },
   {
    "symbol": "SYRMA",
-   "close": 1458.8,
+   "close": 1444.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -2281,25 +2389,25 @@
   },
   {
    "symbol": "TECHM",
-   "close": 1770.0,
+   "close": 1762.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Impulse",
     "D": "Topping",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Ready",
-   "old": "\ud83c\udfaf Consolidating",
-   "detail": "Spilled 1.9% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +8% in up-leg, +4% in pullback",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
+   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +8% in up-leg, +4% in pullback",
    "grade": "Warning",
-   "trigger": 1778.04,
-   "stop": 1758.68
+   "trigger": 1775.19,
+   "stop": 1755.38
   },
   {
    "symbol": "UJJIVANSFB",
-   "close": 61.04,
+   "close": 60.56,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2317,25 +2425,25 @@
   },
   {
    "symbol": "ZYDUSLIFE",
-   "close": 1200.0,
+   "close": 1188.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
     "D": "Topping",
-    "H": "Bottoming"
+    "H": "Bearish"
    },
    "setup": "Hourly Overspill",
-   "stage": "Triggered",
-   "old": "\ud83c\udfaf Consolidating",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
    "detail": "Spilled 1.6% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
    "grade": "Warning",
-   "trigger": 1198.37,
+   "trigger": 1196.98,
    "stop": 1178.74
   },
   {
    "symbol": "HCLTECH",
-   "close": 1381.8,
+   "close": 1374.1,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -2356,25 +2464,21 @@
   "Running": [
    "360ONE",
    "ANGELONE",
-   "APLAPOLLO",
-   "ATHERENERG",
    "BLUESTARCO",
-   "BSE",
    "CANBK",
    "CHOLAFIN",
    "ETERNAL",
-   "FEDERALBNK",
    "GAIL",
    "HDFCLIFE",
-   "INDUSTOWER",
    "ITC",
    "KARURVYSYA",
    "KOTAKBANK",
+   "LAURUSLABS",
    "LODHA",
    "MAHABANK",
    "MARICO",
    "MCX",
-   "NYKAA",
+   "PGEL",
    "RADICO",
    "TATACONSUM",
    "TITAN",
@@ -2382,16 +2486,13 @@
   ],
   "Stretched": [
    "BAJFINANCE",
-   "BANKBARODA",
-   "BANKINDIA",
    "HDFCBANK",
    "KALYANKJIL",
    "LICHSGFIN",
    "MOTILALOFS",
    "NAVINFLUOR",
    "PNB",
-   "SBIN",
-   "UNOMINDA"
+   "SBIN"
   ],
   "Fading": [
    "ANANDRATHI",
@@ -2577,21 +2678,20 @@
    "WAAREEENER",
    "YESBANK"
   ],
-  "\ud83c\udfaf Consolidating": [
+  "\u26a0\ufe0f Extended (Weakening)": [
    "ADANIPORTS",
-   "HAL",
-   "HCLTECH",
-   "INFY",
-   "TECHM",
-   "TVSMOTOR",
-   "ZYDUSLIFE"
-  ],
-  "\u26a0\ufe0f Extended": [
    "ANANDRATHI",
+   "BOSCHLTD",
    "COFORGE",
    "DRREDDY",
+   "INFY",
    "LTM",
-   "PERSISTENT"
+   "PERSISTENT",
+   "TATAELXSI",
+   "TCS",
+   "TECHM",
+   "WIPRO",
+   "ZYDUSLIFE"
   ],
   "\u2705 Confirmed Bullish": [
    "APLAPOLLO",
@@ -2626,16 +2726,15 @@
    "UNOMINDA",
    "VEDL"
   ],
-  "\u26a0\ufe0f Extended (Gaining)": [
+  "\u26a0\ufe0f Extended": [
    "BHARTIARTL",
    "HEROMOTOCO",
    "INDHOTEL"
   ],
-  "\u26a0\ufe0f Extended (Weakening)": [
-   "BOSCHLTD",
-   "TATAELXSI",
-   "TCS",
-   "WIPRO"
+  "\ud83c\udfaf Consolidating": [
+   "HAL",
+   "HCLTECH",
+   "TVSMOTOR"
   ],
   "\ud83c\udfc6 Prime Setup": [
    "SAGILITY"
