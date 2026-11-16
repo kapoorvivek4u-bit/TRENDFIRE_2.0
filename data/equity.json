@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-16 14:34",
+ "generated_ist": "2026-11-16 15:07",
  "oi_asof": "2026-11-13",
- "stocks": 255,
+ "stocks": 256,
  "market": {
   "weekly_bull_pct": 25,
   "monthly_bull_pct": 44,
@@ -1433,6 +1433,7 @@
    "ANANTRAJ",
    "ANURAS",
    "APARINDS",
+   "APOLLOTYRE",
    "APTUS",
    "ARE&M",
    "ASTERDM",
@@ -1683,7 +1684,5 @@
    "WHIRLPOOL"
   ]
  },
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ]
+ "notes": []
 }
