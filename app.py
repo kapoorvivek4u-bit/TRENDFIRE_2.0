@@ -615,35 +615,21 @@ def last_run(workflow):
     return f"{state}, started {when.strftime('%a %d %b %H:%M')}"
 
 
-def scan_panel():
-    if not secret("GH_TOKEN"):
-        st.caption("To start scans from here, add GH_TOKEN, GH_REPO and SCAN_PIN to the "
-                   "app's secrets on Streamlit. Until then, use the Actions tab on GitHub.")
-        return
-    which = st.selectbox("Scan", list(SCANS), key="scan_pick")
-    pin = st.text_input("PIN", type="password", key="scan_pin")
-    if st.button("Start scan", key="scan_go", type="primary"):
-        if str(pin) != str(secret("SCAN_PIN", "")) or not secret("SCAN_PIN"):
-            st.error("Wrong PIN.")
-        else:
-            code, _ = github("POST", f"/actions/workflows/{SCANS[which]}/dispatches",
-                             {"ref": "main"})
-            if code == 204:
-                last_run.clear()
-                st.success(f"{which} scan started. It takes about 2 to 10 minutes. The "
-                           "page reloads by itself when the new results arrive.")
-            else:
-                st.error({401: "GitHub refused the token. It may have expired: make a new "
-                               "one and update GH_TOKEN.",
-                          403: "The token is not allowed to start workflows. Give it "
-                               "'Actions: Read and write' on this repository.",
-                          404: f"GitHub could not find .github/workflows/{SCANS[which]} in "
-                               "the repo, or the token cannot see the repo.",
-                          422: "That workflow cannot be started by hand."}.get(
-                    code, f"Could not reach GitHub (code {code}). Try again shortly."))
+def scan_all():
+    """Start every scan on GitHub at once. Returns (started, problems)."""
+    started, problems = [], []
     for name, wf in SCANS.items():
-        info = last_run(wf)
-        st.caption(f"{name}: {info}" if info else f"{name}: no run found")
+        code, _ = github("POST", f"/actions/workflows/{wf}/dispatches", {"ref": "main"})
+        if code == 204:
+            started.append(name)
+        else:
+            problems.append(f"{name}: " + {
+                401: "GitHub refused the key (expired or deleted).",
+                403: "the key needs Actions set to Read and write.",
+                404: f".github/workflows/{wf} not found in the repo.",
+            }.get(code, f"could not reach GitHub (code {code})."))
+    last_run.clear()
+    return started, problems
 
 
 def file_stamp():
@@ -664,8 +650,16 @@ page = st.radio("Market", ["A list"] + list(PAGES), horizontal=True,
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
         st.cache_data.clear()
-    with st.popover("Run scan"):
-        scan_panel()
+    scan_clicked = st.button("Scan all", disabled=not secret("GH_TOKEN"),
+                             help=None if secret("GH_TOKEN") else
+                             "Add GH_TOKEN to the app's secrets on Streamlit to use this.")
+if scan_clicked:
+    started, problems = scan_all()
+    if started:
+        st.success(f"Started {len(started)} scans: {', '.join(started)}. They take about "
+                   "2 to 10 minutes, and the page reloads by itself as results arrive.")
+    for p in problems:
+        st.error(p)
 # faded diagonal name, fixed to the screen so it stays in view while scrolling;
 # pointer-events:none lets every tap pass through to the page underneath
 st.markdown(
