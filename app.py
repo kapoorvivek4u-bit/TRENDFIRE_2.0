@@ -131,14 +131,40 @@ def money(x):
     return f"{x:,.1f}" if x >= 1000 else f"{x:,.2f}"
 
 
-def grade_badge(g):
-    if g == "A":
+LIVE_STAGES = ("Ready", "Triggered")      # coloured badge only when the stock is tradeable
+
+
+def quality_word(setup):
+    """What the grade measures for this kind of setup."""
+    s = str(setup or "")
+    return ("Coil quality" if s.startswith("Squeeze") else
+            "Base quality" if "Breakout" in s else "Dip quality")
+
+
+def grade_badge(g, stage=None):
+    live = stage is None or stage in LIVE_STAGES
+    if not live:                                       # Watch: not tradeable yet, so grey
+        style = f"border:2px solid {RULE};color:{MUTED}"
+    elif g == "A":
         style = f"background:{GREEN};color:#fff"
     elif g == "Warning":
         style = f"background:{RED};color:#fff;font-size:12px"
     else:
         style = f"border:2px solid {INK};color:{INK}"
-    return f'<span class="tf-grade" style="{style}">{html.escape(g)}</span>'
+    tip = "Not tradeable yet: the grade turns colour at Ready" if not live else ""
+    return (f'<span class="tf-grade" title="{tip}" style="{style}">{html.escape(g)}</span>')
+
+
+def quality_html(r):
+    g = r.get("grade")
+    if not g:
+        return ""
+    stage = r.get("stage")
+    col = (MUTED if stage not in LIVE_STAGES else
+           GREEN if g == "A" else RED if g == "Warning" else INK)
+    tail = "" if stage in LIVE_STAGES else " · not tradeable until Ready"
+    return (f' · <span style="color:{col};font-weight:600">{quality_word(r.get("setup"))} '
+            f'{html.escape(g)}</span><span style="color:{MUTED};font-weight:400">{tail}</span>')
 
 
 UNUSUAL = {}          # symbol -> its row on the Unusual page, for the market in view
@@ -256,9 +282,9 @@ def row_html(r):
     return (
         '<div class="tf-row"><div class="tf-top">'
         f'<a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
-        f'{e(r["symbol"])}</a>{grade_badge(r["grade"])}</div>'
+        f'{e(r["symbol"])}</a>{grade_badge(r["grade"], r.get("stage"))}</div>'
         f'<div class="tf-set">{e(r["setup"])} · '
-        f'<span style="color:{tcol}">{e(trend)}</span></div>'
+        f'<span style="color:{tcol}">{e(trend)}</span>{quality_html(r)}</div>'
         f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
         f'{deals_html(r["symbol"])}{stars_html(r["symbol"])}'
         f'<div class="tf-small">{detail}</div>'
@@ -994,9 +1020,9 @@ def pick_html(p):
     return (
         '<div class="tf-row"><div class="tf-top">'
         f'<a class="tf-sym" href="{chart_link(p["symbol"])}" target="_blank">{e(p["symbol"])}</a>'
-        f'{grade_badge(r.get("grade", ""))}</div>'
+        f'{grade_badge(r.get("grade", ""), r.get("stage"))}</div>'
         f'<div class="tf-set">{e(p["market"])} · {e(r.get("setup", ""))} · '
-        f'<span style="color:{MUTED}">{e(p["size"])}</span></div>'
+        f'<span style="color:{MUTED}">{e(p["size"])}</span>{quality_html(r)}</div>'
         f'{checks}{bonus}{deals_html(p["symbol"])}{stars_html(p["symbol"])}'
         f'<div class="tf-lvl">{lvl}{tgt}{stop}</div></div>')
 
@@ -1974,7 +2000,10 @@ TREND_DEF = (
     "does not decide whether a stock is listed here. It only sets the tag, so check the "
     "tag. Suits holds of one to three weeks.")
 if EQUITY:
-    GRADE_DEF = """**Grade (volume and delivery, as of the last close)**
+    GRADE_DEF = """**Quality grade (volume and delivery, as of the last close)**
+
+The grade says how clean the setup is, not whether to buy: **Dip quality** for pullbacks and Overspill, **Coil quality** for Squeeze. The badge stays grey while the stock is on Watch and turns colour at Ready, when it becomes tradeable.
+
 - **A**: volume and delivery both support the setup.
 - **B**: one of the two supports it.
 - **C**: neither does.
@@ -1983,7 +2012,10 @@ if EQUITY:
                  "against the 30 days before. Higher is better.")
     TF_DEF = "**M, W, D (Monthly, Weekly, Daily momentum)**"
 else:
-    GRADE_DEF = """**Grade (volume and OI, as of the last close)**
+    GRADE_DEF = """**Quality grade (volume and OI, as of the last close)**
+
+The grade says how clean the setup is, not whether to buy: **Dip quality** for pullbacks and Overspill, **Coil quality** for Squeeze. The badge stays grey while the stock is on Watch and turns colour at Ready, when it becomes tradeable.
+
 - **A**: volume and OI both support the setup.
 - **B**: one of the two supports it.
 - **C**: neither does.
