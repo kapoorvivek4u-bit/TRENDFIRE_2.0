@@ -27,7 +27,8 @@ PAGES = {
     "Sectors": {"file": os.path.join("data", "sectors.json"), "workflow": "Sector scan"},
 }
 DEALS_FILE = os.path.join("data", "deals.json")
-ALL_FILES = ([DEALS_FILE] + [PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
+STARS_FILE = os.path.join("data", "stars.json")
+ALL_FILES = ([DEALS_FILE, STARS_FILE] + [PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 OWNER = "Vivek Kapoor"          # name shown as the faded watermark
@@ -177,6 +178,26 @@ def deals_html(sym):
             f'{html.escape(d["text"])}</div>')
 
 
+STAR_MAP = {}         # symbol -> "Kacholia 3.84% (+2.10 pp) · ..." from the star scan
+
+
+def load_star_map():
+    if not os.path.exists(STARS_FILE):
+        return {}
+    try:
+        return load(STARS_FILE, os.path.getmtime(STARS_FILE)).get("map", {})
+    except Exception:
+        return {}
+
+
+def stars_html(sym):
+    t = STAR_MAP.get(sym)
+    if not t:
+        return ""
+    return (f'<div class="tf-small" style="color:{BLUE};font-weight:600">Stars: '
+            f'{html.escape(t)}</div>')
+
+
 def sector_html(sym):
     t = SECTORS.get(sym)
     if not t or not t.get("sector"):
@@ -238,7 +259,7 @@ def row_html(r):
         f'<div class="tf-set">{e(r["setup"])} · '
         f'<span style="color:{tcol}">{e(trend)}</span></div>'
         f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
-        f'{deals_html(r["symbol"])}'
+        f'{deals_html(r["symbol"])}{stars_html(r["symbol"])}'
         f'<div class="tf-small">{detail}</div>'
         f'<div class="tf-lvl"><span>{left}</span>'
         + (f'<span style="color:{RED}">Stop {money(r["stop"])}</span>'
@@ -975,7 +996,7 @@ def pick_html(p):
         f'{grade_badge(r.get("grade", ""))}</div>'
         f'<div class="tf-set">{e(p["market"])} · {e(r.get("setup", ""))} · '
         f'<span style="color:{MUTED}">{e(p["size"])}</span></div>'
-        f'{checks}{bonus}{deals_html(p["symbol"])}'
+        f'{checks}{bonus}{deals_html(p["symbol"])}{stars_html(p["symbol"])}'
         f'<div class="tf-lvl">{lvl}{tgt}{stop}</div></div>')
 
 
@@ -1077,6 +1098,156 @@ Risk the same amount on every trade; the stop sets the quantity. Never move a st
     st.caption("Strategies applied to the latest scans. Watchlist only, not investment advice.")
 
 
+def spark(vals, w=88, h=22):
+    """Tiny trend line of a stake across quarters (None = no filing that quarter)."""
+    pts = [(i, v) for i, v in enumerate(vals) if v is not None]
+    if not pts:
+        return ""
+    top = max(v for _, v in pts) or 1
+    n = max(len(vals) - 1, 1)
+    xy = [(round(i * (w - 4) / n + 2, 1), round(h - 2 - (v / top) * (h - 4), 1)) for i, v in pts]
+    col = GREEN if pts[-1][1] >= pts[0][1] else RED
+    path = " ".join(f"{x},{y}" for x, y in xy)
+    last = xy[-1]
+    return (f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}">'
+            f'<polyline points="{path}" fill="none" stroke="{col}" stroke-width="1.6"/>'
+            f'<circle cx="{last[0]}" cy="{last[1]}" r="2.2" fill="{col}"/></svg>')
+
+
+def in_num(n):
+    """Indian digit grouping: 12,69,832."""
+    if n is None:
+        return "—"
+    s = str(int(n))
+    if len(s) <= 3:
+        return s
+    head, tail = s[:-3], s[-3:]
+    parts = []
+    while len(head) > 2:
+        parts.insert(0, head[-2:])
+        head = head[:-2]
+    return ",".join([head] + parts + [tail]) if head else ",".join(parts + [tail])
+
+
+def render_stars():
+    e = html.escape
+    if not os.path.exists(STARS_FILE):
+        st.title("Star investors")
+        st.info("No results yet. Run the 'Star investors' workflow once, or tap Scan all.")
+        return
+    res = load(STARS_FILE, os.path.getmtime(STARS_FILE))
+    gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
+    st.markdown(
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
+        f'border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Star investors</span><span class="tf-small">Updated {gen.strftime("%a %d %b")} · '
+        f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
+    Q, P, cov = res.get("quarter"), res.get("previous"), res.get("coverage", {})
+    if not Q:
+        st.info("Reading company filings. Results appear after the first run finishes.")
+        return
+    qn = lambda q: dt.date.fromisoformat(q).strftime("%b %Y")
+    rows = res["rows"]
+    counts = {}
+    for r in rows:
+        counts[r["change"]] = counts.get(r["change"], 0) + 1
+    nn, nx = counts.get('New ≥1%', 0), counts.get('Under 1% / exit', 0)
+    head = (f"{nn} new {'stake' if nn == 1 else 'stakes'}, {counts.get('Increased', 0)} increased, "
+            f"{counts.get('Reduced', 0)} reduced, {nx} {'exit' if nx == 1 else 'exits'}.")
+    sub = (f"Stakes of 1% or more, quarter ending {qn(Q)}" + (f" vs {qn(P)}" if P else "")
+           + f". From {cov.get(Q, 0):,} company filings for {qn(Q)}"
+           + (f" and {cov.get(P, 0):,} for {qn(P)}" if P else "") + ".")
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'margin:6px 0 6px">{e(head)}</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">{e(sub)}</div>',
+        unsafe_allow_html=True)
+    comp, left = res.get("companies", 0), res.get("left", 0)
+    if comp and res.get("latest_done", comp) < 0.9 * comp:
+        st.caption(f"First fill in progress: {res.get('latest_done', 0):,} of {comp:,} companies "
+                   f"read for the latest quarter. It finishes over about a day of background "
+                   f"runs; the history for the trend lines follows over a few more days.")
+    with st.expander("What the words mean"):
+        st.markdown("""
+Every listed company files its shareholding pattern each quarter, within 21 days of the quarter end. Anyone holding 1% or more is named, with their %. This page reads those filings for all NSE companies and picks out well-known investors.
+
+- **New ≥1%**: at 1% or more this quarter, not named last quarter (either newly bought, or crossed 1%).
+- **Increased / Reduced**: the % changed by more than 0.01 points (Δ pp = percentage points).
+- **Under 1% / exit**: named last quarter, not named now: they sold out or fell below 1% (below 1% they are no longer named, so it may be a partial sale).
+- **Trend**: their % in each quarter loaded. **Held since**: the first quarter of the current run at 1%+; "≤" means it was already held in the oldest quarter loaded.
+- **Held as**: the exact names in the filing that were counted (a star's funds and family holdings are added together).
+- **⚠**: a common name, so the match may be a different person with the same name.
+- **Stars:** lines on stock cards elsewhere on the site come from this page.
+
+Filings lag: a September quarter stake becomes public in October. Treat this as slow information about conviction, not a timing signal; your setups give the timing.
+""")
+    view = st.radio("Change", ["All changes", "New ≥1%", "Increased", "Reduced",
+                               "Under 1% / exit", "Everything held"], horizontal=True,
+                    label_visibility="collapsed", key="star_view")
+    inv = res.get("investors", {})
+    amb = {r["investor"] for r in rows if r.get("ambiguous")}
+    pick = st.selectbox("Investor", ["All investors"] + list(inv),
+                        format_func=lambda x: x if x == "All investors" else
+                        f"{x}{' ⚠' if x in amb else ''} ({inv[x]})", key="star_inv")
+    if view == "All changes":
+        rs = [r for r in rows if r["change"] in ("New ≥1%", "Increased", "Reduced",
+                                                  "Under 1% / exit")]
+    elif view == "Everything held":
+        rs = [r for r in rows if r["pct_now"] is not None]
+    else:
+        rs = [r for r in rows if r["change"] == view]
+    if pick != "All investors":
+        rs = [r for r in rs if r["investor"] == pick]
+    on_site = {}
+    for key in ("F&O", "Equity"):
+        p_ = PAGES[key]["file"]
+        if os.path.exists(p_):
+            r_ = load(p_, os.path.getmtime(p_))
+            for row in r_.get("rows", []) + r_.get("overspill", []):
+                if row.get("stage") in ("Ready", "Triggered", "Watch"):
+                    on_site.setdefault(row["symbol"], []).append(
+                        f'{row["setup"]} {row["stage"]} ({row["grade"]})')
+    badge = {"New ≥1%": GREEN, "Increased": GREEN, "Reduced": RED, "Under 1% / exit": RED,
+             "Unchanged": MUTED, "Held": MUTED}
+    if not rs:
+        st.caption("None for this choice.")
+        return
+    body = "".join(
+        f"<tr><td><b>{e(r['investor'])}</b>{' ⚠' if r.get('ambiguous') else ''}</td>"
+        f"<td><a class='tf-jump' href='{chart_link(r['symbol'])}' target='_blank'>"
+        f"{e(r['symbol'])}</a>"
+        + (f"<div class='tf-small' style='color:{GREEN}'>{e('; '.join(on_site[r['symbol']][:2]))}</div>"
+           if r["symbol"] in on_site else "")
+        + f"</td><td style='color:{badge[r['change']]};font-weight:600;white-space:nowrap'>"
+        f"{e(r['change'])}</td>"
+        f"<td class='n'>{'—' if r['pct_now'] is None else format(r['pct_now'], '.2f') + '%'}</td>"
+        f"<td class='n'>{'—' if r['pct_before'] is None else format(r['pct_before'], '.2f') + '%'}</td>"
+        f"<td class='n' style='color:{GREEN if (r['delta'] or 0) > 0 else RED if (r['delta'] or 0) < 0 else MUTED}'>"
+        f"{'—' if r['delta'] is None else format(r['delta'], '+.2f')}</td>"
+        f"<td>{spark(r['trend'])}</td><td style='white-space:nowrap'>{e(r['since'] or '—')}</td>"
+        f"<td class='n'>{in_num(r['shares'])}</td><td style='white-space:nowrap'>{e(r['filed'] or '')}</td>"
+        f"<td class='tf-small'>{e(r['held_as'][:60])}</td></tr>"
+        for r in rs[:400])
+    st.markdown(
+        f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
+        f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
+        f"color:{MUTED};font-weight:600;text-align:left;padding:6px 4px;"
+        f"border-bottom:2px solid {INK};white-space:nowrap}}"
+        f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE};vertical-align:middle}}"
+        f".tf-sec td.n{{text-align:right;font-family:{MONO};white-space:nowrap}}"
+        f".tf-jump{{color:{INK};font-weight:600}}</style>"
+        "<div style='overflow-x:auto;margin:6px 0 4px'><table class='tf-sec'>"
+        "<tr><th>Investor</th><th>Symbol</th><th>Change</th><th style='text-align:right'>% now</th>"
+        "<th style='text-align:right'>% before</th><th style='text-align:right'>Δ pp</th>"
+        "<th>Trend</th><th>Held since</th><th style='text-align:right'>Shares now</th>"
+        "<th>Filed</th><th>Held as</th></tr>"
+        f"{body}</table></div>", unsafe_allow_html=True)
+    if len(rs) > 400:
+        st.caption(f"Showing 400 of {len(rs)}. Pick an investor to see the rest.")
+    st.caption("From NSE shareholding filings. Watchlist only, not investment advice.")
+
+
 def render_deals():
     e = html.escape
     if not os.path.exists(DEALS_FILE):
@@ -1165,6 +1336,7 @@ SCANS = {                      # what the button can start -> workflow file in .
     "Unusual (F&O)": "unusual.yml",
     "Sectors": "sector.yml",
     "Deals": "deals.yml",
+    "Star investors": "stars.yml",
 }
 
 
@@ -1238,7 +1410,8 @@ def watch_for_new_scans():
         st.rerun()
 
 
-page = st.radio("Market", ["Strategies", "A list"] + list(PAGES) + ["Deals"], horizontal=True,
+page = st.radio("Market", ["Strategies", "A list"] + list(PAGES) + ["Deals", "Stars"],
+                horizontal=True,
                 label_visibility="collapsed")
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
@@ -1265,6 +1438,10 @@ st.markdown(
 watch_for_new_scans()
 SECTORS.update(load_sector_tags())
 DEALS.update(load_deals())
+STAR_MAP.update(load_star_map())
+if page == "Stars":
+    render_stars()
+    st.stop()
 if page == "Deals":
     render_deals()
     st.stop()
