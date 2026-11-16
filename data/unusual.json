@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 14:33",
+ "generated_ist": "2026-11-16 15:07",
  "oi_asof": "2026-11-13",
  "stocks": 218,
  "rows": [
@@ -265,7 +265,7 @@
     },
     {
      "when": "Thu 12",
-     "text": "1 hour of unusual volume, peak 3.3x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 3.0x at 15:15, absorption",
      "side": 0
     }
    ],
@@ -275,72 +275,6 @@
    "vs_high": "16.8% below its 20-day high",
    "states": {
     "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "APLAPOLLO",
-   "score": 4.2,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Mon 16",
-     "text": "4 hours of unusual volume, peak 9.2x at 12:15",
-     "side": -1
-    },
-    {
-     "when": "Thu 12",
-     "text": "Day's volume 2.2x usual",
-     "side": 1
-    }
-   ],
-   "close": 2249.3,
-   "move_pct": 3.1,
-   "moved": false,
-   "vs_high": "0.7% below its 20-day high",
-   "states": {
-    "W": "Topping",
-    "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Watch"
-  },
-  {
-   "symbol": "BDL",
-   "score": 4.2,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Fri 13",
-     "text": "1 hour of unusual volume, peak 2.6x at 14:15",
-     "side": -1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 2.1x usual",
-     "side": -1
-    },
-    {
-     "when": "Thu 12",
-     "text": "2 hours of unusual volume, peak 7.0x at 15:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Thu 12",
-     "text": "Day's volume 5.9x usual",
-     "side": -1
-    },
-    {
-     "when": "Thu 12",
-     "text": "OI +23% in a day, price -4.7%: short build-up",
-     "side": -1
-    }
-   ],
-   "close": 1029.0,
-   "move_pct": -7.3,
-   "moved": true,
-   "vs_high": "9.9% below its 20-day high",
-   "states": {
-    "W": "Bearish",
     "D": "Bullish"
    }
   },
@@ -391,7 +325,7 @@
    "events": [
     {
      "when": "Fri 13",
-     "text": "4 hours of unusual volume, peak 5.4x at 15:15, absorption",
+     "text": "4 hours of unusual volume, peak 4.8x at 15:15, absorption",
      "side": -1
     },
     {
@@ -419,6 +353,19 @@
     "D": "Bearish"
    },
    "setup": "Squeeze Break \u00b7 Watch"
+  },
+  {
+   "symbol": "APLAPOLLO",
+   "score": 4.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Mon 16",
+     "text": "4 hours of unusual volume, peak 9.2x at 12:15",
+     "side": -1
+    }
+   ],
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "KAYNES",
@@ -477,6 +424,46 @@
    "vs_high": "13.0% below its 20-day high",
    "states": {
     "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "BDL",
+   "score": 3.8,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Fri 13",
+     "text": "1 hour of unusual volume, peak 2.6x at 14:15",
+     "side": -1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 2.1x usual",
+     "side": -1
+    },
+    {
+     "when": "Thu 12",
+     "text": "2 hours of unusual volume, peak 6.0x at 15:15, absorption",
+     "side": -1
+    },
+    {
+     "when": "Thu 12",
+     "text": "Day's volume 5.9x usual",
+     "side": -1
+    },
+    {
+     "when": "Thu 12",
+     "text": "OI +23% in a day, price -4.7%: short build-up",
+     "side": -1
+    }
+   ],
+   "close": 1029.0,
+   "move_pct": -7.3,
+   "moved": true,
+   "vs_high": "9.9% below its 20-day high",
+   "states": {
+    "W": "Bearish",
     "D": "Bullish"
    }
   },
@@ -575,42 +562,6 @@
     "W": "Bottoming",
     "D": "Bullish"
    }
-  },
-  {
-   "symbol": "PETRONET",
-   "score": 3.5,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Fri 13",
-     "text": "2 hours of unusual volume, peak 19.1x at 11:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 3.7x usual",
-     "side": -1
-    },
-    {
-     "when": "Thu 12",
-     "text": "1 hour of unusual volume, peak 16.0x at 15:15",
-     "side": 1
-    },
-    {
-     "when": "Thu 12",
-     "text": "Day's volume 2.3x usual",
-     "side": 1
-    }
-   ],
-   "close": 324.95,
-   "move_pct": 1.4,
-   "moved": false,
-   "vs_high": "3.4% below its 20-day high",
-   "states": {
-    "W": "Bullish",
-    "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "TATAPOWER",
