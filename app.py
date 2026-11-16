@@ -26,7 +26,8 @@ PAGES = {
     "Breakout": {"file": os.path.join("data", "breakout.json"), "workflow": "Equity scan"},
     "Sectors": {"file": os.path.join("data", "sectors.json"), "workflow": "Sector scan"},
 }
-ALL_FILES = ([PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
+DEALS_FILE = os.path.join("data", "deals.json")
+ALL_FILES = ([DEALS_FILE] + [PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 OWNER = "Vivek Kapoor"          # name shown as the faded watermark
@@ -153,6 +154,29 @@ def load_sector_tags():
         return {}
 
 
+DEALS = {}            # symbol -> 30-day fund/star deal picture from the deals scan
+
+
+def load_deals():
+    if not os.path.exists(DEALS_FILE):
+        return {}
+    try:
+        return load(DEALS_FILE, os.path.getmtime(DEALS_FILE)).get("stocks", {})
+    except Exception:
+        return {}
+
+
+def deals_html(sym):
+    d = DEALS.get(sym)
+    if not d or not d.get("text"):
+        return ""
+    buy = ((d.get("mf_net_cr") or 0) + (d.get("ins_net_cr") or 0)
+           + sum(x["value_cr"] * (1 if x["side"] == "BUY" else -1) for x in d.get("stars", [])))
+    col = GREEN if buy >= 0 else RED
+    return (f'<div class="tf-small" style="color:{col};font-weight:600">Deals (30d): '
+            f'{html.escape(d["text"])}</div>')
+
+
 def sector_html(sym):
     t = SECTORS.get(sym)
     if not t or not t.get("sector"):
@@ -214,6 +238,7 @@ def row_html(r):
         f'<div class="tf-set">{e(r["setup"])} · '
         f'<span style="color:{tcol}">{e(trend)}</span></div>'
         f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
+        f'{deals_html(r["symbol"])}'
         f'<div class="tf-small">{detail}</div>'
         f'<div class="tf-lvl"><span>{left}</span>'
         + (f'<span style="color:{RED}">Stop {money(r["stop"])}</span>'
@@ -950,7 +975,7 @@ def pick_html(p):
         f'{grade_badge(r.get("grade", ""))}</div>'
         f'<div class="tf-set">{e(p["market"])} · {e(r.get("setup", ""))} · '
         f'<span style="color:{MUTED}">{e(p["size"])}</span></div>'
-        f'{checks}{bonus}'
+        f'{checks}{bonus}{deals_html(p["symbol"])}'
         f'<div class="tf-lvl">{lvl}{tgt}{stop}</div></div>')
 
 
@@ -1052,11 +1077,94 @@ Risk the same amount on every trade; the stop sets the quantity. Never move a st
     st.caption("Strategies applied to the latest scans. Watchlist only, not investment advice.")
 
 
+def render_deals():
+    e = html.escape
+    if not os.path.exists(DEALS_FILE):
+        st.title("Deals")
+        st.info("No deal results yet. Run the 'Deals scan' workflow once, or tap Scan all.")
+        return
+    res = load(DEALS_FILE, os.path.getmtime(DEALS_FILE))
+    gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
+    st.markdown(
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
+        f'border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Deals</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
+        f'{gen.strftime("%H:%M")} · deals to {e(res["asof"])}</span></div>',
+        unsafe_allow_html=True)
+    recent, stocks = res.get("recent", []), res.get("stocks", {})
+    mf_buy = sorted(((s, d) for s, d in stocks.items() if (d.get("mf_net_cr") or 0) > 0),
+                    key=lambda x: -x[1]["mf_net_cr"])
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'margin:6px 0 6px">{len(recent)} fund, star and large deals in the last 10 days.</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">Bulk and block deals '
+        f'reported to NSE, tagged by who traded. {len(mf_buy)} stocks saw net mutual fund '
+        f'buying in the last 30 days.</div>', unsafe_allow_html=True)
+    with st.expander("What the words mean"):
+        st.markdown("""
+- **Bulk deal**: one client trading more than 0.5% of a company's shares in a day. **Block deal**: a single trade of Rs 10 crore or more in the special block window. NSE publishes both every evening.
+- **Who**: **MF** = a mutual fund; **Star** = a well-known individual investor (Jhunjhunwala/Rare, Kacholia, Kedia, Dolly Khanna, Singhania, Mukul Agrawal, Damani and others); **Insurance** = LIC and insurers; **Other** = everyone else, listed only above Rs 25 crore.
+- **Deals (30d)** on stock cards elsewhere on the site: the last 30 days of fund, star and insurance deals in that stock. Green = net buying, red = net selling.
+- Bulk and block deals show only the big trades. Most fund buying happens quietly in the market and appears only in the monthly portfolios (planned next).
+""")
+    view = st.radio("Who", ["All", "Funds", "Stars", "Insurance", "Others"], horizontal=True,
+                    label_visibility="collapsed", key="deal_view")
+    cat = {"Funds": "MF", "Stars": "Star", "Insurance": "Insurance", "Others": "Other"}.get(view)
+    rows = [r for r in recent if cat is None or r["cat"] == cat]
+    on_site = {}
+    for key in ("F&O", "Equity"):
+        p_ = PAGES[key]["file"]
+        if os.path.exists(p_):
+            r_ = load(p_, os.path.getmtime(p_))
+            for row in r_.get("rows", []) + r_.get("overspill", []):
+                if row.get("stage") in ("Ready", "Triggered", "Watch"):
+                    on_site.setdefault(row["symbol"], []).append(
+                        f'{row["setup"]} {row["stage"]} ({row["grade"]})')
+    if not rows:
+        st.caption("No deals of this kind in the last 10 days.")
+    else:
+        body = "".join(
+            f"<tr><td>{e(r['date'][5:])}</td>"
+            f"<td><a class='tf-jump' href='{chart_link(r['symbol'])}' target='_blank'>"
+            f"{e(r['symbol'])}</a>"
+            + (f"<div class='tf-small' style='color:{GREEN}'>{e('; '.join(on_site[r['symbol']][:2]))}</div>"
+               if r["symbol"] in on_site else "")
+            + f"</td><td style='color:{GREEN if r['side'] == 'BUY' else RED};font-weight:600'>"
+            f"{'Buy' if r['side'] == 'BUY' else 'Sell'}</td>"
+            f"<td>{e(r['who'])}<div class='tf-small'>{e(r['cat'])} · {e(r['kind'])}</div></td>"
+            f"<td class='n'>{r['value_cr']:,.1f}</td><td class='n'>{money(r['price'])}</td></tr>"
+            for r in rows[:300])
+        st.markdown(
+            f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
+            f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
+            f"color:{MUTED};font-weight:600;text-align:left;padding:6px 4px;"
+            f"border-bottom:2px solid {INK}}}"
+            f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE};vertical-align:top}}"
+            f".tf-sec td.n{{text-align:right;font-family:{MONO}}}"
+            f".tf-jump{{color:{INK};font-weight:600}}</style>"
+            "<div style='overflow-x:auto;margin:6px 0 4px'><table class='tf-sec'>"
+            "<tr><th>Date</th><th>Stock</th><th>Side</th><th>Who</th>"
+            "<th style='text-align:right'>Rs Cr</th><th style='text-align:right'>Price</th></tr>"
+            f"{body}</table></div>", unsafe_allow_html=True)
+    if mf_buy:
+        with st.expander(f"Most fund buying through deals, last 30 days · {len(mf_buy)}"):
+            st.markdown("".join(
+                f'<div class="tf-small" style="margin:4px 0"><a href="{chart_link(s)}" '
+                f'target="_blank"><b>{e(s)}</b></a> · {e(d["text"])}</div>'
+                for s, d in mf_buy[:40]), unsafe_allow_html=True)
+    for note in res.get("notes", []):
+        st.caption(f"Note: {note}")
+    st.caption(f"{res.get('days', 0)} trading days of deals saved. Updated each evening "
+               "after NSE publishes. Watchlist only, not investment advice.")
+
+
 SCANS = {                      # what the button can start -> workflow file in .github/workflows
     "F&O setups": "scan.yml",
     "Equity, Breakout, Equity unusual": "equity.yml",
     "Unusual (F&O)": "unusual.yml",
     "Sectors": "sector.yml",
+    "Deals": "deals.yml",
 }
 
 
@@ -1130,7 +1238,7 @@ def watch_for_new_scans():
         st.rerun()
 
 
-page = st.radio("Market", ["Strategies", "A list"] + list(PAGES), horizontal=True,
+page = st.radio("Market", ["Strategies", "A list"] + list(PAGES) + ["Deals"], horizontal=True,
                 label_visibility="collapsed")
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
@@ -1156,6 +1264,10 @@ st.markdown(
     unsafe_allow_html=True)
 watch_for_new_scans()
 SECTORS.update(load_sector_tags())
+DEALS.update(load_deals())
+if page == "Deals":
+    render_deals()
+    st.stop()
 if page == "Sectors":
     render_sectors(PAGES[page])
     st.stop()
