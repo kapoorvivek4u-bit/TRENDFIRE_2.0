@@ -31,6 +31,11 @@ jobs:
       - name: Run scan
         run: python setups_scan.py
 
+      - name: Telegram alerts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python tg_alerts.py || echo "Telegram step failed; scan results are still saved"
+
       - name: Save results to the repo
         run: |
           git config user.name "setups-bot"
