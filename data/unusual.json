@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 12:09",
+ "generated_ist": "2026-11-16 12:11",
  "oi_asof": "2026-11-13",
  "stocks": 218,
  "rows": [
@@ -330,7 +330,7 @@
    "events": [
     {
      "when": "Fri 13",
-     "text": "5 hours of unusual volume, peak 4.8x at 15:15, absorption",
+     "text": "5 hours of unusual volume, peak 5.4x at 15:15, absorption",
      "side": -1
     },
     {
@@ -522,7 +522,7 @@
     },
     {
      "when": "Thu 12",
-     "text": "1 hour of unusual volume, peak 3.0x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 3.3x at 15:15, absorption",
      "side": 0
     }
    ],
@@ -599,6 +599,42 @@
     "W": "Topping",
     "D": "Topping"
    }
+  },
+  {
+   "symbol": "PETRONET",
+   "score": 3.5,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Fri 13",
+     "text": "2 hours of unusual volume, peak 19.4x at 11:15, absorption",
+     "side": -1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 3.7x usual",
+     "side": -1
+    },
+    {
+     "when": "Thu 12",
+     "text": "1 hour of unusual volume, peak 16.0x at 15:15",
+     "side": 1
+    },
+    {
+     "when": "Thu 12",
+     "text": "Day's volume 2.3x usual",
+     "side": 1
+    }
+   ],
+   "close": 325.75,
+   "move_pct": 1.7,
+   "moved": false,
+   "vs_high": "3.1% below its 20-day high",
+   "states": {
+    "W": "Bullish",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "TATAPOWER",
