@@ -39,8 +39,9 @@ import pandas as pd
 
 SCFG = {
     "min_members": 3,             # fewer F&O stocks than this: listed, not ranked
-    "rs_avg": 50,                 # RS ratio = RS line vs its 50-day average
-    "mom_days": 10,               # RS momentum = change in the ratio over 10 days
+    "rs_avg": 20,                 # RS ratio = RS line vs its 20-day average
+    "mom_days": 5,                # RS momentum = change in the ratio over 5 days
+    "periods": {"rw": 5, "r2w": 10, "r1": 21},   # 1 week, 2 weeks, 1 month (trading days)
     "top_n": 5,
     "max_daily_move": 0.25,       # daily returns beyond this are treated as data errors
 }
@@ -156,20 +157,32 @@ def ret(series, days):
     return float(s.iloc[-1] / s.iloc[-1 - days] - 1) if len(s) > days else np.nan
 
 
+def sector_ohlc(daily, members):
+    """Equal-weighted sector line plus high/low bands, so TTM can be read on it."""
+    closes = pd.DataFrame({m: daily[m]["Close"] for m in members}).sort_index().iloc[-260:]
+    idx = sector_index(closes)
+    hi = pd.DataFrame({m: daily[m]["High"] / daily[m]["Close"] for m in members})
+    lo = pd.DataFrame({m: daily[m]["Low"] / daily[m]["Close"] for m in members})
+    hi, lo = hi.reindex(idx.index).mean(axis=1), lo.reindex(idx.index).mean(axis=1)
+    bars = pd.DataFrame({"Open": idx, "High": idx * hi.fillna(1), "Low": idx * lo.fillna(1),
+                         "Close": idx, "Volume": 0.0})
+    return idx, bars
+
+
 def analyse_sectors(daily, smap, nifty, symbols):
-    """Rank sectors among the F&O stocks in `symbols`."""
-    n1, n3 = ret(nifty, 21), ret(nifty, 63)
+    """Rank sectors among the F&O stocks in `symbols`. Returns are against Nifty."""
+    P = SCFG["periods"]
+    nr = {k: ret(nifty, d) for k, d in P.items()}
+    rel = lambda series: {k: (None if np.isnan(ret(series, d)) else
+                              round((ret(series, d) - nr[k]) * 100, 1)) for k, d in P.items()}
     per_stock = {}
     for s in symbols:
         d = daily.get(s)
         if d is None or len(d) < 120:
             continue
         D, W = E.tf_view(d, 3), E.tf_view(E.to_weekly(d), 3)
-        r1, r3 = ret(d["Close"], 21), ret(d["Close"], 63)
         per_stock[s] = {
-            "symbol": s, "close": round(float(d["Close"].iloc[-1]), 2),
-            "rs1": None if np.isnan(r1) else round((r1 - n1) * 100, 1),
-            "rs3": None if np.isnan(r3) else round((r3 - n3) * 100, 1),
+            "symbol": s, "close": round(float(d["Close"].iloc[-1]), 2), **rel(d["Close"]),
             "states": {"W": "Impulse" if W["impulse"] else W["state"],
                        "D": "Impulse" if D["impulse"] else D["state"]},
             "w_bull": bool(W["ok"] and W["mom"] > 0), "d_bull": bool(D["ok"] and D["mom"] > 0)}
@@ -181,27 +194,25 @@ def analyse_sectors(daily, smap, nifty, symbols):
         if len(members) < SCFG["min_members"] or name == "Unclassified":
             unranked.append({"name": name, "n": len(members), "members": sorted(members)})
             continue
-        closes = pd.DataFrame({s: daily[s]["Close"] for s in members}).sort_index()
-        closes = closes.iloc[-260:]
-        idx = sector_index(closes)
+        idx, bars = sector_ohlc(daily, members)
         stage, ratio, mom = rotation(idx, nifty)
         if stage is None:
             unranked.append({"name": name, "n": len(members), "members": sorted(members)})
             continue
+        T = E.tf_view(bars, 3)
         st_ = [per_stock[s] for s in members]
-        score = lambda x: (x["rs1"] or 0) * 0.5 + (x["rs3"] or 0) * 0.5
+        score = lambda x: (x["rw"] or 0) * 0.4 + (x["r2w"] or 0) * 0.3 + (x["r1"] or 0) * 0.3
         top = sorted(st_, key=score, reverse=True)[:SCFG["top_n"]]
         ranked.append({
-            "name": name, "stage": stage, "n": len(members),
-            "rs1": round((ret(idx, 21) - n1) * 100, 1),
-            "rs3": round((ret(idx, 63) - n3) * 100, 1),
+            "name": name, "stage": stage, "n": len(members), **rel(idx),
+            "idx_d": T["state"] if T["ok"] else None,
             "wk_bull": round(100 * np.mean([x["w_bull"] for x in st_])),
             "d_bull": round(100 * np.mean([x["d_bull"] for x in st_])),
             "ratio": ratio, "mom": mom,
             "top": [{k: v for k, v in x.items() if k not in ("w_bull", "d_bull")} for x in top]})
-    ranked.sort(key=lambda x: (STAGE_ORDER[x["stage"]], -(x["rs1"] + x["rs3"])))
+    ranked.sort(key=lambda x: (STAGE_ORDER[x["stage"]], -(x["rw"] or 0)))
     unranked.sort(key=lambda x: x["name"])
-    return ranked, unranked, round(n1 * 100, 1), round(n3 * 100, 1)
+    return ranked, unranked, {k: round(v * 100, 1) for k, v in nr.items()}
 
 
 def main_live():
@@ -225,14 +236,14 @@ def main_live():
     nd = data["^NSEI"] if isinstance(data.columns, pd.MultiIndex) else data
     nifty = nd["Close"].dropna()
     nifty.index = pd.to_datetime(nifty.index).tz_localize(None).normalize()
-    ranked, unranked, n1, n3 = analyse_sectors(daily, smap, nifty, symbols)
+    ranked, unranked, nret = analyse_sectors(daily, smap, nifty, symbols)
     stage_of = {s["name"]: s["stage"] for s in ranked}
     tag_map = {sym: {"sector": sec, "stage": stage_of.get(sec, "")} for sym, sec in smap.items()}
     for s in symbols:
         tag_map.setdefault(s, {"sector": "Unclassified", "stage": ""})
     asof = max(df.index[-1] for df in daily.values()).strftime("%Y-%m-%d")
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"), "asof": asof,
-           "nifty": {"r1": n1, "r3": n3}, "sectors": ranked, "unranked": unranked,
+           "nifty": nret, "sectors": ranked, "unranked": unranked,
            "map": tag_map, "notes": notes}
     with open(os.path.join(DATA_DIR, "sectors.json"), "w") as f:
         json.dump(res, f, indent=1)
@@ -251,8 +262,8 @@ def selftest():
         return E._bars(100 * np.exp(np.cumsum(r)), days, noise=0.005)
 
     t = np.arange(320)
-    accel_up = np.where(t > 270, 0.0004 * (t - 270) / 10, -0.0004)      # late, growing outperformance
-    accel_dn = np.where(t > 270, -0.0004 * (t - 270) / 10, 0.0004)      # late, growing underperformance
+    accel_up = np.where(t > 295, 0.0006 * (t - 295) / 3, -0.0004)      # late, growing outperformance
+    accel_dn = np.where(t > 295, -0.0006 * (t - 295) / 3, 0.0004)      # late, growing underperformance
     daily, smap = {}, {}
     for i in range(5):
         daily[f"MET{i}"], smap[f"MET{i}"] = stock(accel_up, i), "Metals & Mining"
@@ -260,18 +271,20 @@ def selftest():
     for i in range(2):
         daily[f"TINY{i}"], smap[f"TINY{i}"] = stock(0.0, 20 + i), "Media"
     daily["LOST"] = stock(0.0, 30)                                      # not in the sector list
-    ranked, unranked, n1, n3 = analyse_sectors(daily, smap, nifty, list(daily))
-    print(json.dumps({"ranked": [{k: s[k] for k in ("name", "stage", "rs1", "rs3", "wk_bull",
-                                                    "ratio", "mom")} for s in ranked],
-                      "unranked": unranked, "nifty": [n1, n3]}, indent=1))
+    ranked, unranked, nret = analyse_sectors(daily, smap, nifty, list(daily))
+    print(json.dumps({"ranked": [{k: s[k] for k in ("name", "stage", "rw", "r2w", "r1", "idx_d",
+                                                    "d_bull", "wk_bull", "ratio", "mom")}
+                                 for s in ranked],
+                      "unranked": unranked, "nifty": nret}, indent=1))
     by = {s["name"]: s for s in ranked}
     assert by["Metals & Mining"]["stage"] == "Leading", by
     assert by["IT"]["stage"] == "Lagging", by
-    assert by["Metals & Mining"]["rs1"] > 0 > by["IT"]["rs1"]
+    assert by["Metals & Mining"]["rw"] > 0 > by["IT"]["rw"]
+    assert by["Metals & Mining"]["idx_d"] in ("Bullish", "Topping", "Bearish", "Bottoming")
     assert [s["name"] for s in ranked] == ["Metals & Mining", "IT"]
     assert {u["name"] for u in unranked} == {"Media", "Unclassified"}
     top = by["Metals & Mining"]["top"]
-    assert len(top) == 5 and top[0]["rs1"] >= top[-1]["rs1"] - 50 and "w_bull" not in top[0]
+    assert len(top) == 5 and top[0]["rw"] is not None and "w_bull" not in top[0]
 
     # quadrant rule
     idx = pd.Series(np.linspace(1, 1.3, 120), index=days[-120:])

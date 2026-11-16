@@ -208,6 +208,7 @@ def analyse_equity(sym, d, dl):
            "w_bull": bool(W["ok"] and W["mom"] > 0),
            "m_bull": (bool(M["mom"] > 0) if M["ok"] else None),
            "old": old_equity_status(W, D)}
+    row.update(E.extras(D))
     row["overspill"] = equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt)
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
@@ -360,7 +361,7 @@ def equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt):
         tf = "Weekly" if name.startswith("Weekly") else "Daily"
         where = (f"{tf} spilled {sp['under50'] * 100:.1f}% under the 50 EMA"
                  if sp["under50"] > 0 else f"{tf} dipped into the 20-50 EMA zone")
-        r = {k: row[k] for k in ("symbol", "close", "trend", "states", "old")}
+        r = {k: row[k] for k in ("symbol", "close", "trend", "states", "old", "ext")}
         r.update({
             "setup": name, "stage": stage,
             "detail": " · ".join([where] + extra + [
@@ -513,7 +514,8 @@ def main_live():
     missing = len(symbols) - len([r for r in rows if r])
     if missing:
         notes.append(f"{missing} stocks skipped (too little price history or no data).")
-    res = E.build_result(rows, now, hist["date"].max().strftime("%Y-%m-%d"), None, notes)
+    res = E.build_result(rows, now, hist["date"].max().strftime("%Y-%m-%d"), None, notes,
+                         E.fetch_nifty(now))
     with open(os.path.join(CFG["data_dir"], "equity.json"), "w") as f:
         json.dump(res, f, indent=1)
     log_ready(res)
@@ -624,6 +626,7 @@ def selftest():
     res_e = E.build_result([analyse_equity("GRAPH", wd.iloc[:-20], dl)],
                            dt.datetime(2026, 11, 13, 19, 45, tzinfo=E.IST), "2026-11-13", None, [])
     assert res_e["overspill"] and "overspill" not in json.dumps(res_e["rows"])
+    assert all("ext" in x for x in res_e["overspill"]) and "turn" in res_e["market"]
     assert res_e["old_labels"] and all(x["old"] in OLD_EQUITY_LABELS for x in res_e["overspill"])
     mk = lambda w, d, dp, sq: ({"ok": True, "mom": w},
                                {"ok": True, "ind": {"mom": [dp, d], "sq": [sq, sq]}})

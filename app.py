@@ -31,6 +31,34 @@ OWNER = "Vivek Kapoor"          # name shown as the faded watermark
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
+AMBER = "#a15c00"
+EXT_MAX = 4.0     # daily ranges above the 50 EMA that count as Extended (same as the scan)
+
+
+def is_extended(r):
+    return r.get("ext") is not None and r["ext"] >= EXT_MAX
+
+
+def cautious(m):
+    """Weak breadth or a falling market: hide extended Ready stocks."""
+    return m.get("regime") == "Weak" or m.get("turn") == "Falling"
+
+
+def turn_html(m, label=""):
+    t, h, n = m.get("turn"), m.get("daily_bull_hist"), m.get("nifty")
+    if not t or t == "Unknown" or not h:
+        return ""
+    col, head, tail = {
+        "Turning up": (GREEN, "Market turning up.", "Setups are favoured."),
+        "Falling": (RED, "Market still falling.", "Stay light. Extended stocks are hidden."),
+        "No clear turn": (AMBER, "No clear turn yet.", "Trade small and only near value."),
+    }[t]
+    nifty = f" Nifty Daily is {n['state']}." if n else ""
+    return (f'<div style="font-size:14px;line-height:1.5;margin-top:4px">'
+            f'<span style="color:{col};font-weight:700">{html.escape(label)}{head}</span> '
+            f'Stocks with Daily momentum above zero, last 6 sessions: '
+            f'<b>{" → ".join(str(x) for x in h)}%</b>.'
+            f'{html.escape(nifty)} {tail}</div>')
 BIAS_COLOR = {"Buying": GREEN, "Selling": RED, "Mixed": MUTED}
 MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
 
@@ -142,6 +170,11 @@ def row_html(r):
     if r.get("also"):
         detail += (f'<br><span style="color:{GREEN};font-weight:600">Also grade A: '
                    f'{e("; ".join(r["also"]))}</span>')
+    if r.get("ext") is not None:
+        x = r["ext"]
+        where = f"{abs(x):.1f} ranges {'above' if x >= 0 else 'below'} the 50 EMA"
+        detail += (f'<br><span style="color:{RED};font-weight:600">Extended: {where}</span>'
+                   if is_extended(r) else f'<br><span style="color:{MUTED}">{where}</span>')
     if r.get("old"):
         detail += f'<br><span style="color:{MUTED}">Old: {e(r["old"])}</span>'
     u = UNUSUAL.get(r["symbol"])
@@ -412,6 +445,9 @@ def render_alist():
     rows = sorted(merged.values(),
                   key=lambda r: (-len(r["also"]), t_rank.get(r.get("trend") or "", 2), r["symbol"]))
     by = {k: [r for r in rows if r["stage"] == k] for k in stage_rank}
+    ext_held = [r for r in by["Ready"]
+                if is_extended(r) and cautious(markets.get(r["market"], {}))]
+    by["Ready"] = [r for r in by["Ready"] if r not in ext_held]
     n = len(by["Ready"])
     headline = ("No grade A stock is Ready right now." if n == 0 else
                 "1 grade A stock is Ready." if n == 1 else f"{n} grade A stocks are Ready.")
@@ -420,7 +456,8 @@ def render_alist():
     st.markdown(
         f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{headline}</div>'
-        f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(line)}</div>',
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(line)}</div>'
+        + turn_html(markets.get("F&O", {}), "F&O: ") + turn_html(markets.get("Equity", {}), "Equity: "),
         unsafe_allow_html=True)
     with st.expander("What this page is"):
         st.markdown("""
@@ -437,6 +474,9 @@ Grade A is not a guarantee. The grade is as of the last close, and every thresho
 """)
     if by["Ready"]:
         show_rows(by["Ready"])
+    if ext_held:
+        with st.expander(f"{len(ext_held)} more Ready, hidden (extended) while the market is weak"):
+            show_rows(ext_held)
     st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
                 f'font-weight:600;margin-top:18px">Other stages</div>', unsafe_allow_html=True)
     for stage in ("Triggered", "Watch"):
@@ -475,11 +515,17 @@ def render_sectors(P):
                 f"1 sector is Leading: {lead[0]}." if len(lead) == 1 else
                 f"{len(lead)} sectors are Leading: {', '.join(lead)}.")
     nf = res["nifty"]
+    new = "rw" in nf
+    if not new:
+        st.caption("The faster sector view needs the updated sector scan file. It will "
+                   "appear after the next Sector scan.")
+    nifty_txt = (f'Nifty is {nf["rw"]:+.1f}% over 1 week, {nf["r2w"]:+.1f}% over 2 weeks and '
+                 f'{nf["r1"]:+.1f}% over 1 month.' if new else
+                 f'Nifty is {nf["r1"]:+.1f}% over 1 month and {nf["r3"]:+.1f}% over 3 months.')
     st.markdown(
         f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{e(headline)}</div>'
-        f'<div style="font-size:14px;color:{INK};line-height:1.5">Nifty is '
-        f'{nf["r1"]:+.1f}% over 1 month and {nf["r3"]:+.1f}% over 3 months. Each sector '
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">{nifty_txt} Each sector '
         'below is measured against it, using that sector\'s F&amp;O stocks.</div>',
         unsafe_allow_html=True)
     with st.expander("What the words mean"):
@@ -492,13 +538,17 @@ def render_sectors(P):
 
 Sectors usually move round in that order: Improving, Leading, Weakening, Lagging. Improving is often the early sign of the next leader.
 
-**How it is measured.** Each sector's F&O stocks are averaged with equal weight. That line is divided by Nifty. Above its own 50-day average means the sector is beating Nifty. The change in that over the last 10 days says whether the lead is growing or shrinking.
+**How it is measured.** Each sector's F&O stocks are averaged with equal weight. That line is divided by Nifty. Above its own 20-day average means the sector is beating Nifty. The change in that over the last 5 days says whether the lead is growing or shrinking. Built for 3 to 10 day trades, so a turn shows within a few days.
 
-**1M and 3M** are the sector's return over 1 and 3 months, minus Nifty's.
+**1W, 2W, 1M** are the sector's return over 1 week, 2 weeks and 1 month, minus Nifty's. +1.5% means it beat Nifty by 1.5%.
 
-**Wk bull** is the share of the sector's F&O stocks with Weekly momentum above zero.
+**Index D** is the Daily TTM state of the sector's own line (the equal-weight index above): Bullish, Topping, Bearish or Bottoming, the same words as on a chart.
 
-**Top stocks** in each sector are its strongest by return against Nifty over 1 and 3 months, blended. A green line shows when a stock is also on another page today.
+**D bull** is the share of the sector's F&O stocks with Daily TTM above zero. It moves first.
+
+**Wk bull** is the same on Weekly TTM. It moves slowly and shows the bigger trend. D bull rising while Wk bull is low is an early turn.
+
+**Top stocks** in each sector are its strongest against Nifty over 1 week, 2 weeks and 1 month, blended (the latest week counts most). A green line shows when a stock is also on another page today.
 
 **Sector names** come from NSE's Nifty 500 list. Banks and PSU Banks are split out of Finance. Sectors with fewer than 3 F&O stocks are listed at the bottom, not ranked.
 
@@ -506,13 +556,28 @@ The sector line on every stock row elsewhere on the site comes from this page.
 """)
     def pct(x):
         return "n/a" if x is None else f"{x:+.1f}%"
-    head = ("<tr><th style='text-align:left'>Sector</th><th style='text-align:left'>Stage</th>"
-            "<th>1M</th><th>3M</th><th>Wk bull</th></tr>")
-    body = "".join(
-        f"<tr><td>{e(x['name'])}</td>"
-        f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
-        f"<td class='n'>{pct(x['rs1'])}</td><td class='n'>{pct(x['rs3'])}</td>"
-        f"<td class='n'>{x['wk_bull']}%</td></tr>" for x in secs)
+    STATE_COL = {"Bullish": GREEN, "Topping": AMBER, "Bearish": RED, "Bottoming": BLUE}
+    if new:
+        head = ("<tr><th style='text-align:left'>Sector</th><th style='text-align:left'>Stage</th>"
+                "<th>1W</th><th>2W</th><th>1M</th><th style='text-align:left;padding-left:16px'>Index D</th>"
+                "<th>D bull</th><th>Wk bull</th></tr>")
+        body = "".join(
+            f"<tr><td>{e(x['name'])}</td>"
+            f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
+            f"<td class='n'>{pct(x['rw'])}</td><td class='n'>{pct(x['r2w'])}</td>"
+            f"<td class='n'>{pct(x['r1'])}</td>"
+            f"<td style='padding-left:16px;color:{STATE_COL.get(x.get('idx_d'), MUTED)};font-weight:600'>"
+            f"{e(x.get('idx_d') or 'n/a')}</td>"
+            f"<td class='n'>{x['d_bull']}%</td><td class='n'>{x['wk_bull']}%</td></tr>"
+            for x in secs)
+    else:
+        head = ("<tr><th style='text-align:left'>Sector</th><th style='text-align:left'>Stage</th>"
+                "<th>1M</th><th>3M</th><th>Wk bull</th></tr>")
+        body = "".join(
+            f"<tr><td>{e(x['name'])}</td>"
+            f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
+            f"<td class='n'>{pct(x['rs1'])}</td><td class='n'>{pct(x['rs3'])}</td>"
+            f"<td class='n'>{x['wk_bull']}%</td></tr>" for x in secs)
     st.markdown(
         f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
         f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
@@ -536,8 +601,9 @@ The sector line on every stock row elsewhere on the site comes from this page.
                 f'font-weight:600;margin-top:18px">Top stocks by sector</div>',
                 unsafe_allow_html=True)
     for x in secs:
-        label = (f"{x['name']} · {x['stage']} · 1M {pct(x['rs1'])} vs Nifty · "
-                 f"{x['n']} stocks")
+        label = (f"{x['name']} · {x['stage']} · "
+                 + (f"1W {pct(x['rw'])}" if new else f"1M {pct(x['rs1'])}")
+                 + f" vs Nifty · {x['n']} stocks")
         with st.expander(label, expanded=x["stage"] == "Leading"):
             rows_html = []
             for t in x["top"]:
@@ -547,7 +613,9 @@ The sector line on every stock row elsewhere on the site comes from this page.
                     f'<a class="tf-sym" href="{chart_link(t["symbol"])}" target="_blank">'
                     f'{e(t["symbol"])}</a><span class="tf-lvl">{money(t["close"])}</span></div>'
                     f'<div class="tf-small">W {e(t["states"]["W"])} · D {e(t["states"]["D"])}'
-                    f' · 1M {pct(t["rs1"])} · 3M {pct(t["rs3"])} vs Nifty</div>'
+                    + (f' · 1W {pct(t["rw"])} · 2W {pct(t["r2w"])} · 1M {pct(t["r1"])}'
+                       if new else f' · 1M {pct(t["rs1"])} · 3M {pct(t["rs3"])}')
+                    + ' vs Nifty</div>'
                     + (f'<div class="tf-small" style="color:{GREEN};font-weight:600">'
                        f'On the site: {e("; ".join(tags))}</div>' if tags else "")
                     + '</div>')
@@ -798,15 +866,16 @@ view = st.radio("Stage", list(count), horizontal=True, label_visibility="collaps
                 format_func=lambda g: f"{g} · {count[g]}", key=f"stage_{page}")
 ready = [r for r in rows if r["stage"] == "Ready"]
 held = []
-if m["regime"] == "Weak":
-    held = [r for r in ready if r["grade"] != "A"]
-    ready = [r for r in ready if r["grade"] == "A"]
+if cautious(m):
+    held = [r for r in ready if is_extended(r)
+            or (m["regime"] == "Weak" and r["grade"] != "A")]
+    ready = [r for r in ready if r not in held]
 
 n = len(ready)
 headline = ("No stocks are Ready right now." if n == 0 else
             "1 stock is Ready." if n == 1 else f"{n} stocks are Ready.")
 if n == 0 and held:
-    headline = (f"No grade A stock is Ready. {len(held)} lower-grade "
+    headline = (f"Nothing clean is Ready. {len(held)} hidden "
                 f"{'one is' if len(held) == 1 else 'ones are'} listed below.")
 shown = [r for r in rows if r["stage"] == view]
 if view != "Ready":
@@ -827,6 +896,7 @@ st.markdown(
     f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
     f'color:{INK};margin:6px 0 6px">{headline}</div>'
     f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(market)}</div>'
+    + turn_html(m) +
     f'<div style="height:6px;border-radius:3px;background:#dcdcd4;margin:8px 0 4px">'
     f'<div style="height:6px;border-radius:3px;width:{bar}%;background:{GREEN}"></div></div>',
     unsafe_allow_html=True)
@@ -914,6 +984,8 @@ with st.expander("What the words mean"):
 {THIRD_DEF}
 - **Above 1,904**: the trigger. A close above this level confirms the turn.
 - **Stop**: just below the low of the dip.
+- **2.1 ranges above the 50 EMA**: how far price is above the Daily 50 EMA, in normal daily ranges (ATR). Near 0 is buying near value. **Extended** (red) means 4 or more: the stock has run a lot, and it falls hard if the market dips. While the market is weak or falling, extended Ready stocks are moved into the hidden list.
+- **Market line** (under the headline): the share of stocks with Daily momentum above zero over the last 6 sessions, plus Nifty's Daily state. **Turning up** = that share rose 5 points or more in 3 sessions and Nifty is not falling; the best time for fresh setups. **Still falling** = it dropped 5 points or more, or Nifty Daily is Bearish; stay light. **No clear turn** = neither.
 - **Old**: the label the old TrendFire site would give this stock. See the Old labels button for what each one means.
 """)
 
@@ -921,7 +993,8 @@ if view == "Ready":
     if ready:
         show_rows(ready)
     if held:
-        with st.expander(f"{len(held)} more Ready, hidden in a weak market (not grade A)"):
+        why = ("not grade A, or extended" if m["regime"] == "Weak" else "extended")
+        with st.expander(f"{len(held)} more Ready, hidden ({why}) while the market is weak"):
             show_rows(held)
 else:
     st.caption("Still dipping or coiling. These move to Ready when momentum turns up."
