@@ -9,6 +9,7 @@ import urllib.request
 
 import re
 
+import pandas as pd
 import streamlit as st
 
 PAGES = {
@@ -1248,6 +1249,220 @@ Filings lag: a September quarter stake becomes public in October. Treat this as 
     st.caption("From NSE shareholding filings. Watchlist only, not investment advice.")
 
 
+@st.cache_data(ttl=600)
+def company_names(stamp):
+    """symbol -> company name, from the files the scans save."""
+    names = {}
+    for path in (os.path.join("data", "sector_map.csv"), os.path.join("data", "names.csv")):
+        if os.path.exists(path):
+            try:
+                df = pd.read_csv(path)
+                if "name" in df.columns:
+                    names.update({s: n for s, n in zip(df["symbol"], df["name"])
+                                  if isinstance(n, str) and n})
+            except Exception:
+                pass
+    return names
+
+
+def all_results():
+    """Every result file the site has, loaded once."""
+    files = {"F&O": PAGES["F&O"]["file"], "Equity": PAGES["Equity"]["file"],
+             "Breakout": PAGES["Breakout"]["file"], "Sectors": PAGES["Sectors"]["file"],
+             "Unusual F&O": PAGES["Unusual"]["F&O"]["file"],
+             "Unusual Equity": PAGES["Unusual"]["Equity"]["file"],
+             "Deals": DEALS_FILE, "Stars": STARS_FILE}
+    out = {}
+    for k, p in files.items():
+        if os.path.exists(p):
+            try:
+                out[k] = load(p, os.path.getmtime(p))
+            except Exception:
+                pass
+    return out
+
+
+def known_symbols(R):
+    syms = set()
+    for k in ("F&O", "Equity"):
+        r = R.get(k, {})
+        for lab in r.get("old_labels", {}).values():
+            syms |= set(lab)
+        for key in ("rows", "overspill"):
+            syms |= {x["symbol"] for x in r.get(key, [])}
+        for v in r.get("others", {}).values():
+            syms |= set(v)
+    for k in ("broke", "setting"):
+        syms |= {x["symbol"] for x in R.get("Breakout", {}).get(k, [])}
+    for k in ("Unusual F&O", "Unusual Equity"):
+        syms |= {x["symbol"] for x in R.get(k, {}).get("rows", [])}
+    syms |= set(R.get("Deals", {}).get("stocks", {}))
+    syms |= {x["symbol"] for x in R.get("Stars", {}).get("rows", [])}
+    syms |= set(R.get("Sectors", {}).get("map", {}))
+    return syms
+
+
+def section(title, note=""):
+    st.markdown(
+        f'<div style="margin-top:20px;border-top:2px solid {INK};padding-top:8px;'
+        f'display:flex;justify-content:space-between;align-items:baseline">'
+        f'<span style="font-family:Georgia,serif;font-size:19px;font-weight:700">'
+        f'{html.escape(title)}</span><span class="tf-small">{html.escape(note)}</span></div>',
+        unsafe_allow_html=True)
+
+
+def render_search():
+    e = html.escape
+    R = all_results()
+    names = company_names(tuple(os.path.getmtime(p) for p in
+                                (os.path.join("data", "sector_map.csv"),
+                                 os.path.join("data", "names.csv")) if os.path.exists(p)))
+    syms = sorted(known_symbols(R) | set(names))
+    st.markdown(
+        f'<div style="border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Stock search</span></div>', unsafe_allow_html=True)
+    label = {s: (f"{s} · {names[s]}" if s in names else s) for s in syms}
+    q = st.query_params.get("stock")
+    default = syms.index(q.upper()) if q and q.upper() in syms else None
+    sym = st.selectbox("Stock", syms, index=default, format_func=lambda s: label[s],
+                       placeholder="Type a symbol or company name, e.g. INFY or Infosys",
+                       label_visibility="collapsed", key="search_pick")
+    if not sym:
+        st.caption("Everything the site knows about one stock, from every page: setups, old "
+                   "labels, VK, strategies, sector, unusual activity, deals and star investors.")
+        return
+    st.query_params["stock"] = sym
+    fo, eq = R.get("F&O", {}), R.get("Equity", {})
+    in_fo = sym in {x for v in fo.get("old_labels", {}).values() for x in v}
+    home = fo if in_fo else eq
+    market = "F&O" if in_fo else "Equity" if sym in {x for v in eq.get("old_labels", {}).values()
+                                                       for x in v} else "Not scanned"
+    rows = [r for r in home.get("rows", []) + home.get("overspill", []) if r["symbol"] == sym]
+    bo = [r for k in ("broke", "setting") for r in R.get("Breakout", {}).get(k, [])
+          if r["symbol"] == sym]
+    vk = next((dict(x, final=lab) for lab, xs in fo.get("vk_labels", {}).items()
+               for x in xs if x["symbol"] == sym), None)
+    old = next((lab for lab, xs in home.get("old_labels", {}).items() if sym in xs), None)
+    stage_other = next((st_ for st_, xs in home.get("others", {}).items() if sym in xs), None)
+    close = next((r.get("close") for r in rows + bo if r.get("close")), None) or (
+        vk or {}).get("close")
+    states = next((r.get("states") for r in rows if r.get("states")), None) or (vk or {}).get("states")
+    ext = next((r.get("ext") for r in rows if r.get("ext") is not None), None)
+
+    # header
+    st.markdown(
+        f'<div style="margin-top:10px"><a class="tf-sym" style="font-size:26px" '
+        f'href="{chart_link(sym)}" target="_blank">{e(sym)}</a>'
+        f'<span style="font-size:16px;color:{MUTED}"> {e(names.get(sym, ""))}</span></div>'
+        f'<div class="tf-set">{e(market)}' + (f" · {money(close)}" if close else "") + '</div>'
+        + (f'<div class="tf-small">{" · ".join(f"{k} {e(v)}" for k, v in states.items())}</div>'
+           if states else "")
+        + (f'<div class="tf-small">{abs(ext):.1f} ranges {"above" if ext >= 0 else "below"} '
+           f'the 50 EMA{" · Extended" if ext >= EXT_MAX else ""}</div>' if ext is not None else "")
+        + sector_html(sym), unsafe_allow_html=True)
+
+    # setups
+    section("Setups", "new labels")
+    if rows or bo:
+        show_rows(rows + bo)
+    else:
+        st.caption("Not on any setup right now." + (f" Stage: {stage_other}." if stage_other else ""))
+
+    # old label + VK
+    section("Old TrendFire label")
+    st.markdown(f'<div class="tf-set">{e(old) if old else "Not available"}</div>',
+                unsafe_allow_html=True)
+    if market == "F&O":
+        section("VK System")
+        if vk:
+            st.markdown(
+                f'<div class="tf-set" style="color:{VK_COLOR.get(vk["final"], INK)}">'
+                f'{e(vk["final"])}</div>'
+                f'<div class="tf-small">VK SIGNAL: {e(vk["signal"])} · {e(vk["ma"])}</div>'
+                f'<div class="tf-small" style="color:{INK}">KYA KARNA HAI: {e(vk["advice"])}</div>'
+                f'<div class="tf-small">Daily: {e(vk["daily"])} · Hourly: {e(vk["hourly"])} · '
+                f'{e(vk["confirmed"])}</div>', unsafe_allow_html=True)
+        else:
+            st.caption("No VK reading (needs the latest F&O scan).")
+
+    # strategies
+    section("Strategies")
+    try:
+        sec_table = {x["name"]: x for x in R.get("Sectors", {}).get("sectors", [])}
+        data = {"F&O": fo, "Equity": eq, "Breakout": R.get("Breakout"),
+                "Unusual F&O": load_unusual_map("F&O"), "Unusual Equity": load_unusual_map("Equity")}
+        res = strategy_picks({k: v for k, v in data.items() if v}, sec_table)
+        hits = [(n, p, True) for n, v in res.items() for p in v["picks"] if p["symbol"] == sym]
+        hits += [(n, p, False) for n, v in res.items() for p in v["blocked"] if p["symbol"] == sym]
+    except Exception:
+        hits = []
+    if hits:
+        for n, p, ok in hits:
+            st.markdown(f'<div class="tf-set" style="margin-top:6px">{n}. {e(STRAT_RULES[n][0])} · '
+                        + (f'<span style="color:{GREEN}">passes every rule</span>' if ok else
+                           f'<span style="color:{AMBER}">waiting on the market gate</span>')
+                        + '</div><div class="tf-grid">' + pick_html(p) + '</div>',
+                        unsafe_allow_html=True)
+    else:
+        st.caption("Does not pass any strategy's rules right now.")
+
+    # sector
+    t = SECTORS.get(sym)
+    if t and t.get("sector"):
+        x = next((s_ for s_ in R.get("Sectors", {}).get("sectors", []) if s_["name"] == t["sector"]),
+                 None)
+        section("Sector", t["sector"])
+        if x:
+            pct = lambda v: "n/a" if v is None else f"{v:+.1f}%"
+            st.markdown(
+                f'<div class="tf-set"><span style="color:{STAGE_COLOR.get(x["stage"], MUTED)}">'
+                f'{e(x["stage"])}</span> · vs Nifty 1W {pct(x.get("rw"))} · 2W {pct(x.get("r2w"))}'
+                f' · 1M {pct(x.get("r1", x.get("rs1")))}</div>'
+                f'<div class="tf-small">Index Daily {e(x.get("idx_d") or "n/a")} · '
+                f'D bull {x.get("d_bull", "n/a")}% · Wk bull {x["wk_bull"]}%</div>',
+                unsafe_allow_html=True)
+
+    # unusual
+    u = next((r for k in ("Unusual F&O", "Unusual Equity") for r in R.get(k, {}).get("rows", [])
+              if r["symbol"] == sym), None)
+    section("Unusual activity")
+    if u:
+        st.markdown('<div class="tf-grid">' + unusual_row(u) + '</div>', unsafe_allow_html=True)
+    else:
+        st.caption("Nothing unusual in volume, OI or delivery in the last few sessions.")
+
+    # deals
+    section("Bulk and block deals", "last 30 days")
+    d = R.get("Deals", {})
+    mine = [r for r in d.get("recent", []) if r["symbol"] == sym]
+    if d.get("stocks", {}).get(sym):
+        st.markdown(deals_html(sym), unsafe_allow_html=True)
+    if mine:
+        st.markdown("".join(
+            f'<div class="tf-small">{e(r["date"])} · <span style="color:'
+            f'{GREEN if r["side"] == "BUY" else RED}">{"Buy" if r["side"] == "BUY" else "Sell"}'
+            f'</span> · {e(r["who"])} ({e(r["cat"])}, {e(r["kind"])}) · Rs {r["value_cr"]:,.1f} Cr'
+            f' at {money(r["price"])}</div>' for r in mine), unsafe_allow_html=True)
+    if not d.get("stocks", {}).get(sym) and not mine:
+        st.caption("No fund, star or large deals recorded.")
+
+    # stars
+    section("Star investors", "stakes of 1% or more")
+    sr = [r for r in R.get("Stars", {}).get("rows", []) if r["symbol"] == sym]
+    if sr:
+        st.markdown("".join(
+            f'<div class="tf-small" style="margin:3px 0"><b>{e(r["investor"])}</b>'
+            f'{" ⚠" if r.get("ambiguous") else ""} · {e(r["change"])} · '
+            + ("—" if r["pct_now"] is None else f'{r["pct_now"]:.2f}%')
+            + ("" if r["pct_before"] is None else f' (before {r["pct_before"]:.2f}%)')
+            + f' {spark(r["trend"], 70, 18)} · held as {e(r["held_as"][:50])}</div>'
+            for r in sr), unsafe_allow_html=True)
+    else:
+        st.caption("No star investor holds 1% or more (in the filings read so far).")
+    st.caption("Watchlist only, not investment advice.")
+
+
 def render_deals():
     e = html.escape
     if not os.path.exists(DEALS_FILE):
@@ -1485,7 +1700,7 @@ def watch_for_new_scans():
         st.rerun()
 
 
-page = st.radio("Market", ["Strategies", "A list"] + list(PAGES) + ["Deals", "Stars"],
+page = st.radio("Market", ["Strategies", "Search", "A list"] + list(PAGES) + ["Deals", "Stars"],
                 horizontal=True,
                 label_visibility="collapsed")
 with st.container(horizontal=True, vertical_alignment="center"):
@@ -1520,6 +1735,9 @@ DEALS.update(load_deals())
 STAR_MAP.update(load_star_map())
 if page == "Stars":
     render_stars()
+    st.stop()
+if page == "Search":
+    render_search()
     st.stop()
 if page == "Deals":
     render_deals()
