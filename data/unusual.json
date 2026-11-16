@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 14:22",
+ "generated_ist": "2026-11-16 14:33",
  "oi_asof": "2026-11-13",
  "stocks": 218,
  "rows": [
@@ -301,7 +301,8 @@
    "states": {
     "W": "Topping",
     "D": "Bullish"
-   }
+   },
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "BDL",
@@ -542,7 +543,8 @@
    "states": {
     "W": "Bullish",
     "D": "Bullish"
-   }
+   },
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "ENRIN",
@@ -853,8 +855,7 @@
    "states": {
     "W": "Bullish",
     "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Watch"
+   }
   },
   {
    "symbol": "LICHSGFIN",
