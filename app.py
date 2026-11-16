@@ -1380,6 +1380,80 @@ def last_run(workflow):
     return f"{state}, started {when.strftime('%a %d %b %H:%M')}"
 
 
+TYPICAL_SECS = {"F&O setups": 420, "Equity, Breakout, Equity unusual": 600,
+                "Unusual (F&O)": 360, "Sectors": 240, "Deals": 120, "Star investors": 2700}
+
+
+def gh_time(s):
+    return dt.datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+
+
+@st.cache_data(ttl=15)
+def scan_runs():
+    """Latest few runs of every scan workflow, from GitHub."""
+    out = {}
+    for name, wf in SCANS.items():
+        code, data = github("GET", f"/actions/workflows/{wf}/runs?per_page=6")
+        if code != 200:
+            continue
+        out[name] = [{k: r.get(k) for k in ("status", "conclusion", "run_started_at",
+                                            "created_at", "updated_at", "html_url")}
+                     for r in data.get("workflow_runs") or []]
+    return out
+
+
+@st.fragment(run_every="20s")
+def scan_status():
+    """A live bar for each scan running on GitHub, and how the last ones ended."""
+    if not secret("GH_TOKEN"):
+        return
+    runs = scan_runs()
+    if not runs:
+        return
+    now = dt.datetime.now(dt.timezone.utc)
+    active, ended = [], []
+    for name, rs in runs.items():
+        if not rs:
+            continue
+        r = rs[0]
+        if r["status"] != "completed":
+            took = sorted((gh_time(x["updated_at"]) - gh_time(x["run_started_at"])).total_seconds()
+                          for x in rs[1:] if x["status"] == "completed"
+                          and x["conclusion"] == "success" and x.get("run_started_at"))
+            typ = took[len(took) // 2] if took else TYPICAL_SECS.get(name, 600)
+            start = r.get("run_started_at") or r["created_at"]
+            el = max(0.0, (now - gh_time(start)).total_seconds())
+            active.append((name, r["status"], el, typ))
+        else:
+            ended.append((name, r["conclusion"], gh_time(r["updated_at"]), r["html_url"]))
+    for name, status, el, typ in active:
+        if status in ("queued", "waiting", "pending", "requested"):
+            st.caption(f"⏳ {name}: waiting for GitHub to start it")
+            st.progress(0.0)
+            continue
+        pct = min(0.95, el / max(typ, 60))
+        extra = ""
+        if name == "Star investors" and os.path.exists(STARS_FILE):
+            try:
+                sr = load(STARS_FILE, os.path.getmtime(STARS_FILE))
+                if sr.get("companies") and sr.get("latest_done", 0) < sr["companies"]:
+                    extra = (f" · first fill: {sr['latest_done']:,} of {sr['companies']:,} "
+                             "companies read before this run")
+            except Exception:
+                pass
+        st.caption(f"🔄 {name}: running {int(el // 60)} min of about {round(typ / 60)}"
+                   f" · {int(pct * 100)}%{extra}")
+        st.progress(pct)
+    if ended:
+        bits = []
+        for name, concl, t, url in sorted(ended, key=lambda x: x[2], reverse=True):
+            when = t.astimezone(IST).strftime("%H:%M")
+            short = name.split(",")[0].replace(" (F&O)", "")
+            bits.append(f"{short} {when} ✓" if concl == "success" else
+                        f"[{short} {when} ✗ {concl}]({url})")
+        st.caption(("All scans idle. " if not active else "") + "Last finished: " + " · ".join(bits))
+
+
 def scan_all():
     """Start every scan on GitHub at once. Returns (started, problems)."""
     started, problems = [], []
@@ -1394,6 +1468,7 @@ def scan_all():
                 404: f".github/workflows/{wf} not found in the repo.",
             }.get(code, f"could not reach GitHub (code {code})."))
     last_run.clear()
+    scan_runs.clear()
     return started, problems
 
 
@@ -1422,6 +1497,9 @@ with st.container(horizontal=True, vertical_alignment="center"):
 if scan_clicked:
     started, problems = scan_all()
     if started:
+        import time as _t
+        _t.sleep(3)                       # give GitHub a moment so the bars appear at once
+    if started:
         st.success(f"Started {len(started)} scans: {', '.join(started)}. They take about "
                    "2 to 10 minutes, and the page reloads by itself as results arrive.")
     for p in problems:
@@ -1435,6 +1513,7 @@ st.markdown(
     'font-family:Georgia,serif;font-weight:700;font-size:min(11vw,130px);'
     f'color:{INK};opacity:0.07;user-select:none">{html.escape(OWNER)}</div></div>',
     unsafe_allow_html=True)
+scan_status()
 watch_for_new_scans()
 SECTORS.update(load_sector_tags())
 DEALS.update(load_deals())
