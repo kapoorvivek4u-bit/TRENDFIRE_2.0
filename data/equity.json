@@ -1,10 +1,10 @@
 {
- "generated_ist": "2026-11-16 23:24",
+ "generated_ist": "2026-11-16 23:27",
  "oi_asof": "2026-11-16",
- "stocks": 255,
+ "stocks": 254,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 44,
+  "monthly_bull_pct": 43,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
@@ -12,7 +12,7 @@
    46,
    51,
    57,
-   65,
+   66,
    68
   ],
   "nifty": {
@@ -1285,24 +1285,6 @@
    "stop": 1373.25
   },
   {
-   "symbol": "BBOX",
-   "close": 901.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "ext": 1.6,
-   "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 29% vs 31% before",
-   "grade": "C",
-   "trigger": 824.14,
-   "stop": 707.73
-  },
-  {
    "symbol": "CRAFTSMAN",
    "close": 11134.0,
    "trend": "With trend",
@@ -1630,7 +1612,6 @@
    "BAJAJHFL",
    "BALKRISIND",
    "BATAINDIA",
-   "BBOX",
    "BELRISE",
    "BERGEPAINT",
    "BLS",
@@ -1869,5 +1850,7 @@
   ]
  },
  "vk_labels": {},
- "notes": []
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ]
 }
