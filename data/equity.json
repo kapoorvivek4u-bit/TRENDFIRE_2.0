@@ -1,16 +1,16 @@
 {
- "generated_ist": "2026-11-16 23:01",
+ "generated_ist": "2026-11-16 23:19",
  "oi_asof": "2026-11-16",
- "stocks": 254,
+ "stocks": 255,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 43,
+  "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
    37,
    46,
-   50,
+   51,
    57,
    65,
    68
@@ -1589,6 +1589,7 @@
   ],
   "Stretched": [
    "ANURAS",
+   "ASAHIINDIA",
    "EMCURE"
   ],
   "Fading": [
@@ -1804,6 +1805,7 @@
    "ACE",
    "AETHER",
    "ANTHEM",
+   "ASAHIINDIA",
    "CPPLUS",
    "CUPID",
    "EMCURE",
@@ -1867,7 +1869,5 @@
   ]
  },
  "vk_labels": {},
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ]
+ "notes": []
 }
