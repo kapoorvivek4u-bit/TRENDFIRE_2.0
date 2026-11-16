@@ -89,7 +89,7 @@ def classify(client):
     c = " " + re.sub(r"[^A-Z0-9 ]", " ", str(client).upper()) + " "
     c = re.sub(r"\s+", " ", c)
     for star, alts in STARS.items():
-        if any(all(w in c for w in words) for words in alts):
+        if any(all(f" {w} " in c for w in words) for words in alts):
             return "Star", star
     if any(w in c for w in MF_WORDS):
         for key, short in AMC_SHORT:
