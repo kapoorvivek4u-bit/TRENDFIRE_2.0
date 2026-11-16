@@ -15,7 +15,7 @@ PAGES = {
                        "Overspill"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
-               "setups": ["All", "Squeeze Break", "Trend Pullback"],
+               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill"],
                "who": "these midcaps and smallcaps"},
     "Unusual": {"F&O": {"file": os.path.join("data", "unusual.json"),
                         "workflow": "Unusual scan"},
@@ -372,7 +372,7 @@ The main risk is a failed breakout: price falls back into the base. That happens
 def render_alist():
     """Every grade A row on the site, in one place."""
     sources = (("F&O", PAGES["F&O"]["file"], ("rows", "overspill")),
-               ("Equity", PAGES["Equity"]["file"], ("rows",)),
+               ("Equity", PAGES["Equity"]["file"], ("rows", "overspill")),
                ("Equity", PAGES["Breakout"]["file"], ("broke", "setting")))
     found, stamps, markets = [], {}, {}
     for market, path, keys in sources:
@@ -751,7 +751,17 @@ st.markdown(
     f'<div style="height:6px;border-radius:3px;width:{bar}%;background:{GREEN}"></div></div>',
     unsafe_allow_html=True)
 
-SPILL_DEF = "" if EQUITY else (
+SPILL_DEF = (
+    "- **Overspill** (its own list): in an uptrend, with the 20 EMA over the 50 EMA over "
+    "the 200 SMA, price comes back into the 20-50 EMA zone, sometimes spilling under the "
+    "50 EMA, then reclaims the 20 EMA. **Weekly Overspill** is the pattern on the weekly "
+    "chart and needs Monthly bullish; it is Ready when the Daily turns up inside the "
+    "weekly zone, and its stop is wide because it sits under the weekly low. "
+    "**Daily Overspill** needs Weekly bullish. There is no Hourly Overspill for equity. "
+    "Watch means price is in the zone, Ready means it has started to turn, and Triggered "
+    "means it closed back above the 20 EMA. 'Above' is the 20 EMA level, and the stop is "
+    "under the low of the spill. The grade uses volume drying up in the dip and "
+    "delivery.\n") if EQUITY else (
     "- **Overspill** (its own list): in an uptrend, with the 20 EMA over the 50 EMA over "
     "the 200 SMA, price comes back into the 20-50 EMA zone, sometimes spilling under the "
     "50 EMA, then reclaims the 20 EMA. **Weekly Overspill** is the pattern on the weekly "
