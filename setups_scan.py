@@ -127,6 +127,126 @@ OLD_LABELS = ["🏆 Prime Setup", "✅ Confirmed Bullish", "🎯 Consolidating",
               "⚠️ Extended (Weakening)", "❌ Avoid", "— Insufficient Data"]
 
 
+VK_FINAL = ["BUY NOW", "ALMOST READY (Bullish)", "COMING CLOSE TO READY (Bullish)",
+            "SELL NOW", "ALMOST READY (Bearish)", "COMING CLOSE TO READY (Bearish)",
+            "NO SIGNAL"]
+
+
+def vk_status(M, W, D, H):
+    """The VK System (GHOST OF YOTEI) dashboard words, copied from its Pine Script.
+    M, W, D, H are tf_view() results. Returns None without Monthly, Weekly and Daily."""
+    if not (M["ok"] and W["ok"] and D["ok"]):
+        return None
+
+    def vals(T):
+        m = T["ind"]["mom"]
+        return float(m[-1]), float(m[-2])
+
+    def f_status(v, p):
+        if v > 0 and v > p: return "BULLISH RUN"
+        if v > 0 and v <= p: return "TOPPING"
+        if v < 0 and v < p: return "BEARISH RUN"
+        if v < 0 and v >= p: return "BOTTOMING"
+        return "FLAT"
+
+    def f_ma(T):
+        e20, e50, s200 = (float(T["ind"][k][-1]) for k in ("ema20", "ema50", "sma200"))
+        if np.isnan(s200):
+            return "Bullish" if e20 > e50 else "Bearish"
+        if e20 > e50 > s200: return "Bullish"
+        if e20 < e50 < s200: return "Bearish"
+        return "Messy"
+
+    valM, pM = vals(M)
+    valW, pW = vals(W)
+    valD, pD = vals(D)
+    statM, statD = f_status(valM, pM), f_status(valD, pD)
+    sqzOnD = bool(D["ind"]["sq"][-1])
+    if H["ok"]:
+        valH, pH = vals(H)
+        statH = f_status(valH, pH)
+        hm = H["ind"]["mom"]
+        posH = bool(len(hm) >= 2 and hm[-1] > 0 and hm[-2] > 0)
+        negH = bool(len(hm) >= 2 and hm[-1] <= 0 and hm[-2] <= 0)
+    else:
+        valH, statH, posH, negH = np.nan, "FLAT", False, False
+    maM, maW, maD = f_ma(M), f_ma(W), f_ma(D)
+
+    allBull = valM > 0 and valW > 0 and valD > 0
+    allBear = valM < 0 and valW < 0 and valD < 0
+    wdBull, wdBear = valW > 0 and valD > 0, valW < 0 and valD < 0
+    cashSwing = allBull and sqzOnD                       # same as DO NOT MISS (bull) in Pine
+    dnmBear = allBear and sqzOnD
+    pendD = ((valD < 0 and valD > pD and abs(valD) < abs(pD) * 0.6) or
+             (valD > 0 and valD < pD and abs(valD) < abs(pD) * 0.6))
+    cascadeReady = valM > 0 and valW > 0 and (pendD or valD > 0)
+
+    signal = ("ALL 3 ALIGNED BULLISH" if allBull else "ALL 3 ALIGNED BEARISH" if allBear else
+              "W+D BULLISH (M lagging)" if wdBull else "W+D BEARISH (M lagging)" if wdBear else
+              "CASCADE FORMING" if cascadeReady else "Mixed")
+
+    if cashSwing:
+        advice = "PERFECT FOR CASH SWING TRADE — M+W+D bullish + Daily SQZ ON. Hold 2-4 weeks!"
+    elif dnmBear:
+        advice = "DO NOT MISS — M+W+D bearish + squeeze ON! Short consider karo!"
+    elif allBull:
+        advice = "Sab bullish hain — entry le sakte ho, SL recent low ke neeche"
+    elif allBear:
+        advice = "Sell/Avoid — sab timeframe bearish hain"
+    elif wdBull and valM < 0 and statM == "BOTTOMING":
+        advice = "Valid Buy — W/D bullish, Monthly bottoming kar raha"
+    elif wdBear and valM > 0 and statM == "TOPPING":
+        advice = "Avoid Long — W/D bearish, Monthly topping"
+    elif valM > 0 and valW > 0 and statD == "BOTTOMING":
+        advice = "Watchlist mein rakho — M+W bullish, D pullback khatam hone ka wait karo"
+    elif valM < 0 and valW < 0 and statD == "TOPPING":
+        advice = "Bigger trend neeche — chhota bounce hai, chase mat karo"
+    else:
+        advice = "Mixed signal — confluence ka wait karo"
+
+    if maM == "Bullish" and maW == "Bullish" and maD == "Bullish":
+        ma_sig = "ONLY BUY" if valD > 0 else "Wait — Daily TTM not bullish yet"
+    elif maW == "Bearish" and maD == "Bearish":
+        ma_sig = ("ONLY SELL" if valD < 0 else
+                  "Wait — Pullback in bearish trend (Daily TTM still positive)")
+    elif maW == "Bullish" and maD == "Bullish":
+        ma_sig = ("ONLY BUY (M lagging)" if valD > 0 else
+                  "Wait — Daily TTM not bullish yet (M lagging)")
+    elif maM == "Bullish" and maW == "Bullish" and maD == "Bearish":
+        ma_sig = "Wait for Daily Setup"
+    elif maM == "Bullish" and maW == "Bearish" and maD == "Bullish":
+        ma_sig = "Avoid"
+    else:
+        ma_sig = "Mixed - No Clear Signal"
+
+    htfBull = maW == "Bullish" and maD == "Bullish" and valD > 0
+    htfBear = maW == "Bearish" and maD == "Bearish" and valD < 0
+    botSoon = maM == maW == maD == "Bullish" and valW > 0 and valD < 0
+    topSoon = maM == maW == maD == "Bearish" and valW < 0 and valD > 0
+    hpos, hneg = H["ok"] and valH > 0, H["ok"] and valH < 0
+
+    final = ("BUY NOW" if htfBull and hpos else "SELL NOW" if htfBear and hneg else
+             "ALMOST READY (Bullish)" if htfBull and hneg else
+             "ALMOST READY (Bearish)" if htfBear and hpos else
+             "COMING CLOSE TO READY (Bullish)" if botSoon else
+             "COMING CLOSE TO READY (Bearish)" if topSoon else "NO SIGNAL")
+    daily = ("Daily Signal ON (Bullish)" if htfBull else "Daily Signal ON (Bearish)" if htfBear
+             else "Keep Ready (Bullish soon)" if botSoon else
+             "Keep Ready (Bearish soon)" if topSoon else "No signal yet")
+    hourly = ("Dip on Hourly — watch, buy on turn" if htfBull and hneg else
+              "Aligned — can buy now" if htfBull and hpos else
+              "Bounce on Hourly — watch, sell on turn" if htfBear and hpos else
+              "Aligned — can sell now" if htfBear and hneg else
+              "Keep watching LTF" if botSoon or topSoon else "No signal yet")
+    confirmed = ("CONFIRMED — Buy ON" if htfBull and posH else
+                 "CONFIRMED — Sell ON" if htfBear and negH else "Not confirmed")
+    if not H["ok"]:
+        hourly, confirmed = "Hourly not available", "Not confirmed"
+    return {"final": final, "signal": signal, "ma": ma_sig, "advice": advice,
+            "daily": daily, "hourly": hourly, "confirmed": confirmed,
+            "status": {"M": statM, "W": f_status(valW, pW), "D": statD, "H": statH}}
+
+
 def extras(D):
     """Distance above the Daily 50 EMA in daily ranges, and the last 6 Daily momentum
     signs (for market breadth)."""
@@ -391,6 +511,7 @@ def analyse(sym, d, hr, fo):
            "old": old_trade_status(W["mom"], D["ind"]["mom"][-1], D["ind"]["mom"][-2],
                                    bool(D["ind"]["sq"][-1]), hm[-1], hm[-2])}
     row.update(extras(D))
+    row["vk"] = vk_status(M, W, D, H)
 
     # Overspill: price back in the 20-50 EMA zone of an uptrend.
     #   Daily  overspill needs Weekly bullish (Monthly is the tag).
@@ -412,6 +533,7 @@ def analyse(sym, d, hr, fo):
         spills.append({
             "symbol": sym, "close": row["close"], "trend": trend, "states": row["states"],
             "setup": name, "stage": sp["stage"], "old": row["old"], "ext": row["ext"],
+            "vk": row["vk"],
             "detail": " · ".join([where] + det.split(" · ")[1:]),
             "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
             "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
@@ -437,6 +559,7 @@ def analyse(sym, d, hr, fo):
             spills.append({
                 "symbol": sym, "close": row["close"], "trend": trend, "states": row["states"],
                 "setup": "Weekly Overspill", "stage": stage, "old": row["old"],
+                "vk": row["vk"],
                 "ext": row["ext"],
                 "detail": " · ".join([where, "Daily turning up" if daily_up
                                       else "Daily still falling"] + det.split(" · ")[1:]),
@@ -490,6 +613,14 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
         if r.get("old"):
             old_labels.setdefault(r["old"], []).append(r["symbol"])
     old_labels = {k: sorted(v) for k, v in old_labels.items()}
+    vk_labels = {}
+    for r in valid:
+        if r.get("vk"):
+            vk_labels.setdefault(r["vk"]["final"], []).append(
+                {"symbol": r["symbol"], "close": r["close"], "states": r["states"],
+                 **{k: r["vk"][k] for k in ("signal", "ma", "advice", "daily", "hourly",
+                                            "confirmed")}})
+    vk_labels = {k: sorted(v, key=lambda x: x["symbol"]) for k, v in vk_labels.items()}
     for r in setups:
         r.pop("w_bull", None)
         r.pop("m_bull", None)
@@ -499,7 +630,7 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
             "market": {"weekly_bull_pct": w_pct, "monthly_bull_pct": m_pct,
                        "vix": vix, "regime": regime, **turn},
             "rows": setups, "overspill": spills, "others": others,
-            "old_labels": old_labels, "notes": notes}
+            "old_labels": old_labels, "vk_labels": vk_labels, "notes": notes}
 
 
 # ------------------------------------------------------------------ network
@@ -879,6 +1010,25 @@ def selftest():
         assert old_trade_status(*args) == want, (args, want)
     assert ro["old"] in OLD_LABELS and res_o["old_labels"]
     assert res_o["overspill"] and all(x["old"] == ro["old"] for x in res_o["overspill"])
+
+    # 8f) VK System words
+    def T_(m, p, sq=False, e=(3.0, 2.0, 1.0)):
+        return {"ok": True, "ind": {"mom": np.array([p, m]), "sq": np.array([sq, sq]),
+                                    "ema20": np.array([e[0]]), "ema50": np.array([e[1]]),
+                                    "sma200": np.array([e[2]])}}
+    up, dn = (3.0, 2.0, 1.0), (1.0, 2.0, 3.0)
+    v = vk_status(T_(5, 4), T_(4, 3), T_(2, 1), T_(-1, -2))
+    assert v["final"] == "ALMOST READY (Bullish)" and v["hourly"].startswith("Dip on Hourly"), v
+    assert v["signal"] == "ALL 3 ALIGNED BULLISH" and v["ma"] == "ONLY BUY", v
+    assert vk_status(T_(5, 4), T_(4, 3), T_(2, 1), T_(1, 0.5))["confirmed"] == "CONFIRMED — Buy ON"
+    v = vk_status(T_(5, 4), T_(4, 3), T_(-2, -3), T_(-1, -2))
+    assert v["final"] == "COMING CLOSE TO READY (Bullish)" and v["advice"].startswith("Watchlist"), v
+    v = vk_status(T_(-5, -4, e=dn), T_(-4, -3, e=dn), T_(-2, -1, e=dn), T_(-1, -0.5, e=dn))
+    assert v["final"] == "SELL NOW" and v["ma"] == "ONLY SELL", v
+    assert vk_status(T_(5, 4), T_(4, 3), T_(2, 1, sq=True), T_(1, 0))["advice"].startswith("PERFECT")
+    assert vk_status({"ok": False}, T_(1, 0), T_(1, 0), T_(1, 0)) is None
+    assert "vk" in ro and (ro["vk"] is None or ro["vk"]["final"] in VK_FINAL)
+    assert "vk_labels" in res_o
 
     # 8e) market turn and extension
     mkr = lambda pos: {"d_pos": pos}
