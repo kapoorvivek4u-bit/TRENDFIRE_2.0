@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-16 16:24",
- "oi_asof": "2026-11-13",
- "stocks": 256,
+ "generated_ist": "2026-11-16 22:59",
+ "oi_asof": "2026-11-16",
+ "stocks": 255,
  "rows": [
   {
    "symbol": "NATCOPHARM",
@@ -152,11 +152,6 @@
      "when": "Fri 13",
      "text": "Delivery 39% vs 21% usual",
      "side": -1
-    },
-    {
-     "when": "Thu 12",
-     "text": "Delivery 35% vs 20% usual",
-     "side": 1
     }
    ],
    "close": 543.1,
@@ -344,6 +339,37 @@
     "M": "Bullish",
     "W": "Bullish",
     "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "CARBORUNIV",
+   "score": 3.0,
+   "bias": "Mixed",
+   "events": [
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 2.7x usual, absorption (small candle)",
+     "side": 0
+    },
+    {
+     "when": "Mon 16",
+     "text": "Delivery 88% vs 47% usual",
+     "side": 0
+    },
+    {
+     "when": "Fri 13",
+     "text": "Delivery 66% vs 46% usual",
+     "side": 1
+    }
+   ],
+   "close": 1059.6,
+   "move_pct": 1.9,
+   "moved": false,
+   "vs_high": "12.1% below its 20-day high",
+   "states": {
+    "M": "Bullish",
+    "W": "Bearish",
+    "D": "Bottoming"
    }
   },
   {
