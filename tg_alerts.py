@@ -19,6 +19,7 @@ import html
 import json
 import os
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -218,7 +219,7 @@ def run(send, get_updates, state, setups, sectors, when):
 def main():
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     if not token:
-        print("TELEGRAM_BOT_TOKEN secret not set: no Telegram alerts.")
+        print("[error] TELEGRAM_BOT_TOKEN secret not set (or empty): no Telegram alerts.")
         return
     state = load(STATE, {})
     setups = load(os.path.join(DATA, "setups.json"), {})
@@ -231,7 +232,19 @@ def main():
             print(f"[warn] send failed: {e}")
 
     def get_updates(offset):
-        res = tg(token, "getUpdates", offset=offset, timeout=0)
+        try:
+            res = tg(token, "getUpdates", offset=offset, timeout=0)
+        except urllib.error.HTTPError as e:
+            hint = {401: "Telegram rejected the token: copy it again from BotFather into "
+                         "the TELEGRAM_BOT_TOKEN secret",
+                    404: "the token looks malformed: it should look like 123456789:AAH..."
+                    }.get(e.code, "Telegram refused the request")
+            print(f"[error] HTTP {e.code}: {hint}")
+            raise SystemExit(0)
+        except Exception as e:
+            print(f"[error] could not reach Telegram: {e}")
+            raise SystemExit(0)
+        print(f"Telegram OK: {len(res.get('result', []))} new messages")
         return res.get("result", [])
 
     sectors = load(os.path.join(DATA, "sectors.json"), {}).get("map", {})
