@@ -127,6 +127,27 @@ def delivery_check(dl):
         f"Delivery {recent:.0f}% vs {base:.0f}% before"
 
 
+OLD_EQUITY_LABELS = ["🏆 Prime Setup", "✅ Confirmed Bullish", "⏳ Building Momentum",
+                     "⚠️ Extended", "❌ Avoid", "— Insufficient Data"]
+
+
+def old_equity_status(W, D):
+    """TrendFire's F&O label rule without Hourly: the Hourly-based Extended variants
+    and Consolidating all become plain Extended."""
+    if not (W["ok"] and D["ok"]) or len(D["ind"]["mom"]) < 2:
+        return "— Insufficient Data"
+    wVal, dVal, dValPrev = W["mom"], D["ind"]["mom"][-1], D["ind"]["mom"][-2]
+    dSqzOn = bool(D["ind"]["sq"][-1])
+    if any(pd.isna(x) for x in [wVal, dVal, dValPrev]):
+        return "— Insufficient Data"
+    if wVal > 0:
+        if dVal < 0 and dVal >= dValPrev and dSqzOn: return "🏆 Prime Setup"
+        elif dVal > 0 and dVal > dValPrev:           return "✅ Confirmed Bullish"
+        elif dVal > 0 and dVal <= dValPrev:          return "⚠️ Extended"
+        elif dVal < 0 and dVal >= dValPrev:          return "⏳ Building Momentum"
+    return "❌ Avoid"
+
+
 def analyse_equity(sym, d, dl):
     """d: completed daily bars. dl: this stock's delivery history or None."""
     if d is None or len(d) < 80:
@@ -185,7 +206,8 @@ def analyse_equity(sym, d, dl):
     row = {"symbol": sym, "close": round(float(D["c"][-1]), 2), "trend": trend,
            "states": {"M": show(M), "W": show(W), "D": show(D)},
            "w_bull": bool(W["ok"] and W["mom"] > 0),
-           "m_bull": (bool(M["mom"] > 0) if M["ok"] else None)}
+           "m_bull": (bool(M["mom"] > 0) if M["ok"] else None),
+           "old": old_equity_status(W, D)}
     row["overspill"] = equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt)
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
@@ -338,7 +360,7 @@ def equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt):
         tf = "Weekly" if name.startswith("Weekly") else "Daily"
         where = (f"{tf} spilled {sp['under50'] * 100:.1f}% under the 50 EMA"
                  if sp["under50"] > 0 else f"{tf} dipped into the 20-50 EMA zone")
-        r = {k: row[k] for k in ("symbol", "close", "trend", "states")}
+        r = {k: row[k] for k in ("symbol", "close", "trend", "states", "old")}
         r.update({
             "setup": name, "stage": stage,
             "detail": " · ".join([where] + extra + [
@@ -602,6 +624,13 @@ def selftest():
     res_e = E.build_result([analyse_equity("GRAPH", wd.iloc[:-20], dl)],
                            dt.datetime(2026, 11, 13, 19, 45, tzinfo=E.IST), "2026-11-13", None, [])
     assert res_e["overspill"] and "overspill" not in json.dumps(res_e["rows"])
+    assert res_e["old_labels"] and all(x["old"] in OLD_EQUITY_LABELS for x in res_e["overspill"])
+    mk = lambda w, d, dp, sq: ({"ok": True, "mom": w},
+                               {"ok": True, "ind": {"mom": [dp, d], "sq": [sq, sq]}})
+    for args, want in [((1, -1, -2, True), "🏆 Prime Setup"), ((1, -1, -2, False), "⏳ Building Momentum"),
+                       ((1, 2, 1, False), "✅ Confirmed Bullish"), ((1, 2, 3, False), "⚠️ Extended"),
+                       ((1, -2, -1, True), "❌ Avoid"), ((-1, 2, 1, False), "❌ Avoid")]:
+        assert old_equity_status(*mk(*args)) == want, (args, want)
 
     # 4) cash bhavcopy reader (NSE pads its columns with spaces)
     csv = ("SYMBOL, SERIES, DATE1, CLOSE_PRICE, TURNOVER_LACS, DELIV_QTY, DELIV_PER\n"
