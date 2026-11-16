@@ -7,6 +7,8 @@ import os
 import urllib.error
 import urllib.request
 
+import re
+
 import streamlit as st
 
 PAGES = {
@@ -489,6 +491,10 @@ Grade A is not a guarantee. The grade is as of the last close, and every thresho
                "Watchlist only, not investment advice.")
 
 
+def sec_id(name):
+    return "sec-" + re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
 def render_sectors(P):
     path = P["file"]
     if not os.path.exists(path):
@@ -550,7 +556,7 @@ Sectors usually move round in that order: Improving, Leading, Weakening, Lagging
 
 **Top stocks** in each sector are its strongest against Nifty over 1 week, 2 weeks and 1 month, blended (the latest week counts most). A green line shows when a stock is also on another page today.
 
-**Sector names** come from NSE's Nifty 500 list. Banks and PSU Banks are split out of Finance. Sectors with fewer than 3 F&O stocks are listed at the bottom, not ranked.
+**Sector names** come from NSE's Nifty 500 list. Banks and PSU Banks are split out of Finance, and Pharma (NSE's Nifty Pharma list) out of Healthcare, so Healthcare means hospitals, diagnostics and the like. Sectors with fewer than 3 F&O stocks are listed at the bottom, not ranked.
 
 The sector line on every stock row elsewhere on the site comes from this page.
 """)
@@ -562,7 +568,7 @@ The sector line on every stock row elsewhere on the site comes from this page.
                 "<th>1W</th><th>2W</th><th>1M</th><th style='text-align:left;padding-left:16px'>Index D</th>"
                 "<th>D bull</th><th>Wk bull</th></tr>")
         body = "".join(
-            f"<tr><td>{e(x['name'])}</td>"
+            f"<tr><td><a class='tf-jump' href='#{sec_id(x['name'])}'>{e(x['name'])}</a></td>"
             f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
             f"<td class='n'>{pct(x['rw'])}</td><td class='n'>{pct(x['r2w'])}</td>"
             f"<td class='n'>{pct(x['r1'])}</td>"
@@ -574,7 +580,7 @@ The sector line on every stock row elsewhere on the site comes from this page.
         head = ("<tr><th style='text-align:left'>Sector</th><th style='text-align:left'>Stage</th>"
                 "<th>1M</th><th>3M</th><th>Wk bull</th></tr>")
         body = "".join(
-            f"<tr><td>{e(x['name'])}</td>"
+            f"<tr><td><a class='tf-jump' href='#{sec_id(x['name'])}'>{e(x['name'])}</a></td>"
             f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
             f"<td class='n'>{pct(x['rs1'])}</td><td class='n'>{pct(x['rs3'])}</td>"
             f"<td class='n'>{x['wk_bull']}%</td></tr>" for x in secs)
@@ -584,8 +590,14 @@ The sector line on every stock row elsewhere on the site comes from this page.
         f"color:{MUTED};font-weight:600;text-align:right;padding:6px 4px;"
         f"border-bottom:2px solid {INK}}}"
         f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE}}}"
-        f".tf-sec td.n{{text-align:right;font-family:{MONO}}}</style>"
-        f"<div style='overflow-x:auto;margin:6px 0 4px'><table class='tf-sec'>{head}{body}"
+        f".tf-sec td.n{{text-align:right;font-family:{MONO}}}"
+        f".tf-jump{{color:{INK};font-weight:600;text-decoration:underline;"
+        f"text-decoration-color:{RULE};text-underline-offset:3px}}"
+        f".tf-secblock{{scroll-margin-top:70px}}</style>"
+        f"<div class='tf-small' style='margin-top:6px'>Tap a sector name to jump to its "
+        f"top stocks.</div>"
+        f"<div id='sec-table' class='tf-secblock' style='overflow-x:auto;margin:6px 0 4px'>"
+        f"<table class='tf-sec'>{head}{body}"
         "</table></div>", unsafe_allow_html=True)
 
     on_site = {}
@@ -604,25 +616,32 @@ The sector line on every stock row elsewhere on the site comes from this page.
         label = (f"{x['name']} · {x['stage']} · "
                  + (f"1W {pct(x['rw'])}" if new else f"1M {pct(x['rs1'])}")
                  + f" vs Nifty · {x['n']} stocks")
-        with st.expander(label, expanded=x["stage"] == "Leading"):
-            rows_html = []
-            for t in x["top"]:
-                tags = on_site.get(t["symbol"])
-                rows_html.append(
-                    '<div class="tf-row"><div class="tf-top">'
-                    f'<a class="tf-sym" href="{chart_link(t["symbol"])}" target="_blank">'
-                    f'{e(t["symbol"])}</a><span class="tf-lvl">{money(t["close"])}</span></div>'
-                    f'<div class="tf-small">W {e(t["states"]["W"])} · D {e(t["states"]["D"])}'
-                    + (f' · 1W {pct(t["rw"])} · 2W {pct(t["r2w"])} · 1M {pct(t["r1"])}'
-                       if new else f' · 1M {pct(t["rs1"])} · 3M {pct(t["rs3"])}')
-                    + ' vs Nifty</div>'
-                    + (f'<div class="tf-small" style="color:{GREEN};font-weight:600">'
-                       f'On the site: {e("; ".join(tags))}</div>' if tags else "")
-                    + '</div>')
-            st.markdown(f'<div class="tf-small">{x["wk_bull"]}% of its stocks bullish on '
-                        f'Weekly, {x["d_bull"]}% on Daily.</div>'
-                        '<div class="tf-grid">' + "".join(rows_html) + '</div>',
-                        unsafe_allow_html=True)
+        rows_html = []
+        for t in x["top"]:
+            tags = on_site.get(t["symbol"])
+            rows_html.append(
+                '<div class="tf-row"><div class="tf-top">'
+                f'<a class="tf-sym" href="{chart_link(t["symbol"])}" target="_blank">'
+                f'{e(t["symbol"])}</a><span class="tf-lvl">{money(t["close"])}</span></div>'
+                f'<div class="tf-small">W {e(t["states"]["W"])} · D {e(t["states"]["D"])}'
+                + (f' · 1W {pct(t["rw"])} · 2W {pct(t["r2w"])} · 1M {pct(t["r1"])}'
+                   if new else f' · 1M {pct(t["rs1"])} · 3M {pct(t["rs3"])}')
+                + ' vs Nifty</div>'
+                + (f'<div class="tf-small" style="color:{GREEN};font-weight:600">'
+                   f'On the site: {e("; ".join(tags))}</div>' if tags else "")
+                + '</div>')
+        st.markdown(
+            f'<div id="{sec_id(x["name"])}" class="tf-secblock" style="margin-top:22px;'
+            f'border-top:2px solid {INK};padding-top:8px;display:flex;'
+            f'justify-content:space-between;align-items:baseline">'
+            f'<span style="font-family:Georgia,serif;font-size:19px;font-weight:700">'
+            f'{e(x["name"])} <span style="font-size:14px;color:{STAGE_COLOR[x["stage"]]}">'
+            f'{x["stage"]}</span></span>'
+            f'<a class="tf-small" href="#sec-table">↑ Back to table</a></div>'
+            f'<div class="tf-small">{e(label.split(" · ", 2)[2])} · {x["wk_bull"]}% of its '
+            f'stocks bullish on Weekly, {x["d_bull"]}% on Daily.</div>'
+            '<div class="tf-grid">' + "".join(rows_html) + '</div>',
+            unsafe_allow_html=True)
     if res.get("unranked"):
         k = len(res["unranked"])
         with st.expander(f"Not ranked · {k} small group{'' if k == 1 else 's'}"):
