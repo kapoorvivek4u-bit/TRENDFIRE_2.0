@@ -1,16 +1,16 @@
 {
- "generated_ist": "2026-11-16 22:59",
+ "generated_ist": "2026-11-16 23:01",
  "oi_asof": "2026-11-16",
  "stocks": 255,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 44,
+  "monthly_bull_pct": 43,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
    37,
    46,
-   51,
+   50,
    57,
    65,
    68
@@ -50,7 +50,7 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 47.0,
+   "score": 47.3,
    "grade": "C",
    "trigger": 1779.0,
    "stop": 1726.33,
@@ -69,7 +69,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 76.8,
+   "score": 77.2,
    "grade": "A",
    "trigger": 792.0,
    "stop": null,
@@ -86,11 +86,11 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 68.9,
+   "score": 69.3,
    "grade": "B",
    "trigger": 4347.4,
    "stop": null,
-   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 85 \u00b7 Delivery 40% vs 37% before"
+   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 86 \u00b7 Delivery 40% vs 37% before"
   },
   {
    "symbol": "PVRINOX",
@@ -137,7 +137,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 63.4,
+   "score": 63.8,
    "grade": "B",
    "trigger": 672.0,
    "stop": null,
@@ -154,11 +154,11 @@
     "D": "Bottoming"
    },
    "stage": "Ready",
-   "score": 54.5,
+   "score": 54.9,
    "grade": "C",
    "trigger": 11289.0,
    "stop": null,
-   "detail": "1.4% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 84 \u00b7 Delivery 48% vs 52% before"
+   "detail": "1.4% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 85 \u00b7 Delivery 48% vs 52% before"
   },
   {
    "symbol": "GLAND",
@@ -205,7 +205,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 46.9,
+   "score": 47.2,
    "grade": "C",
    "trigger": 804.0,
    "stop": null,
@@ -222,7 +222,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 37.2,
+   "score": 37.6,
    "grade": "C",
    "trigger": 1759.0,
    "stop": null,

@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 22:59",
+ "generated_ist": "2026-11-16 23:01",
  "oi_asof": "2026-11-16",
  "stocks": 255,
  "rows": [
@@ -314,32 +314,6 @@
     "D": "Bullish"
    },
    "setup": "Squeeze Break \u00b7 Triggered"
-  },
-  {
-   "symbol": "ASAHIINDIA",
-   "score": 3.0,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Mon 16",
-     "text": "Day's volume 6.7x usual",
-     "side": 1
-    },
-    {
-     "when": "Thu 12",
-     "text": "Day's volume 2.0x usual",
-     "side": 1
-    }
-   ],
-   "close": 1165.05,
-   "move_pct": 7.1,
-   "moved": false,
-   "vs_high": "At a 20-day high",
-   "states": {
-    "M": "Bullish",
-    "W": "Bullish",
-    "D": "Bullish"
-   }
   },
   {
    "symbol": "CARBORUNIV",
