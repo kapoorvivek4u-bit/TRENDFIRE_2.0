@@ -1,13 +1,11 @@
-# Place this file at: .github/workflows/scan.yml
 name: Setups scan
-
 
 on:
   schedule:
-    - cron: "50 4-9 * * 1-5"   # 10:20 to 15:20 IST, once an hour (Hourly states)
-    - cron: "45 10 * * 1-5"    # 16:15 IST, after the close (Daily states)
-    - cron: "0 14 * * 1-5"     # 19:30 IST, after NSE publishes the F&O file (OI, grades)
-  workflow_dispatch:            # allows a manual run from the Actions tab
+    - cron: "50 4-9 * * 1-5"
+    - cron: "45 10 * * 1-5"
+    - cron: "0 14 * * 1-5"
+  workflow_dispatch:
 
 permissions:
   contents: write

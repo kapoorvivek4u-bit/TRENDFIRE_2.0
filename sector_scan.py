@@ -62,14 +62,14 @@ STAGE_ORDER = {"Leading": 0, "Improving": 1, "Weakening": 2, "Lagging": 3}
 
 
 def load_engine():
-    for name in ("setups_scan", "setups_scan.py", "setups scan.py"):
+    for name in ("setups_scan.py",):
         if os.path.exists(name) and "def tf_view(" in open(name, encoding="utf-8").read():
             loader = importlib.machinery.SourceFileLoader("tf_engine", name)
             spec = importlib.util.spec_from_loader("tf_engine", loader)
             mod = importlib.util.module_from_spec(spec)
             loader.exec_module(mod)
             return mod
-    raise RuntimeError("Engine file not found. The F&O scan file (setups_scan) must "
+    raise RuntimeError("Engine file not found. The F&O scan file (setups_scan.py) must "
                        "be in the same folder.")
 
 

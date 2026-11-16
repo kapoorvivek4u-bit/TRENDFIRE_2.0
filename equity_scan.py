@@ -65,14 +65,14 @@ FUND_WORDS = ("BEES", "ETF", "LIQUID", "GOLD", "SILVER", "NIFTY", "SENSEX", "GIL
 
 def load_engine():
     """The F&O engine file, whatever name it was uploaded under."""
-    for name in ("setups_scan", "setups_scan.py", "setups scan.py"):
+    for name in ("setups_scan.py",):
         if os.path.exists(name) and "def tf_view(" in open(name, encoding="utf-8").read():
             loader = importlib.machinery.SourceFileLoader("tf_engine", name)
             spec = importlib.util.spec_from_loader("tf_engine", loader)
             mod = importlib.util.module_from_spec(spec)
             loader.exec_module(mod)
             return mod
-    raise RuntimeError("Engine file not found. The F&O scan file (setups_scan) must "
+    raise RuntimeError("Engine file not found. The F&O scan file (setups_scan.py) must "
                        "be in the same folder.")
 
 
