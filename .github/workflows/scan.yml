@@ -29,7 +29,7 @@ jobs:
         run: pip install yfinance pandas numpy requests
 
       - name: Run scan
-        run: python "setups scan.py"
+        run: python setups_scan.py
 
       - name: Save results to the repo
         run: |
