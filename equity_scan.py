@@ -4,6 +4,7 @@ TrendFire Setups - equity scan (midcaps and smallcaps outside F&O).
 
 Uses the same engine as the F&O scan, on Daily bars only:
   setup : Squeeze Break | Trend Pullback (Weekly impulse + Daily dip; Monthly is a tag)
+          plus a separate list: Weekly Overspill | Daily Overspill
   stage : Watch | Ready | Triggered   (else Running | Stretched | Fading)
   trend : With trend | Early turn | Counter-trend
   grade : A | B | C | Warning   (volume + delivery %, last close)
@@ -185,6 +186,7 @@ def analyse_equity(sym, d, dl):
            "states": {"M": show(M), "W": show(W), "D": show(D)},
            "w_bull": bool(W["ok"] and W["mom"] > 0),
            "m_bull": (bool(M["mom"] > 0) if M["ok"] else None)}
+    row["overspill"] = equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt)
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
         setup, stage, level, stop, vol_ok, warn, detail, warn_txt = \
@@ -307,6 +309,49 @@ def breakout_scan(symbols, daily, dl_by):
             [r for r in rows if r["stage"] == "Ready"])
 
 
+def equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt):
+    """Weekly Overspill (Monthly bullish, Daily turn as entry) and Daily Overspill
+    (Weekly bullish). Grade: volume drying up in the dip, and delivery."""
+    out = []
+    vol_d = d["Volume"].values.astype(float)
+    vol_w = d["Volume"].astype(float).groupby(d.index.to_period("W-FRI")).sum().values
+    dm = D["ind"]["mom"]
+    for name, T, vol, gate in (
+            ("Weekly Overspill", W, vol_w, M["ok"] and M["mom"] > 0),
+            ("Daily Overspill", D, vol_d, W["ok"] and W["mom"] > 0)):
+        if not (gate and T["ok"]):
+            continue
+        sp = E.find_overspill(T["h"], T["l"], T["c"], T["ind"])
+        if not sp:
+            continue
+        stage, extra = sp["stage"], []
+        if name == "Weekly Overspill":
+            up = bool(dm[-1] > dm[-2])
+            if stage != "Triggered":
+                stage = "Ready" if up else "Watch"
+            extra = ["Daily turning up" if up else "Daily still falling"]
+        leg_v = np.nanmean(vol[sp["il"]:sp["ih"] + 1]) if len(vol) > sp["ih"] else np.nan
+        ratio = (float(np.nanmean(vol[sp["ih"] + 1:]) / leg_v)
+                 if leg_v and leg_v > 0 else np.nan)
+        vol_ok = bool(not np.isnan(ratio) and ratio <= CFG["vol_dry"])
+        warn = bool(not np.isnan(ratio) and ratio >= ECFG["heavy_dip"])
+        tf = "Weekly" if name.startswith("Weekly") else "Daily"
+        where = (f"{tf} spilled {sp['under50'] * 100:.1f}% under the 50 EMA"
+                 if sp["under50"] > 0 else f"{tf} dipped into the 20-50 EMA zone")
+        r = {k: row[k] for k in ("symbol", "close", "trend", "states")}
+        r.update({
+            "setup": name, "stage": stage,
+            "detail": " · ".join([where] + extra + [
+                "Volume n/a" if np.isnan(ratio) else f"Volume {ratio:.1f}x in pullback",
+                deliv_txt]),
+            "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(deliv_ok)],
+            "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
+        if warn:
+            r["warning_text"] = "Volume in the dip is heavier than in the up-move"
+        out.append(r)
+    return out
+
+
 def pick_universe(hist, index_syms, fo_syms, notes):
     """Liquid, normally traded stocks outside F&O."""
     latest = hist["date"].max()
@@ -414,7 +459,7 @@ def log_ready(res):
     rows = [{"date": res["generated_ist"][:10], "symbol": r["symbol"],
              "setup": r["setup"], "trend": r["trend"], "grade": r["grade"],
              "close": r["close"], "trigger": r["trigger"], "stop": r["stop"]}
-            for r in res["rows"] if r["stage"] == "Ready"]
+            for r in res["rows"] + res.get("overspill", []) if r["stage"] == "Ready"]
     if not rows:
         return
     new = pd.DataFrame(rows)
@@ -532,6 +577,31 @@ def selftest():
     print("after a long fall:", tr_["setup"], "|", tr_["stage"], "| tag:", tr_["trend"],
           "| M:", tr_["states"]["M"])
     assert tr_["setup"] == "Trend Pullback" and tr_["states"]["M"] != "Impulse", tr_
+
+    # 3c) overspill on equity: Weekly (Monthly bullish, Daily turn) and Daily
+    wk = np.cumsum(np.full(270, 0.007))
+    wk = np.concatenate([wk, wk[-1] - np.linspace(0.02, 0.15, 6)])
+    wk = np.concatenate([wk, wk[-1] + np.linspace(0.02, 0.12, 6)])
+    wdays = pd.bdate_range(end="2026-11-13", periods=len(wk) * 5)
+    wc = 100 * np.exp(np.repeat(wk, 5) + np.tile(np.linspace(-0.004, 0.004, 5), len(wk)))
+    wv = np.full(len(wc), 1e6)
+    wv[-60:] = 5e5                         # quieter in the dip
+    wd = E._bars(wc * (1 + np.random.default_rng(2).normal(0, 0.003, len(wc))), wdays,
+                 noise=0.006, vol=wv)
+    seen = {}
+    for cut in range(60, -1, -2):
+        for x in analyse_equity("GRAPH", wd.iloc[:len(wd) - cut], dl)["overspill"]:
+            seen.setdefault(x["setup"], []).append(x["stage"])
+            if x["setup"] == "Weekly Overspill" and x["stage"] == "Ready":
+                wready = x
+    print("equity overspill stages:", {k: "".join(v_[0] for v_ in val) for k, val in seen.items()})
+    print(json.dumps(wready, indent=1))
+    assert {"Watch", "Ready", "Triggered"} <= set(seen["Weekly Overspill"])
+    assert wready["grade"] == "A" and "Delivery 55% vs 40% before" in wready["detail"]
+    assert "Daily turning up" in wready["detail"] and wready["stop"] < wready["trigger"]
+    res_e = E.build_result([analyse_equity("GRAPH", wd.iloc[:-20], dl)],
+                           dt.datetime(2026, 11, 13, 19, 45, tzinfo=E.IST), "2026-11-13", None, [])
+    assert res_e["overspill"] and "overspill" not in json.dumps(res_e["rows"])
 
     # 4) cash bhavcopy reader (NSE pads its columns with spaces)
     csv = ("SYMBOL, SERIES, DATE1, CLOSE_PRICE, TURNOVER_LACS, DELIV_QTY, DELIV_PER\n"
