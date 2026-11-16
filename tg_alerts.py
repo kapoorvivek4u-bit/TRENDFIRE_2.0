@@ -198,11 +198,11 @@ def run(send, get_updates, state, setups, sectors, when):
             replies += status_text(vks, setups, sectors, state.get("sells", True))
         elif r:
             replies.append(r)
-    first = "last" not in state
     found = find_changes(state, vks) if vks else {}
     alerts = []
     if state.get("owner") is not None:
-        if first and vks:
+        if not state.get("welcomed") and vks:
+            state["welcomed"] = True
             n_buy = sum(v["final"] == "BUY NOW" for v in vks.values())
             n_ok = sum(v["confirmed"] == "CONFIRMED — Buy ON" for v in vks.values())
             alerts = [f"✅ <b>TradeReady alerts are on.</b> Watching all {len(vks)} F&amp;O "
