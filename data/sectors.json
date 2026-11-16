@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 12:08",
+ "generated_ist": "2026-11-16 12:09",
  "asof": "2026-11-13",
  "nifty": {
   "r1": 11.7,
@@ -21,7 +21,7 @@
      "symbol": "PNB",
      "close": 142.81,
      "rs1": 10.8,
-     "rs3": 16.4,
+     "rs3": 16.5,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -104,7 +104,7 @@
      "symbol": "PRESTIGE",
      "close": 1650.0,
      "rs1": -0.6,
-     "rs3": 0.1,
+     "rs3": 0.2,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -123,7 +123,7 @@
     {
      "symbol": "GODREJPROP",
      "close": 1854.9,
-     "rs1": 4.6,
+     "rs1": 4.7,
      "rs3": -11.5,
      "states": {
       "W": "Bottoming",
@@ -156,7 +156,7 @@
     {
      "symbol": "UNOMINDA",
      "close": 1388.0,
-     "rs1": 13.3,
+     "rs1": 13.4,
      "rs3": 9.0,
      "states": {
       "W": "Impulse",
@@ -375,7 +375,7 @@
     {
      "symbol": "FEDERALBNK",
      "close": 360.95,
-     "rs1": -2.2,
+     "rs1": -2.1,
      "rs3": -2.4,
      "states": {
       "W": "Bottoming",
@@ -515,7 +515,7 @@
      "symbol": "LAURUSLABS",
      "close": 2424.0,
      "rs1": 6.0,
-     "rs3": 27.4,
+     "rs3": 27.5,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -872,7 +872,7 @@
     {
      "symbol": "NYKAA",
      "close": 365.2,
-     "rs1": -3.7,
+     "rs1": -3.6,
      "rs3": 7.7,
      "states": {
       "W": "Topping",
