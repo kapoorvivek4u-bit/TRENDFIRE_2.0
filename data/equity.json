@@ -1,66 +1,48 @@
 {
- "generated_ist": "2026-11-16 23:46",
+ "generated_ist": "2026-11-17 00:02",
  "oi_asof": "2026-11-16",
  "stocks": 255,
  "market": {
-  "weekly_bull_pct": 24,
+  "weekly_bull_pct": 25,
   "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
+   33,
    37,
    46,
    51,
    57,
-   65,
-   68
+   65
   ],
   "nifty": {
    "state": "Bullish",
-   "mom": 1703.1
+   "mom": 1598.6
   },
   "turn": "Turning up"
  },
  "rows": [
   {
-   "symbol": "CHENNPETRO",
-   "close": 1424.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.3,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 16 days \u00b7 Up/down volume 1.2x \u00b7 Delivery 30% vs 24% before",
-   "grade": "A",
-   "trigger": null,
-   "stop": 1384.92
-  },
-  {
    "symbol": "GABRIEL",
-   "close": 1492.2,
+   "close": 1552.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Topping",
+    "W": "Bullish",
     "D": "Impulse"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 1.2,
+   "ext": 2.1,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 6 days \u00b7 Up/down volume 3.9x \u00b7 Delivery 34% vs 31% before",
+   "detail": "Squeeze 6 days \u00b7 Up/down volume 4.1x \u00b7 Delivery 34% vs 31% before",
    "grade": "A",
    "trigger": 1690.0,
    "stop": 1347.3
   },
   {
    "symbol": "HBLENGINE",
-   "close": 780.45,
+   "close": 799.55,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -68,35 +50,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.2,
+   "ext": 0.7,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 52% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 39% vs 35% before",
+   "detail": "Pullback 43% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 39% vs 35% before",
    "grade": "A",
    "trigger": null,
-   "stop": 772.15
-  },
-  {
-   "symbol": "FSL",
-   "close": 287.35,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": 0.5,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 6 days \u00b7 Up/down volume 1.2x \u00b7 Delivery 40% vs 31% before",
-   "grade": "A",
-   "trigger": null,
-   "stop": 280.59
+   "stop": 788.77
   },
   {
    "symbol": "ABDL",
-   "close": 784.25,
+   "close": 757.7,
    "trend": "",
    "states": {
     "M": "No data",
@@ -104,53 +68,53 @@
     "D": "Impulse"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 3.1,
+   "ext": 2.4,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 13 days \u00b7 Up/down volume 3.4x \u00b7 Delivery 47% vs 42% before",
+   "detail": "Squeeze 13 days \u00b7 Up/down volume 2.0x \u00b7 Delivery 47% vs 42% before",
    "grade": "A",
-   "trigger": 792.0,
+   "trigger": 768.0,
    "stop": 674.65
   },
   {
-   "symbol": "IGIL",
-   "close": 433.7,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 3.2,
-   "setup": "Trend Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 22% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 53% vs 49% before",
-   "grade": "A",
-   "trigger": null,
-   "stop": 420.06
-  },
-  {
    "symbol": "PINELABS",
-   "close": 169.69,
+   "close": 176.44,
    "trend": "",
    "states": {
     "M": "No data",
-    "W": "Topping",
+    "W": "Bullish",
     "D": "Bullish"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 0.5,
+   "ext": 1.5,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 6 days \u00b7 Up/down volume 4.8x \u00b7 Delivery 36% vs 30% before",
+   "detail": "Squeeze 6 days \u00b7 Up/down volume 2.3x \u00b7 Delivery 36% vs 30% before",
    "grade": "A",
    "trigger": 178.58,
-   "stop": 151.5
+   "stop": 150.96
   },
   {
-   "symbol": "CRAFTSMAN",
-   "close": 11134.0,
+   "symbol": "CHENNPETRO",
+   "close": 1428.2,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.2,
+   "setup": "Squeeze Break",
+   "stage": "Watch",
+   "detail": "Squeeze 15 days \u00b7 Up/down volume 1.2x \u00b7 Delivery 30% vs 24% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1397.6
+  },
+  {
+   "symbol": "PTCIL",
+   "close": 24365.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -158,71 +122,17 @@
     "D": "Bottoming"
    },
    "old": "\ud83c\udfc6 Prime Setup",
-   "ext": 1.0,
+   "ext": 1.2,
    "setup": "Squeeze Break",
    "stage": "Ready",
-   "detail": "Squeeze 8 days, 1 bars to flip \u00b7 Up/down volume 2.1x \u00b7 Delivery 48% vs 52% before",
+   "detail": "Squeeze 8 days, 10 bars to flip \u00b7 Up/down volume 1.0x \u00b7 Delivery 43% vs 37% before",
    "grade": "B",
-   "trigger": 11222.0,
-   "stop": 10109.74
-  },
-  {
-   "symbol": "ENGINERSIN",
-   "close": 312.05,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 2.3,
-   "setup": "Trend Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 20% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 34% vs 33% before",
-   "grade": "B",
-   "trigger": 317.6,
-   "stop": 305.64
-  },
-  {
-   "symbol": "PFOCUS",
-   "close": 267.6,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.2,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 12 days \u00b7 Up/down volume 0.4x \u00b7 Delivery 14% vs 12% before",
-   "grade": "B",
-   "trigger": null,
-   "stop": 260.58
-  },
-  {
-   "symbol": "PTCIL",
-   "close": 23850.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": 0.6,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 9 days \u00b7 Up/down volume 0.8x \u00b7 Delivery 43% vs 37% before",
-   "grade": "B",
-   "trigger": null,
-   "stop": 23173.56
+   "trigger": 25415.0,
+   "stop": 23408.09
   },
   {
    "symbol": "SHRIPISTON",
-   "close": 4293.9,
+   "close": 4291.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -233,32 +143,14 @@
    "ext": -0.6,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 8 days \u00b7 Up/down volume 1.1x \u00b7 Delivery 56% vs 50% before",
+   "detail": "Squeeze 8 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 56% vs 50% before",
    "grade": "B",
    "trigger": null,
    "stop": 4194.19
   },
   {
-   "symbol": "WELSPUNLIV",
-   "close": 246.13,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 1.9,
-   "setup": "Trend Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 38% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 30% vs 34% before",
-   "grade": "B",
-   "trigger": 257.18,
-   "stop": 239.4
-  },
-  {
    "symbol": "CYIENT",
-   "close": 1103.2,
+   "close": 1104.9,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -269,22 +161,22 @@
    "ext": 0.1,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 8 days \u00b7 Up/down volume 1.2x \u00b7 Delivery 48% vs 36% before",
+   "detail": "Squeeze 8 days \u00b7 Up/down volume 1.1x \u00b7 Delivery 48% vs 36% before",
    "grade": "B",
    "trigger": null,
    "stop": 1069.86
   },
   {
    "symbol": "SUNTV",
-   "close": 658.2,
+   "close": 646.7,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Impulse",
-    "D": "Impulse"
+    "D": "Bottoming"
    },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 2.7,
+   "old": "\u23f3 Building Momentum",
+   "ext": 2.3,
    "setup": "Trend Pullback",
    "stage": "Triggered",
    "detail": "Pullback 48% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 29% vs 28% before",
@@ -294,43 +186,25 @@
   },
   {
    "symbol": "WHIRLPOOL",
-   "close": 835.5,
+   "close": 829.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Bullish",
-    "D": "Impulse"
+    "D": "Bottoming"
    },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 0.5,
+   "old": "\ud83c\udfc6 Prime Setup",
+   "ext": 0.3,
    "setup": "Squeeze Break",
-   "stage": "Triggered",
-   "detail": "Squeeze 14 days \u00b7 Up/down volume 1.0x \u00b7 Delivery 32% vs 28% before",
+   "stage": "Ready",
+   "detail": "Squeeze 13 days, 1 bars to flip \u00b7 Up/down volume 0.9x \u00b7 Delivery 32% vs 28% before",
    "grade": "B",
    "trigger": 868.0,
-   "stop": 806.48
-  },
-  {
-   "symbol": "ANTHEM",
-   "close": 931.45,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 2.0,
-   "setup": "Trend Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 29% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 47% vs 54% before",
-   "grade": "B",
-   "trigger": 948.5,
-   "stop": 928.14
+   "stop": 804.34
   },
   {
    "symbol": "TBOTEK",
-   "close": 1578.8,
+   "close": 1614.3,
    "trend": "",
    "states": {
     "M": "No data",
@@ -338,17 +212,35 @@
     "D": "Bullish"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": -0.4,
+   "ext": 0.2,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 7 days \u00b7 Up/down volume 2.4x \u00b7 Delivery 49% vs 54% before",
+   "detail": "Squeeze 7 days \u00b7 Up/down volume 2.9x \u00b7 Delivery 49% vs 54% before",
    "grade": "B",
    "trigger": 1634.9,
    "stop": 1495.1
   },
   {
+   "symbol": "CRAFTSMAN",
+   "close": 11077.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "old": "\ud83c\udfc6 Prime Setup",
+   "ext": 0.9,
+   "setup": "Squeeze Break",
+   "stage": "Ready",
+   "detail": "Squeeze 7 days, 2 bars to flip \u00b7 Up/down volume 1.0x \u00b7 Delivery 48% vs 52% before",
+   "grade": "C",
+   "trigger": 11178.0,
+   "stop": 10054.85
+  },
+  {
    "symbol": "GESHIP",
-   "close": 1532.9,
+   "close": 1518.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -356,73 +248,37 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": 0.8,
+   "ext": 0.6,
    "setup": "Trend Pullback",
-   "stage": "Triggered",
+   "stage": "Ready",
    "detail": "Pullback 67% \u00b7 Volume 1.1x in pullback \u00b7 Delivery 49% vs 51% before",
    "grade": "C",
    "trigger": 1527.9,
    "stop": 1406.08
   },
   {
-   "symbol": "BHARTIHEXA",
-   "close": 1709.9,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 1.9,
-   "setup": "Trend Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 45% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 53% vs 55% before",
-   "grade": "C",
-   "trigger": null,
-   "stop": 1576.64
-  },
-  {
    "symbol": "CPPLUS",
-   "close": 3963.4,
+   "close": 4148.0,
    "trend": "",
    "states": {
     "M": "No data",
-    "W": "Topping",
-    "D": "Bullish"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 0.3,
-   "setup": "Squeeze Break",
-   "stage": "Triggered",
-   "detail": "Squeeze 3 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 47% vs 54% before",
-   "grade": "C",
-   "trigger": 4342.8,
-   "stop": 3612.06
-  },
-  {
-   "symbol": "LGEINDIA",
-   "close": 1722.9,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
+    "W": "Bullish",
     "D": "Impulse"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 0.5,
-   "setup": "Trend Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 49% \u00b7 Volume 1.2x in pullback \u00b7 Delivery 55% vs 53% before",
+   "ext": 1.3,
+   "setup": "Squeeze Break",
+   "stage": "Triggered",
+   "detail": "Squeeze 2 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 47% vs 54% before",
    "grade": "C",
-   "trigger": 1761.0,
-   "stop": 1710.57
+   "trigger": 4418.6,
+   "stop": 3612.06
   }
  ],
  "overspill": [
   {
    "symbol": "BALRAMCHIN",
-   "close": 649.9,
+   "close": 654.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -430,35 +286,35 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -0.4,
+   "ext": -0.2,
    "setup": "Daily Overspill",
    "stage": "Ready",
    "detail": "Daily spilled 11.9% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 31% vs 28% before",
    "grade": "A",
-   "trigger": 656.55,
+   "trigger": 657.25,
    "stop": 579.54
   },
   {
    "symbol": "GRAPHITE",
-   "close": 797.95,
+   "close": 799.95,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Topping",
+    "W": "Bullish",
     "D": "Impulse"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 1.3,
+   "ext": 1.4,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
+   "stage": "Triggered",
    "detail": "Weekly spilled 0.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 37% before",
    "grade": "A",
-   "trigger": 743.04,
+   "trigger": 737.26,
    "stop": 675.75
   },
   {
    "symbol": "HBLENGINE",
-   "close": 780.45,
+   "close": 799.55,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -466,17 +322,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.2,
+   "ext": 0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly spilled 12.8% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 39% vs 35% before",
    "grade": "A",
-   "trigger": 771.44,
+   "trigger": 770.49,
    "stop": 646.7
   },
   {
    "symbol": "HBLENGINE",
-   "close": 780.45,
+   "close": 799.55,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -484,71 +340,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.2,
+   "ext": 0.7,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 0.1% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 39% vs 35% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 39% vs 35% before",
    "grade": "A",
-   "trigger": 798.07,
-   "stop": 772.15
+   "trigger": 799.92,
+   "stop": 788.77
   },
   {
    "symbol": "KPIL",
-   "close": 1345.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.4,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 2.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 59% vs 50% before",
-   "grade": "A",
-   "trigger": 1347.86,
-   "stop": 1249.4
-  },
-  {
-   "symbol": "MTARTECH",
-   "close": 5909.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.3,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 60% vs 55% before",
-   "grade": "A",
-   "trigger": 6563.51,
-   "stop": 5183.61
-  },
-  {
-   "symbol": "PFOCUS",
-   "close": 267.6,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.2,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 14% vs 12% before",
-   "grade": "A",
-   "trigger": 282.26,
-   "stop": 202.13
-  },
-  {
-   "symbol": "PRIVISCL",
-   "close": 3363.9,
+   "close": 1349.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -559,32 +361,86 @@
    "ext": -0.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 58% vs 55% before",
+   "detail": "Weekly spilled 2.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 59% vs 50% before",
    "grade": "A",
-   "trigger": 3395.65,
+   "trigger": 1348.08,
+   "stop": 1249.4
+  },
+  {
+   "symbol": "MTARTECH",
+   "close": 6056.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bottoming"
+   },
+   "old": "\u274c Avoid",
+   "ext": -1.9,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 60% vs 55% before",
+   "grade": "A",
+   "trigger": 6632.41,
+   "stop": 5183.61
+  },
+  {
+   "symbol": "PFOCUS",
+   "close": 269.95,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Topping",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": -1.2,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 14% vs 12% before",
+   "grade": "A",
+   "trigger": 283.8,
+   "stop": 202.13
+  },
+  {
+   "symbol": "PRIVISCL",
+   "close": 3378.6,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.2,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 58% vs 55% before",
+   "grade": "A",
+   "trigger": 3398.99,
    "stop": 3147.69
   },
   {
    "symbol": "PTCIL",
-   "close": 23850.0,
+   "close": 24365.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
-    "D": "Bearish"
+    "D": "Bottoming"
    },
-   "old": "\u274c Avoid",
-   "ext": 0.6,
+   "old": "\ud83c\udfc6 Prime Setup",
+   "ext": 1.2,
    "setup": "Daily Overspill",
-   "stage": "Watch",
+   "stage": "Triggered",
    "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 43% vs 37% before",
    "grade": "A",
-   "trigger": 24152.96,
+   "trigger": 24184.85,
    "stop": 23048.81
   },
   {
    "symbol": "SCI",
-   "close": 265.0,
+   "close": 270.58,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -592,17 +448,17 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.5,
+   "ext": -0.0,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 13.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 39% vs 34% before",
    "grade": "A",
-   "trigger": 273.42,
+   "trigger": 274.31,
    "stop": 232.98
   },
   {
    "symbol": "SHRIPISTON",
-   "close": 4293.9,
+   "close": 4291.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -615,12 +471,12 @@
    "stage": "Triggered",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 56% vs 50% before",
    "grade": "A",
-   "trigger": 4275.18,
+   "trigger": 4273.21,
    "stop": 4174.23
   },
   {
    "symbol": "WELCORP",
-   "close": 2210.7,
+   "close": 2230.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -628,17 +484,17 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -1.2,
+   "ext": -1.1,
    "setup": "Daily Overspill",
    "stage": "Ready",
    "detail": "Daily spilled 10.7% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 37% before",
    "grade": "A",
-   "trigger": 2350.36,
+   "trigger": 2365.06,
    "stop": 2128.04
   },
   {
    "symbol": "CYIENT",
-   "close": 1103.2,
+   "close": 1104.9,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -651,48 +507,66 @@
    "stage": "Watch",
    "detail": "Daily spilled 2.4% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 48% vs 36% before",
    "grade": "A",
-   "trigger": 1125.04,
+   "trigger": 1127.34,
    "stop": 1069.86
   },
   {
    "symbol": "FSL",
-   "close": 287.35,
+   "close": 291.25,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
-    "W": "Topping",
-    "D": "Bearish"
+    "W": "Bullish",
+    "D": "Topping"
    },
-   "old": "\u274c Avoid",
-   "ext": 0.5,
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 0.8,
    "setup": "Daily Overspill",
-   "stage": "Watch",
+   "stage": "Triggered",
    "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.2x in pullback \u00b7 Delivery 40% vs 31% before",
    "grade": "A",
-   "trigger": 289.14,
+   "trigger": 289.33,
    "stop": 280.59
   },
   {
    "symbol": "ACMESOLAR",
-   "close": 402.4,
+   "close": 414.35,
    "trend": "",
    "states": {
     "M": "No data",
     "W": "Topping",
-    "D": "Topping"
+    "D": "Impulse"
    },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": -0.3,
+   "old": "\u2705 Confirmed Bullish",
+   "ext": 0.3,
    "setup": "Daily Overspill",
    "stage": "Watch",
    "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 50% vs 46% before",
    "grade": "A",
-   "trigger": 410.97,
+   "trigger": 411.88,
    "stop": 365.57
   },
   {
+   "symbol": "AZAD",
+   "close": 2455.9,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "old": "\u23f3 Building Momentum",
+   "ext": -1.5,
+   "setup": "Daily Overspill",
+   "stage": "Ready",
+   "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 Delivery 40% vs 33% before",
+   "grade": "A",
+   "trigger": 2561.19,
+   "stop": 2380.33
+  },
+  {
    "symbol": "ABSLAMC",
-   "close": 896.6,
+   "close": 895.75,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -700,17 +574,17 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -1.3,
+   "ext": -1.4,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 51% vs 49% before",
    "grade": "B",
-   "trigger": 969.14,
+   "trigger": 976.77,
    "stop": 798.9
   },
   {
    "symbol": "AEGISLOG",
-   "close": 1228.1,
+   "close": 1224.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -721,32 +595,32 @@
    "ext": -0.6,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 35% vs 35% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 35% vs 35% before",
    "grade": "B",
-   "trigger": 1219.87,
+   "trigger": 1219.0,
    "stop": 1078.04
   },
   {
    "symbol": "AJANTPHARM",
-   "close": 3360.6,
+   "close": 3284.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bearish",
-    "D": "Bottoming"
+    "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.4,
+   "ext": -1.1,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 60% vs 51% before",
+   "stage": "Watch",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 60% vs 51% before",
    "grade": "B",
-   "trigger": 3367.54,
+   "trigger": 3368.27,
    "stop": 3193.5
   },
   {
    "symbol": "APARINDS",
-   "close": 14831.0,
+   "close": 14667.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -754,35 +628,53 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -1.4,
+   "ext": -1.6,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 47% vs 40% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 47% vs 40% before",
    "grade": "B",
-   "trigger": 15486.37,
+   "trigger": 15555.35,
    "stop": 13752.44
   },
   {
    "symbol": "CAPLIPOINT",
-   "close": 2346.8,
+   "close": 2388.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bearish",
-    "D": "Topping"
+    "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.5,
+   "ext": -1.0,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 3.0% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 44% vs 42% before",
+   "stage": "Ready",
+   "detail": "Weekly spilled 3.0% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 44% vs 42% before",
    "grade": "B",
-   "trigger": 2418.34,
+   "trigger": 2425.87,
    "stop": 2171.85
   },
   {
    "symbol": "CARTRADE",
-   "close": 2643.9,
+   "close": 2696.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "old": "\u23f3 Building Momentum",
+   "ext": -0.4,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 32% vs 39% before",
+   "grade": "B",
+   "trigger": 2706.32,
+   "stop": 2160.67
+  },
+  {
+   "symbol": "CCL",
+   "close": 978.15,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -790,53 +682,35 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -0.7,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 32% vs 39% before",
-   "grade": "B",
-   "trigger": 2700.37,
-   "stop": 2160.67
-  },
-  {
-   "symbol": "CCL",
-   "close": 989.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.7,
+   "ext": -1.0,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 51% vs 50% before",
    "grade": "B",
-   "trigger": 1035.59,
+   "trigger": 1040.49,
    "stop": 883.93
   },
   {
    "symbol": "CEMPRO",
-   "close": 1298.6,
+   "close": 1314.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Topping"
+    "W": "Bearish",
+    "D": "Impulse"
    },
    "old": "\u274c Avoid",
-   "ext": 0.8,
+   "ext": 1.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 50% before",
    "grade": "B",
-   "trigger": 1226.15,
+   "trigger": 1218.52,
    "stop": 1063.87
   },
   {
    "symbol": "CHENNPETRO",
-   "close": 1424.0,
+   "close": 1428.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -844,17 +718,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.3,
+   "ext": -0.2,
    "setup": "Daily Overspill",
    "stage": "Watch",
    "detail": "Daily spilled 2.1% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 30% vs 24% before",
    "grade": "B",
-   "trigger": 1467.78,
+   "trigger": 1472.39,
    "stop": 1374.55
   },
   {
    "symbol": "CHOICEIN",
-   "close": 724.65,
+   "close": 727.35,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -862,17 +736,17 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -0.8,
+   "ext": -0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 31% vs 50% before",
+   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 31% vs 50% before",
    "grade": "B",
-   "trigger": 741.59,
+   "trigger": 743.38,
    "stop": 670.36
   },
   {
    "symbol": "ENDURANCE",
-   "close": 2534.6,
+   "close": 2540.2,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -880,17 +754,17 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": 0.1,
+   "ext": 0.2,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 56% vs 57% before",
    "grade": "B",
-   "trigger": 2563.59,
+   "trigger": 2566.64,
    "stop": 2197.6
   },
   {
    "symbol": "HINDCOPPER",
-   "close": 430.55,
+   "close": 439.85,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -898,17 +772,17 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.6,
+   "ext": -1.1,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 38% vs 40% before",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 38% vs 40% before",
    "grade": "B",
-   "trigger": 469.45,
+   "trigger": 473.55,
    "stop": 391.52
   },
   {
    "symbol": "HSCL",
-   "close": 547.65,
+   "close": 559.7,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -916,35 +790,35 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -2.3,
+   "ext": -2.0,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 18.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 41% vs 41% before",
    "grade": "B",
-   "trigger": 614.65,
+   "trigger": 621.7,
    "stop": 483.18
   },
   {
    "symbol": "IFCI",
-   "close": 62.07,
+   "close": 62.21,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
-    "D": "Bullish"
+    "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -2.0,
+   "ext": -2.1,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 21% vs 20% before",
+   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 21% vs 20% before",
    "grade": "B",
-   "trigger": 68.46,
+   "trigger": 69.13,
    "stop": 54.09
   },
   {
    "symbol": "IPCALAB",
-   "close": 1865.5,
+   "close": 1884.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -952,17 +826,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": -0.7,
+   "ext": -0.4,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.8x in pullback \u00b7 Delivery 57% vs 56% before",
    "grade": "B",
-   "trigger": 1857.29,
+   "trigger": 1856.43,
    "stop": 1793.41
   },
   {
    "symbol": "IPCALAB",
-   "close": 1865.5,
+   "close": 1884.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -970,17 +844,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": -0.7,
+   "ext": -0.4,
    "setup": "Daily Overspill",
    "stage": "Watch",
    "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 57% vs 56% before",
    "grade": "B",
-   "trigger": 1923.76,
+   "trigger": 1929.89,
    "stop": 1793.41
   },
   {
    "symbol": "J&KBANK",
-   "close": 137.32,
+   "close": 137.27,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -993,12 +867,12 @@
    "stage": "Ready",
    "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 45% vs 44% before",
    "grade": "B",
-   "trigger": 138.68,
+   "trigger": 138.82,
    "stop": 111.38
   },
   {
    "symbol": "JINDALSAW",
-   "close": 260.66,
+   "close": 261.45,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1006,53 +880,35 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -0.4,
+   "ext": -0.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.3x in pullback \u00b7 Delivery 46% vs 45% before",
    "grade": "B",
-   "trigger": 262.81,
+   "trigger": 263.04,
    "stop": 226.6
   },
   {
    "symbol": "KIMS",
-   "close": 763.35,
+   "close": 729.65,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Bottoming",
+    "W": "Bearish",
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": 1.5,
+   "ext": -0.0,
    "setup": "Weekly Overspill",
-   "stage": "Triggered",
+   "stage": "Ready",
    "detail": "Weekly spilled 9.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 62% vs 54% before",
    "grade": "B",
-   "trigger": 742.64,
+   "trigger": 740.46,
    "stop": 653.74
   },
   {
-   "symbol": "MINDACORP",
-   "close": 706.65,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 1.1,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 6.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 54% before",
-   "grade": "B",
-   "trigger": 671.61,
-   "stop": 578.84
-  },
-  {
    "symbol": "NEULANDLAB",
-   "close": 21640.0,
+   "close": 21078.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1060,17 +916,17 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": 1.3,
+   "ext": 0.6,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 48% vs 49% before",
    "grade": "B",
-   "trigger": 20338.54,
+   "trigger": 20201.55,
    "stop": 18083.76
   },
   {
    "symbol": "REDINGTON",
-   "close": 340.55,
+   "close": 349.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1078,17 +934,17 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -0.9,
+   "ext": -0.5,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 44% vs 48% before",
+   "stage": "Triggered",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 44% vs 48% before",
    "grade": "B",
    "trigger": 340.56,
    "stop": 314.37
   },
   {
    "symbol": "REDINGTON",
-   "close": 340.55,
+   "close": 349.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1096,35 +952,35 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -0.9,
+   "ext": -0.5,
    "setup": "Daily Overspill",
    "stage": "Ready",
    "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 44% vs 48% before",
    "grade": "B",
-   "trigger": 353.98,
+   "trigger": 355.4,
    "stop": 314.37
   },
   {
    "symbol": "SCHNEIDER",
-   "close": 1024.9,
+   "close": 1061.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
-    "D": "Bearish"
+    "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -2.8,
+   "ext": -2.2,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 7.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 47% before",
+   "stage": "Ready",
+   "detail": "Weekly spilled 6.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 43% vs 47% before",
    "grade": "B",
-   "trigger": 1161.09,
-   "stop": 1017.96
+   "trigger": 1175.42,
+   "stop": 1027.34
   },
   {
    "symbol": "SHRIPISTON",
-   "close": 4293.9,
+   "close": 4291.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1137,12 +993,12 @@
    "stage": "Watch",
    "detail": "Daily spilled 5.3% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 56% vs 50% before",
    "grade": "B",
-   "trigger": 4345.09,
+   "trigger": 4350.48,
    "stop": 4174.23
   },
   {
    "symbol": "THANGAMAYL",
-   "close": 4057.0,
+   "close": 4195.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1150,17 +1006,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -3.8,
+   "ext": -3.3,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 45% vs 50% before",
+   "detail": "Weekly spilled 6.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 45% vs 50% before",
    "grade": "B",
-   "trigger": 4782.07,
-   "stop": 4011.36
+   "trigger": 4858.39,
+   "stop": 4126.73
   },
   {
    "symbol": "USHAMART",
-   "close": 470.0,
+   "close": 481.75,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1168,35 +1024,35 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.1,
+   "ext": -0.4,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 52% vs 53% before",
+   "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 52% vs 53% before",
    "grade": "B",
-   "trigger": 482.26,
+   "trigger": 483.55,
    "stop": 441.42
   },
   {
    "symbol": "VIJAYA",
-   "close": 1487.5,
+   "close": 1410.1,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bearish",
-    "D": "Bullish"
+    "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": 0.9,
+   "ext": -0.5,
    "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 40% vs 54% before",
+   "stage": "Watch",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 40% vs 54% before",
    "grade": "B",
-   "trigger": 1410.26,
+   "trigger": 1402.13,
    "stop": 1332.33
   },
   {
    "symbol": "WELCORP",
-   "close": 2210.7,
+   "close": 2230.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1204,17 +1060,17 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -1.2,
+   "ext": -1.1,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 43% vs 37% before",
+   "stage": "Triggered",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 43% vs 37% before",
    "grade": "B",
-   "trigger": 2181.75,
+   "trigger": 2178.71,
    "stop": 2128.04
   },
   {
    "symbol": "WOCKPHARMA",
-   "close": 2004.5,
+   "close": 2027.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1222,35 +1078,53 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": 0.3,
+   "ext": 0.6,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
+   "stage": "Triggered",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 34% vs 39% before",
    "grade": "B",
-   "trigger": 1945.43,
+   "trigger": 1939.21,
    "stop": 1768.46
   },
   {
    "symbol": "ZYDUSWELL",
-   "close": 466.15,
+   "close": 469.95,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Bottoming",
+    "W": "Bearish",
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -1.5,
+   "ext": -1.4,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 7.0% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 37% vs 44% before",
    "grade": "B",
-   "trigger": 496.97,
+   "trigger": 500.22,
    "stop": 453.54
   },
   {
+   "symbol": "BHARTIHEXA",
+   "close": 1665.5,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bullish",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.2,
+   "setup": "Daily Overspill",
+   "stage": "Triggered",
+   "detail": "Daily spilled 0.6% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 Delivery 53% vs 55% before",
+   "grade": "B",
+   "trigger": 1633.33,
+   "stop": 1576.64
+  },
+  {
    "symbol": "TBOTEK",
-   "close": 1578.8,
+   "close": 1614.3,
    "trend": "",
    "states": {
     "M": "No data",
@@ -1258,17 +1132,17 @@
     "D": "Bullish"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": -0.4,
+   "ext": 0.2,
    "setup": "Daily Overspill",
-   "stage": "Ready",
+   "stage": "Watch",
    "detail": "Daily spilled 8.9% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 49% vs 54% before",
    "grade": "B",
-   "trigger": 1586.46,
+   "trigger": 1587.26,
    "stop": 1477.64
   },
   {
    "symbol": "AETHER",
-   "close": 1632.2,
+   "close": 1677.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1276,17 +1150,17 @@
     "D": "Impulse"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 0.5,
+   "ext": 1.1,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 44% vs 44% before",
+   "stage": "Triggered",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 44% vs 44% before",
    "grade": "C",
-   "trigger": 1548.45,
+   "trigger": 1539.64,
    "stop": 1373.25
   },
   {
    "symbol": "BBOX",
-   "close": 901.0,
+   "close": 900.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1294,17 +1168,17 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": 1.6,
+   "ext": 1.5,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 29% vs 31% before",
    "grade": "C",
-   "trigger": 824.14,
+   "trigger": 816.04,
    "stop": 707.73
   },
   {
    "symbol": "CRAFTSMAN",
-   "close": 11134.0,
+   "close": 11077.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1312,35 +1186,17 @@
     "D": "Bottoming"
    },
    "old": "\ud83c\udfc6 Prime Setup",
-   "ext": 1.0,
+   "ext": 0.9,
    "setup": "Daily Overspill",
    "stage": "Triggered",
    "detail": "Daily spilled 4.9% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 48% vs 52% before",
    "grade": "C",
-   "trigger": 10762.08,
+   "trigger": 10722.93,
    "stop": 9960.04
   },
   {
-   "symbol": "FINCABLES",
-   "close": 1254.9,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bottoming"
-   },
-   "old": "\u23f3 Building Momentum",
-   "ext": -0.0,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 33% vs 40% before",
-   "grade": "C",
-   "trigger": 1213.28,
-   "stop": 1050.49
-  },
-  {
    "symbol": "GESHIP",
-   "close": 1532.9,
+   "close": 1518.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1348,35 +1204,53 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": 0.8,
+   "ext": 0.6,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
    "detail": "Weekly spilled 2.9% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 49% vs 51% before",
    "grade": "C",
-   "trigger": 1462.77,
+   "trigger": 1455.38,
    "stop": 1258.48
   },
   {
    "symbol": "GRANULES",
-   "close": 798.95,
+   "close": 813.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bearish",
-    "D": "Bearish"
+    "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.8,
+   "ext": -0.4,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 50% before",
+   "stage": "Ready",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 42% vs 50% before",
    "grade": "C",
-   "trigger": 814.91,
+   "trigger": 816.58,
    "stop": 759.98
   },
   {
+   "symbol": "IIFL",
+   "close": 641.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Topping",
+    "D": "Impulse"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ext": 1.5,
+   "setup": "Weekly Overspill",
+   "stage": "Triggered",
+   "detail": "Weekly spilled 5.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 41% vs 49% before",
+   "grade": "C",
+   "trigger": 585.71,
+   "stop": 511.67
+  },
+  {
    "symbol": "KIRLOSENG",
-   "close": 1672.6,
+   "close": 1692.3,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1384,17 +1258,17 @@
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -3.0,
+   "ext": -2.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 44% before",
    "grade": "C",
-   "trigger": 1926.17,
+   "trigger": 1952.86,
    "stop": 1461.57
   },
   {
    "symbol": "NLCINDIA",
-   "close": 235.99,
+   "close": 237.91,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1402,17 +1276,17 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.6,
+   "ext": -1.4,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 19.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 44% vs 46% before",
    "grade": "C",
-   "trigger": 259.92,
+   "trigger": 262.43,
    "stop": 221.86
   },
   {
    "symbol": "VTL",
-   "close": 526.65,
+   "close": 528.6,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1420,72 +1294,36 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.6,
+   "ext": -0.5,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 44% vs 49% before",
+   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 44% vs 49% before",
    "grade": "C",
-   "trigger": 549.06,
+   "trigger": 551.42,
    "stop": 481.09
   },
   {
-   "symbol": "CPPLUS",
-   "close": 3963.4,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Topping",
-    "D": "Bullish"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 0.3,
-   "setup": "Daily Overspill",
-   "stage": "Ready",
-   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 Delivery 47% vs 54% before",
-   "grade": "C",
-   "trigger": 4037.82,
-   "stop": 3612.06
-  },
-  {
-   "symbol": "LGEINDIA",
-   "close": 1722.9,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 0.5,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 1.2x in pullback \u00b7 Delivery 55% vs 53% before",
-   "grade": "C",
-   "trigger": 1718.28,
-   "stop": 1710.57
-  },
-  {
    "symbol": "ASTERDM",
-   "close": 750.0,
+   "close": 722.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Bottoming",
+    "W": "Bearish",
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": 1.3,
+   "ext": 0.3,
    "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "detail": "Weekly spilled 9.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 3.0x in pullback \u00b7 Delivery 55% vs 58% before",
+   "stage": "Ready",
+   "detail": "Weekly spilled 9.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 3.2x in pullback \u00b7 Delivery 55% vs 58% before",
    "grade": "Warning",
-   "trigger": 731.44,
+   "trigger": 729.48,
    "stop": 636.72,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   },
   {
    "symbol": "BALRAMCHIN",
-   "close": 649.9,
+   "close": 654.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1493,37 +1331,56 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -0.4,
+   "ext": -0.2,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 2.1x in pullback \u00b7 Delivery 31% vs 28% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 2.3x in pullback \u00b7 Delivery 31% vs 28% before",
    "grade": "Warning",
-   "trigger": 636.75,
+   "trigger": 635.37,
    "stop": 579.54,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   },
   {
-   "symbol": "MRPL",
-   "close": 174.93,
+   "symbol": "FINCABLES",
+   "close": 1270.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
-    "D": "Topping"
+    "D": "Bottoming"
    },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 0.1,
+   "old": "\u23f3 Building Momentum",
+   "ext": 0.2,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.6x in pullback \u00b7 Delivery 34% vs 23% before",
+   "stage": "Triggered",
+   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.4x in pullback \u00b7 Delivery 33% vs 40% before",
    "grade": "Warning",
-   "trigger": 170.33,
+   "trigger": 1208.9,
+   "stop": 1050.49,
+   "warning_text": "Volume in the dip is heavier than in the up-move"
+  },
+  {
+   "symbol": "MRPL",
+   "close": 178.68,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Impulse"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ext": 0.5,
+   "setup": "Weekly Overspill",
+   "stage": "Triggered",
+   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.6x in pullback \u00b7 Delivery 34% vs 23% before",
+   "grade": "Warning",
+   "trigger": 169.85,
    "stop": 142.83,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   },
   {
    "symbol": "TDPOWERSYS",
-   "close": 635.45,
+   "close": 637.55,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1534,23 +1391,65 @@
    "ext": -1.4,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 2.7% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 2.3x in pullback \u00b7 Delivery 35% vs 42% before",
+   "detail": "Weekly spilled 2.7% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 2.6x in pullback \u00b7 Delivery 35% vs 42% before",
    "grade": "Warning",
-   "trigger": 669.7,
+   "trigger": 673.3,
    "stop": 555.94,
+   "warning_text": "Volume in the dip is heavier than in the up-move"
+  },
+  {
+   "symbol": "BEML",
+   "close": 2098.2,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ext": 1.3,
+   "setup": "Daily Overspill",
+   "stage": "Watch",
+   "detail": "Daily spilled 2.6% under the 50 EMA \u00b7 Volume 4.1x in pullback \u00b7 Delivery 30% vs 34% before",
+   "grade": "Warning",
+   "trigger": 2016.74,
+   "stop": 1909.27,
+   "warning_text": "Volume in the dip is heavier than in the up-move"
+  },
+  {
+   "symbol": "LGEINDIA",
+   "close": 1745.4,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ext": 1.0,
+   "setup": "Daily Overspill",
+   "stage": "Triggered",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 1.3x in pullback \u00b7 Delivery 55% vs 53% before",
+   "grade": "Warning",
+   "trigger": 1717.79,
+   "stop": 1712.57,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   }
  ],
  "others": {
   "Running": [
-   "ACE",
+   "ACMESOLAR",
+   "ACUTAAS",
    "AETHER",
    "AFFLE",
    "AIIL",
+   "ANTHEM",
    "BEML",
    "CEATLTD",
+   "CEMPRO",
    "CUPID",
    "EMAMILTD",
+   "ENGINERSIN",
    "FLUOROCHEM",
    "FRACTAL",
    "GLAND",
@@ -1566,12 +1465,13 @@
    "LALPATHLAB",
    "LEMONTREE",
    "LENSKART",
+   "LGEINDIA",
    "LINDEINDIA",
-   "LTFOODS",
    "MEDANTA",
    "MEESHO",
    "MGL",
    "MINDACORP",
+   "MRPL",
    "NH",
    "NUVAMA",
    "ONESOURCE",
@@ -1579,23 +1479,29 @@
    "PPLPHARMA",
    "PVRINOX",
    "RKFORGE",
-   "SAILIFE",
+   "RUBICON",
    "SANSERA",
    "SHYAMMETL",
    "SYNGENE",
    "TATACOMM",
    "URBANCO",
+   "WELSPUNLIV",
    "ZENTEC"
   ],
   "Stretched": [
    "ANURAS",
    "ASAHIINDIA",
-   "EMCURE"
+   "EMCURE",
+   "SAILIFE"
   ],
   "Fading": [
+   "BHARTIHEXA",
    "BSOFT",
+   "FSL",
+   "IGIL",
    "IPCALAB",
    "LTTS",
+   "PFOCUS",
    "ZENSARTECH"
   ]
  },
@@ -1626,7 +1532,6 @@
    "ATUL",
    "AVANTIFEED",
    "AWL",
-   "AZAD",
    "BAJAJHFL",
    "BALKRISIND",
    "BATAINDIA",
@@ -1639,7 +1544,6 @@
    "CANHLIFE",
    "CAPLIPOINT",
    "CARBORUNIV",
-   "CARTRADE",
    "CCL",
    "CEATLTD",
    "CEMPRO",
@@ -1660,7 +1564,6 @@
    "DEEPAKNTR",
    "DEVYANI",
    "DOMS",
-   "ECLERX",
    "EIDPARRY",
    "ELECON",
    "ELGIEQUIP",
@@ -1672,7 +1575,6 @@
    "FACT",
    "FIRSTCRY",
    "FIVESTAR",
-   "FSL",
    "GALLANTT",
    "GICRE",
    "GILLETTE",
@@ -1682,6 +1584,7 @@
    "GPIL",
    "GRANULES",
    "GRAVITA",
+   "GROWW",
    "GRSE",
    "HDBFS",
    "HEGAM",
@@ -1696,7 +1599,6 @@
    "IDBI",
    "IFCI",
    "IGL",
-   "IIFL",
    "IKS",
    "INDIACEM",
    "INDIAMART",
@@ -1715,7 +1617,6 @@
    "JMFINANCIL",
    "JSL",
    "JSWCEMENT",
-   "JSWINFRA",
    "JUBLINGREA",
    "JWL",
    "KAJARIACER",
@@ -1726,6 +1627,7 @@
    "KPIL",
    "KPRMILL",
    "KSB",
+   "LEMONTREE",
    "LINDEINDIA",
    "LLOYDSME",
    "LTFOODS",
@@ -1750,12 +1652,10 @@
    "ONESOURCE",
    "PARADEEP",
    "PCBL",
-   "PFOCUS",
    "PIRAMALFIN",
    "POLYMED",
    "POONAWALLA",
    "PRIVISCL",
-   "PTCIL",
    "PWL",
    "RAILTEL",
    "RAINBOW",
@@ -1776,6 +1676,7 @@
    "SUMICHEM",
    "SUNDARMFIN",
    "SWANCORP",
+   "SYNGENE",
    "TARIL",
    "TATACHEM",
    "TATACOMM",
@@ -1803,9 +1704,12 @@
   "\u2705 Confirmed Bullish": [
    "ABDL",
    "ACE",
+   "ACMESOLAR",
+   "ACUTAAS",
    "AETHER",
    "ANTHEM",
    "ASAHIINDIA",
+   "BEML",
    "CPPLUS",
    "CUPID",
    "EMCURE",
@@ -1814,50 +1718,50 @@
    "GABRIEL",
    "GLAND",
    "GRAPHITE",
-   "GROWW",
+   "IIFL",
+   "JSWINFRA",
    "JYOTICNC",
    "LALPATHLAB",
-   "LEMONTREE",
    "LENSKART",
    "LGEINDIA",
    "MEESHO",
+   "MRPL",
    "PINELABS",
+   "PPLPHARMA",
+   "PVRINOX",
    "RKFORGE",
    "SAILIFE",
    "SANSERA",
    "SHYAMMETL",
-   "SUNTV",
-   "SYNGENE",
    "TBOTEK",
    "URBANCO",
-   "WELSPUNLIV",
-   "WHIRLPOOL"
+   "WELSPUNLIV"
+  ],
+  "\u23f3 Building Momentum": [
+   "AZAD",
+   "BALRAMCHIN",
+   "CARTRADE",
+   "CASTROLIND",
+   "ECLERX",
+   "FINCABLES",
+   "GESHIP",
+   "REDINGTON",
+   "SUNTV",
+   "TDPOWERSYS",
+   "TEGA",
+   "WELCORP"
   ],
   "\u26a0\ufe0f Extended": [
-   "ACMESOLAR",
-   "ACUTAAS",
-   "BEML",
    "BHARTIHEXA",
    "BSOFT",
+   "FSL",
    "HBLENGINE",
    "IGIL",
    "IPCALAB",
    "LTTS",
-   "MRPL",
-   "PPLPHARMA",
-   "PVRINOX",
+   "PFOCUS",
    "RUBICON",
    "ZENSARTECH"
-  ],
-  "\u23f3 Building Momentum": [
-   "BALRAMCHIN",
-   "CASTROLIND",
-   "FINCABLES",
-   "GESHIP",
-   "REDINGTON",
-   "TDPOWERSYS",
-   "TEGA",
-   "WELCORP"
   ],
   "\u2014 Insufficient Data": [
    "CLEANMAX",
@@ -1865,7 +1769,9 @@
    "FRACTAL"
   ],
   "\ud83c\udfc6 Prime Setup": [
-   "CRAFTSMAN"
+   "CRAFTSMAN",
+   "PTCIL",
+   "WHIRLPOOL"
   ]
  },
  "vk_labels": {},
