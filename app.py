@@ -1698,7 +1698,12 @@ def scan_status():
 def scan_all():
     """Start every scan on GitHub at once. Returns (started, problems)."""
     started, problems = [], []
+    scan_runs.clear()
+    busy = {n for n, rs in scan_runs().items() if rs and rs[0]["status"] != "completed"}
     for name, wf in SCANS.items():
+        if name in busy:                       # already running or waiting: no duplicate
+            problems.append(f"{name}: already running, so not started again.")
+            continue
         code, _ = github("POST", f"/actions/workflows/{wf}/dispatches", {"ref": "main"})
         if code == 204:
             started.append(name)
@@ -1744,7 +1749,7 @@ if scan_clicked:
         st.success(f"Started {len(started)} scans: {', '.join(started)}. They take about "
                    "2 to 10 minutes, and the page reloads by itself as results arrive.")
     for p in problems:
-        st.error(p)
+        (st.info if "already running" in p else st.error)(p)
 # faded diagonal name, fixed to the screen so it stays in view while scrolling;
 # pointer-events:none lets every tap pass through to the page underneath
 st.markdown(
