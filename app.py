@@ -15,7 +15,7 @@ PAGES = {
                        "Overspill", "Old labels"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
-               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill"],
+               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Old labels"],
                "who": "these midcaps and smallcaps"},
     "Unusual": {"F&O": {"file": os.path.join("data", "unusual.json"),
                         "workflow": "Unusual scan"},
@@ -734,6 +734,24 @@ OLD_DEF = """**Old TrendFire labels (same rule as before: Weekly, Daily and Hour
 
 The old labels can differ a little from the old site, because Hourly here uses only
 completed bars."""
+if EQUITY:
+    OLD_ORDER = ["🏆 Prime Setup", "✅ Confirmed Bullish", "⏳ Building Momentum",
+                 "⚠️ Extended", "❌ Avoid"]
+    OLD_DEF = """**Old TrendFire labels for Equity (Weekly and Daily momentum)**
+- **🏆 Prime Setup**: Weekly above zero. Daily below zero but rising, and Daily is in a squeeze.
+- **✅ Confirmed Bullish**: Weekly above zero. Daily above zero and rising.
+- **⏳ Building Momentum**: Weekly above zero. Daily below zero but rising, with no squeeze.
+- **⚠️ Extended**: Weekly and Daily above zero, Daily flattening or falling.
+- **❌ Avoid**: Weekly below zero, or Daily below zero and falling.
+
+Same rule as F&O, but Equity has no Hourly, so Consolidating and the three Extended
+variants are all shown as Extended.
+
+**Rough match with the new words**
+- Prime Setup is close to **Squeeze** Watch or Ready.
+- Building Momentum is close to **Trend** Ready (Daily dip turning up).
+- Confirmed Bullish is close to **Running**.
+- Extended is close to **Stretched** or **Fading**."""
 if choice == "Old labels":
     groups = res.get("old_labels")
     if not groups:
@@ -886,7 +904,7 @@ with st.expander("What the words mean"):
 {THIRD_DEF}
 - **Above 1,904**: the trigger. A close above this level confirms the turn.
 - **Stop**: just below the low of the dip.
-- **Old**: the label the old TrendFire site would give this stock.{"" if EQUITY else " See the Old labels button for what each one means."}
+- **Old**: the label the old TrendFire site would give this stock. See the Old labels button for what each one means.
 """)
 
 if ready:
