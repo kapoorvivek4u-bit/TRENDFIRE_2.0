@@ -1,8 +1,8 @@
 {
- "generated_ist": "2026-11-16 14:33",
+ "generated_ist": "2026-11-16 15:07",
  "asof": "2026-11-13",
  "nifty": {
-  "r1": 11.5,
+  "r1": 11.6,
   "r3": 3.4
  },
  "sectors": [
@@ -30,8 +30,8 @@
     {
      "symbol": "UNIONBANK",
      "close": 203.0,
-     "rs1": 6.4,
-     "rs3": 5.2,
+     "rs1": 6.3,
+     "rs3": 5.1,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -50,7 +50,7 @@
     {
      "symbol": "MAHABANK",
      "close": 91.7,
-     "rs1": -2.0,
+     "rs1": -2.1,
      "rs3": 8.6,
      "states": {
       "W": "Bottoming",
@@ -73,8 +73,8 @@
    "name": "Realty",
    "stage": "Leading",
    "n": 6,
-   "rs1": 1.3,
-   "rs3": 1.6,
+   "rs1": 1.2,
+   "rs3": 1.5,
    "wk_bull": 17,
    "d_bull": 100,
    "ratio": 1.0229,
@@ -84,7 +84,7 @@
      "symbol": "PHOENIXLTD",
      "close": 2255.0,
      "rs1": 7.0,
-     "rs3": 15.0,
+     "rs3": 14.9,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -94,7 +94,7 @@
      "symbol": "DLF",
      "close": 758.75,
      "rs1": 2.6,
-     "rs3": 11.3,
+     "rs3": 11.2,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -113,7 +113,7 @@
     {
      "symbol": "LODHA",
      "close": 1220.0,
-     "rs1": 0.3,
+     "rs1": 0.2,
      "rs3": -2.5,
      "states": {
       "W": "Bearish",
@@ -124,7 +124,7 @@
      "symbol": "GODREJPROP",
      "close": 1854.9,
      "rs1": 4.8,
-     "rs3": -11.3,
+     "rs3": -11.4,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -137,7 +137,7 @@
    "stage": "Improving",
    "n": 16,
    "rs1": -1.3,
-   "rs3": -5.3,
+   "rs3": -5.4,
    "wk_bull": 50,
    "d_bull": 94,
    "ratio": 0.9839,
@@ -166,7 +166,7 @@
     {
      "symbol": "SONACOMS",
      "close": 919.0,
-     "rs1": 3.0,
+     "rs1": 2.9,
      "rs3": 10.8,
      "states": {
       "W": "Impulse",
@@ -176,8 +176,8 @@
     {
      "symbol": "BOSCHLTD",
      "close": 49390.0,
-     "rs1": -1.5,
-     "rs3": 2.9,
+     "rs1": -1.6,
+     "rs3": 2.8,
      "states": {
       "W": "Topping",
       "D": "Topping"
@@ -186,7 +186,7 @@
     {
      "symbol": "FORCEMOT",
      "close": 19600.0,
-     "rs1": 2.7,
+     "rs1": 2.6,
      "rs3": -1.7,
      "states": {
       "W": "Impulse",
@@ -199,7 +199,7 @@
    "name": "Finance",
    "stage": "Improving",
    "n": 40,
-   "rs1": -5.6,
+   "rs1": -5.7,
    "rs3": -2.3,
    "wk_bull": 18,
    "d_bull": 92,
@@ -219,8 +219,8 @@
     {
      "symbol": "MCX",
      "close": 3720.0,
-     "rs1": 1.0,
-     "rs3": 21.9,
+     "rs1": 0.9,
+     "rs3": 21.8,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -230,7 +230,7 @@
      "symbol": "PAYTM",
      "close": 1939.9,
      "rs1": 1.6,
-     "rs3": 17.1,
+     "rs3": 17.0,
      "states": {
       "W": "Bullish",
       "D": "Impulse"
@@ -239,7 +239,7 @@
     {
      "symbol": "ANGELONE",
      "close": 349.0,
-     "rs1": 1.1,
+     "rs1": 1.0,
      "rs3": 16.5,
      "states": {
       "W": "Bottoming",
@@ -249,7 +249,7 @@
     {
      "symbol": "BSE",
      "close": 3937.7,
-     "rs1": 5.2,
+     "rs1": 5.1,
      "rs3": 8.2,
      "states": {
       "W": "Bottoming",
@@ -262,8 +262,8 @@
    "name": "Services",
    "stage": "Improving",
    "n": 5,
-   "rs1": -4.0,
-   "rs3": -4.7,
+   "rs1": -4.1,
+   "rs3": -4.8,
    "wk_bull": 20,
    "d_bull": 100,
    "ratio": 0.9784,
@@ -272,7 +272,7 @@
     {
      "symbol": "ADANIPORTS",
      "close": 1903.3,
-     "rs1": -3.5,
+     "rs1": -3.6,
      "rs3": 10.9,
      "states": {
       "W": "Impulse",
@@ -282,8 +282,8 @@
     {
      "symbol": "INDIGO",
      "close": 5587.3,
-     "rs1": 4.9,
-     "rs3": 1.4,
+     "rs1": 4.8,
+     "rs3": 1.3,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -292,8 +292,8 @@
     {
      "symbol": "GMRAIRPORT",
      "close": 99.0,
-     "rs1": -1.9,
-     "rs3": -8.7,
+     "rs1": -2.0,
+     "rs3": -8.8,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -302,8 +302,8 @@
     {
      "symbol": "DELHIVERY",
      "close": 436.3,
-     "rs1": -6.7,
-     "rs3": -10.6,
+     "rs1": -6.8,
+     "rs3": -10.7,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -313,7 +313,7 @@
      "symbol": "CONCOR",
      "close": 442.15,
      "rs1": -13.2,
-     "rs3": -17.0,
+     "rs3": -17.1,
      "states": {
       "W": "Bearish",
       "D": "Bullish"
@@ -325,7 +325,7 @@
    "name": "Banks",
    "stage": "Improving",
    "n": 9,
-   "rs1": -7.0,
+   "rs1": -7.1,
    "rs3": -3.5,
    "wk_bull": 22,
    "d_bull": 89,
@@ -335,7 +335,7 @@
     {
      "symbol": "KOTAKBANK",
      "close": 488.55,
-     "rs1": -0.2,
+     "rs1": -0.3,
      "rs3": 21.7,
      "states": {
       "W": "Impulse",
@@ -355,8 +355,8 @@
     {
      "symbol": "HDFCBANK",
      "close": 804.0,
-     "rs1": 1.1,
-     "rs3": 6.9,
+     "rs1": 1.0,
+     "rs3": 6.8,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -376,7 +376,7 @@
      "symbol": "FEDERALBNK",
      "close": 360.95,
      "rs1": -2.0,
-     "rs3": -2.2,
+     "rs3": -2.3,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -389,7 +389,7 @@
    "stage": "Improving",
    "n": 10,
    "rs1": -4.9,
-   "rs3": -7.1,
+   "rs3": -7.2,
    "wk_bull": 10,
    "d_bull": 100,
    "ratio": 0.979,
@@ -398,7 +398,7 @@
     {
      "symbol": "KALYANKJIL",
      "close": 697.0,
-     "rs1": 10.6,
+     "rs1": 10.5,
      "rs3": 13.4,
      "states": {
       "W": "Bullish",
@@ -408,7 +408,7 @@
     {
      "symbol": "BLUESTARCO",
      "close": 1587.2,
-     "rs1": -11.9,
+     "rs1": -12.0,
      "rs3": 3.1,
      "states": {
       "W": "Bottoming",
@@ -418,7 +418,7 @@
     {
      "symbol": "TITAN",
      "close": 4844.9,
-     "rs1": -3.5,
+     "rs1": -3.6,
      "rs3": -8.4,
      "states": {
       "W": "Bearish",
@@ -426,23 +426,23 @@
      }
     },
     {
-     "symbol": "ASIANPAINT",
-     "close": 2550.0,
-     "rs1": -4.2,
-     "rs3": -10.3,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
      "symbol": "PGEL",
      "close": 566.8,
-     "rs1": -3.3,
+     "rs1": -3.4,
      "rs3": -11.2,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "ASIANPAINT",
+     "close": 2550.0,
+     "rs1": -4.2,
+     "rs3": -10.4,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
      }
     }
    ]
@@ -451,8 +451,8 @@
    "name": "Construction",
    "stage": "Improving",
    "n": 3,
-   "rs1": -6.0,
-   "rs3": -11.5,
+   "rs1": -6.1,
+   "rs3": -11.6,
    "wk_bull": 0,
    "d_bull": 100,
    "ratio": 0.9576,
@@ -461,8 +461,8 @@
     {
      "symbol": "LT",
      "close": 4143.8,
-     "rs1": 1.3,
-     "rs3": -0.3,
+     "rs1": 1.2,
+     "rs3": -0.4,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -481,7 +481,7 @@
     {
      "symbol": "RVNL",
      "close": 199.46,
-     "rs1": -10.4,
+     "rs1": -10.5,
      "rs3": -16.7,
      "states": {
       "W": "Bottoming",
@@ -494,7 +494,7 @@
    "name": "Healthcare",
    "stage": "Lagging",
    "n": 16,
-   "rs1": -3.5,
+   "rs1": -3.6,
    "rs3": -1.2,
    "wk_bull": 38,
    "d_bull": 100,
@@ -514,7 +514,7 @@
     {
      "symbol": "LAURUSLABS",
      "close": 2424.0,
-     "rs1": 6.2,
+     "rs1": 6.1,
      "rs3": 27.6,
      "states": {
       "W": "Impulse",
@@ -525,7 +525,7 @@
      "symbol": "GLENMARK",
      "close": 2640.0,
      "rs1": 5.0,
-     "rs3": 11.9,
+     "rs3": 11.8,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -534,7 +534,7 @@
     {
      "symbol": "DRREDDY",
      "close": 1380.0,
-     "rs1": -0.2,
+     "rs1": -0.3,
      "rs3": 11.6,
      "states": {
       "W": "Impulse",
@@ -544,7 +544,7 @@
     {
      "symbol": "MANKIND",
      "close": 2640.0,
-     "rs1": -0.2,
+     "rs1": -0.3,
      "rs3": 5.1,
      "states": {
       "W": "Bottoming",
@@ -557,7 +557,7 @@
    "name": "Oil & Gas",
    "stage": "Lagging",
    "n": 9,
-   "rs1": -3.4,
+   "rs1": -3.5,
    "rs3": -2.7,
    "wk_bull": 22,
    "d_bull": 78,
@@ -568,7 +568,7 @@
      "symbol": "PETRONET",
      "close": 324.05,
      "rs1": 0.2,
-     "rs3": 12.4,
+     "rs3": 12.3,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -577,7 +577,7 @@
     {
      "symbol": "GAIL",
      "close": 188.0,
-     "rs1": 0.2,
+     "rs1": 0.1,
      "rs3": 2.2,
      "states": {
       "W": "Bottoming",
@@ -587,7 +587,7 @@
     {
      "symbol": "IOC",
      "close": 144.04,
-     "rs1": 2.7,
+     "rs1": 2.6,
      "rs3": -1.0,
      "states": {
       "W": "Bottoming",
@@ -607,7 +607,7 @@
     {
      "symbol": "HINDPETRO",
      "close": 381.5,
-     "rs1": 4.5,
+     "rs1": 4.4,
      "rs3": -5.6,
      "states": {
       "W": "Bottoming",
@@ -620,7 +620,7 @@
    "name": "Telecom",
    "stage": "Lagging",
    "n": 3,
-   "rs1": -5.1,
+   "rs1": -5.2,
    "rs3": -1.4,
    "wk_bull": 33,
    "d_bull": 100,
@@ -630,8 +630,8 @@
     {
      "symbol": "BHARTIARTL",
      "close": 2106.0,
-     "rs1": 5.1,
-     "rs3": 4.9,
+     "rs1": 5.0,
+     "rs3": 4.8,
      "states": {
       "W": "Impulse",
       "D": "Topping"
@@ -640,8 +640,8 @@
     {
      "symbol": "INDUSTOWER",
      "close": 396.0,
-     "rs1": -6.9,
-     "rs3": -0.1,
+     "rs1": -7.0,
+     "rs3": -0.2,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -650,7 +650,7 @@
     {
      "symbol": "IDEA",
      "close": 12.57,
-     "rs1": -13.3,
+     "rs1": -13.4,
      "rs3": -10.3,
      "states": {
       "W": "Bearish",
@@ -664,7 +664,7 @@
    "stage": "Lagging",
    "n": 13,
    "rs1": -6.5,
-   "rs3": -2.8,
+   "rs3": -2.9,
    "wk_bull": 85,
    "d_bull": 85,
    "ratio": 0.9667,
@@ -673,8 +673,8 @@
     {
      "symbol": "TECHM",
      "close": 1764.0,
-     "rs1": 2.8,
-     "rs3": 5.2,
+     "rs1": 2.7,
+     "rs3": 5.1,
      "states": {
       "W": "Impulse",
       "D": "Topping"
@@ -684,7 +684,7 @@
      "symbol": "WIPRO",
      "close": 194.6,
      "rs1": 3.6,
-     "rs3": 2.4,
+     "rs3": 2.3,
      "states": {
       "W": "Bullish",
       "D": "Topping"
@@ -694,7 +694,7 @@
      "symbol": "COFORGE",
      "close": 2028.0,
      "rs1": -6.4,
-     "rs3": 9.2,
+     "rs3": 9.1,
      "states": {
       "W": "Topping",
       "D": "Topping"
@@ -714,7 +714,7 @@
      "symbol": "PERSISTENT",
      "close": 6003.0,
      "rs1": -11.3,
-     "rs3": 6.3,
+     "rs3": 6.2,
      "states": {
       "W": "Topping",
       "D": "Topping"
@@ -726,7 +726,7 @@
    "name": "Construction Materials",
    "stage": "Lagging",
    "n": 4,
-   "rs1": -2.3,
+   "rs1": -2.4,
    "rs3": -8.2,
    "wk_bull": 0,
    "d_bull": 100,
@@ -736,8 +736,8 @@
     {
      "symbol": "ULTRACEMCO",
      "close": 12100.0,
-     "rs1": 1.1,
-     "rs3": -1.6,
+     "rs1": 1.0,
+     "rs3": -1.7,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -756,7 +756,7 @@
     {
      "symbol": "AMBUJACEM",
      "close": 381.45,
-     "rs1": -2.5,
+     "rs1": -2.6,
      "rs3": -12.8,
      "states": {
       "W": "Bottoming",
@@ -766,7 +766,7 @@
     {
      "symbol": "GRASIM",
      "close": 3034.0,
-     "rs1": -7.3,
+     "rs1": -7.4,
      "rs3": -11.7,
      "states": {
       "W": "Bearish",
@@ -780,7 +780,7 @@
    "stage": "Lagging",
    "n": 8,
    "rs1": -4.9,
-   "rs3": -7.1,
+   "rs3": -7.2,
    "wk_bull": 0,
    "d_bull": 100,
    "ratio": 0.949,
@@ -799,8 +799,8 @@
     {
      "symbol": "ADANIPOWER",
      "close": 205.67,
-     "rs1": -0.9,
-     "rs3": -4.0,
+     "rs1": -1.0,
+     "rs3": -4.1,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -810,7 +810,7 @@
      "symbol": "JSWENERGY",
      "close": 514.55,
      "rs1": 0.2,
-     "rs3": -11.3,
+     "rs3": -11.4,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -819,8 +819,8 @@
     {
      "symbol": "NHPC",
      "close": 75.83,
-     "rs1": -8.3,
-     "rs3": -4.7,
+     "rs1": -8.4,
+     "rs3": -4.8,
      "states": {
       "W": "Bottoming",
       "D": "Topping"
@@ -830,7 +830,7 @@
      "symbol": "ADANIENSOL",
      "close": 1438.5,
      "rs1": -0.6,
-     "rs3": -13.4,
+     "rs3": -13.5,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -842,7 +842,7 @@
    "name": "Consumer Services",
    "stage": "Lagging",
    "n": 9,
-   "rs1": -8.1,
+   "rs1": -8.2,
    "rs3": -6.7,
    "wk_bull": 44,
    "d_bull": 78,
@@ -853,7 +853,7 @@
      "symbol": "INDHOTEL",
      "close": 890.3,
      "rs1": 11.4,
-     "rs3": 19.6,
+     "rs3": 19.5,
      "states": {
       "W": "Impulse",
       "D": "Topping"
@@ -862,8 +862,8 @@
     {
      "symbol": "ETERNAL",
      "close": 363.65,
-     "rs1": 2.0,
-     "rs3": 12.4,
+     "rs1": 1.9,
+     "rs3": 12.3,
      "states": {
       "W": "Topping",
       "D": "Impulse"
@@ -883,7 +883,7 @@
      "symbol": "TRENT",
      "close": 3165.2,
      "rs1": -5.6,
-     "rs3": 2.6,
+     "rs3": 2.5,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -892,7 +892,7 @@
     {
      "symbol": "JUBLFOOD",
      "close": 437.75,
-     "rs1": -8.5,
+     "rs1": -8.6,
      "rs3": -13.1,
      "states": {
       "W": "Bearish",
@@ -915,7 +915,7 @@
     {
      "symbol": "PATANJALI",
      "close": 421.0,
-     "rs1": 3.1,
+     "rs1": 3.0,
      "rs3": 16.0,
      "states": {
       "W": "Bullish",
@@ -925,8 +925,8 @@
     {
      "symbol": "MARICO",
      "close": 900.0,
-     "rs1": 3.5,
-     "rs3": 1.9,
+     "rs1": 3.4,
+     "rs3": 1.8,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -935,7 +935,7 @@
     {
      "symbol": "TATACONSUM",
      "close": 1079.0,
-     "rs1": 0.9,
+     "rs1": 0.8,
      "rs3": -1.8,
      "states": {
       "W": "Bottoming",
@@ -945,7 +945,7 @@
     {
      "symbol": "ITC",
      "close": 285.0,
-     "rs1": -2.3,
+     "rs1": -2.4,
      "rs3": -0.2,
      "states": {
       "W": "Bottoming",
@@ -956,7 +956,7 @@
      "symbol": "RADICO",
      "close": 4605.0,
      "rs1": -10.1,
-     "rs3": -1.8,
+     "rs3": -1.9,
      "states": {
       "W": "Topping",
       "D": "Impulse"
@@ -969,7 +969,7 @@
    "stage": "Lagging",
    "n": 10,
    "rs1": -7.2,
-   "rs3": -9.5,
+   "rs3": -9.6,
    "wk_bull": 20,
    "d_bull": 100,
    "ratio": 0.9317,
@@ -978,7 +978,7 @@
     {
      "symbol": "JSWSTEEL",
      "close": 1348.0,
-     "rs1": 3.1,
+     "rs1": 3.0,
      "rs3": 2.8,
      "states": {
       "W": "Bottoming",
@@ -998,8 +998,8 @@
     {
      "symbol": "TATASTEEL",
      "close": 186.68,
-     "rs1": -4.8,
-     "rs3": -3.1,
+     "rs1": -4.9,
+     "rs3": -3.2,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -1008,8 +1008,8 @@
     {
      "symbol": "SAIL",
      "close": 176.2,
-     "rs1": -9.5,
-     "rs3": -2.1,
+     "rs1": -9.6,
+     "rs3": -2.2,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -1018,7 +1018,7 @@
     {
      "symbol": "HINDZINC",
      "close": 554.85,
-     "rs1": -10.5,
+     "rs1": -10.6,
      "rs3": -8.5,
      "states": {
       "W": "Bearish",
@@ -1031,8 +1031,8 @@
    "name": "Chemicals",
    "stage": "Lagging",
    "n": 7,
-   "rs1": -9.2,
-   "rs3": -7.7,
+   "rs1": -9.3,
+   "rs3": -7.8,
    "wk_bull": 14,
    "d_bull": 71,
    "ratio": 0.9328,
@@ -1042,7 +1042,7 @@
      "symbol": "NAVINFLUOR",
      "close": 10002.0,
      "rs1": 6.6,
-     "rs3": 16.3,
+     "rs3": 16.2,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -1052,7 +1052,7 @@
      "symbol": "COROMANDEL",
      "close": 1955.0,
      "rs1": 1.9,
-     "rs3": -9.1,
+     "rs3": -9.2,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -1062,7 +1062,7 @@
      "symbol": "UPL",
      "close": 559.4,
      "rs1": -4.9,
-     "rs3": -5.3,
+     "rs3": -5.4,
      "states": {
       "W": "Bottoming",
       "D": "Bullish"
@@ -1071,7 +1071,7 @@
     {
      "symbol": "SOLARINDS",
      "close": 19338.0,
-     "rs1": -15.2,
+     "rs1": -15.3,
      "rs3": -0.2,
      "states": {
       "W": "Bearish",
@@ -1094,7 +1094,7 @@
    "name": "Capital Goods",
    "stage": "Lagging",
    "n": 26,
-   "rs1": -13.5,
+   "rs1": -13.6,
    "rs3": -12.8,
    "wk_bull": 12,
    "d_bull": 69,
@@ -1115,7 +1115,7 @@
      "symbol": "ASHOKLEY",
      "close": 169.2,
      "rs1": 3.3,
-     "rs3": -7.6,
+     "rs3": -7.7,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
@@ -1124,7 +1124,7 @@
     {
      "symbol": "GVT&D",
      "close": 4420.0,
-     "rs1": -6.0,
+     "rs1": -6.1,
      "rs3": -3.1,
      "states": {
       "W": "Bottoming",
@@ -1134,7 +1134,7 @@
     {
      "symbol": "BEL",
      "close": 400.85,
-     "rs1": -6.0,
+     "rs1": -6.1,
      "rs3": -4.6,
      "states": {
       "W": "Bottoming",
@@ -1145,7 +1145,7 @@
      "symbol": "BHEL",
      "close": 436.3,
      "rs1": -12.9,
-     "rs3": 0.5,
+     "rs3": 0.4,
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
