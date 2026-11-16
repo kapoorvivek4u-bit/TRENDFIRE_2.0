@@ -12,7 +12,7 @@ import streamlit as st
 PAGES = {
     "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
             "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback",
-                       "Overspill"],
+                       "Overspill", "Old labels"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
                "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill"],
@@ -142,6 +142,8 @@ def row_html(r):
     if r.get("also"):
         detail += (f'<br><span style="color:{GREEN};font-weight:600">Also grade A: '
                    f'{e("; ".join(r["also"]))}</span>')
+    if r.get("old"):
+        detail += f'<br><span style="color:{MUTED}">Old: {e(r["old"])}</span>'
     u = UNUSUAL.get(r["symbol"])
     if u:
         ev = u["events"][0]
@@ -708,7 +710,46 @@ if age_days >= 3:
                "GitHub for a failed run.")
 
 choice = st.radio("Setup", P["setups"], horizontal=True, label_visibility="collapsed",
-                  format_func=lambda x: x.split()[0], key=f"setup_{page}")
+                  format_func=lambda x: x if x == "Old labels" else x.split()[0],
+                  key=f"setup_{page}")
+OLD_ORDER = ["🏆 Prime Setup", "✅ Confirmed Bullish", "🎯 Consolidating",
+             "⚠️ Extended (Gaining)", "⏳ Building Momentum", "⚠️ Extended",
+             "⚠️ Extended (Weakening)", "❌ Avoid", "— Insufficient Data"]
+OLD_DEF = """**Old TrendFire labels (same rule as before: Weekly, Daily and Hourly momentum)**
+- **🏆 Prime Setup**: Weekly above zero. Daily below zero but rising, and Daily is in a squeeze.
+- **✅ Confirmed Bullish**: Weekly above zero. Daily above zero and rising.
+- **🎯 Consolidating**: Weekly and Daily above zero, Daily flattening. Hourly below zero but rising.
+- **⚠️ Extended (Gaining)**: Weekly and Daily above zero, Daily flattening. Hourly above zero and rising.
+- **⚠️ Extended**: Weekly and Daily above zero, Daily flattening. Hourly above zero and falling.
+- **⚠️ Extended (Weakening)**: Weekly and Daily above zero, Daily flattening. Hourly below zero and falling.
+- **⏳ Building Momentum**: Weekly above zero. Daily below zero but rising, with no squeeze.
+- **❌ Avoid**: Weekly below zero, or Daily below zero and falling.
+
+**Rough match with the new words**
+- Prime Setup is close to **Squeeze** Watch or Ready.
+- Building Momentum is close to **Trend** Ready (Daily dip turning up).
+- Consolidating is close to **Swing** Ready (Hourly dip turning up).
+- Confirmed Bullish is close to **Running**.
+- Extended is close to **Stretched** or **Fading**.
+
+The old labels can differ a little from the old site, because Hourly here uses only
+completed bars."""
+if choice == "Old labels":
+    groups = res.get("old_labels")
+    if not groups:
+        st.caption("Old labels need the updated F&O scan file. They will appear after the "
+                   "next scan.")
+    else:
+        for lab in OLD_ORDER:
+            names = groups.get(lab, [])
+            if not names or lab.startswith("—"):
+                continue
+            with st.expander(f"{lab} · {len(names)}", expanded=lab == "🏆 Prime Setup"):
+                st.markdown(names_html(names), unsafe_allow_html=True)
+    with st.expander("What the old labels mean"):
+        st.markdown(OLD_DEF)
+    st.caption("Watchlist only, not investment advice.")
+    st.stop()
 SPILL = choice == "Overspill"
 if SPILL:
     rows = res.get("overspill", [])
@@ -828,6 +869,7 @@ with st.expander("What the words mean"):
 {THIRD_DEF}
 - **Above 1,904**: the trigger. A close above this level confirms the turn.
 - **Stop**: just below the low of the dip.
+- **Old**: the label the old TrendFire site would give this stock.{"" if EQUITY else " See the Old labels button for what each one means."}
 """)
 
 if ready:
