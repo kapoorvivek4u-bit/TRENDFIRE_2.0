@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-16 15:45",
+ "generated_ist": "2026-11-16 16:24",
  "asof": "2026-11-16",
  "nifty": {
   "rw": 1.0,
@@ -73,6 +73,54 @@
      "states": {
       "W": "Bottoming",
       "D": "Impulse"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Healthcare",
+   "stage": "Leading",
+   "n": 3,
+   "rw": 4.6,
+   "r2w": -1.1,
+   "r1": 0.9,
+   "idx_d": "Bullish",
+   "wk_bull": 0,
+   "d_bull": 100,
+   "ratio": 1.0235,
+   "mom": 0.0535,
+   "top": [
+    {
+     "symbol": "MAXHEALTH",
+     "close": 1009.9,
+     "rw": 7.1,
+     "r2w": 7.7,
+     "r1": 6.7,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "APOLLOHOSP",
+     "close": 8771.0,
+     "rw": 2.8,
+     "r2w": -5.9,
+     "r1": 0.3,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
+     }
+    },
+    {
+     "symbol": "FORTIS",
+     "close": 803.2,
+     "rw": 3.7,
+     "r2w": -5.1,
+     "r1": -4.7,
+     "states": {
+      "W": "Bottoming",
+      "D": "Bullish"
      }
     }
    ]
@@ -546,87 +594,17 @@
    ]
   },
   {
-   "name": "Healthcare",
-   "stage": "Improving",
-   "n": 15,
-   "rw": 0.2,
-   "r2w": -5.8,
-   "r1": -2.5,
-   "idx_d": "Bullish",
-   "wk_bull": 33,
-   "d_bull": 100,
-   "ratio": 0.9821,
-   "mom": 0.0067,
-   "top": [
-    {
-     "symbol": "MAXHEALTH",
-     "close": 1009.9,
-     "rw": 7.1,
-     "r2w": 7.7,
-     "r1": 6.7,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    },
-    {
-     "symbol": "DIVISLAB",
-     "close": 11080.0,
-     "rw": 6.3,
-     "r2w": 3.6,
-     "r1": 11.0,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "GLENMARK",
-     "close": 2632.9,
-     "rw": 0.6,
-     "r2w": 4.8,
-     "r1": 5.4,
-     "states": {
-      "W": "Impulse",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "MANKIND",
-     "close": 2626.6,
-     "rw": 2.4,
-     "r2w": -4.3,
-     "r1": 0.7,
-     "states": {
-      "W": "Bottoming",
-      "D": "Impulse"
-     }
-    },
-    {
-     "symbol": "APOLLOHOSP",
-     "close": 8771.0,
-     "rw": 2.8,
-     "r2w": -5.9,
-     "r1": 0.3,
-     "states": {
-      "W": "Bottoming",
-      "D": "Bullish"
-     }
-    }
-   ]
-  },
-  {
    "name": "Capital Goods",
    "stage": "Improving",
-   "n": 26,
-   "rw": -0.0,
+   "n": 25,
+   "rw": 0.2,
    "r2w": -4.9,
    "r1": -16.6,
    "idx_d": "Bullish",
    "wk_bull": 12,
-   "d_bull": 77,
-   "ratio": 0.9467,
-   "mom": 0.0302,
+   "d_bull": 76,
+   "ratio": 0.9477,
+   "mom": 0.0323,
    "top": [
     {
      "symbol": "POWERINDIA",
@@ -866,6 +844,76 @@
      "rw": -0.8,
      "r2w": -0.6,
      "r1": 1.4,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Pharma",
+   "stage": "Lagging",
+   "n": 13,
+   "rw": -1.0,
+   "r2w": -6.7,
+   "r1": -3.4,
+   "idx_d": "Topping",
+   "wk_bull": 46,
+   "d_bull": 100,
+   "ratio": 0.9731,
+   "mom": -0.0051,
+   "top": [
+    {
+     "symbol": "DIVISLAB",
+     "close": 11080.0,
+     "rw": 6.3,
+     "r2w": 3.6,
+     "r1": 11.0,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "GLENMARK",
+     "close": 2632.9,
+     "rw": 0.6,
+     "r2w": 4.8,
+     "r1": 5.4,
+     "states": {
+      "W": "Impulse",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "MANKIND",
+     "close": 2626.6,
+     "rw": 2.4,
+     "r2w": -4.3,
+     "r1": 0.7,
+     "states": {
+      "W": "Bottoming",
+      "D": "Impulse"
+     }
+    },
+    {
+     "symbol": "DRREDDY",
+     "close": 1377.9,
+     "rw": -0.7,
+     "r2w": -7.8,
+     "r1": 1.5,
+     "states": {
+      "W": "Impulse",
+      "D": "Topping"
+     }
+    },
+    {
+     "symbol": "AUROPHARMA",
+     "close": 1794.0,
+     "rw": -1.4,
+     "r2w": -3.0,
+     "r1": -3.9,
      "states": {
       "W": "Impulse",
       "D": "Impulse"
@@ -1345,8 +1393,8 @@
    "stage": "Leading"
   },
   "ABBOTINDIA": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "ACE": {
    "sector": "Capital Goods",
@@ -1354,7 +1402,7 @@
   },
   "ACUTAAS": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ADANIENSOL": {
    "sector": "Power",
@@ -1417,12 +1465,12 @@
    "stage": "Lagging"
   },
   "AJANTPHARM": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "ALKEM": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "ABDL": {
    "sector": "FMCG",
@@ -1454,7 +1502,7 @@
   },
   "ANTHEM": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ANURAS": {
    "sector": "Chemicals",
@@ -1466,7 +1514,7 @@
   },
   "APOLLOHOSP": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "APOLLOTYRE": {
    "sector": "Auto",
@@ -1490,7 +1538,7 @@
   },
   "ASTERDM": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "ASTRAL": {
    "sector": "Capital Goods",
@@ -1505,8 +1553,8 @@
    "stage": "Improving"
   },
   "AUROPHARMA": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "AIIL": {
    "sector": "Finance",
@@ -1637,8 +1685,8 @@
    "stage": "Leading"
   },
   "BIOCON": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "BSOFT": {
    "sector": "IT",
@@ -1706,7 +1754,7 @@
   },
   "CAPLIPOINT": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CGCL": {
    "sector": "Finance",
@@ -1765,8 +1813,8 @@
    "stage": "Leading"
   },
   "CIPLA": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "CUB": {
    "sector": "Finance",
@@ -1794,7 +1842,7 @@
   },
   "COHANCE": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "COLPAL": {
    "sector": "FMCG",
@@ -1806,7 +1854,7 @@
   },
   "CONCORDBIO": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "CONCOR": {
    "sector": "Services",
@@ -1877,8 +1925,8 @@
    "stage": "Improving"
   },
   "DIVISLAB": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "DIXON": {
    "sector": "Consumer Durables",
@@ -1886,11 +1934,11 @@
   },
   "LALPATHLAB": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "DRREDDY": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "DUMMYHEG": {
    "sector": "Capital Goods",
@@ -1926,7 +1974,7 @@
   },
   "EMCURE": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "EMMVEE": {
    "sector": "Capital Goods",
@@ -1982,7 +2030,7 @@
   },
   "FORTIS": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "FRACTAL": {
    "sector": "IT",
@@ -2021,20 +2069,20 @@
    "stage": "Improving"
   },
   "GLAND": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "GLAXO": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "GLENMARK": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "MEDANTA": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "GPIL": {
    "sector": "Capital Goods",
@@ -2058,7 +2106,7 @@
   },
   "GRANULES": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "GRAPHITE": {
    "sector": "Capital Goods",
@@ -2317,8 +2365,8 @@
    "stage": "Lagging"
   },
   "IPCALAB": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "JKCEMENT": {
    "sector": "Construction Materials",
@@ -2454,7 +2502,7 @@
   },
   "KIMS": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "LTF": {
    "sector": "Finance",
@@ -2485,8 +2533,8 @@
    "stage": "Improving"
   },
   "LAURUSLABS": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "LEMONTREE": {
    "sector": "Consumer Services",
@@ -2513,8 +2561,8 @@
    "stage": "Weakening"
   },
   "LUPIN": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "MMTC": {
    "sector": "Services",
@@ -2549,8 +2597,8 @@
    "stage": "Lagging"
   },
   "MANKIND": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "MARICO": {
    "sector": "FMCG",
@@ -2566,7 +2614,7 @@
   },
   "MAXHEALTH": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "MAZDOCK": {
    "sector": "Capital Goods",
@@ -2602,7 +2650,7 @@
   },
   "NATCOPHARM": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NBCC": {
    "sector": "Construction",
@@ -2638,7 +2686,7 @@
   },
   "NH": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NATIONALUM": {
    "sector": "Metals & Mining",
@@ -2662,7 +2710,7 @@
   },
   "NEULANDLAB": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "NAM-INDIA": {
    "sector": "Finance",
@@ -2702,7 +2750,7 @@
   },
   "ONESOURCE": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "OFSS": {
    "sector": "IT",
@@ -2777,12 +2825,12 @@
    "stage": "Leading"
   },
   "PPLPHARMA": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "POLYMED": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "POLYCAB": {
    "sector": "Capital Goods",
@@ -2854,7 +2902,7 @@
   },
   "RAINBOW": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "RKFORGE": {
    "sector": "Auto",
@@ -2874,7 +2922,7 @@
   },
   "RUBICON": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SBICARD": {
    "sector": "Finance",
@@ -2901,8 +2949,8 @@
    "stage": "Lagging"
   },
   "SAILIFE": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "SAMMAANCAP": {
    "sector": "Finance",
@@ -2989,8 +3037,8 @@
    "stage": "Improving"
   },
   "SUNPHARMA": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "SUNTV": {
    "sector": "Media",
@@ -3018,7 +3066,7 @@
   },
   "SYNGENE": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "SYRMA": {
    "sector": "Capital Goods",
@@ -3137,8 +3185,8 @@
    "stage": "Leading"
   },
   "TORNTPHARM": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "TORNTPOWER": {
    "sector": "Power",
@@ -3234,7 +3282,7 @@
   },
   "VIJAYA": {
    "sector": "Healthcare",
-   "stage": "Improving"
+   "stage": "Leading"
   },
   "VMM": {
    "sector": "Consumer Services",
@@ -3269,8 +3317,8 @@
    "stage": "Lagging"
   },
   "WOCKPHARMA": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "YESBANK": {
    "sector": "Banks",
@@ -3293,8 +3341,8 @@
    "stage": "Lagging"
   },
   "ZYDUSLIFE": {
-   "sector": "Healthcare",
-   "stage": "Improving"
+   "sector": "Pharma",
+   "stage": "Lagging"
   },
   "ZYDUSWELL": {
    "sector": "FMCG",
