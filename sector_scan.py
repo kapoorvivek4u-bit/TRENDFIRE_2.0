@@ -57,7 +57,7 @@ NAMES = {
 BASE = ["https://nsearchives.nseindia.com/content/indices/",
         "https://www.niftyindices.com/IndexConstituent/"]
 LISTS = {"all": "ind_nifty500list.csv", "banks": "ind_niftybanklist.csv",
-         "psu": "ind_niftypsubanklist.csv"}
+         "psu": "ind_niftypsubanklist.csv", "pharma": "ind_niftypharmalist.csv"}
 STAGE_ORDER = {"Leading": 0, "Improving": 1, "Weakening": 2, "Lagging": 3}
 
 
@@ -87,16 +87,19 @@ def parse_index_list(raw):
     return out
 
 
-def build_map(all_df, banks=None, psu=None):
-    """symbol -> sector name, with Finance split into Banks / PSU Banks / Finance."""
+def build_map(all_df, banks=None, psu=None, pharma=None):
+    """symbol -> sector name, with Finance split into Banks / PSU Banks / Finance, and
+    Pharma split out of Healthcare (hospitals and diagnostics stay in Healthcare)."""
     m = {}
-    banks, psu = set(banks or []), set(psu or [])
+    banks, psu, pharma = set(banks or []), set(psu or []), set(pharma or [])
     for s, ind in zip(all_df["symbol"], all_df["industry"]):
         name = NAMES.get(ind, ind)
         if s in psu:
             name = "PSU Banks"
         elif s in banks:
             name = "Banks"
+        elif s in pharma:
+            name = "Pharma"
         m[s] = name
     return m
 
@@ -119,7 +122,10 @@ def load_sector_map(session, notes):
             notes.append("Bank list unavailable: banks are grouped under Finance.")
         m = build_map(got["all"],
                       got["banks"]["symbol"].tolist() if "banks" in got else None,
-                      got["psu"]["symbol"].tolist() if "psu" in got else None)
+                      got["psu"]["symbol"].tolist() if "psu" in got else None,
+                      got["pharma"]["symbol"].tolist() if "pharma" in got else None)
+        if "pharma" not in got:
+            notes.append("Pharma list unavailable: pharma stays inside Healthcare.")
         pd.DataFrame({"symbol": list(m), "sector": list(m.values())}).to_csv(path, index=False)
         return m
     if os.path.exists(path):
@@ -298,9 +304,12 @@ def selftest():
            "Bajaj Finance Ltd.,Financial Services,BAJFINANCE,EQ,X\n"
            "Infosys Ltd.,Information Technology,INFY,EQ,X\n"
            "Maruti Suzuki,Automobile and Auto Components,MARUTI,EQ,X\n").encode()
-    m = build_map(parse_index_list(csv), ["HDFCBANK", "SBIN"], ["SBIN"])
+    csv2 = csv.decode() + ("Sun Pharma,Healthcare,SUNPHARMA,EQ,X\n"
+                           "Apollo Hospitals,Healthcare,APOLLOHOSP,EQ,X\n")
+    m = build_map(parse_index_list(csv2.encode()), ["HDFCBANK", "SBIN"], ["SBIN"], ["SUNPHARMA"])
     assert m == {"HDFCBANK": "Banks", "SBIN": "PSU Banks", "BAJFINANCE": "Finance",
-                 "INFY": "IT", "MARUTI": "Auto"}, m
+                 "INFY": "IT", "MARUTI": "Auto", "SUNPHARMA": "Pharma",
+                 "APOLLOHOSP": "Healthcare"}, m
     assert build_map(parse_index_list(csv))["HDFCBANK"] == "Finance"
     json.dumps(ranked)
     print("\nSELFTEST PASSED")
