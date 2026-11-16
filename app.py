@@ -27,7 +27,7 @@ PAGES = {
 ALL_FILES = ([PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
-OWNER = "Vivek Kapoor"          # name shown beside the Refresh button
+OWNER = "Vivek Kapoor"          # name shown as the faded watermark
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
@@ -661,15 +661,20 @@ def watch_for_new_scans():
 
 page = st.radio("Market", ["A list"] + list(PAGES), horizontal=True,
                 label_visibility="collapsed")
-with st.container(horizontal=True, horizontal_alignment="distribute",
-                  vertical_alignment="center"):
+with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
         st.cache_data.clear()
     with st.popover("Run scan"):
         scan_panel()
-    st.markdown(f'<div style="font-family:Georgia,serif;font-size:18px;font-weight:600;'
-                f'color:{INK};text-align:right">{html.escape(OWNER)}</div>',
-                unsafe_allow_html=True)
+# faded diagonal name, fixed to the screen so it stays in view while scrolling;
+# pointer-events:none lets every tap pass through to the page underneath
+st.markdown(
+    '<div aria-hidden="true" style="position:fixed;inset:0;display:flex;'
+    'align-items:center;justify-content:center;pointer-events:none;z-index:999990;'
+    'overflow:hidden"><div style="transform:rotate(-30deg);white-space:nowrap;'
+    'font-family:Georgia,serif;font-weight:700;font-size:min(11vw,130px);'
+    f'color:{INK};opacity:0.07;user-select:none">{html.escape(OWNER)}</div></div>',
+    unsafe_allow_html=True)
 watch_for_new_scans()
 SECTORS.update(load_sector_tags())
 if page == "Sectors":
