@@ -250,6 +250,43 @@ def load_unusual_map(market):
         return {}
 
 
+def chart_svg(ch):
+    """The pattern as a small picture: price bars, close line, and the pattern lines."""
+    try:
+        H, L, C = ch["h"], ch["l"], ch["c"]
+        N = len(C)
+        ys = H + L + [p[1] for ln in ch["lines"].values() for p in ln]
+        lo, hi = min(ys), max(ys)
+        pad = (hi - lo) * 0.06 or 1
+        lo, hi = lo - pad, hi + pad
+        W, Hh = 300, 90
+        X = lambda i: (i + 0.5) / N * W
+        Y = lambda v: (hi - v) / (hi - lo) * Hh
+        ne = 'vector-effect="non-scaling-stroke"'
+        bars = "".join(f'<line x1="{X(i):.1f}" y1="{Y(H[i]):.1f}" x2="{X(i):.1f}" '
+                       f'y2="{Y(L[i]):.1f}" stroke="{RULE}" stroke-width="2" {ne}/>'
+                       for i in range(N))
+        close = " ".join(f"{X(i):.1f},{Y(v):.1f}" for i, v in enumerate(C))
+        style = {"top": (GREEN, "5 3", 1.8), "floor": (RED, "5 3", 1.5),
+                 "pole": (GREEN, "", 3)}
+        lines = ""
+        for k, ((x0, y0), (x1, y1)) in ch["lines"].items():
+            col, dash, wd = style.get(k, (MUTED, "", 1.5))
+            lines += (f'<line x1="{X(x0):.1f}" y1="{Y(y0):.1f}" x2="{X(x1):.1f}" '
+                      f'y2="{Y(y1):.1f}" stroke="{col}" stroke-width="{wd}" '
+                      f'stroke-dasharray="{dash}" opacity="{0.45 if k == "pole" else 0.95}" {ne}/>')
+        brk = ""
+        if ch.get("brk") is not None:
+            brk = (f'<line x1="{X(ch["brk"]):.1f}" y1="0" x2="{X(ch["brk"]):.1f}" y2="{Hh}" '
+                   f'stroke="{GREEN}" stroke-width="1" opacity="0.35" {ne}/>')
+        return (f'<svg viewBox="0 0 {W} {Hh}" preserveAspectRatio="none" '
+                f'style="width:100%;height:84px;display:block;margin:6px 0 4px">'
+                f'{bars}{brk}<polyline points="{close}" fill="none" stroke="{INK}" '
+                f'stroke-width="1.4" {ne}/>{lines}</svg>')
+    except Exception:
+        return ""
+
+
 def row_html(r):
     e = html.escape
     trend = r.get("trend") or "Monthly n/a"
@@ -275,7 +312,7 @@ def row_html(r):
                    if is_extended(r) else f'<br><span style="color:{MUTED}">{where}</span>')
     if r.get("target"):
         detail += (f'<br><span style="color:{GREEN}">Target {money(r["target"])} '
-                   f'(range depth added to the breakout level)</span>')
+                   f'({e(r.get("target_why", "range depth added to the breakout level"))})</span>')
     if r.get("old"):
         detail += f'<br><span style="color:{MUTED}">Old: {e(r["old"])}</span>'
     if r.get("vk"):
@@ -293,6 +330,7 @@ def row_html(r):
         f'{e(r["symbol"])}</a>{wl_link(r["symbol"])}</span>{grade_badge(r["grade"], r.get("stage"))}</div>'
         f'<div class="tf-set">{e(r["setup"])} · '
         f'<span style="color:{tcol}">{e(trend)}</span>{quality_html(r)}</div>'
+        + (chart_svg(r["chart"]) if r.get("chart") else "") +
         f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
         f'{deals_html(r["symbol"])}{stars_html(r["symbol"])}'
         f'<div class="tf-small">{detail}</div>'
