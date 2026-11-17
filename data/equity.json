@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-17 16:44",
+ "generated_ist": "2026-11-17 17:05",
  "oi_asof": "2026-11-16",
- "stocks": 255,
+ "stocks": 254,
  "market": {
   "weekly_bull_pct": 24,
   "monthly_bull_pct": 44,
@@ -9,7 +9,7 @@
   "regime": "Weak",
   "daily_bull_hist": [
    46,
-   51,
+   50,
    57,
    65,
    68,
@@ -2083,11 +2083,11 @@
    "target": 143.91
   }
  ],
+ "recent_breakouts": {},
  "others": {
   "Running": [
    "ACE",
    "AETHER",
-   "AFFLE",
    "AIIL",
    "BBOX",
    "BEML",
@@ -2160,7 +2160,6 @@
    "AEGISLOG",
    "AEGISVOPAK",
    "AFCONS",
-   "AFFLE",
    "AIAENG",
    "AIIL",
    "AJANTPHARM",
@@ -2418,5 +2417,7 @@
   ]
  },
  "vk_labels": {},
- "notes": []
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ]
 }
