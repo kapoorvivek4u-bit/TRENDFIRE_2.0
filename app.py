@@ -1623,6 +1623,14 @@ def stock_brief(sym, R):
             "best": rank.get(rows[0]["stage"], 9) if rows else 9}
 
 
+def save_note(sym):
+    txt = st.session_state.get(f"wl_note_{sym}", "")
+    if txt.strip() == WATCH.get(sym, {}).get("note", ""):
+        return
+    err = watch_change(note={sym: txt})
+    st.session_state["watch_msg"] = (err, sym, "note")
+
+
 def render_watchlist():
     e = html.escape
     st.markdown(
@@ -1684,6 +1692,10 @@ def render_watchlist():
                 f'<div class="tf-small" style="color:{INK}">'
                 + (" · ".join(bits) if bits else "Nothing on the site for this stock right now")
                 + f'</div>{sector_html(s)}</div>', unsafe_allow_html=True)
+        st.text_area("Remarks", value=WATCH[s].get("note", ""), key=f"wl_note_{s}",
+                     placeholder="Remarks: your notes on this stock", height=68,
+                     max_chars=1000, label_visibility="collapsed",
+                     on_change=save_note, args=(s,))
         with c2:
             if st.button("Remove", key=f"wl_rm_{s}"):
                 err = watch_change(remove=[s])
@@ -2039,7 +2051,7 @@ def watch_write(items, sha, message):
     return code
 
 
-def watch_change(add=None, remove=None):
+def watch_change(add=None, remove=None, note=None):
     """Add or remove symbols. Returns an error message, or None."""
     if not secret("GH_TOKEN"):
         return "The watchlist needs GH_TOKEN in the app's secrets."
@@ -2051,8 +2063,11 @@ def watch_change(add=None, remove=None):
             items.setdefault(s, {"symbol": s, "added": today})
         for s in remove or []:
             items.pop(s, None)
+        for s, txt in (note or {}).items():
+            items.setdefault(s, {"symbol": s, "added": today})["note"] = txt.strip()
         code = watch_write(items, sha, "Watchlist: " + ", ".join(
-            [f"+{s}" for s in add or []] + [f"-{s}" for s in remove or []]))
+            [f"+{s}" for s in add or []] + [f"-{s}" for s in remove or []]
+            + [f"note {s}" for s in note or {}]))
         st.session_state["watch_v"] = st.session_state.get("watch_v", 0) + 1
         watch_read.clear()
         if code in (200, 201):
@@ -2099,7 +2114,8 @@ if wm:
     if err:
         st.error(f"Watchlist: {err}")
     else:
-        st.toast(f"{sym_q} {'added to' if kind == 'add' else 'removed from'} your watchlist")
+        st.toast(f"Remarks saved for {sym_q}" if kind == "note" else
+                 f"{sym_q} {'added to' if kind == 'add' else 'removed from'} your watchlist")
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
         st.cache_data.clear()
