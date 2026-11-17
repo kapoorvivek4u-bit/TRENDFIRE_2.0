@@ -1,31 +1,49 @@
 {
- "generated_ist": "2026-11-17 04:53",
+ "generated_ist": "2026-11-17 08:37",
  "oi_asof": "2026-11-16",
  "stocks": 255,
  "market": {
-  "weekly_bull_pct": 25,
+  "weekly_bull_pct": 24,
   "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
-   33,
-   37,
-   46,
-   51,
-   57,
+   34,
+   41,
+   49,
+   54,
+   63,
    65
   ],
   "nifty": {
    "state": "Bullish",
-   "mom": 1598.6
+   "mom": 1703.1
   },
   "turn": "Turning up"
  },
- "broke": [],
+ "broke": [
+  {
+   "symbol": "CUPID",
+   "close": 361.9,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Impulse"
+   },
+   "stage": "Triggered",
+   "score": 80.7,
+   "grade": "A",
+   "trigger": 357.0,
+   "stop": 341.53,
+   "detail": "Broke out Thu 12 \u00b7 Volume 2.7x \u00b7 Base 15% deep \u00b7 RS 100 \u00b7 Delivery 38% vs 31% before"
+  }
+ ],
  "setting": [
   {
    "symbol": "ABDL",
-   "close": 757.7,
+   "close": 784.25,
    "trend": "",
    "setup": "Base Breakout",
    "states": {
@@ -34,11 +52,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 78.1,
+   "score": 76.8,
    "grade": "A",
-   "trigger": 768.0,
+   "trigger": 792.0,
    "stop": null,
-   "detail": "1.3% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 92 \u00b7 Delivery 47% vs 42% before"
+   "detail": "1.0% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 0.6x usual \u00b7 RS 94 \u00b7 Delivery 47% vs 42% before"
   },
   {
    "symbol": "LTTS",
@@ -51,7 +69,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 68.1,
+   "score": 68.0,
    "grade": "B",
    "trigger": 4347.4,
    "stop": null,
@@ -119,28 +137,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 51.0,
+   "score": 50.6,
    "grade": "C",
    "trigger": 1347.0,
    "stop": null,
-   "detail": "2.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 98 \u00b7 Delivery 50% vs 54% before"
-  },
-  {
-   "symbol": "CRAFTSMAN",
-   "close": 11077.0,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bottoming"
-   },
-   "stage": "Ready",
-   "score": 48.5,
-   "grade": "C",
-   "trigger": 11289.0,
-   "stop": null,
-   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 83 \u00b7 Delivery 48% vs 52% before"
+   "detail": "2.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 97 \u00b7 Delivery 50% vs 54% before"
   },
   {
    "symbol": "GRAPHITE",
@@ -153,11 +154,28 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 48.5,
+   "score": 49.2,
    "grade": "C",
    "trigger": 804.0,
    "stop": null,
-   "detail": "0.5% below the breakout level \u00b7 Base 16% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 73 \u00b7 Delivery 43% vs 37% before"
+   "detail": "0.5% below the breakout level \u00b7 Base 16% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 74 \u00b7 Delivery 43% vs 37% before"
+  },
+  {
+   "symbol": "CRAFTSMAN",
+   "close": 11077.0,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "stage": "Ready",
+   "score": 48.4,
+   "grade": "C",
+   "trigger": 11289.0,
+   "stop": null,
+   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 83 \u00b7 Delivery 48% vs 52% before"
   },
   {
    "symbol": "TATACOMM",
@@ -170,7 +188,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 41.6,
+   "score": 41.9,
    "grade": "C",
    "trigger": 1779.0,
    "stop": null,
