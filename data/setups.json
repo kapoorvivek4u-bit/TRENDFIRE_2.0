@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-18 00:56",
+ "generated_ist": "2026-11-18 01:00",
  "oi_asof": "2026-11-17",
  "stocks": 218,
  "market": {
@@ -221,44 +221,10 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 46% \u00b7 Volume 0.3x in pullback \u00b7 OI +16% in up-leg, +1% in pullback",
+   "detail": "Pullback 46% \u00b7 Volume 0.4x in pullback \u00b7 OI +16% in up-leg, +1% in pullback",
    "grade": "A",
    "trigger": null,
    "stop": 355.69
-  },
-  {
-   "symbol": "PRESTIGE",
-   "close": 1691.5,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.1,
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "Mixed",
-    "ma": "ONLY BUY",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 31% \u00b7 Volume 0.8x in pullback \u00b7 OI +10% in up-leg",
-   "grade": "A",
-   "trigger": 1688.4,
-   "stop": 1658.78
   },
   {
    "symbol": "RADICO",
@@ -289,7 +255,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 28% \u00b7 Volume 0.4x in pullback \u00b7 OI +5% in up-leg",
+   "detail": "Pullback 28% \u00b7 Volume 0.3x in pullback \u00b7 OI +5% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 4611.36
@@ -357,7 +323,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 21% \u00b7 Volume 0.7x in pullback \u00b7 OI +7% in up-leg",
+   "detail": "Pullback 21% \u00b7 Volume 0.8x in pullback \u00b7 OI +7% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 291.82
@@ -391,7 +357,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 37% \u00b7 Volume 0.7x in pullback \u00b7 OI +2% in up-leg, -2% in pullback",
+   "detail": "Pullback 37% \u00b7 Volume 0.6x in pullback \u00b7 OI +2% in up-leg, -2% in pullback",
    "grade": "A",
    "trigger": 382.15,
    "stop": 379.49
@@ -425,7 +391,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 45% \u00b7 Volume 0.4x in pullback \u00b7 OI +2% in up-leg, +1% in pullback",
+   "detail": "Pullback 45% \u00b7 Volume 0.6x in pullback \u00b7 OI +2% in up-leg, +1% in pullback",
    "grade": "A",
    "trigger": null,
    "stop": 390.27
@@ -493,7 +459,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 48% \u00b7 Volume 6.6x in pullback \u00b7 OI +3% in up-leg",
+   "detail": "Pullback 48% \u00b7 Volume 6.7x in pullback \u00b7 OI +3% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 348.95
@@ -533,40 +499,6 @@
    "stop": 10932.09
   },
   {
-   "symbol": "FEDERALBNK",
-   "close": 365.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.0,
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "Mixed",
-    "ma": "ONLY BUY",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 20% \u00b7 Volume 0.8x in pullback \u00b7 OI -19% in up-leg, -0% in pullback",
-   "grade": "B",
-   "trigger": 366.5,
-   "stop": 360.38
-  },
-  {
    "symbol": "MCX",
    "close": 3705.4,
    "trend": "With trend",
@@ -595,7 +527,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 21% \u00b7 Volume 0.7x in pullback \u00b7 OI -6% in up-leg, -1% in pullback",
+   "detail": "Pullback 21% \u00b7 Volume 0.6x in pullback \u00b7 OI -6% in up-leg, -1% in pullback",
    "grade": "B",
    "trigger": null,
    "stop": 3653.28
@@ -633,6 +565,40 @@
    "grade": "B",
    "trigger": null,
    "stop": 1231.63
+  },
+  {
+   "symbol": "PRESTIGE",
+   "close": 1691.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "old": "\u274c Avoid",
+   "ext": 2.1,
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 31% \u00b7 Volume 0.9x in pullback \u00b7 OI +10% in up-leg",
+   "grade": "B",
+   "trigger": 1688.4,
+   "stop": 1658.78
   },
   {
    "symbol": "ICICIGI",
@@ -833,7 +799,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 41% \u00b7 Volume 1.2x in pullback \u00b7 OI +3% in up-leg",
+   "detail": "Pullback 41% \u00b7 Volume 1.3x in pullback \u00b7 OI +3% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 3149.09
@@ -867,7 +833,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 28% \u00b7 Volume 0.6x in pullback \u00b7 OI -5% in up-leg, -1% in pullback",
+   "detail": "Pullback 28% \u00b7 Volume 0.4x in pullback \u00b7 OI -5% in up-leg, -1% in pullback",
    "grade": "B",
    "trigger": 12295.0,
    "stop": 12040.87
@@ -905,6 +871,40 @@
    "grade": "B",
    "trigger": 273.95,
    "stop": 268.6
+  },
+  {
+   "symbol": "HDFCAMC",
+   "close": 2699.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "old": "\u274c Avoid",
+   "ext": 2.6,
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 30% \u00b7 Volume 0.6x in pullback \u00b7 OI -13% in up-leg, +2% in pullback",
+   "grade": "B",
+   "trigger": 2650.0,
+   "stop": 2621.15
   },
   {
    "symbol": "IOC",
@@ -969,7 +969,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 24% \u00b7 Volume 0.5x in pullback \u00b7 OI -1% in up-leg, +1% in pullback",
+   "detail": "Pullback 24% \u00b7 Volume 0.4x in pullback \u00b7 OI -1% in up-leg, +1% in pullback",
    "grade": "B",
    "trigger": 3330.0,
    "stop": 3307.37
@@ -1071,7 +1071,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 53% \u00b7 Volume 1.2x in pullback \u00b7 OI -14% in up-leg, +2% in pullback",
+   "detail": "Pullback 53% \u00b7 Volume 1.4x in pullback \u00b7 OI -14% in up-leg, +2% in pullback",
    "grade": "C",
    "trigger": 1405.9,
    "stop": 1377.34
@@ -1105,7 +1105,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 72% \u00b7 Volume 1.2x in pullback \u00b7 OI -16% in up-leg, +0% in pullback",
+   "detail": "Pullback 72% \u00b7 Volume 1.4x in pullback \u00b7 OI -16% in up-leg, +0% in pullback",
    "grade": "C",
    "trigger": null,
    "stop": 2176.64
@@ -1179,6 +1179,40 @@
    "stop": 3834.32
   },
   {
+   "symbol": "FEDERALBNK",
+   "close": 365.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "old": "\u274c Avoid",
+   "ext": 2.0,
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Ready",
+   "detail": "Pullback 20% \u00b7 Volume 0.9x in pullback \u00b7 OI -19% in up-leg, -0% in pullback",
+   "grade": "C",
+   "trigger": 366.5,
+   "stop": 360.38
+  },
+  {
    "symbol": "JSWSTEEL",
    "close": 1332.0,
    "trend": "With trend",
@@ -1241,7 +1275,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 46% \u00b7 Volume 1.3x in pullback \u00b7 OI -7% in up-leg",
+   "detail": "Pullback 46% \u00b7 Volume 1.4x in pullback \u00b7 OI -7% in up-leg",
    "grade": "C",
    "trigger": 1608.0,
    "stop": 1598.5
@@ -1275,7 +1309,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 24% \u00b7 Volume 1.1x in pullback \u00b7 OI -1% in up-leg",
+   "detail": "Pullback 24% \u00b7 Volume 1.0x in pullback \u00b7 OI -1% in up-leg",
    "grade": "C",
    "trigger": 765.85,
    "stop": 759.98
@@ -1309,7 +1343,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 40% \u00b7 Volume 1.8x in pullback \u00b7 OI -1% in up-leg",
+   "detail": "Pullback 40% \u00b7 Volume 2.3x in pullback \u00b7 OI -1% in up-leg",
    "grade": "C",
    "trigger": 964.75,
    "stop": 951.29
@@ -1363,44 +1397,10 @@
    "vk": null,
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 38% \u00b7 Volume 1.0x in pullback \u00b7 OI -36% in up-leg, -14% in pullback",
+   "detail": "Pullback 38% \u00b7 Volume 0.9x in pullback \u00b7 OI -36% in up-leg, -14% in pullback",
    "grade": "C",
    "trigger": 122.44,
    "stop": 114.37
-  },
-  {
-   "symbol": "HDFCAMC",
-   "close": 2699.0,
-   "trend": "Counter-trend",
-   "states": {
-    "M": "Bearish",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.6,
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BEARISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 30% \u00b7 Volume 0.9x in pullback \u00b7 OI -13% in up-leg, +2% in pullback",
-   "grade": "C",
-   "trigger": 2650.0,
-   "stop": 2621.15
   },
   {
    "symbol": "TATACONSUM",
@@ -1431,7 +1431,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 30% \u00b7 Volume 1.2x in pullback \u00b7 OI -1% in up-leg",
+   "detail": "Pullback 30% \u00b7 Volume 1.3x in pullback \u00b7 OI -1% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 1105.38
@@ -1465,7 +1465,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 49% \u00b7 Volume 0.5x in pullback \u00b7 OI +6% in up-leg, +27% in pullback",
+   "detail": "Pullback 49% \u00b7 Volume 0.6x in pullback \u00b7 OI +6% in up-leg, +27% in pullback",
    "grade": "Warning",
    "trigger": null,
    "stop": 160.18
@@ -1533,7 +1533,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 31% \u00b7 Volume 0.7x in pullback \u00b7 OI +2% in up-leg, +5% in pullback",
+   "detail": "Pullback 31% \u00b7 Volume 0.6x in pullback \u00b7 OI +2% in up-leg, +5% in pullback",
    "grade": "Warning",
    "trigger": 4135.6,
    "stop": 4108.77
@@ -1567,7 +1567,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 36% \u00b7 Volume 0.4x in pullback \u00b7 OI -8% in up-leg, +5% in pullback",
+   "detail": "Pullback 36% \u00b7 Volume 0.5x in pullback \u00b7 OI -8% in up-leg, +5% in pullback",
    "grade": "Warning",
    "trigger": null,
    "stop": 2604.78
@@ -1601,7 +1601,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 56% \u00b7 Volume 0.2x in pullback \u00b7 OI -2% in up-leg, +4% in pullback",
+   "detail": "Pullback 56% \u00b7 Volume 0.3x in pullback \u00b7 OI -2% in up-leg, +4% in pullback",
    "grade": "Warning",
    "trigger": 162.63,
    "stop": 159.98
@@ -1669,7 +1669,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 33% \u00b7 Volume 1.1x in pullback \u00b7 OI +9% in up-leg, +4% in pullback",
+   "detail": "Pullback 33% \u00b7 Volume 1.0x in pullback \u00b7 OI +9% in up-leg, +4% in pullback",
    "grade": "Warning",
    "trigger": 1903.4,
    "stop": 1868.46
@@ -1703,7 +1703,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 37% \u00b7 Volume 1.1x in pullback \u00b7 OI +8% in up-leg, +10% in pullback",
+   "detail": "Pullback 37% \u00b7 Volume 1.2x in pullback \u00b7 OI +8% in up-leg, +10% in pullback",
    "grade": "Warning",
    "trigger": 2233.8,
    "stop": 2183.12
@@ -1839,7 +1839,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 33% \u00b7 Volume 1.1x in pullback \u00b7 OI +4% in up-leg, +11% in pullback",
+   "detail": "Pullback 33% \u00b7 Volume 1.0x in pullback \u00b7 OI +4% in up-leg, +11% in pullback",
    "grade": "Warning",
    "trigger": 326.0,
    "stop": 322.0
@@ -2085,7 +2085,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +16% in up-leg, +2% in pullback",
+   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +16% in up-leg, +2% in pullback",
    "grade": "A",
    "trigger": 11186.19,
    "stop": 10932.09
@@ -2459,7 +2459,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 1.9% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +3% in up-leg, +2% in pullback",
+   "detail": "Spilled 1.9% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +3% in up-leg, +2% in pullback",
    "grade": "A",
    "trigger": 904.63,
    "stop": 889.22
@@ -2595,7 +2595,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 0.3% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -8% in up-leg, -0% in pullback",
+   "detail": "Spilled 0.3% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 OI -8% in up-leg, -0% in pullback",
    "grade": "B",
    "trigger": 2381.63,
    "stop": 2357.58
@@ -2663,7 +2663,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 0.5% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI -0% in up-leg, +1% in pullback",
+   "detail": "Spilled 0.5% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -0% in up-leg, +1% in pullback",
    "grade": "B",
    "trigger": 1803.65,
    "stop": 1779.63
@@ -2969,7 +2969,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -16% in up-leg, -4% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI -16% in up-leg, -4% in pullback",
    "grade": "B",
    "trigger": 1336.57,
    "stop": 1309.38
@@ -3071,7 +3071,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI -6% in up-leg, -1% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.6x in pullback \u00b7 OI -6% in up-leg, -1% in pullback",
    "grade": "B",
    "trigger": 3699.0,
    "stop": 3653.28
@@ -3309,7 +3309,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 OI -13% in up-leg, -6% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 OI -13% in up-leg, -6% in pullback",
    "grade": "B",
    "trigger": 689.81,
    "stop": 674.9
@@ -3377,7 +3377,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI -4% in up-leg, +1% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 OI -4% in up-leg, +1% in pullback",
    "grade": "B",
    "trigger": 595.97,
    "stop": 592.46
@@ -3411,7 +3411,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 1.2x in pullback \u00b7 OI -10% in up-leg, +0% in pullback",
+   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 1.5x in pullback \u00b7 OI -10% in up-leg, +0% in pullback",
    "grade": "C",
    "trigger": 2220.92,
    "stop": 2176.64
@@ -4057,7 +4057,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.2x in pullback \u00b7 OI -2% in up-leg, +4% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 OI -2% in up-leg, +4% in pullback",
    "grade": "Warning",
    "trigger": 163.98,
    "stop": 159.98
@@ -4193,7 +4193,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI +4% in up-leg, +10% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.1x in pullback \u00b7 OI +4% in up-leg, +10% in pullback",
    "grade": "Warning",
    "trigger": 2226.67,
    "stop": 2183.12
@@ -4499,7 +4499,7 @@
      "H": "BULLISH RUN"
     }
    },
-   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 OI -7% in up-leg, +8% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 OI -7% in up-leg, +8% in pullback",
    "grade": "Warning",
    "trigger": 4471.08,
    "stop": 4359.06
@@ -4601,7 +4601,7 @@
      "H": "BULLISH RUN"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.1x in pullback \u00b7 OI +4% in up-leg, +11% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI +4% in up-leg, +11% in pullback",
    "grade": "Warning",
    "trigger": 328.04,
    "stop": 322.0
@@ -4628,6 +4628,294 @@
   }
  ],
  "ranges": [
+  {
+   "symbol": "ADANIENSOL",
+   "close": 1493.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Bullish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.2,
+   "detail": "19% pole, then a 4 days flag \u00b7 0.6 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 1480.0,
+   "stop": 1406.78,
+   "target": 1760.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "ADANIPOWER",
+   "close": 208.07,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.0,
+   "detail": "16% pole, then a 4 days flag \u00b7 0.8 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 209.49,
+   "stop": 203.14,
+   "target": 243.67,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "BANDHANBNK",
+   "close": 174.62,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.8,
+   "detail": "20% pole, then a 3 days flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 178.5,
+   "stop": 170.32,
+   "target": 213.31,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "BEL",
+   "close": 399.55,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 1.4,
+   "detail": "12% pole, then a 3 days flag \u00b7 0.6 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 406.7,
+   "stop": 396.85,
+   "target": 457.2,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "BIOCON",
+   "close": 359.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.5,
+   "detail": "15% pole, then a 5 days flag \u00b7 1.3 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 375.45,
+   "stop": 358.48,
+   "target": 432.5,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "FORCEMOT",
+   "close": 19945.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.1,
+   "detail": "21% pole, then a 3 days flag \u00b7 1.5 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 20478.0,
+   "stop": 19195.53,
+   "target": 24702.0,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "GLENMARK",
+   "close": 2615.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 2.8,
+   "detail": "23% pole, then a 5 days flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 2714.0,
+   "stop": 2614.76,
+   "target": 3326.4,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "IDFCFIRSTB",
+   "close": 83.59,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.1,
+   "detail": "15% pole, then a 3 days flag \u00b7 0.5 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 82.27,
+   "stop": 79.38,
+   "target": 95.02,
+   "since": "2026-10-26 00:00"
+  },
   {
    "symbol": "INDIANB",
    "close": 936.0,
@@ -4662,6 +4950,150 @@
    "trigger": 919.95,
    "stop": 883.61,
    "target": 1024.22
+  },
+  {
+   "symbol": "LT",
+   "close": 4155.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bullish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.9,
+   "detail": "16% pole, then a 4 days flag \u00b7 1.4 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 4259.0,
+   "stop": 4106.77,
+   "target": 4921.2,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "LTF",
+   "close": 280.3,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Wait for Daily Setup",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.5,
+   "detail": "19% pole, then a 3 days flag \u00b7 0.5 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 283.6,
+   "stop": 271.87,
+   "target": 338.0,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "MANKIND",
+   "close": 2610.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 2.1,
+   "detail": "19% pole, then a 5 days flag \u00b7 1.0 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 2705.0,
+   "stop": 2606.98,
+   "target": 3213.9,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "MARICO",
+   "close": 924.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.9,
+   "detail": "18% pole, then a 4 days flag \u00b7 0.5 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 925.0,
+   "stop": 893.46,
+   "target": 1093.15,
+   "since": "2026-10-23 00:00"
   },
   {
    "symbol": "PRESTIGE",
@@ -4699,6 +5131,258 @@
    "target": 1937.31
   },
   {
+   "symbol": "PRESTIGE",
+   "close": 1691.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.1,
+   "detail": "17% pole, then a 4 days flag \u00b7 broke out Thu 12 \u00b7 Breakout volume 2.5x",
+   "grade": "A",
+   "trigger": 1647.0,
+   "stop": 1567.86,
+   "target": 1930.4,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "RBLBANK",
+   "close": 390.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.1,
+   "detail": "14% pole, then a 4 days flag \u00b7 1.1 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 394.55,
+   "stop": 379.89,
+   "target": 450.55,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "TVSMOTOR",
+   "close": 4466.2,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Topping",
+    "H": "Bullish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "TOPPING",
+     "D": "TOPPING",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.2,
+   "detail": "16% pole, then a 4 days flag \u00b7 1.5 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 4636.1,
+   "stop": 4357.37,
+   "target": 5397.1,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "DIXON",
+   "close": 13081.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.4,
+   "detail": "17% pole, then a 3 days flag \u00b7 0.7 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 13215.0,
+   "stop": 12612.72,
+   "target": 15498.0,
+   "since": "2026-10-30 00:00"
+  },
+  {
+   "symbol": "DLF",
+   "close": 765.95,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.5,
+   "detail": "16% pole, then a 3 days flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 770.45,
+   "stop": 747.45,
+   "target": 890.9,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "ICICIGI",
+   "close": 1693.5,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 2.3,
+   "detail": "11% pole, then a 3 days flag \u00b7 0.6 ranges under the top line \u00b7 Volume 0.3x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 1731.0,
+   "stop": 1676.84,
+   "target": 1929.0,
+   "since": "2026-11-02 00:00"
+  },
+  {
+   "symbol": "IRFC",
+   "close": 82.65,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Rectangle",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 0.6,
+   "detail": "7 weeks rectangle, 6 touches, 8% deep \u00b7 broke out Mon 09 \u00b7 Breakout volume 2.0x",
+   "grade": "A",
+   "trigger": 80.64,
+   "stop": 76.4,
+   "target": 87.46,
+   "since": "2026-09-21 00:00"
+  },
+  {
    "symbol": "LICHSGFIN",
    "close": 622.5,
    "trend": "Early turn",
@@ -4732,6 +5416,150 @@
    "trigger": 583.67,
    "stop": 557.06,
    "target": 660.54
+  },
+  {
+   "symbol": "OBEROIRLTY",
+   "close": 1819.7,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.7,
+   "detail": "14% pole, then a 3 days flag \u00b7 1.2 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 1834.0,
+   "stop": 1752.19,
+   "target": 2099.0,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "TRENT",
+   "close": 3176.3,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Avoid",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 3.1,
+   "detail": "17% pole, then a 4 days flag \u00b7 0.4 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 3238.0,
+   "stop": 3137.01,
+   "target": 3799.8,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "ULTRACEMCO",
+   "close": 12290.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.9,
+   "detail": "15% pole, then a 5 days flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 12532.0,
+   "stop": 12037.88,
+   "target": 14413.0,
+   "since": "2026-10-22 00:00"
+  },
+  {
+   "symbol": "UNITDSPR",
+   "close": 1444.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 1.6,
+   "detail": "16% pole, then a 4 days flag \u00b7 0.2 ranges under the top line \u00b7 Volume 0.3x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 1455.0,
+   "stop": 1397.0,
+   "target": 1692.5,
+   "since": "2026-10-28 00:00"
   },
   {
    "symbol": "VBL",
@@ -4769,6 +5597,114 @@
    "target": 500.78
   },
   {
+   "symbol": "DMART",
+   "close": 3470.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": -0.9,
+   "detail": "11% pole, then a 4 days flag \u00b7 0.4 ranges under the top line \u00b7 Volume 0.3x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 3484.1,
+   "stop": 3420.15,
+   "target": 3865.9,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "HDFCAMC",
+   "close": 2699.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.6,
+   "detail": "20% pole, then a 3 days flag \u00b7 1.6 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 2766.5,
+   "stop": 2619.35,
+   "target": 3316.9,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "M&M",
+   "close": 3399.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.4,
+   "detail": "19% pole, then a 4 days flag \u00b7 1.6 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "A",
+   "trigger": 3465.0,
+   "stop": 3306.37,
+   "target": 4127.6,
+   "since": "2026-10-23 00:00"
+  },
+  {
    "symbol": "UPL",
    "close": 551.7,
    "trend": "Counter-trend",
@@ -4802,6 +5738,78 @@
    "trigger": 535.28,
    "stop": 506.35,
    "target": 642.59
+  },
+  {
+   "symbol": "360ONE",
+   "close": 1202.85,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.3,
+   "detail": "20% pole, then a 3 days flag \u00b7 0.7 ranges under the top line \u00b7 Volume 0.4x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1206.95,
+   "stop": 1165.41,
+   "target": 1448.2,
+   "since": "2026-10-28 00:00"
+  },
+  {
+   "symbol": "360ONE",
+   "close": 1202.85,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.3,
+   "detail": "8% pole, then a 21 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 4.6x",
+   "grade": "B",
+   "trigger": 1206.95,
+   "stop": 1165.66,
+   "target": 1304.6,
+   "since": "2026-11-06 10:15"
   },
   {
    "symbol": "ABB",
@@ -4839,17 +5847,161 @@
    "target": 9997.0
   },
   {
-   "symbol": "ABB",
-   "close": 6923.0,
+   "symbol": "ABCAPITAL",
+   "close": 411.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.8,
+   "detail": "20% pole, then a 3 days flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 420.0,
+   "stop": 401.69,
+   "target": 505.55,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "ADANIGREEN",
+   "close": 1429.9,
+   "trend": "With trend",
+   "states": {
+    "M": "Bullish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY (M lagging)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.7,
+   "detail": "21% pole, then a 4 days flag \u00b7 1.6 ranges under the top line \u00b7 Volume 1.2x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1479.0,
+   "stop": 1377.24,
+   "target": 1787.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "ADANIPORTS",
+   "close": 1917.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Bearish",
-    "D": "Bullish",
-    "H": "Bottoming"
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
    },
-   "setup": "Hourly Range",
+   "setup": "Daily Flag",
    "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.7,
+   "detail": "15% pole, then a 4 days flag \u00b7 1.7 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1979.0,
+   "stop": 1871.85,
+   "target": 2270.1,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "AUROPHARMA",
+   "close": 1794.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 2.1,
+   "detail": "17% pole, then a 4 days flag \u00b7 1.4 ranges under the top line \u00b7 Volume 1.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1859.9,
+   "stop": 1779.43,
+   "target": 2172.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "AXISBANK",
+   "close": 1369.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
    "old": "\u274c Avoid",
    "vk": {
     "final": "NO SIGNAL",
@@ -4861,17 +6013,54 @@
     "confirmed": "Not confirmed",
     "status": {
      "M": "BULLISH RUN",
-     "W": "BEARISH RUN",
+     "W": "BOTTOMING",
      "D": "BULLISH RUN",
-     "H": "BOTTOMING"
+     "H": "BULLISH RUN"
     }
    },
-   "ext": -0.0,
-   "detail": "5-week range under a falling trendline, 3 touches, 13% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "ext": 2.8,
+   "detail": "12% pole, then a 4 days flag \u00b7 0.6 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
    "grade": "B",
-   "trigger": 7135.26,
-   "stop": 7015.86,
-   "target": 8078.31
+   "trigger": 1360.4,
+   "stop": 1323.15,
+   "target": 1523.9,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "BANDHANBNK",
+   "close": 174.62,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.8,
+   "detail": "12% pole, then a 28 hours flag \u00b7 0.7 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 175.71,
+   "stop": 170.32,
+   "target": 196.92,
+   "since": "2026-11-06 09:15"
   },
   {
    "symbol": "BHARATFORG",
@@ -4944,6 +6133,186 @@
    "target": 521.57
   },
   {
+   "symbol": "BHEL",
+   "close": 430.65,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 0.8,
+   "detail": "8% pole, then a 20 hours flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 433.43,
+   "stop": 425.05,
+   "target": 469.18,
+   "since": "2026-11-06 11:15"
+  },
+  {
+   "symbol": "BSE",
+   "close": 3864.9,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 3.5,
+   "detail": "17% pole, then a 3 days flag \u00b7 broke out Wed 11 \u00b7 Breakout volume 1.0x",
+   "grade": "B",
+   "trigger": 3842.0,
+   "stop": 3706.87,
+   "target": 4494.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "CANBK",
+   "close": 134.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 2.8,
+   "detail": "14% pole, then a 4 days flag \u00b7 0.3 ranges under the top line \u00b7 Volume 1.2x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 133.3,
+   "stop": 129.74,
+   "target": 151.97,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "CGPOWER",
+   "close": 801.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.9,
+   "detail": "13% pole, then a 20 hours flag \u00b7 6.8 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 841.9,
+   "stop": 797.4,
+   "target": 949.8,
+   "since": "2026-11-06 10:15"
+  },
+  {
+   "symbol": "CHOLAFIN",
+   "close": 1884.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.9,
+   "detail": "24% pole, then a 3 days flag \u00b7 0.4 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1869.4,
+   "stop": 1805.98,
+   "target": 2323.8,
+   "since": "2026-10-26 00:00"
+  },
+  {
    "symbol": "CUB",
    "close": 232.4,
    "trend": "With trend",
@@ -4988,6 +6357,78 @@
     "D": "Impulse",
     "H": "Bearish"
    },
+   "setup": "Daily Rectangle",
+   "stage": "Ready",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 1.1,
+   "detail": "15 weeks rectangle, 6 touches, 20% deep \u00b7 0.6 ranges under the top line \u00b7 Volume 1.0x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 238.83,
+   "stop": 224.58,
+   "target": 284.38,
+   "since": "2026-07-28 00:00"
+  },
+  {
+   "symbol": "CUB",
+   "close": 232.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Daily Falling Wedge",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 1.1,
+   "detail": "9 weeks falling wedge, 6 touches, 15% deep \u00b7 broke out Wed 11 \u00b7 Breakout volume 1.3x",
+   "grade": "B",
+   "trigger": 222.92,
+   "stop": 206.0,
+   "target": 248.85,
+   "since": "2026-09-07 00:00"
+  },
+  {
+   "symbol": "CUB",
+   "close": 232.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
    "setup": "Hourly Range",
    "stage": "Watch",
    "old": "\u2705 Confirmed Bullish",
@@ -5012,6 +6453,114 @@
    "trigger": 239.74,
    "stop": 236.06,
    "target": 269.16
+  },
+  {
+   "symbol": "CUB",
+   "close": 232.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 1.1,
+   "detail": "10% pole, then a 28 hours flag \u00b7 1.8 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 236.29,
+   "stop": 230.58,
+   "target": 260.64,
+   "since": "2026-11-05 10:15"
+  },
+  {
+   "symbol": "DELHIVERY",
+   "close": 457.95,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.3,
+   "detail": "18% pole, then a 3 days flag \u00b7 0.4 ranges under the top line \u00b7 Volume 0.4x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 445.65,
+   "stop": 430.14,
+   "target": 526.65,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "DIVISLAB",
+   "close": 11150.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 4.1,
+   "detail": "14% pole, then a 21 hours flag \u00b7 2.1 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 11359.57,
+   "stop": 10932.09,
+   "target": 12959.57,
+   "since": "2026-11-06 09:15"
   },
   {
    "symbol": "FEDERALBNK",
@@ -5084,6 +6633,78 @@
    "target": 412.63
   },
   {
+   "symbol": "FORCEMOT",
+   "close": 19945.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.1,
+   "detail": "12% pole, then a 28 hours flag \u00b7 2.7 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 20475.0,
+   "stop": 19197.53,
+   "target": 22989.0,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "GMRAIRPORT",
+   "close": 104.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.3,
+   "detail": "17% pole, then a 6 days flag \u00b7 broke out Mon 16 \u00b7 Breakout volume 1.1x",
+   "grade": "B",
+   "trigger": 100.95,
+   "stop": 96.47,
+   "target": 117.68,
+   "since": "2026-10-23 00:00"
+  },
+  {
    "symbol": "GRASIM",
    "close": 3054.8,
    "trend": "With trend",
@@ -5117,6 +6738,42 @@
    "trigger": 3238.77,
    "stop": 3195.88,
    "target": 3638.26
+  },
+  {
+   "symbol": "GVT&D",
+   "close": 4320.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Wait for Daily Setup",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 0.8,
+   "detail": "13% pole, then a 20 hours flag \u00b7 0.9 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 4361.98,
+   "stop": 4210.36,
+   "target": 4937.88,
+   "since": "2026-11-06 10:15"
   },
   {
    "symbol": "HINDALCO",
@@ -5154,6 +6811,150 @@
    "target": 1080.16
   },
   {
+   "symbol": "HINDZINC",
+   "close": 550.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Wait for Daily Setup",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.1,
+   "detail": "16% pole, then a 4 days flag \u00b7 1.8 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 582.6,
+   "stop": 539.07,
+   "target": 674.7,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "INDIANB",
+   "close": 936.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bullish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.9,
+   "detail": "15% pole, then a 4 days flag \u00b7 1.1 ranges under the top line \u00b7 Volume 1.0x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 958.85,
+   "stop": 924.05,
+   "target": 1098.4,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "JINDALSTEL",
+   "close": 1137.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\ud83c\udfaf Consolidating",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 1.3,
+   "detail": "15% pole, then a 4 days flag \u00b7 1.3 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1175.5,
+   "stop": 1125.05,
+   "target": 1346.1,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "JINDALSTEL",
+   "close": 1137.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Rectangle",
+   "stage": "Watch",
+   "old": "\ud83c\udfaf Consolidating",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 1.3,
+   "detail": "11 weeks rectangle, 7 touches, 16% deep \u00b7 1.1 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1169.9,
+   "stop": 1125.4,
+   "target": 1350.95,
+   "since": "2026-08-27 00:00"
+  },
+  {
    "symbol": "JSWSTEEL",
    "close": 1332.0,
    "trend": "With trend",
@@ -5182,7 +6983,7 @@
     }
    },
    "ext": 1.7,
-   "detail": "10-week range under a falling trendline, 3 touches, 12% deep \u00b7 4.1 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 3 touches, 12% deep \u00b7 4.1 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 1368.46,
    "stop": 1352.41,
@@ -5329,6 +7130,42 @@
    "target": 391.01
   },
   {
+   "symbol": "NAVINFLUOR",
+   "close": 9815.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 4.0,
+   "detail": "13% pole, then a 17 hours flag \u00b7 4.0 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 10165.0,
+   "stop": 9736.49,
+   "target": 11460.5,
+   "since": "2026-11-06 13:15"
+  },
+  {
    "symbol": "PNBHOUSING",
    "close": 1138.0,
    "trend": "With trend",
@@ -5357,7 +7194,7 @@
     }
    },
    "ext": 0.4,
-   "detail": "5-week range under a falling trendline, 3 touches, 15% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "5-week range under a falling trendline, 3 touches, 15% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "B",
    "trigger": 1145.01,
    "stop": 1130.76,
@@ -5399,6 +7236,78 @@
    "target": 39192.76
   },
   {
+   "symbol": "POWERINDIA",
+   "close": 30435.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Wait for Daily Setup",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 0.7,
+   "detail": "17% pole, then a 19 hours flag \u00b7 2.0 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 31134.0,
+   "stop": 29730.42,
+   "target": 36549.0,
+   "since": "2026-11-06 11:15"
+  },
+  {
+   "symbol": "SHRIRAMFIN",
+   "close": 982.85,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Wait for Daily Setup",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.6,
+   "detail": "20% pole, then a 3 days flag \u00b7 0.8 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1006.6,
+   "stop": 963.07,
+   "target": 1203.1,
+   "since": "2026-10-28 00:00"
+  },
+  {
    "symbol": "SHRIRAMFIN",
    "close": 982.85,
    "trend": "With trend",
@@ -5427,11 +7336,83 @@
     }
    },
    "ext": 0.6,
-   "detail": "6-week range under a falling trendline, 3 touches, 18% deep \u00b7 4.2 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 3 touches, 18% deep \u00b7 4.2 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 1008.78,
    "stop": 997.42,
    "target": 1190.24
+  },
+  {
+   "symbol": "SIEMENS",
+   "close": 3561.9,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.4,
+   "detail": "11% pole, then a 28 hours flag \u00b7 5.1 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 3725.0,
+   "stop": 3521.74,
+   "target": 4143.5,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "SOLARINDS",
+   "close": 18764.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bottoming",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BEARISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Avoid Long \u2014 W/D bearish, Monthly topping",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BOTTOMING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.8,
+   "detail": "9% pole, then a 20 hours flag \u00b7 0.8 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 18884.69,
+   "stop": 18684.56,
+   "target": 20692.69,
+   "since": "2026-11-06 12:15"
   },
   {
    "symbol": "SYRMA",
@@ -5462,7 +7443,7 @@
     }
    },
    "ext": -1.2,
-   "detail": "6-week range under a falling trendline, 3 touches, 26% deep \u00b7 12.9 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 3 touches, 26% deep \u00b7 12.9 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 1615.28,
    "stop": 1591.0,
@@ -5497,11 +7478,119 @@
     }
    },
    "ext": 1.8,
-   "detail": "4-week range under a falling trendline, 3 touches, 6% deep \u00b7 9.0 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "4-week range under a falling trendline, 3 touches, 6% deep \u00b7 9.0 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 1856.14,
    "stop": 1836.82,
    "target": 1971.07
+  },
+  {
+   "symbol": "TITAN",
+   "close": 4908.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.9,
+   "detail": "17% pole, then a 4 days flag \u00b7 1.3 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 5056.6,
+   "stop": 4827.43,
+   "target": 5904.2,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "UNOMINDA",
+   "close": 1388.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.4,
+   "detail": "27% pole, then a 4 days flag \u00b7 1.3 ranges under the top line \u00b7 Volume 1.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1406.5,
+   "stop": 1334.73,
+   "target": 1783.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "BHARTIARTL",
+   "close": 2138.3,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Topping",
+    "H": "Topping"
+   },
+   "setup": "Daily Flag",
+   "stage": "Triggered",
+   "old": "\u26a0\ufe0f Extended",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 4.3,
+   "detail": "12% pole, then a 5 days flag \u00b7 broke out Mon 16 \u00b7 Breakout volume 0.9x",
+   "grade": "B",
+   "trigger": 2120.0,
+   "stop": 2036.32,
+   "target": 2379.3,
+   "since": "2026-10-23 00:00"
   },
   {
    "symbol": "BLUESTARCO",
@@ -5567,11 +7656,47 @@
     }
    },
    "ext": 0.6,
-   "detail": "10-week range under a falling trendline, 4 touches, 10% deep \u00b7 4.5 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 4 touches, 10% deep \u00b7 4.5 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 1419.5,
    "stop": 1406.16,
    "target": 1556.55
+  },
+  {
+   "symbol": "COLPAL",
+   "close": 1719.7,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Falling Wedge",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -1.2,
+   "detail": "4 weeks falling wedge, 6 touches, 16% deep \u00b7 broke out Mon 09 \u00b7 Breakout volume 0.3x",
+   "grade": "B",
+   "trigger": 1643.57,
+   "stop": 1560.77,
+   "target": 1868.9,
+   "since": "2026-10-09 00:00"
   },
   {
    "symbol": "CROMPTON",
@@ -5602,11 +7727,263 @@
     }
    },
    "ext": -0.3,
-   "detail": "7-week range under a falling trendline, 4 touches, 14% deep \u00b7 8.2 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 4 touches, 14% deep \u00b7 8.2 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
    "grade": "B",
    "trigger": 223.9,
    "stop": 220.74,
    "target": 255.76
+  },
+  {
+   "symbol": "GAIL",
+   "close": 187.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 2.7,
+   "detail": "15% pole, then a 4 days flag \u00b7 0.7 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 189.9,
+   "stop": 185.15,
+   "target": 219.1,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "HAVELLS",
+   "close": 1175.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 1.9,
+   "detail": "15% pole, then a 3 days flag \u00b7 0.3 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1181.3,
+   "stop": 1148.9,
+   "target": 1363.4,
+   "since": "2026-10-27 00:00"
+  },
+  {
+   "symbol": "HDFCBANK",
+   "close": 814.95,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 4.6,
+   "detail": "18% pole, then a 4 days flag \u00b7 0.1 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 817.85,
+   "stop": 796.4,
+   "target": 966.5,
+   "since": "2026-10-28 00:00"
+  },
+  {
+   "symbol": "ICICIBANK",
+   "close": 1598.7,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 5.0,
+   "detail": "16% pole, then a 4 days flag \u00b7 1.0 ranges under the top line \u00b7 Volume 1.0x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1616.0,
+   "stop": 1562.97,
+   "target": 1870.6,
+   "since": "2026-10-28 00:00"
+  },
+  {
+   "symbol": "ICICIGI",
+   "close": 1693.5,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 2.3,
+   "detail": "8% pole, then a 27 hours flag \u00b7 0.8 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1701.44,
+   "stop": 1674.54,
+   "target": 1835.64,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "INDIGO",
+   "close": 5611.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.3,
+   "detail": "22% pole, then a 4 days flag \u00b7 1.1 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 5713.0,
+   "stop": 5480.12,
+   "target": 6961.6,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "JSWENERGY",
+   "close": 514.9,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Topping",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Bigger trend neeche \u2014 chhota bounce hai, chase mat karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 0.5,
+   "detail": "17% pole, then a 5 days flag \u00b7 1.0 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 527.7,
+   "stop": 506.53,
+   "target": 617.0,
+   "since": "2026-10-26 00:00"
   },
   {
    "symbol": "JUBLFOOD",
@@ -5637,11 +8014,47 @@
     }
    },
    "ext": -0.9,
-   "detail": "7-week range under a falling trendline, 3 touches, 22% deep \u00b7 5.3 ranges under the ceiling \u00b7 Volume 0.2x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 3 touches, 22% deep \u00b7 5.3 ranges under the ceiling \u00b7 Volume 0.3x lately (quieter is better)",
    "grade": "B",
    "trigger": 449.95,
    "stop": 442.73,
    "target": 546.73
+  },
+  {
+   "symbol": "KALYANKJIL",
+   "close": 682.75,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 4.9,
+   "detail": "23% pole, then a 21 hours flag \u00b7 3.7 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 714.3,
+   "stop": 674.9,
+   "target": 877.3,
+   "since": "2026-11-06 09:15"
   },
   {
    "symbol": "KPITTECH",
@@ -5679,74 +8092,76 @@
    "target": 685.22
   },
   {
-   "symbol": "NAUKRI",
-   "close": 1175.0,
+   "symbol": "PETRONET",
+   "close": 328.1,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.2,
+   "detail": "16% pole, then a 3 days flag \u00b7 1.2 ranges under the top line \u00b7 Volume 2.2x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 336.3,
+   "stop": 321.81,
+   "target": 390.55,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "PGEL",
+   "close": 533.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Bearish",
-    "D": "Bearish",
+    "D": "Topping",
     "H": "Bottoming"
    },
-   "setup": "Hourly Range",
-   "stage": "Ready",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "ALL 3 ALIGNED BEARISH",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "DO NOT MISS \u2014 M+W+D bearish + squeeze ON! Short consider karo!",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BOTTOMING",
-     "W": "BEARISH RUN",
-     "D": "BEARISH RUN",
-     "H": "BOTTOMING"
-    }
-   },
-   "ext": -1.1,
-   "detail": "3-week range under a falling trendline, 4 touches, 11% deep \u00b7 0.4 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
-   "grade": "B",
-   "trigger": 1179.23,
-   "stop": 1162.59,
-   "target": 1305.28
-  },
-  {
-   "symbol": "PFC",
-   "close": 328.0,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bottoming",
-    "D": "Bullish",
-    "H": "Bottoming"
-   },
-   "setup": "Hourly Range",
+   "setup": "Daily Flag",
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": {
     "final": "NO SIGNAL",
     "signal": "Mixed",
     "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "advice": "Bigger trend neeche \u2014 chhota bounce hai, chase mat karo",
     "daily": "No signal yet",
     "hourly": "No signal yet",
     "confirmed": "Not confirmed",
     "status": {
      "M": "BOTTOMING",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "TOPPING",
      "H": "BOTTOMING"
     }
    },
-   "ext": -0.7,
-   "detail": "4-week range under a falling trendline, 3 touches, 12% deep \u00b7 8.1 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "ext": -0.2,
+   "detail": "22% pole, then a 3 days flag \u00b7 2.3 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
    "grade": "B",
-   "trigger": 347.01,
-   "stop": 342.8,
-   "target": 388.16
+   "trigger": 579.75,
+   "stop": 531.34,
+   "target": 705.0,
+   "since": "2026-10-26 00:00"
   },
   {
    "symbol": "SHREECEM",
@@ -5777,7 +8192,7 @@
     }
    },
    "ext": 2.1,
-   "detail": "11-week range under a falling trendline, 3 touches, 16% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "11-week range under a falling trendline, 3 touches, 16% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 25443.11,
    "stop": 25171.04,
@@ -5882,11 +8297,113 @@
     }
    },
    "ext": 0.7,
-   "detail": "6-week range under a falling trendline, 6 touches, 13% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 6 touches, 13% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 439.49,
    "stop": 434.76,
    "target": 498.41
+  },
+  {
+   "symbol": "WIPRO",
+   "close": 189.89,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Topping",
+    "H": "Bearish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 1.8,
+   "detail": "15% pole, then a 2 weeks flag \u00b7 1.2 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 200.11,
+   "stop": 191.62,
+   "target": 231.12,
+   "since": "2026-10-14 00:00"
+  },
+  {
+   "symbol": "HYUNDAI",
+   "close": 2121.3,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": 0.7,
+   "detail": "16% pole, then a 6 days flag \u00b7 1.7 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 2187.0,
+   "stop": 2059.97,
+   "target": 2547.0,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "IREDA",
+   "close": 117.4,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bullish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": 1.4,
+   "detail": "20% pole, then a 4 days flag \u00b7 2.1 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 123.99,
+   "stop": 114.4,
+   "target": 149.2,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "JIOFIN",
+   "close": 228.96,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": 0.5,
+   "detail": "13% pole, then a 4 days flag \u00b7 1.5 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 233.87,
+   "stop": 225.15,
+   "target": 265.23,
+   "since": "2026-10-23 00:00"
   },
   {
    "symbol": "AMBER",
@@ -5917,7 +8434,7 @@
     }
    },
    "ext": -1.3,
-   "detail": "4-week range under a falling trendline, 3 touches, 13% deep \u00b7 6.7 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "4-week range under a falling trendline, 3 touches, 13% deep \u00b7 6.7 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 6934.39,
    "stop": 6767.42,
@@ -5959,6 +8476,78 @@
    "target": 462.21
   },
   {
+   "symbol": "BAJAJFINSV",
+   "close": 1870.8,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.1,
+   "detail": "15% pole, then a 3 days flag \u00b7 1.3 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1906.0,
+   "stop": 1837.32,
+   "target": 2187.2,
+   "since": "2026-10-28 00:00"
+  },
+  {
+   "symbol": "BANKBARODA",
+   "close": 274.89,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Ready",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 3.9,
+   "detail": "10% pole, then a 14 hours flag \u00b7 0.4 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 275.59,
+   "stop": 268.6,
+   "target": 302.93,
+   "since": "2026-11-09 09:15"
+  },
+  {
    "symbol": "COROMANDEL",
    "close": 1973.5,
    "trend": "Counter-trend",
@@ -5994,6 +8583,78 @@
    "target": 2643.56
   },
   {
+   "symbol": "COROMANDEL",
+   "close": 1973.5,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.6,
+   "detail": "19% pole, then a 4 days flag \u00b7 1.2 ranges under the top line \u00b7 Volume 1.3x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 2054.0,
+   "stop": 1923.55,
+   "target": 2452.9,
+   "since": "2026-10-30 00:00"
+  },
+  {
+   "symbol": "COROMANDEL",
+   "close": 1973.5,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.6,
+   "detail": "11% pole, then a 23 hours flag \u00b7 at the top line \u00b7 Volume 0.4x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1973.36,
+   "stop": 1923.55,
+   "target": 2195.86,
+   "since": "2026-11-09 09:15"
+  },
+  {
    "symbol": "HDFCLIFE",
    "close": 595.05,
    "trend": "Counter-trend",
@@ -6027,6 +8688,78 @@
    "trigger": 572.56,
    "stop": 548.67,
    "target": 623.62
+  },
+  {
+   "symbol": "HINDPETRO",
+   "close": 389.55,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.2,
+   "detail": "19% pole, then a 4 days flag \u00b7 1.5 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 404.6,
+   "stop": 379.44,
+   "target": 480.4,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "HINDUNILVR",
+   "close": 2009.9,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.3,
+   "detail": "13% pole, then a 4 days flag \u00b7 0.6 ranges under the top line \u00b7 Volume 0.9x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 2027.0,
+   "stop": 1957.08,
+   "target": 2295.8,
+   "since": "2026-10-27 00:00"
   },
   {
    "symbol": "INDUSTOWER",
@@ -6092,11 +8825,47 @@
     }
    },
    "ext": 1.2,
-   "detail": "10-week range under a falling trendline, 5 touches, 8% deep \u00b7 3.4 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 5 touches, 8% deep \u00b7 3.4 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 401.91,
    "stop": 397.05,
    "target": 435.9
+  },
+  {
+   "symbol": "IOC",
+   "close": 145.56,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.2,
+   "detail": "16% pole, then a 4 days flag \u00b7 1.8 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 150.05,
+   "stop": 141.98,
+   "target": 173.6,
+   "since": "2026-10-23 00:00"
   },
   {
    "symbol": "LTM",
@@ -6134,6 +8903,114 @@
    "target": 6372.86
   },
   {
+   "symbol": "M&M",
+   "close": 3399.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.4,
+   "detail": "15% pole, then a 29 hours flag \u00b7 3.0 ranges under the top line \u00b7 Volume 0.4x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 3465.0,
+   "stop": 3307.37,
+   "target": 3985.1,
+   "since": "2026-11-04 15:15"
+  },
+  {
+   "symbol": "MARUTI",
+   "close": 12625.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Topping",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Bigger trend neeche \u2014 chhota bounce hai, chase mat karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 1.1,
+   "detail": "16% pole, then a 3 days flag \u00b7 2.2 ranges under the top line \u00b7 Volume 1.2x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 13215.0,
+   "stop": 12509.93,
+   "target": 15328.0,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "MAXHEALTH",
+   "close": 1030.9,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.7,
+   "detail": "16% pole, then a 5 days flag \u00b7 broke out Fri 13 \u00b7 Breakout volume 0.4x",
+   "grade": "B",
+   "trigger": 943.65,
+   "stop": 908.98,
+   "target": 1090.3,
+   "since": "2026-10-22 00:00"
+  },
+  {
    "symbol": "MAZDOCK",
    "close": 1847.0,
    "trend": "Counter-trend",
@@ -6162,11 +9039,83 @@
     }
    },
    "ext": -2.4,
-   "detail": "5-week range under a falling trendline, 3 touches, 25% deep \u00b7 2.9 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "5-week range under a falling trendline, 3 touches, 25% deep \u00b7 2.9 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 1888.37,
    "stop": 1863.02,
    "target": 2355.81
+  },
+  {
+   "symbol": "MFSL",
+   "close": 1431.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Topping"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 1.6,
+   "detail": "11% pole, then a 6 hours flag \u00b7 1.3 ranges under the top line \u00b7 Volume 0.6x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1448.1,
+   "stop": 1425.14,
+   "target": 1612.5,
+   "since": "2026-11-11 10:15"
+  },
+  {
+   "symbol": "NBCC",
+   "close": 78.51,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.4,
+   "detail": "17% pole, then a 7 days flag \u00b7 1.1 ranges under the top line \u00b7 Volume 1.8x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 81.15,
+   "stop": 76.36,
+   "target": 95.28,
+   "since": "2026-10-26 00:00"
   },
   {
    "symbol": "ONGC",
@@ -6202,6 +9151,42 @@
    "trigger": 238.55,
    "stop": 236.58,
    "target": 260.38
+  },
+  {
+   "symbol": "POLICYBZR",
+   "close": 1052.1,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": -2.6,
+   "detail": "15% pole, then a 14 hours flag \u00b7 1.3 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 1072.57,
+   "stop": 1035.42,
+   "target": 1244.77,
+   "since": "2026-11-09 14:15"
   },
   {
    "symbol": "RELIANCE",
@@ -6267,7 +9252,7 @@
     }
    },
    "ext": 0.0,
-   "detail": "7-week range under a flat top, 3 touches, 15% deep \u00b7 4.3 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "7-week range under a flat top, 3 touches, 15% deep \u00b7 4.3 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 2534.26,
    "stop": 2509.91,
@@ -6309,6 +9294,78 @@
    "target": 4344.3
   },
   {
+   "symbol": "TIINDIA",
+   "close": 2230.8,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -1.4,
+   "detail": "11% pole, then a 20 hours flag \u00b7 0.4 ranges under the top line \u00b7 Volume 0.4x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 2238.06,
+   "stop": 2209.57,
+   "target": 2501.46,
+   "since": "2026-11-06 11:15"
+  },
+  {
+   "symbol": "VEDL",
+   "close": 255.03,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bullish",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.7,
+   "detail": "16% pole, then a 3 days flag \u00b7 1.5 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
+   "grade": "B",
+   "trigger": 264.47,
+   "stop": 251.0,
+   "target": 307.34,
+   "since": "2026-10-26 00:00"
+  },
+  {
    "symbol": "VEDL",
    "close": 255.03,
    "trend": "Counter-trend",
@@ -6337,11 +9394,46 @@
     }
    },
    "ext": -0.7,
-   "detail": "6-week range under a falling trendline, 5 touches, 18% deep \u00b7 3.8 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 5 touches, 18% deep \u00b7 3.8 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 262.98,
    "stop": 259.32,
    "target": 310.31
+  },
+  {
+   "symbol": "ABB",
+   "close": 6923.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.0,
+   "detail": "5-week range under a falling trendline, 3 touches, 13% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "grade": "C",
+   "trigger": 7135.26,
+   "stop": 7015.86,
+   "target": 8078.31
   },
   {
    "symbol": "ADANIENT",
@@ -6414,6 +9506,42 @@
    "target": 239.31
   },
   {
+   "symbol": "ALKEM",
+   "close": 5175.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Topping",
+    "H": "Bullish"
+   },
+   "setup": "Daily Falling Wedge",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "TOPPING",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": -0.7,
+   "detail": "14 weeks falling wedge, 7 touches, 13% deep \u00b7 broke out Fri 06 \u00b7 Breakout volume 0.6x",
+   "grade": "C",
+   "trigger": 5159.34,
+   "stop": 4801.38,
+   "target": 5882.5,
+   "since": "2026-07-30 00:00"
+  },
+  {
    "symbol": "APLAPOLLO",
    "close": 2188.5,
    "trend": "With trend",
@@ -6484,6 +9612,222 @@
    "target": 230.9
   },
   {
+   "symbol": "ASHOKLEY",
+   "close": 160.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bearish"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 1.8,
+   "detail": "22% pole, then a 5 days flag \u00b7 2.2 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 178.83,
+   "stop": 166.97,
+   "target": 217.65,
+   "since": "2026-10-26 00:00"
+  },
+  {
+   "symbol": "ASIANPAINT",
+   "close": 2625.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Bullish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 1.8,
+   "detail": "6% pole, then a 5 hours flag \u00b7 1.8 ranges under the top line \u00b7 Volume 1.0x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 2665.5,
+   "stop": 2611.27,
+   "target": 2835.8,
+   "since": "2026-11-13 12:15"
+  },
+  {
+   "symbol": "AXISBANK",
+   "close": 1369.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.8,
+   "detail": "10% pole, then a 27 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.8x",
+   "grade": "C",
+   "trigger": 1360.0,
+   "stop": 1323.35,
+   "target": 1499.6,
+   "since": "2026-11-04 12:15"
+  },
+  {
+   "symbol": "BANKINDIA",
+   "close": 159.28,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.0,
+   "detail": "11% pole, then a 7 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 156.69,
+   "stop": 151.13,
+   "target": 174.38,
+   "since": "2026-11-09 09:15"
+  },
+  {
+   "symbol": "BOSCHLTD",
+   "close": 49085.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Topping",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\ud83c\udfaf Consolidating",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "TOPPING",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 1.3,
+   "detail": "17% pole, then a 7 days flag \u00b7 2.7 ranges under the top line \u00b7 Volume 1.5x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 52475.0,
+   "stop": 48273.26,
+   "target": 61300.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "CHOLAFIN",
+   "close": 1884.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.9,
+   "detail": "8% pole, then a 19 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 1869.3,
+   "stop": 1818.66,
+   "target": 2015.1,
+   "since": "2026-11-06 09:15"
+  },
+  {
    "symbol": "COALINDIA",
    "close": 391.55,
    "trend": "With trend",
@@ -6517,6 +9861,258 @@
    "trigger": 404.89,
    "stop": 400.67,
    "target": 445.84
+  },
+  {
+   "symbol": "DELHIVERY",
+   "close": 457.95,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.3,
+   "detail": "7% pole, then a 5 hours flag \u00b7 1.9 ranges under the top line \u00b7 Volume 3.6x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 465.75,
+   "stop": 454.09,
+   "target": 500.45,
+   "since": "2026-11-13 12:15"
+  },
+  {
+   "symbol": "DIVISLAB",
+   "close": 11150.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 4.1,
+   "detail": "26% pole, then a 5 days flag \u00b7 2.1 ranges under the top line \u00b7 Volume 1.5x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 11824.0,
+   "stop": 10932.09,
+   "target": 14851.0,
+   "since": "2026-10-23 00:00"
+  },
+  {
+   "symbol": "ETERNAL",
+   "close": 375.05,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.6,
+   "detail": "9% pole, then a 29 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 1.3x",
+   "grade": "C",
+   "trigger": 372.05,
+   "stop": 358.13,
+   "target": 403.9,
+   "since": "2026-11-04 10:15"
+  },
+  {
+   "symbol": "FEDERALBNK",
+   "close": 365.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.0,
+   "detail": "10% pole, then a 12 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.8x",
+   "grade": "C",
+   "trigger": 365.6,
+   "stop": 360.38,
+   "target": 401.45,
+   "since": "2026-11-09 09:15"
+  },
+  {
+   "symbol": "GMRAIRPORT",
+   "close": 104.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.3,
+   "detail": "7% pole, then a 5 hours flag \u00b7 0.9 ranges under the top line \u00b7 Volume 2.2x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 105.26,
+   "stop": 104.29,
+   "target": 112.82,
+   "since": "2026-11-13 13:15"
+  },
+  {
+   "symbol": "IDFCFIRSTB",
+   "close": 83.59,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.1,
+   "detail": "8% pole, then a 20 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 82.27,
+   "stop": 79.38,
+   "target": 88.88,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "INDIANB",
+   "close": 936.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bullish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.9,
+   "detail": "12% pole, then a 27 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 938.14,
+   "stop": 924.65,
+   "target": 1053.16,
+   "since": "2026-11-04 12:15"
   },
   {
    "symbol": "JINDALSTEL",
@@ -6589,6 +10185,42 @@
    "target": 1369.02
   },
   {
+   "symbol": "JSWSTEEL",
+   "close": 1332.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\ud83c\udfaf Consolidating",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 1.7,
+   "detail": "14% pole, then a 7 days flag \u00b7 0.9 ranges under the top line \u00b7 Volume 1.2x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 1365.05,
+   "stop": 1317.96,
+   "target": 1553.15,
+   "since": "2026-10-23 00:00"
+  },
+  {
    "symbol": "LUPIN",
    "close": 1950.0,
    "trend": "With trend",
@@ -6617,11 +10249,47 @@
     }
    },
    "ext": -1.6,
-   "detail": "7-week range under a falling trendline, 4 touches, 10% deep \u00b7 6.4 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 4 touches, 10% deep \u00b7 6.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
    "grade": "C",
    "trigger": 2024.36,
    "stop": 2002.94,
    "target": 2234.48
+  },
+  {
+   "symbol": "MOTILALOFS",
+   "close": 1240.25,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 3.7,
+   "detail": "10% pole, then a 5 hours flag \u00b7 2.5 ranges under the top line \u00b7 Volume 1.4x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 1277.4,
+   "stop": 1231.63,
+   "target": 1404.95,
+   "since": "2026-11-11 14:15"
   },
   {
    "symbol": "OFSS",
@@ -6659,6 +10327,114 @@
    "target": 11558.88
   },
   {
+   "symbol": "PHOENIXLTD",
+   "close": 2229.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 3.1,
+   "detail": "9% pole, then a 15 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 2219.81,
+   "stop": 2185.72,
+   "target": 2444.64,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "PNB",
+   "close": 150.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 5.9,
+   "detail": "14% pole, then a 7 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 146.81,
+   "stop": 143.13,
+   "target": 167.58,
+   "since": "2026-11-09 09:15"
+  },
+  {
+   "symbol": "PNBHOUSING",
+   "close": 1138.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Bottoming",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Falling Wedge",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BEARISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BOTTOMING",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.4,
+   "detail": "5 weeks falling wedge, 6 touches, 14% deep \u00b7 0.9 ranges under the top line \u00b7 Volume 1.0x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 1145.01,
+   "stop": 1075.15,
+   "target": 1224.8,
+   "since": "2026-10-13 15:15"
+  },
+  {
    "symbol": "POLYCAB",
    "close": 7702.0,
    "trend": "With trend",
@@ -6694,6 +10470,78 @@
    "target": 9411.56
   },
   {
+   "symbol": "RBLBANK",
+   "close": 390.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "TOPPING",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 0.1,
+   "detail": "7% pole, then a 23 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.7x",
+   "grade": "C",
+   "trigger": 384.41,
+   "stop": 380.24,
+   "target": 415.12,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "SUNPHARMA",
+   "close": 1870.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Rectangle",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 0.9,
+   "detail": "6 weeks rectangle, 7 touches, 8% deep \u00b7 broke out Fri 06 \u00b7 Breakout volume 1.1x",
+   "grade": "C",
+   "trigger": 1841.48,
+   "stop": 1771.24,
+   "target": 1990.17,
+   "since": "2026-09-21 00:00"
+  },
+  {
    "symbol": "UJJIVANSFB",
    "close": 61.2,
    "trend": "With trend",
@@ -6722,11 +10570,263 @@
     }
    },
    "ext": -0.6,
-   "detail": "3-week range under a flat top, 4 touches, 15% deep \u00b7 1.7 ranges under the ceiling \u00b7 Volume 1.7x lately (quieter is better)",
+   "detail": "3-week range under a flat top, 4 touches, 15% deep \u00b7 1.7 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
    "grade": "C",
    "trigger": 62.16,
    "stop": 61.18,
    "target": 71.29
+  },
+  {
+   "symbol": "UNIONBANK",
+   "close": 207.9,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 4.4,
+   "detail": "9% pole, then a 7 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 206.43,
+   "stop": 203.4,
+   "target": 225.46,
+   "since": "2026-11-09 09:15"
+  },
+  {
+   "symbol": "UNOMINDA",
+   "close": 1388.1,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 3.4,
+   "detail": "16% pole, then a 29 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 1.1x",
+   "grade": "C",
+   "trigger": 1382.25,
+   "stop": 1335.42,
+   "target": 1603.72,
+   "since": "2026-11-04 11:15"
+  },
+  {
+   "symbol": "CDSL",
+   "close": 1439.8,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 2.8,
+   "detail": "12% pole, then a 21 hours flag \u00b7 3.0 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 1478.7,
+   "stop": 1416.16,
+   "target": 1651.0,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "GODREJPROP",
+   "close": 1892.4,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 1.8,
+   "detail": "8% pole, then a 16 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 1851.81,
+   "stop": 1822.85,
+   "target": 2006.74,
+   "since": "2026-11-06 11:15"
+  },
+  {
+   "symbol": "HAVELLS",
+   "close": 1175.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 1.9,
+   "detail": "11% pole, then a 15 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 1173.2,
+   "stop": 1149.4,
+   "target": 1297.8,
+   "since": "2026-11-06 09:15"
+  },
+  {
+   "symbol": "ICICIBANK",
+   "close": 1598.7,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 5.0,
+   "detail": "9% pole, then a 21 hours flag \u00b7 broke out Tue 17 \u00b7 Breakout volume 0.0x",
+   "grade": "C",
+   "trigger": 1591.9,
+   "stop": 1563.07,
+   "target": 1737.5,
+   "since": "2026-11-05 09:15"
+  },
+  {
+   "symbol": "IEX",
+   "close": 114.4,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BEARISH RUN"
+    }
+   },
+   "ext": 1.3,
+   "detail": "8% pole, then a 21 hours flag \u00b7 2.5 ranges under the top line \u00b7 Volume 1.3x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 117.06,
+   "stop": 114.04,
+   "target": 125.92,
+   "since": "2026-11-06 12:15"
   },
   {
    "symbol": "MPHASIS",
@@ -6764,6 +10864,134 @@
    "target": 3081.55
   },
   {
+   "symbol": "NAUKRI",
+   "close": 1175.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bearish",
+    "D": "Bearish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Range",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BEARISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "DO NOT MISS \u2014 M+W+D bearish + squeeze ON! Short consider karo!",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BEARISH RUN",
+     "D": "BEARISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -1.1,
+   "detail": "3-week range under a falling trendline, 4 touches, 11% deep \u00b7 0.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+   "grade": "C",
+   "trigger": 1179.23,
+   "stop": 1162.59,
+   "target": 1305.28
+  },
+  {
+   "symbol": "PFC",
+   "close": 328.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -0.7,
+   "detail": "4-week range under a falling trendline, 3 touches, 12% deep \u00b7 8.1 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "grade": "C",
+   "trigger": 347.01,
+   "stop": 342.8,
+   "target": 388.16
+  },
+  {
+   "symbol": "VOLTAS",
+   "close": 1148.9,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Topping"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 1.4,
+   "detail": "11% pole, then a 5 hours flag \u00b7 broke out Mon 16 \u00b7 Breakout volume 1.2x",
+   "grade": "C",
+   "trigger": 1142.0,
+   "stop": 1119.66,
+   "target": 1267.0,
+   "since": "2026-11-09 09:15"
+  },
+  {
+   "symbol": "PREMIERENE",
+   "close": 833.0,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bearish",
+    "D": "Topping",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Falling Wedge",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": -2.8,
+   "detail": "12 weeks falling wedge, 6 touches, 19% deep \u00b7 2.5 ranges under the top line \u00b7 Volume 1.1x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 900.82,
+   "stop": 812.07,
+   "target": 1072.4,
+   "since": "2026-08-21 00:00"
+  },
+  {
    "symbol": "PREMIERENE",
    "close": 833.0,
    "trend": "",
@@ -6783,6 +11011,64 @@
    "trigger": 903.64,
    "stop": 885.84,
    "target": 1030.57
+  },
+  {
+   "symbol": "SAGILITY",
+   "close": 43.89,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Topping",
+    "D": "Bottoming",
+    "H": "Bullish"
+   },
+   "setup": "Daily Rectangle",
+   "stage": "Watch",
+   "old": "\ud83c\udfc6 Prime Setup",
+   "vk": null,
+   "ext": -0.4,
+   "detail": "8 weeks rectangle, 7 touches, 12% deep \u00b7 1.4 ranges under the top line \u00b7 Volume 1.7x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 45.51,
+   "stop": 43.11,
+   "target": 50.53,
+   "since": "2026-09-21 00:00"
+  },
+  {
+   "symbol": "BANKBARODA",
+   "close": 274.89,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "setup": "Daily Flag",
+   "stage": "Watch",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 3.9,
+   "detail": "18% pole, then a 3 days flag \u00b7 1.0 ranges under the top line \u00b7 Volume 1.0x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 276.85,
+   "stop": 268.58,
+   "target": 326.5,
+   "since": "2026-10-26 00:00"
   },
   {
    "symbol": "DMART",
@@ -6848,11 +11134,47 @@
     }
    },
    "ext": 0.1,
-   "detail": "11-week range under a falling trendline, 4 touches, 11% deep \u00b7 4.4 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
+   "detail": "11-week range under a falling trendline, 4 touches, 11% deep \u00b7 4.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
    "grade": "C",
    "trigger": 407.97,
    "stop": 403.68,
    "target": 454.03
+  },
+  {
+   "symbol": "MAXHEALTH",
+   "close": 1030.9,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Impulse"
+   },
+   "setup": "Hourly Flag",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "ext": 2.7,
+   "detail": "12% pole, then a 7 hours flag \u00b7 0.8 ranges under the top line \u00b7 Volume 1.3x in the pattern (quieter is better)",
+   "grade": "C",
+   "trigger": 1038.9,
+   "stop": 1011.97,
+   "target": 1162.15,
+   "since": "2026-11-11 10:15"
   },
   {
    "symbol": "ONGC",
@@ -6888,6 +11210,42 @@
    "trigger": 236.56,
    "stop": 228.93,
    "target": 258.12
+  },
+  {
+   "symbol": "TATACONSUM",
+   "close": 1112.4,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Topping"
+   },
+   "setup": "Daily Flag",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 3.3,
+   "detail": "17% pole, then a 3 days flag \u00b7 broke out Mon 16 \u00b7 Breakout volume 0.8x",
+   "grade": "C",
+   "trigger": 1099.9,
+   "stop": 1073.55,
+   "target": 1283.8,
+   "since": "2026-10-26 00:00"
   },
   {
    "symbol": "UPL",
