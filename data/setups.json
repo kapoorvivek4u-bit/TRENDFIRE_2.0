@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-17 17:05",
+ "generated_ist": "2026-11-17 17:12",
  "oi_asof": "2026-11-16",
- "stocks": 218,
+ "stocks": 217,
  "market": {
   "weekly_bull_pct": 28,
   "monthly_bull_pct": 52,
@@ -9,7 +9,7 @@
   "regime": "Weak",
   "daily_bull_hist": [
    76,
-   81,
+   82,
    86,
    89,
    92,
@@ -187,10 +187,44 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 46% \u00b7 Volume 0.4x in pullback \u00b7 OI +16% in up-leg",
+   "detail": "Pullback 46% \u00b7 Volume 0.3x in pullback \u00b7 OI +16% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 355.69
+  },
+  {
+   "symbol": "PRESTIGE",
+   "close": 1691.5,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "old": "\u274c Avoid",
+   "ext": 2.8,
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 31% \u00b7 Volume 0.8x in pullback \u00b7 OI +8% in up-leg",
+   "grade": "A",
+   "trigger": 1688.4,
+   "stop": 1658.78
   },
   {
    "symbol": "RADICO",
@@ -221,7 +255,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 28% \u00b7 Volume 0.3x in pullback \u00b7 OI +6% in up-leg",
+   "detail": "Pullback 28% \u00b7 Volume 0.4x in pullback \u00b7 OI +6% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 4611.36
@@ -255,7 +289,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 21% \u00b7 Volume 0.8x in pullback \u00b7 OI +5% in up-leg",
+   "detail": "Pullback 21% \u00b7 Volume 0.7x in pullback \u00b7 OI +5% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 291.82
@@ -323,7 +357,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 37% \u00b7 Volume 0.6x in pullback \u00b7 OI +2% in up-leg, -2% in pullback",
+   "detail": "Pullback 37% \u00b7 Volume 0.7x in pullback \u00b7 OI +2% in up-leg, -2% in pullback",
    "grade": "A",
    "trigger": 382.15,
    "stop": 379.49
@@ -357,7 +391,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 45% \u00b7 Volume 0.6x in pullback \u00b7 OI +2% in up-leg",
+   "detail": "Pullback 45% \u00b7 Volume 0.4x in pullback \u00b7 OI +2% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 390.27
@@ -459,7 +493,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 48% \u00b7 Volume 6.7x in pullback \u00b7 OI +7% in up-leg",
+   "detail": "Pullback 48% \u00b7 Volume 6.6x in pullback \u00b7 OI +7% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 348.95
@@ -493,7 +527,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 23% \u00b7 Volume 1.2x in pullback \u00b7 OI +9% in up-leg",
+   "detail": "Pullback 23% \u00b7 Volume 1.1x in pullback \u00b7 OI +9% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 2611.27
@@ -595,10 +629,44 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 66% \u00b7 Volume 1.2x in pullback \u00b7 OI +7% in up-leg",
+   "detail": "Pullback 66% \u00b7 Volume 1.3x in pullback \u00b7 OI +7% in up-leg",
    "grade": "B",
    "trigger": 7599.0,
    "stop": 7518.93
+  },
+  {
+   "symbol": "FEDERALBNK",
+   "close": 365.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "old": "\u274c Avoid",
+   "ext": 2.5,
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Ready",
+   "detail": "Pullback 20% \u00b7 Volume 0.8x in pullback \u00b7 OI -19% in up-leg",
+   "grade": "B",
+   "trigger": 366.5,
+   "stop": 360.38
   },
   {
    "symbol": "FORCEMOT",
@@ -635,40 +703,6 @@
    "stop": 19195.53
   },
   {
-   "symbol": "HDFCAMC",
-   "close": 2699.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 3.1,
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "TOPPING",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 30% \u00b7 Volume 0.6x in pullback \u00b7 OI -13% in up-leg, +1% in pullback",
-   "grade": "B",
-   "trigger": 2650.0,
-   "stop": 2621.15
-  },
-  {
    "symbol": "MCX",
    "close": 3705.4,
    "trend": "With trend",
@@ -697,7 +731,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 21% \u00b7 Volume 0.6x in pullback \u00b7 OI -6% in up-leg, -2% in pullback",
+   "detail": "Pullback 21% \u00b7 Volume 0.7x in pullback \u00b7 OI -6% in up-leg, -2% in pullback",
    "grade": "B",
    "trigger": null,
    "stop": 3653.28
@@ -765,44 +799,10 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 33% \u00b7 Volume 1.0x in pullback \u00b7 OI +9% in up-leg, +2% in pullback",
+   "detail": "Pullback 33% \u00b7 Volume 1.1x in pullback \u00b7 OI +9% in up-leg, +2% in pullback",
    "grade": "B",
    "trigger": 1903.4,
    "stop": 1868.46
-  },
-  {
-   "symbol": "PRESTIGE",
-   "close": 1691.5,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.8,
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "Mixed",
-    "ma": "ONLY BUY",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 31% \u00b7 Volume 0.9x in pullback \u00b7 OI +8% in up-leg",
-   "grade": "B",
-   "trigger": 1688.4,
-   "stop": 1658.78
   },
   {
    "symbol": "SYRMA",
@@ -1003,7 +1003,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 41% \u00b7 Volume 1.3x in pullback \u00b7 OI +3% in up-leg",
+   "detail": "Pullback 41% \u00b7 Volume 1.2x in pullback \u00b7 OI +3% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 3149.09
@@ -1037,7 +1037,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 31% \u00b7 Volume 0.3x in pullback \u00b7 OI -4% in up-leg, +0% in pullback",
+   "detail": "Pullback 31% \u00b7 Volume 0.2x in pullback \u00b7 OI -4% in up-leg, +0% in pullback",
    "grade": "B",
    "trigger": null,
    "stop": 1400.79
@@ -1117,40 +1117,6 @@
    "stop": 268.6
   },
   {
-   "symbol": "HINDUNILVR",
-   "close": 2009.9,
-   "trend": "Counter-trend",
-   "states": {
-    "M": "Bearish",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Impulse"
-   },
-   "old": "\u274c Avoid",
-   "ext": 1.5,
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BEARISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Triggered",
-   "detail": "Pullback 35% \u00b7 Volume 0.8x in pullback \u00b7 OI -2% in up-leg, +0% in pullback",
-   "grade": "B",
-   "trigger": 1992.9,
-   "stop": 1958.08
-  },
-  {
    "symbol": "ICICIGI",
    "close": 1693.5,
    "trend": "Counter-trend",
@@ -1213,44 +1179,10 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 24% \u00b7 Volume 0.4x in pullback \u00b7 OI -1% in up-leg, -2% in pullback",
+   "detail": "Pullback 24% \u00b7 Volume 0.5x in pullback \u00b7 OI -1% in up-leg, -2% in pullback",
    "grade": "B",
    "trigger": 3330.0,
    "stop": 3307.37
-  },
-  {
-   "symbol": "MARUTI",
-   "close": 12625.0,
-   "trend": "Counter-trend",
-   "states": {
-    "M": "Bearish",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "ext": 1.3,
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Bigger trend neeche \u2014 chhota bounce hai, chase mat karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BEARISH RUN",
-     "W": "BOTTOMING",
-     "D": "TOPPING",
-     "H": "BOTTOMING"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 42% \u00b7 Volume 0.7x in pullback \u00b7 OI -8% in up-leg, -1% in pullback",
-   "grade": "B",
-   "trigger": 12757.0,
-   "stop": 12511.93
   },
   {
    "symbol": "SBILIFE",
@@ -1349,7 +1281,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 53% \u00b7 Volume 1.4x in pullback \u00b7 OI -14% in up-leg, +1% in pullback",
+   "detail": "Pullback 53% \u00b7 Volume 1.2x in pullback \u00b7 OI -14% in up-leg, +1% in pullback",
    "grade": "C",
    "trigger": 1405.9,
    "stop": 1377.34
@@ -1417,7 +1349,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 72% \u00b7 Volume 1.4x in pullback \u00b7 OI -16% in up-leg",
+   "detail": "Pullback 72% \u00b7 Volume 1.2x in pullback \u00b7 OI -16% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 2176.64
@@ -1491,38 +1423,38 @@
    "stop": 3834.32
   },
   {
-   "symbol": "FEDERALBNK",
-   "close": 365.8,
+   "symbol": "HDFCAMC",
+   "close": 2699.0,
    "trend": "With trend",
    "states": {
-    "M": "Impulse",
+    "M": "Topping",
     "W": "Bottoming",
     "D": "Impulse",
     "H": "Impulse"
    },
    "old": "\u274c Avoid",
-   "ext": 2.5,
+   "ext": 3.1,
    "vk": {
-    "final": "BUY NOW",
+    "final": "NO SIGNAL",
     "signal": "Mixed",
-    "ma": "ONLY BUY",
+    "ma": "Mixed - No Clear Signal",
     "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
     "status": {
-     "M": "BULLISH RUN",
+     "M": "TOPPING",
      "W": "BOTTOMING",
      "D": "BULLISH RUN",
      "H": "BULLISH RUN"
     }
    },
    "setup": "Swing Pullback",
-   "stage": "Ready",
-   "detail": "Pullback 20% \u00b7 Volume 0.9x in pullback \u00b7 OI -19% in up-leg",
+   "stage": "Triggered",
+   "detail": "Pullback 30% \u00b7 Volume 0.9x in pullback \u00b7 OI -13% in up-leg, +1% in pullback",
    "grade": "C",
-   "trigger": 366.5,
-   "stop": 360.38
+   "trigger": 2650.0,
+   "stop": 2621.15
   },
   {
    "symbol": "JSWSTEEL",
@@ -1587,7 +1519,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 46% \u00b7 Volume 1.4x in pullback \u00b7 OI -7% in up-leg",
+   "detail": "Pullback 46% \u00b7 Volume 1.3x in pullback \u00b7 OI -7% in up-leg",
    "grade": "C",
    "trigger": 1608.0,
    "stop": 1598.5
@@ -1621,7 +1553,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 24% \u00b7 Volume 1.0x in pullback \u00b7 OI -1% in up-leg",
+   "detail": "Pullback 24% \u00b7 Volume 1.1x in pullback \u00b7 OI -1% in up-leg",
    "grade": "C",
    "trigger": 765.85,
    "stop": 759.98
@@ -1655,7 +1587,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 40% \u00b7 Volume 2.3x in pullback \u00b7 OI -4% in up-leg",
+   "detail": "Pullback 40% \u00b7 Volume 1.8x in pullback \u00b7 OI -4% in up-leg",
    "grade": "C",
    "trigger": 964.75,
    "stop": 951.29
@@ -1675,10 +1607,78 @@
    "vk": null,
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 38% \u00b7 Volume 0.9x in pullback \u00b7 OI -36% in up-leg, -7% in pullback",
+   "detail": "Pullback 38% \u00b7 Volume 1.0x in pullback \u00b7 OI -36% in up-leg, -7% in pullback",
    "grade": "C",
    "trigger": 122.44,
    "stop": 114.37
+  },
+  {
+   "symbol": "HINDUNILVR",
+   "close": 2009.9,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "old": "\u274c Avoid",
+   "ext": 1.5,
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 35% \u00b7 Volume 0.9x in pullback \u00b7 OI -2% in up-leg, +0% in pullback",
+   "grade": "C",
+   "trigger": 1992.9,
+   "stop": 1958.08
+  },
+  {
+   "symbol": "MARUTI",
+   "close": 12625.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "old": "\u274c Avoid",
+   "ext": 1.3,
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Bigger trend neeche \u2014 chhota bounce hai, chase mat karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "TOPPING",
+     "H": "BOTTOMING"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Ready",
+   "detail": "Pullback 42% \u00b7 Volume 0.9x in pullback \u00b7 OI -8% in up-leg, -1% in pullback",
+   "grade": "C",
+   "trigger": 12757.0,
+   "stop": 12511.93
   },
   {
    "symbol": "TATACONSUM",
@@ -1709,7 +1709,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 30% \u00b7 Volume 1.3x in pullback \u00b7 OI -0% in up-leg",
+   "detail": "Pullback 30% \u00b7 Volume 1.2x in pullback \u00b7 OI -0% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 1105.38
@@ -1811,7 +1811,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 31% \u00b7 Volume 0.6x in pullback \u00b7 OI +2% in up-leg, +5% in pullback",
+   "detail": "Pullback 31% \u00b7 Volume 0.7x in pullback \u00b7 OI +2% in up-leg, +5% in pullback",
    "grade": "Warning",
    "trigger": 4135.6,
    "stop": 4108.77
@@ -1845,7 +1845,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 36% \u00b7 Volume 0.5x in pullback \u00b7 OI -8% in up-leg, +4% in pullback",
+   "detail": "Pullback 36% \u00b7 Volume 0.4x in pullback \u00b7 OI -8% in up-leg, +4% in pullback",
    "grade": "Warning",
    "trigger": null,
    "stop": 2604.78
@@ -1879,7 +1879,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 56% \u00b7 Volume 0.3x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
+   "detail": "Pullback 56% \u00b7 Volume 0.2x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
    "grade": "Warning",
    "trigger": 162.63,
    "stop": 159.98
@@ -1947,7 +1947,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 37% \u00b7 Volume 1.2x in pullback \u00b7 OI +8% in up-leg, +8% in pullback",
+   "detail": "Pullback 37% \u00b7 Volume 1.1x in pullback \u00b7 OI +8% in up-leg, +8% in pullback",
    "grade": "Warning",
    "trigger": 2233.8,
    "stop": 2183.12
@@ -1981,7 +1981,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Ready",
-   "detail": "Pullback 38% \u00b7 Volume 0.5x in pullback \u00b7 OI +24% in up-leg, +5% in pullback",
+   "detail": "Pullback 38% \u00b7 Volume 0.7x in pullback \u00b7 OI +24% in up-leg, +5% in pullback",
    "grade": "Warning",
    "trigger": 1874.3,
    "stop": 1855.18
@@ -2357,7 +2357,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +16% in up-leg, -0% in pullback",
+   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +16% in up-leg, -0% in pullback",
    "grade": "A",
    "trigger": 11186.19,
    "stop": 10932.09
@@ -2731,7 +2731,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 1.9% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI +3% in up-leg, +2% in pullback",
+   "detail": "Spilled 1.9% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 OI +3% in up-leg, +2% in pullback",
    "grade": "A",
    "trigger": 904.63,
    "stop": 889.22
@@ -2867,7 +2867,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 0.3% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 OI -8% in up-leg, +0% in pullback",
+   "detail": "Spilled 0.3% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -8% in up-leg, +0% in pullback",
    "grade": "B",
    "trigger": 2381.63,
    "stop": 2357.58
@@ -2941,40 +2941,6 @@
    "stop": 1732.53
   },
   {
-   "symbol": "AUBANK",
-   "close": 993.1,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bullish",
-    "H": "Impulse"
-   },
-   "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Wait for Daily Setup",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "TOPPING",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BULLISH RUN"
-    }
-   },
-   "ext": 0.6,
-   "detail": "Weekly spilled 12.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 OI -9% in pullback",
-   "grade": "B",
-   "trigger": 991.93,
-   "stop": 843.41
-  },
-  {
    "symbol": "AUROPHARMA",
    "close": 1794.1,
    "trend": "With trend",
@@ -3003,7 +2969,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 0.5% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -0% in up-leg, +0% in pullback",
+   "detail": "Spilled 0.5% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 OI -0% in up-leg, +0% in pullback",
    "grade": "B",
    "trigger": 1803.65,
    "stop": 1779.63
@@ -3275,7 +3241,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI -16% in up-leg, -3% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -16% in up-leg, -3% in pullback",
    "grade": "B",
    "trigger": 1336.57,
    "stop": 1309.38
@@ -3377,7 +3343,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.6x in pullback \u00b7 OI -6% in up-leg, -2% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI -6% in up-leg, -2% in pullback",
    "grade": "B",
    "trigger": 3699.0,
    "stop": 3653.28
@@ -3581,7 +3547,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 OI -13% in up-leg",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 OI -13% in up-leg",
    "grade": "B",
    "trigger": 689.81,
    "stop": 674.9
@@ -3669,7 +3635,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 OI -4% in up-leg",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 OI -4% in up-leg",
    "grade": "B",
    "trigger": 595.97,
    "stop": 592.46
@@ -3703,7 +3669,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 1.5x in pullback \u00b7 OI -10% in up-leg",
+   "detail": "Spilled 1.5% under the 50 EMA \u00b7 Volume 1.2x in pullback \u00b7 OI -10% in up-leg",
    "grade": "C",
    "trigger": 2220.92,
    "stop": 2176.64
@@ -4315,7 +4281,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.2x in pullback \u00b7 OI -2% in up-leg, +3% in pullback",
    "grade": "Warning",
    "trigger": 163.98,
    "stop": 159.98
@@ -4451,7 +4417,7 @@
      "H": "BOTTOMING"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.1x in pullback \u00b7 OI +4% in up-leg, +8% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI +4% in up-leg, +8% in pullback",
    "grade": "Warning",
    "trigger": 2226.67,
    "stop": 2183.12
@@ -4723,7 +4689,7 @@
      "H": "BULLISH RUN"
     }
    },
-   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 OI -7% in up-leg, +3% in pullback",
+   "detail": "Spilled 1.8% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 OI -7% in up-leg, +3% in pullback",
    "grade": "Warning",
    "trigger": 4471.08,
    "stop": 4359.06
@@ -4825,7 +4791,7 @@
      "H": "BULLISH RUN"
     }
    },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI +4% in up-leg, +3% in pullback",
+   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.1x in pullback \u00b7 OI +4% in up-leg, +3% in pullback",
    "grade": "Warning",
    "trigger": 328.04,
    "stop": 322.0
@@ -4971,6 +4937,41 @@
    "trigger": 534.13,
    "stop": 504.59,
    "target": 643.49
+  },
+  {
+   "symbol": "ABB",
+   "close": 6923.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BEARISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": 0.1,
+   "detail": "5-week range under a falling trendline, 3 touches, 13% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 7135.26,
+   "stop": 7015.86,
+   "target": 8078.31
   },
   {
    "symbol": "BHARATFORG",
@@ -5351,7 +5352,7 @@
     }
    },
    "ext": 1.6,
-   "detail": "10-week range under a falling trendline, 3 touches, 12% deep \u00b7 4.1 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 3 touches, 12% deep \u00b7 4.1 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 1368.46,
    "stop": 1352.41,
@@ -5526,7 +5527,7 @@
     }
    },
    "ext": 0.5,
-   "detail": "5-week range under a falling trendline, 3 touches, 15% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "detail": "5-week range under a falling trendline, 3 touches, 15% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 1145.01,
    "stop": 1130.76,
@@ -5596,7 +5597,7 @@
     }
    },
    "ext": 0.7,
-   "detail": "6-week range under a falling trendline, 3 touches, 18% deep \u00b7 4.2 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 3 touches, 18% deep \u00b7 4.2 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "B",
    "trigger": 1008.78,
    "stop": 997.42,
@@ -5631,7 +5632,7 @@
     }
    },
    "ext": -1.5,
-   "detail": "6-week range under a falling trendline, 3 touches, 26% deep \u00b7 12.9 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 3 touches, 26% deep \u00b7 12.9 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "B",
    "trigger": 1615.28,
    "stop": 1591.0,
@@ -5666,7 +5667,7 @@
     }
    },
    "ext": 1.6,
-   "detail": "4-week range under a falling trendline, 3 touches, 6% deep \u00b7 9.0 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "4-week range under a falling trendline, 3 touches, 6% deep \u00b7 9.0 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 1856.14,
    "stop": 1836.82,
@@ -5736,7 +5737,7 @@
     }
    },
    "ext": 0.4,
-   "detail": "10-week range under a falling trendline, 4 touches, 10% deep \u00b7 4.5 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 4 touches, 10% deep \u00b7 4.5 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
    "grade": "B",
    "trigger": 1419.5,
    "stop": 1406.16,
@@ -5771,7 +5772,7 @@
     }
    },
    "ext": -0.8,
-   "detail": "7-week range under a falling trendline, 4 touches, 14% deep \u00b7 8.2 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 4 touches, 14% deep \u00b7 8.2 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
    "grade": "B",
    "trigger": 223.9,
    "stop": 220.74,
@@ -5806,7 +5807,7 @@
     }
    },
    "ext": -1.1,
-   "detail": "7-week range under a falling trendline, 3 touches, 22% deep \u00b7 5.3 ranges under the ceiling \u00b7 Volume 0.3x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 3 touches, 22% deep \u00b7 5.3 ranges under the ceiling \u00b7 Volume 0.2x lately (quieter is better)",
    "grade": "B",
    "trigger": 449.95,
    "stop": 442.73,
@@ -5883,6 +5884,41 @@
    "target": 3080.56
   },
   {
+   "symbol": "NAUKRI",
+   "close": 1175.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bearish",
+    "D": "Bottoming",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Range",
+   "stage": "Ready",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "ALL 3 ALIGNED BEARISH",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "DO NOT MISS \u2014 M+W+D bearish + squeeze ON! Short consider karo!",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BEARISH RUN",
+     "D": "BOTTOMING",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -1.0,
+   "detail": "3-week range under a falling trendline, 4 touches, 11% deep \u00b7 0.4 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 1179.23,
+   "stop": 1162.59,
+   "target": 1305.28
+  },
+  {
    "symbol": "SHREECEM",
    "close": 24900.0,
    "trend": "Early turn",
@@ -5911,7 +5947,7 @@
     }
    },
    "ext": 2.0,
-   "detail": "11-week range under a falling trendline, 3 touches, 16% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "11-week range under a falling trendline, 3 touches, 16% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 25443.11,
    "stop": 25171.04,
@@ -6016,7 +6052,7 @@
     }
    },
    "ext": 0.2,
-   "detail": "6-week range under a falling trendline, 6 touches, 13% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 6 touches, 13% deep \u00b7 3.7 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "B",
    "trigger": 439.49,
    "stop": 434.76,
@@ -6051,7 +6087,7 @@
     }
    },
    "ext": -1.2,
-   "detail": "4-week range under a falling trendline, 3 touches, 13% deep \u00b7 6.7 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "4-week range under a falling trendline, 3 touches, 13% deep \u00b7 6.7 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 6934.39,
    "stop": 6767.42,
@@ -6226,7 +6262,7 @@
     }
    },
    "ext": 0.8,
-   "detail": "10-week range under a falling trendline, 5 touches, 8% deep \u00b7 3.4 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 5 touches, 8% deep \u00b7 3.4 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
    "grade": "B",
    "trigger": 401.91,
    "stop": 397.05,
@@ -6296,7 +6332,7 @@
     }
    },
    "ext": -2.6,
-   "detail": "5-week range under a falling trendline, 3 touches, 25% deep \u00b7 2.9 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "5-week range under a falling trendline, 3 touches, 25% deep \u00b7 2.9 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "B",
    "trigger": 1888.37,
    "stop": 1863.02,
@@ -6373,6 +6409,41 @@
    "target": 398.2
   },
   {
+   "symbol": "PFC",
+   "close": 328.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Bottoming"
+   },
+   "setup": "Hourly Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BEARISH RUN",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "ext": -1.3,
+   "detail": "4-week range under a falling trendline, 3 touches, 12% deep \u00b7 8.1 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 347.01,
+   "stop": 342.8,
+   "target": 388.16
+  },
+  {
    "symbol": "RELIANCE",
    "close": 1367.0,
    "trend": "Counter-trend",
@@ -6436,7 +6507,7 @@
     }
    },
    "ext": 0.0,
-   "detail": "7-week range under a flat top, 3 touches, 15% deep \u00b7 4.3 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "7-week range under a flat top, 3 touches, 15% deep \u00b7 4.3 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 2534.26,
    "stop": 2509.91,
@@ -6506,7 +6577,7 @@
     }
    },
    "ext": -0.4,
-   "detail": "6-week range under a falling trendline, 5 touches, 18% deep \u00b7 3.8 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 5 touches, 18% deep \u00b7 3.8 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "B",
    "trigger": 262.98,
    "stop": 259.32,
@@ -6546,41 +6617,6 @@
    "trigger": 7966.5,
    "stop": 7577.07,
    "target": 9990.06
-  },
-  {
-   "symbol": "ABB",
-   "close": 6923.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bearish",
-    "D": "Bullish",
-    "H": "Bottoming"
-   },
-   "setup": "Hourly Range",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "BEARISH RUN",
-     "D": "BULLISH RUN",
-     "H": "BOTTOMING"
-    }
-   },
-   "ext": 0.1,
-   "detail": "5-week range under a falling trendline, 3 touches, 13% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
-   "grade": "C",
-   "trigger": 7135.26,
-   "stop": 7015.86,
-   "target": 8078.31
   },
   {
    "symbol": "ADANIENT",
@@ -6821,7 +6857,7 @@
     }
    },
    "ext": -2.2,
-   "detail": "7-week range under a falling trendline, 4 touches, 10% deep \u00b7 6.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 4 touches, 10% deep \u00b7 6.4 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
    "grade": "C",
    "trigger": 2024.36,
    "stop": 2002.94,
@@ -6961,46 +6997,11 @@
     }
    },
    "ext": -0.2,
-   "detail": "3-week range under a flat top, 4 touches, 15% deep \u00b7 1.7 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
+   "detail": "3-week range under a flat top, 4 touches, 15% deep \u00b7 1.7 ranges under the ceiling \u00b7 Volume 1.7x lately (quieter is better)",
    "grade": "C",
    "trigger": 62.16,
    "stop": 61.18,
    "target": 71.29
-  },
-  {
-   "symbol": "NAUKRI",
-   "close": 1175.0,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bearish",
-    "D": "Bottoming",
-    "H": "Bottoming"
-   },
-   "setup": "Hourly Range",
-   "stage": "Ready",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "ALL 3 ALIGNED BEARISH",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "DO NOT MISS \u2014 M+W+D bearish + squeeze ON! Short consider karo!",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BOTTOMING",
-     "W": "BEARISH RUN",
-     "D": "BOTTOMING",
-     "H": "BOTTOMING"
-    }
-   },
-   "ext": -1.0,
-   "detail": "3-week range under a falling trendline, 4 touches, 11% deep \u00b7 0.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
-   "grade": "C",
-   "trigger": 1179.23,
-   "stop": 1162.59,
-   "target": 1305.28
   },
   {
    "symbol": "PREMIERENE",
@@ -7087,7 +7088,7 @@
     }
    },
    "ext": -0.1,
-   "detail": "11-week range under a falling trendline, 4 touches, 11% deep \u00b7 4.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+   "detail": "11-week range under a falling trendline, 4 touches, 11% deep \u00b7 4.4 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
    "grade": "C",
    "trigger": 407.97,
    "stop": 403.68,
@@ -7127,41 +7128,6 @@
    "trigger": 236.51,
    "stop": 228.84,
    "target": 258.39
-  },
-  {
-   "symbol": "PFC",
-   "close": 328.0,
-   "trend": "Counter-trend",
-   "states": {
-    "M": "Bearish",
-    "W": "Bottoming",
-    "D": "Bullish",
-    "H": "Bottoming"
-   },
-   "setup": "Hourly Range",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BEARISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "BOTTOMING"
-    }
-   },
-   "ext": -1.3,
-   "detail": "4-week range under a falling trendline, 3 touches, 12% deep \u00b7 8.1 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
-   "grade": "C",
-   "trigger": 347.01,
-   "stop": 342.8,
-   "target": 388.16
   },
   {
    "symbol": "UPL",
@@ -7422,7 +7388,6 @@
    "ASHOKLEY",
    "ASIANPAINT",
    "ASTRAL",
-   "AUBANK",
    "BAJAJ-AUTO",
    "BAJAJFINSV",
    "BAJFINANCE",
@@ -7748,22 +7713,6 @@
     },
     "signal": "Mixed",
     "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed"
-   },
-   {
-    "symbol": "AUBANK",
-    "close": 993.1,
-    "states": {
-     "M": "Topping",
-     "W": "Bottoming",
-     "D": "Bullish",
-     "H": "Impulse"
-    },
-    "signal": "Mixed",
-    "ma": "Wait for Daily Setup",
     "advice": "Mixed signal \u2014 confluence ka wait karo",
     "daily": "No signal yet",
     "hourly": "No signal yet",
@@ -10981,5 +10930,7 @@
    }
   ]
  },
- "notes": []
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ]
 }
