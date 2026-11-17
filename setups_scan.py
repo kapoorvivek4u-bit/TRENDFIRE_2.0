@@ -59,6 +59,19 @@ CFG = {
         "ready_atr": 1.0,        # Ready when the close is this close under the ceiling
         "late_atr": 2.5,         # a breakout further away than this is no longer fresh
     },
+    "pattern": {   # chart patterns: Flag, Rectangle, Falling Wedge
+        "daily":  {"pivot": 2, "min_len": 15, "max_len": 90, "fresh": 5,
+                   "flag_len": (3, 15), "pole_len": 12, "pole_pct": 10.0},
+        "hourly": {"pivot": 3, "min_len": 35, "max_len": 240, "fresh": 10,
+                   "flag_len": (5, 30), "pole_len": 28, "pole_pct": 6.0},
+        "touch_atr": 0.35,       # a swing this close to a line counts as a touch
+        "flat_atr": 1.0,         # a line moving less than this many ATRs over the pattern is flat
+        "height_pct": (2.5, 25.0),
+        "pole_atr": 5.0,         # flag pole: at least this many ATRs ...
+        "flag_retrace": 0.5,     # ... and the flag gives back at most half of it
+        "ready_atr": 0.75,       # Ready when the close is this close under the top line
+        "late_atr": 2.5,
+    },
     "recent_break_days": 15,  # a range breakout this recent counts for Breakout + Trend Overspill
     "ext_atr": 4.0,         # this many daily ranges above the 50 EMA = Extended
     "turn_pts": 5,          # Daily breadth change over 3 sessions that counts as a turn
@@ -371,6 +384,211 @@ def range_rows(row, T, vol, idx, fo, name):
              "stop": round(max(rg["low"], rg["line_now"] - 1.5 * float(T["ind"]["atr"][-1]))
                            * 0.998, 2),
              "target": round(rg["line_now"] * (1 + rg["height"] / 100), 2)}]
+
+
+def _pivots(x, k, lo, hi, high=True):
+    """Swing highs (or lows): the extreme of k bars each side; equal neighbours count once."""
+    f = np.max if high else np.min
+    out = []
+    for i in range(max(lo, k), min(hi, len(x) - k)):
+        if x[i] == f(x[i - k:i + k + 1]) and not (out and out[-1] == i - 1 and x[i] == x[i - 1]):
+            out.append(i)
+    return out
+
+
+def _break_stage(line, start, n, c, a_now, fresh, late):
+    """First close above the top line after start: (stage, breakout bar) or None."""
+    after = np.arange(start + 1, n)
+    above = after[c[after] > line(after) + 0.1 * a_now] if len(after) else after
+    brk = int(above[0]) if len(above) else None
+    ln = line(n - 1)
+    if brk is None:
+        return ("Ready" if (ln - c[-1]) / a_now <= CFG["pattern"]["ready_atr"] else "Watch"), None
+    if (n - 1 - brk) > fresh or (c[-1] - ln) / a_now > late or c[-1] < ln - 0.5 * a_now:
+        return None                                  # old, too far, or failed breakout
+    return "Triggered", brk
+
+
+def find_patterns(h, l, c, atr, p):
+    """Bullish chart patterns at the right edge of the chart.
+      Flag: a sharp pole, then a short pause drifting sideways/down that keeps at least
+            half the pole. Top line through the flag highs.
+      Rectangle: flat top and flat floor, at least 2 touches each.
+      Falling Wedge: both lines falling, the top falling faster (narrowing).
+    Each pattern is Watch (inside), Ready (near the top line) or Triggered (fresh close
+    above it). Returns {kind: dict(stage, line_now, stop, target, start, broke_at,
+    span, touches, height)}, best one per kind."""
+    P = CFG["pattern"]
+    n = len(c)
+    if n < 40 or np.isnan(atr[-1]) or atr[-1] <= 0:
+        return {}
+    a_now = float(atr[-1])
+    k = p["pivot"]
+    tol = P["touch_atr"] * a_now
+    out = {}
+
+    # ---- Flag
+    f_lo, f_hi = p["flag_len"]
+    for a in _pivots(h, k, n - f_hi - p["fresh"] - 1, n):
+        s0 = max(0, a - p["pole_len"])
+        lo_i = s0 + int(np.argmin(l[s0:a + 1]))
+        pole = h[a] - l[lo_i]
+        if pole < P["pole_atr"] * a_now or pole / h[a] * 100 < p["pole_pct"]:
+            continue
+        if a - lo_i < 2 or (c[a] - c[lo_i]) < 0.7 * pole:
+            continue                     # a pole is a straight run up, not a spike
+        path = np.abs(np.diff(c[lo_i:a + 1])).sum()
+        if path <= 0 or (c[a] - c[lo_i]) / path < 0.5:
+            continue                     # ... with few down bars along the way
+        lines = [(0.0, a)] + [((h[b] - h[a]) / (b - a), b)
+                              for b in _pivots(h, k, a + 2, n) if h[b] <= h[a]]
+        for slope, b in sorted(lines, key=lambda x: -x[1]):   # latest touch first
+            line = lambda t, a=a, s=slope: h[a] + s * (np.asarray(t) - a)
+            seg = np.arange(a, b + 1)
+            if (c[seg] > line(seg) + 0.15 * a_now).any():
+                continue
+            st_ = _break_stage(line, b, n, c, a_now, p["fresh"], P["late_atr"])
+            if not st_:
+                continue
+            stage, brk = st_
+            end = brk if brk is not None else n
+            span = end - a
+            if not (f_lo <= span <= min(f_hi, max(f_lo, 1.5 * (a - lo_i)))):
+                continue                 # a flag is short next to its pole
+            flag_low = float(l[a + 1:end].min()) if end > a + 1 else float(l[a])
+            if (h[a] - flag_low) > P["flag_retrace"] * pole:
+                continue
+            ln = float(line(n - 1))
+            cand = {"stage": stage, "line_now": ln, "stop": flag_low * 0.998,
+                    "target": float(line(end if brk is not None else n - 1)) + pole,
+                    "start": a, "broke_at": brk, "span": int(span),
+                    "touches": 1 + int(b != a), "height": pole / h[a] * 100,
+                    "pole_start": int(lo_i)}
+            if "Flag" not in out or a > out["Flag"]["start"]:
+                out["Flag"] = cand
+            break
+
+    # ---- Rectangle and Falling Wedge: top line through two swing highs,
+    #      floor line fitted under the swing lows in between
+    piv_h = _pivots(h, k, n - p["max_len"], n - 1)
+    for ia, a in enumerate(piv_h):
+        for b in piv_h[ia + 1:]:
+            if b - a < 4:
+                continue
+            slope = (h[b] - h[a]) / (b - a)
+            line = lambda t, a=a, s=slope: h[a] + s * (np.asarray(t) - a)
+            touches = [q for q in piv_h if q >= a and abs(h[q] - line(q)) <= tol]
+            last = touches[-1]
+            seg = np.arange(a, last + 1)
+            if (c[seg] > line(seg) + 0.15 * a_now).any():
+                continue
+            st_ = _break_stage(line, last, n, c, a_now, p["fresh"], P["late_atr"])
+            if not st_:
+                continue
+            stage, brk = st_
+            end = brk if brk is not None else n
+            span = end - a
+            if not (p["min_len"] <= span <= p["max_len"]):
+                continue
+            piv_l = _pivots(l, k, a + 1, end, high=False)
+            if len(piv_l) < 2:
+                continue
+            x = np.array(piv_l)
+            s_lo = float(np.polyfit(x, l[x], 1)[0])
+            body = np.arange(a, end)
+            icpt = float((l[body] - s_lo * body).min())
+            floor = lambda t, s=s_lo, i=icpt: i + s * np.asarray(t)
+            low_touch = sum(1 for q in piv_l if l[q] - floor(q) <= tol)
+            if low_touch < 3:
+                continue
+            dU, dL = slope * span / a_now, s_lo * span / a_now
+            w0, w1 = line(a) - floor(a), line(end - 1) - floor(end - 1)
+            height = w0 / c[-1] * 100
+            if w0 <= 0 or w1 <= 0 or not (P["height_pct"][0] <= height <= P["height_pct"][1]):
+                continue
+            flat = P["flat_atr"]
+            if len(touches) < 3 or not any(touches[0] < q < touches[-1] for q in piv_l):
+                continue                 # 3 touches on top, price swinging down to the floor
+            if abs(dU) <= flat and abs(dL) <= flat:
+                kind = "Rectangle"
+                stop = max(float(floor(n - 1)), float(line(n - 1)) - 1.5 * a_now)
+                target = float(line(n - 1)) + w0
+            elif dU < -flat and dL < 0 and dU < dL - 0.5 * flat and w1 < 0.75 * w0:
+                kind = "Falling Wedge"
+                stop = float(l[max(a, end - max(5, span // 3)):end].min())
+                target = float(h[a])
+            else:
+                continue
+            cand = {"stage": stage, "line_now": float(line(n - 1)), "stop": stop * 0.998,
+                    "target": target, "start": a, "broke_at": brk, "span": int(span),
+                    "touches": len(touches) + low_touch, "height": height}
+            old_ = out.get(kind)
+            if old_ is None or (cand["touches"], cand["span"]) > (old_["touches"], old_["span"]):
+                out[kind] = cand
+    for kind in list(out):
+        if out[kind]["stop"] >= out[kind]["line_now"] or out[kind]["target"] <= out[kind]["line_now"]:
+            del out[kind]
+    return out
+
+
+def _vol_grade(vol, idx, brk, unit, fo, quiet_from=None):
+    """Volume and OI check for a breakout setup: (vol_ok, vol_txt, oi_ok)."""
+    v = np.asarray(vol, float) if vol is not None else None
+    vol_ok, vol_txt, oi_ok = False, "Volume n/a", False
+    if v is not None and len(v) > 30:
+        if brk is not None:
+            base = np.nanmean(v[max(0, brk - 20):brk]) if unit == "days" else 1.0
+            rel = v[brk] / base if base and base > 0 else np.nan
+            vol_ok = bool(not np.isnan(rel) and rel >= 1.5)
+            vol_txt = "Volume n/a" if np.isnan(rel) else f"Breakout volume {rel:.1f}x"
+        else:
+            q = quiet_from if quiet_from is not None else len(v) - 10
+            recent = np.nanmean(v[q:])
+            older = np.nanmean(v[max(0, q - 50):q])
+            rel = recent / older if older and older > 0 else np.nan
+            vol_ok = bool(not np.isnan(rel) and rel <= 0.9)
+            vol_txt = ("Volume n/a" if np.isnan(rel)
+                       else f"Volume {rel:.1f}x in the pattern (quieter is better)")
+    if fo is not None and idx is not None and len(idx) > 6:
+        ch = oi_change(fo, pd.Timestamp(idx[-6]).normalize(), pd.Timestamp(idx[-1]).normalize())
+        if ch:
+            px, oi = ch
+            oi_ok = bool((px > 0 and oi > 0) or (abs(px) < 0.02 and oi <= 0.03))
+    return vol_ok, vol_txt, oi_ok
+
+
+def pattern_rows(row, T, vol, idx, fo, tf):
+    """Flag / Rectangle / Falling Wedge rows for one timeframe ("Daily" or "Hourly")."""
+    p = CFG["pattern"][tf.lower()]
+    found = find_patterns(T["h"], T["l"], T["c"], T["ind"]["atr"], p)
+    unit = "days" if tf == "Daily" else "hours"
+    per_wk = 5 if unit == "days" else 35
+    a_now = float(T["ind"]["atr"][-1])
+    out = []
+    for kind, pt in found.items():
+        start = pt.get("pole_start", pt["start"]) if kind == "Flag" else pt["start"]
+        vol_ok, vol_txt, oi_ok = _vol_grade(vol, idx, pt["broke_at"], unit, fo,
+                                            quiet_from=pt["start"] + 1)
+        span = (f"{pt['span']} {unit}" if pt["span"] < 2 * per_wk
+                else f"{pt['span'] / per_wk:.0f} weeks")
+        if kind == "Flag":
+            where = f"{pt['height']:.0f}% pole, then a {span} flag"
+        else:
+            where = f"{span} {kind.lower()}, {pt['touches']} touches, {pt['height']:.0f}% deep"
+        pos = ("broke out " + pd.Timestamp(idx[pt["broke_at"]]).strftime("%a %d")
+               if pt["broke_at"] is not None and idx is not None else
+               ("at the top line" if pt["line_now"] - T["c"][-1] <= 0.05 * a_now else
+                f"{(pt['line_now'] - T['c'][-1]) / a_now:.1f} ranges under the top line"))
+        grade = "ABC"[2 - int(vol_ok) - int(oi_ok)] if fo is not None else ("A" if vol_ok else "B")
+        out.append({"symbol": row["symbol"], "close": row["close"], "trend": row["trend"],
+                    "states": row["states"], "setup": f"{tf} {kind}", "stage": pt["stage"],
+                    "old": row.get("old"), "vk": row.get("vk"), "ext": row.get("ext"),
+                    "detail": " · ".join([where, pos, vol_txt]), "grade": grade,
+                    "trigger": round(pt["line_now"], 2), "stop": round(pt["stop"], 2),
+                    "target": round(pt["target"], 2),
+                    "since": pd.Timestamp(idx[start]).strftime("%Y-%m-%d %H:%M")
+                    if idx is not None else None})
+    return out
 
 
 def extras(D):
@@ -701,8 +919,10 @@ def analyse(sym, d, hr, fo):
                               "date": pd.Timestamp(d.index[rb["broke_at"]]).strftime("%Y-%m-%d"),
                               "level": round(rb["line_now"], 2), "kind": rb["kind"],
                               "weeks": round(rb["span"] / 5)}
+    lines += pattern_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily")
     if H["ok"]:
         lines += range_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly Range")
+        lines += pattern_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly")
     row["ranges"] = lines
 
     if cands:
@@ -1199,6 +1419,43 @@ def selftest():
     assert "range_break" not in json.dumps(res_r["rows"])
     print("range trace:", rg["kind"], rg["touches"], round(rg["line_now"], 1), rg["stage"],
           "|", rg_up["stage"], round(rg_up["line_now"], 1))
+
+    # 8h) chart patterns: Flag, Rectangle, Falling Wedge (and none on plain trends)
+    days_p = pd.bdate_range(end="2026-11-13", periods=200)
+    def pats(cc):
+        cc = np.concatenate([np.full(200 - len(cc), cc[0]), cc])[-200:]
+        T = tf_view(_bars(cc, days_p, noise=0.006), 3)
+        return find_patterns(T["h"], T["l"], T["c"], T["ind"]["atr"], CFG["pattern"]["daily"])
+    rw = 1000 + np.cumsum(np.random.default_rng(1).normal(0, 3, 120))
+    pole = np.linspace(rw[-1], rw[-1] * 1.15, 8)
+    flag = pole[-1] * (1 - np.linspace(0, 0.04, 7)) + np.array([0, 8, -4, 6, -6, 4, -2])
+    f1 = pats(np.concatenate([rw, pole, flag]))
+    assert set(f1) == {"Flag"} and f1["Flag"]["stage"] in ("Watch", "Ready"), f1
+    f2 = pats(np.concatenate([rw, pole, flag, [pole[-1] * 1.01, pole[-1] * 1.03]]))["Flag"]
+    assert f2["stage"] == "Triggered" and f2["stop"] < f2["line_now"] < f2["target"], f2
+    tt = np.arange(40)
+    rect = 1030 + 29 * np.sin(2 * np.pi * tt / 10)
+    r1 = pats(np.concatenate([np.linspace(900, 1000, 60), rect, [1035, 1045]]))
+    assert "Rectangle" in r1 and r1["Rectangle"]["stage"] in ("Watch", "Ready"), r1
+    assert 1055 < r1["Rectangle"]["line_now"] < 1075, r1
+    r2 = pats(np.concatenate([np.linspace(900, 1000, 60), rect, [1050, 1075, 1080]]))
+    assert r2["Rectangle"]["stage"] == "Triggered", r2
+    tt = np.arange(45)
+    top, fl = 1200 - 120 * tt / 44, 1100 - 50 * tt / 44
+    wdg = (top + fl) / 2 + (top - fl) / 2 * 0.97 * np.sin(2 * np.pi * tt / 11)
+    w1 = pats(np.concatenate([np.linspace(1300, 1200, 60), wdg]))
+    assert set(w1) == {"Falling Wedge"} and w1["Falling Wedge"]["stage"] != "Triggered", w1
+    w2 = pats(np.concatenate([np.linspace(1300, 1200, 60), wdg, [1085, 1100, 1110]]))
+    assert w2["Falling Wedge"]["stage"] == "Triggered" and w2["Falling Wedge"]["target"] > 1150
+    assert pats(np.linspace(1000, 1600, 200) + 20 * np.sin(np.arange(200) / 2.2)) == {}
+    assert pats(np.linspace(2000, 1400, 200) + 25 * np.sin(np.arange(200) / 2.2)) == {}
+    cc = np.concatenate([np.full(98, 900.0), np.linspace(900, 1000, 60), rect, [1035, 1045]])
+    ap_ = analyse("PAT", _bars(cc, days_p, noise=0.006), None, None)
+    res_p = build_result([ap_], dt.datetime(2026, 11, 13, 19, 45, tzinfo=IST), "2026-11-13",
+                         None, [])
+    rp = [x for x in res_p["ranges"] if x["setup"] == "Daily Rectangle"]
+    assert rp and "rectangle" in rp[0]["detail"] and rp[0]["since"], res_p["ranges"]
+    print("pattern trace:", f2["stage"], r1["Rectangle"]["stage"], w1["Falling Wedge"]["stage"])
 
     # 8f) VK System words
     def T_(m, p, sq=False, e=(3.0, 2.0, 1.0)):
