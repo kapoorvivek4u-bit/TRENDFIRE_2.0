@@ -50,6 +50,15 @@ CFG = {
     "spill_deep": 3.0,                                 # ... and no further than this many ATRs under the 50 EMA
     "stretch_atr": 3.0,                                # close this many ATRs above EMA20
     "healthy": 60, "weak": 40,                         # % of stocks bullish on Weekly
+    "range": {   # big ranges with a falling or flat ceiling (Range Breakout)
+        "daily":  {"window": 160, "pivot": 4, "min_span": 25, "fresh": 5},
+        "hourly": {"window": 380, "pivot": 6, "min_span": 90, "fresh": 14},
+        "touch_atr": 0.35,       # a swing high this close to the line counts as a touch
+        "min_touches": 3,
+        "height_pct": (3.0, 30.0),   # range depth, % of price
+        "ready_atr": 1.0,        # Ready when the close is this close under the ceiling
+        "late_atr": 2.5,         # a breakout further away than this is no longer fresh
+    },
     "ext_atr": 4.0,         # this many daily ranges above the 50 EMA = Extended
     "turn_pts": 5,          # Daily breadth change over 3 sessions that counts as a turn
     "fo_backfill_days": 40, "fo_keep_days": 120,
@@ -245,6 +254,121 @@ def vk_status(M, W, D, H):
     return {"final": final, "signal": signal, "ma": ma_sig, "advice": advice,
             "daily": daily, "hourly": hourly, "confirmed": confirmed,
             "status": {"M": statM, "W": f_status(valW, pW), "D": statD, "H": statH}}
+
+
+def find_range(h, l, c, atr, p):
+    """A big range under a falling or flat ceiling.
+    The ceiling is a line through swing highs (at least min_touches), never closed above
+    until the breakout; the floor must hold (no new lows late in the range).
+    Returns dict(stage, line_now, low, height, touches, span, kind, broke_at) or None."""
+    R = CFG["range"]
+    n = len(c)
+    W = min(p["window"], n - 2)
+    if W < p["min_span"] + 10 or np.isnan(atr[-1]):
+        return None
+    o = n - W
+    k = p["pivot"]
+    piv = [i for i in range(o + k, n - k)
+           if h[i] == h[i - k:i + k + 1].max()]
+    if len(piv) < R["min_touches"]:
+        return None
+    a_now = float(atr[-1])
+    best = None
+    for ia in range(len(piv)):
+        a = piv[ia]
+        for b in piv[ia + 1:]:
+            if b - a < p["min_span"] // 2:
+                continue
+            slope = (h[b] - h[a]) / (b - a)
+            if slope > 0.02 * a_now:              # rising ceilings are not ranges
+                continue
+            line = lambda t: h[a] + slope * (t - a)
+            tol = R["touch_atr"] * a_now
+            touches = [q for q in piv if q >= a and abs(h[q] - line(q)) <= tol]
+            if len(touches) < R["min_touches"]:
+                continue
+            # no close above the line from the first touch to the last touch
+            seg = np.arange(a, touches[-1] + 1)
+            if (c[seg] > line(seg) + 0.15 * a_now).any():
+                continue
+            # first close above the line after the last touch = breakout
+            after = np.arange(touches[-1] + 1, n)
+            above = after[c[after] > line(after) + 0.1 * a_now] if len(after) else after
+            brk = int(above[0]) if len(above) else None
+            span = (brk if brk is not None else n - 1) - a
+            if span < p["min_span"]:
+                continue
+            lo_end = brk if brk is not None else n
+            lows = l[a:lo_end]
+            base_low = float(lows.min())
+            half = len(lows) // 2
+            if half < 3 or lows[half:].min() < lows[:half].min() - 1.0 * a_now:
+                continue                           # floor broke: a downtrend, not a range
+            height = (line(a) - base_low) / c[-1] * 100
+            if not (R["height_pct"][0] <= height <= R["height_pct"][1]):
+                continue
+            score = (len(touches), span)
+            if best is None or score > best[0]:
+                best = (score, a, slope, touches, brk, base_low, height, span)
+    if best is None:
+        return None
+    _, a, slope, touches, brk, base_low, height, span = best
+    line_now = float(h[a] + slope * (n - 1 - a))
+    if brk is None:
+        gap = (line_now - c[-1]) / a_now
+        stage = "Ready" if gap <= R["ready_atr"] else "Watch"
+    else:
+        if (n - 1 - brk) > p["fresh"] or (c[-1] - line_now) / a_now > R["late_atr"] \
+                or c[-1] < line_now - 0.5 * a_now:
+            return None                            # old breakout, too far, or failed
+        stage = "Triggered"
+    return {"stage": stage, "line_now": line_now, "low": base_low, "height": height,
+            "touches": len(touches), "span": int(span), "broke_at": brk,
+            "kind": "flat top" if abs(slope) * span < 0.5 * a_now else "falling trendline"}
+
+
+def range_rows(row, T, vol, idx, fo, name):
+    """Range Breakout row for one timeframe, graded by volume (and OI for F&O)."""
+    p = CFG["range"]["daily" if name.startswith("Daily") else "hourly"]
+    rg = find_range(T["h"], T["l"], T["c"], T["ind"]["atr"], p)
+    if not rg:
+        return []
+    unit = "days" if name.startswith("Daily") else "hours"
+    weeks = rg["span"] / (5 if unit == "days" else 35)
+    v = np.asarray(vol, float) if vol is not None else None
+    vol_ok, vol_txt, oi_ok = False, "Volume n/a", False
+    if v is not None and len(v) > 30:
+        if rg["broke_at"] is not None:
+            b = rg["broke_at"]
+            base = np.nanmean(v[max(0, b - 20):b]) if unit == "days" else 1.0
+            rel = v[b] / base if base and base > 0 else np.nan
+            vol_ok = bool(not np.isnan(rel) and rel >= 1.5)
+            vol_txt = "Volume n/a" if np.isnan(rel) else f"Breakout volume {rel:.1f}x"
+        else:
+            recent = np.nanmean(v[-10:])
+            older = np.nanmean(v[-60:-10])
+            rel = recent / older if older and older > 0 else np.nan
+            vol_ok = bool(not np.isnan(rel) and rel <= 0.9)
+            vol_txt = "Volume n/a" if np.isnan(rel) else f"Volume {rel:.1f}x lately (quieter is better)"
+    if fo is not None and idx is not None and len(idx) > 6:
+        ch = oi_change(fo, pd.Timestamp(idx[-6]).normalize(), pd.Timestamp(idx[-1]).normalize())
+        if ch:
+            px, oi = ch
+            oi_ok = bool((px > 0 and oi > 0) or (abs(px) < 0.02 and oi <= 0.03))
+    where = (f"{weeks:.0f}-week range under a {rg['kind']}, {rg['touches']} touches, "
+             f"{rg['height']:.0f}% deep")
+    pos = ("broke out " + pd.Timestamp(idx[rg['broke_at']]).strftime("%a %d")
+           if rg["broke_at"] is not None and idx is not None else
+           f"{(rg['line_now'] - T['c'][-1]) / T['ind']['atr'][-1]:.1f} ranges under the ceiling")
+    grade = "ABC"[2 - int(vol_ok) - int(oi_ok)] if fo is not None else ("A" if vol_ok else "B")
+    return [{"symbol": row["symbol"], "close": row["close"], "trend": row["trend"],
+             "states": row["states"], "setup": name, "stage": rg["stage"],
+             "old": row.get("old"), "vk": row.get("vk"), "ext": row.get("ext"),
+             "detail": " · ".join([where, pos, vol_txt]), "grade": grade,
+             "trigger": round(rg["line_now"], 2),
+             "stop": round(max(rg["low"], rg["line_now"] - 1.5 * float(T["ind"]["atr"][-1]))
+                           * 0.998, 2),
+             "target": round(rg["line_now"] * (1 + rg["height"] / 100), 2)}]
 
 
 def extras(D):
@@ -566,6 +690,10 @@ def analyse(sym, d, hr, fo):
                 "grade": "Warning" if warn else "ABC"[2 - int(vol_ok) - int(oi_ok)],
                 "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
     row["overspill"] = spills
+    lines = range_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily Range")
+    if H["ok"]:
+        lines += range_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly Range")
+    row["ranges"] = lines
 
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
@@ -605,6 +733,7 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
     t_rank = {"With trend": 0, "Early turn": 1, "": 2, "Counter-trend": 3}
     order = lambda r: (g_rank[r["grade"]], t_rank[r["trend"]], r["symbol"])
     spills = sorted([x for r in valid for x in r.pop("overspill", [])], key=order)
+    ranges = sorted([x for r in valid for x in r.pop("ranges", [])], key=order)
     setups = sorted([r for r in valid if r["setup"]], key=order)
     others = {s: sorted(r["symbol"] for r in valid if not r["setup"] and r["stage"] == s)
               for s in ("Running", "Stretched", "Fading")}
@@ -629,7 +758,7 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
             "oi_asof": fo_asof, "stocks": len(valid),
             "market": {"weekly_bull_pct": w_pct, "monthly_bull_pct": m_pct,
                        "vix": vix, "regime": regime, **turn},
-            "rows": setups, "overspill": spills, "others": others,
+            "rows": setups, "overspill": spills, "ranges": ranges, "others": others,
             "old_labels": old_labels, "vk_labels": vk_labels, "notes": notes}
 
 
@@ -1010,6 +1139,51 @@ def selftest():
         assert old_trade_status(*args) == want, (args, want)
     assert ro["old"] in OLD_LABELS and res_o["old_labels"]
     assert res_o["overspill"] and all(x["old"] == ro["old"] for x in res_o["overspill"])
+
+    # 8g) big ranges: falling ceiling + flat floor, then a breakout
+    def wave(n, top0, top1, floor, period=14, seed=3):
+        """Price swinging between a falling ceiling and a flat floor."""
+        t = np.arange(n)
+        top = top0 + (top1 - top0) * t / (n - 1)
+        mid, amp = (top + floor) / 2, (top - floor) / 2
+        return mid + amp * 0.97 * np.sin(2 * np.pi * t / period)
+    pre = np.linspace(1500, 1700, 40)
+    base = wave(84, 1820, 1760, 1700)
+    days_r = pd.bdate_range(end="2026-11-13", periods=200)
+    def run_range(tail):
+        cc = np.concatenate([pre, base, tail])
+        cc = np.concatenate([np.full(200 - len(cc), 1500.0), cc])[-200:]
+        dd = _bars(cc, days_r, noise=0.006)
+        T = tf_view(dd, 3)
+        return find_range(T["h"], T["l"], T["c"], T["ind"]["atr"], CFG["range"]["daily"]), T
+    rg, T = run_range(np.linspace(1712, 1745, 6))            # mid-range, ceiling ~1755
+    assert rg and rg["kind"] == "falling trendline" and rg["touches"] >= 3, rg
+    assert rg["stage"] in ("Watch", "Ready") and 1740 < rg["line_now"] < 1775, rg
+    rg_up, _ = run_range(np.concatenate([np.linspace(1730, 1752, 4), [1790, 1805, 1812]]))
+    assert rg_up and rg_up["stage"] == "Triggered" and rg_up["broke_at"] is not None, rg_up
+    rg_old, _ = run_range(np.concatenate([[1790, 1810], np.linspace(1815, 1900, 12)]))
+    assert rg_old is None                                    # broke out long ago / too far
+    # a steady downtrend is not a range (floor keeps breaking)
+    down = _bars(np.linspace(2000, 1400, 200) + 25 * np.sin(np.arange(200) / 2.2), days_r, 0.006)
+    Td = tf_view(down, 3)
+    assert find_range(Td["h"], Td["l"], Td["c"], Td["ind"]["atr"], CFG["range"]["daily"]) is None
+    # a rising market has no falling/flat ceiling
+    up = _bars(np.linspace(1000, 1600, 200) + 20 * np.sin(np.arange(200) / 2.2), days_r, 0.006)
+    Tu = tf_view(up, 3)
+    assert find_range(Tu["h"], Tu["l"], Tu["c"], Tu["ind"]["atr"], CFG["range"]["daily"]) is None
+    cc = np.concatenate([pre, base, np.linspace(1730, 1752, 4), [1790, 1805, 1812]])
+    cc = np.concatenate([np.full(200 - len(cc), 1500.0), cc])[-200:]
+    vol = np.full(200, 1e6)
+    vol[-3] = 3e6                                              # heavy breakout day
+    ar = analyse("RNG", _bars(cc, days_r, noise=0.006, vol=vol), None, None)
+    res_r = build_result([ar], dt.datetime(2026, 11, 13, 19, 45, tzinfo=IST), "2026-11-13",
+                         None, [])
+    rgr = [x for x in res_r["ranges"] if x["setup"] == "Daily Range"]
+    assert rgr and rgr[0]["stage"] == "Triggered" and "Breakout volume 3.0x" in rgr[0]["detail"], rgr
+    assert rgr[0]["grade"] == "A" and rgr[0]["stop"] < rgr[0]["trigger"] < rgr[0]["target"], rgr
+    assert "falling trendline" in rgr[0]["detail"] and "ranges" not in json.dumps(res_r["rows"])
+    print("range trace:", rg["kind"], rg["touches"], round(rg["line_now"], 1), rg["stage"],
+          "|", rg_up["stage"], round(rg_up["line_now"], 1))
 
     # 8f) VK System words
     def T_(m, p, sq=False, e=(3.0, 2.0, 1.0)):
