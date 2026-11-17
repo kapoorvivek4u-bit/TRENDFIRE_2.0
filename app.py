@@ -15,10 +15,10 @@ import streamlit as st
 PAGES = {
     "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
             "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback",
-                       "Overspill", "Range", "Old labels", "VK"],
+                       "Overspill", "Patterns", "Old labels", "VK"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
-               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Range", "Old labels"],
+               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Patterns", "Old labels"],
                "who": "these midcaps and smallcaps"},
     "Unusual": {"F&O": {"file": os.path.join("data", "unusual.json"),
                         "workflow": "Unusual scan"},
@@ -142,7 +142,8 @@ def quality_word(setup):
     """What the grade measures for this kind of setup."""
     s = str(setup or "")
     return ("Coil quality" if s.startswith("Squeeze") else
-            "Base quality" if "Breakout" in s or "Range" in s else "Dip quality")
+            "Base quality" if any(w in s for w in ("Breakout", "Range", "Flag", "Rectangle",
+                                                   "Wedge")) else "Dip quality")
 
 
 def grade_badge(g, stage=None):
@@ -1725,7 +1726,7 @@ GUIDE = """
 - **Search**: everything about one stock: setups, old label, VK, strategies, sector, unusual activity, deals, star investors.
 - **Watchlist**: your saved stocks, with what each one is doing now. Tap ☆ next to any stock name to add it.
 - **A list**: every Ready, good-quality setup across F&O, Equity and Breakout.
-- **F&O / Equity**: all setups by type (Squeeze, Swing, Trend, Overspill, Range), with Ready / Watch / Triggered tabs, plus Old labels and VK (F&O).
+- **F&O / Equity**: all setups by type (Squeeze, Swing, Trend, Overspill, Patterns: range, flag, rectangle, wedge), with Ready / Watch / Triggered tabs, plus Old labels and VK (F&O).
 - **Unusual**: stocks with unusual volume, OI or delivery in the last few sessions.
 - **Breakout**: equity bases close to breaking out.
 - **Sectors**: which sectors lead, which way they are moving day by day, and their stocks.
@@ -2318,11 +2319,19 @@ if choice == "Old labels":
     st.caption("Watchlist only, not investment advice.")
     st.stop()
 SPILL = choice == "Overspill"
-if choice == "Range":
-    rows = res.get("ranges", [])
+if choice == "Patterns":
+    allp = res.get("ranges", [])
+    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge"]
+    n_k = {k: sum(1 for r in allp if k == "All" or k in r["setup"]) for k in kinds}
+    kind = st.radio("Pattern", kinds, horizontal=True, label_visibility="collapsed",
+                    format_func=lambda k: f"{k} · {n_k[k]}", key=f"pat_{page}")
+    rows = [r for r in allp if kind == "All" or kind in r["setup"]]
     if "ranges" not in res:
-        st.caption("Range breakouts need the updated scan file. They will appear after the "
+        st.caption("Patterns need the updated scan file. They will appear after the "
                    "next scan with that file.")
+    elif not any(w in r["setup"] for r in allp for w in ("Flag", "Rectangle", "Wedge")):
+        st.caption("Flags, rectangles and wedges appear after the next scan with the "
+                   "updated scan file.")
 elif SPILL:
     rows = res.get("overspill", [])
     if "overspill" not in res:
@@ -2429,7 +2438,12 @@ with st.expander("What the words mean"):
 - **Squeeze** (Squeeze Break): Weekly is bullish. Daily is coiled in a squeeze with momentum below zero. The aim is to catch it before it breaks out.
 {"" if EQUITY else SWING_DEF}{TREND_DEF}
 {SPILL_DEF}
-- **Range** (its own list): weeks of sideways trading under a ceiling, either a **falling trendline** through at least 3 swing highs or a **flat top**, while the floor holds (no new lows, so not a downtrend). **Daily Range** looks back about 8 months, **Hourly Range** about 2 months. Watch = inside the range; Ready = within one normal range of the ceiling; Triggered = closed above the ceiling recently (dropped once it has run more than 2.5 ranges away). "Above" is the ceiling today; the stop is under the range floor or 1.5 ranges below the ceiling, whichever is closer; the target adds the range depth to the breakout level. Quality: volume on the breakout (1.5x or more), or volume going quiet while still inside; for F&O also OI.
+- **Patterns** (its own list, with Range / Flag / Rectangle / Wedge buttons). All are bullish breakout patterns; "Above" is the top line today, the stop and target are on the card.
+- **Flag**: a sharp, clean run up (the pole: at least 10% on Daily, 6% on Hourly), then a short pause drifting sideways or down that gives back no more than half of it. Target = breakout level + pole height. Stop = the flag low.
+- **Rectangle**: flat top and flat floor, at least 3 touches on top and 3 on the floor. Target = top + height. Stop = under the floor, or 1.5 ranges under the top, whichever is closer.
+- **Wedge** (Falling Wedge): both lines falling, the top falling faster so the pattern narrows; at least 3 touches on each line. Target = where the wedge started. Stop = the recent low inside the wedge.
+- All patterns are found on both **Daily** and **Hourly** (F&O; Equity is Daily only). Watch = inside the pattern; Ready = within 0.75 ranges of the top line; Triggered = closed above it recently.
+- **Range**: weeks of sideways trading under a ceiling, either a **falling trendline** through at least 3 swing highs or a **flat top**, while the floor holds (no new lows, so not a downtrend). **Daily Range** looks back about 8 months, **Hourly Range** about 2 months. Watch = inside the range; Ready = within one normal range of the ceiling; Triggered = closed above the ceiling recently (dropped once it has run more than 2.5 ranges away). "Above" is the ceiling today; the stop is under the range floor or 1.5 ranges below the ceiling, whichever is closer; the target adds the range depth to the breakout level. Quality: volume on the breakout (1.5x or more), or volume going quiet while still inside; for F&O also OI.
 
 **Stages (where the stock is)**
 - **Watch**: the dip or coil is still in progress. Momentum is still falling. No trigger yet.
