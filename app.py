@@ -15,10 +15,10 @@ import streamlit as st
 PAGES = {
     "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
             "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback",
-                       "Overspill", "Old labels", "VK"],
+                       "Overspill", "Range", "Old labels", "VK"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
-               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Old labels"],
+               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Range", "Old labels"],
                "who": "these midcaps and smallcaps"},
     "Unusual": {"F&O": {"file": os.path.join("data", "unusual.json"),
                         "workflow": "Unusual scan"},
@@ -138,7 +138,7 @@ def quality_word(setup):
     """What the grade measures for this kind of setup."""
     s = str(setup or "")
     return ("Coil quality" if s.startswith("Squeeze") else
-            "Base quality" if "Breakout" in s else "Dip quality")
+            "Base quality" if "Breakout" in s or "Range" in s else "Dip quality")
 
 
 def grade_badge(g, stage=None):
@@ -268,6 +268,9 @@ def row_html(r):
         where = f"{abs(x):.1f} ranges {'above' if x >= 0 else 'below'} the 50 EMA"
         detail += (f'<br><span style="color:{RED};font-weight:600">Extended: {where}</span>'
                    if is_extended(r) else f'<br><span style="color:{MUTED}">{where}</span>')
+    if r.get("target"):
+        detail += (f'<br><span style="color:{GREEN}">Target {money(r["target"])} '
+                   f'(range depth added to the breakout level)</span>')
     if r.get("old"):
         detail += f'<br><span style="color:{MUTED}">Old: {e(r["old"])}</span>'
     if r.get("vk"):
@@ -504,8 +507,8 @@ The main risk is a failed breakout: price falls back into the base. That happens
 
 def render_alist():
     """Every grade A row on the site, in one place."""
-    sources = (("F&O", PAGES["F&O"]["file"], ("rows", "overspill")),
-               ("Equity", PAGES["Equity"]["file"], ("rows", "overspill")),
+    sources = (("F&O", PAGES["F&O"]["file"], ("rows", "overspill", "ranges")),
+               ("Equity", PAGES["Equity"]["file"], ("rows", "overspill", "ranges")),
                ("Equity", PAGES["Breakout"]["file"], ("broke", "setting")))
     found, stamps, markets = [], {}, {}
     for market, path, keys in sources:
@@ -1364,7 +1367,8 @@ def render_search():
     home = fo if in_fo else eq
     market = "F&O" if in_fo else "Equity" if sym in {x for v in eq.get("old_labels", {}).values()
                                                        for x in v} else "Not scanned"
-    rows = [r for r in home.get("rows", []) + home.get("overspill", []) if r["symbol"] == sym]
+    rows = [r for r in home.get("rows", []) + home.get("overspill", []) + home.get("ranges", [])
+            if r["symbol"] == sym]
     bo = [r for k in ("broke", "setting") for r in R.get("Breakout", {}).get(k, [])
           if r["symbol"] == sym]
     vk = next((dict(x, final=lab) for lab, xs in fo.get("vk_labels", {}).items()
@@ -1929,7 +1933,12 @@ if choice == "Old labels":
     st.caption("Watchlist only, not investment advice.")
     st.stop()
 SPILL = choice == "Overspill"
-if SPILL:
+if choice == "Range":
+    rows = res.get("ranges", [])
+    if "ranges" not in res:
+        st.caption("Range breakouts need the updated scan file. They will appear after the "
+                   "next scan with that file.")
+elif SPILL:
     rows = res.get("overspill", [])
     if "overspill" not in res:
         st.caption("Overspill needs the updated F&O scan file. It will appear after the "
@@ -2035,6 +2044,7 @@ with st.expander("What the words mean"):
 - **Squeeze** (Squeeze Break): Weekly is bullish. Daily is coiled in a squeeze with momentum below zero. The aim is to catch it before it breaks out.
 {"" if EQUITY else SWING_DEF}{TREND_DEF}
 {SPILL_DEF}
+- **Range** (its own list): weeks of sideways trading under a ceiling, either a **falling trendline** through at least 3 swing highs or a **flat top**, while the floor holds (no new lows, so not a downtrend). **Daily Range** looks back about 8 months, **Hourly Range** about 2 months. Watch = inside the range; Ready = within one normal range of the ceiling; Triggered = closed above the ceiling recently (dropped once it has run more than 2.5 ranges away). "Above" is the ceiling today; the stop is under the range floor or 1.5 ranges below the ceiling, whichever is closer; the target adds the range depth to the breakout level. Quality: volume on the breakout (1.5x or more), or volume going quiet while still inside; for F&O also OI.
 
 **Stages (where the stock is)**
 - **Watch**: the dip or coil is still in progress. Momentum is still falling. No trigger yet.
