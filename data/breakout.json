@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-17 16:16",
+ "generated_ist": "2026-11-17 16:44",
  "oi_asof": "2026-11-16",
  "stocks": 255,
  "market": {
@@ -9,7 +9,7 @@
   "regime": "Weak",
   "daily_bull_hist": [
    46,
-   50,
+   51,
    57,
    65,
    68,
@@ -33,7 +33,7 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 42.9,
+   "score": 43.0,
    "grade": "C",
    "trigger": 1779.0,
    "stop": 1726.33,
@@ -103,7 +103,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 57.8,
+   "score": 57.9,
    "grade": "B",
    "trigger": 11325.0,
    "stop": null,
@@ -137,7 +137,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 51.0,
+   "score": 51.1,
    "grade": "C",
    "trigger": 807.7,
    "stop": null,
