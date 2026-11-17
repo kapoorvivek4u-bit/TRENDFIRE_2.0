@@ -210,6 +210,8 @@ def analyse_equity(sym, d, dl):
            "old": old_equity_status(W, D)}
     row.update(E.extras(D))
     row["overspill"] = equity_overspill(row, d, M, W, D, deliv_ok, deliv_txt)
+    row["ranges"] = E.range_rows(row, D, d["Volume"].values.astype(float), d.index, None,
+                                 "Daily Range")
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
         setup, stage, level, stop, vol_ok, warn, detail, warn_txt = \
