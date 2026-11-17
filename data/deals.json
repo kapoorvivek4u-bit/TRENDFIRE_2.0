@@ -1,9 +1,928 @@
 {
- "generated_ist": "2026-11-17 17:12",
- "asof": "2026-11-16",
- "days": 1,
- "stocks": {},
+ "generated_ist": "2026-11-18 01:00",
+ "asof": "2026-11-17",
+ "days": 2,
+ "stocks": {
+  "ALKEM": {
+   "mf_net_cr": 301.9,
+   "mf_buyers": [
+    "DSP MF",
+    "HDFC MF",
+    "ICICI Pru MF",
+    "Nippon MF"
+   ],
+   "mf_sellers": [],
+   "ins_net_cr": null,
+   "stars": [],
+   "last": "2026-11-17",
+   "text": "Funds bought net Rs 302 Cr (DSP MF, HDFC MF, ICICI Pru MF\u2026)"
+  },
+  "GROWW": {
+   "mf_net_cr": 474.1,
+   "mf_buyers": [
+    "Kotak MF",
+    "Tata MF"
+   ],
+   "mf_sellers": [],
+   "ins_net_cr": 138.7,
+   "stars": [],
+   "last": "2026-11-17",
+   "text": "Funds bought net Rs 474 Cr (Kotak MF, Tata MF) \u00b7 Insurance bought Rs 139 Cr"
+  },
+  "HAPPYFORGE": {
+   "mf_net_cr": 71.9,
+   "mf_buyers": [
+    "Axis MF",
+    "Edelweiss MF"
+   ],
+   "mf_sellers": [],
+   "ins_net_cr": null,
+   "stars": [],
+   "last": "2026-11-17",
+   "text": "Funds bought net Rs 72 Cr (Axis MF, Edelweiss MF)"
+  }
+ },
  "recent": [
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Ribbit Capital V L.P.",
+   "cat": "Other",
+   "value_cr": 1064.1,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Ribbit Capital V L.P.",
+   "cat": "Other",
+   "value_cr": 1064.1,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Ribbit Cayman Gw Holdings V Ltd.",
+   "cat": "Other",
+   "value_cr": 841.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Ribbit Cayman Gw Holdings V Ltd.",
+   "cat": "Other",
+   "value_cr": 841.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ALKEM",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Samprada&Nanhamati Singh Family Trust",
+   "cat": "Other",
+   "value_cr": 301.9,
+   "price": 5050.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ALKEM",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Samprada&Nanhamati Singh Family Trust",
+   "cat": "Other",
+   "value_cr": 301.9,
+   "price": 5050.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ANGELONE",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 288.3,
+   "price": 363.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ANGELONE",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 285.1,
+   "price": 363.07
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Societe Generale",
+   "cat": "Other",
+   "value_cr": 237.6,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Kotak MF",
+   "cat": "MF",
+   "value_cr": 200.4,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "KAYNES",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 162.8,
+   "price": 2916.82
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Kotak MF",
+   "cat": "MF",
+   "value_cr": 160.3,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "KAYNES",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 160.3,
+   "price": 2914.08
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Fidelity Funds - India Focus Fund",
+   "cat": "Other",
+   "value_cr": 159.9,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Fidelity Funds - India Focus Fund",
+   "cat": "Other",
+   "value_cr": 159.9,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GALLANTT",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Dinesh R Agarwal",
+   "cat": "Other",
+   "value_cr": 158.1,
+   "price": 527.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GALLANTT",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Dinesh R Agarwal",
+   "cat": "Other",
+   "value_cr": 158.1,
+   "price": 527.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Blackrock Emerging Markets Fund Inc",
+   "cat": "Other",
+   "value_cr": 117.3,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 108.5,
+   "price": 175.93
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 107.4,
+   "price": 176.02
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Paritosh Kumar",
+   "cat": "Other",
+   "value_cr": 102.9,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Paritosh Kumar",
+   "cat": "Other",
+   "value_cr": 102.9,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Paritosh Kumar Garg (Huf)",
+   "cat": "Other",
+   "value_cr": 101.4,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Paritosh Kumar Garg (Huf)",
+   "cat": "Other",
+   "value_cr": 101.4,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 100.1,
+   "price": 177.28
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 100.1,
+   "price": 177.2
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ALKEM",
+   "kind": "block",
+   "side": "BUY",
+   "who": "ICICI Pru MF",
+   "cat": "MF",
+   "value_cr": 90.0,
+   "price": 5050.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Variable Insurance Products Fund Ii Cont",
+   "cat": "Insurance",
+   "value_cr": 81.8,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ALKEM",
+   "kind": "block",
+   "side": "BUY",
+   "who": "DSP MF",
+   "cat": "MF",
+   "value_cr": 80.9,
+   "price": 5050.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ALKEM",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Nippon MF",
+   "cat": "MF",
+   "value_cr": 80.9,
+   "price": 5050.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Bnp Paribas Arbitrage",
+   "cat": "Other",
+   "value_cr": 79.9,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Fidelity Contrafund Fidelity Advisor New",
+   "cat": "Other",
+   "value_cr": 76.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 71.2,
+   "price": 176.58
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 71.2,
+   "price": 176.53
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Rwc Emerging Markets Equity Master Fund ",
+   "cat": "Other",
+   "value_cr": 66.9,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Morgan Stanley Asia Singapore Pte",
+   "cat": "Other",
+   "value_cr": 65.7,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Ghisallo Master Fund Lp",
+   "cat": "Other",
+   "value_cr": 63.5,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GALLANTT",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Suryalaxmi Infracon Private Limited",
+   "cat": "Other",
+   "value_cr": 62.7,
+   "price": 527.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Kotak MF",
+   "cat": "MF",
+   "value_cr": 60.1,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Nk Securities Research Private Limited",
+   "cat": "Other",
+   "value_cr": 58.4,
+   "price": 177.35
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "FIRSTCRY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Nk Securities Research Private Limited",
+   "cat": "Other",
+   "value_cr": 58.4,
+   "price": 177.28
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Viridian Asia Opportunities Master Fund",
+   "cat": "Other",
+   "value_cr": 58.0,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Hdfc Standard Life Insurance Co Ltd",
+   "cat": "Insurance",
+   "value_cr": 56.9,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 56.6,
+   "price": 97.65
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 56.6,
+   "price": 97.63
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 56.6,
+   "price": 97.35
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 56.5,
+   "price": 97.67
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Blackrock Global Funds Emerging Markets ",
+   "cat": "Other",
+   "value_cr": 52.6,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 51.2,
+   "price": 98.09
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 51.2,
+   "price": 98.08
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "National Pension System (Nps) Trust",
+   "cat": "Other",
+   "value_cr": 50.4,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Ashish Garg",
+   "cat": "Other",
+   "value_cr": 50.0,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "ALKEM",
+   "kind": "block",
+   "side": "BUY",
+   "who": "HDFC MF",
+   "cat": "MF",
+   "value_cr": 50.0,
+   "price": 5050.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 49.5,
+   "price": 280.32
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 49.5,
+   "price": 280.21
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Retail Employees Superannuation Pty. Lim",
+   "cat": "Other",
+   "value_cr": 47.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Axis MF",
+   "cat": "MF",
+   "value_cr": 46.9,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Ashish Garg & Sons (Huf)",
+   "cat": "Other",
+   "value_cr": 46.9,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Fidelity Insights Investment Trust",
+   "cat": "Other",
+   "value_cr": 45.0,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "KPIGREEN",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Sw Capital Private Limited",
+   "cat": "Other",
+   "value_cr": 44.7,
+   "price": 315.92
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "KPIGREEN",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Sw Capital Private Limited",
+   "cat": "Other",
+   "value_cr": 44.6,
+   "price": 315.67
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Fidelity Contrafund: Fidelity Series Opp",
+   "cat": "Other",
+   "value_cr": 42.4,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GALLANTT",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Suryalaxmi Infracon Private Limited",
+   "cat": "Other",
+   "value_cr": 39.5,
+   "price": 527.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Rwc Funds-Rwc Global Emerging Markets Fu",
+   "cat": "Other",
+   "value_cr": 37.7,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Blackrock Global Funds India Fund",
+   "cat": "Other",
+   "value_cr": 37.4,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "AGIIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Arihant Capital Markets Limited",
+   "cat": "Other",
+   "value_cr": 35.9,
+   "price": 321.02
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "AGIIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Arihant Capital Markets Limited",
+   "cat": "Other",
+   "value_cr": 35.8,
+   "price": 320.29
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 34.6,
+   "price": 144.69
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GALLANTT",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Suryalaxmi Infracon Private Limited",
+   "cat": "Other",
+   "value_cr": 30.8,
+   "price": 527.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 30.7,
+   "price": 144.49
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 30.2,
+   "price": 280.42
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 30.2,
+   "price": 280.35
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 29.1,
+   "price": 97.92
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "AGIIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Arthkumbh Ventures Llp",
+   "cat": "Other",
+   "value_cr": 28.8,
+   "price": 320.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 28.7,
+   "price": 97.99
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Kotak MF",
+   "cat": "MF",
+   "value_cr": 28.1,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Elixir Wealth Management Private Limited",
+   "cat": "Other",
+   "value_cr": 27.6,
+   "price": 98.34
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "YATRA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Elixir Wealth Management Private Limited",
+   "cat": "Other",
+   "value_cr": 27.3,
+   "price": 98.23
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Norges Bank On Account Of The Government",
+   "cat": "Other",
+   "value_cr": 25.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Rbc Asia Pacific Ex-Japan Equity Fund",
+   "cat": "Other",
+   "value_cr": 25.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Susquehanna Pacific Pty Ltd",
+   "cat": "Other",
+   "value_cr": 25.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GROWW",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Tata MF",
+   "cat": "MF",
+   "value_cr": 25.2,
+   "price": 219.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "GALLANTT",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Suryalaxmi Infracon Private Limited",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 527.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "INDGN",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Rajesh Bhaskaran Nair",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 655.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "INDGN",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Aarabhi Partners Consultants Llp",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 655.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Edelweiss MF",
+   "cat": "MF",
+   "value_cr": 25.0,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Ampersand Growth Opportunities Fund Sche",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 1845.0
+  },
+  {
+   "date": "2026-11-17",
+   "symbol": "HAPPYFORGE",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Bnp Paribas Arbitrage - Odi",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 1845.0
+  },
   {
    "date": "2026-11-16",
    "symbol": "KAYNES",
