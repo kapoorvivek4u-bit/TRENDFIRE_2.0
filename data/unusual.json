@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-18 00:55",
+ "generated_ist": "2026-11-18 01:00",
  "oi_asof": "2026-11-17",
  "stocks": 218,
  "rows": [
@@ -151,7 +151,8 @@
    "states": {
     "W": "Bottoming",
     "D": "Bullish"
-   }
+   },
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "GMRAIRPORT",
@@ -549,8 +550,7 @@
    "states": {
     "W": "Topping",
     "D": "Topping"
-   },
-   "setup": "Trend Pullback \u00b7 Watch"
+   }
   },
   {
    "symbol": "PREMIERENE",
@@ -925,8 +925,7 @@
    "states": {
     "W": "Bearish",
     "D": "Topping"
-   },
-   "setup": "Swing Pullback \u00b7 Triggered"
+   }
   },
   {
    "symbol": "BANKINDIA",
