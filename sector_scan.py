@@ -43,6 +43,9 @@ SCFG = {
     "mom_days": 5,                # RS momentum = change in the ratio over 5 days
     "periods": {"rw": 5, "r2w": 10, "r1": 21},   # 1 week, 2 weeks, 1 month (trading days)
     "top_n": 5,
+    "trail_days": 10,             # day-by-day history shown for each sector
+    "dir_days": 5,                # direction = change in strength vs Nifty over this many days
+    "dir_flat_pct": 0.75,         # smaller changes count as sideways
     "max_daily_move": 0.25,       # daily returns beyond this are treated as data errors
 }
 NAMES = {
@@ -163,6 +166,39 @@ def rotation(idx, nifty):
     return stage, round(r, 4), round(m, 4)
 
 
+def stage_of(r, m):
+    if np.isnan(r) or np.isnan(m):
+        return None
+    return ("Leading" if r >= 1 and m >= 0 else "Weakening" if r >= 1 else
+            "Improving" if m >= 0 else "Lagging")
+
+
+def trail(idx, nifty, d_pos):
+    """Last few sessions of a sector, one entry per day: stage, strength vs Nifty, that
+    day's move vs Nifty, and the share of its stocks with Daily TTM above zero."""
+    n = nifty.reindex(idx.index).ffill()
+    rs = idx / n
+    ratio = rs / rs.rolling(SCFG["rs_avg"]).mean()
+    mom = ratio - ratio.shift(SCFG["mom_days"])
+    day_rel = (idx.pct_change() - n.pct_change()) * 100
+    k = SCFG["trail_days"]
+    out = []
+    for i in range(len(idx) - k, len(idx)):
+        if i < 1:
+            continue
+        out.append({"date": idx.index[i].strftime("%Y-%m-%d"),
+                    "stage": stage_of(float(ratio.iloc[i]), float(mom.iloc[i])),
+                    "rs": round(float(rs.iloc[i] / rs.iloc[len(idx) - k - 1]) * 100 - 100, 2)
+                    if len(idx) > k else None,
+                    "day": None if np.isnan(day_rel.iloc[i]) else round(float(day_rel.iloc[i]), 2),
+                    "d_bull": d_pos[i - len(idx)] if d_pos and len(d_pos) >= len(idx) - i else None})
+    D = SCFG["dir_days"]
+    chg = float(rs.iloc[-1] / rs.iloc[-1 - D] - 1) * 100 if len(rs) > D else np.nan
+    direction = ("Sideways" if np.isnan(chg) or abs(chg) < SCFG["dir_flat_pct"] else
+                 "Rising" if chg > 0 else "Falling")
+    return out, direction, None if np.isnan(chg) else round(chg, 2)
+
+
 def ret(series, days):
     s = series.dropna()
     return float(s.iloc[-1] / s.iloc[-1 - days] - 1) if len(s) > days else np.nan
@@ -196,7 +232,9 @@ def analyse_sectors(daily, smap, nifty, symbols):
             "symbol": s, "close": round(float(d["Close"].iloc[-1]), 2), **rel(d["Close"]),
             "states": {"W": "Impulse" if W["impulse"] else W["state"],
                        "D": "Impulse" if D["impulse"] else D["state"]},
-            "w_bull": bool(W["ok"] and W["mom"] > 0), "d_bull": bool(D["ok"] and D["mom"] > 0)}
+            "w_bull": bool(W["ok"] and W["mom"] > 0), "d_bull": bool(D["ok"] and D["mom"] > 0),
+            "d_hist": ([bool(x > 0) for x in D["ind"]["mom"][-SCFG["trail_days"]:]]
+                       if D["ok"] else [])}
     groups = {}
     for s in per_stock:
         groups.setdefault(smap.get(s, "Unclassified"), []).append(s)
@@ -212,6 +250,11 @@ def analyse_sectors(daily, smap, nifty, symbols):
             continue
         T = E.tf_view(bars, 3)
         st_ = [per_stock[s] for s in members]
+        k = SCFG["trail_days"]
+        hist = [x["d_hist"] for x in st_ if len(x["d_hist"]) == k]
+        d_pos = ([round(100 * np.mean([h[i] for h in hist])) for i in range(k)]
+                 if hist else [])
+        days, direction, chg5 = trail(idx, nifty, d_pos)
         score = lambda x: (x["rw"] or 0) * 0.4 + (x["r2w"] or 0) * 0.3 + (x["r1"] or 0) * 0.3
         top = sorted(st_, key=score, reverse=True)[:SCFG["top_n"]]
         ranked.append({
@@ -219,8 +262,9 @@ def analyse_sectors(daily, smap, nifty, symbols):
             "idx_d": T["state"] if T["ok"] else None,
             "wk_bull": round(100 * np.mean([x["w_bull"] for x in st_])),
             "d_bull": round(100 * np.mean([x["d_bull"] for x in st_])),
-            "ratio": ratio, "mom": mom,
-            "top": [{k: v for k, v in x.items() if k not in ("w_bull", "d_bull")} for x in top]})
+            "ratio": ratio, "mom": mom, "trail": days, "direction": direction, "chg5": chg5,
+            "top": [{k_: v for k_, v in x.items() if k_ not in ("w_bull", "d_bull", "d_hist")}
+                    for x in top]})
     ranked.sort(key=lambda x: (STAGE_ORDER[x["stage"]], -(x["rw"] or 0)))
     unranked.sort(key=lambda x: x["name"])
     return ranked, unranked, {k: round(v * 100, 1) for k, v in nr.items()}
@@ -291,6 +335,10 @@ def selftest():
     assert by["Metals & Mining"]["stage"] == "Leading", by
     assert by["IT"]["stage"] == "Lagging", by
     assert by["Metals & Mining"]["rw"] > 0 > by["IT"]["rw"]
+    mt = by["Metals & Mining"]
+    assert len(mt["trail"]) == SCFG["trail_days"] and mt["direction"] == "Rising", mt["trail"]
+    assert by["IT"]["direction"] == "Falling" and mt["trail"][-1]["stage"] == mt["stage"]
+    assert all(t["d_bull"] is not None for t in mt["trail"]) and "d_hist" not in json.dumps(mt["top"])
     assert by["Metals & Mining"]["idx_d"] in ("Bullish", "Topping", "Bearish", "Bottoming")
     assert [s["name"] for s in ranked] == ["Metals & Mining", "IT"]
     assert {u["name"] for u in unranked} == {"Media", "Unclassified"}
