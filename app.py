@@ -1061,6 +1061,12 @@ def strategy_picks(data, sec_table):
         res["open"] = not gf["falling"]
         res["gate"] = ("Closed: market still falling" if gf["falling"] else
                        "Open (half size: overheated)" if gf["overheated"] else "Open")
+        # the queue: breakout stocks dipping now, and breakout stocks not dipping yet
+        dipping = [r for r in fo.get("overspill", []) if r["setup"] == "Hourly Overspill"
+                   and r["symbol"] in brk and r["stage"] == "Watch" and r["grade"] != "Warning"]
+        dsyms = {r["symbol"] for r in fo.get("overspill", []) if r["setup"] == "Hourly Overspill"}
+        res["queue"] = {"dipping": sorted(dipping, key=lambda r: (r["grade"], r["symbol"])),
+                        "waiting": sorted((s_, b) for s_, b in brk.items() if s_ not in dsyms)}
     out[7] = res
 
     # 6. Equity Base Breakout
@@ -1179,6 +1185,22 @@ Rules are starting points, not tested results. Your own chart is the final check
             with st.expander(f"Waiting on the market gate · {len(v['blocked'])}"):
                 st.markdown('<div class="tf-grid">' + "".join(pick_html(p) for p in v["blocked"])
                             + '</div>', unsafe_allow_html=True)
+        q = v.get("queue")
+        if q and q["dipping"]:
+            with st.expander(f"Dipping now, next to turn · {len(q['dipping'])}"):
+                st.caption("Breakout stocks dipping into the hourly 20-50 EMA zone that have not "
+                           "turned up yet. Set an alert at the hourly 20 EMA ('Above').")
+                show_rows(q["dipping"])
+        if q and q["waiting"]:
+            with st.expander(f"Broke out, waiting for the first dip · {len(q['waiting'])}"):
+                st.caption("Fresh range breakouts that are not dipping yet. Their first pullback "
+                           "to the hourly 20-50 EMA zone is the next round of this strategy.")
+                st.markdown("".join(
+                    f'<div class="tf-small" style="margin:3px 0"><a href="{chart_link(s_)}" '
+                    f'target="_blank"><b>{html.escape(s_)}</b></a> · broke a {b["weeks"]}-week '
+                    f'{html.escape(b["kind"])} {b["days"]} sessions ago, ceiling {money(b["level"])}'
+                    f'{" · " + html.escape(SECTORS[s_]["sector"] + " " + SECTORS[s_].get("stage", "")) if SECTORS.get(s_, {}).get("sector") else ""}'
+                    '</div>' for s_, b in q["waiting"]), unsafe_allow_html=True)
         with st.expander("Rules"):
             st.markdown("\n".join(f"- {x}" for x in rules) + f"\n\n**Manage:** {manage}")
     with st.expander("Exits: signals on stocks you already hold"):
