@@ -56,6 +56,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "BEL": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "BHARATFORG": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -831,5 +835,8 @@
  },
  "offset": 345306825,
  "owner": 397928140,
- "welcomed": true
+ "welcomed": true,
+ "s7": [
+  "INDIANB"
+ ]
 }
