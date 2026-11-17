@@ -59,6 +59,7 @@ CFG = {
         "ready_atr": 1.0,        # Ready when the close is this close under the ceiling
         "late_atr": 2.5,         # a breakout further away than this is no longer fresh
     },
+    "recent_break_days": 15,  # a range breakout this recent counts for Breakout + Trend Overspill
     "ext_atr": 4.0,         # this many daily ranges above the 50 EMA = Extended
     "turn_pts": 5,          # Daily breadth change over 3 sessions that counts as a turn
     "fo_backfill_days": 40, "fo_keep_days": 120,
@@ -256,7 +257,7 @@ def vk_status(M, W, D, H):
             "status": {"M": statM, "W": f_status(valW, pW), "D": statD, "H": statH}}
 
 
-def find_range(h, l, c, atr, p):
+def find_range(h, l, c, atr, p, late=None):
     """A big range under a falling or flat ceiling.
     The ceiling is a line through swing highs (at least min_touches), never closed above
     until the breakout; the floor must hold (no new lows late in the range).
@@ -318,7 +319,7 @@ def find_range(h, l, c, atr, p):
         gap = (line_now - c[-1]) / a_now
         stage = "Ready" if gap <= R["ready_atr"] else "Watch"
     else:
-        if (n - 1 - brk) > p["fresh"] or (c[-1] - line_now) / a_now > R["late_atr"] \
+        if (n - 1 - brk) > p["fresh"] or (c[-1] - line_now) / a_now > (late or R["late_atr"]) \
                 or c[-1] < line_now - 0.5 * a_now:
             return None                            # old breakout, too far, or failed
         stage = "Triggered"
@@ -359,7 +360,8 @@ def range_rows(row, T, vol, idx, fo, name):
              f"{rg['height']:.0f}% deep")
     pos = ("broke out " + pd.Timestamp(idx[rg['broke_at']]).strftime("%a %d")
            if rg["broke_at"] is not None and idx is not None else
-           f"{(rg['line_now'] - T['c'][-1]) / T['ind']['atr'][-1]:.1f} ranges under the ceiling")
+           ("at the ceiling" if rg["line_now"] - T["c"][-1] <= 0.05 * T["ind"]["atr"][-1] else
+            f"{(rg['line_now'] - T['c'][-1]) / T['ind']['atr'][-1]:.1f} ranges under the ceiling"))
     grade = "ABC"[2 - int(vol_ok) - int(oi_ok)] if fo is not None else ("A" if vol_ok else "B")
     return [{"symbol": row["symbol"], "close": row["close"], "trend": row["trend"],
              "states": row["states"], "setup": name, "stage": rg["stage"],
@@ -691,6 +693,14 @@ def analyse(sym, d, hr, fo):
                 "trigger": round(sp["level"], 2), "stop": round(sp["low"] * 0.998, 2)})
     row["overspill"] = spills
     lines = range_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily Range")
+    # a range breakout in the last few weeks that still holds (for Breakout + Trend Overspill)
+    rb = find_range(D["h"], D["l"], D["c"], D["ind"]["atr"],
+                    dict(CFG["range"]["daily"], fresh=CFG["recent_break_days"]), late=12.0)
+    if rb and rb["stage"] == "Triggered":
+        row["range_break"] = {"days": int(len(D["c"]) - 1 - rb["broke_at"]),
+                              "date": pd.Timestamp(d.index[rb["broke_at"]]).strftime("%Y-%m-%d"),
+                              "level": round(rb["line_now"], 2), "kind": rb["kind"],
+                              "weeks": round(rb["span"] / 5)}
     if H["ok"]:
         lines += range_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly Range")
     row["ranges"] = lines
@@ -734,6 +744,7 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
     order = lambda r: (g_rank[r["grade"]], t_rank[r["trend"]], r["symbol"])
     spills = sorted([x for r in valid for x in r.pop("overspill", [])], key=order)
     ranges = sorted([x for r in valid for x in r.pop("ranges", [])], key=order)
+    breakouts = {r["symbol"]: r.pop("range_break") for r in valid if r.get("range_break")}
     setups = sorted([r for r in valid if r["setup"]], key=order)
     others = {s: sorted(r["symbol"] for r in valid if not r["setup"] and r["stage"] == s)
               for s in ("Running", "Stretched", "Fading")}
@@ -758,7 +769,8 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
             "oi_asof": fo_asof, "stocks": len(valid),
             "market": {"weekly_bull_pct": w_pct, "monthly_bull_pct": m_pct,
                        "vix": vix, "regime": regime, **turn},
-            "rows": setups, "overspill": spills, "ranges": ranges, "others": others,
+            "rows": setups, "overspill": spills, "ranges": ranges,
+            "recent_breakouts": breakouts, "others": others,
             "old_labels": old_labels, "vk_labels": vk_labels, "notes": notes}
 
 
@@ -1182,6 +1194,9 @@ def selftest():
     assert rgr and rgr[0]["stage"] == "Triggered" and "Breakout volume 3.0x" in rgr[0]["detail"], rgr
     assert rgr[0]["grade"] == "A" and rgr[0]["stop"] < rgr[0]["trigger"] < rgr[0]["target"], rgr
     assert "falling trendline" in rgr[0]["detail"] and "ranges" not in json.dumps(res_r["rows"])
+    rbk = res_r["recent_breakouts"].get("RNG")
+    assert rbk and rbk["days"] <= 3 and rbk["kind"] == "falling trendline", res_r["recent_breakouts"]
+    assert "range_break" not in json.dumps(res_r["rows"])
     print("range trace:", rg["kind"], rg["touches"], round(rg["line_now"], 1), rg["stage"],
           "|", rg_up["stage"], round(rg_up["line_now"], 1))
 
