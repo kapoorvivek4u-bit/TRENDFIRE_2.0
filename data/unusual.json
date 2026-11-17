@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-17 17:12",
- "oi_asof": "2026-11-16",
+ "generated_ist": "2026-11-17 19:24",
+ "oi_asof": "2026-11-17",
  "stocks": 218,
  "rows": [
   {
@@ -19,6 +19,11 @@
      "side": -1
     },
     {
+     "when": "Tue 17",
+     "text": "OI +10% in a day, price -3.2%: short build-up",
+     "side": -1
+    },
+    {
      "when": "Mon 16",
      "text": "6 hours of unusual volume, peak 41.9x at 11:15, absorption",
      "side": 1
@@ -26,11 +31,6 @@
     {
      "when": "Mon 16",
      "text": "Day's volume 22.4x usual",
-     "side": -1
-    },
-    {
-     "when": "Mon 16",
-     "text": "Range 5.3x normal, closed -13.1%",
      "side": -1
     }
    ],
@@ -44,8 +44,48 @@
    }
   },
   {
+   "symbol": "ASHOKLEY",
+   "score": 8.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "5 hours of unusual volume, peak 4.3x at 13:15, absorption",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 3.6x usual",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI +16% in a day, price -4.3%: short build-up",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Range 2.2x normal, closed -4.2%",
+     "side": -1
+    },
+    {
+     "when": "Mon 16",
+     "text": "1 hour of unusual volume, peak 4.0x at 11:15",
+     "side": 0
+    }
+   ],
+   "close": 160.5,
+   "move_pct": -7.7,
+   "moved": true,
+   "vs_high": "10.2% below its 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Topping"
+   }
+  },
+  {
    "symbol": "ANGELONE",
-   "score": 7.0,
+   "score": 7.5,
    "bias": "Buying",
    "events": [
     {
@@ -64,14 +104,14 @@
      "side": 1
     },
     {
+     "when": "Tue 17",
+     "text": "OI -4% in a day, price +0.1%: short covering",
+     "side": 1
+    },
+    {
      "when": "Mon 16",
      "text": "3 hours of unusual volume, peak 3.5x at 12:15, absorption",
      "side": 0
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 2.8x usual",
-     "side": 1
     }
    ],
    "close": 349.8,
@@ -125,43 +165,33 @@
    }
   },
   {
-   "symbol": "ASHOKLEY",
+   "symbol": "GMRAIRPORT",
    "score": 6.5,
-   "bias": "Selling",
+   "bias": "Buying",
    "events": [
     {
      "when": "Tue 17",
-     "text": "5 hours of unusual volume, peak 4.3x at 13:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 3.6x usual",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Range 2.2x normal, closed -4.2%",
-     "side": -1
-    },
-    {
-     "when": "Mon 16",
-     "text": "1 hour of unusual volume, peak 4.0x at 11:15",
+     "text": "5 hours of unusual volume, peak 5.2x at 11:15, absorption",
      "side": 0
     },
     {
-     "when": "Fri 13",
-     "text": "OI +5% in a day, price -2.4%: short build-up",
-     "side": -1
+     "when": "Tue 17",
+     "text": "OI +9% in a day, price +2.8%: long build-up",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 2.7x usual",
+     "side": 1
     }
    ],
-   "close": 160.5,
-   "move_pct": -7.7,
-   "moved": true,
-   "vs_high": "10.2% below its 20-day high",
+   "close": 104.5,
+   "move_pct": 4.4,
+   "moved": false,
+   "vs_high": "At a 20-day high",
    "states": {
-    "W": "Bearish",
-    "D": "Topping"
+    "W": "Bottoming",
+    "D": "Bullish"
    }
   },
   {
@@ -205,46 +235,6 @@
    }
   },
   {
-   "symbol": "PAGEIND",
-   "score": 6.0,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Tue 17",
-     "text": "6 hours of unusual volume, peak 16.1x at 15:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 4.1x usual",
-     "side": -1
-    },
-    {
-     "when": "Mon 16",
-     "text": "4 hours of unusual volume, peak 5.0x at 13:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Mon 16",
-     "text": "Day's volume 3.1x usual, absorption (small candle)",
-     "side": 0
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 16.1x usual",
-     "side": -1
-    }
-   ],
-   "close": 31105.0,
-   "move_pct": -2.3,
-   "moved": false,
-   "vs_high": "16.4% below its 20-day high",
-   "states": {
-    "W": "Bearish",
-    "D": "Bearish"
-   }
-  },
-  {
    "symbol": "LICHSGFIN",
    "score": 5.7,
    "bias": "Buying",
@@ -282,41 +272,6 @@
    "states": {
     "W": "Bullish",
     "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "OIL",
-   "score": 5.5,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Tue 17",
-     "text": "4 hours of unusual volume, peak 6.4x at 10:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 3.5x usual",
-     "side": -1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 3.9x usual",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "OI +6% in a day, price -0.0%: short build-up",
-     "side": -1
-    }
-   ],
-   "close": 433.5,
-   "move_pct": -1.5,
-   "moved": false,
-   "vs_high": "6.7% below its 20-day high",
-   "states": {
-    "W": "Bearish",
-    "D": "Bearish"
    }
   },
   {
@@ -410,6 +365,117 @@
    }
   },
   {
+   "symbol": "OIL",
+   "score": 5.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "4 hours of unusual volume, peak 6.4x at 10:15, absorption",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 3.5x usual",
+     "side": -1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 3.9x usual",
+     "side": 1
+    }
+   ],
+   "close": 433.5,
+   "move_pct": -1.5,
+   "moved": false,
+   "vs_high": "6.7% below its 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Bearish"
+   }
+  },
+  {
+   "symbol": "PAGEIND",
+   "score": 5.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "6 hours of unusual volume, peak 19.7x at 15:15, absorption",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 4.1x usual",
+     "side": -1
+    },
+    {
+     "when": "Mon 16",
+     "text": "4 hours of unusual volume, peak 5.0x at 13:15, absorption",
+     "side": 0
+    },
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 3.1x usual, absorption (small candle)",
+     "side": 0
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 16.1x usual",
+     "side": -1
+    }
+   ],
+   "close": 31105.0,
+   "move_pct": -2.3,
+   "moved": false,
+   "vs_high": "16.4% below its 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Bearish"
+   }
+  },
+  {
+   "symbol": "KALYANKJIL",
+   "score": 4.8,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "4 hours of unusual volume, peak 3.8x at 11:15",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 3.7x usual",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI -6% in a day, price -3.8%: long unwinding",
+     "side": -1
+    },
+    {
+     "when": "Mon 16",
+     "text": "4 hours of unusual volume, peak 4.2x at 13:15, absorption",
+     "side": 0
+    },
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 4.7x usual",
+     "side": 1
+    }
+   ],
+   "close": 682.75,
+   "move_pct": -4.0,
+   "moved": false,
+   "vs_high": "6.4% below its 20-day high",
+   "states": {
+    "W": "Topping",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Watch"
+  },
+  {
    "symbol": "BSE",
    "score": 4.5,
    "bias": "Selling",
@@ -436,28 +502,79 @@
    "setup": "Swing Pullback \u00b7 Watch"
   },
   {
-   "symbol": "GMRAIRPORT",
+   "symbol": "CDSL",
    "score": 4.5,
-   "bias": "Buying",
+   "bias": "Selling",
    "events": [
     {
      "when": "Tue 17",
-     "text": "5 hours of unusual volume, peak 5.2x at 11:15, absorption",
-     "side": 0
+     "text": "3 hours of unusual volume, peak 5.2x at 12:15",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 2.8x usual",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI +6% in a day, price +0.5%: long build-up",
+     "side": 1
+    },
+    {
+     "when": "Mon 16",
+     "text": "OI +5% in a day, price -1.1%: short build-up",
+     "side": -1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 3.3x usual",
+     "side": -1
+    }
+   ],
+   "close": 1439.8,
+   "move_pct": -1.0,
+   "moved": false,
+   "vs_high": "3.0% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Ready"
+  },
+  {
+   "symbol": "CUMMINSIND",
+   "score": 4.5,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "3 hours of unusual volume, peak 3.8x at 10:15, absorption",
+     "side": -1
     },
     {
      "when": "Tue 17",
      "text": "Day's volume 2.7x usual",
-     "side": 1
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI +5% in a day, price -4.0%: short build-up",
+     "side": -1
+    },
+    {
+     "when": "Mon 16",
+     "text": "1 hour of unusual volume, peak 5.6x at 10:15",
+     "side": -1
     }
    ],
-   "close": 104.5,
-   "move_pct": 4.4,
+   "close": 4065.0,
+   "move_pct": -4.5,
    "moved": false,
-   "vs_high": "At a 20-day high",
+   "vs_high": "14.5% below its 20-day high",
    "states": {
-    "W": "Bottoming",
-    "D": "Bullish"
+    "W": "Bearish",
+    "D": "Bearish"
    }
   },
   {
@@ -532,81 +649,69 @@
    "setup": "Swing Pullback \u00b7 Triggered"
   },
   {
-   "symbol": "KALYANKJIL",
-   "score": 4.3,
-   "bias": "Selling",
+   "symbol": "MAHABANK",
+   "score": 4.5,
+   "bias": "Buying",
    "events": [
     {
      "when": "Tue 17",
-     "text": "4 hours of unusual volume, peak 3.8x at 11:15",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 3.7x usual",
-     "side": -1
-    },
-    {
-     "when": "Mon 16",
-     "text": "4 hours of unusual volume, peak 4.2x at 13:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Mon 16",
-     "text": "Day's volume 4.7x usual",
+     "text": "1 hour of unusual volume, peak 7.4x at 13:15",
      "side": 1
     },
     {
-     "when": "Fri 13",
-     "text": "Day's volume 4.7x usual",
-     "side": -1
+     "when": "Tue 17",
+     "text": "Day's volume 2.3x usual",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI +12% in a day, price +4.5%: long build-up",
+     "side": 1
     }
    ],
-   "close": 682.75,
-   "move_pct": -4.0,
+   "close": 95.99,
+   "move_pct": 4.6,
    "moved": false,
-   "vs_high": "6.4% below its 20-day high",
+   "vs_high": "At a 20-day high",
    "states": {
-    "W": "Topping",
+    "W": "Bullish",
     "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Watch"
+   }
   },
   {
-   "symbol": "CDSL",
-   "score": 4.2,
+   "symbol": "UPL",
+   "score": 4.5,
    "bias": "Selling",
    "events": [
     {
      "when": "Tue 17",
-     "text": "3 hours of unusual volume, peak 5.2x at 12:15",
+     "text": "2 hours of unusual volume, peak 4.5x at 14:15",
      "side": -1
     },
     {
      "when": "Tue 17",
-     "text": "Day's volume 2.8x usual",
-     "side": 1
+     "text": "OI +10% in a day, price -1.4%: short build-up",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 2.0x usual",
+     "side": -1
     },
     {
      "when": "Mon 16",
-     "text": "OI +5% in a day, price -1.1%: short build-up",
-     "side": -1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 3.3x usual",
-     "side": -1
+     "text": "1 hour of unusual volume, peak 2.7x at 12:15",
+     "side": 1
     }
    ],
-   "close": 1439.8,
-   "move_pct": -1.0,
+   "close": 551.7,
+   "move_pct": -0.8,
    "moved": false,
-   "vs_high": "3.0% below its 20-day high",
+   "vs_high": "2.7% below its 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Ready"
+   }
   },
   {
    "symbol": "LAURUSLABS",
@@ -650,46 +755,6 @@
    "setup": "Trend Pullback \u00b7 Watch"
   },
   {
-   "symbol": "POWERINDIA",
-   "score": 4.2,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 2.8x at 15:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 6.4x usual",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Range 2.9x normal, closed +10.7%",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Gap up 5.1%, held",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "OI -6% in a day, price +11.9%: short covering",
-     "side": 1
-    }
-   ],
-   "close": 30435.0,
-   "move_pct": 6.6,
-   "moved": true,
-   "vs_high": "5.6% below its 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
    "symbol": "PREMIERENE",
    "score": 4.2,
    "bias": "Selling",
@@ -725,6 +790,32 @@
    }
   },
   {
+   "symbol": "360ONE",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "1 hour of unusual volume, peak 6.2x at 10:15",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI +5% in a day, price +1.9%: long build-up",
+     "side": 1
+    }
+   ],
+   "close": 1202.85,
+   "move_pct": 1.0,
+   "moved": false,
+   "vs_high": "0.3% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Ready"
+  },
+  {
    "symbol": "ADANIENT",
    "score": 4.0,
    "bias": "Buying",
@@ -743,6 +834,37 @@
     "W": "Bottoming",
     "D": "Bullish"
    }
+  },
+  {
+   "symbol": "IREDA",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "2 hours of unusual volume, peak 4.9x at 10:15",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 4.4x usual",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI -8% in a day, price +1.3%: short covering",
+     "side": 1
+    }
+   ],
+   "close": 117.4,
+   "move_pct": -2.0,
+   "moved": false,
+   "vs_high": "5.3% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Ready"
   },
   {
    "symbol": "NAUKRI",
@@ -771,7 +893,12 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 8.9x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 11.5x at 15:15, absorption",
+     "side": 0
+    },
+    {
+     "when": "Mon 16",
+     "text": "1 hour of unusual volume, peak 2.7x at 15:15, absorption",
      "side": 0
     }
    ],
@@ -782,6 +909,41 @@
    "states": {
     "W": "Bearish",
     "D": "Topping"
+   }
+  },
+  {
+   "symbol": "POWERINDIA",
+   "score": 3.8,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "1 hour of unusual volume, peak 3.0x at 15:15, absorption",
+     "side": 0
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 6.4x usual",
+     "side": 1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Range 2.9x normal, closed +10.7%",
+     "side": 1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Gap up 5.1%, held",
+     "side": 1
+    }
+   ],
+   "close": 30435.0,
+   "move_pct": 6.6,
+   "moved": true,
+   "vs_high": "5.6% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
    }
   },
   {
@@ -838,36 +1000,6 @@
    "states": {
     "W": "Bullish",
     "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "CUMMINSIND",
-   "score": 3.5,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Tue 17",
-     "text": "3 hours of unusual volume, peak 3.8x at 10:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 2.7x usual",
-     "side": -1
-    },
-    {
-     "when": "Mon 16",
-     "text": "1 hour of unusual volume, peak 5.6x at 10:15",
-     "side": -1
-    }
-   ],
-   "close": 4065.0,
-   "move_pct": -4.5,
-   "moved": false,
-   "vs_high": "14.5% below its 20-day high",
-   "states": {
-    "W": "Bearish",
-    "D": "Bearish"
    }
   },
   {
@@ -932,85 +1064,35 @@
    }
   },
   {
-   "symbol": "MAHABANK",
+   "symbol": "MOTILALOFS",
    "score": 3.5,
-   "bias": "Buying",
+   "bias": "Mixed",
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 7.4x at 13:15",
+     "text": "2 hours of unusual volume, peak 4.7x at 12:15",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 2.7x usual",
      "side": 1
     },
     {
      "when": "Tue 17",
-     "text": "Day's volume 2.3x usual",
+     "text": "OI +11% in a day, price +1.6%: long build-up",
      "side": 1
     }
    ],
-   "close": 95.99,
-   "move_pct": 4.6,
+   "close": 1240.25,
+   "move_pct": 1.9,
    "moved": false,
    "vs_high": "At a 20-day high",
    "states": {
     "W": "Bullish",
     "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "PHOENIXLTD",
-   "score": 3.5,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Tue 17",
-     "text": "2 hours of unusual volume, peak 6.0x at 11:15, absorption",
-     "side": -1
-    },
-    {
-     "when": "Fri 13",
-     "text": "OI +8% in a day, price -1.1%: short build-up",
-     "side": -1
-    }
-   ],
-   "close": 2229.0,
-   "move_pct": -2.7,
-   "moved": false,
-   "vs_high": "3.1% below its 20-day high",
-   "states": {
-    "W": "Bullish",
-    "D": "Bullish"
    },
-   "setup": "Swing Pullback \u00b7 Ready"
-  },
-  {
-   "symbol": "POLICYBZR",
-   "score": 3.5,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Fri 13",
-     "text": "Day's volume 3.8x usual, flush absorbed",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "OI +11% in a day, price +5.5%: long build-up",
-     "side": 1
-    },
-    {
-     "when": "Fri 13",
-     "text": "Range 2.2x normal, closed +5.2%",
-     "side": 1
-    }
-   ],
-   "close": 1052.1,
-   "move_pct": 0.2,
-   "moved": true,
-   "vs_high": "6.2% below its 20-day high",
-   "states": {
-    "W": "Bearish",
-    "D": "Bullish"
-   }
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "PNB",
@@ -1079,25 +1161,34 @@
    "setup": "Swing Pullback \u00b7 Watch"
   },
   {
-   "symbol": "360ONE",
-   "score": 3.0,
-   "bias": "Buying",
+   "symbol": "LICI",
+   "score": 3.1,
+   "bias": "Mixed",
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 6.2x at 10:15",
+     "text": "OI +5% in a day, price -0.7%: short build-up",
+     "side": -1
+    },
+    {
+     "when": "Mon 16",
+     "text": "1 hour of unusual volume, peak 4.5x at 15:15, absorption",
+     "side": 0
+    },
+    {
+     "when": "Mon 16",
+     "text": "OI +5% in a day, price +0.1%: long build-up",
      "side": 1
     }
    ],
-   "close": 1202.85,
-   "move_pct": 1.0,
+   "close": 397.7,
+   "move_pct": -1.6,
    "moved": false,
-   "vs_high": "0.3% below its 20-day high",
+   "vs_high": "4.7% below its 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Ready"
+   }
   },
   {
    "symbol": "BLUESTARCO",
@@ -1132,7 +1223,7 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 4.6x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 5.2x at 15:15, absorption",
      "side": 0
     },
     {
@@ -1151,30 +1242,45 @@
    }
   },
   {
-   "symbol": "IREDA",
+   "symbol": "PHOENIXLTD",
+   "score": 3.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "2 hours of unusual volume, peak 6.0x at 11:15, absorption",
+     "side": -1
+    }
+   ],
+   "close": 2229.0,
+   "move_pct": -2.7,
+   "moved": false,
+   "vs_high": "3.1% below its 20-day high",
+   "states": {
+    "W": "Bullish",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Ready"
+  },
+  {
+   "symbol": "SAIL",
    "score": 3.0,
    "bias": "Mixed",
    "events": [
     {
      "when": "Tue 17",
-     "text": "2 hours of unusual volume, peak 4.9x at 10:15",
-     "side": -1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 4.4x usual",
-     "side": 1
+     "text": "1 hour of unusual volume, peak 4.0x at 15:15, absorption",
+     "side": 0
     }
    ],
-   "close": 117.4,
-   "move_pct": -2.0,
+   "close": 171.31,
+   "move_pct": -3.6,
    "moved": false,
-   "vs_high": "5.3% below its 20-day high",
+   "vs_high": "5.5% below its 20-day high",
    "states": {
-    "W": "Bottoming",
+    "W": "Bearish",
     "D": "Bullish"
-   },
-   "setup": "Swing Pullback \u00b7 Ready"
+   }
   },
   {
    "symbol": "UJJIVANSFB",
