@@ -35,6 +35,7 @@ IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 OWNER = "Vivek Kapoor"          # name shown as the faded watermark
 INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
 GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
+AMBER_WL = "#b9a77a"          # watchlist star (empty)
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
 AMBER = "#a15c00"
 VK_ORDER = ["BUY NOW", "ALMOST READY (Bullish)", "COMING CLOSE TO READY (Bullish)",
@@ -111,6 +112,9 @@ st.markdown(f"""<style>
 .tf-ev {{font-size: 13px; color: {INK}; padding-left: 10px; margin: 2px 0;
   border-left: 3px solid {RULE};}}
 .tf-names a {{font-family: {MONO}; font-size: 13px; color: {INK} !important;}}
+a.tf-wl {{text-decoration: none !important; color: {AMBER_WL} !important; font-size: 17px;
+  margin-left: 6px; line-height: 1;}}
+a.tf-wl.on {{color: #c98a00 !important;}}
 </style>""", unsafe_allow_html=True)
 
 
@@ -284,8 +288,8 @@ def row_html(r):
                    f'{e(u["bias"].lower())}): {e(ev["when"])} · {e(ev["text"])}</span>')
     return (
         '<div class="tf-row"><div class="tf-top">'
-        f'<a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
-        f'{e(r["symbol"])}</a>{grade_badge(r["grade"], r.get("stage"))}</div>'
+        f'<span><a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
+        f'{e(r["symbol"])}</a>{wl_link(r["symbol"])}</span>{grade_badge(r["grade"], r.get("stage"))}</div>'
         f'<div class="tf-set">{e(r["setup"])} · '
         f'<span style="color:{tcol}">{e(trend)}</span>{quality_html(r)}</div>'
         f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
@@ -334,8 +338,8 @@ def unusual_row(r):
                       f"font-weight:600\">{e(t['stage'])}</span>" if t.get("stage") else ""))
     return (
         '<div class="tf-row"><div class="tf-top">'
-        f'<a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
-        f'{e(r["symbol"])}</a><span class="tf-grade" style="border:2px solid {INK};'
+        f'<span><a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
+        f'{e(r["symbol"])}</a>{wl_link(r["symbol"])}</span><span class="tf-grade" style="border:2px solid {INK};'
         f'color:{INK};font-family:{MONO}">{r["score"]:.1f}</span></div>'
         f'<div class="tf-set"><span style="color:{bcol}">{e(r["bias"])}</span>'
         + (f' · {money(r["close"])}' if r.get("close") else "") + '</div>'
@@ -744,8 +748,8 @@ The sector line on every stock row elsewhere on the site comes from this page.
             tags = on_site.get(t["symbol"])
             rows_html.append(
                 '<div class="tf-row"><div class="tf-top">'
-                f'<a class="tf-sym" href="{chart_link(t["symbol"])}" target="_blank">'
-                f'{e(t["symbol"])}</a><span class="tf-lvl">{money(t["close"])}</span></div>'
+                f'<span><a class="tf-sym" href="{chart_link(t["symbol"])}" target="_blank">'
+                f'{e(t["symbol"])}</a>{wl_link(t["symbol"])}</span><span class="tf-lvl">{money(t["close"])}</span></div>'
                 f'<div class="tf-small">W {e(t["states"]["W"])} · D {e(t["states"]["D"])}'
                 + (f' · 1W {pct(t["rw"])} · 2W {pct(t["r2w"])} · 1M {pct(t["r1"])}'
                    if new else f' · 1M {pct(t["rs1"])} · 3M {pct(t["rs3"])}')
@@ -1108,7 +1112,8 @@ def pick_html(p):
                     for b in p["bonus"])
     return (
         '<div class="tf-row"><div class="tf-top">'
-        f'<a class="tf-sym" href="{chart_link(p["symbol"])}" target="_blank">{e(p["symbol"])}</a>'
+        f'<span><a class="tf-sym" href="{chart_link(p["symbol"])}" target="_blank">{e(p["symbol"])}</a>'
+        f'{wl_link(p["symbol"])}</span>'
         f'{grade_badge(r.get("grade", ""), r.get("stage"))}</div>'
         f'<div class="tf-set">{e(p["market"])} · {e(r.get("setup", ""))} · '
         f'<span style="color:{MUTED}">{e(p["size"])}</span>{quality_html(r)}</div>'
@@ -1197,7 +1202,7 @@ Rules are starting points, not tested results. Your own chart is the final check
                            "to the hourly 20-50 EMA zone is the next round of this strategy.")
                 st.markdown("".join(
                     f'<div class="tf-small" style="margin:3px 0"><a href="{chart_link(s_)}" '
-                    f'target="_blank"><b>{html.escape(s_)}</b></a> · broke a {b["weeks"]}-week '
+                    f'target="_blank"><b>{html.escape(s_)}</b></a>{wl_link(s_)} · broke a {b["weeks"]}-week '
                     f'{html.escape(b["kind"])} {b["days"]} sessions ago, ceiling {money(b["level"])}'
                     f'{" · " + html.escape(SECTORS[s_]["sector"] + " " + SECTORS[s_].get("stage", "")) if SECTORS.get(s_, {}).get("sector") else ""}'
                     '</div>' for s_, b in q["waiting"]), unsafe_allow_html=True)
@@ -1352,7 +1357,7 @@ Filings lag: a September quarter stake becomes public in October. Treat this as 
     body = "".join(
         f"<tr><td><b>{e(r['investor'])}</b>{' ⚠' if r.get('ambiguous') else ''}</td>"
         f"<td><a class='tf-jump' href='{chart_link(r['symbol'])}' target='_blank'>"
-        f"{e(r['symbol'])}</a>"
+        f"{e(r['symbol'])}</a>{wl_link(r['symbol'])}"
         + (f"<div class='tf-small' style='color:{GREEN}'>{e('; '.join(on_site[r['symbol']][:2]))}</div>"
            if r["symbol"] in on_site else "")
         + f"</td><td style='color:{badge[r['change']]};font-weight:600;white-space:nowrap'>"
@@ -1489,7 +1494,7 @@ def render_search():
     # header
     st.markdown(
         f'<div style="margin-top:10px"><a class="tf-sym" style="font-size:26px" '
-        f'href="{chart_link(sym)}" target="_blank">{e(sym)}</a>'
+        f'href="{chart_link(sym)}" target="_blank">{e(sym)}</a>{wl_link(sym, big=True)}'
         f'<span style="font-size:16px;color:{MUTED}"> {e(names.get(sym, ""))}</span></div>'
         f'<div class="tf-set">{e(market)}' + (f" · {money(close)}" if close else "") + '</div>'
         + (f'<div class="tf-small">{" · ".join(f"{k} {e(v)}" for k, v in states.items())}</div>'
@@ -1599,6 +1604,168 @@ def render_search():
     st.caption("Watchlist only, not investment advice.")
 
 
+def stock_brief(sym, R):
+    """One stock in a few words, from every page: for the watchlist."""
+    fo, eq = R.get("F&O", {}), R.get("Equity", {})
+    in_fo = any(sym in xs for xs in fo.get("old_labels", {}).values())
+    home = fo if in_fo else eq
+    rows = [r for r in home.get("rows", []) + home.get("overspill", []) + home.get("ranges", [])
+            if r["symbol"] == sym]
+    vk = next((lab for lab, xs in fo.get("vk_labels", {}).items()
+               for x in xs if x["symbol"] == sym), None)
+    old = next((lab for lab, xs in home.get("old_labels", {}).items() if sym in xs), None)
+    other = next((s_ for s_, xs in home.get("others", {}).items() if sym in xs), None)
+    close = next((r.get("close") for r in rows if r.get("close")), None)
+    rank = {"Ready": 0, "Triggered": 1, "Watch": 2}
+    rows.sort(key=lambda r: (rank.get(r["stage"], 9), r["grade"]))
+    return {"market": "F&O" if in_fo else ("Equity" if old else ""), "rows": rows, "vk": vk,
+            "old": old, "other": other, "close": close,
+            "best": rank.get(rows[0]["stage"], 9) if rows else 9}
+
+
+def render_watchlist():
+    e = html.escape
+    st.markdown(
+        f'<div style="border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'Watchlist</span></div>', unsafe_allow_html=True)
+    if not secret("GH_TOKEN"):
+        st.info("The watchlist is saved in your GitHub repo, so it needs GH_TOKEN in the "
+                "app's secrets.")
+        return
+    R = all_results()
+    syms = sorted(known_symbols(R))
+    with st.container(horizontal=True, vertical_alignment="bottom"):
+        pick = st.selectbox("Add a stock", syms, index=None, placeholder="Type a symbol to add",
+                            label_visibility="collapsed", key="wl_add_pick")
+        if st.button("Add", disabled=not pick):
+            err = watch_change(add=[pick])
+            if err:
+                st.error(err)
+            else:
+                WATCH[pick] = {"symbol": pick}
+                st.rerun()
+    if not WATCH:
+        st.caption("Your watchlist is empty. Tap the ☆ next to any stock name on the site, or "
+                   "add one above. It is saved in your GitHub repo, so it is the same on your "
+                   "phone and laptop.")
+        return
+    briefs = {s: stock_brief(s, R) for s in WATCH}
+    order = sorted(WATCH, key=lambda s: (briefs[s]["best"], s))
+    n_ready = sum(1 for s in order if briefs[s]["best"] == 0)
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'margin:6px 0">{len(order)} {"stock" if len(order) == 1 else "stocks"} · '
+        f'{n_ready} Ready now</div>', unsafe_allow_html=True)
+    for s in order:
+        b = briefs[s]
+        bits = []
+        for r in b["rows"][:3]:
+            col = (GREEN if r["stage"] in LIVE_STAGES and r["grade"] == "A" else
+                   RED if r["grade"] == "Warning" else INK)
+            bits.append(f'<span style="color:{col}">{e(r["setup"])} {e(r["stage"])} '
+                        f'({quality_word(r["setup"]).split()[0]} {e(r["grade"])})</span>')
+        if not b["rows"] and b["other"]:
+            bits.append(e(b["other"]))
+        if b["vk"]:
+            bits.append(f'<span style="color:{VK_COLOR.get(b["vk"], MUTED)}">VK {e(b["vk"])}</span>')
+        if b["old"]:
+            bits.append(f"Old {e(b['old'])}")
+        added = WATCH[s].get("added", "")
+        c1, c2 = st.columns([6, 1], vertical_alignment="center")
+        with c1:
+            st.markdown(
+                f'<div style="border-top:1px solid {RULE};padding:8px 0">'
+                f'<a class="tf-sym" href="{chart_link(s)}" target="_blank">{e(s)}</a>'
+                f'<span class="tf-small"> {e(b["market"])}'
+                + (f" · {money(b['close'])}" if b["close"] else "")
+                + (f" · added {e(added)}" if added else "")
+                + f' · <a href="?page=Search&stock={e(s)}" target="_self">full details</a></span>'
+                f'<div class="tf-small" style="color:{INK}">'
+                + (" · ".join(bits) if bits else "Nothing on the site for this stock right now")
+                + f'</div>{sector_html(s)}</div>', unsafe_allow_html=True)
+        with c2:
+            if st.button("Remove", key=f"wl_rm_{s}"):
+                err = watch_change(remove=[s])
+                if err:
+                    st.error(err)
+                else:
+                    WATCH.pop(s, None)
+                    st.rerun()
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:600;margin-top:22px">Export to TradingView</div>',
+                unsafe_allow_html=True)
+    tv = ",".join(f"NSE:{s}" for s in order)
+    st.download_button("Download for TradingView", tv, file_name="tradeready_watchlist.txt",
+                       mime="text/plain")
+    st.caption("In TradingView (laptop): open the watchlist panel → the watchlist name menu → "
+               "Import list → choose this file. It becomes a new watchlist. TradingView does "
+               "not let other sites change your watchlists directly, so this is the closest "
+               "to a sync. You can also copy the line below and paste it into a watchlist.")
+    st.code(tv, language=None)
+
+
+GUIDE = """
+**What the site does.** It scans every F&O stock every hour, and midcaps/smallcaps every evening, with your MWDH TTM framework, and lists the setups, how good they are, and whether the market allows trading them. It is a filter. Your chart is the final check.
+
+#### The pages
+- **Strategies**: start here. Trades that pass every rule of 7 strategies, with buy level, stop and 2R target. Also the queue (stocks about to qualify).
+- **Search**: everything about one stock: setups, old label, VK, strategies, sector, unusual activity, deals, star investors.
+- **Watchlist**: your saved stocks, with what each one is doing now. Tap ☆ next to any stock name to add it.
+- **A list**: every Ready, good-quality setup across F&O, Equity and Breakout.
+- **F&O / Equity**: all setups by type (Squeeze, Swing, Trend, Overspill, Range), with Ready / Watch / Triggered tabs, plus Old labels and VK (F&O).
+- **Unusual**: stocks with unusual volume, OI or delivery in the last few sessions.
+- **Breakout**: equity bases close to breaking out.
+- **Sectors**: which sectors lead, which way they are moving day by day, and their stocks.
+- **Deals / Stars**: bulk and block deals, and star investors' 1%+ stakes.
+
+#### Words to know
+- **Watch** = still dipping or coiling, not yet. **Ready** = turned up, the entry stage. **Triggered** = already moved, you are late.
+- **Dip / Coil / Base quality A, B, C**: how clean the setup is (volume, OI, delivery). Grey badge = not tradeable yet; green A = good and tradeable.
+- **Extended**: far above the 50 EMA; chasing is risky.
+- **Market line**: Turning up = trade; Overheated = small size, dips only; No clear turn = small, only A; Still falling = no new trades.
+
+#### Evening routine (15 minutes, after 19:50)
+1. **Market line** (top of F&O): decide size for tomorrow.
+2. **Sectors**: pick 2-3 Leading or Improving sectors that are ▲ Rising.
+3. **Strategies**: read the trades and the "Dipping now" lists.
+4. **F&O → VK → ALMOST READY**: keep names that are also on a setup with quality A, in your sectors, MA signal ONLY BUY, not Extended.
+5. **Search** each finalist: drop Unusual Selling, Warning grade, funds selling, or results due.
+6. Tap **☆** on the 2-4 best. Open **Watchlist** → **Download for TradingView** → import, and set alerts at the "Buy above" levels.
+
+#### During the day
+- The **Telegram bot** pings when stocks turn BUY NOW / CONFIRMED, or a new Strategy 7 setup appears. A ping on a watchlist name is the best signal.
+- **Enter on the alert at the trigger**, not after confirmation. Half size at the trigger, the rest at CONFIRMED.
+- **15-min or hourly dip?** If the Hourly TTM is still rising, buy the 15-min dip. If it has started falling, wait for the hourly 20-50 EMA zone.
+
+#### Managing trades
+- **Stop** from the card. Never move it lower.
+- **Book half at 2R**, trail the rest under the hourly 50 EMA.
+- **Exit by day 5** if nothing happens.
+- Exit or cut on: Stretched, Warning grade, Unusual Selling, sector turning Lagging, market turning Still falling (see Exits on the Strategies page).
+
+#### What to skip
+- Counter-trend tags, Lagging sectors, Extended stocks, grade C or Warning.
+- Anything you only notice after it has already run: wait for the next dip.
+- More than 3-4 open trades at once.
+
+#### Housekeeping
+- **Scan all** refreshes everything; tap once and watch the bars. Scans also run by themselves through the day.
+- If a page looks old, tap **Refresh**; if still old, **Manage app → Reboot app**.
+- Rules are starting values. After 3-4 weeks of noting which strategy each trade came from, we can see which ones work for you.
+
+*Watchlist and research tool, not investment advice.*
+"""
+
+
+def render_guide():
+    st.markdown(
+        f'<div style="border-bottom:2px solid {INK};padding-bottom:10px">'
+        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'How to use TradeReady</span></div>', unsafe_allow_html=True)
+    st.markdown(GUIDE)
+
+
 def render_deals():
     e = html.escape
     if not os.path.exists(DEALS_FILE):
@@ -1649,7 +1816,7 @@ def render_deals():
         body = "".join(
             f"<tr><td>{e(r['date'][5:])}</td>"
             f"<td><a class='tf-jump' href='{chart_link(r['symbol'])}' target='_blank'>"
-            f"{e(r['symbol'])}</a>"
+            f"{e(r['symbol'])}</a>{wl_link(r['symbol'])}"
             + (f"<div class='tf-small' style='color:{GREEN}'>{e('; '.join(on_site[r['symbol']][:2]))}</div>"
                if r["symbol"] in on_site else "")
             + f"</td><td style='color:{GREEN if r['side'] == 'BUY' else RED};font-weight:600'>"
@@ -1841,9 +2008,98 @@ def watch_for_new_scans():
         st.rerun()
 
 
-page = st.radio("Market", ["Strategies", "Search", "A list"] + list(PAGES) + ["Deals", "Stars"],
-                horizontal=True,
-                label_visibility="collapsed")
+# ---------------------------------------------------------------- watchlist
+WATCH_PATH = "data/watchlist.json"
+WATCH = {}                    # symbol -> {"added": date}
+CUR_PAGE = ""
+
+
+@st.cache_data(ttl=30)
+def watch_read(version):
+    """The watchlist file from GitHub: (dict, sha). version busts the cache after a write."""
+    code, data = github("GET", f"/contents/{WATCH_PATH}?ref=main")
+    if code != 200:
+        return {}, None
+    try:
+        import base64
+        items = json.loads(base64.b64decode(data["content"]).decode())
+        return {x["symbol"]: x for x in items}, data.get("sha")
+    except Exception:
+        return {}, data.get("sha")
+
+
+def watch_write(items, sha, message):
+    import base64
+    body = {"message": message, "branch": "main",
+            "content": base64.b64encode(json.dumps(sorted(items.values(), key=lambda x:
+                                                          x["symbol"]), indent=1).encode()).decode()}
+    if sha:
+        body["sha"] = sha
+    code, _ = github("PUT", f"/contents/{WATCH_PATH}", body)
+    return code
+
+
+def watch_change(add=None, remove=None):
+    """Add or remove symbols. Returns an error message, or None."""
+    if not secret("GH_TOKEN"):
+        return "The watchlist needs GH_TOKEN in the app's secrets."
+    for attempt in range(2):
+        items, sha = watch_read(st.session_state.get("watch_v", 0))
+        items = dict(items)
+        today = dt.datetime.now(IST).strftime("%Y-%m-%d")
+        for s in add or []:
+            items.setdefault(s, {"symbol": s, "added": today})
+        for s in remove or []:
+            items.pop(s, None)
+        code = watch_write(items, sha, "Watchlist: " + ", ".join(
+            [f"+{s}" for s in add or []] + [f"-{s}" for s in remove or []]))
+        st.session_state["watch_v"] = st.session_state.get("watch_v", 0) + 1
+        watch_read.clear()
+        if code in (200, 201):
+            return None
+        if code == 409:                       # changed meanwhile: read again and retry
+            continue
+        return {401: "GitHub refused the key.",
+                403: "The GitHub key needs Contents set to Read and write (one-time change).",
+                404: "The GitHub key needs Contents set to Read and write (one-time change)."
+                }.get(code, f"Could not save the watchlist (code {code}).")
+    return "Could not save the watchlist; try again."
+
+
+def wl_link(sym, big=False):
+    """A star next to a stock name: tap to add to (or remove from) the watchlist."""
+    import urllib.parse as up
+    on = sym in WATCH
+    q = up.urlencode({"page": CUR_PAGE, ("unwatch" if on else "watch"): sym})
+    size = "font-size:24px;" if big else ""
+    return (f'<a class="tf-wl{" on" if on else ""}" style="{size}" href="?{q}" target="_self" '
+            f'title="{"Remove from" if on else "Add to"} watchlist">{"★" if on else "☆"}</a>')
+
+
+PAGE_LIST = (["Strategies", "Search", "Watchlist", "A list"] + list(PAGES)
+             + ["Deals", "Stars", "Guide"])
+qp = st.query_params
+for key, kind in (("watch", "add"), ("unwatch", "remove")):
+    if key in qp:
+        sym_q = qp[key].upper().strip()
+        err = watch_change(**{kind: [sym_q]})
+        st.session_state["watch_msg"] = (err, sym_q, kind)
+        del st.query_params[key]
+start = qp.get("page")
+page = st.radio("Market", PAGE_LIST, horizontal=True, label_visibility="collapsed",
+                index=PAGE_LIST.index(start) if start in PAGE_LIST else 0)
+CUR_PAGE = page
+if qp.get("page") != page:
+    st.query_params["page"] = page
+if secret("GH_TOKEN"):
+    WATCH.update(watch_read(st.session_state.get("watch_v", 0))[0])
+wm = st.session_state.pop("watch_msg", None)
+if wm:
+    err, sym_q, kind = wm
+    if err:
+        st.error(f"Watchlist: {err}")
+    else:
+        st.toast(f"{sym_q} {'added to' if kind == 'add' else 'removed from'} your watchlist")
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
         st.cache_data.clear()
@@ -1879,6 +2135,12 @@ if page == "Stars":
     st.stop()
 if page == "Search":
     render_search()
+    st.stop()
+if page == "Watchlist":
+    render_watchlist()
+    st.stop()
+if page == "Guide":
+    render_guide()
     st.stop()
 if page == "Deals":
     render_deals()
@@ -1986,8 +2248,8 @@ if choice == "VK":
             e = html.escape
             cards = "".join(
                 '<div class="tf-row"><div class="tf-top">'
-                f'<a class="tf-sym" href="{chart_link(x["symbol"])}" target="_blank">'
-                f'{e(x["symbol"])}</a><span class="tf-lvl">{money(x["close"])}</span></div>'
+                f'<span><a class="tf-sym" href="{chart_link(x["symbol"])}" target="_blank">'
+                f'{e(x["symbol"])}</a>{wl_link(x["symbol"])}</span><span class="tf-lvl">{money(x["close"])}</span></div>'
                 f'<div class="tf-set">{e(x["signal"])} · <span style="color:{MUTED}">'
                 f'{e(x["ma"])}</span></div>'
                 f'<div class="tf-small">{" · ".join(f"{k} {e(v)}" for k, v in x["states"].items())}</div>'
@@ -2026,7 +2288,8 @@ if choice == "Old labels":
             e = html.escape
             cards = "".join(
                 '<div class="tf-row"><div class="tf-top">'
-                f'<a class="tf-sym" href="{chart_link(n)}" target="_blank">{e(n)}</a></div>'
+                f'<span><a class="tf-sym" href="{chart_link(n)}" target="_blank">{e(n)}</a>'
+                f'{wl_link(n)}</span></div>'
                 + (f'<div class="tf-small">On Setups: {e("; ".join(on_list[n]))}</div>'
                    if n in on_list else "")
                 + sector_html(n) + '</div>'
