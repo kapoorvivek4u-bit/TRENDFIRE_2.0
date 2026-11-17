@@ -763,8 +763,12 @@ The sector line on every stock row elsewhere on the site comes from this page.
             f'<a class="tf-small" href="#sec-table">↑ Back to table</a></div>'
             f'<div class="tf-small">{e(label.split(" · ", 2)[2])} · {x["wk_bull"]}% of its '
             f'stocks bullish on Weekly, {x["d_bull"]}% on Daily.</div>'
-            '<div class="tf-grid">' + "".join(rows_html) + '</div>',
+            '<div class="tf-grid">' + "".join(rows_html[:5]) + '</div>',
             unsafe_allow_html=True)
+        if len(rows_html) > 5:
+            with st.expander(f"Show all {len(rows_html)} stocks in {x['name']}"):
+                st.markdown('<div class="tf-grid">' + "".join(rows_html[5:]) + '</div>',
+                            unsafe_allow_html=True)
         if x.get("trail"):
             with st.expander(f"{x['name']}: day by day, last {len(x['trail'])} sessions"):
                 trs = "".join(
