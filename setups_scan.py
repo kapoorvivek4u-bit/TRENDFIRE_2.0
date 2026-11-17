@@ -338,6 +338,7 @@ def find_range(h, l, c, atr, p, late=None):
         stage = "Triggered"
     return {"stage": stage, "line_now": line_now, "low": base_low, "height": height,
             "touches": len(touches), "span": int(span), "broke_at": brk,
+            "start": int(a), "slope": float(slope),
             "kind": "flat top" if abs(slope) * span < 0.5 * a_now else "falling trendline"}
 
 
@@ -383,7 +384,13 @@ def range_rows(row, T, vol, idx, fo, name):
              "trigger": round(rg["line_now"], 2),
              "stop": round(max(rg["low"], rg["line_now"] - 1.5 * float(T["ind"]["atr"][-1]))
                            * 0.998, 2),
-             "target": round(rg["line_now"] * (1 + rg["height"] / 100), 2)}]
+             "target": round(rg["line_now"] * (1 + rg["height"] / 100), 2),
+             "chart": mini_chart(T, rg["start"], {
+                 "top": (rg["start"], float(T["h"][rg["start"]]), len(T["c"]) - 1,
+                         float(rg["line_now"])),
+                 "floor": (rg["start"], rg["low"],
+                           rg["broke_at"] if rg["broke_at"] is not None else len(T["c"]) - 1,
+                           rg["low"])}, rg["broke_at"])}]
 
 
 def _pivots(x, k, lo, hi, high=True):
@@ -463,7 +470,9 @@ def find_patterns(h, l, c, atr, p):
                     "target": float(line(end if brk is not None else n - 1)) + pole,
                     "start": a, "broke_at": brk, "span": int(span),
                     "touches": 1 + int(b != a), "height": pole / h[a] * 100,
-                    "pole_start": int(lo_i)}
+                    "pole_start": int(lo_i),
+                    "lines": {"pole": (lo_i, float(l[lo_i]), a, float(h[a])),
+                              "top": (a, float(h[a]), n - 1, ln)}}
             if "Flag" not in out or a > out["Flag"]["start"]:
                 out["Flag"] = cand
             break
@@ -513,7 +522,7 @@ def find_patterns(h, l, c, atr, p):
                 kind = "Rectangle"
                 stop = max(float(floor(n - 1)), float(line(n - 1)) - 1.5 * a_now)
                 target = float(line(n - 1)) + w0
-            elif dU < -flat and dL < 0 and dU < dL - 0.5 * flat and w1 < 0.75 * w0:
+            elif dU < -flat and dL < -0.5 * flat and dU < dL - 0.5 * flat and w1 < 0.75 * w0:
                 kind = "Falling Wedge"
                 stop = float(l[max(a, end - max(5, span // 3)):end].min())
                 target = float(h[a])
@@ -521,7 +530,9 @@ def find_patterns(h, l, c, atr, p):
                 continue
             cand = {"stage": stage, "line_now": float(line(n - 1)), "stop": stop * 0.998,
                     "target": target, "start": a, "broke_at": brk, "span": int(span),
-                    "touches": len(touches) + low_touch, "height": height}
+                    "touches": len(touches) + low_touch, "height": height,
+                    "lines": {"top": (a, float(h[a]), n - 1, float(line(n - 1))),
+                              "floor": (a, float(floor(a)), end - 1, float(floor(end - 1)))}}
             old_ = out.get(kind)
             if old_ is None or (cand["touches"], cand["span"]) > (old_["touches"], old_["span"]):
                 out[kind] = cand
@@ -529,6 +540,25 @@ def find_patterns(h, l, c, atr, p):
         if out[kind]["stop"] >= out[kind]["line_now"] or out[kind]["target"] <= out[kind]["line_now"]:
             del out[kind]
     return out
+
+
+def mini_chart(T, start, lines, brk=None, pts=60):
+    """A small chart for the site: bars from a little before the pattern to now, grouped
+    into at most pts points, and the pattern lines in the same point units."""
+    h, l, c = T["h"], T["l"], T["c"]
+    n = len(c)
+    w0 = max(0, start - max(5, (n - start) // 4))
+    g = max(1, math.ceil((n - w0) / pts))
+    H, L, C = [], [], []
+    for i in range(w0, n, g):
+        H.append(round(float(h[i:i + g].max()), 2))
+        L.append(round(float(l[i:i + g].min()), 2))
+        C.append(round(float(c[min(i + g, n) - 1]), 2))
+    x = lambda i: round((i - w0) / g, 2)
+    return {"h": H, "l": L, "c": C,
+            "lines": {k: [[x(x0), round(y0, 2)], [x(x1), round(y1, 2)]]
+                      for k, (x0, y0, x1, y1) in lines.items()},
+            "brk": None if brk is None else x(brk)}
 
 
 def _vol_grade(vol, idx, brk, unit, fo, quiet_from=None):
@@ -586,6 +616,10 @@ def pattern_rows(row, T, vol, idx, fo, tf):
                     "detail": " · ".join([where, pos, vol_txt]), "grade": grade,
                     "trigger": round(pt["line_now"], 2), "stop": round(pt["stop"], 2),
                     "target": round(pt["target"], 2),
+                    "target_why": {"Flag": "pole height added to the breakout",
+                                   "Rectangle": "rectangle height added to the top",
+                                   "Falling Wedge": "back to where the wedge started"}[kind],
+                    "chart": mini_chart(T, start, pt["lines"], pt["broke_at"]),
                     "since": pd.Timestamp(idx[start]).strftime("%Y-%m-%d %H:%M")
                     if idx is not None else None})
     return out
@@ -1455,6 +1489,10 @@ def selftest():
                          None, [])
     rp = [x for x in res_p["ranges"] if x["setup"] == "Daily Rectangle"]
     assert rp and "rectangle" in rp[0]["detail"] and rp[0]["since"], res_p["ranges"]
+    ch = rp[0]["chart"]
+    assert len(ch["c"]) <= 60 and len(ch["h"]) == len(ch["l"]) == len(ch["c"]), ch
+    assert set(ch["lines"]) == {"top", "floor"} and 0 <= ch["lines"]["top"][0][0] < len(ch["c"])
+    assert all("chart" in x for x in res_p["ranges"])
     print("pattern trace:", f2["stage"], r1["Rectangle"]["stage"], w1["Falling Wedge"]["stage"])
 
     # 8f) VK System words
