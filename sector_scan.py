@@ -256,7 +256,7 @@ def analyse_sectors(daily, smap, nifty, symbols):
                  if hist else [])
         days, direction, chg5 = trail(idx, nifty, d_pos)
         score = lambda x: (x["rw"] or 0) * 0.4 + (x["r2w"] or 0) * 0.3 + (x["r1"] or 0) * 0.3
-        top = sorted(st_, key=score, reverse=True)[:SCFG["top_n"]]
+        top = sorted(st_, key=score, reverse=True)      # all members, strongest first
         ranked.append({
             "name": name, "stage": stage, "n": len(members), **rel(idx),
             "idx_d": T["state"] if T["ok"] else None,
