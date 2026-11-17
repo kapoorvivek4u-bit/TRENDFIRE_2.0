@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-17 08:37",
+ "generated_ist": "2026-11-17 12:12",
  "oi_asof": "2026-11-16",
  "stocks": 255,
  "market": {
@@ -11,8 +11,8 @@
    34,
    41,
    49,
-   54,
-   63,
+   55,
+   64,
    65
   ],
   "nifty": {
@@ -69,7 +69,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 68.0,
+   "score": 68.1,
    "grade": "B",
    "trigger": 4347.4,
    "stop": null,
@@ -154,7 +154,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 49.2,
+   "score": 49.3,
    "grade": "C",
    "trigger": 804.0,
    "stop": null,
@@ -171,7 +171,7 @@
     "D": "Bottoming"
    },
    "stage": "Ready",
-   "score": 48.4,
+   "score": 48.5,
    "grade": "C",
    "trigger": 11289.0,
    "stop": null,
@@ -188,11 +188,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 41.9,
+   "score": 42.0,
    "grade": "C",
    "trigger": 1779.0,
    "stop": null,
-   "detail": "0.3% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 72 \u00b7 Delivery 58% vs 51% before"
+   "detail": "0.3% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 73 \u00b7 Delivery 58% vs 51% before"
   }
  ],
  "notes": []

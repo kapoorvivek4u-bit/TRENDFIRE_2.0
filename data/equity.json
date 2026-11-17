@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-17 08:37",
+ "generated_ist": "2026-11-17 12:12",
  "oi_asof": "2026-11-16",
- "stocks": 254,
+ "stocks": 255,
  "market": {
   "weekly_bull_pct": 24,
   "monthly_bull_pct": 44,
@@ -11,8 +11,8 @@
    34,
    41,
    49,
-   54,
-   63,
+   55,
+   64,
    65
   ],
   "nifty": {
@@ -1908,6 +1908,26 @@
    "target": 31964.17
   },
   {
+   "symbol": "APOLLOTYRE",
+   "close": 420.8,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
+    "W": "Bearish",
+    "D": "Bullish"
+   },
+   "setup": "Daily Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": 0.9,
+   "detail": "29-week range under a falling trendline, 3 touches, 20% deep \u00b7 4.6 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 481.95,
+   "stop": 460.98,
+   "target": 578.11
+  },
+  {
    "symbol": "JKCEMENT",
    "close": 5155.1,
    "trend": "Counter-trend",
@@ -2049,6 +2069,7 @@
    "ANANTRAJ",
    "ANURAS",
    "APARINDS",
+   "APOLLOTYRE",
    "APTUS",
    "ARE&M",
    "ASTERDM",
@@ -2299,7 +2320,5 @@
   ]
  },
  "vk_labels": {},
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ]
+ "notes": []
 }
