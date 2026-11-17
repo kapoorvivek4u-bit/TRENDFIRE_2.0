@@ -851,6 +851,17 @@ STRAT_RULES = {
         "Daily close above the breakout level on volume at least 1.5x usual; no volume, no "
         "trade. Stop about one daily range below the level. Exit if it closes back inside the "
         "base within 3 days."),
+    7: ("Breakout + Trend Overspill", "F&O · 3-7 days",
+        "After a range breakout, buy the first hourly dips into the 20-50 EMA zone of the "
+        "new trend.",
+        ["Market: anything except Still falling (half size when Overheated)",
+         "A Range breakout in the last 15 sessions that still holds (price above the old ceiling)",
+         "Weekly or Daily in Impulse",
+         "Hourly Overspill, stage Ready, Dip quality A",
+         "Not Extended (under 4 ranges above the Daily 50 EMA); sector not Lagging"],
+        "Hourly close above the entry (the hourly 20 EMA). Stop under the spill low. Book half "
+        "at 2R, trail the rest under the hourly 50 EMA. Best on the first or second dip after "
+        "the breakout; later dips are weaker."),
 }
 
 
@@ -1026,6 +1037,32 @@ def strategy_picks(data, sec_table):
     res["gate"] = "Open" if res["open"] else "Closed: market still falling"
     out[5] = res
 
+    # 7. Breakout + Trend Overspill (F&O)
+    res = {"picks": [], "blocked": []}
+    if gf and fo:
+        brk = fo.get("recent_breakouts", {})
+        size = "Half size (market overheated)" if gf["overheated"] else "Full size"
+        for r in fo.get("overspill", []):
+            b = brk.get(r["symbol"])
+            stt = r.get("states") or {}
+            if (r["setup"] == "Hourly Overspill" and r["stage"] == "Ready" and r["grade"] == "A"
+                    and b and ext_under(r, 4.0)
+                    and ("Impulse" in (stt.get("W"), stt.get("D")))
+                    and sec(r["symbol"]).get("stage") != "Lagging"):
+                when = dt.date.fromisoformat(b["date"]).strftime("%a %d %b")
+                p = pick(7, r, "F&O", size, [
+                    f"Range breakout {when} ({b['days']} sessions ago): {b['weeks']}-week "
+                    f"{b['kind']}, still holding above {money(b['level'])}",
+                    "Hourly Overspill Ready · Dip quality A",
+                    f"Weekly {stt.get('W', '?')} · Daily {stt.get('D', '?')} · {sector_line(r['symbol'])}"],
+                    [f"VK: {r['vk']['final']}"] if r.get("vk") and
+                    r["vk"]["final"] in ("ALMOST READY (Bullish)", "BUY NOW") else [])
+                (res["blocked"] if gf["falling"] else res["picks"]).append(p)
+        res["open"] = not gf["falling"]
+        res["gate"] = ("Closed: market still falling" if gf["falling"] else
+                       "Open (half size: overheated)" if gf["overheated"] else "Open")
+    out[7] = res
+
     # 6. Equity Base Breakout
     res = {"picks": [], "blocked": []}
     if bo:
@@ -1121,7 +1158,7 @@ Each strategy from the playbook is applied automatically to the latest scans. A 
 
 Rules are starting points, not tested results. Your own chart is the final check. Watchlist only, not investment advice.
 """)
-    for n, v in res.items():
+    for n, v in sorted(res.items()):
         name, hold, idea, rules, manage = STRAT_RULES[n]
         cnt = len(v["picks"])
         status_col = GREEN if v["open"] else MUTED
