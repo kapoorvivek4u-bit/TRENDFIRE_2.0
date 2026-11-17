@@ -125,6 +125,41 @@ def digest(found, setups, sectors, when, show_sells):
     return msgs
 
 
+def strategy7(setups, sectors):
+    """Breakout + Trend Overspill: a recent range breakout that still holds, Weekly or Daily
+    in Impulse, Hourly Overspill Ready with Dip quality A, not extended, sector not Lagging.
+    (The same rule as Strategy 7 on the site.)"""
+    m = (setups or {}).get("market", {})
+    if m.get("turn") == "Falling":
+        return {}
+    brk = (setups or {}).get("recent_breakouts", {})
+    out = {}
+    for r in (setups or {}).get("overspill", []):
+        b, stt = brk.get(r["symbol"]), r.get("states") or {}
+        if (r["setup"] == "Hourly Overspill" and r["stage"] == "Ready" and r["grade"] == "A"
+                and b and (r.get("ext") is None or r["ext"] < 4.0)
+                and "Impulse" in (stt.get("W"), stt.get("D"))
+                and (sectors.get(r["symbol"]) or {}).get("stage") != "Lagging"):
+            out[r["symbol"]] = (r, b)
+    return out
+
+
+def s7_message(new, setups, sectors, when):
+    e = html.escape
+    hot = ((setups or {}).get("market", {}).get("daily_bull_hist") or [0])[-1] >= 85
+    lines = [f"⭐ <b>Strategy 7 · Breakout + Trend Overspill: {len(new)} new</b> · "
+             f"{e(when)} scan" + (" · market overheated, half size" if hot else "")]
+    for sym, (r, b) in new:
+        url = f"https://www.tradingview.com/chart/?symbol=NSE:{urllib.parse.quote(sym)}"
+        sec = sectors.get(sym) or {}
+        lines.append(
+            f'• <a href="{url}"><b>{e(sym)}</b></a> · buy above {r["trigger"]:,.2f} · '
+            f'stop {r["stop"]:,.2f} · broke a {b["weeks"]}-week {e(b["kind"])} '
+            f'{b["days"]} sessions ago' + (f' · {e(sec["sector"])} {e(sec.get("stage", ""))}'
+                                           if sec.get("sector") else ""))
+    return "\n".join(lines)
+
+
 def handle_command(text, state):
     words = text.split()
     if not words:
@@ -199,6 +234,9 @@ def run(send, get_updates, state, setups, sectors, when):
         elif r:
             replies.append(r)
     found = find_changes(state, vks) if vks else {}
+    s7 = strategy7(setups, sectors)
+    new7 = [(k, v) for k, v in sorted(s7.items()) if k not in set(state.get("s7", []))]
+    state["s7"] = sorted(s7)
     alerts = []
     if state.get("owner") is not None:
         if not state.get("welcomed") and vks:
@@ -211,6 +249,8 @@ def run(send, get_updates, state, setups, sectors, when):
                       f"new ones."]
         elif not state.get("paused"):
             alerts = digest(found, setups, sectors, when, state.get("sells", True))
+            if new7:
+                alerts.append(s7_message(new7, setups, sectors, when))
         for t in replies + alerts:
             send(state["owner"], t)
     return replies, alerts
@@ -325,6 +365,26 @@ def selftest():
     sent.clear()
     run(send, lambda off: [], st2, big2, {}, "y")
     assert len(sent) >= 2 and all(len(t) <= 4096 for _, t in sent), [len(t) for _, t in sent]
+    # Strategy 7 pings once per new stock
+    st7 = {"owner": 1, "welcomed": True}
+    base = {"generated_ist": "2026-11-17 11:20", "market": {"turn": "Turning up",
+            "daily_bull_hist": [60, 70]}, "vk_labels": {},
+            "recent_breakouts": {"PRESTIGE": {"days": 3, "date": "2026-11-12", "level": 1654.9,
+                                              "kind": "flat top", "weeks": 13}},
+            "overspill": [{"symbol": "PRESTIGE", "setup": "Hourly Overspill", "stage": "Ready",
+                           "grade": "A", "ext": 2.8, "states": {"W": "Bottoming", "D": "Impulse"},
+                           "trigger": 1676.2, "stop": 1640.0}]}
+    out7 = []
+    run(lambda c, t: out7.append(t), lambda off: [], st7, base,
+        {"PRESTIGE": {"sector": "Realty", "stage": "Leading"}}, "11:20")
+    assert len(out7) == 1 and "Strategy 7" in out7[0] and "PRESTIGE" in out7[0], out7
+    assert "buy above 1,676.20" in out7[0] and "13-week flat top" in out7[0]
+    out7.clear()
+    run(lambda c, t: out7.append(t), lambda off: [], st7, base, {}, "12:20")
+    assert out7 == [], out7                                 # same stock: no repeat
+    base["overspill"][0]["grade"] = "B"
+    run(lambda c, t: out7.append(t), lambda off: [], st7, base, {}, "13:20")
+    assert out7 == [] and st7["s7"] == []
     print("SELFTEST PASSED")
 
 
