@@ -647,6 +647,8 @@ Sectors usually move round in that order: Improving, Leading, Weakening, Lagging
 
 **1W, 2W, 1M** are the sector's return over 1 week, 2 weeks and 1 month, minus Nifty's. +1.5% means it beat Nifty by 1.5%.
 
+**Direction** is how the sector's strength against Nifty changed over the last 5 sessions: **▲ Rising** (gaining on Nifty by more than 0.75%), **▼ Falling**, or **▶ Sideways**. The **10-day trend** line is that strength, day by day (up = beating Nifty). **Stage, last 10 days** shows one dot per session, oldest on the left, coloured by that day's stage (green Leading, blue Improving, brown Weakening, red Lagging); each sector's section below has the same days as a table.
+
 **Index D** is the Daily TTM state of the sector's own line (the equal-weight index above): Bullish, Topping, Bearish or Bottoming, the same words as on a chart.
 
 **D bull** is the share of the sector's F&O stocks with Daily TTM above zero. It moves first.
@@ -662,14 +664,36 @@ The sector line on every stock row elsewhere on the site comes from this page.
     def pct(x):
         return "n/a" if x is None else f"{x:+.1f}%"
     STATE_COL = {"Bullish": GREEN, "Topping": AMBER, "Bearish": RED, "Bottoming": BLUE}
+    def dots(x):
+        tr = x.get("trail") or []
+        return "".join(
+            f"<span title='{e(t['date'])}: {e(t['stage'] or 'n/a')}' style='display:inline-block;"
+            f"width:9px;height:9px;border-radius:50%;margin-right:2px;background:"
+            f"{STAGE_COLOR.get(t['stage'], RULE)}'></span>" for t in tr)
+
+    def direction(x):
+        d = x.get("direction")
+        if not d:
+            return "<td></td>"
+        sym_, col = {"Rising": ("▲", GREEN), "Falling": ("▼", RED)}.get(d, ("▶", MUTED))
+        chg = x.get("chg5")
+        return (f"<td style='color:{col};font-weight:600;white-space:nowrap'>{sym_} {d}"
+                + (f"<div class='tf-small' style='font-weight:400'>{chg:+.1f}% in 5d</div>"
+                   if chg is not None else "") + "</td>")
+    has_trail = any(x.get("trail") for x in secs)
     if new:
         head = ("<tr><th style='text-align:left'>Sector</th><th style='text-align:left'>Stage</th>"
-                "<th>1W</th><th>2W</th><th>1M</th><th style='text-align:left;padding-left:16px'>Index D</th>"
+                + ("<th style='text-align:left'>Direction</th><th style='text-align:left'>"
+                   "10-day trend</th><th style='text-align:left'>Stage, last 10 days</th>"
+                   if has_trail else "")
+                + "<th>1W</th><th>2W</th><th>1M</th><th style='text-align:left;padding-left:16px'>Index D</th>"
                 "<th>D bull</th><th>Wk bull</th></tr>")
         body = "".join(
             f"<tr><td><a class='tf-jump' href='#{sec_id(x['name'])}'>{e(x['name'])}</a></td>"
             f"<td style='color:{STAGE_COLOR[x['stage']]};font-weight:600'>{x['stage']}</td>"
-            f"<td class='n'>{pct(x['rw'])}</td><td class='n'>{pct(x['r2w'])}</td>"
+            + ((direction(x) + f"<td>{spark([t.get('rs') for t in x.get('trail', [])], 80, 20)}</td>"
+                f"<td style='white-space:nowrap'>{dots(x)}</td>") if has_trail else "")
+            + f"<td class='n'>{pct(x['rw'])}</td><td class='n'>{pct(x['r2w'])}</td>"
             f"<td class='n'>{pct(x['r1'])}</td>"
             f"<td style='padding-left:16px;color:{STATE_COL.get(x.get('idx_d'), MUTED)};font-weight:600'>"
             f"{e(x.get('idx_d') or 'n/a')}</td>"
@@ -741,6 +765,21 @@ The sector line on every stock row elsewhere on the site comes from this page.
             f'stocks bullish on Weekly, {x["d_bull"]}% on Daily.</div>'
             '<div class="tf-grid">' + "".join(rows_html) + '</div>',
             unsafe_allow_html=True)
+        if x.get("trail"):
+            with st.expander(f"{x['name']}: day by day, last {len(x['trail'])} sessions"):
+                trs = "".join(
+                    f"<tr><td>{e(dt.date.fromisoformat(t['date']).strftime('%a %d %b'))}</td>"
+                    f"<td style='color:{STAGE_COLOR.get(t['stage'], MUTED)};font-weight:600'>"
+                    f"{e(t['stage'] or 'n/a')}</td>"
+                    f"<td class='n' style='color:{GREEN if (t['day'] or 0) > 0 else RED if (t['day'] or 0) < 0 else MUTED}'>"
+                    f"{'n/a' if t['day'] is None else format(t['day'], '+.2f') + '%'}</td>"
+                    f"<td class='n'>{'n/a' if t['d_bull'] is None else str(t['d_bull']) + '%'}</td></tr>"
+                    for t in reversed(x["trail"]))
+                st.markdown(
+                    "<div style='overflow-x:auto'><table class='tf-sec'><tr>"
+                    "<th style='text-align:left'>Day</th><th style='text-align:left'>Stage</th>"
+                    "<th>Day vs Nifty</th><th>D bull</th></tr>"
+                    f"{trs}</table></div>", unsafe_allow_html=True)
     if res.get("unranked"):
         k = len(res["unranked"])
         with st.expander(f"Not ranked · {k} small group{'' if k == 1 else 's'}"):
@@ -1133,9 +1172,13 @@ def spark(vals, w=88, h=22):
     pts = [(i, v) for i, v in enumerate(vals) if v is not None]
     if not pts:
         return ""
-    top = max(v for _, v in pts) or 1
+    lo, hi = min(v for _, v in pts), max(v for _, v in pts)
+    if lo >= 0 and hi > 0 and lo > 0.5 * hi:
+        lo = 0.0                                   # stakes: keep zero as the floor
+    span = (hi - lo) or 1.0
     n = max(len(vals) - 1, 1)
-    xy = [(round(i * (w - 4) / n + 2, 1), round(h - 2 - (v / top) * (h - 4), 1)) for i, v in pts]
+    xy = [(round(i * (w - 4) / n + 2, 1), round(h - 2 - ((v - lo) / span) * (h - 4), 1))
+          for i, v in pts]
     col = GREEN if pts[-1][1] >= pts[0][1] else RED
     path = " ".join(f"{x},{y}" for x, y in xy)
     last = xy[-1]
