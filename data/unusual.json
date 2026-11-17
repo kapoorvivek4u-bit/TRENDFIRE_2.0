@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-18 01:00",
+ "generated_ist": "2026-11-18 01:05",
  "oi_asof": "2026-11-17",
  "stocks": 218,
  "rows": [
@@ -257,7 +257,7 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "6 hours of unusual volume, peak 19.7x at 15:15, absorption",
+     "text": "6 hours of unusual volume, peak 16.1x at 15:15, absorption",
      "side": -1
     },
     {
@@ -752,12 +752,7 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 11.5x at 15:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Mon 16",
-     "text": "1 hour of unusual volume, peak 2.7x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 8.9x at 15:15, absorption",
      "side": 0
     }
    ],
@@ -807,7 +802,7 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 3.0x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 2.8x at 15:15, absorption",
      "side": 0
     },
     {
@@ -964,7 +959,7 @@
     },
     {
      "when": "Mon 16",
-     "text": "1 hour of unusual volume, peak 4.5x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 4.2x at 15:15, absorption",
      "side": 0
     },
     {
@@ -1009,13 +1004,43 @@
    "setup": "Swing Pullback \u00b7 Ready"
   },
   {
+   "symbol": "CGPOWER",
+   "score": 3.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "1 hour of unusual volume, peak 2.7x at 12:15",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "OI +8% in a day, price -1.7%: short build-up",
+     "side": -1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Delivery 58% vs 40% usual",
+     "side": -1
+    }
+   ],
+   "close": 801.0,
+   "move_pct": -2.6,
+   "moved": false,
+   "vs_high": "7.5% below its 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Bullish"
+   }
+  },
+  {
    "symbol": "GODREJCP",
    "score": 3.0,
    "bias": "Mixed",
    "events": [
     {
      "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 5.2x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 4.6x at 15:15, absorption",
      "side": 0
     },
     {
@@ -1125,26 +1150,6 @@
     "D": "Bullish"
    },
    "setup": "Swing Pullback \u00b7 Ready"
-  },
-  {
-   "symbol": "SAIL",
-   "score": 3.0,
-   "bias": "Mixed",
-   "events": [
-    {
-     "when": "Tue 17",
-     "text": "1 hour of unusual volume, peak 4.0x at 15:15, absorption",
-     "side": 0
-    }
-   ],
-   "close": 171.31,
-   "move_pct": -2.4,
-   "moved": false,
-   "vs_high": "5.5% below its 20-day high",
-   "states": {
-    "W": "Bearish",
-    "D": "Topping"
-   }
   },
   {
    "symbol": "UJJIVANSFB",
