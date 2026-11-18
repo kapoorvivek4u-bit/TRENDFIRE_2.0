@@ -47,6 +47,10 @@ UCFG = {
     "oi_floor": 0.04,             # smallest one-day OI change that can count
     "oi_mult": 2.5,               # ... and it must be this many times the stock's usual
     "deliv_mult": 1.4, "deliv_pts": 10.0,
+    "oi_build_days": 7,           # OI build-up over this many sessions ...
+    "oi_build_min": 0.15,         # ... at least this much above the market's change ...
+    "oi_build_mult": 3.0,         # ... and this many times the stock's usual 7-session change
+    "oi_build_flat": 0.04,        # price change under this = flat: big positions building quietly
     "age_weight": [1.0, 0.7, 0.5],
     "min_score": 3.0,             # score needed to be listed
     "moved_atr": 2.0,             # price move over the window, in normal day-ranges, that counts as "moved"
@@ -195,11 +199,14 @@ def oi_tables(fo):
     px = fo.pivot(index="date", columns="symbol", values="fut_close").sort_index()
     chg = oi.pct_change(fill_method=None)
     rel = chg.sub(chg.median(axis=1), axis=0)
-    return rel, chg, px.pct_change(fill_method=None)
+    N = UCFG["oi_build_days"]
+    chN = oi / oi.shift(N) - 1
+    relN = chN.sub(chN.median(axis=1), axis=0)
+    return rel, chg, px.pct_change(fill_method=None), relN, chN, px / px.shift(N) - 1
 
 
 def oi_events(sym, tables, cal):
-    rel, chg, pxc = tables
+    rel, chg, pxc = tables[:3]
     if sym not in rel.columns:
         return []
     r = rel[sym].dropna()
@@ -221,6 +228,34 @@ def oi_events(sym, tables, cal):
                     "text": f"OI {float(chg.at[day, sym]) * 100:+.0f}% in a day, "
                             f"price {p * 100:+.1f}%: {label}"})
     return out
+
+
+def oi_build_events(sym, tables, cal):
+    """OI building up over several sessions (not just one day), adjusted for the market."""
+    if len(tables) < 6:
+        return []
+    relN, chN, pxN = tables[3:6]
+    N = UCFG["oi_build_days"]
+    if sym not in relN.columns:
+        return []
+    r = relN[sym].dropna()
+    if len(r) < N + 3:
+        return []
+    day = r.index[-1]
+    age = age_of(day, cal)
+    usual = float(r.iloc[:-1].abs().median())
+    x = float(r.iloc[-1])
+    if age > 2 or x < max(UCFG["oi_build_min"], UCFG["oi_build_mult"] * usual):
+        return []
+    p = float(pxN.at[day, sym]) if not np.isnan(pxN.at[day, sym]) else 0.0
+    raw = float(chN.at[day, sym]) * 100
+    if abs(p) <= UCFG["oi_build_flat"]:
+        text, side, strength = ("big positions building, direction not clear yet", 0, 3)
+    else:
+        text, side, strength = (("steady long build-up", 1, 1) if p > 0 else
+                                ("steady short build-up", -1, 1))
+    return [{"src": "oi_build", "age": age, "day": day, "strength": strength, "side": side,
+             "text": f"OI {raw:+.0f}% in {N} sessions, price {p * 100:+.1f}%: {text}"}]
 
 
 def delivery_events(dl, cal):
@@ -263,7 +298,8 @@ def when_text(e):
 
 def analyse_unusual(sym, d, hr, tables, dl, cal):
     events = (hourly_events(hr, cal) + daily_events(d, cal)
-              + (oi_events(sym, tables, cal) if tables else []) + delivery_events(dl, cal))
+              + (oi_events(sym, tables, cal) + oi_build_events(sym, tables, cal)
+                 if tables else []) + delivery_events(dl, cal))
     if not events:
         return None
     score, bias, events = score_events(events)
@@ -432,6 +468,22 @@ def selftest():
     assert oi_events("S3", tables, cal) == []
     ev = oi_events("JUMP", tables, cal)
     assert len(ev) == 1 and "long build-up" in ev[0]["text"] and ev[0]["side"] == 1, ev
+
+    # 4b) OI building over 7 sessions while price is flat: listed on its own
+    rows = []
+    for s in [f"S{n}" for n in range(30)] + ["QUIET"]:
+        oi = 1e6 * np.cumprod(1 + rng.normal(0, 0.01, 40))
+        if s == "QUIET":
+            oi[-7:] *= np.linspace(1.04, 1.30, 7)       # +30% over the last 7 sessions
+        for dte, x in zip(days[-40:], oi):
+            rows.append({"date": dte, "symbol": s, "fut_oi": x, "fut_close": 100.0})
+    tq = oi_tables(pd.DataFrame(rows))
+    ev = oi_build_events("QUIET", tq, cal)
+    assert len(ev) == 1 and "big positions building" in ev[0]["text"] and ev[0]["side"] == 0, ev
+    assert "in 7 sessions" in ev[0]["text"], ev
+    assert oi_build_events("S5", tq, cal) == []
+    rq = analyse_unusual("QUIET", None, None, tq, None, cal)
+    assert rq and rq["score"] >= 3 and rq["bias"] == "Mixed", rq
 
     # 5) delivery spike
     dl = pd.DataFrame({"date": days[-30:], "deliv_per": [40.0] * 29 + [65.0],
