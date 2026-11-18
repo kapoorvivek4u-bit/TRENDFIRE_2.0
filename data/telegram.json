@@ -8,15 +8,7 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "ADANIENSOL": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "ADANIENT": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "ADANIPOWER": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -33,6 +25,10 @@
    "confirmed": "Not confirmed"
   },
   "ASHOKLEY": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "ASIANPAINT": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -156,6 +152,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "GODREJPROP": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "GRASIM": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -185,6 +185,10 @@
    "confirmed": "Not confirmed"
   },
   "HINDPETRO": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "HINDUNILVR": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -237,10 +241,6 @@
    "confirmed": "Not confirmed"
   },
   "JSWENERGY": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "KAYNES": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -440,10 +440,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "SUNPHARMA": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "SUZLON": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -488,10 +484,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "UNITDSPR": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "VBL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -516,19 +508,15 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "ADANIENSOL": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "ADANIGREEN": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ADANIPORTS": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "ANGELONE": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "BAJFINANCE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -544,6 +532,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "DRREDDY": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "EICHERMOT": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -553,6 +545,10 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "FEDERALBNK": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "GAIL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -576,15 +572,19 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "LAURUSLABS": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
+  "LODHA": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "MAHABANK": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MARICO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "MCX": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -594,7 +594,7 @@
   },
   "PETRONET": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PNB": {
    "final": "BUY NOW",
@@ -602,17 +602,9 @@
   },
   "PRESTIGE": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "RADICO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "TITAN": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "TVSMOTOR": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -620,19 +612,19 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "UNITDSPR": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "UNOMINDA": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ZYDUSLIFE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "AMBUJACEM": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "ASIANPAINT": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -664,15 +656,7 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "GODREJPROP": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "HAVELLS": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "HINDUNILVR": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -716,11 +700,19 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "ANGELONE": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "APLAPOLLO": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "AUROPHARMA": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "BAJFINANCE": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -744,19 +736,7 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "DRREDDY": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "GAIL": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "GLENMARK": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "HAL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -772,15 +752,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "LAURUSLABS": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "LODHA": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "MANKIND": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "MCX": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -812,11 +788,27 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "SUNPHARMA": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "TECHM": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "TITAN": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "TVSMOTOR": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "ASTRAL": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "KAYNES": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
@@ -831,12 +823,14 @@
   "SUPREMEIND": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "HAL": {
+   "final": "COMING CLOSE TO READY (Bullish)",
+   "confirmed": "Not confirmed"
   }
  },
  "offset": 345306825,
  "owner": 397928140,
  "welcomed": true,
- "s7": [
-  "INDIANB"
- ]
+ "s7": []
 }
