@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-18 14:52",
- "asof": "2026-11-17",
- "days": 2,
+ "generated_ist": "2026-11-19 03:02",
+ "asof": "2026-11-18",
+ "days": 3,
  "stocks": {
   "ALKEM": {
    "mf_net_cr": 301.9,
@@ -16,6 +16,17 @@
    "stars": [],
    "last": "2026-11-17",
    "text": "Funds bought net Rs 302 Cr (DSP MF, HDFC MF, ICICI Pru MF\u2026)"
+  },
+  "GREENLAM": {
+   "mf_net_cr": -43.0,
+   "mf_buyers": [],
+   "mf_sellers": [
+    "HDFC MF"
+   ],
+   "ins_net_cr": null,
+   "stars": [],
+   "last": "2026-11-18",
+   "text": "Funds sold net Rs 43 Cr (HDFC MF)"
   },
   "GROWW": {
    "mf_net_cr": 474.1,
@@ -40,9 +51,332 @@
    "stars": [],
    "last": "2026-11-17",
    "text": "Funds bought net Rs 72 Cr (Axis MF, Edelweiss MF)"
+  },
+  "NEOGEN": {
+   "mf_net_cr": -41.2,
+   "mf_buyers": [
+    "Invesco MF"
+   ],
+   "mf_sellers": [
+    "SBI MF"
+   ],
+   "ins_net_cr": null,
+   "stars": [],
+   "last": "2026-11-18",
+   "text": "Funds sold net Rs 41 Cr (SBI MF)"
   }
  },
  "recent": [
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Rakesh Chopdar",
+   "cat": "Other",
+   "value_cr": 800.2,
+   "price": 2286.15
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "NEOGEN",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "SBI MF",
+   "cat": "MF",
+   "value_cr": 180.2,
+   "price": 2780.01
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "NEOGEN",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Invesco MF",
+   "cat": "MF",
+   "value_cr": 139.0,
+   "price": 2780.0
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Norges Bank On Account Of The Government",
+   "cat": "Other",
+   "value_cr": 108.1,
+   "price": 2286.0
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Mansi Share And Stock Broking Private Li",
+   "cat": "Other",
+   "value_cr": 103.3,
+   "price": 2286.46
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Valuequest Founders Conviction Lvf",
+   "cat": "Other",
+   "value_cr": 102.9,
+   "price": 2286.0
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Mansi Share And Stock Broking Private Li",
+   "cat": "Other",
+   "value_cr": 98.6,
+   "price": 2309.34
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Valuequest India Inflexion Fund",
+   "cat": "Other",
+   "value_cr": 80.0,
+   "price": 2286.0
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "AZAD",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Vq Fastercap Fund",
+   "cat": "Other",
+   "value_cr": 79.3,
+   "price": 2286.0
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 78.5,
+   "price": 135.59
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 75.9,
+   "price": 135.74
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 74.7,
+   "price": 135.18
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 73.0,
+   "price": 135.75
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 56.3,
+   "price": 135.82
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 56.2,
+   "price": 135.62
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 43.6,
+   "price": 280.26
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 43.6,
+   "price": 280.13
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "GREENLAM",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "HDFC MF",
+   "cat": "MF",
+   "value_cr": 43.0,
+   "price": 215.06
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "GREAVESCOT",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 40.3,
+   "price": 261.79
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "GREAVESCOT",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 39.9,
+   "price": 261.36
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 36.7,
+   "price": 136.09
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 36.7,
+   "price": 136.07
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 35.3,
+   "price": 135.59
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 34.9,
+   "price": 135.65
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 34.2,
+   "price": 280.21
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 34.1,
+   "price": 279.89
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Clt Research Tech Private Ltd",
+   "cat": "Other",
+   "value_cr": 33.9,
+   "price": 135.77
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Clt Research Tech Private Ltd",
+   "cat": "Other",
+   "value_cr": 33.9,
+   "price": 135.72
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "INDOCO",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Nk Securities Research Private Limited",
+   "cat": "Other",
+   "value_cr": 27.3,
+   "price": 249.02
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "INDOCO",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Nk Securities Research Private Limited",
+   "cat": "Other",
+   "value_cr": 27.3,
+   "price": 248.9
+  },
+  {
+   "date": "2026-11-18",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 25.6,
+   "price": 279.98
+  },
   {
    "date": "2026-11-17",
    "symbol": "GROWW",
