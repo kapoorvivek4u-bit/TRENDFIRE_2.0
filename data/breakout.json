@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-18 14:53",
- "oi_asof": "2026-11-17",
+ "generated_ist": "2026-11-19 03:27",
+ "oi_asof": "2026-11-18",
  "stocks": 254,
  "market": {
   "weekly_bull_pct": 24,
@@ -37,7 +37,7 @@
    "grade": "C",
    "trigger": 1779.0,
    "stop": 1726.33,
-   "detail": "Broke out Mon 16 \u00b7 Volume 1.7x \u00b7 Base 10% deep \u00b7 RS 71 \u00b7 Delivery 58% vs 52% before"
+   "detail": "Broke out Mon 16 \u00b7 Volume 1.7x \u00b7 Base 10% deep \u00b7 RS 71 \u00b7 Delivery 56% vs 52% before"
   }
  ],
  "setting": [
@@ -56,7 +56,7 @@
    "grade": "B",
    "trigger": 1690.0,
    "stop": null,
-   "detail": "0.7% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 56% vs 47% before"
+   "detail": "0.7% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 54% vs 48% before"
   },
   {
    "symbol": "IGIL",
@@ -73,7 +73,7 @@
    "grade": "B",
    "trigger": 453.65,
    "stop": null,
-   "detail": "0.7% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 94 \u00b7 Delivery 54% vs 48% before"
+   "detail": "0.7% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 94 \u00b7 Delivery 53% vs 49% before"
   },
   {
    "symbol": "SUNTV",
@@ -90,7 +90,7 @@
    "grade": "B",
    "trigger": 672.0,
    "stop": null,
-   "detail": "1.8% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 93 \u00b7 Delivery 30% vs 29% before"
+   "detail": "1.8% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 93 \u00b7 Delivery 28% vs 28% before"
   },
   {
    "symbol": "CRAFTSMAN",
@@ -107,7 +107,7 @@
    "grade": "B",
    "trigger": 11325.0,
    "stop": null,
-   "detail": "1.1% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 87 \u00b7 Delivery 46% vs 52% before"
+   "detail": "1.1% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 87 \u00b7 Delivery 47% vs 52% before"
   },
   {
    "symbol": "SHYAMMETL",
@@ -124,7 +124,7 @@
    "grade": "C",
    "trigger": 1354.0,
    "stop": null,
-   "detail": "2.4% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 98 \u00b7 Delivery 51% vs 53% before"
+   "detail": "2.4% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 98 \u00b7 Delivery 49% vs 53% before"
   },
   {
    "symbol": "GRAPHITE",
@@ -141,7 +141,7 @@
    "grade": "C",
    "trigger": 807.7,
    "stop": null,
-   "detail": "1.9% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 71 \u00b7 Delivery 43% vs 37% before"
+   "detail": "1.9% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 71 \u00b7 Delivery 44% vs 37% before"
   }
  ],
  "notes": []

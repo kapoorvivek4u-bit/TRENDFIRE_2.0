@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-18 14:53",
- "oi_asof": "2026-11-17",
+ "generated_ist": "2026-11-19 03:27",
+ "oi_asof": "2026-11-18",
  "stocks": 254,
  "market": {
   "weekly_bull_pct": 24,
@@ -35,7 +35,7 @@
    "ext": 2.2,
    "setup": "Trend Pullback",
    "stage": "Ready",
-   "detail": "Pullback 20% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 35% vs 33% before",
+   "detail": "Pullback 20% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 37% vs 33% before",
    "grade": "A",
    "trigger": 317.6,
    "stop": 305.64
@@ -53,7 +53,7 @@
    "ext": 2.9,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 13 days \u00b7 Up/down volume 5.6x \u00b7 Delivery 46% vs 42% before",
+   "detail": "Squeeze 13 days \u00b7 Up/down volume 5.6x \u00b7 Delivery 47% vs 42% before",
    "grade": "A",
    "trigger": 854.7,
    "stop": 674.65
@@ -71,7 +71,7 @@
    "ext": 3.7,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 22% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 54% vs 48% before",
+   "detail": "Pullback 22% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 53% vs 49% before",
    "grade": "A",
    "trigger": null,
    "stop": 420.06
@@ -107,7 +107,7 @@
    "ext": 1.1,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 9 days \u00b7 Up/down volume 1.9x \u00b7 Delivery 46% vs 52% before",
+   "detail": "Squeeze 9 days \u00b7 Up/down volume 1.9x \u00b7 Delivery 47% vs 52% before",
    "grade": "B",
    "trigger": 11325.0,
    "stop": 10109.74
@@ -125,7 +125,7 @@
    "ext": 0.3,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 53% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 37% vs 35% before",
+   "detail": "Pullback 53% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 35% vs 35% before",
    "grade": "B",
    "trigger": null,
    "stop": 770.46
@@ -143,7 +143,7 @@
    "ext": 0.7,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 10 days \u00b7 Up/down volume 0.8x \u00b7 Delivery 42% vs 38% before",
+   "detail": "Squeeze 10 days \u00b7 Up/down volume 0.8x \u00b7 Delivery 41% vs 38% before",
    "grade": "B",
    "trigger": null,
    "stop": 23173.56
@@ -161,7 +161,7 @@
    "ext": -0.8,
    "setup": "Squeeze Break",
    "stage": "Ready",
-   "detail": "Squeeze 2 days, 4 bars to flip \u00b7 Up/down volume 1.8x \u00b7 Delivery 43% vs 49% before",
+   "detail": "Squeeze 2 days, 4 bars to flip \u00b7 Up/down volume 1.8x \u00b7 Delivery 45% vs 48% before",
    "grade": "B",
    "trigger": 362.35,
    "stop": 319.76
@@ -179,7 +179,7 @@
    "ext": 0.4,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 7 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 39% vs 32% before",
+   "detail": "Squeeze 7 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 40% vs 32% before",
    "grade": "B",
    "trigger": null,
    "stop": 283.83
@@ -197,7 +197,7 @@
    "ext": 2.6,
    "setup": "Trend Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 48% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 30% vs 29% before",
+   "detail": "Pullback 48% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 28% vs 28% before",
    "grade": "B",
    "trigger": 617.75,
    "stop": 564.22
@@ -215,7 +215,7 @@
    "ext": 0.2,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 15 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 33% vs 28% before",
+   "detail": "Squeeze 15 days \u00b7 Up/down volume 0.9x \u00b7 Delivery 35% vs 29% before",
    "grade": "B",
    "trigger": 868.0,
    "stop": 806.48
@@ -233,7 +233,7 @@
    "ext": 1.7,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 33% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 48% vs 54% before",
+   "detail": "Pullback 33% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 51% vs 54% before",
    "grade": "B",
    "trigger": null,
    "stop": 919.26
@@ -251,7 +251,7 @@
    "ext": -0.3,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 7 days \u00b7 Up/down volume 2.5x \u00b7 Delivery 48% vs 54% before",
+   "detail": "Squeeze 7 days \u00b7 Up/down volume 2.5x \u00b7 Delivery 51% vs 53% before",
    "grade": "B",
    "trigger": 1634.9,
    "stop": 1495.1
@@ -305,7 +305,7 @@
    "ext": -0.5,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 13 days \u00b7 Up/down volume 0.6x \u00b7 Delivery 12% vs 13% before",
+   "detail": "Squeeze 13 days \u00b7 Up/down volume 0.6x \u00b7 Delivery 11% vs 13% before",
    "grade": "C",
    "trigger": null,
    "stop": 260.58
@@ -323,7 +323,7 @@
    "ext": 1.2,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 45% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 55% vs 56% before",
+   "detail": "Pullback 45% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 53% vs 56% before",
    "grade": "C",
    "trigger": null,
    "stop": 1576.64
@@ -341,7 +341,7 @@
    "ext": 0.4,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 4 days \u00b7 Up/down volume 0.7x \u00b7 Delivery 46% vs 54% before",
+   "detail": "Squeeze 4 days \u00b7 Up/down volume 0.7x \u00b7 Delivery 45% vs 53% before",
    "grade": "C",
    "trigger": 4342.8,
    "stop": 3811.46
@@ -359,7 +359,7 @@
    "ext": 0.5,
    "setup": "Trend Pullback",
    "stage": "Ready",
-   "detail": "Pullback 50% \u00b7 Volume 1.2x in pullback \u00b7 Delivery 54% vs 53% before",
+   "detail": "Pullback 50% \u00b7 Volume 1.2x in pullback \u00b7 Delivery 55% vs 53% before",
    "grade": "C",
    "trigger": 1736.0,
    "stop": 1707.48
@@ -379,7 +379,7 @@
    "ext": -0.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 38% vs 35% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 41% vs 34% before",
    "grade": "A",
    "trigger": 1218.3,
    "stop": 1078.04
@@ -397,7 +397,7 @@
    "ext": -0.1,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 11.9% under the 50 EMA \u00b7 Volume 0.2x in pullback \u00b7 Delivery 34% vs 27% before",
+   "detail": "Daily spilled 11.9% under the 50 EMA \u00b7 Volume 0.2x in pullback \u00b7 Delivery 36% vs 27% before",
    "grade": "A",
    "trigger": 656.56,
    "stop": 579.54
@@ -433,10 +433,28 @@
    "ext": 1.0,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 0.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 37% before",
+   "detail": "Weekly spilled 0.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 44% vs 37% before",
    "grade": "A",
    "trigger": 742.5,
    "stop": 675.75
+  },
+  {
+   "symbol": "JINDALSAW",
+   "close": 258.79,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Bottoming"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.5,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 45% before",
+   "grade": "A",
+   "trigger": 262.63,
+   "stop": 226.6
   },
   {
    "symbol": "KPIL",
@@ -469,28 +487,10 @@
    "ext": -2.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 60% vs 55% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 59% vs 55% before",
    "grade": "A",
    "trigger": 6544.51,
    "stop": 5183.61
-  },
-  {
-   "symbol": "PRIVISCL",
-   "close": 3430.7,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": 0.1,
-   "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 58% vs 56% before",
-   "grade": "A",
-   "trigger": 3402.01,
-   "stop": 3147.69
   },
   {
    "symbol": "PTCIL",
@@ -505,7 +505,7 @@
    "ext": 0.7,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 42% vs 38% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 41% vs 38% before",
    "grade": "A",
    "trigger": 24133.63,
    "stop": 23048.81
@@ -541,7 +541,7 @@
    "ext": -0.4,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 57% vs 50% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 58% vs 50% before",
    "grade": "A",
    "trigger": 4277.86,
    "stop": 4174.23
@@ -559,7 +559,7 @@
    "ext": -0.8,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 10.7% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 45% vs 37% before",
+   "detail": "Daily spilled 10.7% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 45% vs 38% before",
    "grade": "A",
    "trigger": 2341.78,
    "stop": 2128.04
@@ -577,7 +577,7 @@
    "ext": -0.3,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 2.4% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 48% vs 36% before",
+   "detail": "Daily spilled 2.4% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 49% vs 36% before",
    "grade": "A",
    "trigger": 1121.33,
    "stop": 1069.86
@@ -595,28 +595,10 @@
    "ext": 0.4,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.2x in pullback \u00b7 Delivery 39% vs 32% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.2x in pullback \u00b7 Delivery 40% vs 32% before",
    "grade": "A",
    "trigger": 288.86,
    "stop": 280.59
-  },
-  {
-   "symbol": "ACMESOLAR",
-   "close": 403.6,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Topping",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": -0.3,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 49% vs 46% before",
-   "grade": "A",
-   "trigger": 410.27,
-   "stop": 365.57
   },
   {
    "symbol": "ABSLAMC",
@@ -631,7 +613,7 @@
    "ext": -0.6,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 50% vs 49% before",
+   "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 49% vs 49% before",
    "grade": "B",
    "trigger": 971.76,
    "stop": 798.9
@@ -649,7 +631,7 @@
    "ext": -0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 59% vs 52% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 58% vs 52% before",
    "grade": "B",
    "trigger": 3362.96,
    "stop": 3193.5
@@ -667,7 +649,7 @@
    "ext": -2.2,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 47% vs 40% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 45% vs 41% before",
    "grade": "B",
    "trigger": 15423.51,
    "stop": 13752.44
@@ -685,7 +667,7 @@
    "ext": -2.4,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 3.0% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 42% vs 42% before",
+   "detail": "Weekly spilled 3.0% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 39% vs 43% before",
    "grade": "B",
    "trigger": 2408.84,
    "stop": 2171.85
@@ -703,7 +685,7 @@
    "ext": -0.9,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 32% vs 38% before",
+   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 31% vs 38% before",
    "grade": "B",
    "trigger": 2697.34,
    "stop": 2160.67
@@ -721,7 +703,7 @@
    "ext": -1.1,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 52% vs 51% before",
+   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 53% vs 50% before",
    "grade": "B",
    "trigger": 1034.44,
    "stop": 883.93
@@ -739,7 +721,7 @@
    "ext": 1.7,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.3x in pullback \u00b7 Delivery 45% vs 50% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 50% before",
    "grade": "B",
    "trigger": 1231.26,
    "stop": 1063.87
@@ -757,7 +739,7 @@
    "ext": -0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 30% vs 49% before",
+   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 31% vs 48% before",
    "grade": "B",
    "trigger": 741.77,
    "stop": 670.36
@@ -775,7 +757,7 @@
    "ext": -0.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 56% vs 57% before",
+   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 57% vs 57% before",
    "grade": "B",
    "trigger": 2560.87,
    "stop": 2197.6
@@ -793,7 +775,7 @@
    "ext": 0.3,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 12.8% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 37% vs 35% before",
+   "detail": "Weekly spilled 12.8% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 35% vs 35% before",
    "grade": "B",
    "trigger": 771.95,
    "stop": 646.7
@@ -811,7 +793,7 @@
    "ext": 0.3,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 0.4% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 37% vs 35% before",
+   "detail": "Daily spilled 0.4% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 35% vs 35% before",
    "grade": "B",
    "trigger": 796.91,
    "stop": 770.46
@@ -829,7 +811,7 @@
    "ext": -1.4,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 37% vs 41% before",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 38% vs 41% before",
    "grade": "B",
    "trigger": 469.59,
    "stop": 391.52
@@ -847,7 +829,7 @@
    "ext": -1.7,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 18.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 40% vs 40% before",
+   "detail": "Weekly spilled 18.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 41% vs 40% before",
    "grade": "B",
    "trigger": 615.94,
    "stop": 483.18
@@ -865,7 +847,7 @@
    "ext": -2.1,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 21% vs 20% before",
+   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 22% vs 20% before",
    "grade": "B",
    "trigger": 68.42,
    "stop": 54.09
@@ -883,7 +865,7 @@
    "ext": -1.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.8x in pullback \u00b7 Delivery 56% vs 56% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.8x in pullback \u00b7 Delivery 55% vs 56% before",
    "grade": "B",
    "trigger": 1854.33,
    "stop": 1793.41
@@ -901,7 +883,7 @@
    "ext": -1.1,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 56% vs 56% before",
+   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 55% vs 56% before",
    "grade": "B",
    "trigger": 1915.25,
    "stop": 1793.41
@@ -919,28 +901,10 @@
    "ext": 0.7,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 45% vs 44% before",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 43% vs 44% before",
    "grade": "B",
    "trigger": 138.93,
    "stop": 111.38
-  },
-  {
-   "symbol": "JINDALSAW",
-   "close": 258.79,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bearish",
-    "D": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.5,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.3x in pullback \u00b7 Delivery 46% vs 46% before",
-   "grade": "B",
-   "trigger": 262.63,
-   "stop": 226.6
   },
   {
    "symbol": "KIMS",
@@ -955,7 +919,7 @@
    "ext": 1.6,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 9.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 60% vs 55% before",
+   "detail": "Weekly spilled 9.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 58% vs 55% before",
    "grade": "B",
    "trigger": 743.11,
    "stop": 653.74
@@ -973,7 +937,7 @@
    "ext": 0.8,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 54% vs 58% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 57% vs 57% before",
    "grade": "B",
    "trigger": 1867.56,
    "stop": 1794.2
@@ -991,7 +955,7 @@
    "ext": 1.1,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 6.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 53% before",
+   "detail": "Weekly spilled 6.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 47% vs 52% before",
    "grade": "B",
    "trigger": 671.71,
    "stop": 578.84
@@ -1009,10 +973,28 @@
    "ext": 1.0,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 48% vs 49% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 49% vs 49% before",
    "grade": "B",
    "trigger": 20319.97,
    "stop": 18083.76
+  },
+  {
+   "symbol": "NLCINDIA",
+   "close": 234.82,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -1.6,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 19.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 48% vs 45% before",
+   "grade": "B",
+   "trigger": 259.8,
+   "stop": 221.86
   },
   {
    "symbol": "PFOCUS",
@@ -1027,10 +1009,28 @@
    "ext": -0.5,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 12% vs 13% before",
+   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 11% vs 13% before",
    "grade": "B",
    "trigger": 283.34,
    "stop": 202.13
+  },
+  {
+   "symbol": "PRIVISCL",
+   "close": 3430.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "old": "\u274c Avoid",
+   "ext": 0.1,
+   "setup": "Weekly Overspill",
+   "stage": "Triggered",
+   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 57% vs 56% before",
+   "grade": "B",
+   "trigger": 3402.01,
+   "stop": 3147.69
   },
   {
    "symbol": "REDINGTON",
@@ -1045,7 +1045,7 @@
    "ext": -0.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 49% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 45% vs 48% before",
    "grade": "B",
    "trigger": 340.8,
    "stop": 314.37
@@ -1063,7 +1063,7 @@
    "ext": -0.8,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 43% vs 49% before",
+   "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 45% vs 48% before",
    "grade": "B",
    "trigger": 352.95,
    "stop": 314.37
@@ -1081,7 +1081,7 @@
    "ext": -3.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 8.4% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 47% before",
+   "detail": "Weekly spilled 8.4% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 44% vs 47% before",
    "grade": "B",
    "trigger": 1159.44,
    "stop": 1003.49
@@ -1099,7 +1099,7 @@
    "ext": -0.4,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 5.3% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 57% vs 50% before",
+   "detail": "Daily spilled 5.3% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 58% vs 50% before",
    "grade": "B",
    "trigger": 4342.9,
    "stop": 4174.23
@@ -1117,7 +1117,7 @@
    "ext": -3.9,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 45% vs 50% before",
+   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 46% vs 50% before",
    "grade": "B",
    "trigger": 4783.55,
    "stop": 4011.36
@@ -1135,7 +1135,7 @@
    "ext": -1.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 52% vs 54% before",
+   "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 49% vs 54% before",
    "grade": "B",
    "trigger": 481.26,
    "stop": 441.42
@@ -1153,7 +1153,7 @@
    "ext": 0.5,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 39% vs 53% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 36% vs 54% before",
    "grade": "B",
    "trigger": 1408.35,
    "stop": 1332.33
@@ -1171,7 +1171,7 @@
    "ext": -0.8,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 45% vs 37% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 45% vs 38% before",
    "grade": "B",
    "trigger": 2186.47,
    "stop": 2128.04
@@ -1207,10 +1207,28 @@
    "ext": -1.7,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 7.0% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 41% vs 44% before",
+   "detail": "Weekly spilled 7.0% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 43% vs 43% before",
    "grade": "B",
    "trigger": 496.42,
    "stop": 453.54
+  },
+  {
+   "symbol": "ACMESOLAR",
+   "close": 403.6,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Topping",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": -0.3,
+   "setup": "Daily Overspill",
+   "stage": "Watch",
+   "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 47% vs 47% before",
+   "grade": "B",
+   "trigger": 410.27,
+   "stop": 365.57
   },
   {
    "symbol": "TBOTEK",
@@ -1225,7 +1243,7 @@
    "ext": -0.3,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 8.9% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 48% vs 54% before",
+   "detail": "Daily spilled 8.9% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 51% vs 53% before",
    "grade": "B",
    "trigger": 1586.41,
    "stop": 1477.64
@@ -1243,7 +1261,7 @@
    "ext": 0.9,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 44% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 43% before",
    "grade": "C",
    "trigger": 1551.36,
    "stop": 1373.25
@@ -1279,7 +1297,7 @@
    "ext": 1.1,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 4.9% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 46% vs 52% before",
+   "detail": "Daily spilled 4.9% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 47% vs 52% before",
    "grade": "C",
    "trigger": 10803.31,
    "stop": 9960.04
@@ -1297,7 +1315,7 @@
    "ext": -0.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 32% vs 41% before",
+   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 33% vs 41% before",
    "grade": "C",
    "trigger": 1210.95,
    "stop": 1050.49
@@ -1351,7 +1369,7 @@
    "ext": 1.2,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 5.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 49% before",
+   "detail": "Weekly spilled 5.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 39% vs 49% before",
    "grade": "C",
    "trigger": 590.54,
    "stop": 511.67
@@ -1369,28 +1387,10 @@
    "ext": -3.2,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 44% before",
+   "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 43% before",
    "grade": "C",
    "trigger": 1923.67,
    "stop": 1461.57
-  },
-  {
-   "symbol": "NLCINDIA",
-   "close": 234.82,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.6,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 19.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 45% vs 46% before",
-   "grade": "C",
-   "trigger": 259.8,
-   "stop": 221.86
   },
   {
    "symbol": "VTL",
@@ -1405,7 +1405,7 @@
    "ext": -0.5,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 44% vs 49% before",
+   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 46% vs 48% before",
    "grade": "C",
    "trigger": 549.13,
    "stop": 481.09
@@ -1423,7 +1423,7 @@
    "ext": 1.2,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 0.6% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 55% vs 56% before",
+   "detail": "Daily spilled 0.6% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 53% vs 56% before",
    "grade": "C",
    "trigger": 1643.67,
    "stop": 1576.64
@@ -1441,7 +1441,7 @@
    "ext": 0.4,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 Delivery 46% vs 54% before",
+   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 Delivery 45% vs 53% before",
    "grade": "C",
    "trigger": 4033.19,
    "stop": 3612.06
@@ -1459,7 +1459,7 @@
    "ext": 0.5,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 1.2x in pullback \u00b7 Delivery 54% vs 53% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 1.2x in pullback \u00b7 Delivery 55% vs 53% before",
    "grade": "C",
    "trigger": 1718.56,
    "stop": 1707.48
@@ -1477,7 +1477,7 @@
    "ext": 0.8,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 9.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 3.0x in pullback \u00b7 Delivery 55% vs 58% before",
+   "detail": "Weekly spilled 9.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 3.0x in pullback \u00b7 Delivery 54% vs 58% before",
    "grade": "Warning",
    "trigger": 730.29,
    "stop": 636.72,
@@ -1496,7 +1496,7 @@
    "ext": -0.1,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 2.1x in pullback \u00b7 Delivery 34% vs 27% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 2.1x in pullback \u00b7 Delivery 36% vs 27% before",
    "grade": "Warning",
    "trigger": 637.39,
    "stop": 579.54,
@@ -1515,7 +1515,7 @@
    "ext": 0.0,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.6x in pullback \u00b7 Delivery 34% vs 23% before",
+   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.6x in pullback \u00b7 Delivery 35% vs 23% before",
    "grade": "Warning",
    "trigger": 170.27,
    "stop": 142.83,
@@ -1534,7 +1534,7 @@
    "ext": -1.7,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 2.7% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 2.3x in pullback \u00b7 Delivery 34% vs 42% before",
+   "detail": "Weekly spilled 2.7% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 2.3x in pullback \u00b7 Delivery 34% vs 41% before",
    "grade": "Warning",
    "trigger": 668.31,
    "stop": 555.94,
