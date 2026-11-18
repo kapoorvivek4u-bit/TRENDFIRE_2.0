@@ -20,10 +20,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "APOLLOHOSP": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "ASHOKLEY": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -265,10 +261,6 @@
    "confirmed": "Not confirmed"
   },
   "LTF": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "LTM": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -520,7 +512,11 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "BHARTIARTL": {
+  "ADANIPOWER": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "APOLLOHOSP": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -534,7 +530,7 @@
   },
   "DRREDDY": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "EICHERMOT": {
    "final": "BUY NOW",
@@ -544,19 +540,15 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "FEDERALBNK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "GAIL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "ICICIBANK": {
+  "GLENMARK": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
-  "INDHOTEL": {
+  "ICICIBANK": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -574,7 +566,7 @@
   },
   "LAURUSLABS": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "LODHA": {
    "final": "BUY NOW",
@@ -592,9 +584,17 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "NAVINFLUOR": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "PETRONET": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "PHOENIXLTD": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "PNB": {
    "final": "BUY NOW",
@@ -680,6 +680,10 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
+  "LTM": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
   "SBICARD": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -716,6 +720,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "BHARTIARTL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "BHEL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -736,11 +744,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "GLENMARK": {
+  "FEDERALBNK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "HEROMOTOCO": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "INDHOTEL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -764,10 +776,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "NAVINFLUOR": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "NYKAA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -777,10 +785,6 @@
    "confirmed": "Not confirmed"
   },
   "PERSISTENT": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "PHOENIXLTD": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -832,5 +836,7 @@
  "offset": 345306825,
  "owner": 397928140,
  "welcomed": true,
- "s7": []
+ "s7": [
+  "ADANIPORTS"
+ ]
 }
