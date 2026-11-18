@@ -1,44 +1,27 @@
 {
- "generated_ist": "2026-11-18 07:35",
+ "generated_ist": "2026-11-18 13:14",
  "oi_asof": "2026-11-17",
  "stocks": 254,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 43,
+  "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
-   37,
-   46,
-   51,
-   57,
-   66,
-   68
+   40,
+   49,
+   56,
+   61,
+   67,
+   69
   ],
   "nifty": {
    "state": "Bullish",
-   "mom": 1703.1
+   "mom": 1808.1
   },
   "turn": "Turning up"
  },
  "broke": [
-  {
-   "symbol": "CUPID",
-   "close": 361.9,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Impulse"
-   },
-   "stage": "Triggered",
-   "score": 80.7,
-   "grade": "A",
-   "trigger": 357.0,
-   "stop": 341.53,
-   "detail": "Broke out Thu 12 \u00b7 Volume 2.7x \u00b7 Base 15% deep \u00b7 RS 100 \u00b7 Delivery 38% vs 31% before"
-  },
   {
    "symbol": "TATACOMM",
    "close": 1850.5,
@@ -50,31 +33,14 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 47.2,
+   "score": 46.3,
    "grade": "C",
    "trigger": 1779.0,
    "stop": 1726.33,
-   "detail": "Broke out Mon 16 \u00b7 Volume 1.7x \u00b7 Base 10% deep \u00b7 RS 74 \u00b7 Delivery 58% vs 52% before"
+   "detail": "Broke out Mon 16 \u00b7 Volume 1.7x \u00b7 Base 10% deep \u00b7 RS 73 \u00b7 Delivery 58% vs 52% before"
   }
  ],
  "setting": [
-  {
-   "symbol": "ABDL",
-   "close": 784.25,
-   "trend": "",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "stage": "Ready",
-   "score": 76.7,
-   "grade": "A",
-   "trigger": 792.0,
-   "stop": null,
-   "detail": "1.0% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 0.6x usual \u00b7 RS 94 \u00b7 Delivery 46% vs 42% before"
-  },
   {
    "symbol": "LTTS",
    "close": 4226.0,
@@ -86,11 +52,28 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 68.8,
+   "score": 69.3,
    "grade": "B",
    "trigger": 4347.4,
    "stop": null,
-   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 85 \u00b7 Delivery 41% vs 36% before"
+   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 86 \u00b7 Delivery 41% vs 36% before"
+  },
+  {
+   "symbol": "IGIL",
+   "close": 450.6,
+   "trend": "",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 68.8,
+   "grade": "B",
+   "trigger": 453.65,
+   "stop": null,
+   "detail": "0.7% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 95 \u00b7 Delivery 54% vs 48% before"
   },
   {
    "symbol": "PVRINOX",
@@ -137,7 +120,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 63.3,
+   "score": 62.9,
    "grade": "B",
    "trigger": 672.0,
    "stop": null,
@@ -154,28 +137,11 @@
     "D": "Bottoming"
    },
    "stage": "Ready",
-   "score": 54.4,
+   "score": 54.5,
    "grade": "C",
    "trigger": 11289.0,
    "stop": null,
    "detail": "1.4% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 84 \u00b7 Delivery 46% vs 52% before"
-  },
-  {
-   "symbol": "GLAND",
-   "close": 3385.9,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Bullish",
-    "D": "Impulse"
-   },
-   "stage": "Ready",
-   "score": 52.5,
-   "grade": "C",
-   "trigger": 3429.0,
-   "stop": null,
-   "detail": "1.3% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 98 \u00b7 Delivery 51% vs 56% before"
   },
   {
    "symbol": "SHYAMMETL",
@@ -188,15 +154,15 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 50.6,
+   "score": 51.0,
    "grade": "C",
    "trigger": 1347.0,
    "stop": null,
-   "detail": "2.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 97 \u00b7 Delivery 51% vs 53% before"
+   "detail": "2.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 98 \u00b7 Delivery 51% vs 53% before"
   },
   {
    "symbol": "GRAPHITE",
-   "close": 797.95,
+   "close": 792.35,
    "trend": "With trend",
    "setup": "Base Breakout",
    "states": {
@@ -205,11 +171,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 47.1,
+   "score": 50.1,
    "grade": "C",
-   "trigger": 804.0,
+   "trigger": 807.7,
    "stop": null,
-   "detail": "0.8% below the breakout level \u00b7 Base 16% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 72 \u00b7 Delivery 43% vs 37% before"
+   "detail": "1.9% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.4x usual \u00b7 RS 70 \u00b7 Delivery 43% vs 37% before"
   },
   {
    "symbol": "BHARTIHEXA",
@@ -222,7 +188,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 37.5,
+   "score": 37.1,
    "grade": "C",
    "trigger": 1759.0,
    "stop": null,
