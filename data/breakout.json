@@ -1,10 +1,10 @@
 {
- "generated_ist": "2026-11-18 07:32",
+ "generated_ist": "2026-11-18 07:35",
  "oi_asof": "2026-11-17",
  "stocks": 254,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 44,
+  "monthly_bull_pct": 43,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
@@ -50,7 +50,7 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 47.0,
+   "score": 47.2,
    "grade": "C",
    "trigger": 1779.0,
    "stop": 1726.33,
@@ -69,7 +69,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 76.8,
+   "score": 76.7,
    "grade": "A",
    "trigger": 792.0,
    "stop": null,
@@ -86,7 +86,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 68.9,
+   "score": 68.8,
    "grade": "B",
    "trigger": 4347.4,
    "stop": null,
@@ -154,7 +154,7 @@
     "D": "Bottoming"
    },
    "stage": "Ready",
-   "score": 54.5,
+   "score": 54.4,
    "grade": "C",
    "trigger": 11289.0,
    "stop": null,
@@ -205,7 +205,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 46.8,
+   "score": 47.1,
    "grade": "C",
    "trigger": 804.0,
    "stop": null,
@@ -222,7 +222,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 37.1,
+   "score": 37.5,
    "grade": "C",
    "trigger": 1759.0,
    "stop": null,
