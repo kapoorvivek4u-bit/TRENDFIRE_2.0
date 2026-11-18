@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-18 13:14",
+ "generated_ist": "2026-11-18 14:53",
  "oi_asof": "2026-11-17",
  "stocks": 254,
  "rows": [
@@ -269,17 +269,17 @@
    "events": [
     {
      "when": "Mon 16",
-     "text": "Day's volume 9.6x usual",
+     "text": "Day's volume 9.5x usual",
      "side": 1
     },
     {
      "when": "Mon 16",
-     "text": "Range 4.2x normal, closed +2.2%",
+     "text": "Range 4.0x normal, closed +2.2%",
      "side": 1
     },
     {
      "when": "Fri 13",
-     "text": "Day's volume 6.6x usual, flush absorbed",
+     "text": "Day's volume 6.5x usual, flush absorbed",
      "side": 1
     },
     {
@@ -288,10 +288,10 @@
      "side": 0
     }
    ],
-   "close": 828.65,
-   "move_pct": 2.4,
+   "close": 822.9,
+   "move_pct": 1.7,
    "moved": true,
-   "vs_high": "0.2% below its 20-day high",
+   "vs_high": "6.7% below its 20-day high",
    "states": {
     "M": "Bottoming",
     "W": "Bottoming",
@@ -322,6 +322,42 @@
     "M": "Bearish",
     "W": "Bottoming",
     "D": "Bottoming"
+   }
+  },
+  {
+   "symbol": "GODREJIND",
+   "score": 3.5,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 8.7x usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 16.7x usual",
+     "side": -1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Day's volume 98.6x usual",
+     "side": 1
+    },
+    {
+     "when": "Fri 13",
+     "text": "Range 2.3x normal, closed +3.0%",
+     "side": 1
+    }
+   ],
+   "close": 1095.45,
+   "move_pct": 1.0,
+   "moved": true,
+   "vs_high": "7.0% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish"
    }
   },
   {
@@ -392,10 +428,10 @@
      "side": 1
     }
    ],
-   "close": 1487.5,
-   "move_pct": 4.5,
+   "close": 1467.4,
+   "move_pct": 3.7,
    "moved": false,
-   "vs_high": "1.2% below its 20-day high",
+   "vs_high": "2.5% below its 20-day high",
    "states": {
     "M": "Bullish",
     "W": "Bearish",
@@ -421,6 +457,27 @@
     "M": "No data",
     "W": "Bottoming",
     "D": "Bottoming"
+   }
+  },
+  {
+   "symbol": "INOXINDIA",
+   "score": 3.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 9.3x usual",
+     "side": 1
+    }
+   ],
+   "close": 1969.4,
+   "move_pct": 0.4,
+   "moved": false,
+   "vs_high": "4.2% below its 20-day high",
+   "states": {
+    "M": "No data",
+    "W": "Bearish",
+    "D": "Bullish"
    }
   },
   {
