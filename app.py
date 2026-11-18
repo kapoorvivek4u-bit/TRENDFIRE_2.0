@@ -852,12 +852,14 @@ STRAT_RULES = {
         "Hourly close above the entry level. Book half at the 2R target, trail the rest under "
         "hourly swing lows, exit by day 5 if it has not worked."),
     2: ("Cooldown Buy", "F&O and Equity · 5-10 days",
-        "After an overheated rally, buy the leaders on their first daily pullback.",
-        ["Market: Daily breadth was 85% or more in the last 6 sessions and has cooled to 60-78%",
-         "Nifty Daily not Bearish",
+        "Buy strong stocks on their daily pullback; best right after an overheated rally cools.",
+        ["Market not Still falling, and Nifty Daily not Bearish",
+         "Size: full when a cooldown is under way (Daily breadth was 85%+ in the last 6 "
+         "sessions and has cooled to 60-78%), otherwise half",
          "Trend Pullback or Daily Overspill, stage Ready, grade A",
          "Under 2 ranges above the 50 EMA (near value)",
-         "Sector Leading or Weakening (was strong before the dip)"],
+         "Sector Leading, Improving or Weakening (not Lagging)",
+         "The same stocks at stage Watch are listed under 'Dipping now, next to turn'"],
         "Daily close above the entry level. Half at 2R, trail the rest under the 20 EMA."),
     3: ("Squeeze Coil", "F&O and Equity · 3-10 days",
         "Catch a coiled stock as momentum turns up, before the breakout.",
@@ -915,7 +917,7 @@ def gate_of(m):
          "overheated": bool(h and t == "Turning up" and h[-1] >= 85),
          "cooldown": bool(h and max(h[:-1]) >= 85 and 60 <= h[-1] <= 78
                           and h[-1] < max(h[:-1]) and nf != "Bearish"),
-         "falling": t == "Falling"}
+         "falling": t == "Falling", "nifty": nf}
     if g["overheated"]:
         g["word"] = f"Overheated: {h[-1]}% of stocks already up on Daily"
     elif t == "Turning up":
@@ -989,22 +991,32 @@ def strategy_picks(data, sec_table):
         res["gate"] = gf["word"]
     out[1] = res
 
-    # 2. Cooldown Buy (both)
+    # 2. Cooldown Buy (both): open unless the market is falling; full size in a cooldown
     res = {"picks": [], "blocked": [], "open": False, "gate": ""}
+    dipping, words = [], []
     for market, rs, g in (("F&O", fo, gf), ("Equity", eq, ge)):
         if not g:
             continue
+        shut = g["falling"] or g.get("nifty") == "Bearish"
+        size = "Full size (cooldown)" if g["cooldown"] else "Half size (no cooldown yet)"
+        words.append(f"{market}: " + ("closed, market falling" if shut else
+                                      "cooldown, full size" if g["cooldown"] else "half size"))
         for r in rows(rs):
-            if (r["setup"] in ("Trend Pullback", "Daily Overspill") and r["stage"] == "Ready"
-                    and r["grade"] == "A" and r.get("ext") is not None and r["ext"] < 2
-                    and sec_ok(r["symbol"], ("Leading", "Weakening"))):
-                p = pick(2, r, market, "Full size", [
-                    f"{r['setup']} Ready · grade A", f"{r['ext']:.1f} ranges above the 50 EMA",
-                    sector_line(r["symbol"])])
-                (res["picks"] if g["cooldown"] else res["blocked"]).append(p)
-    res["open"] = bool((gf and gf["cooldown"]) or (ge and ge["cooldown"]))
-    res["gate"] = ("Cooldown under way" if res["open"] else
-                   "Waiting for a cooldown: Daily breadth has not yet cooled from 85%+ to 60-78%")
+            if (r["setup"] in ("Trend Pullback", "Daily Overspill") and r["grade"] == "A"
+                    and r.get("ext") is not None and r["ext"] < 2
+                    and sec_ok(r["symbol"], ("Leading", "Improving", "Weakening"))):
+                if r["stage"] == "Watch":
+                    dipping.append(dict(r, setup=f"{market} · {r['setup']}"))
+                elif r["stage"] == "Ready":
+                    p = pick(2, r, market, size, [
+                        f"{r['setup']} Ready · grade A",
+                        f"{r['ext']:.1f} ranges above the 50 EMA", sector_line(r["symbol"])])
+                    (res["blocked"] if shut else res["picks"]).append(p)
+        res["open"] = res["open"] or not shut
+    res["gate"] = "; ".join(words)
+    res["queue"] = {"dipping": sorted(dipping, key=lambda r: r["symbol"]), "waiting": [],
+                    "caption": "Grade A daily dips near value in good sectors that have not "
+                               "turned up yet. Set an alert at 'Above'."}
     out[2] = res
 
     # 3. Squeeze Coil (both)
@@ -1232,7 +1244,8 @@ Rules are starting points, not tested results. Your own chart is the final check
         q = v.get("queue")
         if q and q["dipping"]:
             with st.expander(f"Dipping now, next to turn · {len(q['dipping'])}"):
-                st.caption("Breakout stocks dipping into the hourly 20-50 EMA zone that have not "
+                st.caption(q.get("caption") or
+                           "Breakout stocks dipping into the hourly 20-50 EMA zone that have not "
                            "turned up yet. Set an alert at the hourly 20 EMA ('Above').")
                 show_rows(q["dipping"])
         if q and q["waiting"]:
@@ -1935,6 +1948,53 @@ def github(method, path, body=None):
         return 0, {}
 
 
+@st.cache_resource
+def _sync_state():
+    return {"t": 0.0, "tree": None}
+
+
+def sync_data(every=60):
+    """Copy new scan results from GitHub into the app's data folder.
+    Streamlit Cloud sometimes stops pulling new commits; this keeps the data fresh anyway.
+    Runs at most once a minute and downloads only files that changed."""
+    import base64
+    import hashlib
+    import time as _t
+    S = _sync_state()
+    if not secret("GH_TOKEN") or _t.time() - S["t"] < every:
+        return
+    S["t"] = _t.time()
+    code, tree = github("GET", "/git/trees/main?recursive=1")
+    if code != 200 or tree.get("sha") == S["tree"]:
+        return
+    ok = True
+    for it in tree.get("tree", []):
+        p = it.get("path", "")
+        if it.get("type") != "blob" or not p.startswith("data/") or it.get("size", 0) > 50e6:
+            continue
+        try:
+            with open(p, "rb") as f:
+                raw = f.read()
+            if hashlib.sha1(b"blob %d\0" % len(raw) + raw).hexdigest() == it["sha"]:
+                continue                                    # already up to date
+        except OSError:
+            pass
+        c2, blob = github("GET", f"/git/blobs/{it['sha']}")
+        if c2 != 200 or "content" not in blob:
+            ok = False
+            continue
+        try:
+            os.makedirs(os.path.dirname(p) or ".", exist_ok=True)
+            tmp = p + ".tmp"
+            with open(tmp, "wb") as f:
+                f.write(base64.b64decode(blob["content"]))
+            os.replace(tmp, p)
+        except OSError:
+            ok = False
+    if ok:
+        S["tree"] = tree.get("sha")
+
+
 @st.cache_data(ttl=20)
 def last_run(workflow):
     code, data = github("GET", f"/actions/workflows/{workflow}/runs?per_page=1")
@@ -2053,6 +2113,7 @@ def file_stamp():
 @st.fragment(run_every="120s")
 def watch_for_new_scans():
     """Every two minutes, reload the page if any scan has saved new results."""
+    sync_data()
     now, seen = file_stamp(), st.session_state.get("file_stamp")
     st.session_state["file_stamp"] = now
     if seen is not None and seen != now:
@@ -2130,6 +2191,7 @@ def wl_link(sym, big=False):
             f'title="{"Remove from" if on else "Add to"} watchlist">{"★" if on else "☆"}</a>')
 
 
+sync_data()
 PAGE_LIST = (["Strategies", "Search", "Watchlist", "A list"] + list(PAGES)
              + ["Deals", "Stars", "Guide"])
 qp = st.query_params
@@ -2158,6 +2220,8 @@ if wm:
 with st.container(horizontal=True, vertical_alignment="center"):
     if st.button("Refresh"):
         st.cache_data.clear()
+        _sync_state()["t"] = 0.0
+        sync_data()
     scan_clicked = st.button("Scan all", disabled=not secret("GH_TOKEN"),
                              help=None if secret("GH_TOKEN") else
                              "Add GH_TOKEN to the app's secrets on Streamlit to use this.")
