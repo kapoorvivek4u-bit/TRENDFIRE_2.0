@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-19 12:45",
+ "generated_ist": "2026-11-19 14:46",
  "oi_asof": "2026-11-18",
  "stocks": 254,
  "rows": [
@@ -31,6 +31,42 @@
    "states": {
     "M": "No data",
     "W": "Bearish",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "JAINREC",
+   "score": 6.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 4.1x usual, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Wed 18",
+     "text": "Range 2.1x normal, closed +1.1%",
+     "side": 1
+    },
+    {
+     "when": "Wed 18",
+     "text": "Delivery 54% vs 36% usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 2.1x usual",
+     "side": 1
+    }
+   ],
+   "close": 290.1,
+   "move_pct": 2.7,
+   "moved": true,
+   "vs_high": "2.4% below its 20-day high",
+   "states": {
+    "M": "No data",
+    "W": "Bottoming",
     "D": "Bullish"
    }
   },
@@ -113,24 +149,19 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "Day's volume 16.8x usual, flush absorbed",
+     "text": "Day's volume 15.6x usual, flush absorbed",
      "side": 1
     },
     {
      "when": "Tue 17",
-     "text": "Range 2.3x normal, closed +7.2%",
-     "side": 1
-    },
-    {
-     "when": "Mon 16",
-     "text": "Day's volume 2.1x usual",
+     "text": "Range 2.4x normal, closed +7.2%",
      "side": 1
     }
    ],
-   "close": 188.58,
-   "move_pct": 7.1,
+   "close": 189.03,
+   "move_pct": 8.0,
    "moved": true,
-   "vs_high": "16.6% below its 20-day high",
+   "vs_high": "14.8% below its 20-day high",
    "states": {
     "M": "Bearish",
     "W": "Bearish",
@@ -407,12 +438,12 @@
    "events": [
     {
      "when": "Tue 17",
-     "text": "Day's volume 12.9x usual",
+     "text": "Day's volume 13.7x usual",
      "side": 1
     },
     {
      "when": "Tue 17",
-     "text": "Range 2.5x normal, closed +5.7%",
+     "text": "Range 2.7x normal, closed +5.7%",
      "side": 1
     },
     {
@@ -421,12 +452,69 @@
      "side": 1
     }
    ],
-   "close": 609.55,
-   "move_pct": 3.5,
+   "close": 595.0,
+   "move_pct": 1.5,
    "moved": true,
-   "vs_high": "1.6% below its 20-day high",
+   "vs_high": "3.8% below its 20-day high",
    "states": {
     "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "GODREJIND",
+   "score": 3.0,
+   "bias": "Mixed",
+   "events": [
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 3.5x usual, absorption (small candle)",
+     "side": 0
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 7.9x usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 15.1x usual",
+     "side": -1
+    }
+   ],
+   "close": 1101.5,
+   "move_pct": -1.4,
+   "moved": false,
+   "vs_high": "6.5% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "HONASA",
+   "score": 3.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 5.4x usual",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 3.5x usual",
+     "side": 1
+    }
+   ],
+   "close": 524.5,
+   "move_pct": 4.5,
+   "moved": false,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "M": "No data",
     "W": "Bottoming",
     "D": "Bullish"
    }
