@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-19 12:24",
+ "generated_ist": "2026-11-19 12:44",
  "oi_asof": "2026-11-18",
  "squeeze": [
   {
@@ -18,32 +18,6 @@
    ]
   },
   {
-   "symbol": "DATAPATTNS",
-   "stage": "Shorts trapped",
-   "close": 4101.9,
-   "short_day": "2026-11-05",
-   "short_oi": 62.0,
-   "short_px": -4.7,
-   "short_close": 3888.8,
-   "kept": 310,
-   "above": 5.5,
-   "cover": 3.6,
-   "notes": []
-  },
-  {
-   "symbol": "GODFRYPHLP",
-   "stage": "Shorts trapped",
-   "close": 1766.6,
-   "short_day": "2026-10-23",
-   "short_oi": 10.9,
-   "short_px": -3.8,
-   "short_close": 1665.9,
-   "kept": 312,
-   "above": 6.0,
-   "cover": -2.4,
-   "notes": []
-  },
-  {
    "symbol": "SAGILITY",
    "stage": "Shorts trapped",
    "close": 45.08,
@@ -51,26 +25,11 @@
    "short_oi": 36.1,
    "short_px": -5.9,
    "short_close": 42.08,
-   "kept": 194,
+   "kept": 71,
    "above": 7.1,
    "cover": 2.4,
    "notes": [
     "Daily Rectangle Ready"
-   ]
-  },
-  {
-   "symbol": "COROMANDEL",
-   "stage": "Shorts trapped",
-   "close": 1959.6,
-   "short_day": "2026-11-06",
-   "short_oi": 70.7,
-   "short_px": -4.6,
-   "short_close": 1826.6,
-   "kept": 338,
-   "above": 7.3,
-   "cover": -0.1,
-   "notes": [
-    "1 day of absorption volume"
    ]
   },
   {
@@ -81,27 +40,10 @@
    "short_oi": 9.6,
    "short_px": -3.4,
    "short_close": 968.7,
-   "kept": 292,
+   "kept": 97,
    "above": 9.1,
    "cover": 11.3,
    "notes": []
-  },
-  {
-   "symbol": "CUB",
-   "stage": "Shorts trapped",
-   "close": 231.72,
-   "short_day": "2026-11-02",
-   "short_oi": 54.5,
-   "short_px": -1.9,
-   "short_close": 210.95,
-   "kept": 439,
-   "above": 9.8,
-   "cover": 5.2,
-   "notes": [
-    "Daily Range Triggered",
-    "Daily Rectangle Ready",
-    "Daily Falling Wedge Triggered"
-   ]
   },
   {
    "symbol": "POLICYBZR",
@@ -111,22 +53,9 @@
    "short_oi": 13.8,
    "short_px": -7.5,
    "short_close": 932.8,
-   "kept": 133,
+   "kept": 67,
    "above": 10.9,
    "cover": -5.8,
-   "notes": []
-  },
-  {
-   "symbol": "KARURVYSYA",
-   "stage": "Shorts trapped",
-   "close": 385.55,
-   "short_day": "2026-11-02",
-   "short_oi": 143.4,
-   "short_px": -2.1,
-   "short_close": 343.65,
-   "kept": 554,
-   "above": 12.2,
-   "cover": 7.4,
    "notes": []
   },
   {
@@ -137,7 +66,7 @@
    "short_oi": 137.9,
    "short_px": -1.7,
    "short_close": 2104.3,
-   "kept": 193,
+   "kept": 100,
    "above": 12.7,
    "cover": -19.8,
    "notes": []
@@ -150,7 +79,7 @@
    "short_oi": 23.7,
    "short_px": -8.2,
    "short_close": 6250.5,
-   "kept": 131,
+   "kept": 100,
    "above": 0.1,
    "cover": 5.2,
    "notes": []
@@ -163,25 +92,12 @@
    "short_oi": 16.4,
    "short_px": -4.3,
    "short_close": 159.87,
-   "kept": 103,
+   "kept": 100,
    "above": 0.4,
    "cover": 15.9,
    "notes": [
     "2 days of absorption volume"
    ]
-  },
-  {
-   "symbol": "VMM",
-   "stage": "Watch",
-   "close": 90.58,
-   "short_day": "2026-10-21",
-   "short_oi": 10.1,
-   "short_px": -5.5,
-   "short_close": 89.32,
-   "kept": 421,
-   "above": 1.4,
-   "cover": 2.5,
-   "notes": []
   },
   {
    "symbol": "ENRIN",
@@ -191,7 +107,7 @@
    "short_oi": 14.3,
    "short_px": -2.1,
    "short_close": 2900.2,
-   "kept": 549,
+   "kept": 100,
    "above": 2.4,
    "cover": 8.0,
    "notes": []
@@ -204,22 +120,9 @@
    "short_oi": 16.2,
    "short_px": -4.1,
    "short_close": 5124.5,
-   "kept": 164,
+   "kept": 62,
    "above": 2.7,
    "cover": 2.5,
-   "notes": []
-  },
-  {
-   "symbol": "ITC",
-   "stage": "Ran already",
-   "close": 297.1,
-   "short_day": "2026-10-08",
-   "short_oi": 13.1,
-   "short_px": -3.9,
-   "short_close": 255.35,
-   "kept": 153,
-   "above": 16.4,
-   "cover": 1.7,
    "notes": []
   },
   {
@@ -230,57 +133,10 @@
    "short_oi": 9.5,
    "short_px": -3.5,
    "short_close": 1006.1,
-   "kept": 109,
+   "kept": 72,
    "above": 18.6,
    "cover": 0.7,
    "notes": []
-  },
-  {
-   "symbol": "FORCEMOT",
-   "stage": "Ran already",
-   "close": 20196.0,
-   "short_day": "2026-10-23",
-   "short_oi": 7.8,
-   "short_px": -2.2,
-   "short_close": 16375.0,
-   "kept": 121,
-   "above": 23.3,
-   "cover": 6.5,
-   "notes": [
-    "1 day of absorption volume",
-    "Daily Flag Ready"
-   ]
-  },
-  {
-   "symbol": "NAVINFLUOR",
-   "stage": "Ran already",
-   "close": 10279.0,
-   "short_day": "2026-10-29",
-   "short_oi": 34.6,
-   "short_px": -2.2,
-   "short_close": 8327.5,
-   "kept": 2373,
-   "above": 23.4,
-   "cover": -8.7,
-   "notes": [
-    "Daily Flag Triggered",
-    "Hourly Flag Triggered"
-   ]
-  },
-  {
-   "symbol": "MOTILALOFS",
-   "stage": "Ran already",
-   "close": 1226.55,
-   "short_day": "2026-10-30",
-   "short_oi": 9.3,
-   "short_px": -5.4,
-   "short_close": 939.8,
-   "kept": 101,
-   "above": 30.5,
-   "cover": 4.5,
-   "notes": [
-    "1 day of absorption volume"
-   ]
   }
  ],
  "stocks": 218,
@@ -852,7 +708,7 @@
     "W": "Bullish",
     "D": "Bullish"
    },
-   "setup": "Swing Pullback \u00b7 Ready"
+   "setup": "Swing Pullback \u00b7 Triggered"
   },
   {
    "symbol": "SBIN",
