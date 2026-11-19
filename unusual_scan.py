@@ -59,6 +59,8 @@ UCFG = {
     "sq_trapped": 0.03,           # price this far above that day's close = shorts trapped
     "sq_late": 0.15,              # ... further than this = the squeeze has mostly run
     "sq_cover": -0.02,            # OI change over the last 2 sessions that counts as covering
+    "sq_history": 15,             # sessions of OI needed before the short day (new F&O stocks
+                                  # build OI from zero, which is not a short build-up)
     "age_weight": [1.0, 0.7, 0.5],
     "min_score": 3.0,             # score needed to be listed
     "moved_atr": 2.0,             # price move over the window, in normal day-ranges, that counts as "moved"
@@ -260,6 +262,8 @@ def oi_build(sym, tables, cal):
     r = relN[sym].dropna()
     if len(r) < N + 3:
         return None
+    if chN[sym].first_valid_index() != chN.first_valid_index() and len(r) < N + 10:
+        return None                              # new to F&O: OI is still building from zero
     day = r.index[-1]
     age = age_of(day, cal)
     usual = float(r.iloc[:-1].abs().median())
@@ -316,7 +320,13 @@ def squeeze_watch(symbols, fo, hourly=None, cal=None, setups=None):
         if s not in oi.columns or np.isnan(oi[s].iloc[-1]) or np.isnan(px[s].iloc[-1]):
             continue
         best = None
-        for i in range(max(1, n - C["sq_look"]), n - 1):
+        first = oi[s].first_valid_index()
+        if first is None:
+            continue
+        # a stock that joined F&O after the file starts builds OI from zero: skip its
+        # first sessions (stocks there from the start are fine)
+        start_i = 0 if first == oi.index[0] else oi.index.get_loc(first) + C["sq_history"]
+        for i in range(max(1, n - C["sq_look"], start_i), n - 1):
             r_, p_ = rel[s].iloc[i], pc[s].iloc[i]
             if not (r_ >= C["sq_oi_jump"] and p_ <= C["sq_px_drop"]):
                 continue
@@ -328,9 +338,13 @@ def squeeze_watch(symbols, fo, hourly=None, cal=None, setups=None):
         if not best:
             continue
         i, added = best
-        kept = (oi[s].iloc[-1] - oi[s].iloc[i - 1]) / added
-        ref = oi[s].iloc[max(i, n - 3)]          # before the last 2 sessions of covering
-        kept_before = (ref - oi[s].iloc[i - 1]) / added
+        # shorts still open = the lowest OI since that day, not today's OI: if OI dipped
+        # back to its old level in between (an expiry, a covering day), those shorts left,
+        # and any OI added later is new money, maybe longs
+        low = oi[s].iloc[i:].min()
+        low_before = oi[s].iloc[i:max(i + 1, n - 2)].min()   # before the last 2 sessions
+        kept = (min(oi[s].iloc[-1], low) - oi[s].iloc[i - 1]) / added
+        kept_before = (low_before - oi[s].iloc[i - 1]) / added
         above = px[s].iloc[-1] / px[s].iloc[i] - 1
         if max(kept, kept_before) < C["sq_kept"] or above < 0:
             continue
@@ -360,7 +374,7 @@ def squeeze_watch(symbols, fo, hourly=None, cal=None, setups=None):
             "short_oi": round(float(ch[s].iloc[i]) * 100, 1),
             "short_px": round(float(pc[s].iloc[i]) * 100, 1),
             "short_close": round(float(px[s].iloc[i]), 2),
-            "kept": round(float(kept) * 100), "above": round(float(above) * 100, 1),
+            "kept": round(float(max(kept, 0)) * 100), "above": round(float(above) * 100, 1),
             "cover": round(cover * 100, 1), "notes": notes})
     order = {"Squeeze on": 0, "Shorts trapped": 1, "Watch": 2, "Ran already": 3}
     return sorted(out, key=lambda x: (order[x["stage"]], x["above"]))
@@ -661,6 +675,13 @@ def selftest():
     assert by_sq["COVER"]["stage"] == "Squeeze on", by_sq["COVER"]
     assert by_sq["GONE"]["stage"] == "Ran already" and sq[0]["symbol"] == "COVER", sq
     assert "Daily Flag Ready" in by_sq["TRAP"]["notes"]
+    # shorts that left at an expiry (OI back to its old level) are not trapped any more
+    rows2 = [r for r in rows if r["symbol"] != "TRAP"]
+    for k_, (dte, r_) in enumerate(zip(days[-40:], [r for r in rows if r["symbol"] == "TRAP"])):
+        x = r_["fut_oi"] * (0.80 if k_ == 28 else 1.0) * (1.25 if k_ > 28 else 1.0)
+        rows2.append(dict(r_, fut_oi=x))
+    sq2 = {x["symbol"]: x for x in squeeze_watch(["TRAP"], pd.DataFrame(rows2))}
+    assert "TRAP" not in sq2, sq2
 
     # 5) delivery spike
     dl = pd.DataFrame({"date": days[-30:], "deliv_per": [40.0] * 29 + [65.0],
