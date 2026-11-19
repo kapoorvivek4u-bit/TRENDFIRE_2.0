@@ -681,16 +681,16 @@ def sec_id(name):
     return "sec-" + re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
-def render_strongest(res):
+def render_strongest(res, key, who, n_top):
     e = html.escape
-    rows = res.get("strongest_n50")
+    rows = res.get(key)
     if not rows:
         st.caption("This list appears after the next Sector scan with the updated scan file.")
         return
-    top = rows[:10]
+    top = rows[:n_top]
     st.markdown(
         f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
-        f'margin:6px 0">Top 10 strongest in Nifty 50</div>'
+        f'margin:6px 0">Top {n_top} strongest {e(who)}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">Ranked by 3-month and '
         f'1-month return against Nifty, closeness to the 52-week high, and trend '
         f'(above the 50 EMA and 200 SMA). Score 100 = strongest.</div>',
@@ -718,13 +718,13 @@ def render_strongest(res):
 
     st.markdown('<div class="tf-grid">' + "".join(card(x) for x in top) + '</div>',
                 unsafe_allow_html=True)
-    with st.expander(f"All {len(rows)} Nifty 50 stocks, strongest first"):
-        st.markdown('<div class="tf-grid">' + "".join(card(x) for x in rows[10:]) + '</div>',
+    with st.expander(f"All {len(rows)} {who}, strongest first"):
+        st.markdown('<div class="tf-grid">' + "".join(card(x) for x in rows[n_top:]) + '</div>',
                     unsafe_allow_html=True)
     with st.expander("How the score works"):
         st.markdown("""
 - Each stock gets four readings: **3-month return minus Nifty's** (weight 35%), **1-month return minus Nifty's** (30%), **how close it is to its 52-week high** (20%), and **trend** (15%): close above the 50 EMA, 50 EMA above the 200 SMA, close above the 200 SMA (✓ for each).
-- The first three are ranked among the 50 stocks (strongest = 1, weakest = 0), then the weights are added up into a score out of 100.
+- The first three are ranked within the list (all F&O stocks, or the 50 Nifty stocks; strongest = 1, weakest = 0), then the weights are added up into a score out of 100.
 - Strong stocks tend to stay strong for a while (momentum), so this list is a good hunting ground for dips and setups. It does not say when to buy: use the setups and your chart for that.
 """)
 
@@ -749,10 +749,13 @@ def render_sectors(P):
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
-    view = st.radio("Sector view", ["Sectors", "Strongest Nifty 50"], horizontal=True,
-                    label_visibility="collapsed", key="sector_view")
+    view = st.radio("Sector view", ["Sectors", "Strongest F&O", "Strongest Nifty 50"],
+                    horizontal=True, label_visibility="collapsed", key="sector_view")
+    if view == "Strongest F&O":
+        render_strongest(res, "strongest_fo", "F&O stocks", 20)
+        return
     if view == "Strongest Nifty 50":
-        render_strongest(res)
+        render_strongest(res, "strongest_n50", "Nifty 50", 10)
         return
     secs = res["sectors"]
     lead = [x["name"] for x in secs if x["stage"] == "Leading"]
