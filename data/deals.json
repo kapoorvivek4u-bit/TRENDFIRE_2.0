@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-19 16:49",
- "asof": "2026-11-18",
- "days": 3,
+ "generated_ist": "2026-11-20 03:14",
+ "asof": "2026-11-19",
+ "days": 4,
  "stocks": {
   "ALKEM": {
    "mf_net_cr": 301.9,
@@ -67,6 +67,406 @@
   }
  },
  "recent": [
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Fih Mauritius Investments Ltd",
+   "cat": "Other",
+   "value_cr": 1540.0,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Fih Mauritius Investments Ltd",
+   "cat": "Other",
+   "value_cr": 1540.0,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Nirmal Bhanwarlal Jain",
+   "cat": "Other",
+   "value_cr": 1130.5,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Nirmal Bhanwarlal Jain",
+   "cat": "Other",
+   "value_cr": 1130.5,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Venkatraman R",
+   "cat": "Other",
+   "value_cr": 304.5,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Venkatraman R",
+   "cat": "Other",
+   "value_cr": 304.5,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 87.0,
+   "price": 292.75
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 87.0,
+   "price": 292.6
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 85.7,
+   "price": 291.57
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 85.7,
+   "price": 291.96
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "STYLEBAAZA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Bhagwan Prasad",
+   "cat": "Other",
+   "value_cr": 77.4,
+   "price": 533.45
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Ardent Impex Pvt Ltd",
+   "cat": "Other",
+   "value_cr": 70.0,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Ardent Impex Pvt Ltd",
+   "cat": "Other",
+   "value_cr": 70.0,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 69.1,
+   "price": 146.08
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 68.5,
+   "price": 147.41
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 68.2,
+   "price": 146.22
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 62.4,
+   "price": 146.66
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 46.8,
+   "price": 147.31
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 46.7,
+   "price": 147.04
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 42.4,
+   "price": 292.62
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 42.4,
+   "price": 292.47
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 40.3,
+   "price": 291.19
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 40.2,
+   "price": 290.84
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Jump Trading Financial India Private Lim",
+   "cat": "Other",
+   "value_cr": 40.0,
+   "price": 292.26
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Jump Trading Financial India Private Lim",
+   "cat": "Other",
+   "value_cr": 39.8,
+   "price": 291.01
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "IIFLCAPS",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Kalki Family Private Trust",
+   "cat": "Other",
+   "value_cr": 35.0,
+   "price": 350.0
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 33.2,
+   "price": 289.97
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 33.0,
+   "price": 291.27
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 32.8,
+   "price": 150.97
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 32.8,
+   "price": 150.87
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 31.5,
+   "price": 291.98
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLSPOLY",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 31.4,
+   "price": 291.84
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLKASHYAP",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 31.3,
+   "price": 58.86
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLKASHYAP",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 31.3,
+   "price": 58.77
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 31.2,
+   "price": 148.02
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 31.1,
+   "price": 148.03
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 30.5,
+   "price": 149.17
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "V2RETAIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Plutus Wealth Management Llp",
+   "cat": "Other",
+   "value_cr": 30.5,
+   "price": 149.14
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLKASHYAP",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 26.9,
+   "price": 58.75
+  },
+  {
+   "date": "2026-11-19",
+   "symbol": "BLKASHYAP",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 26.9,
+   "price": 58.69
+  },
   {
    "date": "2026-11-18",
    "symbol": "AZAD",
