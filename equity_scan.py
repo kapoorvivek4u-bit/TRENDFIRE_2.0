@@ -214,6 +214,7 @@ def analyse_equity(sym, d, dl):
                                  "Daily Range")
     row["ranges"] += E.pattern_rows(row, D, d["Volume"].values.astype(float), d.index, None,
                                     "Daily")
+    row["ranges"] += E.vcp_rows(row, D, d["Volume"].values.astype(float), d.index, None, "Daily")
     if cands:
         order = {"Ready": 0, "Triggered": 1, "Watch": 2}
         setup, stage, level, stop, vol_ok, warn, detail, warn_txt = \
