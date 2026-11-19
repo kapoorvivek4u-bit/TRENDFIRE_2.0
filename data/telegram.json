@@ -1,8 +1,108 @@
 {
  "last": {
   "360ONE": {
-   "final": "NO SIGNAL",
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "ABCAPITAL": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "ADANIENSOL": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "ADANIGREEN": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "ADANIPOWER": {
+   "final": "BUY NOW",
    "confirmed": "Not confirmed"
+  },
+  "BOSCHLTD": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "CHOLAFIN": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "COFORGE": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "DRREDDY": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "EICHERMOT": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "GAIL": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "GLENMARK": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "HEROMOTOCO": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "LAURUSLABS": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "MAHABANK": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "MANKIND": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "NAVINFLUOR": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "PETRONET": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "PHOENIXLTD": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "PNB": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "SONACOMS": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
+  "SUNPHARMA": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "TVSMOTOR": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "UNIONBANK": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "UNITDSPR": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "UNOMINDA": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ABB": {
    "final": "NO SIGNAL",
@@ -201,10 +301,6 @@
    "confirmed": "Not confirmed"
   },
   "IDFCFIRSTB": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "INDIANB": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -496,184 +592,8 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "ABCAPITAL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "ADANIENSOL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "ADANIGREEN": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "ADANIPORTS": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "ADANIPOWER": {
-   "final": "BUY NOW",
-   "confirmed": "Not confirmed"
-  },
-  "BOSCHLTD": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "CHOLAFIN": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "COFORGE": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "DRREDDY": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "EICHERMOT": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "GAIL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "GLENMARK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "HEROMOTOCO": {
-   "final": "BUY NOW",
-   "confirmed": "Not confirmed"
-  },
-  "ICICIBANK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "KOTAKBANK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "LAURUSLABS": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "MAHABANK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "NAVINFLUOR": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "PETRONET": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "PHOENIXLTD": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "PNB": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "PRESTIGE": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "SUNPHARMA": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "TVSMOTOR": {
-   "final": "BUY NOW",
-   "confirmed": "Not confirmed"
-  },
-  "UNIONBANK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "UNITDSPR": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "UNOMINDA": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "AMBUJACEM": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "BANDHANBNK": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "COLPAL": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "CONCOR": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "CROMPTON": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "DABUR": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "DMART": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "GODREJCP": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "HAVELLS": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "ICICILIFE": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "IEX": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "INOXWIND": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "JUBLFOOD": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "LTM": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "SBICARD": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "TIINDIA": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "TMPV": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "UPL": {
-   "final": "COMING CLOSE TO READY (Bearish)",
+   "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "ANANDRATHI": {
@@ -728,7 +648,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "ICICIBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "INDHOTEL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "INDIANB": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -748,11 +676,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "LODHA": {
+  "KOTAKBANK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "MANKIND": {
+  "LODHA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -784,15 +712,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "PRESTIGE": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "RADICO": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "SONACOMS": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "TECHM": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -802,6 +726,74 @@
   },
   "ZYDUSLIFE": {
    "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "AMBUJACEM": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "BANDHANBNK": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "COLPAL": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "CONCOR": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "CROMPTON": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "DABUR": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "DMART": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "GODREJCP": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "HAVELLS": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "ICICILIFE": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "IEX": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "INOXWIND": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "JUBLFOOD": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "SBICARD": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "TIINDIA": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "TMPV": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "UPL": {
+   "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
   "ASTRAL": {
@@ -816,6 +808,10 @@
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
+  "LTM": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
   "PIIND": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
@@ -825,6 +821,10 @@
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "HAL": {
+   "final": "COMING CLOSE TO READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "TECHM": {
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
   },
