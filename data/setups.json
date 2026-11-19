@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-19 12:24",
+ "generated_ist": "2026-11-19 12:44",
  "oi_asof": "2026-11-18",
- "stocks": 217,
+ "stocks": 218,
  "market": {
   "weekly_bull_pct": 28,
   "monthly_bull_pct": 52,
@@ -10,10 +10,10 @@
   "daily_bull_hist": [
    80,
    84,
-   88,
+   89,
    91,
    91,
-   88
+   89
   ],
   "nifty": {
    "state": "Bullish",
@@ -24061,6 +24061,7 @@
    "ASTRAL",
    "AUBANK",
    "BAJAJ-AUTO",
+   "BAJAJFINSV",
    "BAJFINANCE",
    "BANDHANBNK",
    "BDL",
@@ -24431,6 +24432,22 @@
      "W": "Bearish",
      "D": "Topping",
      "H": "Bottoming"
+    },
+    "signal": "Mixed",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed"
+   },
+   {
+    "symbol": "BAJAJFINSV",
+    "close": 1879.8,
+    "states": {
+     "M": "Bearish",
+     "W": "Bottoming",
+     "D": "Bullish",
+     "H": "Impulse"
     },
     "signal": "Mixed",
     "ma": "Mixed - No Clear Signal",
@@ -27605,7 +27622,5 @@
    }
   ]
  },
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ]
+ "notes": []
 }
