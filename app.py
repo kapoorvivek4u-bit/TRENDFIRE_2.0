@@ -287,6 +287,45 @@ def chart_svg(ch):
         return ""
 
 
+def render_oi_moves(res):
+    """Stocks whose futures OI changed a lot over the last few sessions: building or exiting."""
+    e = html.escape
+    mv = res.get("oi_moves")
+    n = res.get("oi_days", 7)
+    if mv is None:
+        st.caption("This list appears after the next Unusual scan with the updated scan file.")
+        return
+    st.markdown(
+        f'<div style="font-size:14px;color:{INK};line-height:1.5;margin:6px 0">'
+        f'Futures OI change over the last {n} sessions (to {e(res.get("oi_asof", ""))}), after '
+        'removing the market-wide change, where it is unusually large for that stock. '
+        'Listed even when nothing else is unusual.</div>', unsafe_allow_html=True)
+    col = {1: GREEN, -1: RED, 0: MUTED}
+
+    def block(title, items, note):
+        st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                    f'font-weight:600;margin-top:16px">{title} · {len(items)}</div>'
+                    f'<div class="tf-small">{note}</div>', unsafe_allow_html=True)
+        if not items:
+            st.caption("None right now.")
+            return
+        st.markdown('<div class="tf-grid">' + "".join(
+            f'<div class="tf-row"><div class="tf-top"><span><a class="tf-sym" '
+            f'href="{chart_link(m["symbol"])}" target="_blank">{e(m["symbol"])}</a>'
+            f'{wl_link(m["symbol"])}</span><span style="font-family:{MONO};font-size:14px">'
+            f'OI {m["oi"]:+.0f}% · price {m["px"]:+.1f}%</span></div>'
+            f'<div class="tf-set" style="color:{col.get(m["side"], MUTED)}">{e(m["text"])}</div>'
+            f'{sector_html(m["symbol"])}</div>' for m in items) + '</div>',
+            unsafe_allow_html=True)
+
+    block("Building", [m for m in mv if m["building"]],
+          "New positions. Price flat = big players building quietly, direction not clear. "
+          "Price up = fresh longs. Price down = fresh shorts.")
+    block("Exiting", [m for m in mv if not m["building"]],
+          "Positions being closed. Price up = shorts covering: the rally is not fresh buying "
+          "and can fade. Price down = longs giving up. Price flat = interest fading.")
+
+
 def row_html(r):
     e = html.escape
     trend = r.get("trend") or "Monthly n/a"
@@ -407,8 +446,12 @@ def render_unusual(cfg):
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
-    lean = st.radio("Lean", ["All", "Quiet", "Buying", "Selling", "Mixed"], horizontal=True,
+    leans = ["All", "Quiet", "Buying", "Selling", "Mixed"] + ([] if equity else ["OI 7-day"])
+    lean = st.radio("Lean", leans, horizontal=True,
                     label_visibility="collapsed", key="unusual_lean")
+    if lean == "OI 7-day":
+        render_oi_moves(res)
+        return
     quiet = [r for r in res["rows"] if r.get("moved") is False]
     rows = (res["rows"] if lean == "All" else quiet if lean == "Quiet"
             else [r for r in res["rows"] if r["bias"] == lean])
@@ -433,6 +476,7 @@ def render_unusual(cfg):
 - **Flush absorbed**: a sharp fall on very high volume that was bought back by the close.
 - **Range 2.4x normal**: the day's range against its usual range.
 - **Gap, held**: an opening gap as large as a normal day's range that was not filled.
+- **OI in 7 sessions**: OI building up or exiting over several sessions, not just one day (also its own list under **OI 7-day**). Building with flat price = big positions forming quietly. Exiting with price up = short covering, a rally without fresh buying.
 - **OI in a day**: a one-day change in futures open interest that is large for this stock, after removing the market-wide change.
 - **Delivery vs usual**: delivery share well above the stock's normal.
 
@@ -637,6 +681,54 @@ def sec_id(name):
     return "sec-" + re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
+def render_strongest(res):
+    e = html.escape
+    rows = res.get("strongest_n50")
+    if not rows:
+        st.caption("This list appears after the next Sector scan with the updated scan file.")
+        return
+    top = rows[:10]
+    st.markdown(
+        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'margin:6px 0">Top 10 strongest in Nifty 50</div>'
+        f'<div style="font-size:14px;color:{INK};line-height:1.5">Ranked by 3-month and '
+        f'1-month return against Nifty, closeness to the 52-week high, and trend '
+        f'(above the 50 EMA and 200 SMA). Score 100 = strongest.</div>',
+        unsafe_allow_html=True)
+    col = lambda x: GREEN if x > 0 else RED if x < 0 else MUTED
+
+    def card(x):
+        sec = SECTORS.get(x["symbol"], {})
+        sec_txt = (f' · {e(sec["sector"])} <span style="color:{STAGE_COLOR.get(sec.get("stage"), MUTED)}">'
+                   f'{e(sec.get("stage", ""))}</span>' if sec.get("sector") else "")
+        return (
+            f'<div class="tf-row"><div class="tf-top"><span>'
+            f'<span style="font-family:Georgia,serif;font-weight:700;color:{MUTED};'
+            f'margin-right:8px">#{x["rank"]}</span>'
+            f'<a class="tf-sym" href="{chart_link(x["symbol"])}" target="_blank">'
+            f'{e(x["symbol"])}</a>{wl_link(x["symbol"])}</span>'
+            f'<span class="tf-grade" style="border:2px solid {INK};color:{INK}">{x["score"]}</span></div>'
+            f'<div class="tf-small" style="color:{INK}">'
+            f'3M vs Nifty <b style="color:{col(x["r3m"])}">{x["r3m"]:+.1f}%</b> · '
+            f'1M vs Nifty <b style="color:{col(x["r1m"])}">{x["r1m"]:+.1f}%</b> · '
+            f'{abs(x["hi52"]):.1f}% below 52-week high</div>'
+            f'<div class="tf-small">Trend {"✓" * x["trend"]}{"·" * (3 - x["trend"])} '
+            f'({x["trend"]}/3) · W {e(x["states"]["W"])} · D {e(x["states"]["D"])}{sec_txt}</div>'
+            '</div>')
+
+    st.markdown('<div class="tf-grid">' + "".join(card(x) for x in top) + '</div>',
+                unsafe_allow_html=True)
+    with st.expander(f"All {len(rows)} Nifty 50 stocks, strongest first"):
+        st.markdown('<div class="tf-grid">' + "".join(card(x) for x in rows[10:]) + '</div>',
+                    unsafe_allow_html=True)
+    with st.expander("How the score works"):
+        st.markdown("""
+- Each stock gets four readings: **3-month return minus Nifty's** (weight 35%), **1-month return minus Nifty's** (30%), **how close it is to its 52-week high** (20%), and **trend** (15%): close above the 50 EMA, 50 EMA above the 200 SMA, close above the 200 SMA (✓ for each).
+- The first three are ranked among the 50 stocks (strongest = 1, weakest = 0), then the weights are added up into a score out of 100.
+- Strong stocks tend to stay strong for a while (momentum), so this list is a good hunting ground for dips and setups. It does not say when to buy: use the setups and your chart for that.
+""")
+
+
 def render_sectors(P):
     path = P["file"]
     if not os.path.exists(path):
@@ -657,6 +749,11 @@ def render_sectors(P):
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
+    view = st.radio("Sector view", ["Sectors", "Strongest Nifty 50"], horizontal=True,
+                    label_visibility="collapsed", key="sector_view")
+    if view == "Strongest Nifty 50":
+        render_strongest(res)
+        return
     secs = res["sectors"]
     lead = [x["name"] for x in secs if x["stage"] == "Leading"]
     headline = ("No sector is Leading right now." if not lead else
@@ -2423,11 +2520,13 @@ if choice == "Old labels":
 SPILL = choice == "Overspill"
 if choice == "Patterns":
     allp = res.get("ranges", [])
-    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge"]
-    n_k = {k: sum(1 for r in allp if k == "All" or k in r["setup"]) for k in kinds}
+    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge", "Clean wedge"]
+    match = lambda k, r: (k == "All" or (r.get("clean") if k == "Clean wedge"
+                                         else k in r["setup"]))
+    n_k = {k: sum(1 for r in allp if match(k, r)) for k in kinds}
     kind = st.radio("Pattern", kinds, horizontal=True, label_visibility="collapsed",
                     format_func=lambda k: f"{k} · {n_k[k]}", key=f"pat_{page}")
-    rows = [r for r in allp if kind == "All" or kind in r["setup"]]
+    rows = [r for r in allp if match(kind, r)]
     if "ranges" not in res:
         st.caption("Patterns need the updated scan file. They will appear after the "
                    "next scan with that file.")
@@ -2541,8 +2640,9 @@ with st.expander("What the words mean"):
 {"" if EQUITY else SWING_DEF}{TREND_DEF}
 {SPILL_DEF}
 - **Patterns** (its own list, with Range / Flag / Rectangle / Wedge buttons). All are bullish breakout patterns; "Above" is the top line today, the stop and target are on the card.
-- **Flag**: a sharp, clean run up (the pole: at least 10% on Daily, 6% on Hourly), then a short pause drifting sideways or down that gives back no more than half of it. Target = breakout level + pole height. Stop = the flag low.
+- **Flag**: a pause inside an uptrend (Daily flags need Weekly bullish and Monthly with trend; Hourly flags need Daily and Weekly bullish). A sharp, clean run up (the pole: at least 10% on Daily, 6% on Hourly), then a short pause drifting sideways or down that gives back no more than a third of it, on volume at most 0.8x the pole's. A flag breakout needs 1.5x volume. Target = breakout level + pole height. Stop = the flag low.
 - **Rectangle**: flat top and flat floor, at least 3 touches on top and 3 on the floor. Target = top + height. Stop = under the floor, or 1.5 ranges under the top, whichever is closer.
+- **Clean wedge**: a Falling Wedge that has narrowed to 40% or less of its starting width (close to the point), with quiet volume inside it, or a loud breakout.
 - **Wedge** (Falling Wedge): both lines falling, the top falling faster so the pattern narrows; at least 3 touches on each line. Target = where the wedge started. Stop = the recent low inside the wedge.
 - All patterns are found on both **Daily** and **Hourly** (F&O; Equity is Daily only). Watch = inside the pattern; Ready = within 0.75 ranges of the top line; Triggered = closed above it recently.
 - **Range**: weeks of sideways trading under a ceiling, either a **falling trendline** through at least 3 swing highs or a **flat top**, while the floor holds (no new lows, so not a downtrend). **Daily Range** looks back about 8 months, **Hourly Range** about 2 months. Watch = inside the range; Ready = within one normal range of the ceiling; Triggered = closed above the ceiling recently (dropped once it has run more than 2.5 ranges away). "Above" is the ceiling today; the stop is under the range floor or 1.5 ranges below the ceiling, whichever is closer; the target adds the range depth to the breakout level. Quality: volume on the breakout (1.5x or more), or volume going quiet while still inside; for F&O also OI.
