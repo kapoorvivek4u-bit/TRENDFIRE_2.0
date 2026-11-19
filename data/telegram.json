@@ -36,10 +36,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "BAJAJ-AUTO": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "BAJAJFINSV": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -504,11 +500,11 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "ADANIPORTS": {
+  "ADANIGREEN": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "APOLLOHOSP": {
+  "ADANIPORTS": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -552,19 +548,7 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "LODHA": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "MAHABANK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "MARICO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "MOTILALOFS": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -585,6 +569,10 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PRESTIGE": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "SUNPHARMA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -617,6 +605,10 @@
    "confirmed": "Not confirmed"
   },
   "APLAPOLLO": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "APOLLOHOSP": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -680,7 +672,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "LODHA": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "MANKIND": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "MARICO": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -689,6 +689,10 @@
    "confirmed": "Not confirmed"
   },
   "MOTHERSON": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "MOTILALOFS": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -709,10 +713,6 @@
    "confirmed": "Not confirmed"
   },
   "SONACOMS": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "SUNPHARMA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -780,10 +780,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "KPITTECH": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "LTM": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -809,6 +805,10 @@
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "KAYNES": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "KPITTECH": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
