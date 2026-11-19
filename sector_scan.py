@@ -360,6 +360,7 @@ def main_live():
     if missing:
         daily.update(E.fetch_bars(missing, period="2y", interval="1d"))
     strong = strongest(daily, nifty, n50, smap)
+    strong_fo = strongest(daily, nifty, symbols, smap)
     stage_of = {s["name"]: s["stage"] for s in ranked}
     tag_map = {sym: {"sector": sec, "stage": stage_of.get(sec, "")} for sym, sec in smap.items()}
     for s in symbols:
@@ -367,7 +368,8 @@ def main_live():
     asof = max(df.index[-1] for df in daily.values()).strftime("%Y-%m-%d")
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"), "asof": asof,
            "nifty": nret, "sectors": ranked, "unranked": unranked,
-           "map": tag_map, "notes": notes, "strongest_n50": strong}
+           "map": tag_map, "notes": notes, "strongest_n50": strong,
+           "strongest_fo": strong_fo}
     with open(os.path.join(DATA_DIR, "sectors.json"), "w") as f:
         json.dump(res, f, indent=1)
     print(f"{len(ranked)} sectors ranked | "
