@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-19 14:46",
- "oi_asof": "2026-11-18",
+ "generated_ist": "2026-11-20 03:40",
+ "oi_asof": "2026-11-19",
  "stocks": 254,
  "rows": [
   {
@@ -303,6 +303,37 @@
    }
   },
   {
+   "symbol": "HONASA",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 5.4x usual",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Delivery 65% vs 45% usual",
+     "side": 1
+    },
+    {
+     "when": "Tue 17",
+     "text": "Day's volume 3.5x usual",
+     "side": 1
+    }
+   ],
+   "close": 524.5,
+   "move_pct": 4.5,
+   "moved": false,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "M": "No data",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
    "symbol": "SWANCORP",
    "score": 4.0,
    "bias": "Selling",
@@ -463,6 +494,37 @@
    }
   },
   {
+   "symbol": "GALLANTT",
+   "score": 3.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Thu 19",
+     "text": "Delivery 35% vs 25% usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 16",
+     "text": "Day's volume 10.4x usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 16",
+     "text": "Range 2.1x normal, closed +3.5%",
+     "side": 1
+    }
+   ],
+   "close": 533.2,
+   "move_pct": 1.6,
+   "moved": true,
+   "vs_high": "21.5% below its 20-day high",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bottoming"
+   }
+  },
+  {
    "symbol": "GODREJIND",
    "score": 3.0,
    "bias": "Mixed",
@@ -489,32 +551,6 @@
    "vs_high": "6.5% below its 20-day high",
    "states": {
     "M": "Bottoming",
-    "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "HONASA",
-   "score": 3.0,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Wed 18",
-     "text": "Day's volume 5.4x usual",
-     "side": 1
-    },
-    {
-     "when": "Tue 17",
-     "text": "Day's volume 3.5x usual",
-     "side": 1
-    }
-   ],
-   "close": 524.5,
-   "move_pct": 4.5,
-   "moved": false,
-   "vs_high": "At a 20-day high",
-   "states": {
-    "M": "No data",
     "W": "Bottoming",
     "D": "Bullish"
    }
