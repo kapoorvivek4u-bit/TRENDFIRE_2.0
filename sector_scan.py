@@ -47,7 +47,10 @@ SCFG = {
     "dir_days": 5,                # direction = change in strength vs Nifty over this many days
     "dir_flat_pct": 0.75,         # smaller changes count as sideways
     "max_daily_move": 0.25,       # daily returns beyond this are treated as data errors
+    # strongest Nifty 50 stocks: score = weighted rank of each measure among the 50
+    "strong_w": {"r3m": 0.35, "r1m": 0.30, "hi52": 0.20, "trend": 0.15},
 }
+N50_FILE = "ind_nifty50list.csv"
 NAMES = {
     "Automobile and Auto Components": "Auto",
     "Fast Moving Consumer Goods": "FMCG",
@@ -270,6 +273,66 @@ def analyse_sectors(daily, smap, nifty, symbols):
     return ranked, unranked, {k: round(v * 100, 1) for k, v in nr.items()}
 
 
+def load_nifty50(session, notes):
+    """Nifty 50 symbols from NSE, with a saved copy as fallback."""
+    path = os.path.join(DATA_DIR, "nifty50.csv")
+    for base in BASE:
+        raw = E.nse_get(session, base + N50_FILE, tries=2)
+        if raw is None:
+            continue
+        try:
+            syms = parse_index_list(raw)["symbol"].tolist()
+            if len(syms) >= 45:
+                pd.DataFrame({"symbol": syms}).to_csv(path, index=False)
+                return syms
+        except Exception as e:
+            print(f"[warn] {N50_FILE} unreadable: {e}")
+    if os.path.exists(path):
+        notes.append("Nifty 50 list not refreshed today; using the saved copy.")
+        return pd.read_csv(path)["symbol"].tolist()
+    notes.append("Nifty 50 list unavailable: strongest stocks not ranked.")
+    return []
+
+
+def strongest(daily, nifty, members, smap=None):
+    """Rank index members by strength. Each measure is ranked among the members
+    (0 = weakest, 1 = strongest) and the ranks are weighted into a 0-100 score:
+      r3m   3-month return minus Nifty's
+      r1m   1-month return minus Nifty's
+      hi52  distance from the 52-week high (closer is stronger)
+      trend close above the 50 EMA, 50 EMA above the 200 SMA, close above the 200 SMA"""
+    rows = []
+    for s in members:
+        d = daily.get(s)
+        if d is None or len(d) < 210:
+            continue
+        c = d["Close"]
+        D, W = E.tf_view(d, 3), E.tf_view(E.to_weekly(d), 3)
+        if not D["ok"]:
+            continue
+        e50, s200 = float(D["ind"]["ema50"][-1]), float(D["ind"]["sma200"][-1])
+        close = float(c.iloc[-1])
+        rows.append({
+            "symbol": s, "close": round(close, 2),
+            "r1m": round((ret(c, 21) - ret(nifty, 21)) * 100, 1),
+            "r3m": round((ret(c, 63) - ret(nifty, 63)) * 100, 1),
+            "hi52": round((close / float(d["High"].iloc[-252:].max()) - 1) * 100, 1),
+            "trend": int(close > e50) + int(e50 > s200) + int(close > s200),
+            "states": {"W": "Impulse" if W["impulse"] else W["state"],
+                       "D": "Impulse" if D["impulse"] else D["state"]},
+            "sector": (smap or {}).get(s, "")})
+    if not rows:
+        return []
+    df = pd.DataFrame(rows)
+    w = SCFG["strong_w"]
+    score = sum(w[k] * df[k].rank(pct=True) for k in ("r3m", "r1m", "hi52")) \
+        + w["trend"] * df["trend"] / 3
+    df["score"] = (100 * score / sum(w.values())).round(0).astype(int)
+    df = df.sort_values(["score", "r3m"], ascending=False).reset_index(drop=True)
+    df["rank"] = df.index + 1
+    return json.loads(df.to_json(orient="records"))
+
+
 def main_live():
     os.makedirs(DATA_DIR, exist_ok=True)
     now = dt.datetime.now(E.IST)
@@ -292,6 +355,11 @@ def main_live():
     nifty = nd["Close"].dropna()
     nifty.index = pd.to_datetime(nifty.index).tz_localize(None).normalize()
     ranked, unranked, nret = analyse_sectors(daily, smap, nifty, symbols)
+    n50 = load_nifty50(E.nse_session(), notes)
+    missing = [s for s in n50 if s not in daily]
+    if missing:
+        daily.update(E.fetch_bars(missing, period="2y", interval="1d"))
+    strong = strongest(daily, nifty, n50, smap)
     stage_of = {s["name"]: s["stage"] for s in ranked}
     tag_map = {sym: {"sector": sec, "stage": stage_of.get(sec, "")} for sym, sec in smap.items()}
     for s in symbols:
@@ -299,7 +367,7 @@ def main_live():
     asof = max(df.index[-1] for df in daily.values()).strftime("%Y-%m-%d")
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"), "asof": asof,
            "nifty": nret, "sectors": ranked, "unranked": unranked,
-           "map": tag_map, "notes": notes}
+           "map": tag_map, "notes": notes, "strongest_n50": strong}
     with open(os.path.join(DATA_DIR, "sectors.json"), "w") as f:
         json.dump(res, f, indent=1)
     print(f"{len(ranked)} sectors ranked | "
@@ -365,6 +433,16 @@ def selftest():
                  "APOLLOHOSP": "Healthcare"}, m
     assert build_map(parse_index_list(csv))["HDFCBANK"] == "Finance"
     json.dumps(ranked)
+
+    # strongest Nifty 50: a steady riser beats a faller, scores 0-100, ranks 1..n
+    sg = strongest(daily, nifty, list(daily), m)
+    assert sg and [x["rank"] for x in sg] == list(range(1, len(sg) + 1)), sg
+    assert all(0 <= x["score"] <= 100 for x in sg) and sg[0]["score"] >= sg[-1]["score"]
+    by_s = {x["symbol"]: x for x in sg}
+    up_s = max(by_s, key=lambda s_: by_s[s_]["r3m"])
+    assert by_s[up_s]["rank"] <= len(sg) // 2 + 1, sg
+    assert set(sg[0]) >= {"r1m", "r3m", "hi52", "trend", "states", "score"}
+    print("strongest:", [(x["symbol"], x["score"]) for x in sg[:3]])
     print("\nSELFTEST PASSED")
 
 
