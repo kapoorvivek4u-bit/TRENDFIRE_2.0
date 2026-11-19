@@ -287,6 +287,69 @@ def chart_svg(ch):
         return ""
 
 
+SQ_NOTE = {
+    "Squeeze on": (GREEN, "Shorts have started covering: OI falling over the last 2 sessions "
+                          "while price rises. The squeeze is running."),
+    "Shorts trapped": (BLUE, "Price is 3%+ above the day the shorts came in, and most of them "
+                             "are still open. A break higher can force them out."),
+    "Watch": (MUTED, "Price is just back above the short build-up day. Not yet painful for "
+                     "the shorts."),
+    "Ran already": (RED, "Price is more than 15% above the short day. Most of the squeeze has "
+                         "happened; late to chase."),
+}
+
+
+def render_squeeze(res):
+    """Short squeeze watch: big short build-ups that are now losing money."""
+    e = html.escape
+    sq = res.get("squeeze")
+    if sq is None:
+        st.caption("This list appears after the next Unusual scan with the updated scan file.")
+        return
+    st.markdown(
+        f'<div style="font-size:14px;color:{INK};line-height:1.5;margin:6px 0">'
+        'Stocks where, in the last 30 sessions, futures OI jumped while price fell (a short '
+        'build-up), most of those positions are still open, and price is now back above that '
+        f'day. Those shorts are losing money. OI to {e(res.get("oi_asof", ""))}.</div>',
+        unsafe_allow_html=True)
+    for stage, (colr, note) in SQ_NOTE.items():
+        items = [x for x in sq if x["stage"] == stage]
+        st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                    f'font-weight:600;margin-top:16px;color:{colr}">{stage} · {len(items)}</div>'
+                    f'<div class="tf-small">{note}</div>', unsafe_allow_html=True)
+        if not items:
+            st.caption("None right now.")
+            continue
+        cards = []
+        for x in items:
+            d_ = dt.datetime.strptime(x["short_day"], "%Y-%m-%d").strftime("%a %d %b")
+            kept = ("All still open, and more added since" if x["kept"] >= 100 else
+                    f"{x['kept']}% of them still open")
+            cov = (f'<span style="color:{GREEN}">OI {x["cover"]:+.1f}% in the last 2 sessions '
+                   f'(covering)</span>' if x["cover"] <= -2 else
+                   f'OI {x["cover"]:+.1f}% in the last 2 sessions')
+            extra = "".join(f'<div class="tf-small" style="color:{INK}">+ {e(n)}</div>'
+                            for n in x.get("notes", []))
+            cards.append(
+                f'<div class="tf-row"><div class="tf-top"><span><a class="tf-sym" '
+                f'href="{chart_link(x["symbol"])}" target="_blank">{e(x["symbol"])}</a>'
+                f'{wl_link(x["symbol"])}</span><span style="font-family:{MONO};font-size:14px">'
+                f'{money(x["close"])} · <b style="color:{colr}">{x["above"]:+.1f}%</b></span></div>'
+                f'<div class="tf-small" style="color:{INK}">Shorts came in {d_}: OI '
+                f'{x["short_oi"]:+.0f}%, price {x["short_px"]:+.1f}% (close '
+                f'{money(x["short_close"])}). {kept}.</div>'
+                f'<div class="tf-small">{cov}</div>{extra}{sector_html(x["symbol"])}</div>')
+        st.markdown('<div class="tf-grid">' + "".join(cards) + '</div>', unsafe_allow_html=True)
+    with st.expander("How to use it"):
+        st.markdown("""
+- **Shorts trapped** is the watchlist: shorts are losing and still in. Look for a breakout on the chart (pattern Ready/Triggered, or a 20-day high).
+- **Squeeze on** is the trigger: shorts are now leaving (OI falling, price up). This is what GODREJCP showed on 18 Nov before its 3% day.
+- Lines marked **+** are extra confirmation: absorption volume (big volume, small candle) or a pattern breakout from the setups scan.
+- A squeeze is fuel, not a trend. Book part of the profit into strength, and keep a stop under the breakout. If OI starts rising again while price falls, fresh shorts are winning: exit.
+- Each day's list is saved (data/squeeze_log.csv) so we can check after a few weeks how these stocks did.
+""")
+
+
 def render_oi_moves(res):
     """Stocks whose futures OI changed a lot over the last few sessions: building or exiting."""
     e = html.escape
@@ -446,11 +509,15 @@ def render_unusual(cfg):
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
-    leans = ["All", "Quiet", "Buying", "Selling", "Mixed"] + ([] if equity else ["OI 7-day"])
+    leans = ["All", "Quiet", "Buying", "Selling", "Mixed"] + ([] if equity else
+                                                              ["OI 7-day", "Short squeeze"])
     lean = st.radio("Lean", leans, horizontal=True,
                     label_visibility="collapsed", key="unusual_lean")
     if lean == "OI 7-day":
         render_oi_moves(res)
+        return
+    if lean == "Short squeeze":
+        render_squeeze(res)
         return
     quiet = [r for r in res["rows"] if r.get("moved") is False]
     rows = (res["rows"] if lean == "All" else quiet if lean == "Quiet"
