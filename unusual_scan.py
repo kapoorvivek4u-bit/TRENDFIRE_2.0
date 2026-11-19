@@ -51,6 +51,14 @@ UCFG = {
     "oi_build_min": 0.15,         # ... at least this much above the market's change ...
     "oi_build_mult": 3.0,         # ... and this many times the stock's usual 7-session change
     "oi_build_flat": 0.04,        # price change under this = flat: big positions building quietly
+    # short squeeze watch: a big short build-up day, shorts still in, price back above it
+    "sq_look": 30,                # sessions searched for the short build-up day
+    "sq_oi_jump": 0.08,           # OI rise that day, above the market's change ...
+    "sq_px_drop": -0.015,         # ... while price fell at least this much
+    "sq_kept": 0.6,               # share of that day's added OI still open now
+    "sq_trapped": 0.03,           # price this far above that day's close = shorts trapped
+    "sq_late": 0.15,              # ... further than this = the squeeze has mostly run
+    "sq_cover": -0.02,            # OI change over the last 2 sessions that counts as covering
     "age_weight": [1.0, 0.7, 0.5],
     "min_score": 3.0,             # score needed to be listed
     "moved_atr": 2.0,             # price move over the window, in normal day-ranges, that counts as "moved"
@@ -230,32 +238,146 @@ def oi_events(sym, tables, cal):
     return out
 
 
-def oi_build_events(sym, tables, cal):
-    """OI building up over several sessions (not just one day), adjusted for the market."""
+OI_KINDS = {  # (OI building?, price) -> (text, side, strength)
+    (True, "flat"): ("big positions building, direction not clear yet", 0, 3),
+    (True, "up"): ("steady long build-up", 1, 1),
+    (True, "down"): ("steady short build-up", -1, 1),
+    (False, "up"): ("shorts exiting (short covering), rally not backed by fresh buying", 1, 1),
+    (False, "down"): ("longs exiting (long unwinding)", -1, 1),
+    (False, "flat"): ("positions closing on both sides, interest fading", 0, 1),
+}
+
+
+def oi_build(sym, tables, cal):
+    """OI change over several sessions (adjusted for the market) if it is unusual for this
+    stock: dict(day, age, oi, px, building, text, side, strength), else None."""
     if len(tables) < 6:
-        return []
+        return None
     relN, chN, pxN = tables[3:6]
     N = UCFG["oi_build_days"]
     if sym not in relN.columns:
-        return []
+        return None
     r = relN[sym].dropna()
     if len(r) < N + 3:
-        return []
+        return None
     day = r.index[-1]
     age = age_of(day, cal)
     usual = float(r.iloc[:-1].abs().median())
     x = float(r.iloc[-1])
-    if age > 2 or x < max(UCFG["oi_build_min"], UCFG["oi_build_mult"] * usual):
-        return []
+    if age > 2 or abs(x) < max(UCFG["oi_build_min"], UCFG["oi_build_mult"] * usual):
+        return None
     p = float(pxN.at[day, sym]) if not np.isnan(pxN.at[day, sym]) else 0.0
-    raw = float(chN.at[day, sym]) * 100
-    if abs(p) <= UCFG["oi_build_flat"]:
-        text, side, strength = ("big positions building, direction not clear yet", 0, 3)
-    else:
-        text, side, strength = (("steady long build-up", 1, 1) if p > 0 else
-                                ("steady short build-up", -1, 1))
-    return [{"src": "oi_build", "age": age, "day": day, "strength": strength, "side": side,
-             "text": f"OI {raw:+.0f}% in {N} sessions, price {p * 100:+.1f}%: {text}"}]
+    move = "flat" if abs(p) <= UCFG["oi_build_flat"] else ("up" if p > 0 else "down")
+    text, side, strength = OI_KINDS[(x > 0, move)]
+    return {"day": day, "age": age, "oi": float(chN.at[day, sym]) * 100, "px": p * 100,
+            "building": x > 0, "text": text, "side": side, "strength": strength}
+
+
+def oi_build_events(sym, tables, cal):
+    """OI building up, or positions exiting, over several sessions (not just one day)."""
+    b = oi_build(sym, tables, cal)
+    if not b:
+        return []
+    N = UCFG["oi_build_days"]
+    return [{"src": "oi_build", "age": b["age"], "day": b["day"], "strength": b["strength"],
+             "side": b["side"],
+             "text": f"OI {b['oi']:+.0f}% in {N} sessions, price {b['px']:+.1f}%: {b['text']}"}]
+
+
+def oi_moves(symbols, tables, cal):
+    """Every stock with an unusual 7-session OI change, for the OI page (no score needed)."""
+    out = []
+    for s in symbols:
+        b = oi_build(s, tables, cal)
+        if b:
+            out.append({"symbol": s, "oi": round(b["oi"], 1), "px": round(b["px"], 1),
+                        "building": b["building"], "text": b["text"], "side": b["side"]})
+    return sorted(out, key=lambda x: -abs(x["oi"]))
+
+
+def squeeze_watch(symbols, fo, hourly=None, cal=None, setups=None):
+    """Short squeeze watch: stocks where a big short build-up (OI jump, price down) is still
+    open while price has come back above that day's close, so those shorts are losing.
+      Watch          price 0-3% above the short day; shorts still in
+      Shorts trapped price 3%+ above; shorts still in
+      Squeeze on     shorts started covering: OI falling over the last 2 sessions, price up
+      Ran already    price more than 15% above: most of the move is done"""
+    C = UCFG
+    oi = fo.pivot(index="date", columns="symbol", values="fut_oi").sort_index()
+    px = fo.pivot(index="date", columns="symbol", values="fut_close").sort_index()
+    ch = oi.pct_change(fill_method=None)
+    rel = ch.sub(ch.median(axis=1), axis=0)
+    pc = px.pct_change(fill_method=None)
+    n = len(oi)
+    if n < 6:
+        return []
+    out = []
+    for s in symbols:
+        if s not in oi.columns or np.isnan(oi[s].iloc[-1]) or np.isnan(px[s].iloc[-1]):
+            continue
+        best = None
+        for i in range(max(1, n - C["sq_look"]), n - 1):
+            r_, p_ = rel[s].iloc[i], pc[s].iloc[i]
+            if not (r_ >= C["sq_oi_jump"] and p_ <= C["sq_px_drop"]):
+                continue
+            added = oi[s].iloc[i] - oi[s].iloc[i - 1]
+            if not added > 0:
+                continue
+            if best is None or added >= best[1]:
+                best = (i, added)
+        if not best:
+            continue
+        i, added = best
+        kept = (oi[s].iloc[-1] - oi[s].iloc[i - 1]) / added
+        ref = oi[s].iloc[max(i, n - 3)]          # before the last 2 sessions of covering
+        kept_before = (ref - oi[s].iloc[i - 1]) / added
+        above = px[s].iloc[-1] / px[s].iloc[i] - 1
+        if max(kept, kept_before) < C["sq_kept"] or above < 0:
+            continue
+        cover = float(rel[s].iloc[-2:].sum())
+        p2 = px[s].iloc[-1] / px[s].iloc[-3] - 1
+        if above > C["sq_late"]:
+            stage = "Ran already"
+        elif cover <= C["sq_cover"] and p2 > 0:
+            stage = "Squeeze on"
+        elif kept < C["sq_kept"]:
+            continue                             # shorts mostly gone, without a clear squeeze
+        elif above >= C["sq_trapped"]:
+            stage = "Shorts trapped"
+        else:
+            stage = "Watch"
+        notes = []
+        if hourly is not None and cal is not None and hourly.get(s) is not None:
+            ev = [e for e in hourly_events(hourly[s], cal) if "absorption" in e["text"]
+                  or "flush absorbed" in e["text"]]
+            if ev:
+                notes.append(f"{len(ev)} day{'s' if len(ev) > 1 else ''} of absorption volume")
+        for x in (setups or {}).get(s, []):
+            notes.append(x)
+        out.append({
+            "symbol": s, "stage": stage, "close": round(float(px[s].iloc[-1]), 2),
+            "short_day": oi.index[i].strftime("%Y-%m-%d"),
+            "short_oi": round(float(ch[s].iloc[i]) * 100, 1),
+            "short_px": round(float(pc[s].iloc[i]) * 100, 1),
+            "short_close": round(float(px[s].iloc[i]), 2),
+            "kept": round(float(kept) * 100), "above": round(float(above) * 100, 1),
+            "cover": round(cover * 100, 1), "notes": notes})
+    order = {"Squeeze on": 0, "Shorts trapped": 1, "Watch": 2, "Ran already": 3}
+    return sorted(out, key=lambda x: (order[x["stage"]], x["above"]))
+
+
+def log_squeeze(watch, asof):
+    """One line per stock per day, so we can later check what happened next."""
+    path = os.path.join(DATA_DIR, "squeeze_log.csv")
+    new = pd.DataFrame([{"date": asof, "symbol": x["symbol"], "stage": x["stage"],
+                         "close": x["close"], "above": x["above"]} for x in watch
+                        if x["stage"] != "Ran already"])
+    if new.empty:
+        return
+    old = pd.read_csv(path) if os.path.exists(path) else pd.DataFrame(columns=new.columns)
+    seen = set(zip(old["date"].astype(str), old["symbol"]))
+    new = new[[(d, s) not in seen for d, s in zip(new["date"], new["symbol"])]]
+    pd.concat([old, new], ignore_index=True).to_csv(path, index=False)
 
 
 def delivery_events(dl, cal):
@@ -386,9 +508,25 @@ def main_live():
                 r["setup"] = setups[s]
             rows.append(r)
     rows.sort(key=lambda r: (-r["score"], r["symbol"]))
+    brk = {}
+    if os.path.exists(sp):
+        try:
+            sj = json.load(open(sp))
+            for r in sj.get("ranges", []):
+                if r["stage"] in ("Ready", "Triggered"):
+                    brk.setdefault(r["symbol"], []).append(f"{r['setup']} {r['stage']}")
+        except Exception:
+            pass
+    squeeze = squeeze_watch(symbols, fo, hourly, cal, brk)
+    try:
+        log_squeeze(squeeze, fo["date"].max().strftime("%Y-%m-%d"))
+    except Exception as e:
+        print(f"[warn] squeeze log: {e}")
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"),
            "oi_asof": fo["date"].max().strftime("%Y-%m-%d"),
-           "stocks": len(symbols), "rows": rows, "notes": notes}
+           "squeeze": squeeze,
+           "stocks": len(symbols), "rows": rows, "notes": notes,
+           "oi_days": UCFG["oi_build_days"], "oi_moves": oi_moves(symbols, tables, cal)}
     with open(os.path.join(DATA_DIR, "unusual.json"), "w") as f:
         json.dump(res, f, indent=1)
     print(f"{len(symbols)} stocks | {len(rows)} flagged | top: "
@@ -482,8 +620,47 @@ def selftest():
     assert len(ev) == 1 and "big positions building" in ev[0]["text"] and ev[0]["side"] == 0, ev
     assert "in 7 sessions" in ev[0]["text"], ev
     assert oi_build_events("S5", tq, cal) == []
+    rows = []
+    for s in [f"S{n}" for n in range(30)] + ["EXIT"]:
+        oi = 1e6 * np.cumprod(1 + rng.normal(0, 0.01, 40))
+        px_ = np.full(40, 100.0)
+        if s == "EXIT":
+            oi[-7:] *= np.linspace(0.96, 0.70, 7)       # -30% over 7 sessions
+            px_[-7:] = np.linspace(101, 108, 7)          # while price rises
+        for dte, x, pp in zip(days[-40:], oi, px_):
+            rows.append({"date": dte, "symbol": s, "fut_oi": x, "fut_close": pp})
+    te = oi_tables(pd.DataFrame(rows))
+    ev = oi_build_events("EXIT", te, cal)
+    assert len(ev) == 1 and "short covering" in ev[0]["text"] and ev[0]["side"] == 1, ev
+    mv = oi_moves([f"S{n}" for n in range(30)] + ["EXIT"], te, cal)
+    assert [m["symbol"] for m in mv] == ["EXIT"] and mv[0]["building"] is False, mv
+    assert oi_moves(["QUIET", "S1"], tq, cal)[0]["building"] is True
     rq = analyse_unusual("QUIET", None, None, tq, None, cal)
     assert rq and rq["score"] >= 3 and rq["bias"] == "Mixed", rq
+
+    # 4c) short squeeze watch
+    rows = []
+    for s in [f"S{n}" for n in range(20)] + ["TRAP", "COVER", "GONE"]:
+        oi = 1e6 * np.cumprod(1 + rng.normal(0, 0.005, 40))
+        px_ = 100 * np.cumprod(1 + rng.normal(0, 0.003, 40))
+        if s in ("TRAP", "COVER", "GONE"):
+            oi[25:] *= 1.20                              # day 25: OI +20% ...
+            px_[25:] *= 0.95                             # ... while price falls 5%
+            lift = {"TRAP": 1.10, "COVER": 1.10, "GONE": 1.30}[s]
+            px_[30:] *= np.linspace(1, lift, 10)         # then price climbs back above
+            if s == "COVER":
+                oi[-2:] *= np.array([0.96, 0.92])        # shorts start covering
+                px_[-2:] *= np.array([1.01, 1.02])
+        for dte, x, pp in zip(days[-40:], oi, px_):
+            rows.append({"date": dte, "symbol": s, "fut_oi": x, "fut_close": pp})
+    sq = squeeze_watch([f"S{n}" for n in range(20)] + ["TRAP", "COVER", "GONE"],
+                       pd.DataFrame(rows), setups={"TRAP": ["Daily Flag Ready"]})
+    by_sq = {x["symbol"]: x for x in sq}
+    assert set(by_sq) == {"TRAP", "COVER", "GONE"}, sq
+    assert by_sq["TRAP"]["stage"] == "Shorts trapped" and by_sq["TRAP"]["kept"] >= 60, by_sq
+    assert by_sq["COVER"]["stage"] == "Squeeze on", by_sq["COVER"]
+    assert by_sq["GONE"]["stage"] == "Ran already" and sq[0]["symbol"] == "COVER", sq
+    assert "Daily Flag Ready" in by_sq["TRAP"]["notes"]
 
     # 5) delivery spike
     dl = pd.DataFrame({"date": days[-30:], "deliv_per": [40.0] * 29 + [65.0],
