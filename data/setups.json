@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-19 07:20",
+ "generated_ist": "2026-11-19 07:38",
  "oi_asof": "2026-11-18",
- "stocks": 218,
+ "stocks": 217,
  "market": {
   "weekly_bull_pct": 28,
   "monthly_bull_pct": 52,
@@ -1611,40 +1611,6 @@
    "grade": "C",
    "trigger": null,
    "stop": 1456.48
-  },
-  {
-   "symbol": "ADANIGREEN",
-   "close": 1404.1,
-   "trend": "With trend",
-   "states": {
-    "M": "Bullish",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Topping"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.1,
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "Mixed",
-    "ma": "ONLY BUY (M lagging)",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "TOPPING"
-    }
-   },
-   "setup": "Swing Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 53% \u00b7 Volume 1.1x in pullback \u00b7 OI -11% in up-leg, +1% in pullback",
-   "grade": "C",
-   "trigger": null,
-   "stop": 1377.34
   },
   {
    "symbol": "ADANIPOWER",
@@ -10940,140 +10906,6 @@
     "brk": null
    },
    "since": "2026-10-26 00:00"
-  },
-  {
-   "symbol": "ADANIGREEN",
-   "close": 1404.1,
-   "trend": "With trend",
-   "states": {
-    "M": "Bullish",
-    "W": "Bottoming",
-    "D": "Impulse",
-    "H": "Topping"
-   },
-   "setup": "Daily Flag",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "Mixed",
-    "ma": "ONLY BUY (M lagging)",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "TOPPING"
-    }
-   },
-   "ext": 2.1,
-   "detail": "21% pole, then a 5 days flag \u00b7 1.1 ranges under the top line \u00b7 Volume 1.2x in the pattern (quieter is better)",
-   "grade": "B",
-   "trigger": 1479.0,
-   "stop": 1377.24,
-   "target": 1787.0,
-   "target_why": "pole height added to the breakout",
-   "chart": {
-    "h": [
-     1320.0,
-     1317.5,
-     1319.2,
-     1302.0,
-     1263.4,
-     1247.8,
-     1250.0,
-     1289.0,
-     1288.0,
-     1314.0,
-     1319.5,
-     1340.3,
-     1362.4,
-     1391.2,
-     1429.6,
-     1429.0,
-     1449.5,
-     1479.0,
-     1426.4,
-     1442.0,
-     1409.6,
-     1433.8
-    ],
-    "l": [
-     1300.5,
-     1298.1,
-     1291.0,
-     1244.8,
-     1210.7,
-     1171.0,
-     1175.0,
-     1240.7,
-     1265.4,
-     1269.8,
-     1293.6,
-     1299.0,
-     1330.0,
-     1323.6,
-     1395.0,
-     1391.3,
-     1416.7,
-     1396.7,
-     1406.0,
-     1397.5,
-     1380.0,
-     1403.0
-    ],
-    "c": [
-     1307.1,
-     1302.0,
-     1295.2,
-     1258.5,
-     1250.0,
-     1185.1,
-     1250.0,
-     1289.0,
-     1269.0,
-     1307.0,
-     1298.7,
-     1337.0,
-     1339.3,
-     1388.0,
-     1414.9,
-     1424.1,
-     1448.9,
-     1401.7,
-     1422.0,
-     1403.0,
-     1406.6,
-     1429.9
-    ],
-    "lines": {
-     "pole": [
-      [
-       5.0,
-       1171.0
-      ],
-      [
-       17.0,
-       1479.0
-      ]
-     ],
-     "top": [
-      [
-       17.0,
-       1479.0
-      ],
-      [
-       21.0,
-       1479.0
-      ]
-     ]
-    },
-    "brk": null
-   },
-   "since": "2026-10-23 00:00"
   },
   {
    "symbol": "APLAPOLLO",
@@ -35659,7 +35491,6 @@
    "ABCAPITAL",
    "ADANIENSOL",
    "ADANIENT",
-   "ADANIGREEN",
    "ADANIPOWER",
    "ALKEM",
    "AMBER",
@@ -37907,22 +37738,6 @@
     "confirmed": "CONFIRMED \u2014 Buy ON"
    },
    {
-    "symbol": "ADANIGREEN",
-    "close": 1404.1,
-    "states": {
-     "M": "Bullish",
-     "W": "Bottoming",
-     "D": "Impulse",
-     "H": "Topping"
-    },
-    "signal": "Mixed",
-    "ma": "ONLY BUY (M lagging)",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON"
-   },
-   {
     "symbol": "ADANIPORTS",
     "close": 1902.6,
     "states": {
@@ -39230,5 +39045,7 @@
    }
   ]
  },
- "notes": []
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ]
 }
