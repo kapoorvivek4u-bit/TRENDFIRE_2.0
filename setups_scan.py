@@ -75,6 +75,16 @@ CFG = {
         "ready_atr": 0.75,       # Ready when the close is this close under the top line
         "late_atr": 2.5,
     },
+    "vcp": {   # Volatility Contraction Pattern: a run up, then a base whose swings shrink
+        "daily":  {"base": (10, 60), "run_look": 40, "run_pct": 12.0, "tight_bars": 5,
+                   "tight_pct": 4.0, "fresh": 5},
+        "hourly": {"base": (20, 120), "run_look": 80, "run_pct": 6.0, "tight_bars": 7,
+                   "tight_pct": 1.5, "fresh": 10},
+        "shrink_last": 0.6,      # last third's swing at most this share of the first third's
+        "shrink_step": 0.9,      # ... and smaller than the middle third's by this much
+        "vol_dry": 0.7,          # volume in the last bars vs during the run up
+        "ready_atr": 1.0, "late_atr": 2.5,
+    },
     "recent_break_days": 15,  # a range breakout this recent counts for Breakout + Trend Overspill
     "ext_atr": 4.0,         # this many daily ranges above the 50 EMA = Extended
     "turn_pts": 5,          # Daily breadth change over 3 sessions that counts as a turn
@@ -565,6 +575,117 @@ def mini_chart(T, start, lines, brk=None, pts=60):
             "brk": None if brk is None else x(brk)}
 
 
+def find_vcp(h, l, c, v, atr, p):
+    """VCP at the right edge: a run up of at least run_pct, then a base under the run's
+    high (the pivot) whose swings get smaller (base split in thirds: each third's range
+    narrower than the one before), lows not falling, the last few bars tight, and
+    volume drying up. Returns dict or None."""
+    V = CFG["vcp"]
+    n = len(c)
+    b_lo, b_hi = p["base"]
+    if n < b_hi + p["run_look"] + 5 or np.isnan(atr[-1]) or atr[-1] <= 0:
+        return None
+    a_now = float(atr[-1])
+    lo_w = n - b_hi
+    win = h[lo_w:n - b_lo + 1]
+    pivot = float(win.max())
+    # the base starts the first time price reached the top (a later poke at the same
+    # level is one of the base's swings, not a new start)
+    a = lo_w + int(np.argmax(win >= pivot - 0.3 * a_now))
+    after = np.arange(a + 1, n)
+    above = after[c[after] > pivot + 0.1 * a_now]
+    brk = int(above[0]) if len(above) else None
+    end = brk if brk is not None else n
+    if end - a < b_lo:
+        return None
+    s0 = max(0, a - p["run_look"])
+    run_lo_i = s0 + int(np.argmin(l[s0:a + 1]))
+    run = (pivot / l[run_lo_i] - 1) * 100
+    if run < p["run_pct"] or a - run_lo_i < 3:
+        return None
+    segs = np.array_split(np.arange(a, end), 3)
+    rng = [float((h[s].max() - l[s].min()) / pivot * 100) for s in segs]
+    lows = [float(l[s].min()) for s in segs]
+    if not (rng[2] <= V["shrink_last"] * rng[0] and rng[2] <= V["shrink_step"] * rng[1]
+            and rng[1] <= rng[0] * 1.1):
+        return None                                  # swings are not contracting
+    if lows[2] < lows[0] - 0.25 * a_now or lows[1] < lows[0] - 0.5 * a_now:
+        return None                                  # lows must hold or rise
+    t = np.arange(max(a, end - p["tight_bars"]), end)
+    tight = float((h[t].max() - l[t].min()) / pivot * 100)
+    if tight > p["tight_pct"]:
+        return None
+    if (pivot - lows[0]) / pivot * 100 > 0.5 * run + 1e-9:
+        return None                                  # a base deeper than half the run is no VCP
+    dry = np.nan
+    if v is not None and len(v) == n:
+        run_v = np.nanmean(v[run_lo_i:a + 1])
+        last_v = np.nanmean(v[max(a, end - 10):end])
+        dry = last_v / run_v if run_v and run_v > 0 else np.nan
+    ln = pivot
+    if brk is None:
+        stage = "Ready" if (pivot - c[-1]) / a_now <= V["ready_atr"] else "Watch"
+    else:
+        if (n - 1 - brk) > p["fresh"] or (c[-1] - pivot) / a_now > V["late_atr"] \
+                or c[-1] < pivot - 0.5 * a_now:
+            return None
+        stage = "Triggered"
+    stop = float(l[segs[2]].min()) * 0.998
+    return {"stage": stage, "pivot": pivot, "stop": stop,
+            "target": pivot + (pivot - min(lows)), "start": int(a), "run_start": int(run_lo_i),
+            "broke_at": brk, "span": int(end - a), "run": run, "ranges": rng, "tight": tight,
+            "dry": dry, "lines": {"top": (a, pivot, n - 1, pivot),
+                                  "floor": (int(segs[0][0]), lows[0], int(end - 1), lows[2])}}
+
+
+def vcp_rows(row, T, vol, idx, fo, tf):
+    """Daily / Hourly VCP row. Only in an uptrend, like flags."""
+    up = ("Bullish", "Impulse")
+    st_ = row.get("states", {})
+    ok = (st_.get("W") in up and row.get("trend") == "With trend" if tf == "Daily"
+          else st_.get("D") in up and st_.get("W") in up)
+    if not ok:
+        return []
+    v = np.asarray(vol, float) if vol is not None else None
+    p = CFG["vcp"][tf.lower()]
+    vc = find_vcp(T["h"], T["l"], T["c"], v, T["ind"]["atr"], p)
+    if not vc:
+        return []
+    unit = "days" if tf == "Daily" else "hours"
+    dry_ok = bool(not np.isnan(vc["dry"]) and vc["dry"] <= CFG["vcp"]["vol_dry"])
+    if vc["broke_at"] is not None:
+        _, vol_txt, _ = _vol_grade(vol, idx, vc["broke_at"], unit, None)
+    else:
+        vol_txt = ("Volume n/a" if np.isnan(vc["dry"]) else
+                   f"Volume {vc['dry']:.1f}x the run's " + ("(drying up)" if dry_ok else
+                                                           "(not dry yet)"))
+    oi_ok = False
+    if fo is not None and idx is not None and len(idx) > 6:
+        ch = oi_change(fo, pd.Timestamp(idx[-6]).normalize(), pd.Timestamp(idx[-1]).normalize())
+        if ch:
+            oi_ok = bool((ch[0] > 0 and ch[1] > 0) or (abs(ch[0]) < 0.02 and ch[1] <= 0.03))
+    grade = "ABC"[2 - int(dry_ok) - int(oi_ok)] if fo is not None else ("A" if dry_ok else "B")
+    r_ = vc["ranges"]
+    a_now = float(T["ind"]["atr"][-1])
+    pos = ("broke out " + pd.Timestamp(idx[vc["broke_at"]]).strftime("%a %d")
+           if vc["broke_at"] is not None and idx is not None else
+           ("at the pivot" if vc["pivot"] - T["c"][-1] <= 0.05 * a_now else
+            f"{(vc['pivot'] - T['c'][-1]) / a_now:.1f} ranges under the pivot"))
+    detail = (f"{vc['run']:.0f}% run, then a {vc['span']} {unit} base · swings "
+              f"{r_[0]:.1f}% → {r_[1]:.1f}% → {r_[2]:.1f}%, last bars {vc['tight']:.1f}% · "
+              f"{pos} · {vol_txt}")
+    return [{"symbol": row["symbol"], "close": row["close"], "trend": row["trend"],
+             "states": row["states"], "setup": f"{tf} VCP", "stage": vc["stage"],
+             "old": row.get("old"), "vk": row.get("vk"), "ext": row.get("ext"),
+             "detail": detail, "grade": grade, "clean": False,
+             "trigger": round(vc["pivot"], 2), "stop": round(vc["stop"], 2),
+             "target": round(vc["target"], 2),
+             "target_why": "base depth added to the pivot",
+             "chart": mini_chart(T, vc["run_start"], vc["lines"], vc["broke_at"]),
+             "since": pd.Timestamp(idx[vc["start"]]).strftime("%Y-%m-%d %H:%M")
+             if idx is not None else None}]
+
+
 def _vol_grade(vol, idx, brk, unit, fo, quiet_from=None):
     """Volume and OI check for a breakout setup: (vol_ok, vol_txt, oi_ok)."""
     v = np.asarray(vol, float) if vol is not None else None
@@ -985,9 +1106,11 @@ def analyse(sym, d, hr, fo):
                               "level": round(rb["line_now"], 2), "kind": rb["kind"],
                               "weeks": round(rb["span"] / 5)}
     lines += pattern_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily")
+    lines += vcp_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily")
     if H["ok"]:
         lines += range_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly Range")
         lines += pattern_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly")
+        lines += vcp_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly")
     row["ranges"] = lines
 
     if cands:
@@ -1547,6 +1670,34 @@ def selftest():
     print("wedge narrow:", round(find_patterns(Tw["h"], Tw["l"], Tw["c"], Tw["ind"]["atr"],
           CFG["pattern"]["daily"])["Falling Wedge"]["narrow"], 2), "clean:", wr[0]["clean"])
     print("pattern trace:", f2["stage"], r1["Rectangle"]["stage"], w1["Falling Wedge"]["stage"])
+
+    # 8i) VCP: a run up, then swings shrinking in thirds, tight last bars, dry volume
+    dv = pd.bdate_range(end="2026-11-13", periods=250)
+    def vcp_cc(amps, tail=()):
+        base_ = []
+        for A in amps:
+            tt_ = np.arange(8)
+            base_ += list(958 * (1 - A / 2) + 958 * A / 2 * np.cos(2 * np.pi * tt_ / 8))
+        cc_ = np.concatenate([np.full(150, 830.0) + np.sin(np.arange(150) / 3) * 4,
+                              np.linspace(830, 958, 10), base_, np.array(tail, float)])
+        return np.concatenate([np.full(250 - len(cc_), 830.0), cc_])[-250:]
+    vv = np.full(250, 1e6); vv[150:160] = 3e6; vv[-12:] = 6e5
+    def vcp_of(cc_):
+        T_ = tf_view(_bars(cc_, dv, noise=0.002, vol=vv), 3)
+        return find_vcp(T_["h"], T_["l"], T_["c"], vv, T_["ind"]["atr"], CFG["vcp"]["daily"]), T_
+    v1, Tv = vcp_of(vcp_cc((0.03, 0.02, 0.008)))
+    assert v1 and v1["stage"] in ("Watch", "Ready") and v1["ranges"][2] < v1["ranges"][0], v1
+    assert v1["dry"] <= 0.7 and v1["stop"] < v1["pivot"] < v1["target"], v1
+    v2, _ = vcp_of(vcp_cc((0.03, 0.02, 0.008), tail=[955, 968, 975]))
+    assert v2 and v2["stage"] == "Triggered", v2
+    assert vcp_of(vcp_cc((0.03, 0.03, 0.03)))[0] is None            # swings not shrinking
+    row_v = {"symbol": "V", "close": 950.0, "trend": "With trend",
+             "states": {"M": "Bullish", "W": "Bullish", "D": "Bullish", "H": "Bullish"}}
+    vr = vcp_rows(row_v, Tv, vv, dv, None, "Daily")
+    assert vr and vr[0]["setup"] == "Daily VCP" and vr[0]["grade"] == "A" and "→" in vr[0]["detail"], vr
+    assert vcp_rows(dict(row_v, trend="Early turn"), Tv, vv, dv, None, "Daily") == []
+    print("vcp trace:", v1["stage"], [round(x_, 1) for x_ in v1["ranges"]], round(v1["dry"], 2),
+          "|", v2["stage"])
 
     # 8f) VK System words
     def T_(m, p, sq=False, e=(3.0, 2.0, 1.0)):
