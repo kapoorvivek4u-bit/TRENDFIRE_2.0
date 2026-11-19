@@ -68,7 +68,10 @@ CFG = {
         "flat_atr": 1.0,         # a line moving less than this many ATRs over the pattern is flat
         "height_pct": (2.5, 25.0),
         "pole_atr": 5.0,         # flag pole: at least this many ATRs ...
-        "flag_retrace": 0.5,     # ... and the flag gives back at most half of it
+        "flag_retrace": 0.33,    # ... and the flag gives back at most a third of it
+        "flag_quiet": 0.8,       # flag volume at most this share of the pole's volume
+        "flag_break_vol": 1.5,   # a flag breakout needs this much volume
+        "clean_narrow": 0.4,     # Clean wedge: now at most this share of its starting width
         "ready_atr": 0.75,       # Ready when the close is this close under the top line
         "late_atr": 2.5,
     },
@@ -531,6 +534,7 @@ def find_patterns(h, l, c, atr, p):
             cand = {"stage": stage, "line_now": float(line(n - 1)), "stop": stop * 0.998,
                     "target": target, "start": a, "broke_at": brk, "span": int(span),
                     "touches": len(touches) + low_touch, "height": height,
+                    "narrow": float(w1 / w0),
                     "lines": {"top": (a, float(h[a]), n - 1, float(line(n - 1))),
                               "floor": (a, float(floor(a)), end - 1, float(floor(end - 1)))}}
             old_ = out.get(kind)
@@ -594,11 +598,37 @@ def pattern_rows(row, T, vol, idx, fo, tf):
     unit = "days" if tf == "Daily" else "hours"
     per_wk = 5 if unit == "days" else 35
     a_now = float(T["ind"]["atr"][-1])
+    P = CFG["pattern"]
+    up = ("Bullish", "Impulse")
+    st_ = row.get("states", {})
+    # a flag is a pause inside an uptrend, not a bounce after a fall
+    flag_trend = (st_.get("W") in up and row.get("trend") == "With trend" if tf == "Daily"
+                  else st_.get("D") in up and st_.get("W") in up)
+    v = np.asarray(vol, float) if vol is not None else None
     out = []
     for kind, pt in found.items():
         start = pt.get("pole_start", pt["start"]) if kind == "Flag" else pt["start"]
         vol_ok, vol_txt, oi_ok = _vol_grade(vol, idx, pt["broke_at"], unit, fo,
                                             quiet_from=pt["start"] + 1)
+        clean = False
+        if kind == "Flag":
+            if not flag_trend:
+                continue
+            if v is not None and len(v) == len(T["c"]):
+                a_, end = pt["start"], (pt["broke_at"] if pt["broke_at"] is not None
+                                        else len(v))
+                pole_v = np.nanmean(v[pt["pole_start"]:a_ + 1])
+                flag_v = np.nanmean(v[a_ + 1:end]) if end > a_ + 1 else np.nan
+                quiet = flag_v / pole_v if pole_v and pole_v > 0 else np.nan
+                if np.isnan(quiet) or quiet > P["flag_quiet"]:
+                    continue                     # the flag must be quieter than the pole
+                if pt["broke_at"] is not None and not vol_ok:
+                    continue                     # ... and the breakout loud
+                vol_ok = True
+                vol_txt = (vol_txt if pt["broke_at"] is not None else
+                           f"Flag volume {quiet:.1f}x the pole's (quiet)")
+        elif kind == "Falling Wedge":
+            clean = bool(pt.get("narrow", 1) <= P["clean_narrow"] and vol_ok)
         span = (f"{pt['span']} {unit}" if pt["span"] < 2 * per_wk
                 else f"{pt['span'] / per_wk:.0f} weeks")
         if kind == "Flag":
@@ -613,7 +643,8 @@ def pattern_rows(row, T, vol, idx, fo, tf):
         out.append({"symbol": row["symbol"], "close": row["close"], "trend": row["trend"],
                     "states": row["states"], "setup": f"{tf} {kind}", "stage": pt["stage"],
                     "old": row.get("old"), "vk": row.get("vk"), "ext": row.get("ext"),
-                    "detail": " · ".join([where, pos, vol_txt]), "grade": grade,
+                    "detail": " · ".join((["Clean"] if clean else []) + [where, pos, vol_txt]),
+                    "grade": grade, "clean": clean,
                     "trigger": round(pt["line_now"], 2), "stop": round(pt["stop"], 2),
                     "target": round(pt["target"], 2),
                     "target_why": {"Flag": "pole height added to the breakout",
@@ -1462,7 +1493,7 @@ def selftest():
         return find_patterns(T["h"], T["l"], T["c"], T["ind"]["atr"], CFG["pattern"]["daily"])
     rw = 1000 + np.cumsum(np.random.default_rng(1).normal(0, 3, 120))
     pole = np.linspace(rw[-1], rw[-1] * 1.15, 8)
-    flag = pole[-1] * (1 - np.linspace(0, 0.04, 7)) + np.array([0, 8, -4, 6, -6, 4, -2])
+    flag = pole[-1] * (1 - np.linspace(0, 0.02, 7)) + np.array([0, 8, -4, 6, -6, 4, -2])
     f1 = pats(np.concatenate([rw, pole, flag]))
     assert set(f1) == {"Flag"} and f1["Flag"]["stage"] in ("Watch", "Ready"), f1
     f2 = pats(np.concatenate([rw, pole, flag, [pole[-1] * 1.01, pole[-1] * 1.03]]))["Flag"]
@@ -1493,6 +1524,28 @@ def selftest():
     assert len(ch["c"]) <= 60 and len(ch["h"]) == len(ch["l"]) == len(ch["c"]), ch
     assert set(ch["lines"]) == {"top", "floor"} and 0 <= ch["lines"]["top"][0][0] < len(ch["c"])
     assert all("chart" in x for x in res_p["ranges"])
+    # flag rows: only in an uptrend, with a quiet flag
+    cc = np.concatenate([rw, pole, flag]); cc = np.concatenate([np.full(200 - len(cc), cc[0]), cc])
+    Tf = tf_view(_bars(cc, days_p, noise=0.006), 3)
+    vq = np.full(200, 1e6); vq[-15:-7] = 3e6; vq[-7:] = 1e6      # loud pole, quiet flag
+    row_up = {"symbol": "F", "close": cc[-1], "trend": "With trend",
+              "states": {"M": "Bullish", "W": "Bullish", "D": "Impulse", "H": "Bullish"}}
+    fr = [x for x in pattern_rows(row_up, Tf, vq, days_p, None, "Daily") if "Flag" in x["setup"]]
+    assert fr and fr[0]["grade"] == "A" and "Flag volume" in fr[0]["detail"], fr
+    row_dn = dict(row_up, trend="Early turn", states=dict(row_up["states"], W="Bottoming"))
+    assert not [x for x in pattern_rows(row_dn, Tf, vq, days_p, None, "Daily")
+                if "Flag" in x["setup"]]                          # a bounce, not a flag
+    assert not [x for x in pattern_rows(row_up, Tf, np.full(200, 1e6), days_p, None, "Daily")
+                if "Flag" in x["setup"]]                          # flag as loud as its pole
+    # clean wedge: narrowed a lot and quiet volume
+    vw = np.full(200, 1e6); vw[-30:] = 6e5
+    cw = np.concatenate([np.linspace(1300, 1200, 60), wdg]); cw = np.concatenate([np.full(200 - len(cw), cw[0]), cw])
+    Tw = tf_view(_bars(cw, days_p, noise=0.006), 3)
+    wr = [x for x in pattern_rows(dict(row_up, symbol="W"), Tw, vw, days_p, None, "Daily")
+          if "Wedge" in x["setup"]]
+    assert wr and "clean" in wr[0], wr
+    print("wedge narrow:", round(find_patterns(Tw["h"], Tw["l"], Tw["c"], Tw["ind"]["atr"],
+          CFG["pattern"]["daily"])["Falling Wedge"]["narrow"], 2), "clean:", wr[0]["clean"])
     print("pattern trace:", f2["stage"], r1["Rectangle"]["stage"], w1["Falling Wedge"]["stage"])
 
     # 8f) VK System words
