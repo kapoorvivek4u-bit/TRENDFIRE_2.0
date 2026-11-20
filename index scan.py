@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 TradeReady index scan: Nifty, Bank Nifty and Midcap.
