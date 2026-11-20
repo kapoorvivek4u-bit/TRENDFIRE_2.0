@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-20 19:09",
+ "generated_ist": "2026-11-20 22:16",
  "oi_asof": "2026-11-19",
  "squeeze": [
   {
@@ -194,6 +194,53 @@
    "notes": []
   }
  ],
+ "buildup": {
+  "building": [
+   {
+    "symbol": "GODFRYPHLP",
+    "oi": 21.3,
+    "px": 1.6,
+    "days": 4,
+    "of": 7,
+    "since": "2026-11-16",
+    "close": 1797.3
+   },
+   {
+    "symbol": "LICI",
+    "oi": 44.8,
+    "px": 1.0,
+    "days": 3,
+    "of": 7,
+    "since": "2026-11-17",
+    "close": 404.85
+   },
+   {
+    "symbol": "PAYTM",
+    "oi": 32.7,
+    "px": -3.9,
+    "days": 1,
+    "of": 7,
+    "since": "2026-11-19",
+    "close": 1722.2
+   }
+  ],
+  "starting": [
+   {
+    "symbol": "OIL",
+    "oi": 16.1,
+    "px": -0.7,
+    "oi7": 25.4,
+    "close": 430.95
+   },
+   {
+    "symbol": "UPL",
+    "oi": 14.7,
+    "px": 1.6,
+    "oi7": 21.6,
+    "close": 570.6
+   }
+  ]
+ },
  "stocks": 218,
  "rows": [
   {
