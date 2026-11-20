@@ -15,10 +15,10 @@ import streamlit as st
 PAGES = {
     "F&O": {"file": os.path.join("data", "setups.json"), "workflow": "Setups scan",
             "setups": ["All", "Squeeze Break", "Swing Pullback", "Trend Pullback",
-                       "Overspill", "Patterns", "Old labels", "VK"],
+                       "Overspill", "Patterns", "VK"],
             "who": "F&O stocks"},
     "Equity": {"file": os.path.join("data", "equity.json"), "workflow": "Equity scan",
-               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Patterns", "Old labels"],
+               "setups": ["All", "Squeeze Break", "Trend Pullback", "Overspill", "Patterns"],
                "who": "these midcaps and smallcaps"},
     "Unusual": {"F&O": {"file": os.path.join("data", "unusual.json"),
                         "workflow": "Unusual scan"},
@@ -33,11 +33,31 @@ ALL_FILES = ([DEALS_FILE, STARS_FILE] + [PAGES[k]["file"] for k in ("F&O", "Equi
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 OWNER = "Vivek Kapoor"          # name shown as the faded watermark
-INK, MUTED, RULE = "#1a1a18", "#5c5c57", "#b9b9b0"
-GREEN, RED, BLUE = "#0f6b4f", "#b42318", "#1d5fa8"
-AMBER_WL = "#b9a77a"          # watchlist star (empty)
+THEMES = {
+    "neon": {   # Graphite & Neon (dark)
+        "bg": "#121212", "card": "#1a1a1a", "card2": "#141414", "line": "#2a2a2a",
+        "ink": "#f2f2f2", "muted": "#9a9a9a", "rule": "#2f2f2f", "accent": "#c6ff3d",
+        "accent_ink": "#121212", "green": "#7ee26b", "red": "#ff5c5c", "blue": "#22d3ee",
+        "amber": "#ff8a3d", "weak": "#ffb347", "star": "#ff8a3d", "star_off": "#6b6b6b",
+        "shadow": "none", "chip_mode": "outline", "bg_css": "#121212"},
+    "indigo": {   # Sand & Indigo (light)
+        "bg": "#faf7f2", "card": "#ffffff", "card2": "#f6f5ff", "line": "#e7e5f7",
+        "ink": "#1e1b4b", "muted": "#6b6894", "rule": "#e4e2f5", "accent": "#4f46e5",
+        "accent_ink": "#ffffff", "green": "#0f8a5f", "red": "#e03131", "blue": "#4f46e5",
+        "amber": "#d9480f", "weak": "#b8860b", "star": "#f59f00", "star_off": "#b9b6d6",
+        "shadow": "0 6px 24px rgba(79,70,229,.10)", "chip_mode": "fill",
+        "bg_css": "linear-gradient(180deg,#eef0ff 0%,#faf7f2 420px)"},
+}
+_tq = st.query_params.get("theme")
+if _tq in THEMES:
+    st.session_state["theme"] = _tq
+THEME_NAME = st.session_state.get("theme", "neon")
+TH = THEMES[THEME_NAME]
+INK, MUTED, RULE = TH["ink"], TH["muted"], TH["rule"]
+GREEN, RED, BLUE = TH["green"], TH["red"], TH["blue"]
+AMBER_WL = TH["star_off"]     # watchlist star (empty)
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
-AMBER = "#a15c00"
+AMBER = TH["amber"]
 VK_ORDER = ["BUY NOW", "ALMOST READY (Bullish)", "COMING CLOSE TO READY (Bullish)",
             "SELL NOW", "ALMOST READY (Bearish)", "COMING CLOSE TO READY (Bearish)", "NO SIGNAL"]
 VK_COLOR = {"BUY NOW": GREEN, "ALMOST READY (Bullish)": GREEN,
@@ -87,34 +107,83 @@ def turn_html(m, label=""):
 BIAS_COLOR = {"Buying": GREEN, "Selling": RED, "Mixed": MUTED}
 MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
 
-st.set_page_config(page_title="Setups", layout="centered")
+st.set_page_config(page_title="TradeReady", layout="centered")
 st.markdown(f"""<style>
-.block-container {{max-width: 480px; padding: 1.2rem 1rem 3rem;}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+html, body, [data-testid="stAppViewContainer"], .stApp {{background: {TH["bg_css"]} !important;
+  color: {INK}; font-family: Inter, system-ui, sans-serif;}}
+[data-testid="stAppViewContainer"] p, [data-testid="stAppViewContainer"] li,
+[data-testid="stMarkdownContainer"] {{color: {INK};}}
+.block-container {{max-width: 480px; padding: 1rem 1rem 3rem;}}
 #MainMenu, footer, header {{visibility: hidden;}}
-.tf-grid {{display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 36px;
-  border-bottom: 1px solid {RULE};}}
+.tf-grid {{display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin: 8px 0;}}
 @media (min-width: 900px) {{
-  .block-container {{max-width: 1180px; padding: 1.6rem 2rem 3rem;}}
+  .block-container {{max-width: 1180px; padding: 1.4rem 2rem 3rem;}}
   .tf-grid {{grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));}}
   .tf-small {{font-size: 13px !important;}}
   .tf-set, .tf-ev {{font-size: 14px !important;}}
 }}
-.tf-row {{border-top: 1px solid {RULE}; padding: 11px 0; line-height: 1.45;}}
+.tf-row {{background: {TH["card"]}; border: 1px solid {TH["line"]}; border-radius: 18px;
+  padding: 14px; line-height: 1.45; box-shadow: {TH["shadow"]};}}
 .tf-top {{display: flex; justify-content: space-between; align-items: center;}}
-.tf-sym {{font-family: {MONO}; font-size: 17px; font-weight: 600; color: {INK} !important;}}
-.tf-grade {{min-width: 28px; height: 28px; box-sizing: border-box; border-radius: 5px;
-  font-weight: 700; font-size: 15px; display: flex; align-items: center;
+.tf-sym {{font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 17px;
+  font-weight: 700; color: {INK} !important; text-decoration: none !important;}}
+.tf-grade {{min-width: 32px; height: 32px; box-sizing: border-box; border-radius: 10px;
+  font-weight: 800; font-size: 15px; display: flex; align-items: center;
   justify-content: center; padding: 0 6px;}}
 .tf-set {{font-size: 13px; font-weight: 600; color: {INK};}}
 .tf-small {{font-size: 12px; color: {MUTED};}}
-.tf-lvl {{display: flex; justify-content: space-between; font-family: {MONO};
-  font-size: 13px; font-weight: 500; color: {INK};}}
+.tf-lvl {{display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600; color: {INK}; margin-top: 8px;}}
 .tf-ev {{font-size: 13px; color: {INK}; padding-left: 10px; margin: 2px 0;
   border-left: 3px solid {RULE};}}
-.tf-names a {{font-family: {MONO}; font-size: 13px; color: {INK} !important;}}
+.tf-names a {{font-family: 'JetBrains Mono', monospace; font-size: 13px; color: {INK} !important;}}
 a.tf-wl {{text-decoration: none !important; color: {AMBER_WL} !important; font-size: 17px;
   margin-left: 6px; line-height: 1;}}
-a.tf-wl.on {{color: #c98a00 !important;}}
+a.tf-wl.on {{color: {TH["star"]} !important;}}
+a {{color: {TH["accent"] if THEME_NAME == "indigo" else TH["blue"]};}}
+.tf-chips {{display: flex; flex-wrap: wrap; gap: 6px; margin: 9px 0 4px;}}
+.tf-chip {{font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+  white-space: nowrap; line-height: 1.5;}}
+.tf-boxes {{display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 10px;}}
+.tf-boxes div {{background: {TH["card2"]}; border: 1px solid {TH["line"]}; border-radius: 12px;
+  padding: 7px 4px; text-align: center;}}
+.tf-boxes small {{display: block; font-size: 10px; font-weight: 600; letter-spacing: .05em;
+  text-transform: uppercase; color: {MUTED};}}
+.tf-boxes b {{font-family: 'JetBrains Mono', monospace; font-size: 13px;}}
+.tf-head {{display: flex; justify-content: space-between; align-items: center; margin: 2px 0 10px;}}
+.tf-brand {{font-weight: 800; font-size: 21px; letter-spacing: -.02em; color: {INK};}}
+.tf-brand span {{color: {TH["accent"]};}}
+.tf-pill {{font-size: 11px; font-weight: 700; padding: 5px 11px; border-radius: 999px;}}
+/* radio buttons as pills */
+[data-testid="stRadioGroup"], [data-testid="stRadio"] [role="radiogroup"] {{gap: 6px !important;
+  flex-wrap: wrap !important;}}
+label[data-testid="stRadioOption"] {{background: {TH["card"]}; border: 1px solid {TH["line"]};
+  border-radius: 999px; padding: 6px 13px !important; margin: 0 !important; cursor: pointer;
+  box-shadow: {TH["shadow"] if THEME_NAME == "indigo" else "none"};}}
+label[data-testid="stRadioOption"] > div > div:not([data-testid="stMarkdownContainer"]) {{
+  display: none !important;}}
+label[data-testid="stRadioOption"] p {{font-size: 13px !important; font-weight: 600;
+  color: {MUTED} !important; margin: 0 !important;}}
+label[data-testid="stRadioOption"][data-selected="true"] {{background: {TH["ink"]};
+  border-color: {TH["ink"]};}}
+label[data-testid="stRadioOption"][data-selected="true"] p {{
+  color: {TH["bg"] if THEME_NAME == "neon" else "#ffffff"} !important;}}
+/* buttons, expanders, inputs */
+button[data-testid^="stBaseButton-secondary"], .stDownloadButton > button {{
+  background: {TH["card"]} !important; color: {INK} !important;
+  border: 1px solid {TH["line"]} !important; border-radius: 12px !important; font-weight: 600;}}
+button[data-testid^="stBaseButton-secondary"] p {{color: {INK} !important;}}
+button[data-testid^="stBaseButton-secondary"]:hover {{border-color: {TH["accent"]} !important;}}
+button[data-testid^="stBaseButton-secondary"]:disabled {{opacity: .45;}}
+[data-testid="stExpander"] details {{background: {TH["card"]}; border: 1px solid {TH["line"]};
+  border-radius: 14px;}}
+[data-testid="stExpander"] summary p {{color: {INK} !important; font-weight: 600;}}
+[data-testid="stCaptionContainer"], .stCaption {{color: {MUTED} !important;}}
+input, textarea, [data-baseweb="select"] > div {{background: {TH["card"]} !important;
+  color: {INK} !important; border-color: {TH["line"]} !important; border-radius: 12px !important;}}
+[data-testid="stTable"] td, [data-testid="stTable"] th {{color: {INK};}}
+code {{background: {TH["card2"]} !important; color: {INK} !important;}}
 </style>""", unsafe_allow_html=True)
 
 
@@ -151,9 +220,9 @@ def grade_badge(g, stage=None):
     if not live:                                       # Watch: not tradeable yet, so grey
         style = f"border:2px solid {RULE};color:{MUTED}"
     elif g == "A":
-        style = f"background:{GREEN};color:#fff"
+        style = f"background:{TH['accent']};color:{TH['accent_ink']}"
     elif g == "Warning":
-        style = f"background:{RED};color:#fff;font-size:12px"
+        style = f"background:{RED};color:#fff;font-size:11px"
     else:
         style = f"border:2px solid {INK};color:{INK}"
     tip = "Not tradeable yet: the grade turns colour at Ready" if not live else ""
@@ -174,7 +243,7 @@ def quality_html(r):
 
 UNUSUAL = {}          # symbol -> its row on the Unusual page, for the market in view
 SECTORS = {}          # symbol -> {"sector", "stage"} from the sector scan
-STAGE_COLOR = {"Leading": GREEN, "Improving": BLUE, "Weakening": "#8a5300", "Lagging": RED}
+STAGE_COLOR = {"Leading": GREEN, "Improving": BLUE, "Weakening": TH["weak"], "Lagging": RED}
 
 
 def load_sector_tags():
@@ -389,58 +458,87 @@ def render_oi_moves(res):
           "and can fade. Price down = longs giving up. Price flat = interest fading.")
 
 
+def chip(text, col):
+    """A small rounded label: outlined on the dark theme, softly filled on the light one."""
+    style = (f"border:1px solid {col};color:{col}" if TH["chip_mode"] == "outline"
+             else f"background:{col}1f;color:{col}")
+    return f'<span class="tf-chip" style="{style}">{html.escape(text)}</span>'
+
+
+VK_SHORT = {"BUY NOW": "VK Buy now ▲", "ALMOST READY (Bullish)": "VK Almost ready ▲",
+            "COMING CLOSE TO READY (Bullish)": "VK Coming close ▲", "SELL NOW": "VK Sell now ▼",
+            "ALMOST READY (Bearish)": "VK Almost ready ▼",
+            "COMING CLOSE TO READY (Bearish)": "VK Coming close ▼"}
+
+
+def level_boxes(entry, stop, target, entry_word="Buy above", target_word="Target"):
+    def box(label, val, col):
+        v = money(val) if val else "—"
+        return f'<div><small>{label}</small><b style="color:{col}">{v}</b></div>'
+    return ('<div class="tf-boxes">' + box(entry_word, entry, INK) + box("Stop", stop, RED)
+            + box(target_word, target, GREEN) + '</div>')
+
+
 def row_html(r):
     e = html.escape
-    trend = r.get("trend") or "Monthly n/a"
-    tcol = TREND_COLOR.get(trend, MUTED)
-    states = " · ".join(f"{k} {e(v)}" for k, v in r["states"].items())
-    detail = e(r.get("detail", ""))
+    trend = r.get("trend") or ""
+    stage = r.get("stage") or ""
+    chips = [chip(r.get("setup", ""), BLUE)]
+    if stage:
+        chips.append(chip(stage, GREEN if stage in LIVE_STAGES else MUTED))
+    if trend:
+        chips.append(chip(trend, TREND_COLOR.get(trend, MUTED)))
+    v = r.get("vk")
+    if v and v.get("final") in VK_SHORT:
+        chips.append(chip(VK_SHORT[v["final"]], VK_COLOR.get(v["final"], MUTED)))
+    if r.get("old") == "🏆 Prime Setup":
+        chips.append(chip("🏆 Prime Setup", TH["accent"] if THEME_NAME == "neon" else AMBER))
+    if is_extended(r):
+        chips.append(chip("Extended", RED))
+    sec = SECTORS.get(r["symbol"], {})
+    if sec.get("sector"):
+        chips.append(chip(f'{sec["sector"]} · {sec.get("stage", "")}'.strip(" ·"),
+                          STAGE_COLOR.get(sec.get("stage"), MUTED)))
+    states = " · ".join(f"{k} {e(x)}" for k, x in r["states"].items())
+    lines = [e(r.get("detail", ""))]
     if r["grade"] == "Warning":
         why = r.get("warning_text") or "OI rose while price fell: short build-up"
-        detail += f'<br><span style="color:{RED};font-weight:600">{e(why)}</span>'
-    if r.get("trigger") is None:
-        left = "No trigger yet"
-    elif r["stage"] == "Triggered":
-        left = f"Triggered above {money(r['trigger'])}"
-    else:
-        left = f"Above {money(r['trigger'])}"
+        lines.append(f'<span style="color:{RED};font-weight:600">{e(why)}</span>')
     if r.get("also"):
-        detail += (f'<br><span style="color:{GREEN};font-weight:600">Also grade A: '
-                   f'{e("; ".join(r["also"]))}</span>')
-    if r.get("ext") is not None:
+        lines.append(f'<span style="color:{GREEN};font-weight:600">Also grade A: '
+                     f'{e("; ".join(r["also"]))}</span>')
+    if r.get("ext") is not None and not is_extended(r):
         x = r["ext"]
-        where = f"{abs(x):.1f} ranges {'above' if x >= 0 else 'below'} the 50 EMA"
-        detail += (f'<br><span style="color:{RED};font-weight:600">Extended: {where}</span>'
-                   if is_extended(r) else f'<br><span style="color:{MUTED}">{where}</span>')
-    if r.get("target"):
-        detail += (f'<br><span style="color:{GREEN}">Target {money(r["target"])} '
-                   f'({e(r.get("target_why", "range depth added to the breakout level"))})</span>')
-    if r.get("old"):
-        detail += f'<br><span style="color:{MUTED}">Old: {e(r["old"])}</span>'
-    if r.get("vk"):
-        v = r["vk"]
-        detail += (f'<br><span style="color:{VK_COLOR.get(v["final"], MUTED)};font-weight:600">'
-                   f'VK: {e(v["final"])}</span><span style="color:{MUTED}"> · {e(v["ma"])}</span>')
+        lines.append(f"{abs(x):.1f} ranges {'above' if x >= 0 else 'below'} the 50 EMA")
+    elif is_extended(r):
+        lines.append(f'<span style="color:{RED}">{r["ext"]:.1f} ranges above the 50 EMA</span>')
     u = UNUSUAL.get(r["symbol"])
     if u:
         ev = u["events"][0]
-        detail += (f'<br><span style="color:{INK}">Unusual ({u["score"]:.1f}, '
-                   f'{e(u["bias"].lower())}): {e(ev["when"])} · {e(ev["text"])}</span>')
+        lines.append(f'<span style="color:{INK}">Unusual ({u["score"]:.1f}, '
+                     f'{e(u["bias"].lower())}): {e(ev["when"])} · {e(ev["text"])}</span>')
+    q = quality_html(r).lstrip(" ·")
+    entry = r.get("trigger")
+    target = r.get("target")
+    tword = "Target"
+    if not target and entry and r.get("stop") and entry > r["stop"]:
+        target, tword = entry + 2 * (entry - r["stop"]), "2R"
     return (
         '<div class="tf-row"><div class="tf-top">'
         f'<span><a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
-        f'{e(r["symbol"])}</a>{wl_link(r["symbol"])}</span>{grade_badge(r["grade"], r.get("stage"))}</div>'
-        f'<div class="tf-set">{e(r["setup"])} · '
-        f'<span style="color:{tcol}">{e(trend)}</span>{quality_html(r)}</div>'
-        + (chart_svg(r["chart"]) if r.get("chart") else "") +
-        f'<div class="tf-small">{states}</div>{sector_html(r["symbol"])}'
+        f'{e(r["symbol"])}</a>{wl_link(r["symbol"])}</span>'
+        f'{grade_badge(r["grade"], r.get("stage"))}</div>'
+        f'<div class="tf-chips">{"".join(chips)}</div>'
+        + (chart_svg(r["chart"]) if r.get("chart") else "")
+        + f'<div class="tf-small">{q}</div>'
+        f'<div class="tf-small">{states}</div>'
         f'{deals_html(r["symbol"])}{stars_html(r["symbol"])}'
-        f'<div class="tf-small">{detail}</div>'
-        f'<div class="tf-lvl"><span>{left}</span>'
-        + (f'<span style="color:{RED}">Stop {money(r["stop"])}</span>'
-           if r.get("stop") is not None else
-           f'<span style="color:{MUTED}">Stop set on breakout</span>')
-        + '</div></div>')
+        f'<div class="tf-small">{"<br>".join(x for x in lines if x)}</div>'
+        + (level_boxes(entry, r.get("stop"), target,
+                       "Triggered at" if stage == "Triggered" else "Buy above", tword)
+           if entry or r.get("stop") else
+           f'<div class="tf-small" style="margin-top:8px">No trigger yet · stop set on breakout</div>')
+        + '</div>')
 
 
 def show_rows(rows):
@@ -501,15 +599,15 @@ def render_unusual(cfg):
     gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
     age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Unusual activity</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     if age_days >= 3:
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
-    leans = ["All", "Quiet", "Buying", "Selling", "Mixed"] + ([] if equity else
+    leans = ["All", "Quiet", "Buying", "Selling"] + ([] if equity else
                                                               ["OI 7-day", "Short squeeze"])
     lean = st.radio("Lean", leans, horizontal=True,
                     label_visibility="collapsed", key="unusual_lean")
@@ -526,7 +624,7 @@ def render_unusual(cfg):
     headline = ("Nothing unusual right now." if total == 0 else
                 f"{total} of {res['stocks']} stocks show something unusual.")
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{headline}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">'
         + ("Covers the last three sessions, on Daily bars only."
@@ -595,9 +693,9 @@ def render_breakout(P):
     gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
     age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Breakout</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     if age_days >= 3:
@@ -615,7 +713,7 @@ def render_breakout(P):
         sub += (f" Weak market: {m['weekly_bull_pct']}% of these stocks are bullish on "
                 "Weekly, and breakouts fail more often in a market like this.")
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{headline}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(sub)}</div>',
         unsafe_allow_html=True)
@@ -677,9 +775,9 @@ def render_alist():
     for mk in ("F&O", "Equity"):
         UNUSUAL.update(load_unusual_map(mk))
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'A list</span><span class="tf-small">'
         + html.escape("Scanned: " + " · ".join(
             f"{k} " + dt.datetime.strptime(v, "%Y-%m-%d %H:%M").strftime("%a %d %b %H:%M")
@@ -709,7 +807,7 @@ def render_alist():
     line = " ".join(f"{k}: {m['regime'].lower()} market, {m['weekly_bull_pct']}% bullish on Weekly."
                     for k, m in markets.items() if m.get("weekly_bull_pct") is not None)
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{headline}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(line)}</div>'
         + turn_html(markets.get("F&O", {}), "F&O: ") + turn_html(markets.get("Equity", {}), "Equity: "),
@@ -756,7 +854,7 @@ def render_strongest(res, key, who, n_top):
         return
     top = rows[:n_top]
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;color:{INK};'
         f'margin:6px 0">Top {n_top} strongest {e(who)}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">Ranked by 3-month and '
         f'1-month return against Nifty, closeness to the 52-week high, and trend '
@@ -770,7 +868,7 @@ def render_strongest(res, key, who, n_top):
                    f'{e(sec.get("stage", ""))}</span>' if sec.get("sector") else "")
         return (
             f'<div class="tf-row"><div class="tf-top"><span>'
-            f'<span style="font-family:Georgia,serif;font-weight:700;color:{MUTED};'
+            f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-weight:700;color:{MUTED};'
             f'margin-right:8px">#{x["rank"]}</span>'
             f'<a class="tf-sym" href="{chart_link(x["symbol"])}" target="_blank">'
             f'{e(x["symbol"])}</a>{wl_link(x["symbol"])}</span>'
@@ -808,9 +906,9 @@ def render_sectors(P):
     gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
     age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Sectors</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     if age_days >= 3:
@@ -838,7 +936,7 @@ def render_sectors(P):
                  f'{nf["r1"]:+.1f}% over 1 month.' if new else
                  f'Nifty is {nf["r1"]:+.1f}% over 1 month and {nf["r3"]:+.1f}% over 3 months.')
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{e(headline)}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">{nifty_txt} Each sector '
         'below is measured against it, using that sector\'s F&amp;O stocks.</div>',
@@ -921,7 +1019,7 @@ The sector line on every stock row elsewhere on the site comes from this page.
         f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
         f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
         f"color:{MUTED};font-weight:600;text-align:right;padding:6px 4px;"
-        f"border-bottom:2px solid {INK}}}"
+        f"border-bottom:1px solid {RULE}}}"
         f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE}}}"
         f".tf-sec td.n{{text-align:right;font-family:{MONO}}}"
         f".tf-jump{{color:{INK};font-weight:600;text-decoration:underline;"
@@ -965,9 +1063,9 @@ The sector line on every stock row elsewhere on the site comes from this page.
                 + '</div>')
         st.markdown(
             f'<div id="{sec_id(x["name"])}" class="tf-secblock" style="margin-top:22px;'
-            f'border-top:2px solid {INK};padding-top:8px;display:flex;'
+            f'border-top:1px solid {RULE};padding-top:8px;display:flex;'
             f'justify-content:space-between;align-items:baseline">'
-            f'<span style="font-family:Georgia,serif;font-size:19px;font-weight:700">'
+            f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:19px;font-weight:700">'
             f'{e(x["name"])} <span style="font-size:14px;color:{STAGE_COLOR[x["stage"]]}">'
             f'{x["stage"]}</span></span>'
             f'<a class="tf-small" href="#sec-table">↑ Back to table</a></div>'
@@ -1333,10 +1431,12 @@ def pick_html(p):
         f'<span><a class="tf-sym" href="{chart_link(p["symbol"])}" target="_blank">{e(p["symbol"])}</a>'
         f'{wl_link(p["symbol"])}</span>'
         f'{grade_badge(r.get("grade", ""), r.get("stage"))}</div>'
-        f'<div class="tf-set">{e(p["market"])} · {e(r.get("setup", ""))} · '
-        f'<span style="color:{MUTED}">{e(p["size"])}</span>{quality_html(r)}</div>'
+        f'<div class="tf-chips">{chip(p["market"], MUTED)}{chip(r.get("setup", ""), BLUE)}'
+        f'{chip(p["size"], AMBER if "alf" in p["size"] or "ccordion" in p["size"] else GREEN)}</div>'
+        f'<div class="tf-small">{quality_html(r).lstrip(" ·")}</div>'
         f'{checks}{bonus}{deals_html(p["symbol"])}{stars_html(p["symbol"])}'
-        f'<div class="tf-lvl">{lvl}{tgt}{stop}</div></div>')
+        + level_boxes(p.get("entry"), p.get("stop"), p.get("target"), "Buy above", "2R")
+        + '</div>')
 
 
 def render_strategies():
@@ -1353,9 +1453,9 @@ def render_strategies():
         f"{k} " + dt.datetime.strptime(data[k]["generated_ist"], "%Y-%m-%d %H:%M").strftime(
             "%a %d %b %H:%M") for k in ("F&O", "Equity") if k in data)
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Strategies</span><span class="tf-small">Scanned: {html.escape(stamps)}</span></div>',
         unsafe_allow_html=True)
     if "F&O" not in data:
@@ -1372,7 +1472,7 @@ def render_strategies():
             g = gate_of(data[k]["market"])
             lines.append(f"{k} market: {g['word']}.")
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;'
         f'color:{INK};margin:6px 0 6px">{headline}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">'
         f'{html.escape(" ".join(lines))}</div>', unsafe_allow_html=True)
@@ -1387,14 +1487,14 @@ Each strategy from the playbook is applied automatically to the latest scans. A 
 
 Rules are starting points, not tested results. Your own chart is the final check. Watchlist only, not investment advice.
 """)
-    for n, v in sorted(res.items()):
+    def show_strategy(n, v):
         name, hold, idea, rules, manage = STRAT_RULES[n]
         cnt = len(v["picks"])
         status_col = GREEN if v["open"] else MUTED
         st.markdown(
-            f'<div style="margin-top:22px;border-top:2px solid {INK};padding-top:8px;'
+            f'<div style="margin-top:22px;border-top:1px solid {RULE};padding-top:8px;'
             f'display:flex;justify-content:space-between;align-items:baseline;gap:10px">'
-            f'<span style="font-family:Georgia,serif;font-size:19px;font-weight:700">'
+            f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:19px;font-weight:700">'
             f'{n}. {html.escape(name)}</span>'
             f'<span class="tf-small">{html.escape(hold)}</span></div>'
             f'<div class="tf-small">{html.escape(idea)}</div>'
@@ -1427,6 +1527,17 @@ Rules are starting points, not tested results. Your own chart is the final check
                     '</div>' for s_, b in q["waiting"]), unsafe_allow_html=True)
         with st.expander("Rules"):
             st.markdown("\n".join(f"- {x}" for x in rules) + f"\n\n**Manage:** {manage}")
+
+    for n in (1, 2, 4, 7):                 # the main strategies
+        if n in res:
+            show_strategy(n, res[n])
+    more = [n for n in (3, 5, 6) if n in res]
+    if more:
+        n_more = sum(len(res[n]["picks"]) for n in more)
+        if st.toggle(f"Show more strategies (3, 5, 6) · {n_more} "
+                     f"{'trade' if n_more == 1 else 'trades'}", key="more_strats"):
+            for n in more:
+                show_strategy(n, res[n])
     with st.expander("Exits: signals on stocks you already hold"):
         st.markdown("""
 | Site signal | Action |
@@ -1498,9 +1609,9 @@ def render_stars():
     res = load(STARS_FILE, os.path.getmtime(STARS_FILE))
     gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Star investors</span><span class="tf-small">Updated {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
     Q, P, cov = res.get("quarter"), res.get("previous"), res.get("coverage", {})
@@ -1519,7 +1630,7 @@ def render_stars():
            + f". From {cov.get(Q, 0):,} company filings for {qn(Q)}"
            + (f" and {cov.get(P, 0):,} for {qn(P)}" if P else "") + ".")
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;color:{INK};'
         f'margin:6px 0 6px">{e(head)}</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">{e(sub)}</div>',
         unsafe_allow_html=True)
@@ -1593,7 +1704,7 @@ Filings lag: a September quarter stake becomes public in October. Treat this as 
         f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
         f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
         f"color:{MUTED};font-weight:600;text-align:left;padding:6px 4px;"
-        f"border-bottom:2px solid {INK};white-space:nowrap}}"
+        f"border-bottom:1px solid {RULE};white-space:nowrap}}"
         f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE};vertical-align:middle}}"
         f".tf-sec td.n{{text-align:right;font-family:{MONO};white-space:nowrap}}"
         f".tf-jump{{color:{INK};font-weight:600}}</style>"
@@ -1663,9 +1774,9 @@ def known_symbols(R):
 
 def section(title, note=""):
     st.markdown(
-        f'<div style="margin-top:20px;border-top:2px solid {INK};padding-top:8px;'
+        f'<div style="margin-top:20px;border-top:1px solid {RULE};padding-top:8px;'
         f'display:flex;justify-content:space-between;align-items:baseline">'
-        f'<span style="font-family:Georgia,serif;font-size:19px;font-weight:700">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:19px;font-weight:700">'
         f'{html.escape(title)}</span><span class="tf-small">{html.escape(note)}</span></div>',
         unsafe_allow_html=True)
 
@@ -1678,8 +1789,8 @@ def render_search():
                                  os.path.join("data", "names.csv")) if os.path.exists(p)))
     syms = sorted(known_symbols(R) | set(names))
     st.markdown(
-        f'<div style="border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Stock search</span></div>', unsafe_allow_html=True)
     label = {s: (f"{s} · {names[s]}" if s in names else s) for s in syms}
     q = st.query_params.get("stock")
@@ -1729,10 +1840,10 @@ def render_search():
     else:
         st.caption("Not on any setup right now." + (f" Stage: {stage_other}." if stage_other else ""))
 
-    # old label + VK
-    section("Old TrendFire label")
-    st.markdown(f'<div class="tf-set">{e(old) if old else "Not available"}</div>',
-                unsafe_allow_html=True)
+    # VK (the main verdict); the old label only when it is a Prime Setup
+    if old == "🏆 Prime Setup":
+        st.markdown(f'<div class="tf-chips">{chip("🏆 Prime Setup", AMBER)}</div>',
+                    unsafe_allow_html=True)
     if market == "F&O":
         section("VK System")
         if vk:
@@ -1853,8 +1964,8 @@ def save_note(sym):
 def render_watchlist():
     e = html.escape
     st.markdown(
-        f'<div style="border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Watchlist</span></div>', unsafe_allow_html=True)
     if not secret("GH_TOKEN"):
         st.info("The watchlist is saved in your GitHub repo, so it needs GH_TOKEN in the "
@@ -1881,7 +1992,7 @@ def render_watchlist():
     order = sorted(WATCH, key=lambda s: (briefs[s]["best"], s))
     n_ready = sum(1 for s in order if briefs[s]["best"] == 0)
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;color:{INK};'
         f'margin:6px 0">{len(order)} {"stock" if len(order) == 1 else "stocks"} · '
         f'{n_ready} Ready now</div>', unsafe_allow_html=True)
     for s in order:
@@ -1940,15 +2051,12 @@ GUIDE = """
 **What the site does.** It scans every F&O stock every hour, and midcaps/smallcaps every evening, with your MWDH TTM framework, and lists the setups, how good they are, and whether the market allows trading them. It is a filter. Your chart is the final check.
 
 #### The pages
-- **Strategies**: start here. Trades that pass every rule of 7 strategies, with buy level, stop and 2R target. Also the queue (stocks about to qualify).
-- **Search**: everything about one stock: setups, old label, VK, strategies, sector, unusual activity, deals, star investors.
-- **Watchlist**: your saved stocks, with what each one is doing now. Tap ☆ next to any stock name to add it.
-- **A list**: every Ready, good-quality setup across F&O, Equity and Breakout.
-- **F&O / Equity**: all setups by type (Squeeze, Swing, Trend, Overspill, Patterns: range, flag, rectangle, wedge, VCP, cup), with Ready / Watch / Triggered tabs, plus Old labels and VK (F&O).
-- **Unusual**: stocks with unusual volume, OI or delivery in the last few sessions.
-- **Breakout**: equity bases close to breaking out.
-- **Sectors**: which sectors lead, which way they are moving day by day, and their stocks.
-- **Deals / Stars**: bulk and block deals, and star investors' 1%+ stakes.
+- **Today**: start here. **Strategies** = trades that pass every rule (4 main strategies; 3 more behind a switch), with buy level, stop and 2R, plus the queue of stocks about to qualify. **A list** = every Ready, grade A setup across F&O and Equity.
+- **Scanner**: F&O or Equity, then the setup type (Squeeze, Swing, Trend, Overspill, Patterns: range, flag, rectangle, wedge, VCP, cup), with Ready / Watch / Triggered tabs. VK list for F&O.
+- **Search**: everything about one stock: setups, VK, strategies, sector, unusual activity, OI, deals, star investors.
+- **Watchlist**: your saved stocks with remarks. Tap ☆ next to any stock name to add it.
+- **Market**: Sectors (plus the strongest F&O and Nifty 50 stocks), Unusual activity (plus OI 7-day and Short squeeze), Deals and Stars.
+- **☀️ / 🌙**: switch between the dark and light look.
 
 #### Words to know
 - **Watch** = still dipping or coiling, not yet. **Ready** = turned up, the entry stage. **Triggered** = already moved, you are late.
@@ -1957,10 +2065,10 @@ GUIDE = """
 - **Market line**: Turning up = trade; Overheated = small size, dips only; No clear turn = small, only A; Still falling = no new trades.
 
 #### Evening routine (15 minutes, after 19:50)
-1. **Market line** (top of F&O): decide size for tomorrow.
+1. **Market line** (the pill at the top, and Scanner → F&O): decide size for tomorrow.
 2. **Sectors**: pick 2-3 Leading or Improving sectors that are ▲ Rising.
 3. **Strategies**: read the trades and the "Dipping now" lists.
-4. **F&O → VK → ALMOST READY**: keep names that are also on a setup with quality A, in your sectors, MA signal ONLY BUY, not Extended.
+4. **Scanner → F&O → VK → ALMOST READY**: keep names that are also on a setup with quality A, in your sectors, MA signal ONLY BUY, not Extended.
 5. **Search** each finalist: drop Unusual Selling, Warning grade, funds selling, or results due.
 6. Tap **☆** on the 2-4 best. Open **Watchlist** → **Download for TradingView** → import, and set alerts at the "Buy above" levels.
 
@@ -1991,8 +2099,8 @@ GUIDE = """
 
 def render_guide():
     st.markdown(
-        f'<div style="border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'How to use TradeReady</span></div>', unsafe_allow_html=True)
     st.markdown(GUIDE)
 
@@ -2006,9 +2114,9 @@ def render_deals():
     res = load(DEALS_FILE, os.path.getmtime(DEALS_FILE))
     gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
     st.markdown(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-        f'border-bottom:2px solid {INK};padding-bottom:10px">'
-        f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+        f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+        f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
         f'Deals</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
         f'{gen.strftime("%H:%M")} · deals to {e(res["asof"])}</span></div>',
         unsafe_allow_html=True)
@@ -2016,7 +2124,7 @@ def render_deals():
     mf_buy = sorted(((s, d) for s, d in stocks.items() if (d.get("mf_net_cr") or 0) > 0),
                     key=lambda x: -x[1]["mf_net_cr"])
     st.markdown(
-        f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;color:{INK};'
+        f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;color:{INK};'
         f'margin:6px 0 6px">{len(recent)} fund, star and large deals in the last 10 days.</div>'
         f'<div style="font-size:14px;color:{INK};line-height:1.5">Bulk and block deals '
         f'reported to NSE, tagged by who traded. {len(mf_buy)} stocks saw net mutual fund '
@@ -2059,7 +2167,7 @@ def render_deals():
             f"<style>.tf-sec{{width:100%;border-collapse:collapse;font-size:13.5px;color:{INK}}}"
             f".tf-sec th{{font-size:11px;letter-spacing:.06em;text-transform:uppercase;"
             f"color:{MUTED};font-weight:600;text-align:left;padding:6px 4px;"
-            f"border-bottom:2px solid {INK}}}"
+            f"border-bottom:1px solid {RULE}}}"
             f".tf-sec td{{padding:7px 4px;border-bottom:1px solid {RULE};vertical-align:top}}"
             f".tf-sec td.n{{text-align:right;font-family:{MONO}}}"
             f".tf-jump{{color:{INK};font-weight:600}}</style>"
@@ -2291,6 +2399,7 @@ def watch_for_new_scans():
 WATCH_PATH = "data/watchlist.json"
 WATCH = {}                    # symbol -> {"added": date}
 CUR_PAGE = ""
+CUR_VIEW = ""
 
 
 @st.cache_data(ttl=30)
@@ -2352,15 +2461,22 @@ def wl_link(sym, big=False):
     """A star next to a stock name: tap to add to (or remove from) the watchlist."""
     import urllib.parse as up
     on = sym in WATCH
-    q = up.urlencode({"page": CUR_PAGE, ("unwatch" if on else "watch"): sym})
+    q = up.urlencode({"page": CUR_PAGE, "view": CUR_VIEW, "theme": THEME_NAME,
+                      ("unwatch" if on else "watch"): sym})
     size = "font-size:24px;" if big else ""
     return (f'<a class="tf-wl{" on" if on else ""}" style="{size}" href="?{q}" target="_self" '
             f'title="{"Remove from" if on else "Add to"} watchlist">{"★" if on else "☆"}</a>')
 
 
 sync_data()
-PAGE_LIST = (["Strategies", "Search", "Watchlist", "A list"] + list(PAGES)
-             + ["Deals", "Stars", "Guide"])
+PAGE_LIST = ["Today", "Scanner", "Search", "Watchlist", "Market"]
+SUBVIEWS = {"Today": ["Strategies", "A list"], "Scanner": ["F&O", "Equity"],
+            "Market": ["Sectors", "Unusual", "Deals", "Stars"]}
+LEGACY = {"Strategies": ("Today", "Strategies"), "A list": ("Today", "A list"),
+          "Guide": ("Today", "Strategies"), "F&O": ("Scanner", "F&O"),
+          "Equity": ("Scanner", "Equity"), "Breakout": ("Scanner", "Equity"),
+          "Unusual": ("Market", "Unusual"), "Sectors": ("Market", "Sectors"),
+          "Deals": ("Market", "Deals"), "Stars": ("Market", "Stars")}
 qp = st.query_params
 for key, kind in (("watch", "add"), ("unwatch", "remove")):
     if key in qp:
@@ -2368,12 +2484,40 @@ for key, kind in (("watch", "add"), ("unwatch", "remove")):
         err = watch_change(**{kind: [sym_q]})
         st.session_state["watch_msg"] = (err, sym_q, kind)
         del st.query_params[key]
-start = qp.get("page")
-page = st.radio("Market", PAGE_LIST, horizontal=True, label_visibility="collapsed",
-                index=PAGE_LIST.index(start) if start in PAGE_LIST else 0)
+start, start_view = qp.get("page"), qp.get("view")
+if start in LEGACY:                                   # old links keep working
+    start, start_view = LEGACY[start]
+
+
+def market_pill():
+    path = PAGES["F&O"]["file"]
+    if not os.path.exists(path):
+        return ""
+    m_ = load(path, os.path.getmtime(path)).get("market", {})
+    t = m_.get("turn")
+    col = {"Turning up": GREEN, "Falling": RED, "No clear turn": AMBER}.get(t, MUTED)
+    word = {"Falling": "Market falling"}.get(t, t or "")
+    if not word:
+        return ""
+    style = (f"background:{TH['accent']};color:{TH['accent_ink']}" if t == "Turning up"
+             and THEME_NAME == "neon" else f"background:{col}22;color:{col}")
+    return f'<span class="tf-pill" style="{style}">● {html.escape(word)}</span>'
+
+
+st.markdown(f'<div class="tf-head"><span class="tf-brand">Trade<span>Ready</span></span>'
+            f'{market_pill()}</div>', unsafe_allow_html=True)
+page = st.radio("Page", PAGE_LIST, horizontal=True, label_visibility="collapsed",
+                index=PAGE_LIST.index(start) if start in PAGE_LIST else 0, key="nav_page")
 CUR_PAGE = page
-if qp.get("page") != page:
-    st.query_params["page"] = page
+view = ""
+if page in SUBVIEWS:
+    opts = SUBVIEWS[page]
+    view = st.radio("View", opts, horizontal=True, label_visibility="collapsed",
+                    index=opts.index(start_view) if start_view in opts and start == page else 0,
+                    key=f"view_{page}")
+CUR_VIEW = view
+if qp.get("page") != page or qp.get("view", "") != view or qp.get("theme") != THEME_NAME:
+    st.query_params.update({"page": page, "view": view, "theme": THEME_NAME})
 if secret("GH_TOKEN"):
     WATCH.update(watch_read(st.session_state.get("watch_v", 0))[0])
 wm = st.session_state.pop("watch_msg", None)
@@ -2392,6 +2536,12 @@ with st.container(horizontal=True, vertical_alignment="center"):
     scan_clicked = st.button("Scan all", disabled=not secret("GH_TOKEN"),
                              help=None if secret("GH_TOKEN") else
                              "Add GH_TOKEN to the app's secrets on Streamlit to use this.")
+    other = "indigo" if THEME_NAME == "neon" else "neon"
+    if st.button("☀️ Light" if THEME_NAME == "neon" else "🌙 Dark",
+                 help="Switch between Graphite & Neon (dark) and Sand & Indigo (light)"):
+        st.session_state["theme"] = other
+        st.query_params["theme"] = other
+        st.rerun()
 if scan_clicked:
     started, problems = scan_all()
     if started:
@@ -2408,16 +2558,21 @@ st.markdown(
     '<div aria-hidden="true" style="position:fixed;inset:0;display:flex;'
     'align-items:center;justify-content:center;pointer-events:none;z-index:999990;'
     'overflow:hidden"><div style="transform:rotate(-30deg);white-space:nowrap;'
-    'font-family:Georgia,serif;font-weight:700;font-size:min(11vw,130px);'
-    f'color:{INK};opacity:0.07;user-select:none">{html.escape(OWNER)}</div></div>',
+    'font-family:Inter,sans-serif;font-weight:800;font-size:min(11vw,130px);'
+    f'color:{INK};opacity:0.05;user-select:none">{html.escape(OWNER)}</div></div>',
     unsafe_allow_html=True)
 scan_status()
 watch_for_new_scans()
 SECTORS.update(load_sector_tags())
 DEALS.update(load_deals())
 STAR_MAP.update(load_star_map())
-if page == "Stars":
-    render_stars()
+if page == "Today":
+    if view == "A list":
+        render_alist()
+    else:
+        render_strategies()
+    with st.expander("How to use TradeReady"):
+        st.markdown(GUIDE)
     st.stop()
 if page == "Search":
     render_search()
@@ -2425,27 +2580,17 @@ if page == "Search":
 if page == "Watchlist":
     render_watchlist()
     st.stop()
-if page == "Guide":
-    render_guide()
+if page == "Market":
+    if view == "Unusual":
+        render_unusual(PAGES["Unusual"])
+    elif view == "Deals":
+        render_deals()
+    elif view == "Stars":
+        render_stars()
+    else:
+        render_sectors(PAGES["Sectors"])
     st.stop()
-if page == "Deals":
-    render_deals()
-    st.stop()
-if page == "Sectors":
-    render_sectors(PAGES[page])
-    st.stop()
-if page == "A list":
-    render_alist()
-    st.stop()
-if page == "Strategies":
-    render_strategies()
-    st.stop()
-if page == "Unusual":
-    render_unusual(PAGES[page])
-    st.stop()
-if page == "Breakout":
-    render_breakout(PAGES[page])
-    st.stop()
+page = view                                           # Scanner: F&O or Equity
 P = PAGES[page]
 DATA, EQUITY = P["file"], page == "Equity"
 if not os.path.exists(DATA):
@@ -2461,9 +2606,9 @@ gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
 age_days = (dt.datetime.now(IST).replace(tzinfo=None) - gen).days
 
 st.markdown(
-    f'<div style="display:flex;justify-content:space-between;align-items:baseline;'
-    f'border-bottom:2px solid {INK};padding-bottom:10px">'
-    f'<span style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:{INK}">'
+    f'<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 10px;'
+    f'border-bottom:1px solid {RULE};padding-bottom:10px">'
+    f'<span style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:700;color:{INK}">'
     f'{html.escape(page)} Setups</span><span class="tf-small">Scanned {gen.strftime("%a %d %b")} · '
     f'{gen.strftime("%H:%M")}</span></div>', unsafe_allow_html=True)
 if age_days >= 3:
@@ -2590,7 +2735,7 @@ if choice == "Old labels":
 SPILL = choice == "Overspill"
 if choice == "Patterns":
     allp = res.get("ranges", [])
-    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge", "Clean wedge", "VCP", "Cup"]
+    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge", "VCP", "Cup"]
     match = lambda k, r: (k == "All" or (r.get("clean") if k == "Clean wedge"
                                          else k in r["setup"]))
     n_k = {k: sum(1 for r in allp if match(k, r)) for k in kinds}
@@ -2642,11 +2787,11 @@ if m["weekly_bull_pct"] is not None:
     market += "." + (f" VIX is {m['vix']}." if m.get("vix") else "")
 bar = m["weekly_bull_pct"] or 0
 st.markdown(
-    f'<div style="font-family:Georgia,serif;font-size:22px;font-weight:600;'
+    f'<div style="font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;font-size:22px;font-weight:600;'
     f'color:{INK};margin:6px 0 6px">{headline}</div>'
     f'<div style="font-size:14px;color:{INK};line-height:1.5">{html.escape(market)}</div>'
     + turn_html(m) +
-    f'<div style="height:6px;border-radius:3px;background:#dcdcd4;margin:8px 0 4px">'
+    f'<div style="height:6px;border-radius:3px;background:{RULE};margin:8px 0 4px">'
     f'<div style="height:6px;border-radius:3px;width:{bar}%;background:{GREEN}"></div></div>',
     unsafe_allow_html=True)
 
@@ -2750,7 +2895,7 @@ with st.expander("What the words mean"):
 - **Stop**: just below the low of the dip.
 - **2.1 ranges above the 50 EMA**: how far price is above the Daily 50 EMA, in normal daily ranges (ATR). Near 0 is buying near value. **Extended** (red) means 4 or more: the stock has run a lot, and it falls hard if the market dips. While the market is weak or falling, extended Ready stocks are moved into the hidden list.
 - **Market line** (under the headline): the share of stocks with Daily momentum above zero over the last 6 sessions, plus Nifty's Daily state. **Turning up** = that share rose 5 points or more in 3 sessions and Nifty is not falling; the best time for fresh setups. **Still falling** = it dropped 5 points or more, or Nifty Daily is Bearish; stay light. **No clear turn** = neither.
-- **Old**: the label the old TrendFire site would give this stock. See the Old labels button for what each one means.
+- **🏆 Prime Setup** (tag): from the old TrendFire labels. Weekly momentum above zero, Daily below zero but turning up, and Daily in a squeeze: an early entry before VK says BUY NOW.
 """)
 
 if view == "Ready":
