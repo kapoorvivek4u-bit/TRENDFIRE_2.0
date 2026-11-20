@@ -143,7 +143,7 @@ def quality_word(setup):
     s = str(setup or "")
     return ("Coil quality" if s.startswith("Squeeze") else
             "Base quality" if any(w in s for w in ("Breakout", "Range", "Flag", "Rectangle",
-                                                   "Wedge", "VCP")) else "Dip quality")
+                                                   "Wedge", "VCP", "Cup")) else "Dip quality")
 
 
 def grade_badge(g, stage=None):
@@ -1944,7 +1944,7 @@ GUIDE = """
 - **Search**: everything about one stock: setups, old label, VK, strategies, sector, unusual activity, deals, star investors.
 - **Watchlist**: your saved stocks, with what each one is doing now. Tap ☆ next to any stock name to add it.
 - **A list**: every Ready, good-quality setup across F&O, Equity and Breakout.
-- **F&O / Equity**: all setups by type (Squeeze, Swing, Trend, Overspill, Patterns: range, flag, rectangle, wedge, VCP), with Ready / Watch / Triggered tabs, plus Old labels and VK (F&O).
+- **F&O / Equity**: all setups by type (Squeeze, Swing, Trend, Overspill, Patterns: range, flag, rectangle, wedge, VCP, cup), with Ready / Watch / Triggered tabs, plus Old labels and VK (F&O).
 - **Unusual**: stocks with unusual volume, OI or delivery in the last few sessions.
 - **Breakout**: equity bases close to breaking out.
 - **Sectors**: which sectors lead, which way they are moving day by day, and their stocks.
@@ -2590,7 +2590,7 @@ if choice == "Old labels":
 SPILL = choice == "Overspill"
 if choice == "Patterns":
     allp = res.get("ranges", [])
-    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge", "Clean wedge", "VCP"]
+    kinds = ["All", "Range", "Flag", "Rectangle", "Wedge", "Clean wedge", "VCP", "Cup"]
     match = lambda k, r: (k == "All" or (r.get("clean") if k == "Clean wedge"
                                          else k in r["setup"]))
     n_k = {k: sum(1 for r in allp if match(k, r)) for k in kinds}
@@ -2713,6 +2713,7 @@ with st.expander("What the words mean"):
 - **Flag**: a pause inside an uptrend (Daily flags need Weekly bullish and Monthly with trend; Hourly flags need Daily and Weekly bullish). A sharp, clean run up (the pole: at least 10% on Daily, 6% on Hourly), then a short pause drifting sideways or down that gives back no more than a third of it, on volume at most 0.8x the pole's. A flag breakout needs 1.5x volume. Target = breakout level + pole height. Stop = the flag low.
 - **Rectangle**: flat top and flat floor, at least 3 touches on top and 3 on the floor. Target = top + height. Stop = under the floor, or 1.5 ranges under the top, whichever is closer.
 - **VCP** (Volatility Contraction Pattern): a run up (12%+ on Daily, 6%+ on Hourly) in an uptrend, then a base under the run's high where the swings keep shrinking (base split in thirds, each narrower, e.g. 3% → 2% → 1%), lows holding, the last few bars tight, and volume drying up (grade A when the last bars' volume is 0.7x the run's or less). "Above" is the pivot (the base's top); the stop is the low of the last contraction; the target adds the base depth to the pivot.
+- **Cup**: a run up (20%+ on Daily, 6%+ on Hourly) in an uptrend, then a rounded U-shaped cup (12-35% deep on Daily, 4-15% on Hourly; a sharp V does not count) whose right side has climbed back into the cup's upper third. No handle needed. Watch = climbing the right side; Ready = within 5% (or one range) of the left rim; Triggered = closed above the rim recently. "Above" is the rim; the stop is the latest swing low on the right side; the target adds the cup depth to the rim. Grade A when recent volume is quiet (0.8x the cup's or less), or the breakout came on 1.5x volume.
 - **Clean wedge**: a Falling Wedge that has narrowed to 40% or less of its starting width (close to the point), with quiet volume inside it, or a loud breakout.
 - **Wedge** (Falling Wedge): both lines falling, the top falling faster so the pattern narrows; at least 3 touches on each line. Target = where the wedge started. Stop = the recent low inside the wedge.
 - All patterns are found on both **Daily** and **Hourly** (F&O; Equity is Daily only). Watch = inside the pattern; Ready = within 0.75 ranges of the top line; Triggered = closed above it recently.
