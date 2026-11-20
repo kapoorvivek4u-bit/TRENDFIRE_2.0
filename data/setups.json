@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-20 15:59",
+ "generated_ist": "2026-11-20 19:07",
  "oi_asof": "2026-11-19",
  "stocks": 218,
  "market": {
@@ -24,7 +24,7 @@
  "rows": [
   {
    "symbol": "360ONE",
-   "close": 1208.0,
+   "close": 1208.1,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -51,7 +51,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 40% \u00b7 Volume 0.6x in pullback \u00b7 OI +8% in up-leg",
+   "detail": "Pullback 40% \u00b7 Volume 0.8x in pullback \u00b7 OI +8% in up-leg",
    "grade": "A",
    "trigger": null,
    "stop": 1197.45
@@ -316,7 +316,7 @@
   },
   {
    "symbol": "BEL",
-   "close": 401.4,
+   "close": 402.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -343,7 +343,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 33% \u00b7 Volume 0.4x in pullback \u00b7 OI -0% in up-leg",
+   "detail": "Pullback 33% \u00b7 Volume 0.5x in pullback \u00b7 OI -0% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 399.55
@@ -622,7 +622,7 @@
   },
   {
    "symbol": "GAIL",
-   "close": 190.35,
+   "close": 191.44,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -656,7 +656,7 @@
   },
   {
    "symbol": "HAVELLS",
-   "close": 1202.0,
+   "close": 1211.0,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -682,7 +682,7 @@
     }
    },
    "setup": "Swing Pullback",
-   "stage": "Ready",
+   "stage": "Triggered",
    "detail": "Pullback 27% \u00b7 Volume 0.6x in pullback \u00b7 OI n/a",
    "grade": "B",
    "trigger": 1208.7,
@@ -791,6 +791,40 @@
    "stop": 615.77
   },
   {
+   "symbol": "LICHSGFIN",
+   "close": 614.9,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Bottoming"
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ext": 3.7,
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Avoid",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BOTTOMING"
+    }
+   },
+   "setup": "Swing Pullback",
+   "stage": "Triggered",
+   "detail": "Pullback 24% \u00b7 Volume 2.0x in pullback \u00b7 OI +9% in up-leg",
+   "grade": "B",
+   "trigger": 613.55,
+   "stop": 608.88
+  },
+  {
    "symbol": "MPHASIS",
    "close": 2420.0,
    "trend": "Early turn",
@@ -826,7 +860,7 @@
   },
   {
    "symbol": "UNITDSPR",
-   "close": 1468.0,
+   "close": 1466.4,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -982,7 +1016,7 @@
   },
   {
    "symbol": "UPL",
-   "close": 568.6,
+   "close": 571.95,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -1009,7 +1043,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 31% \u00b7 Volume 0.6x in pullback \u00b7 OI +1% in up-leg",
+   "detail": "Pullback 31% \u00b7 Volume 0.7x in pullback \u00b7 OI +1% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 563.12
@@ -1664,13 +1698,13 @@
   },
   {
    "symbol": "HEROMOTOCO",
-   "close": 5520.0,
+   "close": 5536.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Topping",
     "D": "Bullish",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Weekly Overspill",
    "stage": "Triggered",
@@ -2126,7 +2160,7 @@
   },
   {
    "symbol": "BEL",
-   "close": 401.4,
+   "close": 402.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2160,7 +2194,7 @@
   },
   {
    "symbol": "CUMMINSIND",
-   "close": 4090.0,
+   "close": 4100.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2466,13 +2500,13 @@
   },
   {
    "symbol": "SOLARINDS",
-   "close": 18714.0,
+   "close": 18710.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
     "D": "Bearish",
-    "H": "Bullish"
+    "H": "Topping"
    },
    "setup": "Weekly Overspill",
    "stage": "Watch",
@@ -2489,7 +2523,7 @@
      "M": "TOPPING",
      "W": "BEARISH RUN",
      "D": "BEARISH RUN",
-     "H": "BULLISH RUN"
+     "H": "TOPPING"
     }
    },
    "ext": -0.9,
@@ -2599,40 +2633,6 @@
    "grade": "B",
    "trigger": 297.65,
    "stop": 295.66
-  },
-  {
-   "symbol": "LICHSGFIN",
-   "close": 612.05,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bullish",
-    "D": "Impulse",
-    "H": "Bottoming"
-   },
-   "setup": "Hourly Overspill",
-   "stage": "Watch",
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 3.7,
-   "vk": {
-    "final": "NO SIGNAL",
-    "signal": "W+D BULLISH (M lagging)",
-    "ma": "Avoid",
-    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BOTTOMING",
-     "W": "BULLISH RUN",
-     "D": "BULLISH RUN",
-     "H": "BOTTOMING"
-    }
-   },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI +9% in up-leg, +1% in pullback",
-   "grade": "B",
-   "trigger": 609.51,
-   "stop": 601.15
   },
   {
    "symbol": "APLAPOLLO",
@@ -2873,40 +2873,6 @@
    "stop": 163.08
   },
   {
-   "symbol": "GAIL",
-   "close": 190.35,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Impulse",
-    "D": "Impulse",
-    "H": "Topping"
-   },
-   "setup": "Hourly Overspill",
-   "stage": "Watch",
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 3.2,
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "W+D BULLISH (M lagging)",
-    "ma": "ONLY BUY",
-    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON",
-    "status": {
-     "M": "BOTTOMING",
-     "W": "BULLISH RUN",
-     "D": "BULLISH RUN",
-     "H": "TOPPING"
-    }
-   },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI -3% in up-leg",
-   "grade": "C",
-   "trigger": 189.96,
-   "stop": 188.52
-  },
-  {
    "symbol": "ABB",
    "close": 6934.5,
    "trend": "With trend",
@@ -3010,7 +2976,7 @@
   },
   {
    "symbol": "COFORGE",
-   "close": 2090.1,
+   "close": 2086.7,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -3214,7 +3180,7 @@
   },
   {
    "symbol": "HINDZINC",
-   "close": 522.25,
+   "close": 521.6,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -4008,7 +3974,7 @@
   },
   {
    "symbol": "BEL",
-   "close": 401.4,
+   "close": 402.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -8619,7 +8585,7 @@
   },
   {
    "symbol": "PNBHOUSING",
-   "close": 1190.0,
+   "close": 1191.3,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -9690,7 +9656,7 @@
   },
   {
    "symbol": "CONCOR",
-   "close": 440.1,
+   "close": 438.35,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -9699,7 +9665,7 @@
     "H": "Bullish"
    },
    "setup": "Hourly Falling Wedge",
-   "stage": "Ready",
+   "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": {
     "final": "COMING CLOSE TO READY (Bearish)",
@@ -9717,7 +9683,7 @@
     }
    },
    "ext": -1.0,
-   "detail": "54 hours falling wedge, 6 touches, 4% deep \u00b7 0.4 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "detail": "54 hours falling wedge, 6 touches, 4% deep \u00b7 0.9 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
    "grade": "B",
    "clean": false,
    "trigger": 441.34,
@@ -9795,7 +9761,7 @@
      435.9,
      436.0,
      438.55,
-     440.1
+     438.35
     ],
     "c": [
      435.8,
@@ -9831,7 +9797,7 @@
      436.2,
      439.4,
      440.1,
-     440.1
+     438.35
     ],
     "lines": {
      "top": [
@@ -11470,7 +11436,7 @@
   },
   {
    "symbol": "AMBER",
-   "close": 6740.0,
+   "close": 6740.5,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -11650,7 +11616,7 @@
   },
   {
    "symbol": "AMBUJACEM",
-   "close": 399.8,
+   "close": 400.0,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -11680,8 +11646,8 @@
    "detail": "10-week range under a falling trendline, 3 touches, 17% deep \u00b7 broke out Thu 19 \u00b7 Breakout volume 1.5x",
    "grade": "B",
    "trigger": 394.25,
-   "stop": 389.31,
-   "target": 460.52,
+   "stop": 389.3,
+   "target": 460.49,
    "chart": {
     "h": [
      413.1,
@@ -11864,7 +11830,7 @@
      390.2,
      384.8,
      396.8,
-     399.8
+     400.0
     ],
     "lines": {
      "top": [
@@ -13618,7 +13584,7 @@
   },
   {
    "symbol": "UPL",
-   "close": 568.6,
+   "close": 571.95,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -13645,11 +13611,11 @@
     }
    },
    "ext": 1.3,
-   "detail": "10-week range under a falling trendline, 4 touches, 18% deep \u00b7 3.8 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "10-week range under a falling trendline, 4 touches, 18% deep \u00b7 3.2 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "B",
    "trigger": 591.28,
-   "stop": 581.07,
-   "target": 697.09,
+   "stop": 580.93,
+   "target": 696.47,
    "chart": {
     "h": [
      585.9,
@@ -13710,7 +13676,7 @@
      570.7,
      574.8,
      576.75,
-     570.0
+     571.95
     ],
     "l": [
      570.7,
@@ -13832,7 +13798,7 @@
      552.65,
      568.3,
      566.5,
-     568.6
+     571.95
     ],
     "lines": {
      "top": [
@@ -15586,13 +15552,13 @@
   },
   {
    "symbol": "HEROMOTOCO",
-   "close": 5520.0,
+   "close": 5536.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Topping",
     "D": "Bullish",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "setup": "Hourly Range",
    "stage": "Watch",
@@ -15613,55 +15579,55 @@
     }
    },
    "ext": 1.6,
-   "detail": "7-week range under a falling trendline, 4 touches, 10% deep \u00b7 1.8 ranges under the ceiling \u00b7 Volume 1.5x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 5 touches, 10% deep \u00b7 1.6 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
    "grade": "C",
-   "trigger": 5604.94,
-   "stop": 5522.54,
-   "target": 6182.18,
+   "trigger": 5605.74,
+   "stop": 5527.84,
+   "target": 6181.41,
    "chart": {
     "h": [
+     5242.5,
      5326.5,
-     5298.0,
      5314.5,
      5340.0,
      5359.0,
-     5419.0,
+     5409.0,
      5439.0,
      5448.0,
-     5427.0,
+     5442.5,
      5367.0,
      5396.5,
-     5390.0,
+     5380.5,
      5390.0,
      5341.0,
      5329.5,
-     5230.0,
-     5113.5,
+     5290.0,
+     5126.0,
      5101.0,
-     5038.0,
-     4990.5,
+     5076.5,
+     5004.0,
      4953.0,
      4993.5,
      4991.0,
      5054.0,
-     5158.0,
-     5210.0,
+     5030.0,
+     5192.5,
      5232.0,
      5298.0,
      5322.0,
      5261.5,
-     5175.5,
-     5109.0,
-     5199.0,
+     5249.0,
+     5100.5,
+     5189.5,
      5328.0,
      5341.0,
      5410.5,
-     5189.0,
+     5178.0,
      5211.0,
-     5319.0,
+     5193.0,
      5321.0,
-     5384.5,
-     5527.0,
+     5382.0,
+     5524.0,
      5550.0,
      5513.0,
      5447.0,
@@ -15671,140 +15637,143 @@
      5448.5,
      5427.0,
      5375.5,
-     5498.5,
+     5444.0,
+     5558.0,
      5595.0,
-     5590.0
+     5536.0
     ],
     "l": [
-     5221.0,
+     5195.5,
+     5198.5,
      5166.0,
-     5186.5,
-     5243.5,
+     5235.0,
      5291.0,
      5285.5,
+     5376.0,
      5368.5,
-     5369.0,
      5300.0,
      5294.0,
-     5314.0,
+     5304.0,
      5306.5,
-     5267.5,
+     5309.0,
      5208.0,
      5053.0,
      4995.5,
      5043.0,
-     5010.0,
+     5058.0,
      4968.0,
-     4843.5,
+     4868.0,
      4828.0,
      4894.0,
      4892.5,
      4911.0,
      4987.5,
-     5138.5,
+     5036.5,
      5139.0,
-     5210.0,
-     5085.5,
+     5195.5,
+     5088.0,
      5059.0,
-     5046.0,
+     5064.5,
+     4994.5,
      4977.5,
-     5040.0,
-     5197.5,
+     5180.0,
      5201.5,
      5141.0,
      5054.0,
      5108.5,
      5135.0,
-     5265.0,
+     5218.5,
      5286.0,
-     5374.0,
+     5368.0,
      5445.5,
      5356.0,
      5367.5,
      5305.0,
      5288.5,
      5297.0,
-     5325.0,
+     5341.0,
      5301.0,
      5253.0,
      5236.0,
-     5472.0,
-     5500.5
+     5385.5,
+     5500.5,
+     5536.0
     ],
     "c": [
-     5264.5,
-     5166.0,
-     5235.0,
-     5340.0,
-     5332.5,
-     5417.5,
-     5388.5,
-     5425.5,
-     5345.0,
-     5329.5,
-     5360.0,
-     5375.5,
-     5276.5,
-     5320.0,
+     5221.5,
      5222.0,
-     5102.5,
-     5065.0,
-     5012.0,
-     5004.0,
-     4854.0,
-     4922.5,
-     4925.5,
-     4940.5,
-     5009.5,
-     5149.5,
-     5210.0,
-     5210.0,
-     5226.0,
-     5100.5,
-     5132.0,
-     5057.5,
-     5097.5,
-     5199.0,
-     5225.0,
-     5317.0,
-     5169.0,
-     5163.0,
-     5163.0,
-     5266.5,
+     5250.0,
+     5316.5,
+     5302.5,
+     5396.5,
+     5409.5,
+     5433.5,
+     5308.0,
+     5296.0,
+     5360.0,
+     5377.5,
+     5338.0,
+     5296.0,
+     5138.5,
+     5101.5,
+     5066.0,
+     5075.0,
+     5004.5,
+     4881.5,
+     4927.0,
+     4908.0,
+     4974.0,
+     5002.5,
+     5019.5,
+     5182.0,
+     5215.0,
+     5251.0,
+     5090.0,
+     5249.5,
+     5066.0,
+     5047.0,
+     5166.0,
+     5221.0,
+     5308.0,
+     5151.5,
+     5145.5,
+     5142.0,
+     5193.0,
      5300.0,
-     5373.5,
-     5524.0,
-     5470.5,
-     5405.0,
-     5391.0,
-     5349.0,
-     5342.0,
-     5372.0,
-     5336.5,
-     5346.5,
-     5287.0,
-     5487.5,
-     5577.5,
-     5520.0
+     5370.0,
+     5507.0,
+     5482.0,
+     5399.5,
+     5385.0,
+     5345.0,
+     5328.5,
+     5363.5,
+     5342.5,
+     5348.5,
+     5271.0,
+     5381.5,
+     5556.0,
+     5520.0,
+     5536.0
     ],
     "lines": {
      "top": [
       [
-       10.67,
+       10.83,
        5396.5
       ],
       [
-       53.67,
-       5604.94
+       54.0,
+       5605.74
       ]
      ],
      "floor": [
       [
-       10.67,
+       10.83,
        4828.0
       ],
       [
-       53.67,
+       54.0,
        4828.0
       ]
      ]
@@ -16033,7 +16002,7 @@
   },
   {
    "symbol": "HINDZINC",
-   "close": 522.25,
+   "close": 521.6,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -16060,11 +16029,11 @@
     }
    },
    "ext": -1.5,
-   "detail": "7-week range under a falling trendline, 3 touches, 16% deep \u00b7 10.9 ranges under the ceiling \u00b7 Volume 2.1x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 3 touches, 16% deep \u00b7 10.9 ranges under the ceiling \u00b7 Volume 2.2x lately (quieter is better)",
    "grade": "C",
    "trigger": 584.11,
-   "stop": 574.41,
-   "target": 680.3,
+   "stop": 574.36,
+   "target": 680.42,
    "chart": {
     "h": [
      573.55,
@@ -16226,7 +16195,7 @@
      533.55,
      519.6,
      516.7,
-     522.25
+     521.6
     ],
     "lines": {
      "top": [
@@ -24205,7 +24174,6 @@
    "HYUNDAI",
    "ICICIGI",
    "INDIANB",
-   "LICHSGFIN",
    "LODHA",
    "PGEL",
    "PIDILITIND",
@@ -24493,7 +24461,7 @@
   "ALMOST READY (Bullish)": [
    {
     "symbol": "360ONE",
-    "close": 1208.0,
+    "close": 1208.1,
     "states": {
      "M": "Impulse",
      "W": "Bottoming",
@@ -24831,7 +24799,7 @@
    },
    {
     "symbol": "AMBER",
-    "close": 6740.0,
+    "close": 6740.5,
     "states": {
      "M": "Bearish",
      "W": "Bottoming",
@@ -24991,7 +24959,7 @@
    },
    {
     "symbol": "BEL",
-    "close": 401.4,
+    "close": 402.0,
     "states": {
      "M": "Topping",
      "W": "Bottoming",
@@ -25055,7 +25023,7 @@
    },
    {
     "symbol": "BPCL",
-    "close": 311.0,
+    "close": 314.1,
     "states": {
      "M": "Bearish",
      "W": "Bottoming",
@@ -25215,7 +25183,7 @@
    },
    {
     "symbol": "CUMMINSIND",
-    "close": 4090.0,
+    "close": 4100.0,
     "states": {
      "M": "Topping",
      "W": "Bearish",
@@ -25407,7 +25375,7 @@
    },
    {
     "symbol": "HAVELLS",
-    "close": 1202.0,
+    "close": 1211.0,
     "states": {
      "M": "Bottoming",
      "W": "Bottoming",
@@ -25535,7 +25503,7 @@
    },
    {
     "symbol": "HINDZINC",
-    "close": 522.25,
+    "close": 521.6,
     "states": {
      "M": "Topping",
      "W": "Bearish",
@@ -25551,7 +25519,7 @@
    },
    {
     "symbol": "ICICIGI",
-    "close": 1731.0,
+    "close": 1736.0,
     "states": {
      "M": "Bottoming",
      "W": "Bottoming",
@@ -25583,7 +25551,7 @@
    },
    {
     "symbol": "INDUSINDBK",
-    "close": 997.2,
+    "close": 1003.0,
     "states": {
      "M": "Bullish",
      "W": "Bottoming",
@@ -25743,7 +25711,7 @@
    },
    {
     "symbol": "LICHSGFIN",
-    "close": 612.05,
+    "close": 614.9,
     "states": {
      "M": "Bottoming",
      "W": "Bullish",
@@ -25903,7 +25871,7 @@
    },
    {
     "symbol": "MFSL",
-    "close": 1432.1,
+    "close": 1435.1,
     "states": {
      "M": "Bearish",
      "W": "Bottoming",
@@ -26399,12 +26367,12 @@
    },
    {
     "symbol": "SOLARINDS",
-    "close": 18714.0,
+    "close": 18710.0,
     "states": {
      "M": "Topping",
      "W": "Bearish",
      "D": "Bearish",
-     "H": "Bullish"
+     "H": "Topping"
     },
     "signal": "W+D BEARISH (M lagging)",
     "ma": "Mixed - No Clear Signal",
@@ -26431,7 +26399,7 @@
    },
    {
     "symbol": "SUZLON",
-    "close": 37.0,
+    "close": 36.96,
     "states": {
      "M": "Bearish",
      "W": "Bottoming",
@@ -26607,7 +26575,7 @@
    },
    {
     "symbol": "UPL",
-    "close": 568.6,
+    "close": 571.95,
     "states": {
      "M": "Bearish",
      "W": "Bottoming",
@@ -26897,7 +26865,7 @@
    },
    {
     "symbol": "COFORGE",
-    "close": 2090.1,
+    "close": 2086.7,
     "states": {
      "M": "Impulse",
      "W": "Topping",
@@ -26977,7 +26945,7 @@
    },
    {
     "symbol": "GAIL",
-    "close": 190.35,
+    "close": 191.44,
     "states": {
      "M": "Bottoming",
      "W": "Impulse",
@@ -26993,12 +26961,12 @@
    },
    {
     "symbol": "HEROMOTOCO",
-    "close": 5520.0,
+    "close": 5536.0,
     "states": {
      "M": "Topping",
      "W": "Topping",
      "D": "Bullish",
-     "H": "Impulse"
+     "H": "Topping"
     },
     "signal": "ALL 3 ALIGNED BULLISH",
     "ma": "ONLY BUY",
@@ -27121,7 +27089,7 @@
    },
    {
     "symbol": "MAHABANK",
-    "close": 98.9,
+    "close": 99.45,
     "states": {
      "M": "Impulse",
      "W": "Impulse",
@@ -27313,7 +27281,7 @@
    },
    {
     "symbol": "PNBHOUSING",
-    "close": 1190.0,
+    "close": 1191.3,
     "states": {
      "M": "Impulse",
      "W": "Bottoming",
@@ -27409,7 +27377,7 @@
    },
    {
     "symbol": "UNITDSPR",
-    "close": 1468.0,
+    "close": 1466.4,
     "states": {
      "M": "Bottoming",
      "W": "Bottoming",
@@ -27443,7 +27411,7 @@
   "COMING CLOSE TO READY (Bearish)": [
    {
     "symbol": "AMBUJACEM",
-    "close": 399.8,
+    "close": 400.0,
     "states": {
      "M": "Bearish",
      "W": "Bottoming",
@@ -27491,7 +27459,7 @@
    },
    {
     "symbol": "CONCOR",
-    "close": 440.1,
+    "close": 438.35,
     "states": {
      "M": "Bottoming",
      "W": "Bearish",
