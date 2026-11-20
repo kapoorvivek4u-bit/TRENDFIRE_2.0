@@ -368,6 +368,54 @@ SQ_NOTE = {
 }
 
 
+def render_buildup(res):
+    """Big positions building quietly (OI up a lot, price flat), and the ones starting to."""
+    e = html.escape
+    pb = res.get("buildup")
+    if pb is None:
+        st.caption("This list appears after the next Unusual scan with the updated scan file.")
+        return
+    st.markdown(
+        f'<div style="font-size:14px;color:{INK};line-height:1.5;margin:6px 0">'
+        'Futures OI rising a lot while price stays flat: big players building positions '
+        f'quietly. Direction is for your chart. OI to {e(res.get("oi_asof", ""))}.</div>',
+        unsafe_allow_html=True)
+
+    def head(title, n, note, col):
+        st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                    f'font-weight:700;margin-top:16px;color:{col}">{title} · {n}</div>'
+                    f'<div class="tf-small">{note}</div>', unsafe_allow_html=True)
+
+    def card(x, line):
+        return (f'<div class="tf-row"><div class="tf-top"><span><a class="tf-sym" '
+                f'href="{chart_link(x["symbol"])}" target="_blank">{e(x["symbol"])}</a>'
+                f'{wl_link(x["symbol"])}</span><span style="font-family:\'JetBrains Mono\','
+                f'monospace;font-size:14px;font-weight:700">{money(x["close"])}</span></div>'
+                f'<div class="tf-chips">{line}</div>{sector_html(x["symbol"])}</div>')
+
+    b = pb.get("building", [])
+    head("Building now", len(b), "OI up a lot over 7 sessions, price within ±4%. "
+         "Sorted by how many of the last 7 sessions it showed up.", GREEN)
+    if b:
+        st.markdown('<div class="tf-grid">' + "".join(card(x, (
+            chip(f'OI {x["oi"]:+.0f}% in 7 sessions', GREEN) + chip(f'price {x["px"]:+.1f}%', MUTED)
+            + chip(f'{x["days"]} of last {x["of"]} days', BLUE)
+            + chip("since " + dt.datetime.strptime(x["since"], "%Y-%m-%d").strftime("%d %b"), MUTED)))
+            for x in b) + '</div>', unsafe_allow_html=True)
+    else:
+        st.caption("None right now.")
+    s = pb.get("starting", [])
+    head("Starting to build", len(s), "OI jumped in the last 3 sessions with price flat, "
+         "but not yet big over 7 sessions: the ones that may show up next.", AMBER)
+    if s:
+        st.markdown('<div class="tf-grid">' + "".join(card(x, (
+            chip(f'OI {x["oi"]:+.0f}% in 3 sessions', AMBER) + chip(f'price {x["px"]:+.1f}%', MUTED)
+            + (chip(f'7 sessions: OI {x["oi7"]:+.0f}%', MUTED) if x.get("oi7") is not None else "")))
+            for x in s) + '</div>', unsafe_allow_html=True)
+    else:
+        st.caption("None right now.")
+
+
 def render_squeeze(res):
     """Short squeeze watch: big short build-ups that are now losing money."""
     e = html.escape
@@ -608,7 +656,8 @@ def render_unusual(cfg):
         st.warning(f"These results are {age_days} days old. Check the Actions tab on "
                    "GitHub for a failed run.")
     leans = ["All", "Quiet", "Buying", "Selling"] + ([] if equity else
-                                                              ["OI 7-day", "Short squeeze"])
+                                                     ["Big positions", "OI 7-day",
+                                                      "Short squeeze"])
     lean = st.radio("Lean", leans, horizontal=True,
                     label_visibility="collapsed", key="unusual_lean")
     if lean == "OI 7-day":
@@ -616,6 +665,9 @@ def render_unusual(cfg):
         return
     if lean == "Short squeeze":
         render_squeeze(res)
+        return
+    if lean == "Big positions":
+        render_buildup(res)
         return
     quiet = [r for r in res["rows"] if r.get("moved") is False]
     rows = (res["rows"] if lean == "All" else quiet if lean == "Quiet"
