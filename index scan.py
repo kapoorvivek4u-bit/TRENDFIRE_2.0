@@ -411,7 +411,6 @@ def selftest():
           "| chart:", ic["states"], ic["vk"]["final"] if ic["vk"] else None, len(ic["setups"]))
     print("SELFTEST PASSED")
 
-
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
