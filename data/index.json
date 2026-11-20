@@ -1,0 +1,1867 @@
+{
+ "generated_ist": "2026-11-21 00:16",
+ "oi_asof": "2026-11-20",
+ "indexes": [
+  {
+   "key": "NIFTY",
+   "name": "Nifty 50",
+   "close": 25514.3,
+   "chg1": 1.14,
+   "chg5": 0.85,
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "vk": {
+    "final": "NO SIGNAL",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "Mixed - No Clear Signal",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "No signal yet",
+    "hourly": "No signal yet",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ma": "Messy",
+   "squeeze": false,
+   "ext": 5.0,
+   "stage": "Stretched",
+   "spark": [
+    24219.05,
+    24334.55,
+    24207.75,
+    24090.85,
+    24175.65,
+    24080.4,
+    24055.8,
+    23914.45,
+    23873.45,
+    23897.7,
+    23779.15,
+    23635.1,
+    23431.5,
+    23477.8,
+    23398.1,
+    23118.6,
+    23217.6,
+    23270.6,
+    23346.4,
+    23414.3,
+    23329.0,
+    23446.8,
+    23063.1,
+    23140.5,
+    22780.25,
+    22716.2,
+    22620.45,
+    22421.95,
+    22555.75,
+    22776.1,
+    22603.05,
+    22231.8,
+    22520.45,
+    22363.35,
+    22721.95,
+    22622.7,
+    22997.35,
+    23146.15,
+    22888.95,
+    22811.35,
+    22687.65,
+    22600.0,
+    22753.2,
+    22749.75,
+    22698.85,
+    22936.75,
+    23053.1,
+    23440.8,
+    23810.85,
+    23960.6,
+    24536.6,
+    25030.35,
+    25044.65,
+    25255.05,
+    25299.35,
+    25144.3,
+    25291.1,
+    25387.4,
+    25227.95,
+    25514.3
+   ],
+   "setups": [],
+   "futures": {
+    "oi": 15131350.0,
+    "price": 25775.3,
+    "date": "2026-11-20",
+    "day": {
+     "sessions": 1,
+     "oi_pct": 4.1,
+     "px_pct": 0.95,
+     "word": "Big positions building",
+     "side": 0
+    },
+    "week": {
+     "sessions": 5,
+     "oi_pct": 7.6,
+     "px_pct": 2.4,
+     "word": "Long build-up",
+     "side": 1
+    },
+    "pcr_hist": [
+     0.83,
+     0.94,
+     1.0,
+     0.85,
+     1.47,
+     1.67
+    ]
+   },
+   "options": {
+    "expiry": "2026-11-23",
+    "pcr": 1.67,
+    "max_pain": 25500.0,
+    "resistance": [
+     {
+      "strike": 26000.0,
+      "oi": 13720915.0
+     },
+     {
+      "strike": 26500.0,
+      "oi": 9875125.0
+     },
+     {
+      "strike": 26200.0,
+      "oi": 7757490.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 24500.0,
+      "oi": 16989440.0
+     },
+     {
+      "strike": 25000.0,
+      "oi": 15652130.0
+     },
+     {
+      "strike": 25500.0,
+      "oi": 13861120.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 25500.0,
+      "type": "PE",
+      "chg_oi": 6646510.0
+     },
+     {
+      "strike": 25650.0,
+      "type": "PE",
+      "chg_oi": 5942235.0
+     },
+     {
+      "strike": 26200.0,
+      "type": "CE",
+      "chg_oi": 3190070.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 25000.0,
+      "ce": 2470260.0,
+      "pe": 15652130.0
+     },
+     {
+      "strike": 25050.0,
+      "ce": 186095.0,
+      "pe": 2362230.0
+     },
+     {
+      "strike": 25100.0,
+      "ce": 983840.0,
+      "pe": 7681635.0
+     },
+     {
+      "strike": 25150.0,
+      "ce": 367445.0,
+      "pe": 3683420.0
+     },
+     {
+      "strike": 25200.0,
+      "ce": 1744600.0,
+      "pe": 10516545.0
+     },
+     {
+      "strike": 25250.0,
+      "ce": 602160.0,
+      "pe": 5073705.0
+     },
+     {
+      "strike": 25300.0,
+      "ce": 1975610.0,
+      "pe": 10205910.0
+     },
+     {
+      "strike": 25350.0,
+      "ce": 521755.0,
+      "pe": 4503135.0
+     },
+     {
+      "strike": 25400.0,
+      "ce": 2655900.0,
+      "pe": 9871550.0
+     },
+     {
+      "strike": 25450.0,
+      "ce": 970060.0,
+      "pe": 4294680.0
+     },
+     {
+      "strike": 25500.0,
+      "ce": 5297110.0,
+      "pe": 13861120.0
+     },
+     {
+      "strike": 25550.0,
+      "ce": 1591460.0,
+      "pe": 3735225.0
+     },
+     {
+      "strike": 25600.0,
+      "ce": 2598765.0,
+      "pe": 5678855.0
+     },
+     {
+      "strike": 25650.0,
+      "ce": 1841255.0,
+      "pe": 6180850.0
+     },
+     {
+      "strike": 25700.0,
+      "ce": 4605185.0,
+      "pe": 6282380.0
+     },
+     {
+      "strike": 25750.0,
+      "ce": 3251040.0,
+      "pe": 3860090.0
+     },
+     {
+      "strike": 25800.0,
+      "ce": 6271980.0,
+      "pe": 3665740.0
+     },
+     {
+      "strike": 25850.0,
+      "ce": 2800980.0,
+      "pe": 693940.0
+     },
+     {
+      "strike": 25900.0,
+      "ce": 4225325.0,
+      "pe": 497835.0
+     },
+     {
+      "strike": 25950.0,
+      "ce": 2365285.0,
+      "pe": 190385.0
+     },
+     {
+      "strike": 26000.0,
+      "ce": 13720915.0,
+      "pe": 1564550.0
+     }
+    ],
+    "tot_ce": 150898670.0,
+    "tot_pe": 252486195.0
+   },
+   "board": [
+    {
+     "symbol": "ADANIPORTS",
+     "vk": "BUY NOW",
+     "setup": "Daily VCP \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 6.8,
+      "px_pct": 0.5,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "APOLLOHOSP",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 15.9,
+      "px_pct": 7.7,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "BAJFINANCE",
+     "vk": "BUY NOW",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "A",
+     "oi": {
+      "oi_pct": -0.5,
+      "px_pct": -0.2,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "BHARTIARTL",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 0.4,
+      "px_pct": 1.9,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "EICHERMOT",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 10.9,
+      "px_pct": 5.5,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "ICICIBANK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 7.6,
+      "px_pct": 3.5,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "JSWSTEEL",
+     "vk": "BUY NOW",
+     "setup": "Daily Overspill \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -6.4,
+      "px_pct": -1.1,
+      "word": "Long unwinding",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "KOTAKBANK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 3.2,
+      "px_pct": 5.0,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "SUNPHARMA",
+     "vk": "BUY NOW",
+     "setup": "Weekly Overspill \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -0.8,
+      "px_pct": 0.3,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "BSE",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 0.4,
+      "px_pct": -4.0,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "DRREDDY",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "Warning",
+     "oi": {
+      "oi_pct": 8.2,
+      "px_pct": 0.4,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "ETERNAL",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Hourly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 4.5,
+      "px_pct": -0.6,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "INDIGO",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "Warning",
+     "oi": {
+      "oi_pct": 16.7,
+      "px_pct": -0.5,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "TITAN",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 14.4,
+      "px_pct": -5.3,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "TECHM",
+     "vk": "COMING CLOSE TO READY (Bullish)",
+     "setup": "Squeeze Break \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -1.5,
+      "px_pct": -2.0,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "ADANIENT",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -0.6,
+      "px_pct": 1.0,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "ASIANPAINT",
+     "vk": "NO SIGNAL",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "Warning",
+     "oi": {
+      "oi_pct": 19.8,
+      "px_pct": 2.3,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "AXISBANK",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Cup \u00b7 Ready",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -2.2,
+      "px_pct": 7.7,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "BAJAJ-AUTO",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "A",
+     "oi": {
+      "oi_pct": 18.0,
+      "px_pct": -0.8,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "BAJAJFINSV",
+     "vk": "NO SIGNAL",
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 14.5,
+      "px_pct": 1.7,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "BEL",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Range \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 1.0,
+      "px_pct": 0.1,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "CIPLA",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 2.4,
+      "px_pct": 0.8,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "COALINDIA",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 6.8,
+      "px_pct": -3.4,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "GRASIM",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Triggered",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 4.0,
+      "px_pct": 2.0,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "HCLTECH",
+     "vk": "NO SIGNAL",
+     "setup": "Squeeze Break \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 2.0,
+      "px_pct": -2.4,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "HDFCBANK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -4.4,
+      "px_pct": 5.2,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "HDFCLIFE",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Range \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 3.5,
+      "px_pct": -0.7,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "HINDALCO",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 14.5,
+      "px_pct": -2.2,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "HINDUNILVR",
+     "vk": "NO SIGNAL",
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 5.2,
+      "px_pct": 3.3,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "INFY",
+     "vk": "NO SIGNAL",
+     "setup": "Squeeze Break \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 1.7,
+      "px_pct": -4.2,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "ITC",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 10.1,
+      "px_pct": 5.0,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "LT",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 0.9,
+      "px_pct": 0.9,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "M&M",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 13.5,
+      "px_pct": 5.4,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "MARUTI",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 29.5,
+      "px_pct": 8.2,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "MAXHEALTH",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -2.1,
+      "px_pct": 13.9,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "NESTLEIND",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -5.3,
+      "px_pct": 3.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "NTPC",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 2.5,
+      "px_pct": 0.7,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "ONGC",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -0.7,
+      "px_pct": -0.8,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "POWERGRID",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Falling Wedge \u00b7 Ready",
+     "grade": "A",
+     "oi": {
+      "oi_pct": -9.9,
+      "px_pct": 3.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "RELIANCE",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 13.6,
+      "px_pct": 2.3,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "SBILIFE",
+     "vk": "NO SIGNAL",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 9.5,
+      "px_pct": 2.0,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "SBIN",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -11.5,
+      "px_pct": 7.7,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "SHRIRAMFIN",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 5.2,
+      "px_pct": -0.4,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "TATACONSUM",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -1.5,
+      "px_pct": 6.2,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "TATASTEEL",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 5.9,
+      "px_pct": -4.5,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "TCS",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 2.2,
+      "px_pct": -1.6,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "TRENT",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Rectangle \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -3.9,
+      "px_pct": 2.6,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "ULTRACEMCO",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -1.3,
+      "px_pct": 5.7,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "JIOFIN",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -0.1,
+      "px_pct": -1.1,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "TMPV",
+     "vk": "COMING CLOSE TO READY (Bearish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 9.8,
+      "px_pct": -7.4,
+      "word": "Short build-up",
+      "side": -1
+     }
+    }
+   ]
+  },
+  {
+   "key": "BANKNIFTY",
+   "name": "Bank Nifty",
+   "close": 63063.0,
+   "chg1": 1.65,
+   "chg5": 2.51,
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "BULLISH RUN",
+     "W": "BULLISH RUN",
+     "D": "BULLISH RUN",
+     "H": "BULLISH RUN"
+    }
+   },
+   "old": "\u2705 Confirmed Bullish",
+   "ma": "Bullish",
+   "squeeze": false,
+   "ext": 6.2,
+   "stage": "Stretched",
+   "spark": [
+    57525.95,
+    57514.2,
+    57783.75,
+    57509.95,
+    57496.3,
+    58024.95,
+    57409.6,
+    57172.0,
+    57380.6,
+    57369.65,
+    57088.3,
+    56777.55,
+    56295.55,
+    56471.95,
+    56606.55,
+    55794.75,
+    56292.45,
+    56055.75,
+    56358.7,
+    56470.65,
+    56215.55,
+    56548.9,
+    55438.5,
+    55580.4,
+    54471.65,
+    54259.95,
+    54633.05,
+    54450.75,
+    54714.1,
+    55128.4,
+    55055.55,
+    54515.05,
+    55256.65,
+    54918.0,
+    55481.05,
+    55316.0,
+    55810.5,
+    55844.0,
+    55488.1,
+    54976.9,
+    54925.7,
+    54287.35,
+    54366.7,
+    53974.9,
+    54267.4,
+    54909.65,
+    54686.95,
+    55002.2,
+    55540.05,
+    55913.6,
+    57773.65,
+    59086.0,
+    59741.25,
+    60792.4,
+    61518.5,
+    61034.1,
+    61575.9,
+    62273.25,
+    62038.65,
+    63063.0
+   ],
+   "setups": [],
+   "futures": {
+    "oi": 2466930.0,
+    "price": 64556.6,
+    "date": "2026-11-20",
+    "day": {
+     "sessions": 1,
+     "oi_pct": -2.1,
+     "px_pct": 2.34,
+     "word": "No big change",
+     "side": 0
+    },
+    "week": {
+     "sessions": 5,
+     "oi_pct": 4.3,
+     "px_pct": 5.95,
+     "word": "Long build-up",
+     "side": 1
+    },
+    "pcr_hist": [
+     1.24,
+     1.24,
+     1.34,
+     1.18,
+     1.36,
+     1.37
+    ]
+   },
+   "options": {
+    "expiry": "2026-11-23",
+    "pcr": 1.37,
+    "max_pain": 62500.0,
+    "resistance": [
+     {
+      "strike": 66000.0,
+      "oi": 1039710.0
+     },
+     {
+      "strike": 65000.0,
+      "oi": 1020420.0
+     },
+     {
+      "strike": 64500.0,
+      "oi": 856890.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 63000.0,
+      "oi": 1493730.0
+     },
+     {
+      "strike": 62000.0,
+      "oi": 1096890.0
+     },
+     {
+      "strike": 61000.0,
+      "oi": 1095960.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 63000.0,
+      "type": "PE",
+      "chg_oi": 856230.0
+     },
+     {
+      "strike": 64000.0,
+      "type": "PE",
+      "chg_oi": 612150.0
+     },
+     {
+      "strike": 66000.0,
+      "type": "CE",
+      "chg_oi": 601830.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 62100.0,
+      "ce": 83880.0,
+      "pe": 210480.0
+     },
+     {
+      "strike": 62200.0,
+      "ce": 87900.0,
+      "pe": 212730.0
+     },
+     {
+      "strike": 62300.0,
+      "ce": 90120.0,
+      "pe": 288540.0
+     },
+     {
+      "strike": 62400.0,
+      "ce": 107400.0,
+      "pe": 273600.0
+     },
+     {
+      "strike": 62500.0,
+      "ce": 318360.0,
+      "pe": 999600.0
+     },
+     {
+      "strike": 62600.0,
+      "ce": 74190.0,
+      "pe": 258000.0
+     },
+     {
+      "strike": 62700.0,
+      "ce": 42510.0,
+      "pe": 216960.0
+     },
+     {
+      "strike": 62800.0,
+      "ce": 80670.0,
+      "pe": 245400.0
+     },
+     {
+      "strike": 62900.0,
+      "ce": 81750.0,
+      "pe": 439890.0
+     },
+     {
+      "strike": 63000.0,
+      "ce": 391470.0,
+      "pe": 1493730.0
+     },
+     {
+      "strike": 63100.0,
+      "ce": 153990.0,
+      "pe": 236760.0
+     },
+     {
+      "strike": 63200.0,
+      "ce": 157530.0,
+      "pe": 309540.0
+     },
+     {
+      "strike": 63300.0,
+      "ce": 100590.0,
+      "pe": 176700.0
+     },
+     {
+      "strike": 63400.0,
+      "ce": 73770.0,
+      "pe": 194310.0
+     },
+     {
+      "strike": 63500.0,
+      "ce": 226380.0,
+      "pe": 431400.0
+     },
+     {
+      "strike": 63600.0,
+      "ce": 108150.0,
+      "pe": 206610.0
+     },
+     {
+      "strike": 63700.0,
+      "ce": 70560.0,
+      "pe": 237900.0
+     },
+     {
+      "strike": 63800.0,
+      "ce": 112830.0,
+      "pe": 255000.0
+     },
+     {
+      "strike": 63900.0,
+      "ce": 119220.0,
+      "pe": 199770.0
+     },
+     {
+      "strike": 64000.0,
+      "ce": 517710.0,
+      "pe": 662280.0
+     },
+     {
+      "strike": 64100.0,
+      "ce": 86580.0,
+      "pe": 199470.0
+     }
+    ],
+    "tot_ce": 19288770.0,
+    "tot_pe": 26445360.0
+   },
+   "board": [
+    {
+     "symbol": "FEDERALBNK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -3.2,
+      "px_pct": 3.3,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "ICICIBANK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 7.6,
+      "px_pct": 3.5,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "KOTAKBANK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 3.2,
+      "px_pct": 5.0,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "PNB",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -9.5,
+      "px_pct": 8.0,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "UNIONBANK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -5.3,
+      "px_pct": 6.6,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "AUBANK",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -4.5,
+      "px_pct": 1.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "AXISBANK",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Cup \u00b7 Ready",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -2.2,
+      "px_pct": 7.7,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "BANKBARODA",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -4.2,
+      "px_pct": 4.5,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "CANBK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 2.1,
+      "px_pct": 5.1,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "HDFCBANK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -4.4,
+      "px_pct": 5.2,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "IDFCFIRSTB",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -4.5,
+      "px_pct": 8.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "INDUSINDBK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -8.4,
+      "px_pct": 8.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "SBIN",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -11.5,
+      "px_pct": 7.7,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "YESBANK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -2.0,
+      "px_pct": 2.6,
+      "word": "No big change",
+      "side": 0
+     }
+    }
+   ]
+  },
+  {
+   "key": "MIDCAP",
+   "name": "Midcap Select",
+   "close": 17756.15,
+   "chg1": 0.98,
+   "chg5": -0.72,
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Impulse",
+    "H": "Impulse"
+   },
+   "vk": {
+    "final": "BUY NOW",
+    "signal": "Mixed",
+    "ma": "ONLY BUY",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
+    "status": {
+     "M": "TOPPING",
+     "W": "BOTTOMING",
+     "D": "TOPPING",
+     "H": "BULLISH RUN"
+    }
+   },
+   "old": "\u274c Avoid",
+   "ma": "Bullish",
+   "squeeze": false,
+   "ext": 1.6,
+   "stage": "Triggered",
+   "spark": [
+    18331.75,
+    18412.25,
+    18380.6,
+    18361.75,
+    18405.8,
+    18491.45,
+    18248.8,
+    18120.2,
+    18170.25,
+    18127.75,
+    18051.6,
+    18093.0,
+    17994.1,
+    17928.7,
+    17929.75,
+    17556.35,
+    17560.1,
+    17728.75,
+    17882.9,
+    17879.65,
+    17878.6,
+    17979.65,
+    17518.05,
+    17474.1,
+    17208.9,
+    17030.55,
+    17028.7,
+    16840.35,
+    16911.25,
+    17119.7,
+    16990.85,
+    16530.9,
+    16786.7,
+    16827.65,
+    16974.0,
+    16997.35,
+    16956.3,
+    16946.3,
+    16767.85,
+    16500.2,
+    16410.8,
+    16066.4,
+    16266.85,
+    16412.7,
+    16500.65,
+    16656.4,
+    16513.3,
+    16717.7,
+    16908.3,
+    17149.1,
+    17432.4,
+    17490.0,
+    17589.5,
+    17753.6,
+    17884.95,
+    17877.45,
+    17774.15,
+    17821.3,
+    17583.65,
+    17756.15
+   ],
+   "setups": [
+    {
+     "symbol": "MIDCAP",
+     "close": 17885.85,
+     "trend": "With trend",
+     "states": {
+      "M": "Topping",
+      "W": "Bottoming",
+      "D": "Impulse",
+      "H": "Impulse"
+     },
+     "old": "\u274c Avoid",
+     "ext": 1.6,
+     "vk": {
+      "final": "BUY NOW",
+      "signal": "Mixed",
+      "ma": "ONLY BUY",
+      "advice": "Mixed signal \u2014 confluence ka wait karo",
+      "daily": "Daily Signal ON (Bullish)",
+      "hourly": "Aligned \u2014 can buy now",
+      "confirmed": "CONFIRMED \u2014 Buy ON",
+      "status": {
+       "M": "TOPPING",
+       "W": "BOTTOMING",
+       "D": "TOPPING",
+       "H": "BULLISH RUN"
+      }
+     },
+     "setup": "Swing Pullback",
+     "stage": "Triggered",
+     "detail": "Pullback 41% \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
+     "grade": "C",
+     "trigger": 17725.6,
+     "stop": 17441.75
+    },
+    {
+     "symbol": "MIDCAP",
+     "close": 17885.85,
+     "trend": "With trend",
+     "states": {
+      "M": "Topping",
+      "W": "Bottoming",
+      "D": "Impulse",
+      "H": "Impulse"
+     },
+     "setup": "Weekly Overspill",
+     "stage": "Watch",
+     "old": "\u274c Avoid",
+     "vk": {
+      "final": "BUY NOW",
+      "signal": "Mixed",
+      "ma": "ONLY BUY",
+      "advice": "Mixed signal \u2014 confluence ka wait karo",
+      "daily": "Daily Signal ON (Bullish)",
+      "hourly": "Aligned \u2014 can buy now",
+      "confirmed": "CONFIRMED \u2014 Buy ON",
+      "status": {
+       "M": "TOPPING",
+       "W": "BOTTOMING",
+       "D": "TOPPING",
+       "H": "BULLISH RUN"
+      }
+     },
+     "ext": 1.6,
+     "detail": "Weekly spilled 7.2% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 OI n/a",
+     "grade": "C",
+     "trigger": 17399.15,
+     "stop": 15839.41
+    }
+   ],
+   "futures": {
+    "oi": 2493840.0,
+    "price": 14297.9,
+    "date": "2026-11-20",
+    "day": {
+     "sessions": 1,
+     "oi_pct": 3.2,
+     "px_pct": 0.5,
+     "word": "Big positions building",
+     "side": 0
+    },
+    "week": {
+     "sessions": 5,
+     "oi_pct": 12.9,
+     "px_pct": -0.52,
+     "word": "Big positions building",
+     "side": 0
+    },
+    "pcr_hist": [
+     1.07,
+     1.02,
+     0.98,
+     0.83,
+     0.93,
+     0.96
+    ]
+   },
+   "options": {
+    "expiry": "2026-11-23",
+    "pcr": 0.96,
+    "max_pain": 14200.0,
+    "resistance": [],
+    "support": [
+     {
+      "strike": 16400.0,
+      "oi": 0.0
+     },
+     {
+      "strike": 16500.0,
+      "oi": 0.0
+     }
+    ],
+    "new_oi": [],
+    "ladder": [
+     {
+      "strike": 16400.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 16500.0,
+      "ce": 2640.0,
+      "pe": 0.0
+     }
+    ],
+    "tot_ce": 10332960.0,
+    "tot_pe": 9965880.0
+   },
+   "board": [
+    {
+     "symbol": "AUROPHARMA",
+     "vk": "BUY NOW",
+     "setup": "Hourly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 0.0,
+      "px_pct": -1.2,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "BHEL",
+     "vk": "BUY NOW",
+     "setup": "Weekly Overspill \u00b7 Ready",
+     "grade": "A",
+     "oi": {
+      "oi_pct": 4.1,
+      "px_pct": -0.8,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "FEDERALBNK",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -3.2,
+      "px_pct": 3.3,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "HEROMOTOCO",
+     "vk": "BUY NOW",
+     "setup": "Weekly Overspill \u00b7 Triggered",
+     "grade": "A",
+     "oi": {
+      "oi_pct": 1.4,
+      "px_pct": 2.6,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "INDHOTEL",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 2.2,
+      "px_pct": 1.8,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "INDIANB",
+     "vk": "BUY NOW",
+     "setup": "Daily Flag \u00b7 Ready",
+     "grade": "A",
+     "oi": {
+      "oi_pct": 7.6,
+      "px_pct": 1.6,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "MARICO",
+     "vk": "BUY NOW",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 10.2,
+      "px_pct": 1.5,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "PERSISTENT",
+     "vk": "BUY NOW",
+     "setup": "Daily Overspill \u00b7 Watch",
+     "grade": "A",
+     "oi": {
+      "oi_pct": 0.2,
+      "px_pct": 0.8,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "MCX",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "Warning",
+     "oi": {
+      "oi_pct": 5.6,
+      "px_pct": -5.5,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "PAYTM",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Daily Overspill \u00b7 Watch",
+     "grade": "Warning",
+     "oi": {
+      "oi_pct": 16.7,
+      "px_pct": -10.6,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "ASHOKLEY",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 18.6,
+      "px_pct": -3.2,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "AUBANK",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -4.5,
+      "px_pct": 1.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "BHARATFORG",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 8.0,
+      "px_pct": -0.7,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "DIXON",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 5.0,
+      "px_pct": 2.5,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "GVT&D",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -5.5,
+      "px_pct": -4.4,
+      "word": "Long unwinding",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "INDUSINDBK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -8.4,
+      "px_pct": 8.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "INDUSTOWER",
+     "vk": "NO SIGNAL",
+     "setup": "Daily Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 3.7,
+      "px_pct": -2.6,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "LICI",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 19.3,
+      "px_pct": 2.3,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "LUPIN",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Ready",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -0.9,
+      "px_pct": 0.4,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "NAUKRI",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "C",
+     "oi": {
+      "oi_pct": 1.9,
+      "px_pct": -1.1,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "POLICYBZR",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -8.2,
+      "px_pct": -7.9,
+      "word": "Long unwinding",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "SRF",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -1.6,
+      "px_pct": 1.2,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "SUZLON",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -9.9,
+      "px_pct": -3.3,
+      "word": "Long unwinding",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "YESBANK",
+     "vk": "NO SIGNAL",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -2.0,
+      "px_pct": 2.6,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "SWIGGY",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 4.1,
+      "px_pct": -4.5,
+      "word": "Short build-up",
+      "side": -1
+     }
+    }
+   ]
+  }
+ ]
+}
