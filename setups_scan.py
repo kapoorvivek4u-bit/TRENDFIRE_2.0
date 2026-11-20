@@ -85,6 +85,16 @@ CFG = {
         "vol_dry": 0.7,          # volume in the last bars vs during the run up
         "ready_atr": 1.0, "late_atr": 2.5,
     },
+    "cup": {   # Cup: run up, then a rounded U whose right side climbs back to the left rim
+        "daily":  {"cup": (30, 160), "depth": (12.0, 35.0), "run_look": 60, "run_pct": 20.0,
+                   "fresh": 5},
+        "hourly": {"cup": (35, 210), "depth": (4.0, 15.0), "run_look": 100, "run_pct": 6.0,
+                   "fresh": 10},
+        "lip_below": 5.0,        # Ready: price within this % under the rim
+        "round_share": 0.35,     # at least this share of the cup's bars in its bottom third (U, not V)
+        "vol_dry": 0.8,          # recent volume vs the cup's average
+        "ready_atr": 1.0, "late_atr": 2.5,
+    },
     "recent_break_days": 15,  # a range breakout this recent counts for Breakout + Trend Overspill
     "ext_atr": 4.0,         # this many daily ranges above the 50 EMA = Extended
     "turn_pts": 5,          # Daily breadth change over 3 sessions that counts as a turn
@@ -638,6 +648,116 @@ def find_vcp(h, l, c, v, atr, p):
                                   "floor": (int(segs[0][0]), lows[0], int(end - 1), lows[2])}}
 
 
+def find_cup(h, l, c, v, atr, p):
+    """Cup at the right edge (no handle needed): a run up, then a rounded U-shaped cup
+    whose right side has climbed back toward the left rim. The pivot is the left rim.
+      Watch     right side in the upper third of the cup, climbing
+      Ready     price within lip_below % (or 1 range) of the rim
+      Triggered a fresh close above the rim
+    Returns dict or None."""
+    K = CFG["cup"]
+    n = len(c)
+    c_lo, c_hi = p["cup"]
+    if n < c_hi + p["run_look"] + 5 or np.isnan(atr[-1]) or atr[-1] <= 0:
+        return None
+    a_now = float(atr[-1])
+    l0, l1 = max(0, n - 1 - c_hi), n - 1 - c_lo
+    if l1 <= l0:
+        return None
+    a = l0 + int(np.argmax(h[l0:l1 + 1]))           # left rim: the highest high back then
+    L = float(h[a])
+    after = np.arange(a + 1, n)
+    above = after[c[after] > L + 0.1 * a_now]
+    brk = int(above[0]) if len(above) else None
+    end = brk if brk is not None else n              # the cup ends at the breakout or today
+    if end - 1 - a < c_lo:
+        return None
+    m = a + int(np.argmin(l[a:end]))
+    bottom = float(l[m])
+    depth = (L - bottom) / L * 100
+    if not (p["depth"][0] <= depth <= p["depth"][1]):
+        return None
+    span = end - 1 - a
+    if not (0.2 * span <= m - a <= 0.8 * span):
+        return None                                  # the low must sit near the middle
+    third = bottom + (L - bottom) / 3
+    if np.mean(c[a:end] <= third) < K["round_share"]:
+        return None                                  # a V, not a rounded U
+    last = c[end - 1]
+    if last < bottom + 2 * (L - bottom) / 3:
+        return None                                  # right side not yet in the upper third
+    s0 = max(0, a - p["run_look"])
+    run_lo = s0 + int(np.argmin(l[s0:a + 1]))
+    run = (L / l[run_lo] - 1) * 100
+    if run < p["run_pct"]:
+        return None
+    dry = np.nan
+    if v is not None and len(v) == n:
+        cup_v = np.nanmean(v[a:end])
+        rec_v = np.nanmean(v[max(m, end - 10):end])
+        dry = rec_v / cup_v if cup_v and cup_v > 0 else np.nan
+    if brk is None:
+        near = (L - c[-1]) / L * 100 <= K["lip_below"] or (L - c[-1]) / a_now <= K["ready_atr"]
+        stage = "Ready" if near else "Watch"
+    else:
+        if (n - 1 - brk) > p["fresh"] or (c[-1] - L) / a_now > K["late_atr"] \
+                or c[-1] < L - 0.5 * a_now:
+            return None
+        stage = "Triggered"
+    k = max(5, span // 6)                            # stop: the latest swing low on the right side
+    stop = float(l[max(m, end - k):end].min()) * 0.998
+    return {"stage": stage, "pivot": L, "stop": stop, "target": L + (L - bottom),
+            "start": int(a), "run_start": int(run_lo), "broke_at": brk, "cup_len": int(span),
+            "depth": depth, "back": (last - bottom) / (L - bottom) * 100, "run": run, "dry": dry,
+            "lines": {"top": (a, L, n - 1, L), "floor": (int(m), bottom, int(m), bottom)}}
+
+
+def cup_rows(row, T, vol, idx, fo, tf):
+    """Daily / Hourly Cup row, only in an uptrend."""
+    up = ("Bullish", "Impulse")
+    st_ = row.get("states", {})
+    ok = (st_.get("W") in up and row.get("trend") == "With trend" if tf == "Daily"
+          else st_.get("D") in up and st_.get("W") in up)
+    if not ok:
+        return []
+    v = np.asarray(vol, float) if vol is not None else None
+    cp = find_cup(T["h"], T["l"], T["c"], v, T["ind"]["atr"], CFG["cup"][tf.lower()])
+    if not cp:
+        return []
+    unit = "days" if tf == "Daily" else "hours"
+    dry_ok = bool(not np.isnan(cp["dry"]) and cp["dry"] <= CFG["cup"]["vol_dry"])
+    if cp["broke_at"] is not None:
+        dry_ok, vol_txt, _ = _vol_grade(vol, idx, cp["broke_at"], unit, None)
+    else:
+        vol_txt = ("Volume n/a" if np.isnan(cp["dry"]) else
+                   f"Recent volume {cp['dry']:.1f}x the cup's" + (" (quiet)" if dry_ok else ""))
+    oi_ok = False
+    if fo is not None and idx is not None and len(idx) > 6:
+        ch = oi_change(fo, pd.Timestamp(idx[-6]).normalize(), pd.Timestamp(idx[-1]).normalize())
+        if ch:
+            oi_ok = bool((ch[0] > 0 and ch[1] > 0) or (abs(ch[0]) < 0.02 and ch[1] <= 0.03))
+    grade = "ABC"[2 - int(dry_ok) - int(oi_ok)] if fo is not None else ("A" if dry_ok else "B")
+    a_now = float(T["ind"]["atr"][-1])
+    pos = ("broke out " + pd.Timestamp(idx[cp["broke_at"]]).strftime("%a %d")
+           if cp["broke_at"] is not None and idx is not None else
+           ("at the rim" if cp["pivot"] - T["c"][-1] <= 0.05 * a_now else
+            f"{(cp['pivot'] - T['c'][-1]) / cp['pivot'] * 100:.1f}% under the rim"))
+    per_wk = 5 if unit == "days" else 35
+    cup_txt = (f"{cp['cup_len'] / per_wk:.0f}-week cup" if cp["cup_len"] >= 2 * per_wk
+               else f"{cp['cup_len']} {unit} cup")
+    detail = (f"{cp['run']:.0f}% run, {cup_txt} {cp['depth']:.0f}% deep, right side "
+              f"{min(cp['back'], 100):.0f}% of the way back · {pos} · {vol_txt}")
+    return [{"symbol": row["symbol"], "close": row["close"], "trend": row["trend"],
+             "states": row["states"], "setup": f"{tf} Cup", "stage": cp["stage"],
+             "old": row.get("old"), "vk": row.get("vk"), "ext": row.get("ext"),
+             "detail": detail, "grade": grade, "clean": False,
+             "trigger": round(cp["pivot"], 2), "stop": round(cp["stop"], 2),
+             "target": round(cp["target"], 2), "target_why": "cup depth added to the rim",
+             "chart": mini_chart(T, cp["start"], cp["lines"], cp["broke_at"]),
+             "since": pd.Timestamp(idx[cp["start"]]).strftime("%Y-%m-%d %H:%M")
+             if idx is not None else None}]
+
+
 def vcp_rows(row, T, vol, idx, fo, tf):
     """Daily / Hourly VCP row. Only in an uptrend, like flags."""
     up = ("Bullish", "Impulse")
@@ -1107,10 +1227,12 @@ def analyse(sym, d, hr, fo):
                               "weeks": round(rb["span"] / 5)}
     lines += pattern_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily")
     lines += vcp_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily")
+    lines += cup_rows(row, D, d["Volume"].values.astype(float), d.index, fo, "Daily")
     if H["ok"]:
         lines += range_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly Range")
         lines += pattern_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly")
         lines += vcp_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly")
+        lines += cup_rows(row, H, slot_rvol(hr), hr.index, fo, "Hourly")
     row["ranges"] = lines
 
     if cands:
@@ -1698,6 +1820,32 @@ def selftest():
     assert vcp_rows(dict(row_v, trend="Early turn"), Tv, vv, dv, None, "Daily") == []
     print("vcp trace:", v1["stage"], [round(x_, 1) for x_ in v1["ranges"]], round(v1["dry"], 2),
           "|", v2["stage"])
+
+    # 8j) Cup: rounded U, right side back near the rim (no handle needed)
+    dc = pd.bdate_range(end="2026-11-13", periods=300)
+    def cup_cc(shape="U", tail=()):
+        tc = np.linspace(0, np.pi, 60)
+        cup = (800 - 160 * np.sin(tc) if shape == "U"
+               else 800 - 160 * (1 - np.abs(np.linspace(-1, 1, 60))))
+        cc_ = np.concatenate([np.full(150, 600.0) + np.sin(np.arange(150) / 3) * 3,
+                              np.linspace(600, 800, 30), cup[:-3], np.array(tail, float)])
+        return np.concatenate([np.full(300 - len(cc_), 600.0), cc_])[-300:]
+    vc_ = np.r_[np.full(290, 1e6), np.full(10, 6e5)]
+    def cup_of(cc_):
+        T_ = tf_view(_bars(cc_, dc, noise=0.004, vol=vc_), 3)
+        return find_cup(T_["h"], T_["l"], T_["c"], vc_, T_["ind"]["atr"], CFG["cup"]["daily"]), T_
+    k1, Tk = cup_of(cup_cc())
+    assert k1 and k1["stage"] == "Ready" and 15 < k1["depth"] < 25, k1
+    assert k1["stop"] < k1["pivot"] < k1["target"], k1
+    assert cup_of(cup_cc(tail=(805, 815, 820)))[0]["stage"] == "Triggered"
+    assert cup_of(cup_cc("V"))[0] is None                            # a V is not a cup
+    kh, _ = cup_of(np.concatenate([cup_cc()[:-25], np.linspace(700, 690, 25)]))
+    assert kh is None                                                # right side not back up yet
+    kr = cup_rows({"symbol": "K", "close": 780.0, "trend": "With trend",
+                   "states": {"M": "Bullish", "W": "Bullish", "D": "Bullish", "H": "Bullish"}},
+                  Tk, vc_, dc, None, "Daily")
+    assert kr and kr[0]["setup"] == "Daily Cup" and "way back" in kr[0]["detail"], kr
+    print("cup trace:", k1["stage"], round(k1["depth"], 1), k1["cup_len"])
 
     # 8f) VK System words
     def T_(m, p, sq=False, e=(3.0, 2.0, 1.0)):
