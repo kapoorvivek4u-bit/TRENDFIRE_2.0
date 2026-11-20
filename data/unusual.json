@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-21 00:04",
+ "generated_ist": "2026-11-21 00:10",
  "oi_asof": "2026-11-20",
  "squeeze": [
   {
@@ -911,7 +911,7 @@
     "W": "Bullish",
     "D": "Bearish"
    },
-   "setup": "Squeeze Break \u00b7 Ready"
+   "setup": "Squeeze Break \u00b7 Watch"
   },
   {
    "symbol": "CIPLA",
@@ -1011,7 +1011,8 @@
    "states": {
     "W": "Bottoming",
     "D": "Topping"
-   }
+   },
+   "setup": "Swing Pullback \u00b7 Triggered"
   },
   {
    "symbol": "LICHSGFIN",
@@ -1404,7 +1405,8 @@
    "states": {
     "W": "Bullish",
     "D": "Topping"
-   }
+   },
+   "setup": "Swing Pullback \u00b7 Ready"
   },
   {
    "symbol": "PHOENIXLTD",
@@ -1429,7 +1431,8 @@
    "states": {
     "W": "Bullish",
     "D": "Topping"
-   }
+   },
+   "setup": "Trend Pullback \u00b7 Watch"
   },
   {
    "symbol": "COROMANDEL",
