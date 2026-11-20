@@ -59,6 +59,10 @@ UCFG = {
     "sq_trapped": 0.03,           # price this far above that day's close = shorts trapped
     "sq_late": 0.15,              # ... further than this = the squeeze has mostly run
     "sq_cover": -0.02,            # OI change over the last 2 sessions that counts as covering
+    "pb_days": 7,                 # position build-up watch: days of history shown
+    "pb_start_days": 3,           # "starting": OI change over this many sessions ...
+    "pb_start_min": 0.08,         # ... at least this much above the market's change ...
+    "pb_start_mult": 3.0,         # ... and this many times the stock's usual 3-session change
     "sq_history": 15,             # sessions of OI needed before the short day (new F&O stocks
                                   # build OI from zero, which is not a short build-up)
     "age_weight": [1.0, 0.7, 0.5],
@@ -380,6 +384,73 @@ def squeeze_watch(symbols, fo, hourly=None, cal=None, setups=None):
     return sorted(out, key=lambda x: (order[x["stage"]], x["above"]))
 
 
+def position_buildup(symbols, fo):
+    """Big positions building quietly: futures OI rising a lot while price stays flat.
+      building  the 7-session test (same as the OI 7-day list) passes today, price flat;
+                with how many of the last pb_days sessions it passed, and since when
+      starting  OI jumped over the last 3 sessions with price flat, but the 7-session
+                test has not passed yet: the ones about to show up"""
+    C = UCFG
+    oi = fo.pivot(index="date", columns="symbol", values="fut_oi").sort_index()
+    px = fo.pivot(index="date", columns="symbol", values="fut_close").sort_index()
+    N, S = C["oi_build_days"], C["pb_start_days"]
+    if len(oi) < N + 6:
+        return {"building": [], "starting": []}
+
+    def rel_change(k):
+        ch = oi / oi.shift(k) - 1
+        return ch, ch.sub(ch.median(axis=1), axis=0), px / px.shift(k) - 1
+
+    chN, relN, pxN = rel_change(N)
+    chS, relS, pxS = rel_change(S)
+    first_day = oi.index[0]
+    days = list(oi.index[-C["pb_days"]:])
+    out_b, out_s = [], []
+    for s in symbols:
+        if s not in oi.columns or np.isnan(oi[s].iloc[-1]):
+            continue
+        fv = oi[s].first_valid_index()
+        if fv is None or (fv != first_day and oi.index.get_loc(fv) > len(oi) - N - 15):
+            continue                                   # new to F&O: OI still building from zero
+        rN = relN[s]
+        hits = []
+        for d in days:
+            i = oi.index.get_loc(d)
+            hist = rN.iloc[:i].dropna()
+            if len(hist) < 3 or np.isnan(rN.iloc[i]) or np.isnan(pxN[s].iloc[i]):
+                continue
+            usual = float(hist.abs().median())
+            if (rN.iloc[i] >= max(C["oi_build_min"], C["oi_build_mult"] * usual)
+                    and abs(pxN[s].iloc[i]) <= C["oi_build_flat"]):
+                hits.append(d)
+        if hits and hits[-1] == oi.index[-1]:
+            out_b.append({"symbol": s, "oi": round(float(chN[s].iloc[-1]) * 100, 1),
+                          "px": round(float(pxN[s].iloc[-1]) * 100, 1),
+                          "days": len(hits), "of": len(days),
+                          "since": hits[0].strftime("%Y-%m-%d"),
+                          "close": round(float(px[s].iloc[-1]), 2)})
+            continue
+        rS = relS[s].dropna()
+        if len(rS) < 6 or np.isnan(pxS[s].iloc[-1]):
+            continue
+        hN = rN.iloc[:-1].dropna()
+        if not np.isnan(rN.iloc[-1]) and len(hN) >= 3 and rN.iloc[-1] >= max(
+                C["oi_build_min"], C["oi_build_mult"] * float(hN.abs().median())):
+            continue                                   # the 7-session OI is already big:
+                                                       # not "starting" (price has moved)
+        usual3 = float(rS.iloc[:-1].abs().median())
+        if (rS.iloc[-1] >= max(C["pb_start_min"], C["pb_start_mult"] * usual3)
+                and abs(pxS[s].iloc[-1]) <= C["oi_build_flat"] * 0.75
+                and chS[s].iloc[-1] > 0):
+            out_s.append({"symbol": s, "oi": round(float(chS[s].iloc[-1]) * 100, 1),
+                          "px": round(float(pxS[s].iloc[-1]) * 100, 1),
+                          "oi7": (None if np.isnan(chN[s].iloc[-1]) else
+                                  round(float(chN[s].iloc[-1]) * 100, 1)),
+                          "close": round(float(px[s].iloc[-1]), 2)})
+    return {"building": sorted(out_b, key=lambda x: (-x["days"], -x["oi"])),
+            "starting": sorted(out_s, key=lambda x: -x["oi"])}
+
+
 def log_squeeze(watch, asof):
     """One line per stock per day, so we can later check what happened next."""
     path = os.path.join(DATA_DIR, "squeeze_log.csv")
@@ -539,6 +610,7 @@ def main_live():
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"),
            "oi_asof": fo["date"].max().strftime("%Y-%m-%d"),
            "squeeze": squeeze,
+           "buildup": position_buildup(symbols, fo),
            "stocks": len(symbols), "rows": rows, "notes": notes,
            "oi_days": UCFG["oi_build_days"], "oi_moves": oi_moves(symbols, tables, cal)}
     with open(os.path.join(DATA_DIR, "unusual.json"), "w") as f:
@@ -682,6 +754,20 @@ def selftest():
         rows2.append(dict(r_, fut_oi=x))
     sq2 = {x["symbol"]: x for x in squeeze_watch(["TRAP"], pd.DataFrame(rows2))}
     assert "TRAP" not in sq2, sq2
+
+    # 4d) position build-up watch: building (7 sessions, flat price) and starting (3 sessions)
+    rows = []
+    for s in [f"S{n}" for n in range(25)] + ["BIG", "NEW"]:
+        oi = 1e6 * np.cumprod(1 + rng.normal(0, 0.005, 40))
+        if s == "BIG":
+            oi[-9:] *= np.linspace(1.03, 1.45, 9)       # steady build over 9 sessions
+        if s == "NEW":
+            oi[-3:] *= np.array([1.03, 1.07, 1.12])      # only the last 3 sessions
+        for dte, x in zip(days[-40:], oi):
+            rows.append({"date": dte, "symbol": s, "fut_oi": x, "fut_close": 100.0})
+    pb = position_buildup([f"S{n}" for n in range(25)] + ["BIG", "NEW"], pd.DataFrame(rows))
+    assert [x["symbol"] for x in pb["building"]] == ["BIG"] and pb["building"][0]["days"] >= 2, pb
+    assert [x["symbol"] for x in pb["starting"]] == ["NEW"], pb
 
     # 5) delivery spike
     dl = pd.DataFrame({"date": days[-30:], "deliv_per": [40.0] * 29 + [65.0],
