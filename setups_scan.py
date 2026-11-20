@@ -1515,6 +1515,13 @@ def main_live():
     for r in res["rows"]:
         c[r["stage"]] = c.get(r["stage"], 0) + 1
     print(f"{res['stocks']} stocks | {c} | market {res['market']}")
+    # Nifty, Bank Nifty and Midcap page (index_scan.py); never stops the stock scan
+    try:
+        if os.path.exists("index_scan.py"):
+            import index_scan
+            index_scan.run(now)
+    except Exception as e:
+        print(f"[warn] index scan skipped: {e}")
 
 
 # ---------------------------------------------------------------- selftest
