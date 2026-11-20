@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-20 16:00",
- "oi_asof": "2026-11-19",
- "stocks": 254,
+ "generated_ist": "2026-11-20 22:18",
+ "oi_asof": "2026-11-20",
+ "stocks": 256,
  "rows": [
   {
    "symbol": "LTFOODS",
@@ -40,6 +40,42 @@
    }
   },
   {
+   "symbol": "EIHOTEL",
+   "score": 5.5,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 29.1x usual",
+     "side": 1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Range 3.0x normal, closed +7.8%",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Day's volume 5.1x usual, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 3.1x usual",
+     "side": 1
+    }
+   ],
+   "close": 334.15,
+   "move_pct": 7.6,
+   "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
    "symbol": "KIRLOSBROS",
    "score": 5.0,
    "bias": "Buying",
@@ -56,32 +92,6 @@
    "vs_high": "12.8% below its 20-day high",
    "states": {
     "M": "Bearish",
-    "W": "Bearish",
-    "D": "Bearish"
-   }
-  },
-  {
-   "symbol": "FSL",
-   "score": 4.5,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Fri 20",
-     "text": "Day's volume 7.6x usual, after a dry-up",
-     "side": 1
-    },
-    {
-     "when": "Wed 18",
-     "text": "Delivery 53% vs 36% usual",
-     "side": -1
-    }
-   ],
-   "close": 281.45,
-   "move_pct": -1.7,
-   "moved": false,
-   "vs_high": "11.8% below its 20-day high",
-   "states": {
-    "M": "Bottoming",
     "W": "Bearish",
     "D": "Bearish"
    }
@@ -195,6 +205,53 @@
    }
   },
   {
+   "symbol": "APOLLOTYRE",
+   "score": 4.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 5.6x usual",
+     "side": -1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Delivery 84% vs 47% usual",
+     "side": -1
+    }
+   ],
+   "close": 417.85,
+   "move_pct": -0.2,
+   "moved": false,
+   "vs_high": "4.1% below its 20-day high",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "FSL",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 7.6x usual, after a dry-up",
+     "side": 1
+    }
+   ],
+   "close": 281.45,
+   "move_pct": -1.7,
+   "moved": false,
+   "vs_high": "11.8% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bearish",
+    "D": "Bearish"
+   }
+  },
+  {
    "symbol": "IIFL",
    "score": 4.0,
    "bias": "Mixed",
@@ -245,6 +302,32 @@
    "move_pct": 3.1,
    "moved": true,
    "vs_high": "5.5% below its 20-day high",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "NUVOCO",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 52.3x usual",
+     "side": 1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Range 2.7x normal, closed +3.0%",
+     "side": 1
+    }
+   ],
+   "close": 358.5,
+   "move_pct": 3.7,
+   "moved": true,
+   "vs_high": "At a 20-day high",
    "states": {
     "M": "Bearish",
     "W": "Bottoming",
@@ -397,58 +480,6 @@
    }
   },
   {
-   "symbol": "AZAD",
-   "score": 3.3,
-   "bias": "Mixed",
-   "events": [
-    {
-     "when": "Thu 19",
-     "text": "Day's volume 3.3x usual, flush absorbed",
-     "side": 1
-    },
-    {
-     "when": "Wed 18",
-     "text": "Day's volume 13.8x usual",
-     "side": -1
-    },
-    {
-     "when": "Wed 18",
-     "text": "Delivery 61% vs 39% usual",
-     "side": -1
-    }
-   ],
-   "close": 2341.3,
-   "move_pct": -1.0,
-   "moved": false,
-   "vs_high": "12.1% below its 20-day high",
-   "states": {
-    "M": "No data",
-    "W": "Bearish",
-    "D": "Bottoming"
-   }
-  },
-  {
-   "symbol": "APOLLOTYRE",
-   "score": 3.0,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Fri 20",
-     "text": "Day's volume 5.6x usual",
-     "side": -1
-    }
-   ],
-   "close": 417.85,
-   "move_pct": -0.2,
-   "moved": false,
-   "vs_high": "4.1% below its 20-day high",
-   "states": {
-    "M": "Bearish",
-    "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
    "symbol": "DOMS",
    "score": 3.0,
    "bias": "Buying",
@@ -514,6 +545,68 @@
     "M": "No data",
     "W": "Bearish",
     "D": "Topping"
+   }
+  },
+  {
+   "symbol": "SWANCORP",
+   "score": 3.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "Delivery 56% vs 36% usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 9.6x usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 18",
+     "text": "Range 2.5x normal, closed -0.4%",
+     "side": -1
+    }
+   ],
+   "close": 230.91,
+   "move_pct": 0.3,
+   "moved": true,
+   "vs_high": "11.2% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bearish",
+    "D": "Bearish"
+   }
+  },
+  {
+   "symbol": "THANGAMAYL",
+   "score": 3.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 3.0x usual",
+     "side": -1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Delivery 70% vs 48% usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 18",
+     "text": "Day's volume 3.5x usual",
+     "side": -1
+    }
+   ],
+   "close": 3813.0,
+   "move_pct": -6.4,
+   "moved": false,
+   "vs_high": "22.1% below its 20-day high",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bearish"
    }
   },
   {

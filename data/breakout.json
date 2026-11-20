@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-20 16:00",
- "oi_asof": "2026-11-19",
- "stocks": 254,
+ "generated_ist": "2026-11-20 22:18",
+ "oi_asof": "2026-11-20",
+ "stocks": 256,
  "market": {
   "weekly_bull_pct": 24,
   "monthly_bull_pct": 44,
@@ -33,11 +33,11 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 61.6,
+   "score": 61.3,
    "grade": "B",
    "trigger": 672.0,
    "stop": 647.7,
-   "detail": "Broke out Wed 18 \u00b7 Volume 1.6x \u00b7 Base 15% deep \u00b7 RS 98 \u00b7 Delivery 26% vs 29% before"
+   "detail": "Broke out Wed 18 \u00b7 Volume 1.6x \u00b7 Base 15% deep \u00b7 RS 97 \u00b7 Delivery 25% vs 29% before"
   },
   {
    "symbol": "CRAFTSMAN",
@@ -50,11 +50,11 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 57.4,
+   "score": 57.2,
    "grade": "B",
    "trigger": 11400.0,
    "stop": 11029.58,
-   "detail": "Broke out Thu 19 \u00b7 Volume 1.9x \u00b7 Base 12% deep \u00b7 RS 87 \u00b7 Delivery 48% vs 52% before"
+   "detail": "Broke out Thu 19 \u00b7 Volume 1.9x \u00b7 Base 12% deep \u00b7 RS 87 \u00b7 Delivery 47% vs 51% before"
   }
  ],
  "setting": [
@@ -69,11 +69,11 @@
     "D": "Bottoming"
    },
    "stage": "Ready",
-   "score": 79.7,
+   "score": 79.4,
    "grade": "A",
    "trigger": 1177.0,
    "stop": null,
-   "detail": "1.8% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 92 \u00b7 Delivery 49% vs 36% before"
+   "detail": "1.8% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 92 \u00b7 Delivery 48% vs 37% before"
   },
   {
    "symbol": "LENSKART",
@@ -86,11 +86,11 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 72.7,
+   "score": 72.4,
    "grade": "A",
    "trigger": 762.75,
    "stop": null,
-   "detail": "2.4% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 95 \u00b7 Delivery 61% vs 57% before"
+   "detail": "2.4% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 95 \u00b7 Delivery 62% vs 57% before"
   },
   {
    "symbol": "SANSERA",
@@ -107,7 +107,7 @@
    "grade": "B",
    "trigger": 4849.9,
    "stop": null,
-   "detail": "1.1% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 53% vs 46% before"
+   "detail": "1.1% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 53% vs 47% before"
   },
   {
    "symbol": "MEESHO",
@@ -120,11 +120,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 63.8,
+   "score": 63.4,
    "grade": "B",
    "trigger": 263.38,
    "stop": null,
-   "detail": "1.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 94 \u00b7 Delivery 50% vs 42% before"
+   "detail": "1.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 94 \u00b7 Delivery 53% vs 42% before"
   },
   {
    "symbol": "GLAND",
@@ -137,11 +137,11 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 58.5,
+   "score": 58.2,
    "grade": "B",
    "trigger": 3429.0,
    "stop": null,
-   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 94 \u00b7 Delivery 46% vs 57% before"
+   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 94 \u00b7 Delivery 47% vs 57% before"
   },
   {
    "symbol": "CEMPRO",
@@ -154,11 +154,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 48.5,
+   "score": 48.1,
    "grade": "C",
    "trigger": 1422.9,
    "stop": null,
-   "detail": "0.5% below the breakout level \u00b7 Base 13% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 97 \u00b7 Delivery 50% vs 49% before"
+   "detail": "0.5% below the breakout level \u00b7 Base 13% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 97 \u00b7 Delivery 51% vs 49% before"
   },
   {
    "symbol": "PWL",
@@ -171,11 +171,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 36.7,
+   "score": 36.4,
    "grade": "C",
    "trigger": 140.25,
    "stop": null,
-   "detail": "2.6% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 84 \u00b7 Delivery 31% vs 31% before"
+   "detail": "2.6% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 84 \u00b7 Delivery 30% vs 31% before"
   }
  ],
  "notes": []
