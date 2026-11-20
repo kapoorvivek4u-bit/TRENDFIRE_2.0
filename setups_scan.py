@@ -24,6 +24,8 @@ Usage
 """
 import argparse
 import datetime as dt
+import importlib.machinery
+import importlib.util
 import io
 import json
 import math
@@ -1516,10 +1518,17 @@ def main_live():
         c[r["stage"]] = c.get(r["stage"], 0) + 1
     print(f"{res['stocks']} stocks | {c} | market {res['market']}")
     # Nifty, Bank Nifty and Midcap page (index_scan.py); never stops the stock scan
+    # (a phone upload can save the file as "index scan.py", so either name works)
     try:
-        if os.path.exists("index_scan.py"):
-            import index_scan
-            index_scan.run(now)
+        path = next((p for p in ("index_scan.py", "index scan.py") if os.path.exists(p)), None)
+        if path:
+            loader = importlib.machinery.SourceFileLoader("index_scan", path)
+            spec = importlib.util.spec_from_loader("index_scan", loader)
+            mod = importlib.util.module_from_spec(spec)
+            loader.exec_module(mod)
+            mod.run(now)
+        else:
+            print("index scan: index_scan.py not found")
     except Exception as e:
         print(f"[warn] index scan skipped: {e}")
 
