@@ -1,4 +1,4 @@
-l"""TrendFire Setups - F&O and Equity views. Reads the scan results; does no scanning itself."""
+"""TrendFire Setups - F&O and Equity views. Reads the scan results; does no scanning itself."""
 import datetime as dt
 import html
 import json
