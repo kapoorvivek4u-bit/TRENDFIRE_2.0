@@ -1,30 +1,30 @@
 {
- "generated_ist": "2026-11-20 11:28",
+ "generated_ist": "2026-11-20 16:00",
  "oi_asof": "2026-11-19",
  "stocks": 254,
  "market": {
-  "weekly_bull_pct": 23,
+  "weekly_bull_pct": 24,
   "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
-   53,
-   61,
-   67,
-   70,
+   66,
+   68,
    71,
-   72
+   71,
+   73,
+   75
   ],
   "nifty": {
    "state": "Bullish",
-   "mom": 1870.8
+   "mom": 1904.2
   },
-  "turn": "Turning up"
+  "turn": "No clear turn"
  },
  "broke": [
   {
    "symbol": "SUNTV",
-   "close": 695.6,
+   "close": 694.2,
    "trend": "Early turn",
    "setup": "Base Breakout",
    "states": {
@@ -33,17 +33,85 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 61.1,
+   "score": 61.6,
    "grade": "B",
    "trigger": 672.0,
    "stop": 647.7,
-   "detail": "Broke out Wed 18 \u00b7 Volume 1.6x \u00b7 Base 15% deep \u00b7 RS 97 \u00b7 Delivery 26% vs 29% before"
+   "detail": "Broke out Wed 18 \u00b7 Volume 1.6x \u00b7 Base 15% deep \u00b7 RS 98 \u00b7 Delivery 26% vs 29% before"
+  },
+  {
+   "symbol": "CRAFTSMAN",
+   "close": 11723.0,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "stage": "Triggered",
+   "score": 57.4,
+   "grade": "B",
+   "trigger": 11400.0,
+   "stop": 11029.58,
+   "detail": "Broke out Thu 19 \u00b7 Volume 1.9x \u00b7 Base 12% deep \u00b7 RS 87 \u00b7 Delivery 48% vs 52% before"
   }
  ],
  "setting": [
   {
+   "symbol": "CYIENT",
+   "close": 1155.5,
+   "trend": "Early turn",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Bottoming"
+   },
+   "stage": "Ready",
+   "score": 79.7,
+   "grade": "A",
+   "trigger": 1177.0,
+   "stop": null,
+   "detail": "1.8% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 92 \u00b7 Delivery 49% vs 36% before"
+  },
+  {
+   "symbol": "LENSKART",
+   "close": 744.35,
+   "trend": "",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "No data",
+    "W": "Topping",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 72.7,
+   "grade": "A",
+   "trigger": 762.75,
+   "stop": null,
+   "detail": "2.4% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 95 \u00b7 Delivery 61% vs 57% before"
+  },
+  {
+   "symbol": "SANSERA",
+   "close": 4798.4,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bullish",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 69.5,
+   "grade": "B",
+   "trigger": 4849.9,
+   "stop": null,
+   "detail": "1.1% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 53% vs 46% before"
+  },
+  {
    "symbol": "MEESHO",
-   "close": 258.85,
+   "close": 259.92,
    "trend": "",
    "setup": "Base Breakout",
    "states": {
@@ -52,49 +120,32 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 68.5,
+   "score": 63.8,
    "grade": "B",
-   "trigger": 261.1,
+   "trigger": 263.38,
    "stop": null,
-   "detail": "0.9% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 95 \u00b7 Delivery 50% vs 42% before"
+   "detail": "1.3% below the breakout level \u00b7 Base 18% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 94 \u00b7 Delivery 50% vs 42% before"
   },
   {
-   "symbol": "PVRINOX",
-   "close": 1714.4,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Bullish",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "stage": "Ready",
-   "score": 65.3,
-   "grade": "B",
-   "trigger": 1739.8,
-   "stop": null,
-   "detail": "1.5% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 53% vs 48% before"
-  },
-  {
-   "symbol": "CRAFTSMAN",
-   "close": 11345.0,
+   "symbol": "GLAND",
+   "close": 3331.9,
    "trend": "With trend",
    "setup": "Base Breakout",
    "states": {
     "M": "Impulse",
-    "W": "Topping",
-    "D": "Impulse"
+    "W": "Bullish",
+    "D": "Topping"
    },
    "stage": "Ready",
-   "score": 59.0,
+   "score": 58.5,
    "grade": "B",
-   "trigger": 11400.0,
+   "trigger": 3429.0,
    "stop": null,
-   "detail": "0.5% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.6x usual \u00b7 RS 86 \u00b7 Delivery 48% vs 52% before"
+   "detail": "2.8% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.1x usual \u00b7 RS 94 \u00b7 Delivery 46% vs 57% before"
   },
   {
    "symbol": "CEMPRO",
-   "close": 1378.5,
+   "close": 1415.9,
    "trend": "With trend",
    "setup": "Base Breakout",
    "states": {
@@ -103,15 +154,15 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 39.2,
+   "score": 48.5,
    "grade": "C",
-   "trigger": 1414.3,
+   "trigger": 1422.9,
    "stop": null,
-   "detail": "2.5% below the breakout level \u00b7 Base 14% deep \u00b7 Volume in base 1.3x usual \u00b7 RS 93 \u00b7 Delivery 50% vs 49% before"
+   "detail": "0.5% below the breakout level \u00b7 Base 13% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 97 \u00b7 Delivery 50% vs 49% before"
   },
   {
    "symbol": "PWL",
-   "close": 136.21,
+   "close": 136.6,
    "trend": "",
    "setup": "Base Breakout",
    "states": {
@@ -120,11 +171,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 34.3,
+   "score": 36.7,
    "grade": "C",
    "trigger": 140.25,
    "stop": null,
-   "detail": "2.9% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 1.5x usual \u00b7 RS 82 \u00b7 Delivery 31% vs 31% before"
+   "detail": "2.6% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 84 \u00b7 Delivery 31% vs 31% before"
   }
  ],
  "notes": []
