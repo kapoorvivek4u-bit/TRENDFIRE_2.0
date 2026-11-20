@@ -1,4 +1,4 @@
-"""TrendFire Setups - F&O and Equity views. Reads the scan results; does no scanning itself."""
+l"""TrendFire Setups - F&O and Equity views. Reads the scan results; does no scanning itself."""
 import datetime as dt
 import html
 import json
@@ -28,8 +28,9 @@ PAGES = {
     "Sectors": {"file": os.path.join("data", "sectors.json"), "workflow": "Sector scan"},
 }
 DEALS_FILE = os.path.join("data", "deals.json")
+INDEX_FILE = os.path.join("data", "index.json")
 STARS_FILE = os.path.join("data", "stars.json")
-ALL_FILES = ([DEALS_FILE, STARS_FILE] + [PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
+ALL_FILES = ([DEALS_FILE, STARS_FILE, INDEX_FILE] + [PAGES[k]["file"] for k in ("F&O", "Equity", "Breakout", "Sectors")]
              + [v["file"] for v in PAGES["Unusual"].values()])
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 OWNER = "Vivek Kapoor"          # name shown as the faded watermark
@@ -414,6 +415,200 @@ def render_buildup(res):
             for x in s) + '</div>', unsafe_allow_html=True)
     else:
         st.caption("None right now.")
+
+
+def fmt_oi(x):
+    if x is None:
+        return "—"
+    x = float(x)
+    return (f"{x / 1e7:.2f} Cr" if abs(x) >= 1e7 else f"{x / 1e5:.1f} L" if abs(x) >= 1e5
+            else f"{x:,.0f}")
+
+
+def area_chart(vals, h=96):
+    """Big area chart of the last closes, in the theme's accent."""
+    if not vals or len(vals) < 2:
+        return ""
+    w = 300
+    lo, hi = min(vals), max(vals)
+    span = (hi - lo) or 1
+    col = TH["accent"] if THEME_NAME == "neon" else BLUE
+    pts = " ".join(f"{i / (len(vals) - 1) * w:.1f},{h - 6 - (v - lo) / span * (h - 14):.1f}"
+                   for i, v in enumerate(vals))
+    gid = "ga" + THEME_NAME
+    return (f'<svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" style="width:100%;'
+            f'height:{h}px;display:block;margin:8px 0 4px"><defs><linearGradient id="{gid}" '
+            f'x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{col}" stop-opacity=".30"/>'
+            f'<stop offset="1" stop-color="{col}" stop-opacity="0"/></linearGradient></defs>'
+            f'<polygon points="0,{h} {pts} {w},{h}" fill="url(#{gid})"/>'
+            f'<polyline points="{pts}" fill="none" stroke="{col}" stroke-width="2.2" '
+            f'vector-effect="non-scaling-stroke"/></svg>')
+
+
+def card_open(title, right=""):
+    return (f'<div class="tf-row" style="margin:10px 0"><div class="tf-top">'
+            f'<span class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+            f'font-weight:700">{title}</span><span class="tf-small">{right}</span></div>')
+
+
+def render_index(view):
+    e = html.escape
+    key = {"Nifty 50": "NIFTY", "Bank Nifty": "BANKNIFTY", "Midcap Select": "MIDCAP"}.get(view, "NIFTY")
+    if not os.path.exists(INDEX_FILE):
+        st.info("The Index page fills in after the next F&O scan with index_scan.py uploaded.")
+        return
+    res = load(INDEX_FILE, os.path.getmtime(INDEX_FILE))
+    item = next((x for x in res.get("indexes", []) if x.get("key") == key), None)
+    gen = dt.datetime.strptime(res["generated_ist"], "%Y-%m-%d %H:%M")
+    if not item or "close" not in item:
+        st.info(f"No {view} data in the last scan.")
+        if not item:
+            return
+    up_ = lambda x: GREEN if (x or 0) >= 0 else RED
+    # hero
+    if "close" in item:
+        v = item.get("vk") or {}
+        chips = []
+        if v.get("final"):
+            chips.append(chip(VK_SHORT.get(v["final"], "VK " + v["final"].title()),
+                              VK_COLOR.get(v["final"], MUTED)))
+        chips.append(chip(f'MA {item.get("ma", "")}', GREEN if item.get("ma") == "Bullish" else
+                          RED if item.get("ma") == "Bearish" else MUTED))
+        if item.get("squeeze"):
+            chips.append(chip("Squeeze ON", AMBER))
+        if item.get("old") == "🏆 Prime Setup":
+            chips.append(chip("🏆 Prime Setup", AMBER))
+        tf = "".join(chip(f"{k} {s}", GREEN if s in ("Bullish", "Impulse") else
+                          RED if s == "Bearish" else AMBER if s in ("Topping", "Bottoming") else MUTED)
+                     for k, s in item.get("states", {}).items() if s != "No data")
+        ext = item.get("ext")
+        st.markdown(
+            f'<div class="tf-row" style="margin:6px 0 10px"><div class="tf-top">'
+            f'<span class="tf-small" style="font-weight:700;letter-spacing:.06em;'
+            f'text-transform:uppercase">{e(item["name"])}</span>'
+            f'<span class="tf-small">{gen.strftime("%a %d %b · %H:%M")}</span></div>'
+            f'<div style="display:flex;align-items:baseline;gap:10px;margin-top:4px">'
+            f'<span style="font-family:\'JetBrains Mono\',monospace;font-size:30px;font-weight:700;'
+            f'color:{INK}">{money(item["close"])}</span>'
+            f'<span style="font-weight:700;color:{up_(item.get("chg1"))}">{item.get("chg1", 0):+.2f}%</span>'
+            f'<span class="tf-small">5 days {item.get("chg5", 0):+.2f}%</span></div>'
+            + area_chart(item.get("spark"))
+            + f'<div class="tf-chips">{"".join(chips)}</div><div class="tf-chips">{tf}</div>'
+            + (f'<div class="tf-small">{e(v.get("advice", ""))}</div>' if v.get("advice") else "")
+            + (f'<div class="tf-small">{abs(ext):.1f} ranges {"above" if ext >= 0 else "below"} '
+               f'the Daily 50 EMA</div>' if ext is not None else "")
+            + '</div>', unsafe_allow_html=True)
+    # futures OI
+    fr = item.get("futures")
+    if fr:
+        def cell(lbl, x):
+            col = GREEN if x["side"] > 0 else RED if x["side"] < 0 else (
+                AMBER if "positions" in x["word"] else MUTED)
+            return (f'<div><small>{lbl}</small><b style="color:{col};font-family:Inter;'
+                    f'font-size:13px">{e(x["word"])}</b><div class="tf-small">OI {x["oi_pct"]:+.1f}% · '
+                    f'price {x["px_pct"]:+.2f}%</div></div>')
+        st.markdown(card_open("Futures OI", f'{fmt_oi(fr["oi"])} · {e(fr["date"])}')
+                    + '<div class="tf-boxes" style="grid-template-columns:1fr 1fr">'
+                    + cell("Today", fr["day"]) + cell(f'{fr["week"]["sessions"]} sessions', fr["week"])
+                    + '</div></div>', unsafe_allow_html=True)
+    # options
+    op = item.get("options")
+    if op:
+        exp = dt.datetime.strptime(op["expiry"], "%Y-%m-%d").strftime("%a %d %b")
+        ph = [x for x in (fr or {}).get("pcr_hist", []) if x is not None]
+        pcr = op.get("pcr")
+        pcr_col = GREEN if pcr and pcr >= 1.1 else RED if pcr and pcr <= 0.8 else AMBER
+        pcr_word = ("puts heavy: support below" if pcr and pcr >= 1.1 else
+                    "calls heavy: resistance above" if pcr and pcr <= 0.8 else "balanced")
+        def strikes(xs, col):
+            return "".join(f'<div style="display:flex;justify-content:space-between;'
+                           f'font-family:\'JetBrains Mono\',monospace;font-size:13px;margin:2px 0">'
+                           f'<b style="color:{col}">{x["strike"]:,.0f}</b>'
+                           f'<span class="tf-small">{fmt_oi(x["oi"])}</span></div>' for x in xs)
+        new = "".join(chip(f'{x["strike"]:,.0f} {x["type"]} +{fmt_oi(x["chg_oi"])}',
+                           RED if x["type"] == "CE" else GREEN) for x in op.get("new_oi", []))
+        ladder = op.get("ladder", [])
+        mx = max([max(x["ce"], x["pe"]) for x in ladder] or [1]) or 1
+        spot = item.get("close") or (fr or {}).get("price") or 0
+        rows_ = []
+        for x in ladder:
+            near = spot and abs(x["strike"] - spot) == min(abs(y["strike"] - spot) for y in ladder)
+            rows_.append(
+                f'<div style="display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;'
+                f'gap:6px;margin:2px 0">'
+                f'<div style="display:flex;justify-content:flex-end"><div style="height:9px;'
+                f'border-radius:5px;background:{GREEN};opacity:.85;width:{x["pe"] / mx * 100:.0f}%"></div></div>'
+                f'<div style="text-align:center;font-family:\'JetBrains Mono\',monospace;font-size:11px;'
+                f'font-weight:{800 if near else 500};color:{INK if near else MUTED}'
+                f'{";border:1px solid " + TH["accent"] + ";border-radius:6px" if near else ""}">'
+                f'{x["strike"]:,.0f}</div>'
+                f'<div><div style="height:9px;border-radius:5px;background:{RED};opacity:.85;'
+                f'width:{x["ce"] / mx * 100:.0f}%"></div></div></div>')
+        st.markdown(
+            card_open("Options", f"Expiry {exp}")
+            + f'<div class="tf-boxes"><div><small>PCR</small><b style="color:{pcr_col}">'
+            f'{pcr if pcr is not None else "—"}</b>'
+            + (spark(ph, w=70, h=18) if len(ph) > 1 else "")
+            + f'</div><div><small>Max pain</small><b>{op["max_pain"]:,.0f}</b></div>'
+            f'<div><small>Spot</small><b>{money(spot)}</b></div></div>'
+            f'<div class="tf-small" style="margin-top:6px">PCR {e(pcr_word)}'
+            + (f' · last sessions {" → ".join(str(x) for x in ph)}' if len(ph) > 1 else "")
+            + '</div>'
+            f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px">'
+            f'<div><div class="tf-small" style="font-weight:700">Resistance (call OI)</div>'
+            f'{strikes(op.get("resistance", []), RED)}</div>'
+            f'<div><div class="tf-small" style="font-weight:700">Support (put OI)</div>'
+            f'{strikes(op.get("support", []), GREEN)}</div></div>'
+            + (f'<div class="tf-small" style="font-weight:700;margin-top:10px">Most new OI today</div>'
+               f'<div class="tf-chips">{new}</div>' if new else "")
+            + (f'<div class="tf-small" style="font-weight:700;margin:10px 0 4px">OI by strike '
+               f'<span style="color:{GREEN}">■ puts</span> <span style="color:{RED}">■ calls</span></div>'
+               + "".join(rows_) if rows_ else "")
+            + '</div>', unsafe_allow_html=True)
+    elif key == "MIDCAP":
+        st.caption("Midcap options are thin, so the options section is skipped when there is "
+                   "too little data.")
+    # setups and patterns on the index chart
+    sets = item.get("setups") or []
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:700;margin-top:16px">Setups and patterns on the index · {len(sets)}</div>',
+                unsafe_allow_html=True)
+    if sets:
+        show_rows(sets)
+    else:
+        st.caption(f"No setup or pattern on the {view} chart right now"
+                   + (f" (stage: {item['stage']})." if item.get("stage") else "."))
+    # constituents board
+    bd = item.get("board") or []
+    st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
+                f'font-weight:700;margin-top:16px">{e(view)} stocks · {len(bd)}</div>'
+                f'<div class="tf-small">Strongest VK first. OI = futures over the last 5 sessions.</div>',
+                unsafe_allow_html=True)
+    if not bd:
+        st.caption("The stock list appears after the next scan.")
+        return
+    cards = []
+    for x in bd:
+        cs = []
+        if x.get("vk") in VK_SHORT:
+            cs.append(chip(VK_SHORT[x["vk"]], VK_COLOR.get(x["vk"], MUTED)))
+        if x.get("setup"):
+            cs.append(chip(x["setup"] + (f' · {x["grade"]}' if x.get("grade") else ""), BLUE))
+        o = x.get("oi")
+        if o:
+            col = GREEN if o["side"] > 0 else RED if o["side"] < 0 else (
+                AMBER if "positions" in o["word"] else MUTED)
+            cs.append(chip(f'{o["word"]} · OI {o["oi_pct"]:+.0f}%', col))
+        cards.append(f'<div class="tf-row" style="padding:10px 12px"><div class="tf-top">'
+                     f'<span><a class="tf-sym" style="font-size:15px" href="{chart_link(x["symbol"])}" '
+                     f'target="_blank">{e(x["symbol"])}</a>{wl_link(x["symbol"])}</span>'
+                     + (f'<span class="tf-small">{o["px_pct"]:+.1f}% 5d</span>' if o else "")
+                     + f'</div><div class="tf-chips" style="margin-top:6px">{"".join(cs)}</div></div>')
+    st.markdown('<div class="tf-grid">' + "".join(cards[:12]) + '</div>', unsafe_allow_html=True)
+    if len(cards) > 12:
+        with st.expander(f"All {len(cards)} stocks"):
+            st.markdown('<div class="tf-grid">' + "".join(cards[12:]) + '</div>',
+                        unsafe_allow_html=True)
 
 
 def render_squeeze(res):
@@ -2521,8 +2716,9 @@ def wl_link(sym, big=False):
 
 
 sync_data()
-PAGE_LIST = ["Today", "Scanner", "Search", "Watchlist", "Market"]
+PAGE_LIST = ["Today", "Scanner", "Index", "Search", "Watchlist", "Market"]
 SUBVIEWS = {"Today": ["Strategies", "A list"], "Scanner": ["F&O", "Equity"],
+            "Index": ["Nifty 50", "Bank Nifty", "Midcap Select"],
             "Market": ["Sectors", "Unusual", "Deals", "Stars"]}
 LEGACY = {"Strategies": ("Today", "Strategies"), "A list": ("Today", "A list"),
           "Guide": ("Today", "Strategies"), "F&O": ("Scanner", "F&O"),
@@ -2625,6 +2821,9 @@ if page == "Today":
         render_strategies()
     with st.expander("How to use TradeReady"):
         st.markdown(GUIDE)
+    st.stop()
+if page == "Index":
+    render_index(view)
     st.stop()
 if page == "Search":
     render_search()
