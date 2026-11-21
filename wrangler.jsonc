@@ -1,6 +1,6 @@
-// tradeready.in: the website (folder "site") plus a small API for the watchlist and the
-// Scan all button (worker.js). Secrets GH_TOKEN and WL_PIN are added in the Cloudflare
-// dashboard, never in this file.
+// tradeready.in: the website (folder "site") and its server (worker.js: sign-in, login log,
+// watchlist, Scan all). Secrets are added in the Cloudflare dashboard, never in this file.
+// USERS is the login log storage (Storage & databases > Workers KV > tradeready-users).
 {
   "name": "trendfire-2-0",
   "main": "worker.js",
@@ -8,8 +8,9 @@
   "assets": {
     "directory": "./site",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": true
   },
   "vars": { "REPO": "kapoorvivek4u-bit/trendfire_2.0" },
+  "kv_namespaces": [{ "binding": "USERS", "id": "a7d72d7ccec14ca4b0bc1dddf0c4489d" }],
   "observability": { "enabled": true }
 }

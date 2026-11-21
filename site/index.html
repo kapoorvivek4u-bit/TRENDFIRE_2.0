@@ -7,7 +7,10 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="NSE F&O swing setups, market strength and big-money flows. Updated every hour.">
 <meta name="theme-color" content="#111113">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%234f46e5'/%3E%3Cpath d='M13 3L5 14h6l-1 7 8-11h-6z' fill='white'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="TradeReady">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +20,7 @@
 :root{
   --bg:#f6f4ef; --bg2:#eceaff; --surface:#ffffff; --surface2:#f4f3fb; --line:#e6e3f3; --ink:#1e1b4b; --muted:#6b6894; --faint:#a3a1c2;
   --accent:#4f46e5; --accent2:#7c3aed; --on-accent:#ffffff; --up:#0f8a5f; --down:#e03131; --warn:#d9480f; --info:#2563eb;
-  --shadow:0 6px 24px rgba(79,70,229,.09); --glow:none; --chip-bg:.12;
+  --shadow:0 6px 24px rgba(79,70,229,.09); --glow:none; --chip-bg:.12; --mark-bg:linear-gradient(135deg,#4f46e5,#7c3aed); --mark-fg:#ffffff; --mark-line:transparent;
   --f-ui:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --f-num:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --f-head:"Space Grotesk",Inter,system-ui,sans-serif;
@@ -26,11 +29,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0f0f11; --bg2:#141416; --surface:#18181b; --surface2:#1f1f23; --line:#2a2a2f; --ink:#f2f2f2; --muted:#9a9aa2; --faint:#5e5e66;
   --accent:#c6ff3d; --accent2:#22d3ee; --on-accent:#111111; --up:#b9f53c; --down:#ff5c5c; --warn:#ff8a3d; --info:#22d3ee;
-  --shadow:none; --glow:0 0 24px rgba(198,255,61,.18); --chip-bg:.14; color-scheme:dark}}
+  --shadow:none; --glow:0 0 24px rgba(198,255,61,.18); --chip-bg:.14; --mark-bg:#151517; --mark-fg:#c6ff3d; --mark-line:#2c2c31; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f0f11; --bg2:#141416; --surface:#18181b; --surface2:#1f1f23; --line:#2a2a2f; --ink:#f2f2f2; --muted:#9a9aa2; --faint:#5e5e66;
   --accent:#c6ff3d; --accent2:#22d3ee; --on-accent:#111111; --up:#b9f53c; --down:#ff5c5c; --warn:#ff8a3d; --info:#22d3ee;
-  --shadow:none; --glow:0 0 24px rgba(198,255,61,.18); --chip-bg:.14; color-scheme:dark}
+  --shadow:none; --glow:0 0 24px rgba(198,255,61,.18); --chip-bg:.14; --mark-bg:#151517; --mark-fg:#c6ff3d; --mark-line:#2c2c31; color-scheme:dark}
 
 *{box-sizing:border-box}
 html,body{background:var(--bg);color:var(--ink)}
@@ -49,8 +52,8 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
   background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
 .brand{font-family:var(--f-head);font-weight:700;font-size:20px;letter-spacing:-.03em;display:flex;align-items:center;gap:9px}
-.brand .mark{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--on-accent);box-shadow:var(--glow)}
-.brand .mark svg{width:16px;height:16px}
+.brand .mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--mark-bg);color:var(--mark-fg);box-shadow:inset 0 0 0 1px var(--mark-line),var(--glow)}
+.brand .mark svg{width:22px;height:22px}
 .brand b{color:var(--accent)}
 .top-r{display:flex;align-items:center;gap:8px}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:999px;white-space:nowrap}
@@ -348,6 +351,13 @@ textarea.note{width:100%;min-height:64px;resize:vertical;font:inherit;font-size:
 .spin{width:12px;height:12px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:sp 1s linear infinite;display:inline-block}
 @keyframes sp{to{transform:rotate(360deg)}}
 .rail .foot .acts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rail .foot .me{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ink);padding-top:4px;border-top:1px solid var(--line)}
+.rail .foot .me span:not(.av){flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rail .foot .me img,.rail .foot .me .av{width:26px;height:26px;border-radius:50%;flex:none}
+.rail .foot .me .av{display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font-weight:800}
+.rail .foot .me a{color:var(--muted);display:grid;place-items:center}
+.rail .foot .me a svg{width:17px;height:17px}
+a.tbtn{color:var(--ink)}
 .rail .foot .acts button{justify-content:center}
 </style>
 </head>
@@ -368,7 +378,11 @@ const UI = { strong: "fo", strongMarket: "fo", setup: {}, stage: {}, pat: "All",
 async function getJSON(name, fresh){
   if(CACHE[name] && !fresh) return CACHE[name];
   if(window.SNAP && window.SNAP.files && window.SNAP.files[name]){ CACHE[name] = window.SNAP.files[name]; return CACHE[name]; }
-  const r = await fetch(DATA_BASE + name + "?t=" + Math.floor(Date.now()/60000), {cache:"no-store"});
+  const t = "?t=" + Math.floor(Date.now()/60000);
+  let r = null;
+  try{ r = await fetch("/data/" + name + t); if(r.status === 401){ location.href = "/login"; throw new Error("signed out"); }
+       if(!r.ok || !(r.headers.get("content-type") || "").includes("json")) r = null; }catch(e){ if(e.message === "signed out") throw e; r = null; }
+  if(!r) r = await fetch(DATA_BASE + name + t, {cache:"no-store"});
   if(!r.ok) throw new Error(name + " " + r.status);
   CACHE[name] = await r.json();
   return CACHE[name];
@@ -376,6 +390,7 @@ async function getJSON(name, fresh){
 const S = () => CACHE["site.json"];
 
 async function loadWatch(){
+  if(!isAdmin()){ WATCH = []; return; }
   try{
     const r = await fetch("/api/watch", {cache:"no-store"});
     if(r.ok){ const d = await r.json(); if(d.items){ WATCH = d.items; WATCH_LIVE = true; return; } }
@@ -454,6 +469,8 @@ const I = {
   search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
   watch:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   market:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a5.5 5.5 0 0 1 3.5 6"/>',
+  logout:'<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',
   bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/>',
@@ -461,7 +478,7 @@ const I = {
   play:'<path d="M7 4l13 8-13 8z"/>'
 };
 const ico = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
-const starBtn = s => `<button class="star ${inWatch(s) ? "on" : ""}" data-star="${esc(s)}" aria-label="${inWatch(s) ? "Remove from" : "Add to"} watchlist" title="Watchlist">${ico("watch")}</button>`;
+const starBtn = s => !isAdmin() ? "" : `<button class="star ${inWatch(s) ? "on" : ""}" data-star="${esc(s)}" aria-label="${inWatch(s) ? "Remove from" : "Add to"} watchlist" title="Watchlist">${ico("watch")}</button>`;
 const symLink = (s, size=16) => `<a class="sym" style="font-size:${size}px" href="${tv(s)}" target="_blank" rel="noopener">${esc(s)}</a>`;
 
 /* ============================================================ routes */
@@ -473,7 +490,8 @@ const PAGES = [
   ["watchlist","Watchlist","watch", []],
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
-const TABS = ["today","scanner","index","watchlist","market"];
+const TABS_ALL = ["today","scanner","index","watchlist","market"];
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["admin","Admin","users",[]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
 function subnav(){
@@ -495,44 +513,18 @@ function setTheme(t){
 try{ const t = localStorage.getItem("tr-theme"); if(t) document.documentElement.setAttribute("data-theme", t); }catch(e){}
 const flip = () => setTheme(isDark() ? "light" : "dark");
 
-const getPin = () => { try{ return localStorage.getItem("tr-pin") || ""; }catch(e){ return ""; } };
-function askPin(why){
-  return new Promise(resolve => {
-    const m = document.createElement("div"); m.className = "modal";
-    m.innerHTML = `<form class="box"><h3>Enter your PIN</h3><p>${esc(why)} The PIN is saved on this device, so you enter it once.</p>
-      <input class="in" id="pin-in" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN">
-      <p id="pin-err" class="down" hidden></p>
-      <div class="inrow"><button type="button" class="btn2" id="pin-x">Cancel</button><button class="btn" id="pin-ok" style="flex:1;justify-content:center">Unlock</button></div></form>`;
-    document.body.appendChild(m);
-    const inp = m.querySelector("#pin-in"); inp.focus();
-    m.querySelector("#pin-x").onclick = () => { m.remove(); resolve(null); };
-    m.querySelector("form").onsubmit = async e => {
-      e.preventDefault();
-      const pin = inp.value.trim(); if(!pin) return;
-      try{
-        const r = await fetch("/api/pin", {method:"POST", headers:{"x-pin":pin}});
-        if(r.status === 401){ const er = m.querySelector("#pin-err"); er.hidden = false; er.textContent = "Wrong PIN. Try again."; return; }
-        if(!r.ok){ const d = await r.json().catch(() => ({})); const er = m.querySelector("#pin-err"); er.hidden = false; er.textContent = d.error || "The server is not set up yet."; return; }
-        try{ localStorage.setItem("tr-pin", pin); }catch(e){}
-        m.remove(); resolve(pin);
-      }catch(err){ const er = m.querySelector("#pin-err"); er.hidden = false; er.textContent = "Could not reach the server. Saving works on tradeready.in only."; }
-    };
-  });
-}
-async function apiPost(path, body, why){
-  let pin = getPin() || await askPin(why);
-  if(!pin) return null;
-  let r = await fetch(path, {method:"POST", headers:{"x-pin":pin, "content-type":"application/json"}, body:JSON.stringify(body || {})});
-  if(r.status === 401){ try{ localStorage.removeItem("tr-pin"); }catch(e){}
-    pin = await askPin("That PIN did not work."); if(!pin) return null;
-    r = await fetch(path, {method:"POST", headers:{"x-pin":pin, "content-type":"application/json"}, body:JSON.stringify(body || {})}); }
+let USER = null;                 // {email, name, role} from /api/me
+const isAdmin = () => !USER || USER.role === "admin";
+async function apiPost(path, body){
+  const r = await fetch(path, {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify(body || {})});
+  if(r.status === 401){ location.href = "/login"; return null; }
   const d = await r.json().catch(() => ({}));
   if(!r.ok){ toast(d.error || "Something went wrong."); return null; }
   return d;
 }
 async function watchChange(body, msg){
   try{
-    const d = await apiPost("/api/watch", body, "Changing the watchlist needs your PIN.");
+    const d = await apiPost("/api/watch", body);
     if(!d) return false;
     WATCH = d.items; WATCH_LIVE = true; toast(msg); render(); return true;
   }catch(e){ toast("Could not reach the server. Saving works on tradeready.in only."); return false; }
@@ -544,7 +536,7 @@ async function toggleStar(s){
 let SCAN_STATE = null;
 async function scanAll(){
   try{
-    const d = await apiPost("/api/scan", {}, "Starting the scans needs your PIN.");
+    const d = await apiPost("/api/scan", {});
     if(!d) return;
     toast(d.started.length ? `Started ${d.started.length} scans. Results arrive in 2 to 10 minutes.` : (d.problems[0] || "Nothing started."));
     pollScans();
@@ -578,16 +570,18 @@ function scanLine(){
 }
 function renderShell(){
   const r = pageOf(route());
-  const brand = `<a class="brand" href="#today"><span class="mark">${ico("bolt")}</span><span>Trade<b>Ready</b></span></a>`;
+  const brand = `<a class="brand" href="#today" aria-label="TradeReady home"><span class="mark"><svg viewBox="8 8 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 30h26M12 43h26" stroke-width="3" stroke-dasharray="1 6" opacity=".5"/><polyline points="12,38 18,33 24,40 30,34 36,39 42,30 51,17" stroke-width="5"/><polyline points="43,16 51,16 51,24" stroke-width="5"/></svg></span><span>Trade<b>Ready</b></span></a>`;
   const s = S();
   document.getElementById("rail").innerHTML = brand +
-    `<nav>${PAGES.map(p => `<a href="#${p[0]}" class="${r===p[0]?"on":""}">${ico(p[2])}${p[1]}</a>`).join("")}</nav>
+    `<nav>${visiblePages().map(p => `<a href="#${p[0]}" class="${r===p[0]?"on":""}">${ico(p[2])}${p[1]}</a>`).join("")}</nav>
      <div class="foot">${marketPill()}
        <div>Scan ${esc(s ? when(s.generated_ist) : "")} IST</div>${scanLine()}
-       <div class="acts"><button data-act="refresh">${ico("refresh")}Refresh</button><button data-act="scan">${ico("play")}Scan all</button></div>
-       <button data-act="theme">${isDark() ? "Graphite & Neon" : "Sand & Indigo"} ${ico(isDark() ? "sun" : "moon")}</button></div>`;
+       <div class="acts">${isAdmin() ? `<button data-act="refresh">${ico("refresh")}Refresh</button><button data-act="scan">${ico("play")}Scan all</button>` : `<button data-act="refresh" style="grid-column:span 2">${ico("refresh")}Refresh</button>`}</div>
+       <button data-act="theme">${isDark() ? "Graphite & Neon" : "Sand & Indigo"} ${ico(isDark() ? "sun" : "moon")}</button>
+       ${USER ? `<div class="me">${USER.picture ? `<img src="${esc(USER.picture)}" alt="" referrerpolicy="no-referrer">` : `<span class="av">${esc((USER.name || USER.email || "?")[0].toUpperCase())}</span>`}<span>${esc(USER.name || USER.email)}</span><a href="/logout" title="Sign out" aria-label="Sign out">${ico("logout")}</a></div>` : ""}</div>`;
   document.getElementById("top").innerHTML = brand +
-    `<div class="top-r">${marketPill()}<button class="tbtn" data-act="refresh" aria-label="Refresh data">${ico("refresh")}</button><button class="tbtn" data-act="theme" aria-label="Switch theme">${ico(isDark() ? "sun" : "moon")}</button></div>`;
+    `<div class="top-r">${marketPill()}<button class="tbtn" data-act="refresh" aria-label="Refresh data">${ico("refresh")}</button><button class="tbtn" data-act="theme" aria-label="Switch theme">${ico(isDark() ? "sun" : "moon")}</button>${USER ? `<a class="tbtn" href="${isAdmin() ? "#admin" : "/logout"}" aria-label="${isAdmin() ? "Admin" : "Sign out"}">${ico(isAdmin() ? "users" : "logout")}</a>` : ""}</div>`;
+  const TABS = isAdmin() ? TABS_ALL : ["today","scanner","index","search","market"];
   document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = PAGES.find(x => x[0]===k);
     return `<a href="#${k}" class="${r===k?"on":""}">${ico(p[2])}${p[1]}</a>`; }).join("");
 }
@@ -789,7 +783,7 @@ async function pageDashboard(){
       ${strongestCard()}${readyCard()}
       ${moneyCard()}${moversCard()}
       ${heatCard()}
-      ${sectorCard()}<div class="s5" style="display:grid;gap:14px;align-content:start">${watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
+      ${sectorCard()}<div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
     </div>`;
 }
 
@@ -1133,17 +1127,47 @@ async function pageSearch(){
     <datalist id="syms2">${syms.map(s => `<option value="${esc(s)}">${esc(names[s] || "")}</option>`).join("")}</datalist>${body}`;
 }
 
+function moversCardSmall(){
+  const b = (S().buildup || {}).building || [];
+  return `<section class="card fade"><div class="ct"><h2>Big positions building</h2><a class="more" href="#market-unusual">Unusual ›</a></div>
+    ${b.length ? `<div class="list">${b.map(x => `<div class="mv"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span class="num muted">OI <b class="up">${pct(x.oi,0)}</b> · price ${pct(x.px)}</span></div>`).join("")}</div>` : `<div class="empty">None right now.</div>`}</section>`;
+}
+const ago = iso => { if(!iso) return "—"; const m = Math.round((Date.now() - Date.parse(iso))/60000);
+  return m < 1 ? "just now" : m < 60 ? m + " min ago" : m < 1440 ? Math.round(m/60) + " h ago" : Math.round(m/1440) + " d ago"; };
+const dt = iso => iso ? new Date(iso).toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit", timeZone:"Asia/Kolkata"}) : "—";
+async function pageAdmin(){
+  if(!isAdmin()) return pageHead("Admin", "") + `<div class="empty">Admin only.</div>`;
+  let d;
+  try{ const r = await fetch("/api/admin/log", {cache:"no-store"}); d = await r.json(); }catch(e){ d = {error:"Could not reach the server."}; }
+  if(d.error) return pageHead("Admin", "Who signed in") + `<div class="empty">${esc(d.error)}</div>`;
+  const users = (d.users || []).filter(u => u.role !== "admin"), today = new Date().toISOString().slice(0,10);
+  const active = users.filter(u => (u.seen || "").slice(0,10) === today).length;
+  const week = users.filter(u => Date.now() - Date.parse(u.seen || u.last || 0) < 7*864e5).length;
+  return pageHead("Admin", "Who signed in, when, and from where") + `
+    <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
+      <div><small>Users</small><b>${users.length}</b></div><div><small>Active today</small><b>${active}</b></div>
+      <div><small>Active this week</small><b>${week}</b></div><div><small>Logins logged</small><b>${(d.logins || []).length}</b></div></div>
+    <section class="card fade"><div class="ct"><h2>Users<em>${users.length}</em></h2></div>
+      <div class="tw"><table class="t"><tr><th>User</th><th>Last seen</th><th>First login</th><th class="n">Logins</th><th class="n">Visits</th><th>Place · device</th></tr>
+      ${users.map(u => `<tr><td><div style="display:flex;gap:8px;align-items:center">${u.picture ? `<img src="${esc(u.picture)}" alt="" referrerpolicy="no-referrer" style="width:28px;height:28px;border-radius:50%">` : ""}<div><b>${esc(u.name || "—")}</b><div class="muted" style="font-size:11.5px">${esc(u.email)}</div></div></div></td>
+        <td style="white-space:nowrap">${ago(u.seen || u.last)}</td><td style="white-space:nowrap">${dt(u.first)}</td><td class="n">${u.logins || 0}</td><td class="n">${u.visits || 0}</td><td style="font-size:12px">${esc(u.place || "")}<div class="muted">${esc(u.device || "")}</div></td></tr>`).join("") || `<tr><td colspan="6" class="muted">Nobody has signed in yet.</td></tr>`}</table></div></section>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Recent logins<em>last 100</em></h2></div>
+      <div class="tw"><table class="t"><tr><th>When</th><th>Who</th><th>How</th><th>Place</th><th>Device</th></tr>
+      ${(d.logins || []).map(l => `<tr><td style="white-space:nowrap">${dt(l.at)}</td><td>${esc(l.name || l.email)}<div class="muted" style="font-size:11.5px">${esc(l.email)}</div></td><td>${chip(l.how, l.role === "admin" ? "var(--warn)" : "var(--info)")}</td><td style="font-size:12px">${esc(l.place || "")}</td><td style="font-size:12px">${esc(l.device || "")}</td></tr>`).join("")}</table></div></section>
+    <p class="foot-note">Visits count at most once an hour per person. Logins are kept for 120 days.</p>`;
+}
+
 /* ============================================================ render + events */
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars};
+  "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin};
 let RENDER_ID = 0;
 async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const fn = VIEWS[r] || pageDashboard;
+  const fn = (r === "watchlist" && !isAdmin()) ? pageDashboard : (VIEWS[r] || pageDashboard);
   let html;
   try{ html = await fn(); }
   catch(e){ html = pageHead("Could not load", "") + subnav() + `<div class="empty">This page's data could not be loaded (${esc(e.message)}). Check your connection and tap Refresh.</div>`; }
@@ -1159,7 +1183,7 @@ document.addEventListener("click", e => {
   const d = b.dataset;
   if(d.act === "theme") return flip();
   if(d.act === "refresh") return refreshAll();
-  if(d.act === "scan") return scanAll();
+  if(d.act === "scan") return isAdmin() && scanAll();
   if(d.star){ e.preventDefault(); return toggleStar(d.star); }
   if(d.strong){ UI.strong = d.strong; return rerender(); }
   if(d.sm){ UI.strongMarket = d.sm; return rerender(); }
@@ -1185,6 +1209,11 @@ addEventListener("hashchange", () => { render(); scrollTo(0,0); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 
 (async function boot(){
+  try{
+    const r = await fetch("/api/me", {cache:"no-store"});
+    if(r.status === 401){ location.href = "/login"; return; }
+    if(r.ok) USER = await r.json();
+  }catch(e){ USER = null; }          // no server (preview): show everything
   renderShell();
   try{ await getJSON("site.json"); }
   catch(e){
@@ -1195,7 +1224,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
   getJSON("sectors.json").catch(() => null);
   render();
   setInterval(async () => { try{ await getJSON("site.json", true); await loadWatch(); if(route() === "today") rerender(); }catch(e){} }, 5*60*1000);
-  pollScans();
+  if(isAdmin()) pollScans();
 })();
 
 </script>
