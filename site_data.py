@@ -536,6 +536,23 @@ def pct_over(vals, n):
     return (vals[-1] / vals[-1 - n] - 1) * 100
 
 
+def write_names():
+    """symbol -> company name, for the search box on the website."""
+    names = {}
+    for f in ("names.csv", "sector_map.csv"):
+        path = os.path.join(DATA, f)
+        try:
+            df = pd.read_csv(path)
+            if "name" in df.columns:
+                names.update({s: n for s, n in zip(df["symbol"], df["name"])
+                              if isinstance(s, str) and isinstance(n, str) and n})
+        except Exception:
+            pass
+    if names:
+        with open(os.path.join(DATA, "names.json"), "w") as f:
+            json.dump(names, f, separators=(",", ":"), sort_keys=True)
+
+
 # ---------------------------------------------------------------- build
 def run(now=None):
     global SECTORS
@@ -599,6 +616,28 @@ def run(now=None):
             picks.append(c)
     gates = {n: {"name": STRAT_RULES[n][0], "open": v.get("open"), "gate": v.get("gate"),
                  "count": len(v["picks"])} for n, v in sorted(res.items())}
+
+    def strat_card(p):
+        c = card(p["row"], p["market"])
+        c.update(levels(p["row"], p["entry"], p["stop"]))
+        c.update({"size": p["size"], "checks": p["checks"], "bonus": p["bonus"]})
+        return c
+    strategies = []
+    for n in (1, 2, 4, 7, 3, 5, 6):
+        if n not in res:
+            continue
+        v, rule = res[n], STRAT_RULES[n]
+        q = v.get("queue") or {}
+        strategies.append({
+            "n": n, "name": rule[0], "horizon": rule[1], "idea": rule[2], "rules": rule[3],
+            "exit": rule[4], "open": v.get("open"), "gate": v.get("gate"),
+            "main": n in (1, 2, 4, 7),
+            "picks": [strat_card(p) for p in v["picks"]],
+            "blocked": [strat_card(p) for p in v["blocked"]],
+            "dipping": [card(r, "F&O" if n == 7 else r.get("setup", "").split(" · ")[0])
+                        for r in q.get("dipping", [])][:20],
+            "waiting": [{"symbol": s_, **b} for s_, b in q.get("waiting", [])][:30],
+            "queue_note": q.get("caption", "")})
     rank = {"A": 0, "B": 1, "C": 2}
     ready = sorted([card(r, mk) for mk, d in (("F&O", fo), ("Equity", eq)) for r in setup_rows(d)
                     if r.get("stage") == "Ready" and r.get("grade") in ("A", "B")],
@@ -611,8 +650,8 @@ def run(now=None):
 
     # strongest
     ctx = {"five": five, "ready": ready_map, "vk": vk, "brk": fo.get("recent_breakouts", {})}
-    strong_fo = strongest_block(sj.get("strongest_fo") or [], ctx)
-    strong_n50 = strongest_block(sj.get("strongest_n50") or [], ctx)
+    strong_fo = strongest_block(sj.get("strongest_fo") or [], ctx, 40)
+    strong_n50 = strongest_block(sj.get("strongest_n50") or [], ctx, 50)
 
     # sectors
     sectors = [{"name": s["name"], "stage": s["stage"], "rw": s.get("rw"), "r2w": s.get("r2w"),
@@ -646,7 +685,7 @@ def run(now=None):
                    "gate": gate_of(m)["word"], "nifty": (m.get("nifty") or {}).get("state"),
                    "adv": adv, "dec": len(moves) - adv},
         "strength": st_, "indexes": indexes,
-        "picks": picks, "gates": gates, "ready": ready[:24], "ready_count": len(ready),
+        "picks": picks, "gates": gates, "strategies": strategies, "ready": ready[:24], "ready_count": len(ready),
         "vk_count": vk_count,
         "strongest_fo": strong_fo, "strongest_n50": strong_n50,
         "sectors": sectors, "heatmap": heatmap,
@@ -660,6 +699,7 @@ def run(now=None):
     }
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
+    write_names()
     print(f"site_data: wrote {OUT} ({os.path.getsize(OUT) // 1024} KB), "
           f"strength {st_['score'] if st_ else 'n/a'}, {len(picks)} picks, {len(ready)} ready")
     return out
