@@ -1531,6 +1531,19 @@ def main_live():
             print("index scan: index_scan.py not found")
     except Exception as e:
         print(f"[warn] index scan skipped: {e}")
+    # the dashboard file for tradeready.in (site_data.py); never stops the stock scan
+    try:
+        path = next((p for p in ("site_data.py", "site data.py") if os.path.exists(p)), None)
+        if path:
+            loader = importlib.machinery.SourceFileLoader("site_data", path)
+            spec = importlib.util.spec_from_loader("site_data", loader)
+            mod = importlib.util.module_from_spec(spec)
+            loader.exec_module(mod)
+            mod.run(now)
+        else:
+            print("site data: site_data.py not found")
+    except Exception as e:
+        print(f"[warn] site data skipped: {e}")
 
 
 # ---------------------------------------------------------------- selftest
