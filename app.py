@@ -57,6 +57,7 @@ TH = THEMES[THEME_NAME]
 INK, MUTED, RULE = TH["ink"], TH["muted"], TH["rule"]
 GREEN, RED, BLUE = TH["green"], TH["red"], TH["blue"]
 AMBER_WL = TH["star_off"]     # watchlist star (empty)
+SHADOW = TH["shadow"] if TH["shadow"] != "none" else "0 0 0 transparent"   # usable in a list
 TREND_COLOR = {"With trend": GREEN, "Early turn": BLUE, "Counter-trend": RED}
 AMBER = TH["amber"]
 VK_ORDER = ["BUY NOW", "ALMOST READY (Bullish)", "COMING CLOSE TO READY (Bullish)",
@@ -126,6 +127,15 @@ html, body, [data-testid="stAppViewContainer"], .stApp {{background: {TH["bg_css
 }}
 .tf-row {{background: {TH["card"]}; border: 1px solid {TH["line"]}; border-radius: 18px;
   padding: 14px; line-height: 1.45; box-shadow: {TH["shadow"]};}}
+.tf-row {{position: relative; overflow: hidden; transition: transform .15s ease, box-shadow .15s ease;
+  background-image: linear-gradient(180deg, {"rgba(255,255,255,.035)" if THEME_NAME == "neon" else "rgba(79,70,229,.025)"}, transparent 60%);}}
+.tf-row:hover {{transform: translateY(-2px);}}
+.tf-row.st-Ready {{box-shadow: inset 4px 0 0 {GREEN}, {SHADOW};}}
+.tf-row.st-Triggered {{box-shadow: inset 4px 0 0 {BLUE}, {SHADOW};}}
+.tf-row.st-Watch {{box-shadow: inset 4px 0 0 {TH["line"]}, {SHADOW};}}
+.tf-row.st-Warn {{box-shadow: inset 4px 0 0 {RED}, {SHADOW};}}
+.tf-grade.glow {{box-shadow: 0 0 14px {TH["accent"]}88;}}
+.tf-tile {{padding: 14px 16px;}}
 .tf-top {{display: flex; justify-content: space-between; align-items: center;}}
 .tf-sym {{font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 17px;
   font-weight: 700; color: {INK} !important; text-decoration: none !important;}}
@@ -227,7 +237,8 @@ def grade_badge(g, stage=None):
     else:
         style = f"border:2px solid {INK};color:{INK}"
     tip = "Not tradeable yet: the grade turns colour at Ready" if not live else ""
-    return (f'<span class="tf-grade" title="{tip}" style="{style}">{html.escape(g)}</span>')
+    glow = " glow" if live and g == "A" else ""
+    return (f'<span class="tf-grade{glow}" title="{tip}" style="{style}">{html.escape(g)}</span>')
 
 
 def quality_html(r):
@@ -769,8 +780,9 @@ def row_html(r):
     tword = "Target"
     if not target and entry and r.get("stop") and entry > r["stop"]:
         target, tword = entry + 2 * (entry - r["stop"]), "2R"
+    stc = "Warn" if r["grade"] == "Warning" else stage if stage in ("Ready", "Triggered", "Watch") else ""
     return (
-        '<div class="tf-row"><div class="tf-top">'
+        f'<div class="tf-row st-{stc}"><div class="tf-top">'
         f'<span><a class="tf-sym" href="{chart_link(r["symbol"])}" target="_blank">'
         f'{e(r["symbol"])}</a>{wl_link(r["symbol"])}</span>'
         f'{grade_badge(r["grade"], r.get("stage"))}</div>'
@@ -1677,7 +1689,7 @@ def pick_html(p):
     bonus = "".join(f'<div class="tf-small" style="color:{GREEN};font-weight:600">+ {e(b)}</div>'
                     for b in p["bonus"])
     return (
-        '<div class="tf-row"><div class="tf-top">'
+        '<div class="tf-row st-Ready"><div class="tf-top">'
         f'<span><a class="tf-sym" href="{chart_link(p["symbol"])}" target="_blank">{e(p["symbol"])}</a>'
         f'{wl_link(p["symbol"])}</span>'
         f'{grade_badge(r.get("grade", ""), r.get("stage"))}</div>'
@@ -1689,7 +1701,7 @@ def pick_html(p):
         + '</div>')
 
 
-def render_strategies():
+def strategy_data():
     data = {}
     for key, path in (("F&O", PAGES["F&O"]["file"]), ("Equity", PAGES["Equity"]["file"]),
                       ("Breakout", PAGES["Breakout"]["file"]),
@@ -1698,6 +1710,147 @@ def render_strategies():
             data[key] = load(path, os.path.getmtime(path))
     data["Unusual F&O"] = load_unusual_map("F&O")
     data["Unusual Equity"] = load_unusual_map("Equity")
+    return data
+
+
+def dash_tile(title, body, href=None, right=""):
+    link = (f'<a href="{href}" target="_self" style="text-decoration:none;font-size:12px;'
+            f'font-weight:700;color:{TH["accent"] if THEME_NAME == "indigo" else TH["blue"]}">'
+            f'Open ›</a>' if href else "")
+    return (f'<div class="tf-row tf-tile"><div class="tf-top"><span class="tf-small" '
+            f'style="letter-spacing:.08em;text-transform:uppercase;font-weight:700">{title}</span>'
+            f'<span>{right}{link}</span></div>{body}</div>')
+
+
+def qlink(page, view=""):
+    import urllib.parse as up
+    return "?" + up.urlencode({"page": page, "view": view, "theme": THEME_NAME})
+
+
+def render_dashboard():
+    e = html.escape
+    data = strategy_data()
+    fo = data.get("F&O")
+    if not fo:
+        st.info("No scan results yet.")
+        return
+    m = fo["market"]
+    gen = dt.datetime.strptime(fo["generated_ist"], "%Y-%m-%d %H:%M")
+    tiles = []
+    # market
+    t = m.get("turn") or ""
+    tcol = {"Turning up": GREEN, "Falling": RED, "No clear turn": AMBER}.get(t, MUTED)
+    word = {"Turning up": "Market turning up", "Falling": "Market still falling",
+            "No clear turn": "No clear turn yet"}.get(t, "Market")
+    hist = m.get("daily_bull_hist") or []
+    g = gate_of(m)
+    tiles.append(dash_tile("Market", (
+        f'<div style="font-size:22px;font-weight:800;color:{tcol};margin:6px 0 2px">{e(word)}</div>'
+        f'<div class="tf-small">{e(g["word"])}</div>'
+        + (f'<div style="display:flex;align-items:center;gap:10px;margin-top:6px">'
+           f'{spark(hist, w=120, h=28)}<span class="tf-small">Daily bullish: '
+           f'{" → ".join(str(x) for x in hist[-4:])}%</span></div>' if len(hist) > 1 else "")
+        + f'<div class="tf-chips">{chip("Weekly bullish " + str(m.get("weekly_bull_pct")) + "%", MUTED)}'
+        + (chip(f"VIX {m['vix']}", MUTED) if m.get("vix") else "")
+        + (chip(f"Nifty Daily {m['nifty']['state']}", MUTED) if m.get("nifty") else "")
+        + '</div>'), right=f'<span class="tf-small" style="margin-right:8px">'
+        f'{gen.strftime("%a %H:%M")}</span>'))
+    # indexes
+    if os.path.exists(INDEX_FILE):
+        ix = load(INDEX_FILE, os.path.getmtime(INDEX_FILE)).get("indexes", [])
+        rows_ = []
+        for x in ix:
+            if x.get("key") not in ("NIFTY", "BANKNIFTY", "FINNIFTY") or "close" not in x:
+                continue
+            v = (x.get("vk") or {}).get("final")
+            op, fr = x.get("options") or {}, x.get("futures") or {}
+            rows_.append(
+                f'<div style="display:flex;justify-content:space-between;align-items:center;'
+                f'padding:8px 0;border-top:1px solid {TH["line"]}">'
+                f'<div><div style="font-weight:700;color:{INK}">{e(x["name"])}</div>'
+                f'<div class="tf-chips" style="margin:4px 0 0">'
+                + (chip(VK_SHORT[v], VK_COLOR.get(v, MUTED)) if v in VK_SHORT else "")
+                + (chip(fr["week"]["word"], GREEN if fr["week"]["side"] > 0 else RED
+                        if fr["week"]["side"] < 0 else AMBER) if fr.get("week") else "")
+                + (chip(f'PCR {op["pcr"]}', MUTED) if op.get("pcr") else "")
+                + '</div></div><div style="text-align:right">'
+                f'<div style="font-family:\'JetBrains Mono\',monospace;font-weight:700;color:{INK}">'
+                f'{money(x["close"])}</div><div style="font-size:12px;font-weight:700;'
+                f'color:{GREEN if x.get("chg1", 0) >= 0 else RED}">{x.get("chg1", 0):+.2f}%</div></div></div>')
+        if rows_:
+            tiles.append(dash_tile("Indexes", "".join(rows_), qlink("Index", "Nifty 50")))
+    # top trades
+    sec_table = {s["name"]: s for s in data.get("Sectors", {}).get("sectors", [])}
+    try:
+        res = strategy_picks(data, sec_table)
+    except Exception:
+        res = {}
+    picks = [p for n in sorted(res) for p in res[n]["picks"]]
+    if picks:
+        body = "".join(
+            f'<div style="display:flex;justify-content:space-between;align-items:center;'
+            f'padding:8px 0;border-top:1px solid {TH["line"]}"><div>'
+            f'<a class="tf-sym" style="font-size:15px" href="{chart_link(p["symbol"])}" '
+            f'target="_blank">{e(p["symbol"])}</a>{wl_link(p["symbol"])}'
+            f'<div class="tf-small">{p["strategy"]}. {e(STRAT_RULES[p["strategy"]][0])} · '
+            f'{e(p["row"].get("setup", ""))}</div></div>'
+            f'<div style="text-align:right;font-family:\'JetBrains Mono\',monospace;font-size:12px">'
+            f'<div style="color:{INK}">↑ {money(p.get("entry"))}</div>'
+            f'<div style="color:{RED}">✕ {money(p.get("stop"))}</div></div></div>'
+            for p in picks[:4])
+        more = f' · {len(picks) - 4} more' if len(picks) > 4 else ""
+        tiles.append(dash_tile(f"Today's trades · {len(picks)}", body, qlink("Today", "Strategies"),
+                               right=f'<span class="tf-small" style="margin-right:8px">{more}</span>'))
+    else:
+        tiles.append(dash_tile("Today's trades", '<div class="tf-small" style="margin-top:6px">'
+                               'No trade passes every rule right now. Patience is a position.</div>',
+                               qlink("Today", "Strategies")))
+    # sectors
+    secs = data.get("Sectors", {}).get("sectors", [])
+    lead = [s for s in secs if s["stage"] in ("Leading", "Improving")][:5]
+    if lead:
+        tiles.append(dash_tile("Strong sectors", '<div class="tf-chips">' + "".join(
+            chip(f'{s["name"]} {"▲" if s.get("direction") == "Rising" else "▼" if s.get("direction") == "Falling" else "►"}',
+                 STAGE_COLOR.get(s["stage"], MUTED)) for s in lead) + '</div>',
+            qlink("Market", "Sectors")))
+    # strongest F&O
+    sj = data.get("Sectors", {})
+    strong = (sj.get("strongest_fo") or [])[:6]
+    if strong:
+        tiles.append(dash_tile("Strongest F&O", '<div class="tf-chips">' + "".join(
+            chip(f'#{x["rank"]} {x["symbol"]}', GREEN if x["r1m"] >= 0 else AMBER) for x in strong)
+            + '</div>', qlink("Market", "Sectors")))
+    # big positions and squeezes
+    up_ = PAGES["Unusual"]["F&O"]["file"]
+    if os.path.exists(up_):
+        u = load(up_, os.path.getmtime(up_))
+        pb = (u.get("buildup") or {})
+        sq = [x for x in (u.get("squeeze") or []) if x["stage"] in ("Squeeze on", "Shorts trapped")]
+        chips_ = ([chip(f'{x["symbol"]} OI {x["oi"]:+.0f}%', AMBER) for x in pb.get("building", [])]
+                  + [chip(f'{x["symbol"]} starting', MUTED) for x in pb.get("starting", [])[:3]])
+        sqc = [chip(f'{x["symbol"]} · {x["stage"]}', GREEN if x["stage"] == "Squeeze on" else BLUE)
+               for x in sq[:5]]
+        if chips_ or sqc:
+            tiles.append(dash_tile("Big money", (
+                (f'<div class="tf-small" style="margin-top:6px">Big positions building</div>'
+                 f'<div class="tf-chips">{"".join(chips_)}</div>' if chips_ else "")
+                + (f'<div class="tf-small" style="margin-top:6px">Short squeeze</div>'
+                   f'<div class="tf-chips">{"".join(sqc)}</div>' if sqc else "")),
+                qlink("Market", "Unusual")))
+    # watchlist
+    if WATCH:
+        R = all_results()
+        ready = [s for s in WATCH if stock_brief(s, R)["best"] == 0]
+        tiles.append(dash_tile(f"Watchlist · {len(WATCH)}", (
+            f'<div class="tf-small" style="margin-top:6px">{len(ready)} Ready now</div>'
+            f'<div class="tf-chips">' + "".join(chip(s, GREEN) for s in ready[:8])
+            + "".join(chip(s, MUTED) for s in [x for x in WATCH if x not in ready][:max(0, 8 - len(ready))])
+            + '</div>'), qlink("Watchlist")))
+    st.markdown('<div class="tf-grid">' + "".join(tiles) + '</div>', unsafe_allow_html=True)
+
+
+def render_strategies():
+    data = strategy_data()
     sec_table = {s["name"]: s for s in data.get("Sectors", {}).get("sectors", [])}
     stamps = " · ".join(
         f"{k} " + dt.datetime.strptime(data[k]["generated_ist"], "%Y-%m-%d %H:%M").strftime(
@@ -2720,11 +2873,11 @@ def wl_link(sym, big=False):
 
 sync_data()
 PAGE_LIST = ["Today", "Scanner", "Index", "Search", "Watchlist", "Market"]
-SUBVIEWS = {"Today": ["Strategies", "A list"], "Scanner": ["F&O", "Equity"],
+SUBVIEWS = {"Today": ["Dashboard", "Strategies", "A list"], "Scanner": ["F&O", "Equity"],
             "Index": ["Nifty 50", "Bank Nifty", "Fin Nifty", "Midcap Select", "Nifty Next 50"],
             "Market": ["Sectors", "Unusual", "Deals", "Stars"]}
 LEGACY = {"Strategies": ("Today", "Strategies"), "A list": ("Today", "A list"),
-          "Guide": ("Today", "Strategies"), "F&O": ("Scanner", "F&O"),
+          "Guide": ("Today", "Dashboard"), "F&O": ("Scanner", "F&O"),
           "Equity": ("Scanner", "Equity"), "Breakout": ("Scanner", "Equity"),
           "Unusual": ("Market", "Unusual"), "Sectors": ("Market", "Sectors"),
           "Deals": ("Market", "Deals"), "Stars": ("Market", "Stars")}
@@ -2820,8 +2973,10 @@ STAR_MAP.update(load_star_map())
 if page == "Today":
     if view == "A list":
         render_alist()
-    else:
+    elif view == "Strategies":
         render_strategies()
+    else:
+        render_dashboard()
     with st.expander("How to use TradeReady"):
         st.markdown(GUIDE)
     st.stop()
