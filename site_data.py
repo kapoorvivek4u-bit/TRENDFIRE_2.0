@@ -479,7 +479,8 @@ def card(r, market):
     out = {"symbol": r["symbol"], "market": market, "setup": r.get("setup"),
            "stage": r.get("stage"), "grade": r.get("grade"), "close": r.get("close"),
            "trend": r.get("trend"), "detail": r.get("detail"), "vk": vk,
-           "ext": r.get("ext"), "sector": SECTORS.get(r["symbol"], {}).get("sector"),
+           "ext": r.get("ext"), "states": r.get("states"),
+           "sector": SECTORS.get(r["symbol"], {}).get("sector"),
            "sector_stage": SECTORS.get(r["symbol"], {}).get("stage")}
     out.update(levels(r))
     if r.get("chart"):
@@ -551,6 +552,37 @@ def write_names():
     if names:
         with open(os.path.join(DATA, "names.json"), "w") as f:
             json.dump(names, f, separators=(",", ":"), sort_keys=True)
+
+
+def card_candles(symbols, n=45):
+    """Daily candles plus 20 and 50 EMA for the stocks shown as cards on the dashboard,
+    so each card can draw its own chart. Never stops the build."""
+    out = {}
+    symbols = sorted({s for s in symbols if s})
+    if not symbols:
+        return out
+    try:
+        import yfinance as yf
+        tick = {s: s + ".NS" for s in symbols}
+        d = yf.download(list(tick.values()), period="6mo", interval="1d", group_by="ticker",
+                        progress=False, auto_adjust=False, threads=True)
+        for s, t in tick.items():
+            try:
+                x = d[t] if isinstance(d.columns, pd.MultiIndex) else d
+            except KeyError:
+                continue
+            x = x.dropna(subset=["Open", "High", "Low", "Close"])
+            if len(x) < 25:
+                continue
+            c = x["Close"]
+            e20, e50 = c.ewm(span=20, adjust=False).mean(), c.ewm(span=50, adjust=False).mean()
+            x, e20, e50 = x.iloc[-n:], e20.iloc[-n:], e50.iloc[-n:]
+            rnd = lambda col: [round(float(v), 2) for v in col]
+            out[s] = {"o": rnd(x["Open"]), "h": rnd(x["High"]), "l": rnd(x["Low"]), "c": rnd(x["Close"]),
+                      "e20": rnd(e20), "e50": rnd(e50)}
+    except Exception as ex:
+        print("site_data: candles skipped:", ex)
+    return out
 
 
 # ---------------------------------------------------------------- build
@@ -697,6 +729,9 @@ def run(now=None):
         "closes": {r["symbol"]: r["close"] for r in moves},
         "vk": vk,
     }
+    syms = [c["symbol"] for c in picks] + [c["symbol"] for c in ready[:24]]
+    syms += [c["symbol"] for st in strategies for k in ("picks", "blocked", "dipping") for c in st[k]]
+    out["candles"] = card_candles(syms)
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
     write_names()
