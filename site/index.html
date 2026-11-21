@@ -441,7 +441,18 @@ a.tbtn{color:var(--ink)}
 .rar b{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-weight:900;font-size:16px;color:#3b2a00;background:linear-gradient(135deg,var(--gold1),var(--gold2))}
 .tc.gB .rar b{color:#1e1b4b;background:linear-gradient(135deg,var(--silver1),var(--silver2))}
 .rar span{font-size:8.5px;font-weight:800;letter-spacing:.1em;color:var(--muted)}
-.tc svg.mini{margin-top:auto;height:88px}
+.tc{height:390px}
+.tc .fchart{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.legend2{display:flex;gap:10px;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.legend2 span{display:flex;align-items:center;gap:4px}
+.legend2 i{display:block;width:12px;height:2px;border-radius:2px;background:var(--c)}
+.fstats{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.fstats div{background:var(--surface2);border-radius:9px;padding:6px 7px;min-width:0}
+.fstats small{display:block;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fstats b{font-family:var(--f-num);font-size:12px;white-space:nowrap}
+.wx .wxstats{display:flex;gap:8px;flex-wrap:wrap}
+.wx .wxstats span{font-size:12px;font-weight:700;color:var(--wxink);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.55);backdrop-filter:blur(6px)}
+:root[data-theme="dark"] .wx .wxstats span{background:rgba(0,0,0,.35)}
 .tc .foot{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--faint)}
 .tc .lvv{display:grid;gap:7px}
 .tc .lvv div{display:flex;justify-content:space-between;align-items:center;background:var(--surface2);border-radius:11px;padding:9px 11px}
@@ -954,7 +965,8 @@ function weatherCard(){
   return `<section class="wx s5 fade" data-w="${kind}">${wxScene(kind)}
     <div style="display:flex;justify-content:space-between"><span class="lbl">Market weather</span><span class="lbl">${esc(st.trend || "")}</span></div>
     <div><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span class="score" data-count="${st.score}">${st.score}</span><span class="word">${word}</span></div>
-      <div class="say">${esc(st.advice)}</div></div></section>`;
+      <div class="say">${esc(st.advice)}</div>
+      <div class="wxstats" style="margin-top:12px">${st.parts.map(x => `<span title="${esc(x.why)}">${esc(x.name)} ${x.value}</span>`).join("")}</div></div></section>`;
 }
 function newsCard(){
   const s = S(), secs = (s.sectors || []).slice().filter(x => x.r1 != null).sort((a,b) => b.r1 - a.r1);
@@ -986,15 +998,40 @@ function partsCard(){
       <div>Advance / decline (F&O)<br><b class="up">${m.adv}</b> / <b class="down">${m.dec}</b><div class="adbar"><i style="width:${100*m.adv/tot}%;background:var(--up)"></i><i style="width:${100*m.dec/tot}%;background:var(--down)"></i></div></div>
       <div>Market line<br><b>${esc(m.gate)}</b></div></div></section>`;
 }
+function candleChart(k, p){
+  const W = 300, H = 110, N = k.c.length;
+  const last = k.c[k.c.length-1], near = v => v && Math.abs(v - last)/last < .3;   // levels far away would flatten the candles
+  const vals = k.h.concat(k.l, near(p.entry) ? [p.entry] : [], near(p.stop) ? [p.stop] : []);
+  let lo = Math.min(...vals), hi = Math.max(...vals); const pad = (hi-lo)*.06 || 1; lo -= pad; hi += pad;
+  const X = i => (i+.5)/N*W, Y = v => (hi-v)/(hi-lo)*H, bw = Math.max(2, W/N*.6);
+  const ne = 'vector-effect="non-scaling-stroke"';
+  let s = "";
+  if(near(p.entry) && near(p.stop)) s += `<rect x="0" y="${Y(p.entry)}" width="${W}" height="${Math.max(0, Y(p.stop)-Y(p.entry))}" fill="var(--down)" opacity=".06"/>`;
+  for(let i=0;i<N;i++){ const up = k.c[i] >= k.o[i], col = up ? "var(--up)" : "var(--down)";
+    s += `<line x1="${X(i)}" y1="${Y(k.h[i])}" x2="${X(i)}" y2="${Y(k.l[i])}" stroke="${col}" stroke-width="1" ${ne}/>`
+       + `<rect x="${X(i)-bw/2}" y="${Math.min(Y(k.o[i]),Y(k.c[i]))}" width="${bw}" height="${Math.max(1, Math.abs(Y(k.o[i])-Y(k.c[i])))}" fill="${col}" rx=".6"/>`; }
+  const line = (arr, col, w) => `<polyline points="${arr.map((v,i) => X(i)+","+Y(v)).join(" ")}" fill="none" stroke="${col}" stroke-width="${w}" opacity=".85" ${ne}/>`;
+  if(k.e50) s += line(k.e50, "var(--warn)", 1.3);
+  if(k.e20) s += line(k.e20, "var(--info)", 1.3);
+  if(near(p.entry)) s += `<line x1="0" x2="${W}" y1="${Y(p.entry)}" y2="${Y(p.entry)}" stroke="var(--accent2)" stroke-dasharray="5 4" stroke-width="1.6" ${ne}/>`;
+  if(near(p.stop)) s += `<line x1="0" x2="${W}" y1="${Y(p.stop)}" y2="${Y(p.stop)}" stroke="var(--down)" stroke-dasharray="5 4" stroke-width="1.6" ${ne}/>`;
+  return `<svg class="mini" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true" style="width:100%;height:110px;display:block">${s}</svg>
+    <div class="legend2"><span><i style="--c:var(--info)"></i>20 EMA</span><span><i style="--c:var(--warn)"></i>50 EMA</span><span><i style="--c:var(--accent2)"></i>entry</span><span><i style="--c:var(--down)"></i>stop</span></div>`;
+}
 function flipMini(p){
-  if(p.chart) return miniChart(p.chart).replace('height:64px','height:88px');
-  if(!(p.entry && p.stop)) return "";
-  const W = 300, H = 88, lo = p.stop*0.985, hi = p.entry*1.03, Y = v => (hi-v)/(hi-lo)*H;
-  return `<svg class="mini" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true" style="width:100%;height:88px;display:block">
-    <rect x="0" y="${Y(p.entry)}" width="${W}" height="${Y(p.stop)-Y(p.entry)}" fill="var(--down)" opacity=".07"/>
-    <line x1="0" x2="${W}" y1="${Y(p.entry)}" y2="${Y(p.entry)}" stroke="var(--accent2)" stroke-dasharray="6 4" stroke-width="2" vector-effect="non-scaling-stroke"/>
-    <line x1="0" x2="${W}" y1="${Y(p.stop)}" y2="${Y(p.stop)}" stroke="var(--down)" stroke-dasharray="6 4" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-    <div class="muted num" style="font-size:10.5px;display:flex;justify-content:space-between;margin-top:-4px"><span>entry ${fmt(p.entry)}</span><span>stop ${fmt(p.stop)}</span></div>`;
+  const k = (S().candles || {})[p.symbol];
+  if(k) return candleChart(k, p);
+  if(p.chart) return miniChart(p.chart).replace('height:64px','height:96px');
+  return `${statesHtml(p.states)}<div class="why" style="font-size:12px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${esc(p.detail || "")}</div>`;
+}
+function flipStats(p){
+  const risk = p.entry && p.stop ? (p.entry - p.stop)/p.entry*100 : null;
+  const gain = p.entry && p.target ? (p.target - p.entry)/p.entry*100 : null;
+  const away = p.entry && p.close ? (p.entry - p.close)/p.close*100 : null;
+  return `<div class="fstats"><div><small>Close</small><b>${fmt(p.close)}</b></div>
+    <div><small>To entry</small><b class="${away != null && away <= 0 ? "up" : ""}">${away == null ? "—" : (away <= 0 ? "above" : pct(away))}</b></div>
+    <div><small>Risk</small><b class="down">${risk == null ? "—" : risk.toFixed(1) + "%"}</b></div>
+    <div><small>Reward</small><b class="up">${gain == null ? "—" : "+" + gain.toFixed(1) + "%"}</b></div></div>`;
 }
 const FLIP = {};
 function flipCard(p, i){
@@ -1006,7 +1043,8 @@ function flipCard(p, i){
         <div class="row1"><div style="min-width:0"><div class="symrow">${symLink(p.symbol, 18)}${starBtn(p.symbol)}</div><div class="sub">${esc(p.strategy ? p.strategy + ". " + p.strategy_name : (p.market || ""))}${p.sector ? " · " + esc(p.sector) : ""}</div></div>
           <div class="rar"><b>${esc(p.grade)}</b><span>${gA ? "GOLD" : "SILVER"}</span></div></div>
         <div class="chips">${chip(p.setup, "var(--info)")}${p.sector_stage ? chip(p.sector_stage, STAGE_C[p.sector_stage]) : ""}${p.size ? chip(p.size, /alf|ccordion/.test(p.size) ? "var(--warn)" : "var(--up)") : ""}${vkChip(p.vk)}</div>
-        ${flipMini(p)}
+        <div class="fchart">${flipMini(p)}</div>
+        ${flipStats(p)}
         <div class="foot">${p.rr ? `<span class="rr">R:R ${p.rr}</span>` : "<span></span>"}<span>tap to flip ↻</span></div>
       </div>
       <div class="face back">
