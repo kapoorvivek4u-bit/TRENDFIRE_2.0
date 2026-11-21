@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 TradeReady index scan: Nifty, Bank Nifty and Midcap.
@@ -51,9 +50,12 @@ INDEXES = [   # key, name, yahoo tickers to try, NSE F&O symbol, constituents li
     ("NIFTY", "Nifty 50", ["^NSEI"], "NIFTY", "nifty50"),
     ("BANKNIFTY", "Bank Nifty", ["^NSEBANK"], "BANKNIFTY", "banknifty"),
     ("MIDCAP", "Midcap Select", ["NIFTY_MID_SELECT.NS", "^NSEMDCP50"], "MIDCPNIFTY", "midcap"),
+    ("FINNIFTY", "Fin Nifty", ["NIFTY_FIN_SERVICE.NS", "^CNXFIN"], "FINNIFTY", "finnifty"),
+    ("NEXT50", "Nifty Next 50", ["^NSMIDCP", "NIFTY_NEXT_50.NS"], "NIFTYNXT50", "next50"),
 ]
 LISTS = {"nifty50": "ind_nifty50list.csv", "banknifty": "ind_niftybanklist.csv",
-         "midcap": "ind_niftymidcapselect_list.csv"}
+         "midcap": "ind_niftymidcapselect_list.csv", "finnifty": "ind_niftyfinancelist.csv",
+         "next50": "ind_niftynext50list.csv"}
 ICFG = {"hist_days": 15, "chain_pct": 0.08, "top_strikes": 3, "oi_days": 5,
         "oi_move": 0.03, "px_flat": 0.01}
 
@@ -67,7 +69,7 @@ def _col(df, *names):
     return None
 
 
-def parse_index_fo(raw, symbols=("NIFTY", "BANKNIFTY", "MIDCPNIFTY")):
+def parse_index_fo(raw, symbols=("NIFTY", "BANKNIFTY", "MIDCPNIFTY", "FINNIFTY", "NIFTYNXT50")):
     """F&O file -> (futures: {sym: (oi, near price)}, options: DataFrame of index options
     with symbol, expiry, strike, type CE/PE, oi, chg_oi, under)."""
     with zipfile.ZipFile(io.BytesIO(raw)) as z:
@@ -139,7 +141,8 @@ def chain_summary(opt, spot, today):
         i = int(np.argmin([abs(x["strike"] - spot) for x in ladder]))
         ladder = ladder[max(0, i - 10):i + 11]
     tot_ce, tot_pe = float(ce["oi"].sum()), float(pe["oi"].sum())
-    return {"expiry": exp.strftime("%Y-%m-%d"), "pcr": round(tot_pe / tot_ce, 2) if tot_ce else None,
+    return {"expiry": exp.strftime("%Y-%m-%d"), "spot": round(float(spot), 2),
+            "pcr": round(tot_pe / tot_ce, 2) if tot_ce else None,
             "max_pain": max_pain,
             "resistance": [{"strike": float(k), "oi": float(r["oi"])} for k, r in res_k.iterrows()],
             "support": [{"strike": float(k), "oi": float(r["oi"])} for k, r in sup_k.iterrows()],
@@ -257,7 +260,11 @@ def update_history(session, now):
     path = os.path.join(DATA, "index_oi.csv.gz")
     hist = (pd.read_csv(path, parse_dates=["date"]) if os.path.exists(path)
             else pd.DataFrame(columns=["date", "symbol", "fut_oi", "fut_close", "pcr"]))
-    have = set(pd.to_datetime(hist["date"]).dt.normalize())
+    # a day counts as done only when it has every index (so a newly added index backfills)
+    want_syms = {x[3] for x in INDEXES}
+    got = hist.groupby(pd.to_datetime(hist["date"]).dt.normalize())["symbol"].agg(set) \
+        if len(hist) else pd.Series(dtype=object)
+    have = {d for d, s in got.items() if want_syms - {"NIFTYNXT50"} <= s}
     today = pd.Timestamp(now.date())
     days = [today - pd.Timedelta(days=i) for i in range(ICFG["hist_days"] + 8)]
     days = sorted(d for d in days if d.weekday() < 5 and (d < today or now.hour >= 18))
@@ -305,6 +312,7 @@ def run(now=None, session=None):
            "indexes": []}
     for key, name, tickers, fo_sym, list_key in INDEXES:
         d = hr = None
+        used = None
         for t in tickers:
             data = E.yf_download([t], period="5y", interval="1d")
             if data is None:
@@ -312,7 +320,7 @@ def run(now=None, session=None):
             df = (data[t] if isinstance(data.columns, pd.MultiIndex) else data)
             df = df[["Open", "High", "Low", "Close", "Volume"]].dropna(subset=["Close"])
             if len(df) > 250:
-                d = df
+                d, used = df, t
                 hd = E.yf_download([t], period="60d", interval="1h")
                 if hd is not None:
                     h_ = hd[t] if isinstance(hd.columns, pd.MultiIndex) else hd
@@ -324,6 +332,9 @@ def run(now=None, session=None):
                     hr = h_
                 break
         item = {"key": key, "name": name}
+        if used == "^NSEMDCP50":
+            item["chart_note"] = ("Chart from Nifty Midcap 50 (Midcap Select is not on "
+                                  "Yahoo); options and futures are Midcap Select")
         if d is not None:
             idx = pd.to_datetime(d.index)
             d.index = idx.tz_localize(None) if idx.tz is not None else idx
@@ -339,9 +350,12 @@ def run(now=None, session=None):
                 print(f"[warn] {key} chart: {e}")
         item["futures"] = futures_reading(hist, fo_sym)
         if opt is not None:
-            spot = item.get("close") or (item["futures"] or {}).get("price")
+            o_ = opt[opt["symbol"] == fo_sym]
+            # the options' own underlying price (the chart index can differ, e.g. Midcap)
+            spot = (float(o_["under"].median()) if len(o_) and o_["under"].notna().any()
+                    else (item["futures"] or {}).get("price") or item.get("close"))
             if spot:
-                item["options"] = chain_summary(opt[opt["symbol"] == fo_sym], spot, opt_day)
+                item["options"] = chain_summary(o_, spot, opt_day)
         members = load_members(session, list_key)
         item["board"] = board(members, setups_res, fo) if members else []
         out["indexes"].append(item)
@@ -411,6 +425,7 @@ def selftest():
     print("ladder:", len(cs["ladder"]), "pcr", cs["pcr"], "max pain", cs["max_pain"],
           "| chart:", ic["states"], ic["vk"]["final"] if ic["vk"] else None, len(ic["setups"]))
     print("SELFTEST PASSED")
+
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
