@@ -359,10 +359,30 @@ textarea.note{width:100%;min-height:64px;resize:vertical;font:inherit;font-size:
 .rail .foot .me a svg{width:17px;height:17px}
 a.tbtn{color:var(--ink)}
 .rail .foot .acts button{justify-content:center}
+
+/* ---------- right panel (wide screens only) ---------- */
+.rrail{display:none}
+@media (min-width:1500px){
+  .rrail{display:flex;flex-direction:column;gap:12px;position:fixed;top:0;bottom:0;right:0;width:300px;overflow-y:auto;scrollbar-width:thin;
+    padding:22px 18px;padding-right:max(18px,env(safe-area-inset-right,0px));border-left:1px solid var(--line);background:color-mix(in srgb,var(--surface) 55%,transparent);backdrop-filter:blur(10px)}
+  main{margin-right:300px;max-width:none}
+}
+.rrail .rp{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.rrail h3{margin:0 0 10px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.rrail h3 a{font-size:11px;letter-spacing:0;text-transform:none;color:var(--accent);font-weight:700}
+.rrail .pulse{display:flex;align-items:center;gap:14px}
+.rrail .ring{width:66px;height:66px;flex:none;position:relative}
+.rrail .ring svg{width:66px;height:66px;transform:rotate(-90deg)}
+.rrail .ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-num);font-size:20px;font-weight:800}
+.rrail .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--line);font-size:12.5px}
+.rrail .row:first-of-type{border-top:0}
+.rrail .row .num{font-weight:700}
+.rrail .when{font-size:11px;color:var(--muted);text-align:center;margin-top:auto;padding-top:6px}
 </style>
 </head>
 <body>
 <aside class="rail" id="rail"></aside>
+<aside class="rrail" id="rrail" aria-label="Market pulse"></aside>
 <header class="top" id="top"></header>
 <main id="main"></main>
 <nav class="tabbar" id="tabbar" aria-label="Pages"></nav>
@@ -569,6 +589,35 @@ function scanLine(){
   const busy = Object.entries(SCAN_STATE).filter(([,x]) => x.status !== "completed").map(([n]) => n);
   return busy.length ? `<div class="scanline"><span class="spin"></span>Running: ${esc(busy.join(", "))}</div>` : "";
 }
+
+function rightRail(){
+  const el = document.getElementById("rrail"); if(!el) return;
+  const s = S(); if(!s){ el.innerHTML = ""; return; }
+  const st = s.strength, m = s.market;
+  const c = !st ? "var(--muted)" : st.score >= 55 ? "var(--up)" : st.score >= 45 ? "var(--warn)" : "var(--down)";
+  const R = 28, C = 2*Math.PI*R, tot = (m.adv||0) + (m.dec||0) || 1;
+  const pulse = st ? `<section class="rp"><h3>Market pulse</h3><div class="pulse">
+      <div class="ring"><svg viewBox="0 0 66 66"><circle cx="33" cy="33" r="${R}" fill="none" stroke="var(--surface2)" stroke-width="7"/>
+        <circle cx="33" cy="33" r="${R}" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C*st.score/100} ${C}"/></svg><b style="color:${c}">${st.score}</b></div>
+      <div style="min-width:0"><b style="color:${c};font-family:var(--f-head);font-size:16px">${esc(st.label)}</b><div class="muted" style="font-size:12px;line-height:1.35;margin-top:2px">${esc(st.advice)}</div></div></div>
+      <div class="adbar" style="width:100%;margin-top:12px"><i style="width:${100*m.adv/tot}%;background:var(--up)"></i><i style="width:${100*m.dec/tot}%;background:var(--down)"></i></div>
+      <div class="row" style="border-top:0;padding-bottom:0"><span class="up num">${m.adv} up</span><span class="muted">VIX ${m.vix ?? "—"}</span><span class="down num">${m.dec} down</span></div></section>` : "";
+  const ix = `<section class="rp"><h3>Indexes<a href="#index">Open ›</a></h3>${(s.indexes||[]).map(x => `<div class="row"><span style="font-weight:600">${esc(x.name)}</span><span><span class="num">${fmt(x.close)}</span> <b class="num ${cls(x.chg1)}" style="font-size:11.5px">${pct(x.chg1,2)}</b></span></div>`).join("")}</section>`;
+  let mine;
+  if(isAdmin() && WATCH.length){
+    const ready = new Set(s.ready_syms || []);
+    const items = WATCH.slice().sort((a,b) => (ready.has(b.symbol) - ready.has(a.symbol)) || a.symbol.localeCompare(b.symbol));
+    mine = `<section class="rp"><h3>Watchlist<a href="#watchlist">${WATCH.length} ›</a></h3>${items.slice(0, 12).map(w => `<div class="row"><a href="${tv(w.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(w.symbol)}</a><span>${ready.has(w.symbol) ? chip("Ready", "var(--up)") : ""} <span class="num muted">${s.closes[w.symbol] ? fmt(s.closes[w.symbol]) : ""}</span></span></div>`).join("")}</section>`;
+  } else {
+    mine = `<section class="rp"><h3>Strongest F&O<a href="#market-strongest">All ›</a></h3>${(s.strongest_fo||[]).slice(0, 8).map(x => `<div class="row"><a href="${tv(x.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(x.symbol)}</a><span class="muted" style="font-size:11.5px">${esc(x.sector || "")}</span><b class="num">${x.score}</b></div>`).join("")}</section>`;
+  }
+  const bu = (s.buildup || {}).building || [], sq = (s.squeeze || []).filter(x => /on|trapped/i.test(x.stage));
+  const money = (bu.length || sq.length) ? `<section class="rp"><h3>Big money<a href="#market-unusual">Open ›</a></h3>
+      ${bu.map(x => `<div class="row"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span class="muted" style="font-size:11.5px">building</span><b class="num up">OI ${pct(x.oi,0)}</b></div>`).join("")}
+      ${sq.slice(0, 5).map(x => `<div class="row"><span class="num" style="font-weight:700">${esc(x.symbol)}</span>${chip(x.stage, x.stage === "Squeeze on" ? "var(--up)" : "var(--info)")}</div>`).join("")}</section>` : "";
+  const mv = `<section class="rp"><h3>Top movers</h3>${s.gainers.slice(0,4).concat(s.losers.slice(0,4)).map(x => `<div class="row"><a href="${tv(x.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(x.symbol)}</a><b class="num ${cls(x.chg)}">${pct(x.chg,2)}</b></div>`).join("")}</section>`;
+  el.innerHTML = pulse + ix + mine + money + mv + `<div class="when">Scan ${esc(when(s.generated_ist))} IST</div>`;
+}
 function renderShell(){
   const r = pageOf(route());
   const brand = `<a class="brand" href="#today" aria-label="TradeReady home"><span class="mark"><svg viewBox="8 8 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 30h26M12 43h26" stroke-width="3" stroke-dasharray="1 6" opacity=".5"/><polyline points="12,38 18,33 24,40 30,34 36,39 42,30 51,17" stroke-width="5"/><polyline points="43,16 51,16 51,24" stroke-width="5"/></svg></span><span>Trade<b>Ready</b></span></a>`;
@@ -585,6 +634,7 @@ function renderShell(){
   const TABS = isAdmin() ? TABS_ALL : ["today","scanner","index","search","market"];
   document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = PAGES.find(x => x[0]===k);
     return `<a href="#${k}" class="${r===k?"on":""}">${ico(p[2])}${p[1]}</a>`; }).join("");
+  rightRail();
 }
 
 /* ============================================================ shared cards */
