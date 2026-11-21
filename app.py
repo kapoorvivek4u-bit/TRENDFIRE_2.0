@@ -453,7 +453,8 @@ def card_open(title, right=""):
 
 def render_index(view):
     e = html.escape
-    key = {"Nifty 50": "NIFTY", "Bank Nifty": "BANKNIFTY", "Midcap Select": "MIDCAP"}.get(view, "NIFTY")
+    key = {"Nifty 50": "NIFTY", "Bank Nifty": "BANKNIFTY", "Midcap Select": "MIDCAP",
+           "Fin Nifty": "FINNIFTY", "Nifty Next 50": "NEXT50"}.get(view, "NIFTY")
     if not os.path.exists(INDEX_FILE):
         st.info("The Index page fills in after the next F&O scan with index_scan.py uploaded.")
         return
@@ -495,6 +496,8 @@ def render_index(view):
             + area_chart(item.get("spark"))
             + f'<div class="tf-chips">{"".join(chips)}</div><div class="tf-chips">{tf}</div>'
             + (f'<div class="tf-small">{e(v.get("advice", ""))}</div>' if v.get("advice") else "")
+            + (f'<div class="tf-small" style="color:{AMBER}">{e(item["chart_note"])}</div>'
+               if item.get("chart_note") else "")
             + (f'<div class="tf-small">{abs(ext):.1f} ranges {"above" if ext >= 0 else "below"} '
                f'the Daily 50 EMA</div>' if ext is not None else "")
             + '</div>', unsafe_allow_html=True)
@@ -529,7 +532,7 @@ def render_index(view):
                            RED if x["type"] == "CE" else GREEN) for x in op.get("new_oi", []))
         ladder = op.get("ladder", [])
         mx = max([max(x["ce"], x["pe"]) for x in ladder] or [1]) or 1
-        spot = item.get("close") or (fr or {}).get("price") or 0
+        spot = op.get("spot") or item.get("close") or (fr or {}).get("price") or 0
         rows_ = []
         for x in ladder:
             near = spot and abs(x["strike"] - spot) == min(abs(y["strike"] - spot) for y in ladder)
@@ -565,9 +568,9 @@ def render_index(view):
                f'<span style="color:{GREEN}">■ puts</span> <span style="color:{RED}">■ calls</span></div>'
                + "".join(rows_) if rows_ else "")
             + '</div>', unsafe_allow_html=True)
-    elif key == "MIDCAP":
-        st.caption("Midcap options are thin, so the options section is skipped when there is "
-                   "too little data.")
+    elif key in ("MIDCAP", "NEXT50", "FINNIFTY"):
+        st.caption("Options for this index are thin (monthly expiry only), so the options "
+                   "section is skipped when there is too little data.")
     # setups and patterns on the index chart
     sets = item.get("setups") or []
     st.markdown(f'<div class="tf-small" style="letter-spacing:.08em;text-transform:uppercase;'
@@ -2718,7 +2721,7 @@ def wl_link(sym, big=False):
 sync_data()
 PAGE_LIST = ["Today", "Scanner", "Index", "Search", "Watchlist", "Market"]
 SUBVIEWS = {"Today": ["Strategies", "A list"], "Scanner": ["F&O", "Equity"],
-            "Index": ["Nifty 50", "Bank Nifty", "Midcap Select"],
+            "Index": ["Nifty 50", "Bank Nifty", "Fin Nifty", "Midcap Select", "Nifty Next 50"],
             "Market": ["Sectors", "Unusual", "Deals", "Stars"]}
 LEGACY = {"Strategies": ("Today", "Strategies"), "A list": ("Today", "A list"),
           "Guide": ("Today", "Strategies"), "F&O": ("Scanner", "F&O"),
