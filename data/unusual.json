@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-21 03:22",
+ "generated_ist": "2026-11-21 06:58",
  "oi_asof": "2026-11-20",
  "squeeze": [
   {
@@ -658,7 +658,7 @@
    "events": [
     {
      "when": "Fri 20",
-     "text": "1 hour of unusual volume, peak 5.2x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 5.6x at 15:15, absorption",
      "side": 0
     },
     {
@@ -944,46 +944,6 @@
    }
   },
   {
-   "symbol": "HYUNDAI",
-   "score": 4.8,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Fri 20",
-     "text": "3 hours of unusual volume, peak 2.7x at 15:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Thu 19",
-     "text": "2 hours of unusual volume, peak 4.1x at 14:15",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Day's volume 2.7x usual",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Range 2.4x normal, closed +5.8%",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "OI +11% in a day, price +5.6%: long build-up",
-     "side": 1
-    }
-   ],
-   "close": 2215.0,
-   "move_pct": 6.3,
-   "moved": true,
-   "vs_high": "At a 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
    "symbol": "INDIGO",
    "score": 4.4,
    "bias": "Mixed",
@@ -1152,6 +1112,26 @@
    }
   },
   {
+   "symbol": "INOXWIND",
+   "score": 4.0,
+   "bias": "Mixed",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "3 hours of unusual volume, peak 4.6x at 14:15, absorption",
+     "side": 0
+    }
+   ],
+   "close": 55.46,
+   "move_pct": -6.8,
+   "moved": false,
+   "vs_high": "18.9% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Topping"
+   }
+  },
+  {
    "symbol": "MFSL",
    "score": 4.0,
    "bias": "Buying",
@@ -1196,36 +1176,6 @@
    "move_pct": -2.6,
    "moved": false,
    "vs_high": "7.2% below its 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "PGEL",
-   "score": 4.0,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Fri 20",
-     "text": "3 hours of unusual volume, peak 3.6x at 14:15, absorption",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "5 hours of unusual volume, peak 9.7x at 11:15",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Day's volume 6.5x usual",
-     "side": 1
-    }
-   ],
-   "close": 588.7,
-   "move_pct": 10.6,
-   "moved": true,
-   "vs_high": "At a 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Bullish"
@@ -1319,7 +1269,7 @@
    "events": [
     {
      "when": "Fri 20",
-     "text": "1 hour of unusual volume, peak 5.0x at 15:15",
+     "text": "1 hour of unusual volume, peak 4.5x at 15:15",
      "side": 1
     },
     {
@@ -1350,6 +1300,36 @@
    "states": {
     "W": "Bearish",
     "D": "Bearish"
+   }
+  },
+  {
+   "symbol": "PGEL",
+   "score": 3.8,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "2 hours of unusual volume, peak 3.6x at 14:15",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "5 hours of unusual volume, peak 9.7x at 11:15",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Day's volume 6.5x usual",
+     "side": 1
+    }
+   ],
+   "close": 588.7,
+   "move_pct": 10.6,
+   "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
    }
   },
   {
@@ -1389,7 +1369,7 @@
    "events": [
     {
      "when": "Fri 20",
-     "text": "2 hours of unusual volume, peak 5.5x at 15:15, absorption",
+     "text": "2 hours of unusual volume, peak 5.0x at 15:15, absorption",
      "side": 0
     },
     {
@@ -1549,6 +1529,46 @@
    "states": {
     "W": "Bottoming",
     "D": "Topping"
+   }
+  },
+  {
+   "symbol": "HYUNDAI",
+   "score": 3.1,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "2 hours of unusual volume, peak 2.6x at 12:15",
+     "side": 0
+    },
+    {
+     "when": "Thu 19",
+     "text": "2 hours of unusual volume, peak 4.1x at 14:15",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Day's volume 2.7x usual",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Range 2.4x normal, closed +5.8%",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "OI +11% in a day, price +5.6%: long build-up",
+     "side": 1
+    }
+   ],
+   "close": 2215.0,
+   "move_pct": 6.3,
+   "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
    }
   },
   {
@@ -1784,26 +1804,6 @@
     "D": "Bearish"
    },
    "setup": "Squeeze Break \u00b7 Watch"
-  },
-  {
-   "symbol": "INOXWIND",
-   "score": 3.0,
-   "bias": "Mixed",
-   "events": [
-    {
-     "when": "Fri 20",
-     "text": "2 hours of unusual volume, peak 4.6x at 14:15, absorption",
-     "side": 0
-    }
-   ],
-   "close": 55.46,
-   "move_pct": -6.8,
-   "moved": false,
-   "vs_high": "18.9% below its 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Topping"
-   }
   },
   {
    "symbol": "ITC",
