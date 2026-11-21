@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-21 06:58",
+ "generated_ist": "2026-11-21 07:48",
  "oi_asof": "2026-11-20",
  "squeeze": [
   {
@@ -914,36 +914,6 @@
    "setup": "Squeeze Break \u00b7 Watch"
   },
   {
-   "symbol": "CIPLA",
-   "score": 4.8,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Fri 20",
-     "text": "1 hour of unusual volume, peak 6.1x at 15:15, absorption",
-     "side": 0
-    },
-    {
-     "when": "Wed 18",
-     "text": "Day's volume 2.2x usual",
-     "side": 1
-    },
-    {
-     "when": "Wed 18",
-     "text": "Range 2.1x normal, closed +2.1%",
-     "side": 1
-    }
-   ],
-   "close": 1415.0,
-   "move_pct": 1.5,
-   "moved": true,
-   "vs_high": "1.4% below its 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Topping"
-   }
-  },
-  {
    "symbol": "INDIGO",
    "score": 4.4,
    "bias": "Mixed",
@@ -1050,6 +1020,18 @@
     "W": "Bullish",
     "D": "Bullish"
    }
+  },
+  {
+   "symbol": "CIPLA",
+   "score": 4.0,
+   "bias": "Mixed",
+   "events": [
+    {
+     "when": "Fri 20",
+     "text": "1 hour of unusual volume, peak 6.1x at 15:15, absorption",
+     "side": 0
+    }
+   ]
   },
   {
    "symbol": "CUB",
