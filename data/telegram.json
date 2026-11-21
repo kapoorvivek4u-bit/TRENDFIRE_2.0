@@ -272,10 +272,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "IDFCFIRSTB": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "INDUSINDBK": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -428,10 +424,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "PNBHOUSING": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "POLICYBZR": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -540,6 +532,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "UPL": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "VBL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -640,6 +636,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "IDFCFIRSTB": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "INDHOTEL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -701,6 +701,10 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PNB": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "PNBHOUSING": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -788,14 +792,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "TMPV": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "UPL": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "ASTRAL": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -813,6 +809,10 @@
    "confirmed": "Not confirmed"
   },
   "SUPREMEIND": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "TMPV": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },

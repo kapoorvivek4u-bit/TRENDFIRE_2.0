@@ -1,13 +1,13 @@
 {
- "generated_ist": "2026-11-21 07:48",
+ "generated_ist": "2026-11-21 11:53",
  "oi_asof": "2026-11-20",
  "indexes": [
   {
    "key": "NIFTY",
    "name": "Nifty 50",
-   "close": 25514.3,
-   "chg1": 1.14,
-   "chg5": 0.85,
+   "close": 25800.6,
+   "chg1": 1.12,
+   "chg5": 2.61,
    "states": {
     "M": "Bottoming",
     "W": "Bullish",
@@ -32,10 +32,9 @@
    "old": "\u2705 Confirmed Bullish",
    "ma": "Messy",
    "squeeze": false,
-   "ext": 5.0,
+   "ext": 5.5,
    "stage": "Stretched",
    "spark": [
-    24219.05,
     24334.55,
     24207.75,
     24090.85,
@@ -94,7 +93,8 @@
     25291.1,
     25387.4,
     25227.95,
-    25514.3
+    25514.3,
+    25800.6
    ],
    "setups": [],
    "futures": {
@@ -289,7 +289,7 @@
      "symbol": "ADANIPORTS",
      "vk": "BUY NOW",
      "setup": "Daily VCP \u00b7 Ready",
-     "grade": "B",
+     "grade": "A",
      "oi": {
       "oi_pct": 6.8,
       "px_pct": 0.5,
@@ -361,7 +361,7 @@
      "symbol": "JSWSTEEL",
      "vk": "BUY NOW",
      "setup": "Daily Overspill \u00b7 Triggered",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -6.4,
       "px_pct": -1.1,
@@ -432,8 +432,8 @@
     {
      "symbol": "INDIGO",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Triggered",
-     "grade": "Warning",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 16.7,
       "px_pct": -0.5,
@@ -456,8 +456,8 @@
     {
      "symbol": "TECHM",
      "vk": "COMING CLOSE TO READY (Bullish)",
-     "setup": "Squeeze Break \u00b7 Watch",
-     "grade": "C",
+     "setup": "Daily Overspill \u00b7 Ready",
+     "grade": "B",
      "oi": {
       "oi_pct": -1.5,
       "px_pct": -2.0,
@@ -492,8 +492,8 @@
     {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
-     "setup": "Daily Cup \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -2.2,
       "px_pct": 7.7,
@@ -529,7 +529,7 @@
      "symbol": "BEL",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Ready",
-     "grade": "B",
+     "grade": "A",
      "oi": {
       "oi_pct": 1.0,
       "px_pct": 0.1,
@@ -576,8 +576,8 @@
     {
      "symbol": "HCLTECH",
      "vk": "NO SIGNAL",
-     "setup": "Squeeze Break \u00b7 Watch",
-     "grade": "C",
+     "setup": "Daily Overspill \u00b7 Ready",
+     "grade": "Warning",
      "oi": {
       "oi_pct": 2.0,
       "px_pct": -2.4,
@@ -600,8 +600,8 @@
     {
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
-     "setup": "Daily Range \u00b7 Triggered",
-     "grade": "B",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.5,
       "px_pct": -0.7,
@@ -744,8 +744,8 @@
     {
      "symbol": "POWERGRID",
      "vk": "NO SIGNAL",
-     "setup": "Daily Falling Wedge \u00b7 Ready",
-     "grade": "A",
+     "setup": "Daily Rectangle \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": -9.9,
       "px_pct": 3.8,
@@ -829,7 +829,7 @@
      "symbol": "TCS",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "A",
      "oi": {
       "oi_pct": 2.2,
       "px_pct": -1.6,
@@ -875,7 +875,7 @@
     },
     {
      "symbol": "TMPV",
-     "vk": "COMING CLOSE TO READY (Bearish)",
+     "vk": "ALMOST READY (Bearish)",
      "setup": null,
      "grade": null,
      "oi": {
@@ -890,9 +890,9 @@
   {
    "key": "BANKNIFTY",
    "name": "Bank Nifty",
-   "close": 63063.0,
-   "chg1": 1.65,
-   "chg5": 2.51,
+   "close": 64635.2,
+   "chg1": 2.49,
+   "chg5": 5.9,
    "states": {
     "M": "Impulse",
     "W": "Impulse",
@@ -917,10 +917,9 @@
    "old": "\u2705 Confirmed Bullish",
    "ma": "Bullish",
    "squeeze": false,
-   "ext": 6.2,
+   "ext": 7.1,
    "stage": "Stretched",
    "spark": [
-    57525.95,
     57514.2,
     57783.75,
     57509.95,
@@ -979,7 +978,8 @@
     61575.9,
     62273.25,
     62038.65,
-    63063.0
+    63063.0,
+    64635.2
    ],
    "setups": [],
    "futures": {
@@ -1195,6 +1195,18 @@
      }
     },
     {
+     "symbol": "IDFCFIRSTB",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -4.5,
+      "px_pct": 8.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "KOTAKBANK",
      "vk": "BUY NOW",
      "setup": null,
@@ -1245,8 +1257,8 @@
     {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
-     "setup": "Daily Cup \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -2.2,
       "px_pct": 7.7,
@@ -1286,18 +1298,6 @@
      "oi": {
       "oi_pct": -4.4,
       "px_pct": 5.2,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
-     "symbol": "IDFCFIRSTB",
-     "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -4.5,
-      "px_pct": 8.8,
       "word": "Short covering",
       "side": 1
      }
@@ -1344,13 +1344,13 @@
    "key": "MIDCAP",
    "name": "Midcap Select",
    "chart_note": "Chart from Nifty Midcap 50 (Midcap Select is not on Yahoo); options and futures are Midcap Select",
-   "close": 17756.15,
-   "chg1": 0.98,
-   "chg5": -0.72,
+   "close": 17885.85,
+   "chg1": 0.73,
+   "chg5": 0.05,
    "states": {
     "M": "Topping",
     "W": "Bottoming",
-    "D": "Impulse",
+    "D": "Topping",
     "H": "Impulse"
    },
    "vk": {
@@ -1371,10 +1371,9 @@
    "old": "\u274c Avoid",
    "ma": "Bullish",
    "squeeze": false,
-   "ext": 1.6,
-   "stage": "Triggered",
+   "ext": 2.0,
+   "stage": null,
    "spark": [
-    18331.75,
     18412.25,
     18380.6,
     18361.75,
@@ -1433,7 +1432,8 @@
     17774.15,
     17821.3,
     17583.65,
-    17756.15
+    17756.15,
+    17885.85
    ],
    "setups": [
     {
@@ -1443,45 +1443,11 @@
      "states": {
       "M": "Topping",
       "W": "Bottoming",
-      "D": "Impulse",
-      "H": "Impulse"
-     },
-     "old": "\u274c Avoid",
-     "ext": 1.6,
-     "vk": {
-      "final": "BUY NOW",
-      "signal": "Mixed",
-      "ma": "ONLY BUY",
-      "advice": "Mixed signal \u2014 confluence ka wait karo",
-      "daily": "Daily Signal ON (Bullish)",
-      "hourly": "Aligned \u2014 can buy now",
-      "confirmed": "CONFIRMED \u2014 Buy ON",
-      "status": {
-       "M": "TOPPING",
-       "W": "BOTTOMING",
-       "D": "TOPPING",
-       "H": "BULLISH RUN"
-      }
-     },
-     "setup": "Swing Pullback",
-     "stage": "Triggered",
-     "detail": "Pullback 41% \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
-     "grade": "C",
-     "trigger": 17725.6,
-     "stop": 17441.75
-    },
-    {
-     "symbol": "MIDCAP",
-     "close": 17885.85,
-     "trend": "With trend",
-     "states": {
-      "M": "Topping",
-      "W": "Bottoming",
-      "D": "Impulse",
+      "D": "Topping",
       "H": "Impulse"
      },
      "setup": "Weekly Overspill",
-     "stage": "Watch",
+     "stage": "Triggered",
      "old": "\u274c Avoid",
      "vk": {
       "final": "BUY NOW",
@@ -1498,10 +1464,10 @@
        "H": "BULLISH RUN"
       }
      },
-     "ext": 1.6,
+     "ext": 2.0,
      "detail": "Weekly spilled 7.2% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 17399.15,
+     "trigger": 17411.5,
      "stop": 15839.41
     }
    ],
@@ -1756,8 +1722,8 @@
     {
      "symbol": "INDIANB",
      "vk": "BUY NOW",
-     "setup": "Daily Flag \u00b7 Ready",
-     "grade": "A",
+     "setup": "Daily Cup \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": 7.6,
       "px_pct": 1.6,
@@ -1780,8 +1746,8 @@
     {
      "symbol": "PERSISTENT",
      "vk": "BUY NOW",
-     "setup": "Daily Overspill \u00b7 Watch",
-     "grade": "A",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 0.2,
       "px_pct": 0.8,
@@ -1792,7 +1758,7 @@
     {
      "symbol": "MCX",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "Warning",
      "oi": {
       "oi_pct": 5.6,
@@ -1841,7 +1807,7 @@
      "symbol": "BHARATFORG",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
+     "grade": "B",
      "oi": {
       "oi_pct": 8.0,
       "px_pct": -0.7,
@@ -1888,8 +1854,8 @@
     {
      "symbol": "INDUSTOWER",
      "vk": "NO SIGNAL",
-     "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.7,
       "px_pct": -2.6,
@@ -1900,8 +1866,8 @@
     {
      "symbol": "LICI",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Daily Falling Wedge \u00b7 Triggered",
+     "grade": "A",
      "oi": {
       "oi_pct": 19.3,
       "px_pct": 2.3,
@@ -1998,37 +1964,36 @@
   {
    "key": "FINNIFTY",
    "name": "Fin Nifty",
-   "close": 28299.65,
-   "chg1": 1.1,
-   "chg5": 0.86,
+   "close": 28871.2,
+   "chg1": 2.02,
+   "chg5": 3.65,
    "states": {
     "M": "Bottoming",
-    "W": "Bottoming",
+    "W": "Impulse",
     "D": "Impulse",
     "H": "Impulse"
    },
    "vk": {
-    "final": "NO SIGNAL",
-    "signal": "Mixed",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed",
+    "final": "BUY NOW",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON",
     "status": {
      "M": "BOTTOMING",
-     "W": "BOTTOMING",
+     "W": "BULLISH RUN",
      "D": "BULLISH RUN",
      "H": "BULLISH RUN"
     }
    },
-   "old": "\u274c Avoid",
-   "ma": "Messy",
+   "old": "\u2705 Confirmed Bullish",
+   "ma": "Bullish",
    "squeeze": false,
-   "ext": 5.3,
+   "ext": 6.0,
    "stage": "Stretched",
    "spark": [
-    26158.5,
     26246.95,
     26386.75,
     26280.65,
@@ -2087,7 +2052,8 @@
     28015.4,
     28195.0,
     27992.25,
-    28299.65
+    28299.65,
+    28871.2
    ],
    "setups": [],
    "futures": {
@@ -2341,8 +2307,8 @@
     {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
-     "setup": "Daily Cup \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -2.2,
       "px_pct": 7.7,
@@ -2377,8 +2343,8 @@
     {
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
-     "setup": "Daily Range \u00b7 Triggered",
-     "grade": "B",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.5,
       "px_pct": -0.7,
@@ -2438,7 +2404,7 @@
      "symbol": "PFC",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "A",
      "oi": {
       "oi_pct": -2.3,
       "px_pct": -0.3,
@@ -2523,13 +2489,13 @@
   {
    "key": "NEXT50",
    "name": "Nifty Next 50",
-   "close": 72889.75,
-   "chg1": 1.64,
-   "chg5": -0.8,
+   "close": 73207.25,
+   "chg1": 0.44,
+   "chg5": 0.46,
    "states": {
     "M": "Impulse",
     "W": "Bottoming",
-    "D": "Impulse",
+    "D": "Topping",
     "H": "Impulse"
    },
    "vk": {
@@ -2543,17 +2509,16 @@
     "status": {
      "M": "BULLISH RUN",
      "W": "BOTTOMING",
-     "D": "BULLISH RUN",
+     "D": "TOPPING",
      "H": "BULLISH RUN"
     }
    },
    "old": "\u274c Avoid",
    "ma": "Bullish",
    "squeeze": false,
-   "ext": 1.9,
-   "stage": "Running",
+   "ext": 2.1,
+   "stage": null,
    "spark": [
-    74022.4,
     74508.9,
     74501.05,
     74347.45,
@@ -2612,44 +2577,10 @@
     72490.25,
     72693.0,
     71714.7,
-    72889.75
+    72889.75,
+    73207.25
    ],
-   "setups": [
-    {
-     "symbol": "NEXT50",
-     "close": 73208.25,
-     "trend": "With trend",
-     "states": {
-      "M": "Impulse",
-      "W": "Bottoming",
-      "D": "Impulse",
-      "H": "Impulse"
-     },
-     "setup": "Weekly Overspill",
-     "stage": "Triggered",
-     "old": "\u274c Avoid",
-     "vk": {
-      "final": "BUY NOW",
-      "signal": "Mixed",
-      "ma": "ONLY BUY",
-      "advice": "Mixed signal \u2014 confluence ka wait karo",
-      "daily": "Daily Signal ON (Bullish)",
-      "hourly": "Aligned \u2014 can buy now",
-      "confirmed": "CONFIRMED \u2014 Buy ON",
-      "status": {
-       "M": "BULLISH RUN",
-       "W": "BOTTOMING",
-       "D": "BULLISH RUN",
-       "H": "BULLISH RUN"
-      }
-     },
-     "ext": 1.9,
-     "detail": "Weekly spilled 6.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.3x in pullback \u00b7 OI n/a",
-     "grade": "C",
-     "trigger": 70892.91,
-     "stop": 64869.15
-    }
-   ],
+   "setups": [],
    "futures": {
     "oi": 16450.0,
     "price": 72930.4,
@@ -2956,7 +2887,7 @@
     {
      "symbol": "ZYDUSLIFE",
      "vk": "BUY NOW",
-     "setup": "Daily Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "A",
      "oi": {
       "oi_pct": -3.6,
@@ -2980,8 +2911,8 @@
     {
      "symbol": "HAL",
      "vk": "COMING CLOSE TO READY (Bullish)",
-     "setup": "Squeeze Break \u00b7 Watch",
-     "grade": "B",
+     "setup": "Daily Overspill \u00b7 Ready",
+     "grade": "Warning",
      "oi": {
       "oi_pct": 8.7,
       "px_pct": -0.1,
@@ -3052,7 +2983,7 @@
     {
      "symbol": "CGPOWER",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Ready",
+     "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "Warning",
      "oi": {
       "oi_pct": -2.0,
@@ -3124,8 +3055,8 @@
     {
      "symbol": "IOC",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Cup \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 6.2,
       "px_pct": 5.0,
@@ -3148,8 +3079,8 @@
     {
      "symbol": "JINDALSTEL",
      "vk": "NO SIGNAL",
-     "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "B",
+     "setup": "Daily Range \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": -1.2,
       "px_pct": -2.6,
@@ -3185,7 +3116,7 @@
      "symbol": "PFC",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "A",
      "oi": {
       "oi_pct": -2.3,
       "px_pct": -0.3,
@@ -3244,7 +3175,7 @@
     {
      "symbol": "SOLARINDS",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Ready",
+     "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": -5.5,
@@ -3280,8 +3211,8 @@
     {
      "symbol": "VBL",
      "vk": "NO SIGNAL",
-     "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "setup": "Daily Range \u00b7 Ready",
+     "grade": "A",
      "oi": {
       "oi_pct": 1.5,
       "px_pct": -1.4,
