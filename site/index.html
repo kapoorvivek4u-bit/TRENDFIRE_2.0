@@ -6,7 +6,7 @@
 <title>TradeReady</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="NSE F&O swing setups, market strength and big-money flows. Updated every hour.">
-<meta name="theme-color" content="#111113">
+<meta name="theme-color" content="#f6f4ef">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -510,7 +510,8 @@ function setTheme(t){
   try{ localStorage.setItem("tr-theme", t); }catch(e){}
   render();
 }
-try{ const t = localStorage.getItem("tr-theme"); if(t) document.documentElement.setAttribute("data-theme", t); }catch(e){}
+{ let t = null; try{ t = localStorage.getItem("tr-theme"); }catch(e){}
+  document.documentElement.setAttribute("data-theme", t || "light"); }   // light (Sand & Indigo) unless the viewer picked dark
 const flip = () => setTheme(isDark() ? "light" : "dark");
 
 let USER = null;                 // {email, name, role} from /api/me
