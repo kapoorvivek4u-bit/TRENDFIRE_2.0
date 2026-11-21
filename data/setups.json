@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-21 03:12",
+ "generated_ist": "2026-11-21 06:58",
  "oi_asof": "2026-11-20",
  "stocks": 218,
  "market": {
@@ -765,7 +765,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 27% \u00b7 Volume 0.6x in pullback \u00b7 OI +1% in up-leg",
+   "detail": "Pullback 27% \u00b7 Volume 0.7x in pullback \u00b7 OI +1% in up-leg",
    "grade": "B",
    "trigger": 1208.7,
    "stop": 1193.81
@@ -17495,7 +17495,7 @@
     }
    },
    "ext": -1.2,
-   "detail": "7-week range under a falling trendline, 3 touches, 16% deep \u00b7 10.9 ranges under the ceiling \u00b7 Volume 2.2x lately (quieter is better)",
+   "detail": "7-week range under a falling trendline, 3 touches, 16% deep \u00b7 10.9 ranges under the ceiling \u00b7 Volume 2.3x lately (quieter is better)",
    "grade": "C",
    "trigger": 584.11,
    "stop": 574.36,
