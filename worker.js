@@ -217,7 +217,7 @@ async function adminSignIn(env, req) {
 // pages and files anyone may open without signing in
 const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favicon.svg", "/apple-touch-icon.png",
   "/icon-192.png", "/icon-512.png", "/manifest.webmanifest", "/robots.txt",
-  "/privacy", "/privacy.html", "/terms", "/terms.html"]);
+  "/privacy", "/privacy.html", "/terms", "/terms.html", "/sitemap.xml", "/og-image.png"]);
 
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
@@ -247,7 +247,17 @@ export default {
       if (p === "/auth/callback") return await googleCallback(env, req, url);
       if (p === "/auth/admin" && req.method === "POST") return await adminSignIn(env, req);
       if (p === "/logout") return redirect("/login", [cookie("tr_s", "", 0)]);
+      if (url.hostname.startsWith("www.")) {             // one address for Google: tradeready.in
+        url.hostname = url.hostname.slice(4);
+        return Response.redirect(url.toString(), 301);
+      }
       const user = await readSession(env, req);
+      if (!user && p === "/") {                          // signed-out visitors and Google see the front page here
+        const res = await env.ASSETS.fetch(new Request(new URL("/login", url), req));
+        const out = new Response(res.body, res);
+        out.headers.set("cache-control", "no-cache");
+        return out;
+      }
       if (OPEN.has(p)) {
         if (user && (p === "/login" || p === "/login.html")) return redirect("/");
         return env.ASSETS.fetch(req);          // /login serves login.html, /admin serves admin.html
