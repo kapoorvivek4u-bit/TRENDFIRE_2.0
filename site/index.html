@@ -11,6 +11,9 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="apple-mobile-web-app-title" content="TradeReady">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -472,6 +475,12 @@ a.tbtn{color:var(--ink)}
 .chip.newb{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;letter-spacing:.06em;animation:newp 2.4s ease-in-out infinite}
 :root[data-theme="dark"] .chip.newb{color:#111}
 @keyframes newp{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 40%,transparent)}50%{box-shadow:0 0 0 5px transparent}}
+.installhint{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:40;
+  display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:0 14px 40px rgba(30,27,75,.18);font-size:13px;color:var(--muted);animation:cardin .5s ease both}
+.installhint b{color:var(--ink)}
+.installhint button{font-size:16px;color:var(--muted);padding:6px}
+@media (min-width:960px){.installhint{display:none}}
+@media (display-mode: standalone){.top{padding-top:calc(12px + env(safe-area-inset-top,0px))}}
 </style>
 </head>
 <body>
@@ -1629,7 +1638,21 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
   render();
   setInterval(async () => { try{ await getJSON("site.json", true); await loadWatch(); if(route() === "today") rerender(); }catch(e){} }, 5*60*1000);
   if(isAdmin()) pollScans();
+  if("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(() => {});
+  installHint();
 })();
+function installHint(){
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  let seen = false; try{ seen = localStorage.getItem("tr-install") === "1"; }catch(e){}
+  if(standalone || !ios || seen) return;
+  const b = document.createElement("div"); b.className = "installhint";
+  b.innerHTML = `<span class="brand"><span class="mark" style="width:34px;height:34px">${document.querySelector(".brand .mark") ? document.querySelector(".brand .mark").innerHTML : ""}</span></span>
+    <div style="flex:1;min-width:0"><b>Get the TradeReady app</b><div>Tap <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 3v12M7 8l5-5 5 5M5 13v7h14v-7"/></svg> Share, then <b>Add to Home Screen</b>.</div></div>
+    <button aria-label="Close">✕</button>`;
+  b.querySelector("button").onclick = () => { b.remove(); try{ localStorage.setItem("tr-install", "1"); }catch(e){} };
+  document.body.appendChild(b);
+}
 
 </script>
 </body>

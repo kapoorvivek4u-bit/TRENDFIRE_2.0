@@ -2,13 +2,29 @@
   "name": "TradeReady",
   "short_name": "TradeReady",
   "description": "NSE F&O swing setups, market strength and big-money flows.",
-  "start_url": "/#today",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f0f11",
-  "theme_color": "#4f46e5",
+  "background_color": "#f6f4ef",
+  "theme_color": "#f6f4ef",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
-  ]
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "/",
+  "scope": "/",
+  "orientation": "portrait"
 }
