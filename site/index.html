@@ -538,7 +538,12 @@ const TREND_C = {"With trend":"var(--up)", "Early turn":"var(--info)", "Counter-
 const STATE_C = {Impulse:"var(--up)", Bullish:"var(--up)", Bottoming:"var(--info)", Topping:"var(--warn)", Bearish:"var(--down)"};
 const VK_SHORT = {"BUY NOW":["VK Buy now ▲","var(--up)"], "ALMOST READY (Bullish)":["VK Almost ready ▲","var(--up)"],
   "COMING CLOSE TO READY (Bullish)":["VK Coming close ▲","var(--info)"], "SELL NOW":["VK Sell now ▼","var(--down)"],
-  "ALMOST READY (Bearish)":["VK Almost ready ▼","var(--down)"], "COMING CLOSE TO READY (Bearish)":["VK Coming close ▼","var(--warn)"]};
+  "ALMOST READY (Bearish)":["VK Almost ready ▼","var(--down)"], "COMING CLOSE TO READY (Bearish)":["VK Coming close ▼","var(--warn)"],
+  "SIGNAL ON (Bullish)":["VK Signal on ▲","var(--up)"], "SIGNAL ON (Bearish)":["VK Signal on ▼","var(--down)"]};
+// Members without full access get "Signal on" in place of Buy now / Sell now (the server renames it).
+const FULL = () => !USER || USER.role === "admin" || !!USER.full;
+const vkOn = side => FULL() ? (side > 0 ? "BUY NOW" : "SELL NOW") : (side > 0 ? "SIGNAL ON (Bullish)" : "SIGNAL ON (Bearish)");
+const vkOrder = () => [vkOn(1),"ALMOST READY (Bullish)","COMING CLOSE TO READY (Bullish)",vkOn(-1),"ALMOST READY (Bearish)","COMING CLOSE TO READY (Bearish)","NO SIGNAL"];
 const VK_ORDER = ["BUY NOW","ALMOST READY (Bullish)","COMING CLOSE TO READY (Bullish)","SELL NOW","ALMOST READY (Bearish)","COMING CLOSE TO READY (Bearish)","NO SIGNAL"];
 const vkChip = v => VK_SHORT[v] ? chip(VK_SHORT[v][0], VK_SHORT[v][1]) : "";
 const plural = (n, a, b) => `${n} ${n === 1 ? a : (b || a + "s")}`;
@@ -704,7 +709,7 @@ function rightRail(){
   const pulse = st ? `<section class="rp"><h3>Market pulse</h3><div class="pulse">
       <div class="ring"><svg viewBox="0 0 66 66"><circle cx="33" cy="33" r="${R}" fill="none" stroke="var(--surface2)" stroke-width="7"/>
         <circle cx="33" cy="33" r="${R}" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C*st.score/100} ${C}"/></svg><b style="color:${c}">${st.score}</b></div>
-      <div style="min-width:0"><b style="color:${c};font-family:var(--f-head);font-size:16px">${esc(st.label)}</b><div class="muted" style="font-size:12px;line-height:1.35;margin-top:2px">${esc(st.advice)}</div></div></div>
+      <div style="min-width:0"><b style="color:${c};font-family:var(--f-head);font-size:16px">${esc(st.label)}</b><div class="muted" style="font-size:12px;line-height:1.35;margin-top:2px">${esc(st.advice || `${st.label} market · ${st.trend || ""}`)}</div></div></div>
       <div class="adbar" style="width:100%;margin-top:12px"><i style="width:${100*m.adv/tot}%;background:var(--up)"></i><i style="width:${100*m.dec/tot}%;background:var(--down)"></i></div>
       <div class="row" style="border-top:0;padding-bottom:0"><span class="up num">${m.adv} up</span><span class="muted">VIX ${m.vix ?? "—"}</span><span class="down num">${m.dec} down</span></div></section>` : "";
   const ix = `<section class="rp"><h3>Indexes<a href="#index">Open ›</a></h3>${(s.indexes||[]).map(x => `<div class="row"><span style="font-weight:600">${esc(x.name)}</span><span><span class="num">${fmt(x.close)}</span> <b class="num ${cls(x.chg1)}" style="font-size:11.5px">${pct(x.chg1,2)}</b></span></div>`).join("")}</section>`;
@@ -744,7 +749,7 @@ function renderShell(){
 
 /* ============================================================ shared cards */
 function levels(entry, stop, target, word="Buy above", tword){
-  if(!entry && !stop) return "";
+  if(!FULL() || (!entry && !stop)) return "";
   if(!target && entry && stop && entry > stop) target = entry + 2*(entry - stop);
   return `<div class="lv"><div><small>${esc(word)}</small><b>${fmt(entry)}</b></div><div><small>Stop</small><b class="down">${stop ? fmt(stop) : "on breakout"}</b></div><div><small>${esc(tword || "Target 2R")}</small><b class="up">${fmt(target)}</b></div></div>`;
 }
@@ -820,7 +825,7 @@ function strengthCard(){
   return `<section class="card s8 fade"><div class="ct"><h2>Market strength</h2>${chip(st.trend)}</div>
     <div class="hero">
       <div class="gauge">${gauge(st.score)}<div class="big"><b class="num" style="color:${c}">${st.score}</b><span style="color:${c}">${esc(st.label)}</span></div></div>
-      <div><p class="advice">${esc(st.advice)}</p>
+      <div><p class="advice">${esc(st.advice || `${st.label} market · ${st.trend || ""}`)}</p>
         <div class="muted" style="font-size:12.5px">${esc(m.gate)} · Nifty Daily ${esc(m.nifty || "—")} · VIX ${m.vix ?? "—"}</div>
         <div class="parts">${parts}</div></div>
     </div>
@@ -834,8 +839,8 @@ function strengthCard(){
 }
 function vkCard(){
   const v = S().vk_count || {};
-  const rows = [["BUY NOW","Buy now","var(--up)"],["ALMOST READY (Bullish)","Almost ready ▲","var(--up)"],["COMING CLOSE TO READY (Bullish)","Coming close ▲","var(--info)"],
-    ["SELL NOW","Sell now","var(--down)"],["ALMOST READY (Bearish)","Almost ready ▼","var(--down)"],["COMING CLOSE TO READY (Bearish)","Coming close ▼","var(--warn)"]];
+  const rows = [[vkOn(1), FULL() ? "Buy now" : "Signal on ▲","var(--up)"],["ALMOST READY (Bullish)","Almost ready ▲","var(--up)"],["COMING CLOSE TO READY (Bullish)","Coming close ▲","var(--info)"],
+    [vkOn(-1), FULL() ? "Sell now" : "Signal on ▼","var(--down)"],["ALMOST READY (Bearish)","Almost ready ▼","var(--down)"],["COMING CLOSE TO READY (Bearish)","Coming close ▼","var(--warn)"]];
   const mx = Math.max(1, ...rows.map(r => v[r[0]] || 0));
   return `<section class="card s4 fade"><div class="ct"><h2>VK System<em>F&O</em></h2><a class="more" href="#scanner" data-setup="VK">Open ›</a></div>
     <div class="list">${rows.map(r => `<div class="part" style="margin:4px 0"><span class="lab">${r[1]}</span><span class="bar"><i style="width:${100*(v[r[0]]||0)/mx}%;--c:${r[2]}"></i></span><span class="val">${v[r[0]]||0}</span></div>`).join("")}</div>
@@ -856,28 +861,28 @@ function tradesCard(){
   const picks = all.filter(p => (p.market === "F&O") === (mk === "F&O"));
   const used = new Set(picks.map(p => p.symbol));
   const rank = {A:0, B:1};
-  const next = (S().ready || []).filter(r => (r.market === "F&O") === (mk === "F&O") && r.rr && !used.has(r.symbol))
+  const next = (S().ready || []).filter(r => (r.market === "F&O") === (mk === "F&O") && (r.rr || r.ok) && !used.has(r.symbol))
     .sort((a,b) => (rank[a.grade] ?? 9) - (rank[b.grade] ?? 9) || (b.rr || 0) - (a.rr || 0))
     .slice(0, Math.max(0, 4 - picks.length)).map(r => ({...r, bestNext: true}));
   const cards = picks.slice(0, 8).concat(next);
   const nFo = all.filter(p => p.market === "F&O").length, nEq = all.length - nFo;
-  const note = !picks.length && next.length ? `<div class="muted" style="font-size:12.5px;margin-bottom:12px">No ${mk} stock passes every strategy rule right now. These are the best ${mk} setups that are Ready, by grade and R:R.</div>`
-    : picks.length && next.length ? `<div class="muted" style="font-size:12.5px;margin-bottom:12px">${plural(picks.length, "trade")} passed every rule. The rest are the best next ${mk} Ready setups.</div>` : "";
+  const note = !picks.length && next.length ? `<div class="muted" style="font-size:12.5px;margin-bottom:12px">No ${mk} stock passes every strategy rule right now. These are the best ${mk} setups that are Ready, by grade${FULL() ? " and R:R" : ""}.</div>`
+    : picks.length && next.length ? `<div class="muted" style="font-size:12.5px;margin-bottom:12px">${plural(picks.length, FULL() ? "trade" : "setup")} passed every rule. The rest are the best next ${mk} Ready setups.</div>` : "";
   const body = cards.length ? note + `<div class="flipgrid">${cards.map(flipCard).join("")}</div>`
     : `<div class="empty">No ${mk} setup is Ready right now. Patience is a position. <a class="more" href="#scanner" style="color:var(--accent);font-weight:700">See Watch list ›</a></div>`;
   const gates = Object.entries(S().gates || {}).map(([n,g]) => chip(`${n}. ${g.name}: ${g.count}`, g.count ? "var(--up)" : g.open ? "var(--muted)" : "var(--down)")).join("");
-  return `<section class="card fade"><div class="ct"><h2>Today's trades<em>${picks.length}</em></h2>
+  return `<section class="card fade"><div class="ct"><h2>${FULL() ? "Today's trades" : "Setups passing every rule"}<em>${picks.length}</em></h2>
       <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="seg"><button data-trm="F&O" class="${mk==="F&O"?"on":""}">F&O · ${nFo}</button><button data-trm="Equity" class="${mk==="Equity"?"on":""}">Equity · ${nEq}</button></span>
       ${isAdmin() ? `<a class="more" href="#admin-scorecard">Scorecard ›</a>` : ""}<a class="more" href="#today-strategies">All strategies ›</a></span></div>
     ${body}<div class="chips" style="margin-top:12px">${gates}</div></section>`;
 }
 function readyCard(){
   const mk = UI.trMarket || "F&O";
-  const rs = (S().ready || []).filter(r => r.rr && (r.market === "F&O") === (mk === "F&O")).slice(0, 8);
-  return `<section class="card s5 fade"><div class="ct"><h2>Ready now<em>${esc(UI.trMarket || "F&O")} · best R:R</em></h2><a class="more" href="#scanner">All ${S().ready_count} ›</a></div>
+  const rs = (S().ready || []).filter(r => (r.rr || r.ok) && (r.market === "F&O") === (mk === "F&O")).slice(0, 8);
+  return `<section class="card s5 fade"><div class="ct"><h2>Ready now<em>${esc(UI.trMarket || "F&O")} · ${FULL() ? "best R:R" : "by grade"}</em></h2><a class="more" href="#scanner">All ${S().ready_count} ›</a></div>
     <div class="list">${rs.map(r => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(r.symbol, 14)}${starBtn(r.symbol)}</div>
       <div class="chips" style="margin-top:4px">${headsChips(r.symbol, r.setup)}${chip(r.setup, "var(--info)")}${chip("Grade " + r.grade, r.grade === "A" ? "var(--up)" : "var(--muted)")}${r.sector_stage ? chip(r.sector_stage, STAGE_C[r.sector_stage]) : ""}</div></div>
-      <div class="r"><span class="rr">R:R ${r.rr}</span><div style="margin-top:5px">↑ ${fmt(r.entry)}</div><div class="down">✕ ${fmt(r.stop)}</div></div></div>`).join("")}</div></section>`;
+      ${FULL() ? `<div class="r"><span class="rr">R:R ${r.rr}</span><div style="margin-top:5px">↑ ${fmt(r.entry)}</div><div class="down">✕ ${fmt(r.stop)}</div></div>` : `<div class="r"><div class="num">${fmt(r.close)}</div></div>`}</div>`).join("")}</div></section>`;
 }
 const R_COLOR = {rs:"var(--accent2)", hi:"var(--up)", mom:"var(--info)", trend:"var(--muted)", sector:"var(--warn)", oi:"var(--accent2)", setup:"var(--up)", vk:"var(--up)", brk:"var(--info)"};
 function strongRow(x){
@@ -967,7 +972,7 @@ function bellStrip(){
   let c, a, b, sub;
   if(weekend){ c = "var(--muted)"; a = "Market closed"; b = "Weekend"; sub = `Next session Monday 9:15 · last scan ${last}`; }
   else if(mins < open){ const left = open - mins; c = "var(--warn)"; a = "Opening bell in"; b = left >= 60 ? `${Math.floor(left/60)}h ${left%60}m` : `${left} min`;
-    sub = `${(s.picks||[]).length} trades on the list · ${s.ready_count} setups Ready`; }
+    sub = `${plural((s.picks||[]).length, FULL() ? "trade" : "setup")} ${FULL() ? "on the list" : "passing every rule"} · ${s.ready_count} setups Ready`; }
   else if(mins <= close){ c = "var(--up)"; a = "Market open"; b = last; sub = `Last scan ${last} · refreshes about every hour · ${s.ready_count} setups Ready`; }
   else { c = "var(--accent2)"; a = "Closing bell recap"; b = "3:30"; sub = `${(s.picks||[]).length} trades passed every rule · ${s.market.adv} up, ${s.market.dec} down · breadth ${hist.slice(-1)[0] ?? "—"}%`; }
   const rib = hist.map((v,i) => `<i style="height:${Math.max(6, v/100*26)}px;--c:${v >= 70 ? "var(--up)" : v >= 40 ? "var(--warn)" : "var(--down)"};animation-delay:${i*70}ms" title="Daily breadth ${v}%"></i>`).join("");
@@ -992,7 +997,7 @@ function weatherCard(){
   return `<section class="wx s5 fade" data-w="${kind}">${wxScene(kind)}
     <div style="display:flex;justify-content:space-between"><span class="lbl">Market weather</span><span class="lbl">${esc(st.trend || "")}</span></div>
     <div><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span class="score" data-count="${st.score}">${st.score}</span><span class="word">${word}</span></div>
-      <div class="say">${esc(st.advice)}</div>
+      <div class="say">${esc(st.advice || `${st.label} market · ${st.trend || ""}`)}</div>
       <div class="wxstats" style="margin-top:12px">${st.parts.map(x => `<span title="${esc(x.why)}">${esc(x.name)} ${x.value}</span>`).join("")}</div></div></section>`;
 }
 function newsCard(){
@@ -1052,6 +1057,8 @@ function flipMini(p){
   return `${statesHtml(p.states)}<div class="why" style="font-size:12px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${esc(p.detail || "")}</div>`;
 }
 function flipStats(p){
+  if(!FULL()) return `<div class="fstats"><div><small>Close</small><b>${fmt(p.close)}</b></div><div><small>Grade</small><b>${esc(p.grade || "—")}</b></div>
+    <div><small>Trend</small><b style="font-size:11px">${esc(p.trend || "—")}</b></div><div><small>Sector</small><b style="font-size:11px">${esc(p.sector_stage || "—")}</b></div></div>`;
   const risk = p.entry && p.stop ? (p.entry - p.stop)/p.entry*100 : null;
   const gain = p.entry && p.target ? (p.target - p.entry)/p.entry*100 : null;
   const away = p.entry && p.close ? (p.entry - p.close)/p.close*100 : null;
@@ -1064,7 +1071,7 @@ const FLIP = {};
 function flipCard(p, i){
   FLIP[p.symbol] = p;
   const gA = p.grade === "A";
-  return `<div class="tc ${gA ? "gA" : "gB"}" style="animation-delay:${i*80}ms" tabindex="0" role="button" aria-label="${esc(p.symbol)}: tap to see levels" data-flip>
+  return `<div class="tc ${gA ? "gA" : "gB"}" style="animation-delay:${i*80}ms" tabindex="0" role="button" aria-label="${esc(p.symbol)}: tap for details" data-flip>
     <div class="in">
       <div class="face front">
         <div class="row1"><div style="min-width:0"><div class="symrow">${symLink(p.symbol, 18)}${starBtn(p.symbol)}</div><div class="sub">${esc(p.strategy ? p.strategy + ". " + p.strategy_name : p.bestNext ? "Best next · Ready, not every rule" : (p.market || ""))}${p.sector ? " · " + esc(p.sector) : ""}</div></div>
@@ -1076,9 +1083,9 @@ function flipCard(p, i){
       </div>
       <div class="face back">
         <div class="row1"><div><b class="sym">${esc(p.symbol)}</b><div class="sub num">${fmt(p.close)}</div></div>${p.rr ? `<span class="rr">R:R ${p.rr}</span>` : ""}</div>
-        <div class="lvv"><div><small>Buy above</small><b>${fmt(p.entry)}</b></div><div><small>Stop</small><b class="down">${fmt(p.stop)}</b></div><div><small>${p.target_word && p.target_word !== "2R" ? "Target" : "Target 2R"}</small><b class="up">${fmt(p.target)}</b></div></div>
+        ${!FULL() ? `${statesHtml(p.states)}<div class="why" style="font-size:12px">${esc(p.detail || "")}</div>` : `<div class="lvv"><div><small>Buy above</small><b>${fmt(p.entry)}</b></div><div><small>Stop</small><b class="down">${fmt(p.stop)}</b></div><div><small>${p.target_word && p.target_word !== "2R" ? "Target" : "Target 2R"}</small><b class="up">${fmt(p.target)}</b></div></div>
         <div class="why" style="font-size:11.5px">${esc(p.detail || "")}</div>
-        <button class="sharebtn" data-sharecard="${esc(p.symbol)}">Share card ↗</button>
+        <button class="sharebtn" data-sharecard="${esc(p.symbol)}">Share card ↗</button>`}
       </div>
     </div></div>`;
 }
@@ -1184,7 +1191,7 @@ async function pageStrategies(){
   const one = s => `<section class="card strat fade">
     <div class="top2"><div><h3><span>${s.n}</span>${esc(s.name)}</h3><div class="muted" style="font-size:12.5px;margin-top:3px">${esc(s.horizon)} · ${esc(s.idea)}</div></div>
       <span class="gate" style="--c:${s.picks.length ? "var(--up)" : s.open ? "var(--muted)" : "var(--down)"}">${s.picks.length ? plural(s.picks.length, "trade") + " · " : ""}${esc(s.gate)}</span></div>
-    <details><summary>Rules and exit</summary><ul>${s.rules.map(r => `<li>${esc(r)}</li>`).join("")}</ul><p><b>Entry and exit:</b> ${esc(s.exit)}</p></details>
+    <details><summary>${s.exit ? "Rules and exit" : "Rules"}</summary><ul>${s.rules.map(r => `<li>${esc(r)}</li>`).join("")}</ul>${s.exit ? `<p><b>Entry and exit:</b> ${esc(s.exit)}</p>` : ""}</details>
     ${s.picks.length ? `<div class="cards">${s.picks.map(p => setupCard(p, {market:p.market, size:p.size, checks:p.checks, bonus:p.bonus})).join("")}</div>` : `<div class="empty">No stock passes every rule right now.</div>`}
     ${s.blocked.length ? `<div class="sub-h">Pass the stock rules, waiting on the market</div><div class="cards">${s.blocked.map(p => setupCard(p, {market:p.market, size:p.size, checks:p.checks})).join("")}</div>` : ""}
     ${s.dipping.length ? `<div class="sub-h">Dipping now, next to turn · ${s.dipping.length}</div><div class="cards">${s.dipping.map(r => setupCard(r)).join("")}</div>${s.queue_note ? `<div class="muted" style="font-size:12px">${esc(s.queue_note)}</div>` : ""}` : ""}
@@ -1229,11 +1236,11 @@ async function pageScanner(){
   const setupBar = `<div class="filters">${SETUPS[key].map(x => `<button data-setup="${x}" class="${setup===x?"on":""}">${short(x)}</button>`).join("")}</div>`;
   if(setup === "VK"){
     const groups = res.vk_labels || {};
-    const pick = UI.vk || VK_ORDER.find(l => (groups[l]||[]).length) || "BUY NOW";
+    const pick = UI.vk || vkOrder().find(l => (groups[l]||[]).length) || vkOrder()[0];
     const on = {};
     for(const r of (res.rows||[]).concat(res.overspill||[])) (on[r.symbol] = on[r.symbol] || []).push(`${r.setup} ${r.stage} (${r.grade})`);
     const items = groups[pick] || [];
-    body = `<div class="filters">${VK_ORDER.map(l => `<button data-vk="${l}" class="${pick===l?"on":""}">${esc((VK_SHORT[l]||["No signal"])[0].replace("VK ",""))}<i>${(groups[l]||[]).length}</i></button>`).join("")}</div>
+    body = `<div class="filters">${vkOrder().map(l => `<button data-vk="${l}" class="${pick===l?"on":""}">${esc((VK_SHORT[l]||["No signal"])[0].replace("VK ",""))}<i>${(groups[l]||[]).length}</i></button>`).join("")}</div>
       <div class="cards">${items.map(x => `<article class="sc" style="--stc:${(VK_SHORT[pick]||[0,"transparent"])[1]}">
         <div class="row1"><div class="symrow">${symLink(x.symbol)}${starBtn(x.symbol)}<span class="px">${fmt(x.close)}</span></div></div>
         <div class="chips">${chip(x.signal, "var(--info)")}${chip(x.ma)}</div>${statesHtml(x.states)}
@@ -1549,7 +1556,7 @@ const avatar = (u, s=28) => u && u.picture ? `<img src="${esc(u.picture)}" alt="
 async function pageAdmin(){
   if(!isAdmin()) return pageHead("Admin", "") + `<div class="empty">Admin only.</div>`;
   const get = u => fetch(u, {cache:"no-store"}).then(r => r.json()).catch(() => ({error:"Could not reach the server."}));
-  const [d, st] = await Promise.all([get("/api/admin/log"), get("/api/admin/stats")]);
+  const [d, st, fl] = await Promise.all([get("/api/admin/log"), get("/api/admin/stats"), get("/api/admin/full")]);
   if(d.error) return pageHead("Admin", "Who signed in") + `<div class="empty">${esc(d.error)}</div>`;
   const users = (d.users || []).filter(u => u.role !== "admin"), today = istDay(Date.now());
   const byEmail = Object.fromEntries(users.map(u => [u.email.toLowerCase(), u]));
@@ -1576,7 +1583,12 @@ async function pageAdmin(){
     ${!hasStats ? noDb : pages.length ? `<div class="tw"><table class="t"><tr><th>Page</th><th style="width:45%"></th><th class="n">Views</th><th class="n">People</th></tr>
       ${pages.map(p => `<tr><td style="white-space:nowrap"><b>${esc(pageLabel(p.page))}</b></td><td><div class="meter" style="margin:0;max-width:none"><i style="width:${p.views/pmax*100}%;background:var(--accent)"></i></div></td><td class="n">${p.views}</td><td class="n">${p.users}</td></tr>`).join("")}</table></div>`
       : `<div class="muted" style="font-size:12.5px">No page views yet. They start counting from now.</div>`}</section>`;
-  return pageHead("Admin", "Who uses the site, when, and what they open") + subnav() + kiteCard + `
+  const fullList = (fl && fl.list) || [];
+  const fullCard = `<section class="card fade" style="margin-bottom:14px"><div class="ct"><h2>Full access<em>${fullList.length}</em></h2></div>
+    <div class="muted" style="font-size:12.5px;margin-bottom:10px">Only you and these people see Buy above / Stop / Target, R:R and Buy now / Sell now signals. Everyone else sees setups without trade levels.</div>
+    ${fullList.map(e => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">${esc(e)}</span><button class="btn2 danger" data-fullrm="${esc(e)}">Remove</button></div>`).join("") || `<div class="muted" style="font-size:12.5px">Nobody added yet.</div>`}
+    <form id="full-form" class="inrow" style="margin-top:12px"><input id="full-email" class="in" type="email" placeholder="name@gmail.com" autocomplete="off"><button class="btn2" type="submit">Give full access</button></form></section>`;
+  return pageHead("Admin", "Who uses the site, when, and what they open") + subnav() + kiteCard + fullCard + `
     <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:14px">
       <div><small>Users</small><b>${users.length}</b></div><div><small>Online now</small><b>${hasStats ? online.length : "—"}</b></div>
       <div><small>Opened today</small><b>${todayUsers.length}</b></div><div><small>Active this week</small><b>${week}</b></div><div><small>New this week</small><b>${newWeek}</b></div></div>
@@ -1630,8 +1642,16 @@ async function render(){
   if(!keep) track(r);
 }
 const rerender = () => { render.keepScroll = true; render(); };
+async function fullChange(body){
+  try{ const r = await fetch("/api/admin/full", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(body)});
+    const j = await r.json(); if(j.error){ toast(j.error); return; }
+    toast(body.remove ? `${body.email} removed` : `Full access given to ${String(body.email).trim().toLowerCase()}`); rerender();
+  }catch(e){ toast("Could not reach the server."); }
+}
 
 document.addEventListener("click", e => {
+  const fr = e.target.closest("[data-fullrm]");
+  if(fr){ fullChange({email: fr.dataset.fullrm, remove: true}); return; }
   const sc = e.target.closest("[data-sharecard]");
   if(sc){ e.stopPropagation(); shareCard(sc.dataset.sharecard); return; }
   const fc = e.target.closest("[data-flip]");
@@ -1662,6 +1682,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-flip]")){ e.preventDefault(); e.target.classList.toggle("flip"); } });
 document.addEventListener("submit", e => {
   if(e.target.id === "wl-add"){ e.preventDefault(); const v = document.getElementById("wl-sym").value.trim().toUpperCase(); if(v) watchChange({add:[v]}, `${v} added to your watchlist`); }
+  if(e.target.id === "full-form"){ e.preventDefault(); fullChange({email: document.getElementById("full-email").value}); return; }
   if(e.target.id === "search-form"){ e.preventDefault(); UI.search = document.getElementById("search-in").value.trim().toUpperCase(); rerender(); }
 });
 addEventListener("hashchange", () => { render(); scrollTo(0,0); });

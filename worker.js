@@ -219,6 +219,65 @@ async function adminStats(env) {
   return { since, today, daily: daily.results, pages: pages.results, per_user: perUser.results, today_users: todayRows.results, online: online.results };
 }
 
+
+// ------------------------------------------------------------------ full access: trade levels only for the admin and a short list
+// Everyone else (any Google account) sees the scanner without Buy above / Stop / Target, R:R, position size,
+// buy/sell signal words or advice lines. Done here on the server so the numbers never reach their browser.
+const FULL_KEY = "full:list";
+let FULL_CACHE = { at: 0, list: [] };
+async function fullList(env) {
+  if (!env.USERS) return [];
+  if (Date.now() - FULL_CACHE.at < 60e3) return FULL_CACHE.list;
+  const list = (await env.USERS.get(FULL_KEY, "json")) || [];
+  FULL_CACHE = { at: Date.now(), list };
+  return list;
+}
+async function hasFull(env, user) {
+  return user.role === "admin" || (await fullList(env)).includes(String(user.email || "").toLowerCase());
+}
+async function changeFull(env, body) {
+  const list = new Set(await fullList(env));
+  const email = String(body.email || "").trim().toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { error: "Enter a full email address." };
+  if (body.remove) list.delete(email); else list.add(email);
+  const out = [...list].sort();
+  await env.USERS.put(FULL_KEY, JSON.stringify(out));
+  FULL_CACHE = { at: Date.now(), list: out };
+  return { list: out };
+}
+const LEVEL_KEYS = new Set(["entry", "trigger", "stop", "target", "target_why", "target_word", "rr", "size", "advice", "ma", "hourly"]);
+function stripLevels(x) {
+  if (Array.isArray(x)) return x.map(stripLevels);
+  if (x && typeof x === "object") {
+    const o = {};
+    for (const [k, v] of Object.entries(x)) {
+      if (LEVEL_KEYS.has(k)) { if (k === "rr" && v) o.ok = 1; continue; }
+      o[k] = stripLevels(v);
+    }
+    return o;
+  }
+  return x;
+}
+async function memberData(env, ctx, name, r) {
+  const key = new Request(`https://tradeready.cache/member-v1/${name}`);
+  const hit = await caches.default.match(key);
+  const head = { "content-type": "application/json", "cache-control": "private, max-age=60" };
+  if (hit) return new Response(hit.body, { headers: head });
+  const txt = (await r.text()).replaceAll('"BUY NOW"', '"SIGNAL ON (Bullish)"').replaceAll('"SELL NOW"', '"SIGNAL ON (Bearish)"')
+    .replaceAll("VK Buy now", "VK signal on").replaceAll("VK Sell now", "VK signal on");
+  const d = stripLevels(JSON.parse(txt));
+  if (name === "site.json") {
+    delete d.scorecard;                                          // the scorecard is for the admin only
+    const gate = g => /size/i.test(g || "") ? "Open" : g;        // no position-size advice
+    for (const st of d.strategies || []) { st.gate = gate(st.gate); delete st.exit; st.rules = (st.rules || []).filter(r => !/^Size:/i.test(r)).map(r => r.replace(/\s*\((full|half) size\)/gi, "")); }
+    for (const g of Object.values(d.gates || {})) g.gate = gate(g.gate);
+  }
+  const body = JSON.stringify(d);
+  const put = caches.default.put(key, new Response(body, { headers: { "content-type": "application/json", "cache-control": "public, max-age=60" } }));
+  ctx && ctx.waitUntil ? ctx.waitUntil(put) : await put;
+  return new Response(body, { headers: head });
+}
+
 // ------------------------------------------------------------------ Google and admin sign-in
 function googleStart(env, url) {
   const state = crypto.randomUUID();
@@ -331,7 +390,12 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
 
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
-  if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role }); }
+  if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user) }); }
+  if (p === "/api/admin/full") {
+    if (!admin) return json({ error: "Admin only." }, 403);
+    if (req.method === "GET") return json({ list: await fullList(env) });
+    if (req.method === "POST") { const r = await changeFull(env, await req.json().catch(() => ({}))); return json(r, r.error ? 400 : 200); }
+  }
   if (p === "/api/hit" && req.method === "POST") return await hit(env, req, user);
   if (p === "/api/admin/stats" && req.method === "GET") return admin ? json(await adminStats(env)) : json({ error: "Admin only." }, 403);
   if (p === "/api/kite/status" && req.method === "GET") return admin ? json(await kiteStatus(env)) : json({ error: "Admin only." }, 403);
@@ -402,6 +466,7 @@ export default {
         if (m[1] === "watchlist.json" && user.role !== "admin") return json([]);
         const r = await fetch(`https://raw.githubusercontent.com/${env.REPO}/main/data/${m[1]}`,
                               { cf: { cacheTtl: 60, cacheEverything: true } });
+        if (r.ok && !(await hasFull(env, user))) return await memberData(env, ctx, m[1], r);   // no trade levels
         if (m[1] === "site.json" && user.role !== "admin" && r.ok) {      // the scorecard is for the admin only
           const d = await r.json(); delete d.scorecard;
           return new Response(JSON.stringify(d), { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
