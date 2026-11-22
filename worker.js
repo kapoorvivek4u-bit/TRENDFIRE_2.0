@@ -174,6 +174,49 @@ async function adminLog(env) {
   return { users, logins };
 }
 
+// ------------------------------------------------------------------ page views and online now (D1 database "DB")
+// KV allows only 1,000 writes a day on the free plan, so page views go to D1 (100,000 writes a day free).
+let DB_READY = false;
+async function db(env) {
+  if (!env.DB) return null;
+  if (!DB_READY) {
+    await env.DB.batch([
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS hits (ts INTEGER, day TEXT, email TEXT, page TEXT)"),
+      env.DB.prepare("CREATE INDEX IF NOT EXISTS hits_day ON hits(day)"),
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS online (email TEXT PRIMARY KEY, name TEXT, picture TEXT, ts INTEGER, page TEXT, device TEXT)")]);
+    DB_READY = true;
+  }
+  return env.DB;
+}
+const istDay = ms => new Date(ms + 5.5 * 3600e3).toISOString().slice(0, 10);
+async function hit(env, req, user) {             // a page opened, or a 2-minute "still here" ping (no page)
+  try {
+    const d = await db(env);
+    if (!d || user.role === "admin") return json({ ok: true });
+    let b = {}; try { b = JSON.parse(await req.text()); } catch (e) {}
+    const page = /^[a-z0-9-]{1,30}$/.test(b.p || "") ? b.p : null, now = Date.now(), email = user.email.toLowerCase();
+    const st = [d.prepare("INSERT INTO online (email,name,picture,ts,page,device) VALUES (?1,?2,?3,?4,?5,?6) " +
+                          "ON CONFLICT(email) DO UPDATE SET name=?2, picture=?3, ts=?4, page=COALESCE(?5,page), device=?6")
+                 .bind(email, user.name || "", user.picture || "", now, page, device(req))];
+    if (page) st.push(d.prepare("INSERT INTO hits (ts,day,email,page) VALUES (?1,?2,?3,?4)").bind(now, istDay(now), email, page));
+    await d.batch(st);
+  } catch (e) { console.log("hit failed", e.message); }
+  return json({ ok: true });
+}
+async function adminStats(env) {
+  const d = await db(env);
+  if (!d) return { error: "no-db" };
+  const now = Date.now(), since = istDay(now - 29 * 864e5), today = istDay(now);
+  await d.prepare("DELETE FROM hits WHERE ts < ?").bind(now - 120 * 864e5).run();
+  const [daily, pages, perUser, todayRows, online] = await d.batch([
+    d.prepare("SELECT day, COUNT(DISTINCT email) AS users, COUNT(*) AS views FROM hits WHERE day >= ? GROUP BY day ORDER BY day").bind(since),
+    d.prepare("SELECT page, COUNT(*) AS views, COUNT(DISTINCT email) AS users FROM hits WHERE day >= ? GROUP BY page ORDER BY views DESC").bind(since),
+    d.prepare("SELECT email, page, COUNT(*) AS views FROM hits WHERE day >= ? GROUP BY email, page ORDER BY views DESC").bind(since),
+    d.prepare("SELECT email, COUNT(*) AS views, MIN(ts) AS first, MAX(ts) AS last FROM hits WHERE day = ? GROUP BY email ORDER BY last DESC").bind(today),
+    d.prepare("SELECT email, name, picture, ts, page, device FROM online WHERE ts > ? ORDER BY ts DESC").bind(now - 5 * 60e3)]);
+  return { since, today, daily: daily.results, pages: pages.results, per_user: perUser.results, today_users: todayRows.results, online: online.results };
+}
+
 // ------------------------------------------------------------------ Google and admin sign-in
 function googleStart(env, url) {
   const state = crypto.randomUUID();
@@ -287,6 +330,8 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
   if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role }); }
+  if (p === "/api/hit" && req.method === "POST") return await hit(env, req, user);
+  if (p === "/api/admin/stats" && req.method === "GET") return admin ? json(await adminStats(env)) : json({ error: "Admin only." }, 403);
   if (p === "/api/kite/status" && req.method === "GET") return admin ? json(await kiteStatus(env)) : json({ error: "Admin only." }, 403);
   if (!env.GH_TOKEN) return json({ error: "GH_TOKEN is not set in the Cloudflare secrets." }, 503);
   if (p === "/api/watch" && req.method === "GET") {
