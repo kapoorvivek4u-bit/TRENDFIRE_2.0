@@ -469,6 +469,9 @@ a.tbtn{color:var(--ink)}
 .grid>.fade:nth-child(1){animation-delay:0ms}.grid>.fade:nth-child(2){animation-delay:60ms}.grid>.fade:nth-child(3){animation-delay:120ms}.grid>.fade:nth-child(4){animation-delay:180ms}
 .grid>.fade:nth-child(5){animation-delay:240ms}.grid>.fade:nth-child(6){animation-delay:300ms}.grid>.fade:nth-child(n+7){animation-delay:340ms}
 @media (prefers-reduced-motion:reduce){.tc .in{transition:none}}
+.chip.newb{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;letter-spacing:.06em;animation:newp 2.4s ease-in-out infinite}
+:root[data-theme="dark"] .chip.newb{color:#111}
+@keyframes newp{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 40%,transparent)}50%{box-shadow:0 0 0 5px transparent}}
 </style>
 </head>
 <body>
@@ -594,7 +597,7 @@ const symLink = (s, size=16) => `<a class="sym" style="font-size:${size}px" href
 
 /* ============================================================ routes */
 const PAGES = [
-  ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
+  ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"],["today-scorecard","Scorecard"]]],
   ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
@@ -625,7 +628,7 @@ function setTheme(t){
   document.documentElement.setAttribute("data-theme", t || "light"); }   // light (Sand & Indigo) unless the viewer picked dark
 const flip = () => setTheme(isDark() ? "light" : "dark");
 
-let USER = null;                 // {email, name, role} from /api/me
+let USER = null, KITE = null;                 // {email, name, role} from /api/me
 const isAdmin = () => !USER || USER.role === "admin";
 async function apiPost(path, body){
   const r = await fetch(path, {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify(body || {})});
@@ -749,7 +752,7 @@ function setupCard(r, opts={}){
   return `<article class="sc" style="--stc:${stc}">
     <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px">${fmt(r.close)}</span></div>
       <span style="display:flex;gap:6px;align-items:center">${rr && live ? `<span class="rr">R:R ${rr}</span>` : ""}${r.grade ? `<span class="grade ${live && r.grade === "A" ? "" : "b"}" title="Quality grade">${esc(r.grade === "Warning" ? "!" : r.grade)}</span>` : ""}</span></div>
-    <div class="chips">${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
+    <div class="chips">${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
     ${r.chart ? miniChart(r.chart) : ""}
     ${statesHtml(r.states)}
     ${r.detail ? `<div class="detail">${esc(r.detail)}</div>` : ""}
@@ -843,14 +846,14 @@ function tradesCard(){
   const body = (picks.length ? "" : `<div class="empty" style="margin-bottom:12px">No trade passes every strategy rule right now. Patience is a position. Best Ready setups instead:</div>`)
     + `<div class="flipgrid">${cards.map(flipCard).join("")}</div>`;
   const gates = Object.entries(S().gates || {}).map(([n,g]) => chip(`${n}. ${g.name}: ${g.count}`, g.count ? "var(--up)" : g.open ? "var(--muted)" : "var(--down)")).join("");
-  return `<section class="card fade"><div class="ct"><h2>Today's trades<em>${picks.length}</em></h2><a class="more" href="#today-strategies">All strategies ›</a></div>
+  return `<section class="card fade"><div class="ct"><h2>Today's trades<em>${picks.length}</em></h2><span style="display:flex;gap:14px"><a class="more" href="#today-scorecard">Scorecard ›</a><a class="more" href="#today-strategies">All strategies ›</a></span></div>
     ${body}<div class="chips" style="margin-top:12px">${gates}</div></section>`;
 }
 function readyCard(){
   const rs = (S().ready || []).filter(r => r.rr).slice(0, 8);
   return `<section class="card s5 fade"><div class="ct"><h2>Ready now<em>best R:R</em></h2><a class="more" href="#scanner">All ${S().ready_count} ›</a></div>
     <div class="list">${rs.map(r => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(r.symbol, 14)}${starBtn(r.symbol)}</div>
-      <div class="chips" style="margin-top:4px">${chip(r.setup, "var(--info)")}${chip("Grade " + r.grade, r.grade === "A" ? "var(--up)" : "var(--muted)")}${r.sector_stage ? chip(r.sector_stage, STAGE_C[r.sector_stage]) : ""}</div></div>
+      <div class="chips" style="margin-top:4px">${headsChips(r.symbol, r.setup)}${chip(r.setup, "var(--info)")}${chip("Grade " + r.grade, r.grade === "A" ? "var(--up)" : "var(--muted)")}${r.sector_stage ? chip(r.sector_stage, STAGE_C[r.sector_stage]) : ""}</div></div>
       <div class="r"><span class="rr">R:R ${r.rr}</span><div style="margin-top:5px">↑ ${fmt(r.entry)}</div><div class="down">✕ ${fmt(r.stop)}</div></div></div>`).join("")}</div></section>`;
 }
 const R_COLOR = {rs:"var(--accent2)", hi:"var(--up)", mom:"var(--info)", trend:"var(--muted)", sector:"var(--warn)", oi:"var(--accent2)", setup:"var(--up)", vk:"var(--up)", brk:"var(--info)"};
@@ -920,7 +923,7 @@ function greet(){ const h = +new Date().toLocaleString("en-US", {hour:"numeric",
 async function pageDashboard(){
   return `<div class="head"><div><h1>${greet()}, Trader</h1><div class="sub">Here's the market before you trade.</div></div>
       <div class="stamp"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST · refreshes hourly</div></div>
-    ${subnav()}${bellStrip()}${indexStrip()}
+    ${subnav()}${bellStrip()}${headsUpCard()}${indexStrip()}
     <div class="grid">
       ${weatherCard()}${newsCard()}
       ${tradesCard()}
@@ -945,7 +948,8 @@ function bellStrip(){
   else if(mins <= close){ c = "var(--up)"; a = "Market open"; b = last; sub = `Last scan ${last} · refreshes about every hour · ${s.ready_count} setups Ready`; }
   else { c = "var(--accent2)"; a = "Closing bell recap"; b = "3:30"; sub = `${(s.picks||[]).length} trades passed every rule · ${s.market.adv} up, ${s.market.dec} down · breadth ${hist.slice(-1)[0] ?? "—"}%`; }
   const rib = hist.map((v,i) => `<i style="height:${Math.max(6, v/100*26)}px;--c:${v >= 70 ? "var(--up)" : v >= 40 ? "var(--warn)" : "var(--down)"};animation-delay:${i*70}ms" title="Daily breadth ${v}%"></i>`).join("");
-  return `<section class="bell" aria-label="Market clock"><div class="state"><span class="bdot" style="--c:${c}"></span>${a} <span class="count" style="--c:${c}">${esc(b)}</span><span class="bsub">${esc(sub)}</span></div>
+  const kiteChip = (KITE && !KITE.connected && !weekend) ? `<a href="/kite/login" class="count" style="--c:var(--down);text-decoration:none">Kite not connected · Connect ›</a>` : "";
+  return `<section class="bell" aria-label="Market clock"><div class="state">${kiteChip}<span class="bdot" style="--c:${c}"></span>${a} <span class="count" style="--c:${c}">${esc(b)}</span><span class="bsub">${esc(sub)}</span></div>
     <div style="display:flex;align-items:center;gap:8px"><span class="muted" style="font-size:11px">Breadth, 6 days</span><div class="ribbon">${rib}</div></div></section>`;
 }
 const WX = sc => sc >= 70 ? ["sun","Clear skies"] : sc >= 55 ? ["partly","Partly sunny"] : sc >= 40 ? ["rain","Light showers"] : ["storm","Storm warning"];
@@ -1042,7 +1046,7 @@ function flipCard(p, i){
       <div class="face front">
         <div class="row1"><div style="min-width:0"><div class="symrow">${symLink(p.symbol, 18)}${starBtn(p.symbol)}</div><div class="sub">${esc(p.strategy ? p.strategy + ". " + p.strategy_name : (p.market || ""))}${p.sector ? " · " + esc(p.sector) : ""}</div></div>
           <div class="rar"><b>${esc(p.grade)}</b><span>${gA ? "GOLD" : "SILVER"}</span></div></div>
-        <div class="chips">${chip(p.setup, "var(--info)")}${p.sector_stage ? chip(p.sector_stage, STAGE_C[p.sector_stage]) : ""}${p.size ? chip(p.size, /alf|ccordion/.test(p.size) ? "var(--warn)" : "var(--up)") : ""}${vkChip(p.vk)}</div>
+        <div class="chips">${headsChips(p.symbol, p.setup)}${chip(p.setup, "var(--info)")}${p.sector_stage ? chip(p.sector_stage, STAGE_C[p.sector_stage]) : ""}${p.size ? chip(p.size, /alf|ccordion/.test(p.size) ? "var(--warn)" : "var(--up)") : ""}${vkChip(p.vk)}</div>
         <div class="fchart">${flipMini(p)}</div>
         ${flipStats(p)}
         <div class="foot">${p.rr ? `<span class="rr">R:R ${p.rr}</span>` : "<span></span>"}<span>tap to flip ↻</span></div>
@@ -1101,6 +1105,54 @@ function prefetch(){
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
   market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
+
+
+/* ============================================================ heads-up badges and scorecard */
+function headsChips(sym, setup){
+  const s = S() || {}, h = s.heads_up || {}, out = [];
+  if((s.new || []).includes(`${sym}|${setup}`)) out.push(`<span class="chip newb">NEW</span>`);
+  if((h.ban || []).includes(sym)) out.push(chip("F&O ban 🚫", "var(--down)"));
+  const rd = (h.results || {})[sym];
+  if(rd){ const days = Math.round((new Date(rd + "T00:00:00+05:30") - new Date(new Date().toLocaleDateString("en-CA", {timeZone:"Asia/Kolkata"}) + "T00:00:00+05:30"))/864e5);
+    out.push(chip(days <= 0 ? "Results today ⚠️" : `Results in ${days}d ⚠️`, "var(--warn)")); }
+  return out.join("");
+}
+function headsUpCard(){
+  const h = S().heads_up || {}, ban = h.ban || [], res = Object.entries(h.results || {}).sort((a,b) => a[1].localeCompare(b[1]));
+  const newN = (S().new || []).length;
+  if(!ban.length && !res.length && !newN) return "";
+  const d = iso => new Date(iso + "T00:00:00+05:30").toLocaleDateString("en-IN", {day:"numeric", month:"short", timeZone:"Asia/Kolkata"});
+  return `<section class="card fade" style="margin-bottom:14px;display:grid;gap:10px">
+    ${newN ? `<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">New today</b><span class="chip newb">${newN} new Ready</span><a class="more" href="#scanner" style="font-size:12px;font-weight:700;color:var(--accent)">Scanner ›</a></div>` : ""}
+    ${ban.length ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">F&O ban</b>${ban.map(x => chip(x, "var(--down)")).join("")}</div>` : ""}
+    ${res.length ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">Results soon</b>${res.slice(0, 24).map(([x, dt_]) => chip(`${x} · ${d(dt_)}`, "var(--warn)")).join("")}${res.length > 24 ? `<span class="muted" style="font-size:12px">+${res.length - 24} more</span>` : ""}</div>` : ""}
+  </section>`;
+}
+async function pageScorecard(){
+  const sc = S().scorecard;
+  if(!sc || !sc.setups) return pageHead("Scorecard", "") + subnav() + `<div class="empty">The scorecard appears after the next scan.</div>`;
+  const since = new Date(sc.since + "T00:00:00+05:30").toLocaleDateString("en-IN", {day:"numeric", month:"short", timeZone:"Asia/Kolkata"});
+  const rc = r => r == null ? "muted" : r > 0 ? "up" : r < 0 ? "down" : "muted";
+  const fmtR = r => r == null ? "—" : (r > 0 ? "+" : "") + r.toFixed(2) + "R";
+  const RES = {target:["Target hit","var(--up)"], stopped:["Stopped","var(--down)"], "time exit":["Time exit","var(--warn)"]};
+  return pageHead("Scorecard", `How every Ready signal did since ${esc(since)}. Entry when price crosses Buy above; then 2R target or stop, whichever comes first.`) + subnav() + `
+    <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
+      <div><small>Signals</small><b data-count="${sc.signals}">${sc.signals}</b></div><div><small>Finished</small><b>${sc.closed}</b></div>
+      <div><small>Win rate</small><b class="${sc.win_pct >= 50 ? "up" : sc.win_pct != null ? "down" : ""}">${sc.win_pct == null ? "—" : sc.win_pct + "%"}</b></div>
+      <div><small>Average result</small><b class="${rc(sc.avg_r)}">${fmtR(sc.avg_r)}</b></div></div>
+    ${sc.closed < 30 ? `<div class="empty" style="text-align:left;margin-bottom:14px">Early days: only ${plural(sc.closed, "trade has", "trades have")} finished so far. Read these numbers as a first look, not a verdict. They firm up after 50+ finished trades per setup.</div>` : ""}
+    <section class="card fade"><div class="ct"><h2>By setup</h2></div><div class="tw"><table class="t">
+      <tr><th>Setup</th><th class="n">Signals</th><th class="n">Triggered</th><th>Win rate</th><th class="n">Avg</th><th class="n">Target</th><th class="n">Stop</th><th class="n">Open</th></tr>
+      ${sc.setups.map(x => `<tr><td><b>${esc(x.setup)}</b><div class="muted" style="font-size:11.5px">${esc(x.market)}</div></td><td class="n">${x.signals}</td><td class="n">${x.triggered}</td>
+        <td style="min-width:140px">${x.win_pct == null ? '<span class="muted">not enough yet</span>' : `<div style="display:flex;align-items:center;gap:8px"><span class="bar" style="flex:1"><i style="width:${x.win_pct}%;--c:${x.win_pct >= 50 ? "var(--up)" : "var(--down)"}"></i></span><b class="num">${x.win_pct}%</b></div>`}</td>
+        <td class="n ${rc(x.avg_r)}">${fmtR(x.avg_r)}</td><td class="n up">${x.targets}</td><td class="n down">${x.stops}</td><td class="n">${x.open}</td></tr>`).join("")}</table></div>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Holding limit: Swing and Hourly Overspill 5 days; Squeeze, Trend and Daily Overspill 10 days; Weekly Overspill 20 days. A day that touches both stop and target counts as a stop. Daily prices, so intraday order is unknown.</div></section>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Latest results</h2></div>
+      ${(sc.recent || []).length ? `<div class="tw"><table class="t"><tr><th>Signal</th><th>Stock</th><th>Setup</th><th>Result</th><th class="n">R</th><th class="n">Days</th></tr>
+      ${sc.recent.map(x => `<tr><td class="num" style="white-space:nowrap">${esc(x.date.slice(5))}</td><td><a class="num" style="font-weight:700" href="${tv(x.symbol)}" target="_blank" rel="noopener">${esc(x.symbol)}</a> <span class="muted" style="font-size:11px">${esc(x.grade || "")}</span></td>
+        <td style="font-size:12px">${esc(x.setup)}</td><td>${chip((RES[x.result]||[x.result])[0], (RES[x.result]||[0,"var(--muted)"])[1])}</td><td class="n ${rc(x.r)}">${fmtR(x.r)}</td><td class="n">${x.days ?? "—"}</td></tr>`).join("")}</table></div>`
+        : `<div class="empty">No trade has finished yet. Results appear as signals hit their target or stop.</div>`}</section>`;
+}
 
 /* ============================================================ TODAY: strategies, A list */
 async function pageStrategies(){
@@ -1458,7 +1510,14 @@ async function pageAdmin(){
   const users = (d.users || []).filter(u => u.role !== "admin"), today = new Date().toISOString().slice(0,10);
   const active = users.filter(u => (u.seen || "").slice(0,10) === today).length;
   const week = users.filter(u => Date.now() - Date.parse(u.seen || u.last || 0) < 7*864e5).length;
-  return pageHead("Admin", "Who signed in, when, and from where") + `
+  const k = KITE || {};
+  const kiteCard = `<section class="card fade" style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+    <div><div class="ct" style="margin:0 0 6px"><h2>Kite Connect</h2></div>
+      ${!k.configured ? `<div class="muted">Add KITE_API_KEY and KITE_API_SECRET in the Cloudflare secrets first.</div>`
+        : k.connected ? `<div style="font-weight:700" class="up">● Connected as ${esc(k.user_id || "")}</div><div class="muted" style="font-size:12.5px">Since ${dt(k.at)} · valid till ${dt(k.expires)}</div>`
+        : `<div style="font-weight:700" class="down">● Not connected today</div><div class="muted" style="font-size:12.5px">Tap once each morning. The scans use today's token.</div>`}</div>
+    ${k.configured ? `<a class="btn" href="/kite/login">${k.connected ? "Reconnect" : "Connect Kite"}</a>` : ""}</section>`;
+  return pageHead("Admin", "Who signed in, when, and from where") + kiteCard + `
     <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
       <div><small>Users</small><b>${users.length}</b></div><div><small>Active today</small><b>${active}</b></div>
       <div><small>Active this week</small><b>${week}</b></div><div><small>Logins logged</small><b>${(d.logins || []).length}</b></div></div>
@@ -1475,7 +1534,7 @@ async function pageAdmin(){
 /* ============================================================ render + events */
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
-  search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
+  "today-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
   "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin};
 let RENDER_ID = 0;
 async function render(){
@@ -1541,6 +1600,10 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
     if(r.status === 401){ location.href = "/login"; return; }
     if(r.ok) USER = await r.json();
   }catch(e){ USER = null; }          // no server (preview): show everything
+  if(USER && USER.role === "admin"){ try{ const r = await fetch("/api/kite/status", {cache:"no-store"}); if(r.ok) KITE = await r.json(); }catch(e){} }
+  { const q = new URLSearchParams(location.search).get("kite");
+    if(q){ setTimeout(() => toast(q === "ok" ? "Kite connected for today ✓" : q === "failed" ? "Kite login did not finish. Try again." : "Kite login cancelled"), 600);
+           history.replaceState(null, "", location.pathname + location.hash); } }
   renderShell();
   try{ await getJSON("site.json"); }
   catch(e){
