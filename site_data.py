@@ -584,6 +584,196 @@ def card_candles(symbols, n=45):
         print("site_data: candles skipped:", ex)
     return out
 
+# ---------------------------------------------------------------- scorecard
+HORIZON = {"Swing Pullback": 5, "Hourly Overspill": 5, "Squeeze Break": 10, "Trend Pullback": 10,
+           "Daily Overspill": 10, "Weekly Overspill": 20}
+
+
+def ready_episodes(path, market, gap_days=3):
+    """First Ready sighting of each run of a stock on a setup (a new run after a gap)."""
+    try:
+        lg = pd.read_csv(path)
+    except Exception:
+        return []
+    if lg.empty:
+        return []
+    lg["date"] = pd.to_datetime(lg["date"])
+    lg = lg.sort_values("date")
+    out = []
+    for (sym, setup), g in lg.groupby(["symbol", "setup"]):
+        prev = None
+        for _, r in g.iterrows():
+            if prev is None or (r["date"] - prev).days > gap_days:
+                out.append({"market": market, "symbol": sym, "setup": setup, "grade": r.get("grade"),
+                            "trend": r.get("trend"), "date": r["date"], "entry": r.get("trigger"),
+                            "stop": r.get("stop"), "close": r.get("close")})
+            prev = r["date"]
+    return out
+
+
+def daily_bars(symbols, start):
+    """Daily OHLC from Yahoo for the scorecard. Returns {symbol: DataFrame}."""
+    out = {}
+    if not symbols:
+        return out
+    try:
+        import yfinance as yf
+        tick = {s: s + ".NS" for s in symbols}
+        d = yf.download(list(tick.values()), start=(start - dt.timedelta(days=3)).strftime("%Y-%m-%d"),
+                        interval="1d", group_by="ticker", progress=False, auto_adjust=False, threads=True)
+        for s, t in tick.items():
+            try:
+                x = d[t] if isinstance(d.columns, pd.MultiIndex) else d
+                x = x.dropna(subset=["High", "Low", "Close"])
+                if len(x):
+                    x.index = pd.to_datetime(x.index).tz_localize(None)
+                    out[s] = x
+            except KeyError:
+                pass
+    except Exception as ex:
+        print("site_data: scorecard prices skipped:", ex)
+    return out
+
+
+def judge(ep, bars, today):
+    """Walk the days after the signal: wait for the entry, then 2R target or stop, whichever
+    comes first. A day that touches both counts as a loss. Returns the episode with its result."""
+    e, st = ep["entry"], ep["stop"]
+    res = dict(ep, date=ep["date"].strftime("%Y-%m-%d"), result="no data", r=None, days=None)
+    if not (e and st and e > st) or bars is None:
+        return res
+    tgt = e + 2 * (e - st)
+    res["target"] = round(float(tgt), 2)
+    hz = HORIZON.get(ep["setup"], 10)
+    after = bars[bars.index > ep["date"]]
+    if after.empty:
+        res["result"] = "waiting"
+        return res
+    trig_i = None
+    for i, (d, b) in enumerate(after.iterrows()):
+        if trig_i is None:
+            if i >= hz:
+                res["result"], res["days"] = "not triggered", i
+                return res
+            if b["High"] >= e:
+                trig_i = i
+            else:
+                continue
+        if b["Low"] <= st:
+            res.update(result="stopped", r=-1.0, days=i + 1)
+            return res
+        if b["High"] >= tgt:
+            res.update(result="target", r=2.0, days=i + 1)
+            return res
+        if i - trig_i + 1 >= hz:
+            r = (float(b["Close"]) - e) / (e - st)
+            res.update(result="time exit", r=round(r, 2), days=i + 1)
+            return res
+    last = float(after["Close"].iloc[-1])
+    if trig_i is None:
+        res["result"] = "waiting"
+    else:
+        res.update(result="open", r=round((last - e) / (e - st), 2), days=len(after))
+    return res
+
+
+def scorecard(today):
+    eps = ready_episodes(os.path.join(DATA, "ready_log.csv"), "F&O") + \
+          ready_episodes(os.path.join(DATA, "equity_ready_log.csv"), "Equity")
+    if not eps:
+        return None
+    start = min(e["date"] for e in eps)
+    bars = daily_bars(sorted({e["symbol"] for e in eps}), start)
+    if not bars:
+        return {"since": start.strftime("%Y-%m-%d"), "note": "Prices not available this run.", "setups": [], "recent": []}
+    done = [judge(e, bars.get(e["symbol"]), today) for e in eps]
+    rows = []
+    for (mk, setup), grp in pd.DataFrame(done).groupby(["market", "setup"]):
+        g = grp.to_dict("records")
+        trig = [x for x in g if x["result"] in ("target", "stopped", "time exit", "open")]
+        closed = [x for x in trig if x["result"] != "open"]
+        wins = [x for x in closed if (x["r"] or 0) > 0]
+        rows.append({"market": mk, "setup": setup, "signals": len(g), "triggered": len(trig),
+                     "closed": len(closed), "targets": sum(1 for x in closed if x["result"] == "target"),
+                     "stops": sum(1 for x in closed if x["result"] == "stopped"),
+                     "win_pct": round(100 * len(wins) / len(closed)) if closed else None,
+                     "avg_r": round(sum(x["r"] for x in closed) / len(closed), 2) if closed else None,
+                     "open": len(trig) - len(closed),
+                     "grade_a": {"closed": sum(1 for x in closed if x["grade"] == "A"),
+                                 "wins": sum(1 for x in wins if x["grade"] == "A")}})
+    rows.sort(key=lambda x: (-(x["closed"]), x["setup"]))
+    recent = sorted([x for x in done if x["result"] in ("target", "stopped", "time exit")],
+                    key=lambda x: x["date"], reverse=True)[:20]
+    keep = ("market", "symbol", "setup", "grade", "date", "entry", "stop", "target", "result", "r", "days")
+    all_closed = [x for x in done if x["result"] in ("target", "stopped", "time exit")]
+    return {"since": start.strftime("%Y-%m-%d"), "signals": len(done),
+            "closed": len(all_closed),
+            "win_pct": round(100 * sum(1 for x in all_closed if (x["r"] or 0) > 0) / len(all_closed)) if all_closed else None,
+            "avg_r": round(sum(x["r"] for x in all_closed) / len(all_closed), 2) if all_closed else None,
+            "setups": rows, "recent": [{k: x.get(k) for k in keep} for x in recent]}
+
+
+# ---------------------------------------------------------------- heads-up: F&O ban, results, new today
+def heads_up(today):
+    out = {"ban": [], "results": {}}
+    try:
+        import requests
+        s = requests.Session()
+        s.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                        "(KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+                          "Accept": "*/*", "Referer": "https://www.nseindia.com/"})
+        try:
+            s.get("https://www.nseindia.com", timeout=15)
+        except Exception:
+            pass
+        try:
+            r = s.get("https://nsearchives.nseindia.com/content/fo/fo_secban.csv", timeout=30)
+            if r.ok:
+                for line in r.text.splitlines()[1:]:
+                    parts = [p.strip() for p in line.split(",")]
+                    if len(parts) >= 2 and parts[1] and parts[1].isupper():
+                        out["ban"].append(parts[1])
+        except Exception as ex:
+            print("site_data: ban list skipped:", ex)
+        try:
+            r = s.get("https://www.nseindia.com/api/event-calendar", timeout=30)
+            if r.ok:
+                for ev in r.json():
+                    purpose = (ev.get("purpose") or "") + " " + (ev.get("bm_desc") or "")
+                    if "result" not in purpose.lower():
+                        continue
+                    try:
+                        d = dt.datetime.strptime(ev.get("date", ""), "%d-%b-%Y").date()
+                    except ValueError:
+                        continue
+                    if 0 <= (d - today).days <= 10:
+                        sym = ev.get("symbol")
+                        if sym and (sym not in out["results"] or d.isoformat() < out["results"][sym]):
+                            out["results"][sym] = d.isoformat()
+        except Exception as ex:
+            print("site_data: results calendar skipped:", ex)
+    except Exception as ex:
+        print("site_data: heads-up skipped:", ex)
+    return out
+
+
+def new_today():
+    """symbol|setup pairs whose first Ready sighting in the last 10 days is the latest scan day."""
+    keys = []
+    for f in ("ready_log.csv", "equity_ready_log.csv"):
+        try:
+            lg = pd.read_csv(os.path.join(DATA, f))
+        except Exception:
+            continue
+        if lg.empty:
+            continue
+        lg["date"] = pd.to_datetime(lg["date"])
+        last = lg["date"].max()
+        recent = lg[lg["date"] >= last - pd.Timedelta(days=10)]
+        first = recent.groupby(["symbol", "setup"])["date"].min()
+        keys += [f"{s}|{st}" for (s, st), d in first.items() if d == last]
+    return sorted(set(keys))
+
 
 # ---------------------------------------------------------------- build
 def run(now=None):
@@ -732,6 +922,15 @@ def run(now=None):
     syms = [c["symbol"] for c in picks] + [c["symbol"] for c in ready[:24]]
     syms += [c["symbol"] for st in strategies for k in ("picks", "blocked", "dipping") for c in st[k]]
     out["candles"] = card_candles(syms)
+    try:
+        out["scorecard"] = scorecard(now.date())
+    except Exception as ex:
+        print("site_data: scorecard failed:", ex)
+    try:
+        out["heads_up"] = heads_up(now.date())
+    except Exception as ex:
+        print("site_data: heads-up failed:", ex)
+    out["new"] = new_today()
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
     write_names()
