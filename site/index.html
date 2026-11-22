@@ -1130,14 +1130,15 @@ function headsChips(sym, setup){
   return out.join("");
 }
 function headsUpCard(){
-  const h = S().heads_up || {}, ban = h.ban || [], res = Object.entries(h.results || {}).sort((a,b) => a[1].localeCompare(b[1]));
+  const h = S().heads_up || {}, ban = h.ban || [], fo = S().closes || {};
+  const res = Object.entries(h.results || {}).filter(([x]) => x in fo).sort((a,b) => a[1].localeCompare(b[1]));   // F&O stocks only
   const newN = (S().new || []).length;
   if(!ban.length && !res.length && !newN) return "";
   const d = iso => new Date(iso + "T00:00:00+05:30").toLocaleDateString("en-IN", {day:"numeric", month:"short", timeZone:"Asia/Kolkata"});
   return `<section class="card fade" style="margin-bottom:14px;display:grid;gap:10px">
     ${newN ? `<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">New today</b><span class="chip newb">${newN} new Ready</span><a class="more" href="#scanner" style="font-size:12px;font-weight:700;color:var(--accent)">Scanner ›</a></div>` : ""}
     ${ban.length ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">F&O ban</b>${ban.map(x => chip(x, "var(--down)")).join("")}</div>` : ""}
-    ${res.length ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">Results soon</b>${res.slice(0, 24).map(([x, dt_]) => chip(`${x} · ${d(dt_)}`, "var(--warn)")).join("")}${res.length > 24 ? `<span class="muted" style="font-size:12px">+${res.length - 24} more</span>` : ""}</div>` : ""}
+    ${res.length ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;letter-spacing:.06em;text-transform:uppercase" class="muted">F&O results soon</b>${res.slice(0, 24).map(([x, dt_]) => chip(`${x} · ${d(dt_)}`, "var(--warn)")).join("")}${res.length > 24 ? `<span class="muted" style="font-size:12px">+${res.length - 24} more</span>` : ""}</div>` : ""}
   </section>`;
 }
 async function pageScorecard(){
