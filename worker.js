@@ -214,14 +214,80 @@ async function adminSignIn(env, req) {
   return new Response(JSON.stringify({ ok: true }), { headers: h });
 }
 
+
+// ------------------------------------------------------------------ Kite Connect (admin)
+// The admin taps "Connect Kite" each morning; Zerodha sends the request token back to
+// /kite/callback, the token is swapped for today's access token and kept in KV.
+// Scans (GitHub Actions) and the VM can fetch it from /api/kite/token with KITE_PULL_KEY.
+const KITE_KEY = "kite:token";
+async function sha256hex(text) {
+  const d = await crypto.subtle.digest("SHA-256", enc.encode(text));
+  return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function next6amIST(ms) {                       // Kite tokens expire at 6:00 IST the next morning
+  const ist = new Date(ms + 5.5 * 3600e3);
+  const six = Date.UTC(ist.getUTCFullYear(), ist.getUTCMonth(), ist.getUTCDate(), 6, 0) - 5.5 * 3600e3;
+  return six > ms ? six : six + 864e5;
+}
+async function kiteToken(env) {
+  if (!env.USERS) return null;
+  const t = await env.USERS.get(KITE_KEY, "json");
+  return t && t.expires > Date.now() ? t : null;
+}
+function kiteLogin(env) {
+  if (!env.KITE_API_KEY) return json({ error: "KITE_API_KEY is not set in the Cloudflare secrets." }, 503);
+  return redirect(`https://kite.zerodha.com/connect/login?v=3&api_key=${encodeURIComponent(env.KITE_API_KEY)}`);
+}
+async function kiteCallback(env, url) {
+  const rt = url.searchParams.get("request_token");
+  if (url.searchParams.get("status") !== "success" || !rt) return redirect("/?kite=cancelled#admin");
+  const body = new URLSearchParams({ api_key: env.KITE_API_KEY, request_token: rt,
+    checksum: await sha256hex(env.KITE_API_KEY + rt + env.KITE_API_SECRET) });
+  const r = await fetch("https://api.kite.trade/session/token", { method: "POST", body,
+    headers: { "X-Kite-Version": "3", "content-type": "application/x-www-form-urlencoded" } });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok || !d.data || !d.data.access_token) {
+    console.log("KITE LOGIN FAILED", r.status, d.message || "");
+    return redirect("/?kite=failed#admin");
+  }
+  const now = Date.now();
+  await env.USERS.put(KITE_KEY, JSON.stringify({ access_token: d.data.access_token, user_id: d.data.user_id,
+    user_name: d.data.user_name || "", at: new Date(now).toISOString(), expires: next6amIST(now) }));
+  console.log("KITE CONNECTED", d.data.user_id);
+  return redirect("/?kite=ok#admin");
+}
+async function kiteStatus(env) {
+  const t = await kiteToken(env);
+  if (!t) return { connected: false, configured: !!(env.KITE_API_KEY && env.KITE_API_SECRET) };
+  let live = null;
+  try {
+    const r = await fetch("https://api.kite.trade/user/profile", {
+      headers: { "X-Kite-Version": "3", authorization: `token ${env.KITE_API_KEY}:${t.access_token}` } });
+    live = r.ok;
+  } catch (e) {}
+  return { connected: live !== false, user_id: t.user_id, user_name: t.user_name, at: t.at,
+           expires: new Date(t.expires).toISOString(), configured: true };
+}
+// morning reminder on Telegram when Kite is not connected (cron in wrangler.jsonc)
+async function kiteReminder(env) {
+  if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return;
+  const ist = new Date(Date.now() + 5.5 * 3600e3);
+  if (ist.getUTCDay() === 0 || ist.getUTCDay() === 6) return;
+  if (await kiteToken(env)) return;
+  await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, { method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: "Good morning. Kite is not connected yet today.\nTap to connect: https://tradeready.in/kite/login" }) });
+}
+
 // pages and files anyone may open without signing in
 const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favicon.svg", "/apple-touch-icon.png",
   "/icon-192.png", "/icon-512.png", "/manifest.webmanifest", "/robots.txt",
-  "/privacy", "/privacy.html", "/terms", "/terms.html", "/sitemap.xml", "/og-image.png"]);
+  "/privacy", "/privacy.html", "/terms", "/terms.html", "/sitemap.xml", "/og-image.png", "/sw.js"]);
 
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
   if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role }); }
+  if (p === "/api/kite/status" && req.method === "GET") return admin ? json(await kiteStatus(env)) : json({ error: "Admin only." }, 403);
   if (!env.GH_TOKEN) return json({ error: "GH_TOKEN is not set in the Cloudflare secrets." }, 503);
   if (p === "/api/watch" && req.method === "GET") {
     if (!admin) return json({ items: [] });
@@ -240,6 +306,9 @@ async function api(req, env, url, user) {
 }
 
 export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(kiteReminder(env));
+  },
   async fetch(req, env) {
     const url = new URL(req.url), p = url.pathname;
     try {
@@ -247,6 +316,12 @@ export default {
       if (p === "/auth/callback") return await googleCallback(env, req, url);
       if (p === "/auth/admin" && req.method === "POST") return await adminSignIn(env, req);
       if (p === "/logout") return redirect("/login", [cookie("tr_s", "", 0)]);
+      if (p === "/api/kite/token") {                     // for scans and the VM, with their own key
+        if (!env.KITE_PULL_KEY || req.headers.get("x-kite-key") !== env.KITE_PULL_KEY) return json({ error: "Not allowed." }, 403);
+        const t = await kiteToken(env);
+        return t ? json({ api_key: env.KITE_API_KEY, access_token: t.access_token, expires: new Date(t.expires).toISOString() })
+                 : json({ error: "Kite is not connected today." }, 404);
+      }
       if (url.hostname.startsWith("www.")) {             // one address for Google: tradeready.in
         url.hostname = url.hostname.slice(4);
         return Response.redirect(url.toString(), 301);
@@ -265,6 +340,10 @@ export default {
       if (!user) {
         if (p.startsWith("/api/") || p.startsWith("/data/")) return json({ error: "Please sign in." }, 401);
         return redirect("/login");
+      }
+      if (p === "/kite/login" || p === "/kite/callback") {
+        if (user.role !== "admin") return redirect("/admin");
+        return p === "/kite/login" ? kiteLogin(env) : await kiteCallback(env, url);
       }
       const m = p.match(/^\/data\/([A-Za-z0-9_.\-]+\.json)$/);
       if (m) {
