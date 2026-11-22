@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-22 09:13",
+ "generated_ist": "2026-11-22 09:30",
  "oi_asof": "2026-11-20",
  "indexes": [
   {
@@ -1816,6 +1816,18 @@
      }
     },
     {
+     "symbol": "DIXON",
+     "vk": "NO SIGNAL",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": 5.0,
+      "px_pct": 2.5,
+      "word": "Long build-up",
+      "side": 1
+     }
+    },
+    {
      "symbol": "GVT&D",
      "vk": "NO SIGNAL",
      "setup": "Weekly Overspill \u00b7 Watch",
@@ -1933,18 +1945,6 @@
       "px_pct": 2.6,
       "word": "No big change",
       "side": 0
-     }
-    },
-    {
-     "symbol": "DIXON",
-     "vk": null,
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": 5.0,
-      "px_pct": 2.5,
-      "word": "Long build-up",
-      "side": 1
      }
     },
     {
