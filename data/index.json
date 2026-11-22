@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-21 11:53",
+ "generated_ist": "2026-11-22 09:13",
  "oi_asof": "2026-11-20",
  "indexes": [
   {
@@ -1734,8 +1734,8 @@
     {
      "symbol": "MARICO",
      "vk": "BUY NOW",
-     "setup": "Swing Pullback \u00b7 Triggered",
-     "grade": "B",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 10.2,
       "px_pct": 1.5,
@@ -1807,24 +1807,12 @@
      "symbol": "BHARATFORG",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 8.0,
       "px_pct": -0.7,
       "word": "Big positions building",
       "side": 0
-     }
-    },
-    {
-     "symbol": "DIXON",
-     "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
-     "oi": {
-      "oi_pct": 5.0,
-      "px_pct": 2.5,
-      "word": "Long build-up",
-      "side": 1
      }
     },
     {
@@ -1945,6 +1933,18 @@
       "px_pct": 2.6,
       "word": "No big change",
       "side": 0
+     }
+    },
+    {
+     "symbol": "DIXON",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 5.0,
+      "px_pct": 2.5,
+      "word": "Long build-up",
+      "side": 1
      }
     },
     {
@@ -2367,8 +2367,8 @@
     {
      "symbol": "LICHSGFIN",
      "vk": "NO SIGNAL",
-     "setup": "Daily Range \u00b7 Triggered",
-     "grade": "A",
+     "setup": "Swing Pullback \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -0.9,
       "px_pct": 4.3,
@@ -2791,8 +2791,8 @@
     {
      "symbol": "BOSCHLTD",
      "vk": "BUY NOW",
-     "setup": "Daily Overspill \u00b7 Triggered",
-     "grade": "Warning",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": -1.9,
       "px_pct": -0.6,
@@ -2849,6 +2849,18 @@
      }
     },
     {
+     "symbol": "PIDILITIND",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 2.3,
+      "px_pct": 4.9,
+      "word": "No big change",
+      "side": 0
+     }
+    },
+    {
      "symbol": "PNB",
      "vk": "BUY NOW",
      "setup": null,
@@ -2863,8 +2875,8 @@
     {
      "symbol": "TVSMOTOR",
      "vk": "BUY NOW",
-     "setup": "Trend Pullback \u00b7 Ready",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 12.9,
       "px_pct": 1.9,
@@ -3020,7 +3032,7 @@
      "symbol": "HDFCAMC",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "C",
+     "grade": "A",
      "oi": {
       "oi_pct": 2.0,
       "px_pct": 0.9,
@@ -3120,18 +3132,6 @@
      "oi": {
       "oi_pct": -2.3,
       "px_pct": -0.3,
-      "word": "No big change",
-      "side": 0
-     }
-    },
-    {
-     "symbol": "PIDILITIND",
-     "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": 2.3,
-      "px_pct": 4.9,
       "word": "No big change",
       "side": 0
      }

@@ -192,10 +192,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "DIXON": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "DLF": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -417,10 +413,6 @@
    "confirmed": "Not confirmed"
   },
   "PGEL": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "PIDILITIND": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -697,6 +689,10 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PHOENIXLTD": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "PIDILITIND": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
