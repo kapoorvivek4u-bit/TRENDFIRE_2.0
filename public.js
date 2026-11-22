@@ -345,7 +345,7 @@ footer a{font-weight:600;margin-right:14px}
 </main>
 
 <footer><div class="wrap">
-  <div class="row"><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/login">Sign in</a></div><div>© ${new Date().getFullYear()} TradeReady · tradeready.in</div></div>
+  <div class="row"><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/login">Sign in</a><a href="/admin">Admin</a></div><div>© ${new Date().getFullYear()} TradeReady · tradeready.in</div></div>
   <p style="margin:12px 0 0;max-width:90ch">For study and tracking only. TradeReady is not a SEBI-registered investment adviser or research analyst, and nothing on this site is a recommendation to buy or sell. Market data can be delayed or wrong; check with your broker before you trade.</p>
 </div></footer>
 </body>
