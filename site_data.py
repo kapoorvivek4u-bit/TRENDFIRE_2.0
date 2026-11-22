@@ -907,7 +907,8 @@ def run(now=None):
                    "gate": gate_of(m)["word"], "nifty": (m.get("nifty") or {}).get("state"),
                    "adv": adv, "dec": len(moves) - adv},
         "strength": st_, "indexes": indexes,
-        "picks": picks, "gates": gates, "strategies": strategies, "ready": ready[:24], "ready_count": len(ready),
+        "picks": picks, "gates": gates, "strategies": strategies, "ready": ([c for c in ready if c["market"] == "F&O"][:18] + [c for c in ready if c["market"] != "F&O"][:12]),
+        "ready_count": len(ready), "ready_fo": sum(1 for c in ready if c["market"] == "F&O"),
         "vk_count": vk_count,
         "strongest_fo": strong_fo, "strongest_n50": strong_n50,
         "sectors": sectors, "heatmap": heatmap,
@@ -919,7 +920,7 @@ def run(now=None):
         "closes": {r["symbol"]: r["close"] for r in moves},
         "vk": vk,
     }
-    syms = [c["symbol"] for c in picks] + [c["symbol"] for c in ready[:24]]
+    syms = [c["symbol"] for c in picks] + [c["symbol"] for c in out["ready"]]
     syms += [c["symbol"] for st in strategies for k in ("picks", "blocked", "dipping") for c in st[k]]
     out["candles"] = card_candles(syms)
     try:
