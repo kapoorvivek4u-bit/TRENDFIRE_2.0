@@ -608,7 +608,7 @@ const symLink = (s, size=16) => `<a class="sym" style="font-size:${size}px" href
 
 /* ============================================================ routes */
 const PAGES = [
-  ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"],["today-scorecard","Scorecard"]]],
+  ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
   ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
@@ -616,11 +616,11 @@ const PAGES = [
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["admin","Admin","users",[]]] : []);
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["admin","Admin","users",[["admin","Users"],["admin-scorecard","Scorecard"]]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
 function subnav(){
-  const r = route(), p = PAGES.find(x => x[0] === pageOf(r));
+  const r = route(), p = visiblePages().find(x => x[0] === pageOf(r));
   if(!p || !p[3].length) return "";
   return `<nav class="subnav" aria-label="${p[1]} views">${p[3].map(([h, n]) => `<a href="#${h}" class="${r === h ? "on" : ""}">${n}</a>`).join("")}</nav>`;
 }
@@ -868,7 +868,7 @@ function tradesCard(){
   const gates = Object.entries(S().gates || {}).map(([n,g]) => chip(`${n}. ${g.name}: ${g.count}`, g.count ? "var(--up)" : g.open ? "var(--muted)" : "var(--down)")).join("");
   return `<section class="card fade"><div class="ct"><h2>Today's trades<em>${picks.length}</em></h2>
       <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="seg"><button data-trm="F&O" class="${mk==="F&O"?"on":""}">F&O · ${nFo}</button><button data-trm="Equity" class="${mk==="Equity"?"on":""}">Equity · ${nEq}</button></span>
-      <a class="more" href="#today-scorecard">Scorecard ›</a><a class="more" href="#today-strategies">All strategies ›</a></span></div>
+      ${isAdmin() ? `<a class="more" href="#admin-scorecard">Scorecard ›</a>` : ""}<a class="more" href="#today-strategies">All strategies ›</a></span></div>
     ${body}<div class="chips" style="margin-top:12px">${gates}</div></section>`;
 }
 function readyCard(){
@@ -1576,7 +1576,7 @@ async function pageAdmin(){
     ${!hasStats ? noDb : pages.length ? `<div class="tw"><table class="t"><tr><th>Page</th><th style="width:45%"></th><th class="n">Views</th><th class="n">People</th></tr>
       ${pages.map(p => `<tr><td style="white-space:nowrap"><b>${esc(pageLabel(p.page))}</b></td><td><div class="meter" style="margin:0;max-width:none"><i style="width:${p.views/pmax*100}%;background:var(--accent)"></i></div></td><td class="n">${p.views}</td><td class="n">${p.users}</td></tr>`).join("")}</table></div>`
       : `<div class="muted" style="font-size:12.5px">No page views yet. They start counting from now.</div>`}</section>`;
-  return pageHead("Admin", "Who uses the site, when, and what they open") + kiteCard + `
+  return pageHead("Admin", "Who uses the site, when, and what they open") + subnav() + kiteCard + `
     <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:14px">
       <div><small>Users</small><b>${users.length}</b></div><div><small>Online now</small><b>${hasStats ? online.length : "—"}</b></div>
       <div><small>Opened today</small><b>${todayUsers.length}</b></div><div><small>Active this week</small><b>${week}</b></div><div><small>New this week</small><b>${newWeek}</b></div></div>
@@ -1599,7 +1599,7 @@ async function pageAdmin(){
 /* ============================================================ render + events */
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
-  "today-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
+  "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
   "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
@@ -1611,7 +1611,8 @@ async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const fn = (r === "watchlist" && !isAdmin()) ? pageDashboard : (VIEWS[r] || pageDashboard);
+  const adminOnly = r === "watchlist" || r.startsWith("admin") || r.endsWith("scorecard");   // the scorecard is for the admin only
+  const fn = (adminOnly && !isAdmin()) ? pageDashboard : (VIEWS[r] || pageDashboard);
   let html;
   const need = (NEEDS[r] || []).filter(f => !CACHE[f]);
   const sk = need.length && !render.keepScroll ? setTimeout(() => { if(id === RENDER_ID) main.innerHTML = skeleton(); }, 120) : null;
@@ -1697,7 +1698,7 @@ function installHint(){
   if(standalone || !ios || seen) return;
   const b = document.createElement("div"); b.className = "installhint";
   b.innerHTML = `<span class="brand"><span class="mark" style="width:34px;height:34px">${document.querySelector(".brand .mark") ? document.querySelector(".brand .mark").innerHTML : ""}</span></span>
-    <div style="flex:1;min-width:0"><b>Get the TradeReady app</b><div>Tap <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 3v12M7 8l5-5 5 5M5 13v7h14v-7"/></svg> Share, then <b>Add to Home Screen</b>.</div></div>
+    <div style="flex:1;min-width:0"><b>Get the TradeReady app</b><div>In Safari tap <b>≡</b> next to the address (or <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 3v12M7 8l5-5 5 5M5 13v7h14v-7"/></svg>), then <b>Share → Add to Home Screen</b>.</div></div>
     <button aria-label="Close">✕</button>`;
   b.querySelector("button").onclick = () => { b.remove(); try{ localStorage.setItem("tr-install", "1"); }catch(e){} };
   document.body.appendChild(b);
