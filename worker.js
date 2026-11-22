@@ -1,3 +1,4 @@
+import { publicPage } from "./public.js";
 // tradeready.in server (Cloudflare Worker). It does four jobs:
 //  1. Sign-in. Users sign in with Google (any Google account). The admin signs in at /admin
 //     with a password. Nobody sees the site without signing in.
@@ -354,7 +355,7 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(kiteReminder(env));
   },
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     const url = new URL(req.url), p = url.pathname;
     try {
       if (p === "/auth/google") return googleStart(env, url);
@@ -372,7 +373,8 @@ export default {
         return Response.redirect(url.toString(), 301);
       }
       const user = await readSession(env, req);
-      if (!user && p === "/") {                          // signed-out visitors and Google see the front page here
+      if (!user && p === "/") {                          // signed-out visitors and Google see today's public market page
+        try { const pub = await publicPage(env, ctx); if (pub) return pub; } catch (e) { console.log("public page failed", e.message); }
         const res = await env.ASSETS.fetch(new Request(new URL("/login", url), req));
         const out = new Response(res.body, res);
         out.headers.set("cache-control", "no-cache");
@@ -395,6 +397,10 @@ export default {
         if (m[1] === "watchlist.json" && user.role !== "admin") return json([]);
         const r = await fetch(`https://raw.githubusercontent.com/${env.REPO}/main/data/${m[1]}`,
                               { cf: { cacheTtl: 60, cacheEverything: true } });
+        if (m[1] === "site.json" && user.role !== "admin" && r.ok) {      // the scorecard is for the admin only
+          const d = await r.json(); delete d.scorecard;
+          return new Response(JSON.stringify(d), { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
+        }
         return new Response(r.body, { status: r.status, headers: {
           "content-type": r.ok ? "application/json" : "text/plain", "cache-control": "private, max-age=60" } });
       }
