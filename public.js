@@ -394,13 +394,16 @@ export function renderPublic(s, sj) {
 // Cached for 5 minutes so Google and visitors share one copy.
 export async function publicPage(env, ctx) {
   const key = new Request("https://tradeready.cache/public-v1");
+  // The browser must not keep this copy: "/" is the dashboard once someone signs in.
+  const out = html => new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-cache, private", "vary": "cookie" } });
   const hit = await caches.default.match(key);
-  if (hit) return hit;
+  if (hit) return out(await hit.text());
   const get = f => fetch(`https://raw.githubusercontent.com/${env.REPO}/main/data/${f}`, { cf: { cacheTtl: 300, cacheEverything: true } })
     .then(r => r.ok ? r.json() : null).catch(() => null);
   const [s, sj] = await Promise.all([get("site.json"), get("sectors.json")]);
   if (!s) return null;
-  const res = new Response(renderPublic(s, sj), { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=300" } });
-  ctx && ctx.waitUntil ? ctx.waitUntil(caches.default.put(key, res.clone())) : await caches.default.put(key, res.clone());
-  return res;
+  const html = renderPublic(s, sj);
+  const put = caches.default.put(key, new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=300" } }));
+  ctx && ctx.waitUntil ? ctx.waitUntil(put) : await put;
+  return out(html);
 }
