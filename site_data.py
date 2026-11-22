@@ -775,6 +775,81 @@ def new_today():
     return sorted(set(keys))
 
 
+# ---------------------------------------------------------------- public pages for Google (data/seo.json)
+PUBLIC_REASONS = {"rs", "hi", "mom", "trend", "sector", "oi", "brk"}    # never setups or buy signals
+
+
+def seo_data(out, fo, sj, uj, oi, px, ctx):
+    """Everything the public stock, OI, ban and sector pages need, in one small file.
+    No setups, no entry/stop/target levels, no scorecard."""
+    if oi is None or len(oi) < 2:
+        return None
+    n = min(len(oi), 22)
+    dates = [str(d) for d in oi.index[-n:]]
+    try:
+        with open(os.path.join(DATA, "names.json")) as f:
+            names = json.load(f)
+    except Exception:
+        names = {}
+    states = {}
+    for k in ("rows", "overspill", "ranges"):
+        for r in fo.get(k) or []:
+            if isinstance(r, dict) and r.get("states"):
+                states.setdefault(r["symbol"], r["states"])
+    for r in uj.get("rows", []):
+        if r.get("states"):
+            states.setdefault(r["symbol"], r["states"])
+    strong = {x["symbol"]: x for x in strongest_block(sj.get("strongest_fo") or [], ctx, 400)}
+    for x in sj.get("strongest_fo") or []:
+        states.setdefault(x["symbol"], x.get("states") or {})
+    events = {r["symbol"]: [[e.get("when", ""), e.get("text", "")] for e in (r.get("events") or [])[:4]]
+              for r in uj.get("rows", [])}
+    hu = out.get("heads_up") or {}
+    ban, results = set(hu.get("ban") or []), hu.get("results") or {}
+    d_oi = (oi.iloc[-1] / oi.iloc[-2] - 1) * 100
+    d_px = (px.iloc[-1] / px.iloc[-2] - 1) * 100
+    k5 = min(6, len(oi))
+    o5 = (oi.iloc[-1] / oi.iloc[-k5] - 1) * 100
+    p5 = (px.iloc[-1] / px.iloc[-k5] - 1) * 100
+    quads = {k: [] for k, *_ in QUADS}
+    stocks = {}
+    for s in oi.columns:
+        o, p = oi[s].iloc[-n:], px[s].iloc[-n:]
+        if pd.isna(o.iloc[-1]) or pd.isna(p.iloc[-1]):
+            continue
+        q = None
+        if pd.notna(d_oi.get(s)) and pd.notna(d_px.get(s)) and abs(d_oi[s]) < 300:
+            q = ("long" if d_px[s] > 0 else "short") if d_oi[s] > 0 else ("cover" if d_px[s] > 0 else "unwind")
+            quads[q].append({"s": s, "oi": r1(d_oi[s]), "px": r1(d_px[s])})
+        st = strong.get(s, {})
+        stocks[s] = {
+            "n": names.get(s, ""), "sec": SECTORS.get(s, {}).get("sector") or st.get("sector") or "Others",
+            "stage": SECTORS.get(s, {}).get("stage"),
+            "c": r1(p.iloc[-1], 2), "d": r1(d_px.get(s)), "d5": r1(p5.get(s)),
+            "oid": r1(d_oi.get(s)), "oi5": r1(o5.get(s)), "q": q,
+            "oi": [None if pd.isna(v) else int(v) for v in o], "px": [None if pd.isna(v) else r1(v, 2) for v in p],
+            "st": states.get(s) or {}, "ev": events.get(s, []),
+            "rk": st.get("rank"), "sc": st.get("score"), "r1m": st.get("r1m"), "r3m": st.get("r3m"), "hi52": st.get("hi52"),
+            "rs": [r["text"] for r in st.get("reasons", []) if r["kind"] in PUBLIC_REASONS],
+            "ban": s in ban, "res": results.get(s)}
+    for k in quads:
+        quads[k].sort(key=lambda x: -abs(x["oi"]))
+    sectors = []
+    for x in sj.get("sectors") or []:
+        row = {k: x.get(k) for k in ("name", "stage", "direction", "rw", "r2w", "r1", "ratio", "mom", "d_bull", "n")}
+        row["members"] = sorted([s for s in stocks if stocks[s]["sec"] == x.get("name")], key=lambda s: stocks[s]["rk"] or 999)
+        sectors.append(row)
+    res = {"generated_ist": out.get("generated_ist"), "oi_asof": dates[-1], "dates": dates,
+           "strength": {k: (out.get("strength") or {}).get(k) for k in ("score", "label", "trend")},
+           "stocks": stocks, "quads": quads, "building": (out.get("buildup") or {}).get("building", []),
+           "sectors": sectors, "ban": sorted(ban), "results": results}
+    path = os.path.join(DATA, "seo.json")
+    with open(path, "w") as f:
+        json.dump(res, f, separators=(",", ":"), allow_nan=False, default=str)
+    print(f"site_data: wrote seo.json ({os.path.getsize(path) // 1024} KB, {len(stocks)} stocks)")
+    return res
+
+
 # ---------------------------------------------------------------- build
 def run(now=None):
     global SECTORS
@@ -937,6 +1012,10 @@ def run(now=None):
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
     write_names()
+    try:
+        seo_data(out, fo, sj, uj, oi, px, ctx)
+    except Exception as ex:
+        print("site_data: seo pages data failed:", ex)
     print(f"site_data: wrote {OUT} ({os.path.getsize(OUT) // 1024} KB), "
           f"strength {st_['score'] if st_ else 'n/a'}, {len(picks)} picks, {len(ready)} ready")
     return out

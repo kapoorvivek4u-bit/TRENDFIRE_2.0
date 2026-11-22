@@ -2,22 +2,22 @@
 // from the latest scan. It shows market weather, indexes, sector rotation, strongest F&O stocks, OI build-up,
 // movers and the ban list. It never shows setups, buy/stop/target levels, the watchlist or the scorecard.
 
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const num = (v, d = 2) => v == null ? "—" : Number(v).toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d });
-const pct = (v, d = 1) => v == null ? "—" : `${v > 0 ? "+" : ""}${Number(v).toFixed(d)}%`;
-const cls = v => v > 0 ? "up" : v < 0 ? "down" : "";
-const STAGE_C = { Leading: "var(--up)", Improving: "var(--info)", Weakening: "var(--warn)", Lagging: "var(--down)" };
+export const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+export const num = (v, d = 2) => v == null ? "—" : Number(v).toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d });
+export const pct = (v, d = 1) => v == null ? "—" : `${v > 0 ? "+" : ""}${Number(v).toFixed(d)}%`;
+export const cls = v => v > 0 ? "up" : v < 0 ? "down" : "";
+export const STAGE_C = { Leading: "var(--up)", Improving: "var(--info)", Weakening: "var(--warn)", Lagging: "var(--down)" };
 const WX = sc => sc >= 70 ? ["sun", "Clear skies"] : sc >= 55 ? ["partly", "Partly sunny"] : sc >= 40 ? ["rain", "Light showers"] : ["storm", "Storm warning"];
-const tv = s => `https://www.tradingview.com/chart/?symbol=NSE:${encodeURIComponent(s)}`;
+export const tv = s => `https://www.tradingview.com/chart/?symbol=NSE:${encodeURIComponent(s)}`;
 
-function spark(v, color, w = 120, h = 34) {
+export function spark(v, color, w = 120, h = 34) {
   if (!v || v.length < 2) return "";
   const lo = Math.min(...v), hi = Math.max(...v), r = hi - lo || 1;
   const pts = v.map((x, i) => `${(i / (v.length - 1) * w).toFixed(1)},${(h - 2 - (x - lo) / r * (h - 4)).toFixed(1)}`).join(" ");
   return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
-function rrg(secs) {
+export function rrg(secs) {
   secs = secs.filter(s => s.ratio != null && s.mom != null);
   if (!secs.length) return "";
   const W = 560, H = 380, P = 34;
@@ -56,80 +56,7 @@ function headline(s) {
   };
 }
 
-export function renderPublic(s, sj) {
-  const st = s.strength || {}, m = s.market || {};
-  const [kind, word] = WX(st.score ?? 50);
-  const gen = s.generated_ist || "";
-  const when = gen ? new Date(gen.replace(" ", "T") + ":00+05:30") : new Date();
-  const dateTxt = when.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata" });
-  const timeTxt = when.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata" });
-  const hd = headline(s);
-  const secsFull = (sj && sj.sectors) || [];
-  const secs = s.sectors || [];
-  const byStage = ["Leading", "Improving", "Weakening", "Lagging"].map(g => [g, secs.filter(x => x.stage === g)]);
-
-  const idx = (s.indexes || []).map(i => {
-    const c = (i.chg1 ?? 0) >= 0 ? "var(--up)" : "var(--down)";
-    return `<div class="ix"><div class="ixn">${esc(i.name)}</div><div class="ixv">${num(i.close)}</div>
-      <div class="ixc"><span class="${cls(i.chg1)}">${pct(i.chg1, 2)}</span><span class="muted">5d ${pct(i.chg5, 1)}</span></div><div class="sp">${spark((i.spark || []).slice(-30), c)}</div></div>`;
-  }).join("");
-
-  const parts = (st.parts || []).map(p => { const c = p.value >= 60 ? "var(--up)" : p.value >= 40 ? "var(--warn)" : "var(--down)";
-    return `<div class="part"><span>${esc(p.name)}</span><span class="bar"><i style="width:${p.value}%;background:${c}"></i></span><b>${p.value}</b><small>${esc(p.why)}</small></div>`; }).join("");
-
-  const strong = (s.strongest_fo || []).slice(0, 12).map(x => `<tr>
-      <td class="n rk">${x.rank}</td><td><a class="sym" href="${tv(x.symbol)}" target="_blank" rel="noopener">${esc(x.symbol)}</a><div class="muted sm">${esc(x.sector || "")}</div></td>
-      <td class="n"><span class="score">${x.score}</span></td><td class="n ${cls(x.r1m)}">${pct(x.r1m)}</td><td class="n ${cls(x.r3m)}">${pct(x.r3m)}</td>
-      <td class="why">${(x.reasons || []).filter(r => r.kind !== "vk").slice(0, 3).map(r => `<span class="tag">${esc(r.text)}</span>`).join("")}</td></tr>`).join("");
-
-  const boxes = ((s.quadrants || {}).boxes || []);
-  const BOX_C = { long: "var(--up)", short: "var(--down)", cover: "var(--info)", unwind: "var(--warn)" };
-  const oi = boxes.map(b => `<div class="oib" style="--c:${BOX_C[b.key] || "var(--muted)"}"><div class="oih"><b>${esc(b.name)}</b><span>${b.count} stocks</span></div>
-      ${(b.top || []).slice(0, 5).map(t => `<div class="oir"><a href="${tv(t.symbol)}" target="_blank" rel="noopener">${esc(t.symbol)}</a><span class="muted">OI ${pct(t.oi)}</span><span class="${cls(t.px)}">${pct(t.px)}</span></div>`).join("")}</div>`).join("");
-
-  const mover = (list) => (list || []).slice(0, 6).map(g => `<div class="oir"><a href="${tv(g.symbol)}" target="_blank" rel="noopener">${esc(g.symbol)}</a><span class="muted">${esc(g.sector || "")}</span><span class="${cls(g.chg)}">${pct(g.chg, 2)}</span></div>`).join("");
-
-  const hu = s.heads_up || {}, ban = hu.ban || [], res = Object.entries(hu.results || {}).sort((a, b) => a[1].localeCompare(b[1]));
-  const fmtD = d => new Date(d + "T00:00:00+05:30").toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" });
-
-  const faq = [
-    ["What is TradeReady?", "TradeReady scans every NSE F&O stock on Monthly, Weekly, Daily and Hourly charts and reads futures open interest, sector rotation and market breadth. This page is the free daily summary; signed-in members also see the full setup scanner."],
-    ["How often is it updated?", `Through the trading day, with the latest read at ${timeTxt} IST on ${dateTxt}. Open interest data is from the last NSE session${(s.quadrants || {}).date ? ` (${fmtD(s.quadrants.date)})` : ""}.`],
-    ["Is it free?", "Yes. Signing in with any Google account is free and gives view access to the full scanner."],
-    ["Is this investment advice?", "No. TradeReady is a study and tracking tool. It is not a SEBI-registered investment adviser or research analyst, and nothing here is a recommendation to buy or sell."]
-  ];
-  const ld = [{ "@context": "https://schema.org", "@type": "WebApplication", name: "TradeReady", url: "https://tradeready.in/", applicationCategory: "FinanceApplication", operatingSystem: "Web",
-      description: "Daily NSE F&O market read: market strength, sector rotation, strongest stocks and futures open interest build-up.", offers: { "@type": "Offer", price: "0", priceCurrency: "INR" }, inLanguage: "en-IN" },
-    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }];
-
-  const title = `NSE market today: ${hd.best ? `${hd.best} lead` : "market read"}, strength ${st.score ?? "—"} · TradeReady`;
-  const desc = `${dateTxt}: ${hd.h} Market strength ${st.score ?? "—"}/100 (${st.label || ""}). Sector rotation, strongest F&O stocks, OI build-up and the F&O ban list.`;
-  const g = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.8-5.5 3.8-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.2 14.6 2.2 12 2.2 6.6 2.2 2.3 6.6 2.3 12s4.3 9.8 9.7 9.8c5.6 0 9.3-3.9 9.3-9.5 0-.6-.1-1.1-.2-1.6H12z"/></svg>`;
-  const mark = `<span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-6 5 4 10-11" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9h6v6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
-  const readyFo = s.ready_fo ?? 0, readyAll = s.ready_count ?? 0;
-  const ghost = Array.from({ length: 3 }, (_, i) => `<div class="ghost"><div class="gl" style="width:${50 + i * 12}%"></div><div class="gl" style="width:80%"></div><div class="gbars">${Array.from({ length: 16 }, (_, j) => `<i style="height:${20 + ((i * 7 + j * 13) % 60)}%"></i>`).join("")}</div><div class="gl" style="width:65%"></div></div>`).join("");
-
-  return `<!doctype html>
-<html lang="en-IN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="https://tradeready.in/">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="website"><meta property="og:site_name" content="TradeReady"><meta property="og:url" content="https://tradeready.in/">
-<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
-<meta property="og:image" content="https://tradeready.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="https://tradeready.in/og-image.png">
-<meta name="theme-color" content="#f6f4ef">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="TradeReady"><meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>
-<style>
-:root{--bg:#f6f4ef;--bg2:#eceaff;--surface:#fff;--surface2:#f4f3fb;--line:#e6e3f3;--ink:#1e1b4b;--muted:#6b6894;--accent:#4f46e5;--accent2:#7c3aed;
+export const CSS = `:root{--bg:#f6f4ef;--bg2:#eceaff;--surface:#fff;--surface2:#f4f3fb;--line:#e6e3f3;--ink:#1e1b4b;--muted:#6b6894;--accent:#4f46e5;--accent2:#7c3aed;
   --up:#0f8a5f;--down:#e03131;--warn:#d9480f;--info:#2563eb;--shadow:0 6px 24px rgba(79,70,229,.08);
   --f-ui:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-head:"Space Grotesk",Inter,system-ui,sans-serif;--f-num:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:light}
 *{box-sizing:border-box}
@@ -249,21 +176,140 @@ footer a{font-weight:600;margin-right:14px}
 .fade{animation:up .6s cubic-bezier(.2,.7,.2,1) both}
 @keyframes up{from{opacity:0;transform:translateY(10px)}}
 @media (prefers-reduced-motion:reduce){.fade,.live i{animation:none}}
-</style>
+
+.nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px;margin-top:-2px}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;font-size:13px;font-weight:700;color:var(--muted);padding:7px 12px;border-radius:999px}
+.nav a.on{background:var(--ink);color:#fff}
+.nav a:hover:not(.on){background:var(--surface2);color:var(--ink)}
+.crumb{font-size:12.5px;color:var(--muted);margin:22px 0 4px}.crumb a{font-weight:600}.crumb a:hover{color:var(--accent)}
+.ph{font-family:var(--f-head);font-size:clamp(28px,4.6vw,44px);line-height:1.06;letter-spacing:-.035em;margin:6px 0 10px;text-wrap:balance}
+.lede{color:var(--muted);font-size:15.5px;max-width:70ch;margin:0 0 8px}
+.kpis{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));margin:18px 0}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow)}
+.kpi small{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.kpi b{font-family:var(--f-num);font-size:20px;letter-spacing:-.02em}
+.kpi span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.tf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tf div{border-radius:12px;padding:10px;background:color-mix(in srgb,var(--c) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 25%,transparent)}
+.tf small{display:block;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em}
+.tf b{color:var(--c);font-size:14px}
+.oichart{width:100%;height:auto;display:block}
+.prose{max-width:72ch;color:var(--ink);font-size:15px}.prose p{margin:0 0 12px}
+.az{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 18px}.az a{font-family:var(--f-num);font-weight:700;font-size:13px;width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:var(--surface);border:1px solid var(--line)}
+.grid3{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr))}
+.sl{display:flex;justify-content:space-between;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:13px}
+.sl b{font-family:var(--f-num)}.sl span{color:var(--muted);font-size:11.5px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sl:hover{border-color:var(--accent)}
+.empty2{padding:16px;border-radius:14px;background:var(--surface2);color:var(--muted)}
+`;
+const G = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.8-5.5 3.8-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.2 14.6 2.2 12 2.2 6.6 2.2 2.3 6.6 2.3 12s4.3 9.8 9.7 9.8c5.6 0 9.3-3.9 9.3-9.5 0-.6-.1-1.1-.2-1.6H12z"/></svg>`;
+const MARK = `<span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-6 5 4 10-11" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9h6v6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+export const NAV = [["/", "Market today"], ["/stocks", "F&O stocks"], ["/oi-buildup", "OI build-up"], ["/fo-ban-list", "F&O ban list"],
+  ["/sector-rotation", "Sector rotation"], ["/strongest-stocks", "Strongest stocks"]];
+export { G as GOOGLE_ICON };
+
+// One page frame for every public page: head (SEO tags), header with links, footer with the disclaimer.
+export function shell({ title, desc, path, ld, body }) {
+  const url = "https://tradeready.in" + path;
+  const top = path.startsWith("/stock/") ? "/stocks" : path;
+  return `<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}">
+<link rel="canonical" href="${url}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website"><meta property="og:site_name" content="TradeReady"><meta property="og:url" content="${url}">
+<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
+<meta property="og:image" content="https://tradeready.in/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="https://tradeready.in/og-image.png">
+<meta name="theme-color" content="#f6f4ef">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="TradeReady"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+${ld ? `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>` : ""}
+<style>${CSS}</style>
 </head>
 <body>
-<header><div class="wrap bar1">
-  <a class="brand" href="/">${mark}<span>Trade<b>Ready</b></span></a>
-  <a class="gbtn" href="/auth/google">${g}<span>Sign in<span class="long"> with Google</span></span></a>
+<header><div class="wrap">
+  <div class="bar1"><a class="brand" href="/">${MARK}<span>Trade<b>Ready</b></span></a>
+  <a class="gbtn" href="/auth/google">${G}<span>Sign in<span class="long"> with Google</span></span></a></div>
+  <nav class="nav" aria-label="Market pages">${NAV.map(([h, t]) => `<a href="${h}"${h === top ? ' class="on" aria-current="page"' : ""}>${esc(t)}</a>`).join("")}</nav>
 </div></header>
-
 <main class="wrap">
+${body}
+</main>
+<footer><div class="wrap">
+  <div class="row"><div>${NAV.slice(1).map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join("")}</div></div>
+  <div class="row" style="margin-top:10px"><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/login">Sign in</a><a href="/admin">Admin</a></div><div>© ${new Date().getFullYear()} TradeReady · tradeready.in</div></div>
+  <p style="margin:12px 0 0;max-width:90ch">For study and tracking only. TradeReady is not a SEBI-registered investment adviser or research analyst, and nothing on this site is a recommendation to buy or sell. Market data can be delayed or wrong; check with your broker before you trade.</p>
+</div></footer>
+</body>
+</html>`;
+}
+
+export function renderPublic(s, sj) {
+  const st = s.strength || {}, m = s.market || {};
+  const [kind, word] = WX(st.score ?? 50);
+  const gen = s.generated_ist || "";
+  const when = gen ? new Date(gen.replace(" ", "T") + ":00+05:30") : new Date();
+  const dateTxt = when.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata" });
+  const timeTxt = when.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata" });
+  const hd = headline(s);
+  const secsFull = (sj && sj.sectors) || [];
+  const secs = s.sectors || [];
+  const byStage = ["Leading", "Improving", "Weakening", "Lagging"].map(g => [g, secs.filter(x => x.stage === g)]);
+
+  const idx = (s.indexes || []).map(i => {
+    const c = (i.chg1 ?? 0) >= 0 ? "var(--up)" : "var(--down)";
+    return `<div class="ix"><div class="ixn">${esc(i.name)}</div><div class="ixv">${num(i.close)}</div>
+      <div class="ixc"><span class="${cls(i.chg1)}">${pct(i.chg1, 2)}</span><span class="muted">5d ${pct(i.chg5, 1)}</span></div><div class="sp">${spark((i.spark || []).slice(-30), c)}</div></div>`;
+  }).join("");
+
+  const parts = (st.parts || []).map(p => { const c = p.value >= 60 ? "var(--up)" : p.value >= 40 ? "var(--warn)" : "var(--down)";
+    return `<div class="part"><span>${esc(p.name)}</span><span class="bar"><i style="width:${p.value}%;background:${c}"></i></span><b>${p.value}</b><small>${esc(p.why)}</small></div>`; }).join("");
+
+  const strong = (s.strongest_fo || []).slice(0, 12).map(x => `<tr>
+      <td class="n rk">${x.rank}</td><td><a class="sym" href="/stock/${encodeURIComponent(x.symbol)}">${esc(x.symbol)}</a><div class="muted sm">${esc(x.sector || "")}</div></td>
+      <td class="n"><span class="score">${x.score}</span></td><td class="n ${cls(x.r1m)}">${pct(x.r1m)}</td><td class="n ${cls(x.r3m)}">${pct(x.r3m)}</td>
+      <td class="why">${(x.reasons || []).filter(r => r.kind !== "vk").slice(0, 3).map(r => `<span class="tag">${esc(r.text)}</span>`).join("")}</td></tr>`).join("");
+
+  const boxes = ((s.quadrants || {}).boxes || []);
+  const BOX_C = { long: "var(--up)", short: "var(--down)", cover: "var(--info)", unwind: "var(--warn)" };
+  const oi = boxes.map(b => `<div class="oib" style="--c:${BOX_C[b.key] || "var(--muted)"}"><div class="oih"><b>${esc(b.name)}</b><span>${b.count} stocks</span></div>
+      ${(b.top || []).slice(0, 5).map(t => `<div class="oir"><a href="/stock/${encodeURIComponent(t.symbol)}">${esc(t.symbol)}</a><span class="muted">OI ${pct(t.oi)}</span><span class="${cls(t.px)}">${pct(t.px)}</span></div>`).join("")}</div>`).join("");
+
+  const mover = (list) => (list || []).slice(0, 6).map(g => `<div class="oir"><a href="/stock/${encodeURIComponent(g.symbol)}">${esc(g.symbol)}</a><span class="muted">${esc(g.sector || "")}</span><span class="${cls(g.chg)}">${pct(g.chg, 2)}</span></div>`).join("");
+
+  const hu = s.heads_up || {}, ban = hu.ban || [], res = Object.entries(hu.results || {}).sort((a, b) => a[1].localeCompare(b[1]));
+  const fmtD = d => new Date(d + "T00:00:00+05:30").toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" });
+
+  const faq = [
+    ["What is TradeReady?", "TradeReady scans every NSE F&O stock on Monthly, Weekly, Daily and Hourly charts and reads futures open interest, sector rotation and market breadth. This page is the free daily summary; signed-in members also see the full setup scanner."],
+    ["How often is it updated?", `Through the trading day, with the latest read at ${timeTxt} IST on ${dateTxt}. Open interest data is from the last NSE session${(s.quadrants || {}).date ? ` (${fmtD(s.quadrants.date)})` : ""}.`],
+    ["Is it free?", "Yes. Signing in with any Google account is free and gives view access to the full scanner."],
+    ["Is this investment advice?", "No. TradeReady is a study and tracking tool. It is not a SEBI-registered investment adviser or research analyst, and nothing here is a recommendation to buy or sell."]
+  ];
+  const ld = [{ "@context": "https://schema.org", "@type": "WebApplication", name: "TradeReady", url: "https://tradeready.in/", applicationCategory: "FinanceApplication", operatingSystem: "Web",
+      description: "Daily NSE F&O market read: market strength, sector rotation, strongest stocks and futures open interest build-up.", offers: { "@type": "Offer", price: "0", priceCurrency: "INR" }, inLanguage: "en-IN" },
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }];
+
+  const title = `NSE market today: ${hd.best ? `${hd.best} lead` : "market read"}, strength ${st.score ?? "—"} · TradeReady`;
+  const desc = `${dateTxt}: ${hd.h} Market strength ${st.score ?? "—"}/100 (${st.label || ""}). Sector rotation, strongest F&O stocks, OI build-up and the F&O ban list.`;
+  const readyFo = s.ready_fo ?? 0, readyAll = s.ready_count ?? 0;
+  const ghost = Array.from({ length: 3 }, (_, i) => `<div class="ghost"><div class="gl" style="width:${50 + i * 12}%"></div><div class="gl" style="width:80%"></div><div class="gbars">${Array.from({ length: 16 }, (_, j) => `<i style="height:${20 + ((i * 7 + j * 13) % 60)}%"></i>`).join("")}</div><div class="gl" style="width:65%"></div></div>`).join("");
+
+  return shell({ title, desc, path: "/", ld, body: `
   <div class="hero">
     <div class="fade">
       <div class="kicker"><span class="live"><i></i>Updated ${esc(timeTxt)} IST</span><span>·</span><span>${esc(dateTxt)}</span></div>
       <h1>${hd.best ? `${esc(hd.best)} <em>lead</em>, ${esc(hd.worst)} <s>drag</s>. ${esc(hd.h.split(". ").slice(1).join(". "))}` : esc(hd.h)}</h1>
       <p class="deck">${esc(hd.deck)}</p>
-      <div class="cta"><a class="gbtn big" href="/auth/google">${g}Open the full scanner, free</a><small>Any Google account. View only.</small></div>
+      <div class="cta"><a class="gbtn big" href="/auth/google">${G}Open the full scanner, free</a><small>Any Google account. View only.</small></div>
     </div>
     <div class="wx fade" data-w="${kind}" style="animation-delay:.08s">
       <svg class="sky" viewBox="0 0 120 100" aria-hidden="true">${SKY[kind]}</svg>
@@ -277,7 +323,7 @@ footer a{font-weight:600;margin-right:14px}
   <div class="strip fade" style="animation-delay:.14s">${idx}</div>
 
   <section class="blk">
-    <div class="sh"><h2>Sector rotation</h2><p>Where money is moving. Right of centre beats Nifty; above centre is gaining strength. Sectors usually travel clockwise: Improving → Leading → Weakening → Lagging.</p></div>
+    <div class="sh"><h2><a href="/sector-rotation">Sector rotation ›</a></h2><p>Where money is moving. Right of centre beats Nifty; above centre is gaining strength. Sectors usually travel clockwise: Improving → Leading → Weakening → Lagging.</p></div>
     <div class="two">
       <div class="card">${rrg(secsFull)}</div>
       <div class="card">${byStage.map(([gname, list]) => `<div class="stage" style="--c:${STAGE_C[gname]}"><h3>${gname} · ${list.length}</h3><div class="chips">${list.map(x => `<span class="chip" style="--c:${STAGE_C[gname]}">${esc(x.name)}<small>${pct(x.r1)}</small></span>`).join("") || `<span class="muted sm">None today</span>`}</div></div>`).join("")}
@@ -298,12 +344,12 @@ footer a{font-weight:600;margin-right:14px}
   </section>
 
   <section class="blk">
-    <div class="sh"><h2>Strongest F&amp;O stocks</h2><p>Ranked on relative strength, trend, momentum across timeframes and sector. A list to study, not a buy list.</p></div>
+    <div class="sh"><h2><a href="/strongest-stocks">Strongest F&amp;O stocks ›</a></h2><p>Ranked on relative strength, trend, momentum across timeframes and sector. A list to study, not a buy list.</p></div>
     <div class="card"><div class="tw"><table><thead><tr><th class="n">#</th><th>Stock</th><th class="n">Score</th><th class="n">1M</th><th class="n">3M</th><th>Why it ranks</th></tr></thead><tbody>${strong}</tbody></table></div></div>
   </section>
 
   <section class="blk">
-    <div class="sh"><h2>Futures OI build-up</h2><p>Open interest and price change in stock futures from the last NSE session${(s.quadrants || {}).date ? ` (${esc(fmtD(s.quadrants.date))})` : ""}. Rising OI with rising price is long build-up; falling OI with rising price is short covering.</p></div>
+    <div class="sh"><h2><a href="/oi-buildup">Futures OI build-up ›</a></h2><p>Open interest and price change in stock futures from the last NSE session${(s.quadrants || {}).date ? ` (${esc(fmtD(s.quadrants.date))})` : ""}. Rising OI with rising price is long build-up; falling OI with rising price is short covering.</p></div>
     <div class="oig">${oi}</div>
   </section>
 
@@ -312,7 +358,7 @@ footer a{font-weight:600;margin-right:14px}
     <div class="heads">
       <div class="oib" style="--c:var(--up)"><div class="oih"><b>Top gainers</b><span>F&amp;O</span></div>${mover(s.gainers)}</div>
       <div class="oib" style="--c:var(--down)"><div class="oih"><b>Top losers</b><span>F&amp;O</span></div>${mover(s.losers)}</div>
-      <div class="oib" style="--c:var(--warn)"><div class="oih"><b>Heads-up</b><span>F&amp;O</span></div>
+      <div class="oib" style="--c:var(--warn)"><div class="oih"><b><a href="/fo-ban-list">Heads-up ›</a></b><span>F&amp;O</span></div>
         <div class="muted sm" style="margin:4px 0 6px;font-weight:700">In F&amp;O ban</div><div class="chips">${ban.map(b => `<span class="chip" style="--c:var(--down)">${esc(b)}</span>`).join("") || `<span class="muted sm">None today</span>`}</div>
         <div class="muted sm" style="margin:12px 0 6px;font-weight:700">Results soon</div><div class="chips">${res.map(([k, d]) => `<span class="chip" style="--c:var(--info)">${esc(k)}<small>${esc(fmtD(d))}</small></span>`).join("") || `<span class="muted sm">None this week</span>`}</div></div>
     </div>
@@ -324,7 +370,7 @@ footer a{font-weight:600;margin-right:14px}
         <div class="bignum">${readyFo}</div>
         <h2>F&amp;O setups are Ready today${readyAll > readyFo ? `, plus ${readyAll - readyFo} in equity` : ""}.</h2>
         <p>Pullbacks, squeezes, overspills, flags and VCPs on four timeframes, with charts, unusual OI, block deals and every index in detail. Free with Google sign-in.</p>
-        <a class="gbtn big" href="/auth/google">${g}Sign in to see them</a></div>
+        <a class="gbtn big" href="/auth/google">${G}Sign in to see them</a></div>
       <div class="ghosts" aria-hidden="true">${ghost}</div>
     </div></div>
   </section>
@@ -342,14 +388,7 @@ footer a{font-weight:600;margin-right:14px}
     <div class="sh"><h2>Questions</h2></div>
     <div>${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}</div>
   </section>
-</main>
-
-<footer><div class="wrap">
-  <div class="row"><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/login">Sign in</a><a href="/admin">Admin</a></div><div>© ${new Date().getFullYear()} TradeReady · tradeready.in</div></div>
-  <p style="margin:12px 0 0;max-width:90ch">For study and tracking only. TradeReady is not a SEBI-registered investment adviser or research analyst, and nothing on this site is a recommendation to buy or sell. Market data can be delayed or wrong; check with your broker before you trade.</p>
-</div></footer>
-</body>
-</html>`;
+` });
 }
 
 // Cached for 5 minutes so Google and visitors share one copy.

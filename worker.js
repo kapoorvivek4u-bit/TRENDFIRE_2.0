@@ -1,4 +1,5 @@
 import { publicPage } from "./public.js";
+import { isPublicPage, servePublicPage } from "./pages.js";
 // tradeready.in server (Cloudflare Worker). It does four jobs:
 //  1. Sign-in. Users sign in with Google (any Google account). The admin signs in at /admin
 //     with a password. Nobody sees the site without signing in.
@@ -371,6 +372,10 @@ export default {
       if (url.hostname.startsWith("www.")) {             // one address for Google: tradeready.in
         url.hostname = url.hostname.slice(4);
         return Response.redirect(url.toString(), 301);
+      }
+      if (req.method === "GET" && isPublicPage(p.replace(/\/+$/, "") || "/")) {   // public pages for Google, same for everyone
+        try { const pg = await servePublicPage(env, ctx, url); if (pg) return pg; } catch (e) { console.log("public page failed", p, e.message); }
+        if (p !== "/sitemap.xml") return new Response("Not found", { status: 404 });
       }
       const user = await readSession(env, req);
       if (!user && p === "/") {                          // signed-out visitors and Google see today's public market page
