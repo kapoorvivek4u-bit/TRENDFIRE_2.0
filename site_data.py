@@ -928,7 +928,9 @@ def run(now=None):
     except Exception as ex:
         print("site_data: scorecard failed:", ex)
     try:
-        out["heads_up"] = heads_up(now.date())
+        hu = heads_up(now.date())
+        hu["results"] = {k: v for k, v in hu["results"].items() if k in out["closes"]}   # F&O stocks only
+        out["heads_up"] = hu
     except Exception as ex:
         print("site_data: heads-up failed:", ex)
     out["new"] = new_today()
