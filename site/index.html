@@ -63,6 +63,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pill .dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 22%,transparent)}
 .tbtn{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line)}
 .tbtn svg{width:17px;height:17px}
+@media (max-width:600px){.dchart text{font-size:22px}}
+@media (max-width:420px){.top-r{gap:5px}.tbtn{width:32px;height:32px;border-radius:10px}.top .pill{padding:6px 8px}.top .brand{font-size:18px;gap:7px}}
 
 main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1320px;margin:0 auto}
 
@@ -1524,14 +1526,38 @@ function moversCardSmall(){
 const ago = iso => { if(!iso) return "—"; const m = Math.round((Date.now() - Date.parse(iso))/60000);
   return m < 1 ? "just now" : m < 60 ? m + " min ago" : m < 1440 ? Math.round(m/60) + " h ago" : Math.round(m/1440) + " d ago"; };
 const dt = iso => iso ? new Date(iso).toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit", timeZone:"Asia/Kolkata"}) : "—";
+const istDay = ms => new Date(ms + 5.5*3600e3).toISOString().slice(0,10);
+const pageLabel = k => { for(const p of PAGES){ if(p[0] === k) return p[1] + (p[3].length ? " · " + p[3][0][1] : "");
+  const sub = p[3].find(x => x[0] === k); if(sub) return p[1] + " · " + sub[1]; } return k; };
+function dailyChart(daily, signups, since){
+  const days = []; for(let i = 29; i >= 0; i--) days.push(istDay(Date.now() - i*864e5));
+  const by = Object.fromEntries((daily || []).map(r => [r.day, r]));
+  const rows = days.map(d => ({d, u: by[d] ? by[d].users : 0, v: by[d] ? by[d].views : 0, n: signups[d] || 0}));
+  const max = Math.max(1, ...rows.map(r => Math.max(r.u, r.n))), W = 720, H = 180, bw = W/30;
+  const bars = rows.map((r, i) => { const h = r.u/max*(H-30), x = i*bw;
+    return `<g><title>${r.d}: ${r.u} users, ${r.v} page views, ${r.n} new</title>
+      <rect x="${x+2}" y="${H-20-h}" width="${bw-4}" height="${Math.max(h, r.u ? 2 : 0)}" rx="3" fill="var(--accent)" opacity="${i === 29 ? 1 : .55}"/>
+      ${r.n ? `<circle cx="${x+bw/2}" cy="${H-20-r.n/max*(H-30)}" r="4" fill="var(--up)" stroke="var(--surface)" stroke-width="2"/>` : ""}
+      ${i % 5 === 4 || i === 29 ? `<text x="${i === 29 ? W : x+bw/2}" y="${H-4}" text-anchor="${i === 29 ? "end" : "middle"}" font-size="10" fill="var(--muted)">${new Date(r.d+"T00:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short"})}</text>` : ""}</g>`; }).join("");
+  const tot = rows.reduce((a, r) => a + r.v, 0);
+  return `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>Daily users<em>last 30 days · ${tot} page views</em></h2></div>
+    <svg class="dchart" viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block" role="img" aria-label="Users per day"><line x1="0" x2="${W}" y1="${H-20}" y2="${H-20}" stroke="var(--line)"/>${bars}</svg>
+    <div class="muted" style="font-size:12px;display:flex;gap:14px;flex-wrap:wrap;margin-top:6px"><span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--accent);margin-right:5px"></i>Users who opened the site</span><span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--up);margin-right:5px"></i>New sign-ups</span><span>Tap or hover a bar for the numbers</span></div></section>`;
+}
+const avatar = (u, s=28) => u && u.picture ? `<img src="${esc(u.picture)}" alt="" referrerpolicy="no-referrer" style="width:${s}px;height:${s}px;border-radius:50%;flex:none">`
+  : `<span style="width:${s}px;height:${s}px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--surface2);font-weight:700;font-size:12px">${esc(((u && (u.name || u.email)) || "?")[0].toUpperCase())}</span>`;
 async function pageAdmin(){
   if(!isAdmin()) return pageHead("Admin", "") + `<div class="empty">Admin only.</div>`;
-  let d;
-  try{ const r = await fetch("/api/admin/log", {cache:"no-store"}); d = await r.json(); }catch(e){ d = {error:"Could not reach the server."}; }
+  const get = u => fetch(u, {cache:"no-store"}).then(r => r.json()).catch(() => ({error:"Could not reach the server."}));
+  const [d, st] = await Promise.all([get("/api/admin/log"), get("/api/admin/stats")]);
   if(d.error) return pageHead("Admin", "Who signed in") + `<div class="empty">${esc(d.error)}</div>`;
-  const users = (d.users || []).filter(u => u.role !== "admin"), today = new Date().toISOString().slice(0,10);
-  const active = users.filter(u => (u.seen || "").slice(0,10) === today).length;
+  const users = (d.users || []).filter(u => u.role !== "admin"), today = istDay(Date.now());
+  const byEmail = Object.fromEntries(users.map(u => [u.email.toLowerCase(), u]));
+  const hasStats = !st.error, online = hasStats ? st.online : [], todayUsers = hasStats ? st.today_users : users.filter(u => istDay(Date.parse(u.seen || 0)) === today).map(u => ({email:u.email.toLowerCase(), last:Date.parse(u.seen)}));
   const week = users.filter(u => Date.now() - Date.parse(u.seen || u.last || 0) < 7*864e5).length;
+  const signups = {}; users.forEach(u => { if(u.first){ const k = istDay(Date.parse(u.first)); signups[k] = (signups[k] || 0) + 1; } });
+  const newWeek = users.filter(u => Date.now() - Date.parse(u.first || 0) < 7*864e5).length;
+  const top = {}; (hasStats ? st.per_user : []).forEach(r => { (top[r.email] = top[r.email] || []).push(r); });
   const k = KITE || {};
   const kiteCard = `<section class="card fade" style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
     <div><div class="ct" style="margin:0 0 6px"><h2>Kite Connect</h2></div>
@@ -1539,18 +1565,35 @@ async function pageAdmin(){
         : k.connected ? `<div style="font-weight:700" class="up">● Connected as ${esc(k.user_id || "")}</div><div class="muted" style="font-size:12.5px">Since ${dt(k.at)} · valid till ${dt(k.expires)}</div>`
         : `<div style="font-weight:700" class="down">● Not connected today</div><div class="muted" style="font-size:12.5px">Tap once each morning. The scans use today's token.</div>`}</div>
     ${k.configured ? `<a class="btn" href="/kite/login">${k.connected ? "Reconnect" : "Connect Kite"}</a>` : ""}</section>`;
-  return pageHead("Admin", "Who signed in, when, and from where") + kiteCard + `
-    <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
-      <div><small>Users</small><b>${users.length}</b></div><div><small>Active today</small><b>${active}</b></div>
-      <div><small>Active this week</small><b>${week}</b></div><div><small>Logins logged</small><b>${(d.logins || []).length}</b></div></div>
-    <section class="card fade"><div class="ct"><h2>Users<em>${users.length}</em></h2></div>
-      <div class="tw"><table class="t"><tr><th>User</th><th>Last seen</th><th>First login</th><th class="n">Logins</th><th class="n">Visits</th><th>Place · device</th></tr>
-      ${users.map(u => `<tr><td><div style="display:flex;gap:8px;align-items:center">${u.picture ? `<img src="${esc(u.picture)}" alt="" referrerpolicy="no-referrer" style="width:28px;height:28px;border-radius:50%">` : ""}<div><b>${esc(u.name || "—")}</b><div class="muted" style="font-size:11.5px">${esc(u.email)}</div></div></div></td>
-        <td style="white-space:nowrap">${ago(u.seen || u.last)}</td><td style="white-space:nowrap">${dt(u.first)}</td><td class="n">${u.logins || 0}</td><td class="n">${u.visits || 0}</td><td style="font-size:12px">${esc(u.place || "")}<div class="muted">${esc(u.device || "")}</div></td></tr>`).join("") || `<tr><td colspan="6" class="muted">Nobody has signed in yet.</td></tr>`}</table></div></section>
+  const person = (email, extra) => { const u = byEmail[email] || {email}; return `<div style="display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)">${avatar(u)}<div style="flex:1;min-width:0"><b>${esc(u.name || email)}</b><div class="muted" style="font-size:11.5px;overflow:hidden;text-overflow:ellipsis">${esc(email)}</div></div>${extra}</div>`; };
+  const noDb = `<div class="muted" style="font-size:12.5px">Page tracking starts once the D1 database is connected in Cloudflare.</div>`;
+  const onlineCard = `<section class="card fade"><div class="ct"><h2><span class="up" style="font-size:12px">●</span> Online now<em>${online.length}</em></h2></div>
+    ${!hasStats ? noDb : online.length ? online.map(o => person(o.email, `<div style="text-align:right;font-size:12px"><b>${esc(pageLabel(o.page || ""))}</b><div class="muted">${esc(o.device || "")}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody right now. Online means the site is open on their screen, checked every 2 minutes.</div>`}</section>`;
+  const todayCard = `<section class="card fade"><div class="ct"><h2>Opened today<em>${todayUsers.length}</em></h2></div>
+    ${todayUsers.length ? todayUsers.map(t => person(t.email, `<div style="text-align:right;font-size:12px;white-space:nowrap">${t.views ? `<b>${t.views} pages</b>` : ""}<div class="muted">last ${ago(new Date(t.last).toISOString())}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody yet today.</div>`}</section>`;
+  const pages = hasStats ? st.pages : [], pmax = Math.max(1, ...pages.map(p => p.views));
+  const pagesCard = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>Popular pages<em>last 30 days</em></h2></div>
+    ${!hasStats ? noDb : pages.length ? `<div class="tw"><table class="t"><tr><th>Page</th><th style="width:45%"></th><th class="n">Views</th><th class="n">People</th></tr>
+      ${pages.map(p => `<tr><td style="white-space:nowrap"><b>${esc(pageLabel(p.page))}</b></td><td><div class="meter" style="margin:0;max-width:none"><i style="width:${p.views/pmax*100}%;background:var(--accent)"></i></div></td><td class="n">${p.views}</td><td class="n">${p.users}</td></tr>`).join("")}</table></div>`
+      : `<div class="muted" style="font-size:12.5px">No page views yet. They start counting from now.</div>`}</section>`;
+  return pageHead("Admin", "Who uses the site, when, and what they open") + kiteCard + `
+    <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:14px">
+      <div><small>Users</small><b>${users.length}</b></div><div><small>Online now</small><b>${hasStats ? online.length : "—"}</b></div>
+      <div><small>Opened today</small><b>${todayUsers.length}</b></div><div><small>Active this week</small><b>${week}</b></div><div><small>New this week</small><b>${newWeek}</b></div></div>
+    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))">${onlineCard}${todayCard}</div>
+    ${dailyChart(hasStats ? st.daily : [], signups)}
+    ${pagesCard}
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>All users<em>${users.length}</em></h2></div>
+      <div class="tw"><table class="t"><tr><th>User</th><th>Last seen</th><th>First login</th><th class="n">Logins</th><th class="n">Visits</th><th>Opens most</th><th>Place · device</th></tr>
+      ${users.map(u => { const t = (top[u.email.toLowerCase()] || []).slice(0,3);
+        return `<tr><td><div style="display:flex;gap:8px;align-items:center">${avatar(u)}<div><b>${esc(u.name || "—")}</b><div class="muted" style="font-size:11.5px">${esc(u.email)}</div></div></div></td>
+        <td style="white-space:nowrap">${ago(u.seen || u.last)}</td><td style="white-space:nowrap">${dt(u.first)}</td><td class="n">${u.logins || 0}</td><td class="n">${u.visits || 0}</td>
+        <td style="font-size:12px">${t.map(x => `${esc(pageLabel(x.page))} <span class="muted">${x.views}</span>`).join("<br>") || `<span class="muted">—</span>`}</td>
+        <td style="font-size:12px">${esc(u.place || "")}<div class="muted">${esc(u.device || "")}</div></td></tr>`; }).join("") || `<tr><td colspan="7" class="muted">Nobody has signed in yet.</td></tr>`}</table></div></section>
     <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Recent logins<em>last 100</em></h2></div>
       <div class="tw"><table class="t"><tr><th>When</th><th>Who</th><th>How</th><th>Place</th><th>Device</th></tr>
       ${(d.logins || []).map(l => `<tr><td style="white-space:nowrap">${dt(l.at)}</td><td>${esc(l.name || l.email)}<div class="muted" style="font-size:11.5px">${esc(l.email)}</div></td><td>${chip(l.how, l.role === "admin" ? "var(--warn)" : "var(--info)")}</td><td style="font-size:12px">${esc(l.place || "")}</td><td style="font-size:12px">${esc(l.device || "")}</td></tr>`).join("")}</table></div></section>
-    <p class="foot-note">Visits count at most once an hour per person. Logins are kept for 120 days.</p>`;
+    <p class="foot-note">Your own visits as admin are not counted. Visits count at most once an hour per person. Page views and logins are kept for 120 days. People stay signed in for 30 days, so closing the site does not sign them out.</p>`;
 }
 
 /* ============================================================ render + events */
@@ -1558,7 +1601,12 @@ const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-al
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
   "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin};
-let RENDER_ID = 0;
+let RENDER_ID = 0, LAST_TRACK = "";
+function track(p){       // tells the admin page which pages people open (not counted for the admin)
+  if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
+  try{ navigator.sendBeacon("/api/hit", new Blob([JSON.stringify({p})], {type:"text/plain"})); }catch(e){}
+}
+setInterval(() => { if(USER && !isAdmin() && document.visibilityState === "visible") fetch("/api/hit", {method:"POST", body:"{}", keepalive:true}).catch(() => {}); }, 120000);
 async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
@@ -1578,6 +1626,7 @@ async function render(){
   };
   if(!keep && document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(paint); else paint();
   if(r === "today") prefetch();
+  if(!keep) track(r);
 }
 const rerender = () => { render.keepScroll = true; render(); };
 
