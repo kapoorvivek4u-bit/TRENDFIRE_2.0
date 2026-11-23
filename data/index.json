@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-23 11:31",
+ "generated_ist": "2026-11-23 12:15",
  "oi_asof": "2026-11-20",
  "indexes": [
   {
@@ -12,7 +12,7 @@
     "M": "Bottoming",
     "W": "Bullish",
     "D": "Impulse",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "vk": {
     "final": "NO SIGNAL",
@@ -99,13 +99,13 @@
    "setups": [
     {
      "symbol": "NIFTY",
-     "close": 25599.55,
+     "close": 25530.75,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
       "W": "Bullish",
       "D": "Impulse",
-      "H": "Impulse"
+      "H": "Topping"
      },
      "setup": "Hourly Overspill",
      "stage": "Watch",
@@ -128,8 +128,8 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 25536.3,
-     "stop": 25465.92
+     "trigger": 25535.77,
+     "stop": 25440.47
     }
    ],
    "futures": {
@@ -383,7 +383,7 @@
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": 7.6,
@@ -429,18 +429,6 @@
      }
     },
     {
-     "symbol": "SUNPHARMA",
-     "vk": "BUY NOW",
-     "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "B",
-     "oi": {
-      "oi_pct": -0.8,
-      "px_pct": 0.3,
-      "word": "No big change",
-      "side": 0
-     }
-    },
-    {
      "symbol": "BSE",
      "vk": "ALMOST READY (Bullish)",
      "setup": null,
@@ -473,6 +461,18 @@
       "oi_pct": 4.5,
       "px_pct": -0.6,
       "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "SUNPHARMA",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Weekly Overspill \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -0.8,
+      "px_pct": 0.3,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -515,7 +515,7 @@
     {
      "symbol": "ASIANPAINT",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Triggered",
+     "setup": "Swing Pullback \u00b7 Watch",
      "grade": "Warning",
      "oi": {
       "oi_pct": 19.8,
@@ -899,8 +899,8 @@
     {
      "symbol": "JIOFIN",
      "vk": null,
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -0.1,
       "px_pct": -1.1,
@@ -1019,7 +1019,7 @@
    "setups": [
     {
      "symbol": "BANKNIFTY",
-     "close": 63606.85,
+     "close": 63285.15,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -1028,7 +1028,7 @@
       "H": "Topping"
      },
      "setup": "Hourly Overspill",
-     "stage": "Triggered",
+     "stage": "Watch",
      "old": "\u2705 Confirmed Bullish",
      "ext": 7.1,
      "vk": {
@@ -1048,8 +1048,8 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63315.4,
-     "stop": 63050.15
+     "trigger": 63312.52,
+     "stop": 63035.38
     }
    ],
    "futures": {
@@ -1255,7 +1255,7 @@
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": 7.6,
@@ -1289,18 +1289,6 @@
      }
     },
     {
-     "symbol": "PNB",
-     "vk": "BUY NOW",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "C",
-     "oi": {
-      "oi_pct": -9.5,
-      "px_pct": 8.0,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "UNIONBANK",
      "vk": "BUY NOW",
      "setup": "Hourly Overspill \u00b7 Watch",
@@ -1308,6 +1296,18 @@
      "oi": {
       "oi_pct": -5.3,
       "px_pct": 6.6,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "PNB",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -9.5,
+      "px_pct": 8.0,
       "word": "Short covering",
       "side": 1
      }
@@ -1421,7 +1421,7 @@
     "M": "Topping",
     "W": "Bottoming",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "vk": {
     "final": "BUY NOW",
@@ -1508,13 +1508,13 @@
    "setups": [
     {
      "symbol": "MIDCAP",
-     "close": 17774.1,
+     "close": 17801.0,
      "trend": "With trend",
      "states": {
       "M": "Topping",
       "W": "Bottoming",
       "D": "Topping",
-      "H": "Impulse"
+      "H": "Topping"
      },
      "setup": "Weekly Overspill",
      "stage": "Triggered",
@@ -1732,8 +1732,8 @@
     {
      "symbol": "AUROPHARMA",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "B",
+     "setup": "Trend Pullback \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": 0.0,
       "px_pct": -1.2,
@@ -1768,8 +1768,8 @@
     {
      "symbol": "HEROMOTOCO",
      "vk": "BUY NOW",
-     "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "A",
+     "setup": "Hourly Range \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": 1.4,
       "px_pct": 2.6,
@@ -1792,7 +1792,7 @@
     {
      "symbol": "INDIANB",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": 7.6,
@@ -1960,8 +1960,8 @@
     {
      "symbol": "NAUKRI",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 1.9,
       "px_pct": -1.1,
@@ -1984,7 +1984,7 @@
     {
      "symbol": "SRF",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
+     "setup": "Hourly Range \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": -1.6,
@@ -2041,7 +2041,7 @@
     "M": "Bottoming",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "vk": {
     "final": "BUY NOW",
@@ -2128,16 +2128,16 @@
    "setups": [
     {
      "symbol": "FINNIFTY",
-     "close": 28542.0,
+     "close": 28423.2,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
       "W": "Impulse",
       "D": "Impulse",
-      "H": "Impulse"
+      "H": "Topping"
      },
      "setup": "Hourly Overspill",
-     "stage": "Triggered",
+     "stage": "Watch",
      "old": "\u2705 Confirmed Bullish",
      "ext": 6.0,
      "vk": {
@@ -2157,8 +2157,8 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 28424.43,
-     "stop": 28339.86
+     "trigger": 28424.32,
+     "stop": 28322.39
     }
    ],
    "futures": {
@@ -2362,21 +2362,9 @@
      }
     },
     {
-     "symbol": "CHOLAFIN",
-     "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -5.9,
-      "px_pct": 2.3,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": 7.6,
@@ -2407,6 +2395,18 @@
       "px_pct": -4.0,
       "word": "No big change",
       "side": 0
+     }
+    },
+    {
+     "symbol": "CHOLAFIN",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -5.9,
+      "px_pct": 2.3,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2568,8 +2568,8 @@
     {
      "symbol": "JIOFIN",
      "vk": null,
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -0.1,
       "px_pct": -1.1,
@@ -2894,18 +2894,6 @@
      }
     },
     {
-     "symbol": "CHOLAFIN",
-     "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -5.9,
-      "px_pct": 2.3,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "DIVISLAB",
      "vk": "BUY NOW",
      "setup": "Trend Pullback \u00b7 Watch",
@@ -2939,18 +2927,6 @@
       "px_pct": 4.9,
       "word": "No big change",
       "side": 0
-     }
-    },
-    {
-     "symbol": "PNB",
-     "vk": "BUY NOW",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "C",
-     "oi": {
-      "oi_pct": -9.5,
-      "px_pct": 8.0,
-      "word": "Short covering",
-      "side": 1
      }
     },
     {
@@ -3014,6 +2990,18 @@
      }
     },
     {
+     "symbol": "CHOLAFIN",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -5.9,
+      "px_pct": 2.3,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "GAIL",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Swing Pullback \u00b7 Watch",
@@ -3021,6 +3009,18 @@
      "oi": {
       "oi_pct": -4.4,
       "px_pct": 1.7,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "PNB",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -9.5,
+      "px_pct": 8.0,
       "word": "Short covering",
       "side": 1
      }
@@ -3035,18 +3035,6 @@
       "px_pct": -0.1,
       "word": "Big positions building",
       "side": 0
-     }
-    },
-    {
-     "symbol": "ABB",
-     "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Ready",
-     "grade": "Warning",
-     "oi": {
-      "oi_pct": -16.1,
-      "px_pct": -1.9,
-      "word": "Long unwinding",
-      "side": -1
      }
     },
     {
@@ -3208,7 +3196,7 @@
     {
      "symbol": "MAZDOCK",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
+     "setup": "Hourly Range \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": -7.4,
@@ -3304,8 +3292,8 @@
     {
      "symbol": "TORNTPHARM",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Ready",
-     "grade": "C",
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": 7.5,
       "px_pct": -0.4,
@@ -3345,6 +3333,18 @@
      "oi": {
       "oi_pct": -6.4,
       "px_pct": -5.3,
+      "word": "Long unwinding",
+      "side": -1
+     }
+    },
+    {
+     "symbol": "ABB",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -16.1,
+      "px_pct": -1.9,
       "word": "Long unwinding",
       "side": -1
      }
