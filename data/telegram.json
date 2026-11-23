@@ -4,6 +4,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "ABCAPITAL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "ADANIENSOL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -16,10 +20,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "APLAPOLLO": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "BHARTIARTL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -28,11 +28,19 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "BOSCHLTD": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "CHOLAFIN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "DRREDDY": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "FEDERALBNK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -45,6 +53,10 @@
    "confirmed": "Not confirmed"
   },
   "INDIANB": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "JSWSTEEL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -80,6 +92,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "UNIONBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "UNOMINDA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -97,6 +113,14 @@
    "confirmed": "Not confirmed"
   },
   "AMBER": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "AMBUJACEM": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "APLAPOLLO": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -536,10 +560,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "ULTRACEMCO": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "UPL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -563,10 +583,6 @@
   "YESBANK": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
-  },
-  "ABCAPITAL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ADANIPORTS": {
    "final": "BUY NOW",
@@ -616,10 +632,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "FEDERALBNK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "GLENMARK": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -640,17 +652,13 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "JSWSTEEL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "KALYANKJIL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "KARURVYSYA": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "KOTAKBANK": {
    "final": "BUY NOW",
@@ -720,7 +728,7 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "UNIONBANK": {
+  "ULTRACEMCO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -732,9 +740,29 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "AMBUJACEM": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
+  "ASTRAL": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "INOXWIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "KAYNES": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PAGEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PIIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "SUPREMEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "BANDHANBNK": {
    "final": "COMING CLOSE TO READY (Bearish)",
@@ -772,10 +800,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "INOXWIND": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "JUBLFOOD": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -787,26 +811,6 @@
   "TIINDIA": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
-  },
-  "ASTRAL": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "KAYNES": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PAGEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PIIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "SUPREMEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "HAL": {
    "final": "COMING CLOSE TO READY (Bullish)",
