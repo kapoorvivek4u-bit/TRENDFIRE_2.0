@@ -530,7 +530,7 @@ const S = () => CACHE["site.json"];
 let LIVE = null;
 async function loadLive(){
   if(window.SNAP) return;
-  try{ const r = await fetch("/api/live", {cache:"no-store"}); if(r.ok) LIVE = await r.json(); }catch(e){}
+  try{ const r = await fetch("/api/live?t=" + Date.now(), {cache:"no-store"}); LIVE = r.ok ? await r.json() : {why: "server " + r.status}; }catch(e){ LIVE = {why: "could not reach the server"}; }
   applyLive();
 }
 const livePx = sym => { const s = CACHE["site.json"]; if(!s || !s._live || !LIVE || !LIVE._by) return null; return LIVE._by[sym] || null; };
@@ -540,7 +540,10 @@ function applyLive(){
   if(!s) return;
   const today = new Date(Date.now() + 5.5*3600e3).toISOString().slice(0,10);
   if(!s._orig) s._orig = {heatmap: s.heatmap, gainers: s.gainers, losers: s.losers, adv: (s.market||{}).adv, dec: (s.market||{}).dec};
-  if(!LIVE || !LIVE.rows || LIVE.session !== today){ s._live = null; return; }
+  if(!LIVE || !LIVE.rows || LIVE.session !== today){
+    s._live = null; s._liveWhy = !LIVE ? "not loaded" : LIVE.why || (!LIVE.rows ? "no live scan stored yet" : `last live scan is from ${LIVE.session}`);
+    s.heatmap = s._orig.heatmap; s.gainers = s._orig.gainers; s.losers = s._orig.losers; s.market.adv = s._orig.adv; s.market.dec = s._orig.dec;
+    return; }
   const by = Object.fromEntries(LIVE.rows.map(([sym, c, chg, sec]) => [sym, {symbol: sym, close: c, chg, sector: sec}]));
   LIVE._by = by;
   s.heatmap = (s._orig.heatmap || []).map(g => { const stocks = g.stocks.map(x => by[x.symbol] ? {...x, chg: by[x.symbol].chg, close: by[x.symbol].close} : x).sort((a,b) => b.chg - a.chg);
@@ -961,7 +964,7 @@ function heatCard(){
   return `<section class="card fade"><div class="ct"><h2>F&O heatmap<em>by sector</em></h2><span class="legend">−4%<i></i>+4%</span></div>
     <div class="heat">${groups.map(g => `<div class="hs"><h4><span>${esc(g.sector)}</span><span class="${cls(g.avg)}">${pct(g.avg,2)}</span></h4>
       <div class="tiles">${g.stocks.slice(0, 12).map(tile).join("")}</div></div>`).join("")}</div>
-    <div class="muted" style="font-size:11.5px;margin-top:10px">${S()._live ? `<b class="up">● Live ${esc(S()._live)}</b> (a few minutes late)` : "Last session, futures price"}. Biggest 12 sectors shown, up to 12 stocks each.</div></section>`;
+    <div class="muted" style="font-size:11.5px;margin-top:10px">${S()._live ? `<b class="up">● Live ${esc(S()._live)}</b> (a few minutes late)` : `Last session, futures price <span title="${esc(S()._liveWhy || "")}">(live: ${esc(S()._liveWhy || "not loaded")})</span>`}. Biggest 12 sectors shown, up to 12 stocks each.</div></section>`;
 }
 function moversCard(){
   const row = x => `<a class="mv" href="${tv(x.symbol)}" target="_blank" rel="noopener"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span><span class="muted num">${fmt(x.close)}</span> <b class="${cls(x.chg)}">${pct(x.chg,2)}</b></span></a>`;
