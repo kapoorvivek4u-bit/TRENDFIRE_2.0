@@ -492,6 +492,8 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .bmeter{height:6px;border-radius:9px;background:linear-gradient(90deg,var(--down),var(--warn) 50%,var(--up));margin-top:6px;position:relative;opacity:.85}
 .bmeter i{position:absolute;top:-3px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:3px solid var(--ink);transform:translateX(-50%);left:0}
 .checks div.no{color:var(--down)}.checks div.no::before{content:"✗";color:var(--down)}
+.ichart{width:100%;height:auto;display:block;font-family:Inter,sans-serif}
+.ilegend{display:flex;gap:10px;font-size:10.5px;color:var(--muted);margin-top:2px}.ilegend i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:4px;vertical-align:2px}
 </style>
 </head>
 <body>
@@ -1628,6 +1630,34 @@ async function intraLoad(force){
   return INTRA;
 }
 const IQ = {long:["Long build-up","var(--up)"], short:["Short build-up","var(--down)"], cover:["Short covering","var(--info)"], unwind:["Long unwinding","var(--warn)"]};
+function intraChart(x, big){
+  const b = x.bars;
+  if(!b || !b.c || b.c.length < 3) return x.spark && x.spark.length > 3 ? `<div style="height:40px;overflow:hidden;position:relative">${spark(x.spark.filter(v => v != null), {h:40})}</div>` : "";
+  const W = 320, H = big ? 170 : 140, VH = b.v && b.v.some(v => v > 0) ? 26 : 0, PT = 8, PB = 14 + VH, N = 75;
+  const lv = [x.orh, x.orl, x.pc].filter(v => v != null);
+  const hi = Math.max(...b.h.filter(v => v != null), ...lv.filter(v => Math.abs(v / x.c - 1) < .04));
+  const lo = Math.min(...b.l.filter(v => v != null), ...lv.filter(v => Math.abs(v / x.c - 1) < .04));
+  const r = (hi - lo) || 1, bw = W / N;
+  const X = i => i * bw + bw / 2, Y = v => PT + (hi - v) / r * (H - PT - PB);
+  let g = "";
+  if(x.orh != null && x.orl != null) g += `<rect x="0" y="${Y(x.orh)}" width="${W}" height="${Math.max(1, Y(x.orl) - Y(x.orh))}" fill="var(--accent)" opacity=".07"/>
+    <rect x="0" y="${Y(x.orh)}" width="${6 * bw}" height="${Math.max(1, Y(x.orl) - Y(x.orh))}" fill="var(--accent)" opacity=".12"/>`;
+  if(x.pc != null && x.pc <= hi && x.pc >= lo) g += `<line x1="0" x2="${W}" y1="${Y(x.pc)}" y2="${Y(x.pc)}" stroke="var(--muted)" stroke-dasharray="3 4" stroke-width="1"/><text x="2" y="${Y(x.pc) - 3}" font-size="8.5" fill="var(--muted)">prev close</text>`;
+  const vmax = Math.max(1, ...(b.v || [0]));
+  b.c.forEach((c, k) => {
+    const i = b.i[k], o = b.o[k], h = b.h[k], l = b.l[k]; if(c == null || o == null) return;
+    const up = c >= o, col = up ? "var(--up)" : "var(--down)", cx = X(i);
+    g += `<line x1="${cx}" x2="${cx}" y1="${Y(h)}" y2="${Y(l)}" stroke="${col}" stroke-width="1"/><rect x="${cx - bw * .35}" y="${Y(Math.max(o, c))}" width="${bw * .7}" height="${Math.max(1, Math.abs(Y(o) - Y(c)))}" fill="${col}"/>`;
+    if(VH && b.v[k]) g += `<rect x="${cx - bw * .35}" y="${H - 12 - b.v[k] / vmax * VH}" width="${bw * .7}" height="${b.v[k] / vmax * VH}" fill="${col}" opacity=".35"/>`;
+  });
+  if(b.vw) g += `<polyline points="${b.vw.map((v, k) => v == null ? "" : `${X(b.i[k]).toFixed(1)},${Y(v).toFixed(1)}`).filter(Boolean).join(" ")}" fill="none" stroke="var(--accent2)" stroke-width="1.6"/>`;
+  const last = b.c[b.c.length - 1], ly = Math.min(H - PB - 2, Math.max(PT + 8, Y(last)));
+  g += `<line x1="${X(b.i[b.i.length - 1])}" x2="${W}" y1="${Y(last)}" y2="${Y(last)}" stroke="var(--ink)" stroke-width=".8" opacity=".5"/>`;
+  const tl = [[0, "9:15"], [33, "12:00"], [N - 1, "3:30"]].map(([i, t]) => `<text x="${X(i)}" y="${H - 2}" font-size="8.5" fill="var(--muted)" text-anchor="${i === 0 ? "start" : i === N - 1 ? "end" : "middle"}">${t}</text>`).join("");
+  return `<svg class="ichart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(x.s)} 5-minute chart today">${g}${tl}
+    <rect x="${W - 54}" y="${ly - 8}" width="52" height="15" rx="4" fill="var(--ink)"/><text x="${W - 28}" y="${ly + 3}" font-size="9.5" fill="var(--bg)" text-anchor="middle" font-family="JetBrains Mono,monospace">${fmt(last)}</text></svg>
+    <div class="ilegend"><span><i style="background:var(--accent2)"></i>VWAP</span><span><i style="background:var(--accent);opacity:.35"></i>30-min range</span><span><i style="border-top:1px dashed var(--muted);height:0"></i>Prev close</span></div>`;
+}
 function intraChainMini(c){
   if(!c) return "";
   return `<div class="ich"><span>PCR <b>${c.pcr ?? "—"}</b></span><span>Call wall <b class="down">${c.res && c.res[0] ? fmt(c.res[0].k, 0) : "—"}</b></span><span>Put base <b class="up">${c.sup && c.sup[0] ? fmt(c.sup[0].k, 0) : "—"}</b></span><span>Max pain <b>${fmt(c.max_pain, 0)}</b></span><span>Move <b>±${c.move_pct ?? "—"}%</b></span></div>`;
@@ -1640,7 +1670,7 @@ function intraCard(x, side, chains){
     <div class="row1"><div class="symrow">${symLink(x.s)}<span class="px">${fmt(x.c)}</span><b class="num ${cls(x.chg)}" style="font-size:12.5px">${pct(x.chg, 2)}</b></div>
       <span class="grade" style="background:color-mix(in srgb,${c} 16%,transparent);color:${c}" title="Score">${sc}</span></div>
     <div class="chips">${x.sec ? chip(x.sec) : ""}${x.res ? chip("Results " + x.res, "var(--warn)") : ""}${x.oi != null ? chip(`OI ${pct(x.oi)}`, x.oi > 0 ? "var(--accent2)" : "var(--muted)") : ""}${x.rvol ? chip(`Vol ${x.rvol}x`, x.rvol >= 1.5 ? "var(--accent2)" : "var(--muted)") : ""}</div>
-    ${x.spark && x.spark.length > 3 ? `<div style="height:40px;overflow:hidden;position:relative">${spark(x.spark.filter(v => v != null), {h:40, color:c})}</div>` : ""}
+    ${intraChart(x)}
     <div class="checks">${(tags || []).map(t => `<div>${esc(t)}</div>`).join("")}</div>
     <div class="lv"><div><small>VWAP</small><b>${fmt(x.vwap)}</b></div><div><small>30-min range</small><b>${fmt(x.orl)}–${fmt(x.orh)}</b></div><div><small>Day</small><b>${fmt(x.lo)}–${fmt(x.hi)}</b></div></div>
     ${intraChainMini(chains[x.s])}
@@ -1656,7 +1686,7 @@ function intraIndex(k, x, c){
         <div class="bmeter"><i style="left:${bi.score}%"></i></div>
         <div class="checks" style="margin-top:8px">${bi.bull.map(t => `<div>${esc(t)}</div>`).join("")}${bi.bear.map(t => `<div class="no">${esc(t)}</div>`).join("")}</div>
         ${(bi.heavy || []).length ? `<div class="chips" style="margin-top:8px">${bi.heavy.map(h => chip(`${h.s} ${pct(h.chg, 1)}`, h.chg > 0 && h.vw ? "var(--up)" : h.chg < 0 && !h.vw ? "var(--down)" : "var(--muted)")).join("")}</div>` : ""}</div>`; })() : ""}
-    ${x.spark && x.spark.length > 3 ? `<div style="height:56px;margin:8px 0 12px;overflow:hidden;position:relative">${spark(x.spark.filter(v => v != null), {h:56, color: x.chg >= 0 ? "var(--up)" : "var(--down)"})}</div>` : ""}
+    <div style="margin:10px 0">${intraChart(x, true)}</div>
     ${c ? `${intraChainMini(c)}<div class="detail" style="margin-top:8px">${esc(c.read)}</div>
       <div class="kv" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px">
         <div><small>Calls added today</small><b style="font-size:13px">${(c.ce_add || []).map(a => fmt(a.k, 0)).join(" · ") || "—"}</b></div>
