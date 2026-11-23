@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-23 15:39",
- "asof": "2026-11-20",
- "days": 5,
+ "generated_ist": "2026-11-23 18:24",
+ "asof": "2026-11-23",
+ "days": 6,
  "stocks": {
   "ALKEM": {
    "mf_net_cr": 301.9,
@@ -67,6 +67,186 @@
   }
  },
  "recent": [
+  {
+   "date": "2026-11-23",
+   "symbol": "LENSKART",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Steadview Capital Mauritius Limited-Fdi",
+   "cat": "Other",
+   "value_cr": 835.2,
+   "price": 725.0
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "LENSKART",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Steadview Capital Mauritius Limited-Fdi",
+   "cat": "Other",
+   "value_cr": 835.2,
+   "price": 725.0
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "LENSKART",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Societe Generale - Odi",
+   "cat": "Other",
+   "value_cr": 447.8,
+   "price": 725.0
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "LENSKART",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Goldman Sachs Investments Mauritius I Li",
+   "cat": "Other",
+   "value_cr": 447.8,
+   "price": 725.0
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "APLAPOLLO",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 355.3,
+   "price": 1763.63
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "APLAPOLLO",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 351.9,
+   "price": 1765.13
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "LENSKART",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Ltr Focus Fund-Fdi",
+   "cat": "Other",
+   "value_cr": 85.4,
+   "price": 725.0
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "RATNAVEER",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Arihant Capital Markets Limited",
+   "cat": "Other",
+   "value_cr": 50.6,
+   "price": 391.72
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "RATNAVEER",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Arihant Capital Markets Limited",
+   "cat": "Other",
+   "value_cr": 42.4,
+   "price": 393.68
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "JSLL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 38.2,
+   "price": 328.87
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "JSLL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 38.2,
+   "price": 328.7
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "JSLL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 32.3,
+   "price": 329.41
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "JSLL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 32.2,
+   "price": 329.23
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "JSLL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 28.7,
+   "price": 327.73
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "JSLL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 28.2,
+   "price": 328.69
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "AJMERA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 26.3,
+   "price": 163.39
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "AJMERA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 26.3,
+   "price": 163.27
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "LENSKART",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Goldman Sachs Bank Europese-Odi",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 725.0
+  },
   {
    "date": "2026-11-20",
    "symbol": "V2RETAIL",
