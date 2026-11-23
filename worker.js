@@ -476,7 +476,7 @@ export default {
         let d; try { d = JSON.parse(body); } catch (e) { return json({ error: "Bad JSON." }, 400); }
         await env.USERS.put("intraday:latest", body, { expirationTtl: 60 * 60 * 24 * 5 });
         if (d.live) await env.USERS.put("live:latest", JSON.stringify({ at: d.at, session: d.session, rows: d.live,
-          index: Object.fromEntries(Object.entries(d.index || {}).map(([k, x]) => [k, { c: x.c, chg: x.chg }])) }), { expirationTtl: 60 * 60 * 24 * 5 });
+          index: Object.fromEntries(Object.entries(d.index || {}).map(([k, x]) => [k, { c: x.c, chg: x.chg, ...((d.ixlive || {})[k] || {}) }])) }), { expirationTtl: 60 * 60 * 24 * 5 });
         if (d.final && d.session) {                      // keep the day's last BTST / STBT list to check next morning
           await env.USERS.put("btst:" + d.session, JSON.stringify({ session: d.session, at: d.at,
             btst: (d.btst || []).map(x => ({ s: x.s, c: x.c, score: x.bl })), stbt: (d.stbt || []).map(x => ({ s: x.s, c: x.c, score: x.bs })) }),

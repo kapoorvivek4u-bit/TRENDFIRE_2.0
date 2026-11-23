@@ -475,7 +475,13 @@ def main(force=False):
            "index": idx, "chains": chains, "board": board,
            "longs": longs, "shorts": shorts, "btst": bl, "stbt": bs,
            "prices": {x["s"]: x["c"] for x in rows},
-           "live": [[x["s"], x["c"], x["chg"], x["sec"]] for x in rows]}
+           "live": [[x["s"], x["c"], x["chg"], x["sec"]] for x in rows],
+           "ixlive": {k: {"pcr": (chains.get(k) or {}).get("pcr"),
+                          "oi": (oi.get(k) or {}).get("oi"),
+                          "oiq": (lambda o, c: None if o is None or c is None or abs(o) < 0.5 else
+                                  ("Long build-up" if c > 0 else "Short build-up") if o > 0 else ("Short covering" if c > 0 else "Long unwinding"))(
+                                      (oi.get(k) or {}).get("oi"), (idx.get(k) or {}).get("chg"))}
+                      for k in ("NIFTY", "BANKNIFTY")}}
     shown = {x["s"] for x in longs + shorts + bl + bs}
     for x in rows + list(idx.values()):
         if x["s"] in shown or x["s"] in idx:
