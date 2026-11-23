@@ -217,7 +217,18 @@ def read_stock(s, df, nifty_chg):
             "gap": r1((op / pc - 1) * 100, 2), "hi": r1(hi, 2), "lo": r1(lo, 2), "pc": r1(pc, 2),
             "vwap": r1(vwap, 2), "above_vwap": vwap is not None and c > vwap, "reclaim": reclaim, "lose": lose,
             "orh": r1(orh, 2), "orl": r1(orl, 2), "orb": orb, "rvol": r1(rvol, 2), "pos": r1(pos, 2),
-            "sq": sq, "spark": [r1(x, 2) for x in t.Close.iloc[-40:].tolist()], "date": str(today)}
+            "sq": sq, "spark": [r1(x, 2) for x in t.Close.iloc[-40:].tolist()], "date": str(today), "_t": t, "_vw": vw_series}
+
+
+def bars(x):
+    """Today's 5-minute candles in a compact form for the cards: slot (0 = 9:15), OHLC, volume, VWAP."""
+    t, vw = x.get("_t"), x.get("_vw")
+    if t is None or not len(t):
+        return None
+    slot = [int(((d.hour * 60 + d.minute) - (9 * 60 + 15)) // 5) for d in t.index]
+    return {"i": slot, "o": [r1(v, 2) for v in t.Open], "h": [r1(v, 2) for v in t.High], "l": [r1(v, 2) for v in t.Low],
+            "c": [r1(v, 2) for v in t.Close], "v": [int(v) if v == v else 0 for v in t.Volume],
+            "vw": [r1(v, 2) for v in vw] if vw is not None and t.Volume.sum() > 0 else None}
 
 
 # ------------------------------------------------------------------ scoring
@@ -464,6 +475,11 @@ def main(force=False):
            "index": idx, "chains": chains, "board": board,
            "longs": longs, "shorts": shorts, "btst": bl, "stbt": bs,
            "prices": {x["s"]: x["c"] for x in rows}}
+    shown = {x["s"] for x in longs + shorts + bl + bs}
+    for x in rows + list(idx.values()):
+        if x["s"] in shown or x["s"] in idx:
+            x["bars"] = bars(x)
+        x.pop("_t", None); x.pop("_vw", None)
     body = json.dumps(out, separators=(",", ":"), allow_nan=False, default=str)
     print(f"built: {len(rows)} stocks, {len(chains)} chains, {len(body) // 1024} KB, longs {[x['s'] for x in longs[:5]]}, btst {[x['s'] for x in bl[:5]]}")
     if os.environ.get("DRY_RUN"):
