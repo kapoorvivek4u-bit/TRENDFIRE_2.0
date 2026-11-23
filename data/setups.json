@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-23 22:42",
+ "generated_ist": "2026-11-23 22:56",
  "oi_asof": "2026-11-23",
- "stocks": 217,
+ "stocks": 218,
  "market": {
   "weekly_bull_pct": 35,
   "monthly_bull_pct": 52,
@@ -221,7 +221,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 68% \u00b7 Volume 0.6x in pullback \u00b7 OI +5% in up-leg, +7% in pullback",
+   "detail": "Pullback 68% \u00b7 Volume 0.7x in pullback \u00b7 OI +5% in up-leg, +7% in pullback",
    "grade": "A",
    "trigger": null,
    "stop": 4493.2
@@ -255,7 +255,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 29% \u00b7 Volume 0.5x in pullback \u00b7 OI +5% in up-leg, +2% in pullback",
+   "detail": "Pullback 29% \u00b7 Volume 0.4x in pullback \u00b7 OI +5% in up-leg, +2% in pullback",
    "grade": "A",
    "trigger": null,
    "stop": 1207.78
@@ -935,7 +935,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 23% \u00b7 Volume 0.4x in pullback \u00b7 OI -7% in up-leg",
+   "detail": "Pullback 23% \u00b7 Volume 0.3x in pullback \u00b7 OI -7% in up-leg",
    "grade": "B",
    "trigger": null,
    "stop": 581.93
@@ -1267,7 +1267,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 39% \u00b7 Volume 0.9x in pullback \u00b7 OI -1% in up-leg",
+   "detail": "Pullback 39% \u00b7 Volume 1.0x in pullback \u00b7 OI -1% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 414.42
@@ -1607,7 +1607,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Watch",
-   "detail": "Pullback 23% \u00b7 Volume 2.0x in pullback \u00b7 OI -1% in up-leg",
+   "detail": "Pullback 23% \u00b7 Volume 2.1x in pullback \u00b7 OI -1% in up-leg",
    "grade": "C",
    "trigger": null,
    "stop": 1730.63
@@ -1641,7 +1641,7 @@
    },
    "setup": "Swing Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 21% \u00b7 Volume 1.8x in pullback \u00b7 OI -5% in up-leg",
+   "detail": "Pullback 21% \u00b7 Volume 1.7x in pullback \u00b7 OI -5% in up-leg",
    "grade": "C",
    "trigger": 1853.7,
    "stop": 1835.32
@@ -3003,7 +3003,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.6x in pullback \u00b7 OI -3% in up-leg, +11% in pullback",
+   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 OI -3% in up-leg, +11% in pullback",
    "grade": "B",
    "trigger": 11192.46,
    "stop": 10932.09
@@ -3071,7 +3071,7 @@
      "H": "BEARISH RUN"
     }
    },
-   "detail": "Spilled 1.1% under the 50 EMA \u00b7 Volume 1.3x in pullback \u00b7 OI +6% in up-leg, +3% in pullback",
+   "detail": "Spilled 1.1% under the 50 EMA \u00b7 Volume 1.2x in pullback \u00b7 OI +6% in up-leg, +3% in pullback",
    "grade": "B",
    "trigger": 940.69,
    "stop": 923.95
@@ -3275,7 +3275,7 @@
      "H": "BULLISH RUN"
     }
    },
-   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 1.2x in pullback \u00b7 OI +10% in up-leg, -1% in pullback",
+   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 1.1x in pullback \u00b7 OI +10% in up-leg, -1% in pullback",
    "grade": "B",
    "trigger": 915.04,
    "stop": 903.34
@@ -4125,7 +4125,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Spilled 0.9% under the 50 EMA \u00b7 Volume 1.1x in pullback \u00b7 OI -3% in up-leg, +1% in pullback",
+   "detail": "Spilled 0.9% under the 50 EMA \u00b7 Volume 1.0x in pullback \u00b7 OI -3% in up-leg, +1% in pullback",
    "grade": "C",
    "trigger": 2633.85,
    "stop": 2598.79
@@ -4159,7 +4159,7 @@
      "H": "TOPPING"
     }
    },
-   "detail": "Spilled 0.5% under the 50 EMA \u00b7 Volume 1.8x in pullback \u00b7 OI -0% in up-leg",
+   "detail": "Spilled 0.5% under the 50 EMA \u00b7 Volume 1.7x in pullback \u00b7 OI -0% in up-leg",
    "grade": "C",
    "trigger": 360.11,
    "stop": 356.29
@@ -9262,7 +9262,7 @@
     }
    },
    "ext": -1.9,
-   "detail": "8-week range under a falling trendline, 3 touches, 20% deep \u00b7 7.5 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "8-week range under a falling trendline, 3 touches, 20% deep \u00b7 7.5 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
    "grade": "B",
    "trigger": 1827.7,
    "stop": 1802.89,
@@ -12975,6 +12975,237 @@
    "since": "2026-11-18 09:15"
   },
   {
+   "symbol": "CROMPTON",
+   "close": 219.0,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish",
+    "H": "Topping"
+   },
+   "setup": "Hourly Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": {
+    "final": "COMING CLOSE TO READY (Bearish)",
+    "signal": "Mixed",
+    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
+    "advice": "Mixed signal \u2014 confluence ka wait karo",
+    "daily": "Keep Ready (Bearish soon)",
+    "hourly": "Keep watching LTF",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BOTTOMING",
+     "D": "BULLISH RUN",
+     "H": "TOPPING"
+    }
+   },
+   "ext": 0.4,
+   "detail": "7-week range under a falling trendline, 4 touches, 14% deep \u00b7 2.6 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 224.22,
+   "stop": 220.82,
+   "target": 254.66,
+   "chart": {
+    "h": [
+     231.6,
+     228.62,
+     226.46,
+     227.0,
+     227.12,
+     226.51,
+     225.5,
+     226.74,
+     223.43,
+     221.55,
+     221.28,
+     220.01,
+     216.1,
+     212.98,
+     211.71,
+     211.98,
+     213.05,
+     212.9,
+     213.09,
+     210.27,
+     207.66,
+     205.82,
+     214.74,
+     217.3,
+     219.99,
+     219.45,
+     221.73,
+     210.55,
+     203.6,
+     203.68,
+     196.17,
+     199.11,
+     198.9,
+     204.26,
+     205.26,
+     200.5,
+     197.16,
+     196.42,
+     201.29,
+     207.28,
+     209.08,
+     213.31,
+     223.45,
+     222.22,
+     222.99,
+     220.2,
+     218.06,
+     214.7,
+     214.71,
+     212.03,
+     216.79,
+     220.0,
+     224.17,
+     226.0,
+     219.89
+    ],
+    "l": [
+     227.47,
+     223.02,
+     222.47,
+     224.54,
+     225.19,
+     225.05,
+     221.8,
+     222.74,
+     218.65,
+     218.1,
+     214.51,
+     213.78,
+     210.8,
+     208.25,
+     201.1,
+     208.64,
+     210.13,
+     210.2,
+     205.0,
+     203.83,
+     204.1,
+     201.4,
+     203.45,
+     213.08,
+     214.02,
+     204.56,
+     208.73,
+     202.11,
+     197.7,
+     193.5,
+     192.05,
+     192.66,
+     193.95,
+     194.79,
+     199.41,
+     193.5,
+     191.55,
+     194.34,
+     194.86,
+     196.14,
+     203.19,
+     202.35,
+     210.0,
+     218.9,
+     216.24,
+     215.56,
+     211.61,
+     209.73,
+     212.0,
+     205.51,
+     205.74,
+     215.07,
+     217.69,
+     219.2,
+     218.85
+    ],
+    "c": [
+     227.51,
+     223.64,
+     224.98,
+     225.5,
+     225.57,
+     225.05,
+     222.0,
+     223.27,
+     219.22,
+     218.27,
+     219.28,
+     216.03,
+     210.9,
+     209.04,
+     211.54,
+     211.5,
+     212.22,
+     212.02,
+     205.0,
+     207.36,
+     204.62,
+     203.79,
+     213.32,
+     216.0,
+     215.96,
+     212.75,
+     209.9,
+     202.57,
+     202.26,
+     193.64,
+     195.18,
+     194.01,
+     197.33,
+     203.57,
+     200.12,
+     194.51,
+     196.19,
+     195.0,
+     197.03,
+     203.27,
+     206.25,
+     212.4,
+     219.21,
+     221.46,
+     216.9,
+     215.65,
+     212.02,
+     213.14,
+     212.0,
+     207.08,
+     215.41,
+     220.0,
+     223.7,
+     219.28,
+     219.0
+    ],
+    "lines": {
+     "top": [
+      [
+       10.83,
+       221.28
+      ],
+      [
+       54.17,
+       224.22
+      ]
+     ],
+     "floor": [
+      [
+       10.83,
+       191.55
+      ],
+      [
+       54.17,
+       191.55
+      ]
+     ]
+    },
+    "brk": null
+   }
+  },
+  {
    "symbol": "INFY",
    "close": 1103.4,
    "trend": "Early turn",
@@ -16665,7 +16896,7 @@
     }
    },
    "ext": 0.1,
-   "detail": "8-week range under a falling trendline, 4 touches, 25% deep \u00b7 broke out Thu 19 \u00b7 Breakout volume 1.8x",
+   "detail": "8-week range under a falling trendline, 4 touches, 25% deep \u00b7 broke out Thu 19 \u00b7 Breakout volume 1.7x",
    "grade": "B",
    "trigger": 799.15,
    "stop": 786.29,
@@ -20670,14 +20901,14 @@
     }
    },
    "ext": -3.1,
-   "detail": "8-week range under a falling trendline, 4 touches, 24% deep \u00b7 17.1 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
+   "detail": "8-week range under a falling trendline, 4 touches, 24% deep \u00b7 17.1 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
    "grade": "C",
    "trigger": 325.48,
    "stop": 320.05,
    "target": 403.49,
    "chart": {
     "h": [
-     330.8,
+     331.7,
      329.6,
      324.65,
      322.15,
@@ -22877,237 +23108,6 @@
    }
   },
   {
-   "symbol": "CROMPTON",
-   "close": 219.0,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bottoming",
-    "D": "Bullish",
-    "H": "Topping"
-   },
-   "setup": "Hourly Range",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": {
-    "final": "COMING CLOSE TO READY (Bearish)",
-    "signal": "Mixed",
-    "ma": "Wait \u2014 Pullback in bearish trend (Daily TTM still positive)",
-    "advice": "Mixed signal \u2014 confluence ka wait karo",
-    "daily": "Keep Ready (Bearish soon)",
-    "hourly": "Keep watching LTF",
-    "confirmed": "Not confirmed",
-    "status": {
-     "M": "BOTTOMING",
-     "W": "BOTTOMING",
-     "D": "BULLISH RUN",
-     "H": "TOPPING"
-    }
-   },
-   "ext": 0.4,
-   "detail": "7-week range under a falling trendline, 4 touches, 14% deep \u00b7 2.6 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
-   "grade": "C",
-   "trigger": 224.22,
-   "stop": 220.82,
-   "target": 254.66,
-   "chart": {
-    "h": [
-     231.6,
-     228.62,
-     226.46,
-     227.0,
-     227.12,
-     226.51,
-     225.5,
-     226.74,
-     223.43,
-     221.55,
-     221.28,
-     220.01,
-     216.1,
-     212.98,
-     211.71,
-     211.98,
-     213.05,
-     212.9,
-     213.09,
-     210.27,
-     207.66,
-     205.82,
-     214.74,
-     217.3,
-     219.99,
-     219.45,
-     221.73,
-     210.55,
-     203.6,
-     203.68,
-     196.17,
-     199.11,
-     198.9,
-     204.26,
-     205.26,
-     200.5,
-     197.16,
-     196.42,
-     201.29,
-     207.28,
-     209.08,
-     213.31,
-     223.45,
-     222.22,
-     222.99,
-     220.2,
-     218.06,
-     214.7,
-     214.71,
-     212.03,
-     216.79,
-     220.0,
-     224.17,
-     226.0,
-     219.89
-    ],
-    "l": [
-     227.47,
-     223.02,
-     222.47,
-     224.54,
-     225.19,
-     225.05,
-     221.8,
-     222.74,
-     218.65,
-     218.1,
-     214.51,
-     213.78,
-     210.8,
-     208.25,
-     201.1,
-     208.64,
-     210.13,
-     210.2,
-     205.0,
-     203.83,
-     204.1,
-     201.4,
-     203.45,
-     213.08,
-     214.02,
-     204.56,
-     208.73,
-     202.11,
-     197.7,
-     193.5,
-     192.05,
-     192.66,
-     193.95,
-     194.79,
-     199.41,
-     193.5,
-     191.55,
-     194.34,
-     194.86,
-     196.14,
-     203.19,
-     202.35,
-     210.0,
-     218.9,
-     216.24,
-     215.56,
-     211.61,
-     209.73,
-     212.0,
-     205.51,
-     205.74,
-     215.07,
-     217.69,
-     219.2,
-     218.85
-    ],
-    "c": [
-     227.51,
-     223.64,
-     224.98,
-     225.5,
-     225.57,
-     225.05,
-     222.0,
-     223.27,
-     219.22,
-     218.27,
-     219.28,
-     216.03,
-     210.9,
-     209.04,
-     211.54,
-     211.5,
-     212.22,
-     212.02,
-     205.0,
-     207.36,
-     204.62,
-     203.79,
-     213.32,
-     216.0,
-     215.96,
-     212.75,
-     209.9,
-     202.57,
-     202.26,
-     193.64,
-     195.18,
-     194.01,
-     197.33,
-     203.57,
-     200.12,
-     194.51,
-     196.19,
-     195.0,
-     197.03,
-     203.27,
-     206.25,
-     212.4,
-     219.21,
-     221.46,
-     216.9,
-     215.65,
-     212.02,
-     213.14,
-     212.0,
-     207.08,
-     215.41,
-     220.0,
-     223.7,
-     219.28,
-     219.0
-    ],
-    "lines": {
-     "top": [
-      [
-       10.83,
-       221.28
-      ],
-      [
-       54.17,
-       224.22
-      ]
-     ],
-     "floor": [
-      [
-       10.83,
-       191.55
-      ],
-      [
-       54.17,
-       191.55
-      ]
-     ]
-    },
-    "brk": null
-   }
-  },
-  {
    "symbol": "DIXON",
    "close": 13390.0,
    "trend": "Early turn",
@@ -23847,7 +23847,7 @@
     }
    },
    "ext": -0.8,
-   "detail": "9-week range under a falling trendline, 4 touches, 17% deep \u00b7 5.8 ranges under the ceiling \u00b7 Volume 1.4x lately (quieter is better)",
+   "detail": "9-week range under a falling trendline, 4 touches, 17% deep \u00b7 5.8 ranges under the ceiling \u00b7 Volume 1.5x lately (quieter is better)",
    "grade": "C",
    "trigger": 557.78,
    "stop": 548.38,
@@ -24754,7 +24754,7 @@
     }
    },
    "ext": 1.5,
-   "detail": "8-week range under a falling trendline, 3 touches, 13% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 1.7x lately (quieter is better)",
+   "detail": "8-week range under a falling trendline, 3 touches, 13% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 1.5x lately (quieter is better)",
    "grade": "C",
    "trigger": 1915.76,
    "stop": 1894.38,
@@ -25468,7 +25468,7 @@
     }
    },
    "ext": -3.2,
-   "detail": "5-week range under a falling trendline, 4 touches, 25% deep \u00b7 3.3 ranges under the ceiling \u00b7 Volume 1.4x lately (quieter is better)",
+   "detail": "5-week range under a falling trendline, 4 touches, 25% deep \u00b7 3.3 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
    "grade": "C",
    "trigger": 1843.23,
    "stop": 1820.34,
@@ -25951,7 +25951,7 @@
     }
    },
    "ext": -0.8,
-   "detail": "8-week range under a falling trendline, 3 touches, 12% deep \u00b7 9.1 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
+   "detail": "8-week range under a falling trendline, 3 touches, 12% deep \u00b7 9.1 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
    "grade": "C",
    "trigger": 335.02,
    "stop": 331.11,
@@ -26683,7 +26683,7 @@
     }
    },
    "ext": -1.7,
-   "detail": "6-week range under a falling trendline, 3 touches, 16% deep \u00b7 2.7 ranges under the ceiling \u00b7 Volume 1.9x lately (quieter is better)",
+   "detail": "6-week range under a falling trendline, 3 touches, 16% deep \u00b7 2.7 ranges under the ceiling \u00b7 Volume 1.4x lately (quieter is better)",
    "grade": "C",
    "trigger": 1127.6,
    "stop": 1103.98,
@@ -27920,6 +27920,7 @@
    "AXISBANK",
    "BANKINDIA",
    "BLUESTARCO",
+   "COFORGE",
    "CUB",
    "DLF",
    "ICICIGI",
@@ -30410,6 +30411,22 @@
     "confirmed": "CONFIRMED \u2014 Buy ON"
    },
    {
+    "symbol": "COFORGE",
+    "close": 2142.3,
+    "states": {
+     "M": "Impulse",
+     "W": "Topping",
+     "D": "Bullish",
+     "H": "Impulse"
+    },
+    "signal": "ALL 3 ALIGNED BULLISH",
+    "ma": "ONLY BUY",
+    "advice": "PERFECT FOR CASH SWING TRADE \u2014 M+W+D bullish + Daily SQZ ON. Hold 2-4 weeks!",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Aligned \u2014 can buy now",
+    "confirmed": "CONFIRMED \u2014 Buy ON"
+   },
+   {
     "symbol": "CUB",
     "close": 245.54,
     "states": {
@@ -31283,9 +31300,1099 @@
    }
   ]
  },
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ],
+ "notes": [],
+ "mtf": {
+  "360ONE": [
+   "Impulse",
+   "Bottoming",
+   "Impulse"
+  ],
+  "ABB": [
+   "Impulse",
+   "Bearish",
+   "Topping"
+  ],
+  "ABCAPITAL": [
+   "Topping",
+   "Bottoming",
+   "Impulse"
+  ],
+  "ADANIENSOL": [
+   "Bullish",
+   "Bottoming",
+   "Topping"
+  ],
+  "ADANIENT": [
+   "Impulse",
+   "Bottoming",
+   "Topping"
+  ],
+  "ADANIGREEN": [
+   "Bullish",
+   "Bottoming",
+   "Topping"
+  ],
+  "ADANIPORTS": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "ADANIPOWER": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "ALKEM": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "AMBER": [
+   "Bearish",
+   "Bottoming",
+   "Bullish"
+  ],
+  "AMBUJACEM": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "ANANDRATHI": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "ANGELONE": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "APLAPOLLO": [
+   "Topping",
+   "Topping",
+   "Bearish"
+  ],
+  "APOLLOHOSP": [
+   "Impulse",
+   "Bottoming",
+   "Topping"
+  ],
+  "ASHOKLEY": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "ASIANPAINT": [
+   "Bullish",
+   "Bottoming",
+   "Topping"
+  ],
+  "ASTRAL": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "ATHERENERG": [
+   "No data",
+   "Impulse",
+   "Topping"
+  ],
+  "AUBANK": [
+   "Topping",
+   "Bottoming",
+   "Bullish"
+  ],
+  "AUROPHARMA": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "AXISBANK": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "BAJAJ-AUTO": [
+   "Impulse",
+   "Bearish",
+   "Topping"
+  ],
+  "BAJAJFINSV": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "BAJFINANCE": [
+   "Impulse",
+   "Bottoming",
+   "Topping"
+  ],
+  "BANDHANBNK": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "BANKBARODA": [
+   "Bearish",
+   "Bullish",
+   "Impulse"
+  ],
+  "BANKINDIA": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "BDL": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "BEL": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "BHARATFORG": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "BHARTIARTL": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
+  ],
+  "BHEL": [
+   "Impulse",
+   "Bearish",
+   "Topping"
+  ],
+  "BIOCON": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "BLUESTARCO": [
+   "Bottoming",
+   "Bullish",
+   "Impulse"
+  ],
+  "BOSCHLTD": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "BPCL": [
+   "Bearish",
+   "Bearish",
+   "Topping"
+  ],
+  "BRITANNIA": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "BSE": [
+   "Topping",
+   "Impulse",
+   "Topping"
+  ],
+  "CAMS": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "CANBK": [
+   "Topping",
+   "Bullish",
+   "Impulse"
+  ],
+  "CDSL": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "CGPOWER": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "CHOLAFIN": [
+   "Impulse",
+   "Bottoming",
+   "Topping"
+  ],
+  "CIPLA": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "COALINDIA": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "COCHINSHIP": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "COFORGE": [
+   "Impulse",
+   "Topping",
+   "Bullish"
+  ],
+  "COLPAL": [
+   "Bottoming",
+   "Bottoming",
+   "Bullish"
+  ],
+  "CONCOR": [
+   "Bottoming",
+   "Bearish",
+   "Topping"
+  ],
+  "COROMANDEL": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "CROMPTON": [
+   "Bottoming",
+   "Bottoming",
+   "Bullish"
+  ],
+  "CUB": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "CUMMINSIND": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "DABUR": [
+   "Bearish",
+   "Bottoming",
+   "Bullish"
+  ],
+  "DATAPATTNS": [
+   "Topping",
+   "Bottoming",
+   "Bullish"
+  ],
+  "DELHIVERY": [
+   "Topping",
+   "Bottoming",
+   "Impulse"
+  ],
+  "DIVISLAB": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "DIXON": [
+   "Bottoming",
+   "Bottoming",
+   "Bullish"
+  ],
+  "DLF": [
+   "Bottoming",
+   "Impulse",
+   "Impulse"
+  ],
+  "DMART": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "DRREDDY": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "EICHERMOT": [
+   "Impulse",
+   "Bottoming",
+   "Impulse"
+  ],
+  "ENRIN": [
+   "No data",
+   "Bottoming",
+   "Topping"
+  ],
+  "ETERNAL": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "FEDERALBNK": [
+   "Impulse",
+   "Bottoming",
+   "Impulse"
+  ],
+  "FORCEMOT": [
+   "Topping",
+   "Impulse",
+   "Impulse"
+  ],
+  "FORTIS": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "GAIL": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
+  ],
+  "GLENMARK": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "GMRAIRPORT": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "GODFRYPHLP": [
+   "Bearish",
+   "Bearish",
+   "Topping"
+  ],
+  "GODREJCP": [
+   "Bearish",
+   "Bottoming",
+   "Bullish"
+  ],
+  "GODREJPROP": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "GRASIM": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "GVT&D": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "HAL": [
+   "Impulse",
+   "Topping",
+   "Bearish"
+  ],
+  "HAVELLS": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "HCLTECH": [
+   "Bottoming",
+   "Topping",
+   "Bearish"
+  ],
+  "HDFCAMC": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "HDFCBANK": [
+   "Bottoming",
+   "Bullish",
+   "Impulse"
+  ],
+  "HDFCLIFE": [
+   "Bearish",
+   "Bullish",
+   "Impulse"
+  ],
+  "HEROMOTOCO": [
+   "Topping",
+   "Topping",
+   "Impulse"
+  ],
+  "HINDALCO": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "HINDPETRO": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "HINDUNILVR": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "HINDZINC": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "HYUNDAI": [
+   "No data",
+   "Bearish",
+   "Impulse"
+  ],
+  "ICICIBANK": [
+   "Bottoming",
+   "Impulse",
+   "Impulse"
+  ],
+  "ICICIGI": [
+   "Bottoming",
+   "Bullish",
+   "Impulse"
+  ],
+  "ICICILIFE": [
+   "Bearish",
+   "Bottoming",
+   "Bullish"
+  ],
+  "IDEA": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "IDFCFIRSTB": [
+   "Topping",
+   "Bottoming",
+   "Impulse"
+  ],
+  "IEX": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "INDHOTEL": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
+  ],
+  "INDIANB": [
+   "Topping",
+   "Impulse",
+   "Impulse"
+  ],
+  "INDIGO": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
+  ],
+  "INDUSINDBK": [
+   "Bullish",
+   "Bottoming",
+   "Bullish"
+  ],
+  "INDUSTOWER": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "INFY": [
+   "Bottoming",
+   "Topping",
+   "Bearish"
+  ],
+  "INOXWIND": [
+   "Bottoming",
+   "Bottoming",
+   "Bearish"
+  ],
+  "IOC": [
+   "Bearish",
+   "Bullish",
+   "Topping"
+  ],
+  "IREDA": [
+   "No data",
+   "Bottoming",
+   "Impulse"
+  ],
+  "IRFC": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "ITC": [
+   "Bottoming",
+   "Bullish",
+   "Impulse"
+  ],
+  "JINDALSTEL": [
+   "Topping",
+   "Impulse",
+   "Topping"
+  ],
+  "JIOFIN": [
+   "No data",
+   "Bottoming",
+   "Topping"
+  ],
+  "JSWENERGY": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "JSWSTEEL": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "JUBLFOOD": [
+   "Bearish",
+   "Bearish",
+   "Topping"
+  ],
+  "KALYANKJIL": [
+   "Bottoming",
+   "Topping",
+   "Impulse"
+  ],
+  "KARURVYSYA": [
+   "Impulse",
+   "Bullish",
+   "Impulse"
+  ],
+  "KAYNES": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "KEI": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "KFINTECH": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "KOTAKBANK": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "KPITTECH": [
+   "Bottoming",
+   "Bottoming",
+   "Bearish"
+  ],
+  "LAURUSLABS": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "LICHSGFIN": [
+   "Bottoming",
+   "Impulse",
+   "Impulse"
+  ],
+  "LICI": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "LODHA": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "LT": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "LTF": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "LTM": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "LUPIN": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "M&M": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "MAHABANK": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "MANAPPURAM": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "MANKIND": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "MARICO": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "MARUTI": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "MAXHEALTH": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "MAZDOCK": [
+   "Bearish",
+   "Bearish",
+   "Bullish"
+  ],
+  "MCX": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "MFSL": [
+   "Bearish",
+   "Bottoming",
+   "Bullish"
+  ],
+  "MOTHERSON": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "MOTILALOFS": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "MPHASIS": [
+   "Bottoming",
+   "Topping",
+   "Bottoming"
+  ],
+  "MUTHOOTFIN": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "NAM-INDIA": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "NATIONALUM": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "NAUKRI": [
+   "Bottoming",
+   "Bearish",
+   "Bottoming"
+  ],
+  "NAVINFLUOR": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "NBCC": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "NESTLEIND": [
+   "Topping",
+   "Bottoming",
+   "Bullish"
+  ],
+  "NHPC": [
+   "Bottoming",
+   "Bottoming",
+   "Bearish"
+  ],
+  "NMDC": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "NTPC": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "NYKAA": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "OBEROIRLTY": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "OFSS": [
+   "Impulse",
+   "Bearish",
+   "Bearish"
+  ],
+  "OIL": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "ONGC": [
+   "Bearish",
+   "Bottoming",
+   "Bearish"
+  ],
+  "PAGEIND": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "PATANJALI": [
+   "Bottoming",
+   "Bullish",
+   "Topping"
+  ],
+  "PAYTM": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "PERSISTENT": [
+   "Bottoming",
+   "Topping",
+   "Bullish"
+  ],
+  "PETRONET": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
+  ],
+  "PFC": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "PGEL": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "PHOENIXLTD": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "PIDILITIND": [
+   "Impulse",
+   "Bottoming",
+   "Impulse"
+  ],
+  "PIIND": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "PNB": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "PNBHOUSING": [
+   "Impulse",
+   "Bottoming",
+   "Impulse"
+  ],
+  "POLICYBZR": [
+   "Bearish",
+   "Bearish",
+   "Bullish"
+  ],
+  "POLYCAB": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "POWERGRID": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "POWERINDIA": [
+   "Topping",
+   "Bottoming",
+   "Topping"
+  ],
+  "PREMIERENE": [
+   "No data",
+   "Bottoming",
+   "Bearish"
+  ],
+  "PRESTIGE": [
+   "Impulse",
+   "Bottoming",
+   "Impulse"
+  ],
+  "RADICO": [
+   "Impulse",
+   "Topping",
+   "Impulse"
+  ],
+  "RBLBANK": [
+   "Topping",
+   "Bearish",
+   "Bullish"
+  ],
+  "RECLTD": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "RELIANCE": [
+   "Bearish",
+   "Bullish",
+   "Topping"
+  ],
+  "RVNL": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "SAGILITY": [
+   "No data",
+   "Bullish",
+   "Impulse"
+  ],
+  "SAIL": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "SBICARD": [
+   "Bearish",
+   "Bearish",
+   "Topping"
+  ],
+  "SBILIFE": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "SBIN": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "SHREECEM": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "SHRIRAMFIN": [
+   "Topping",
+   "Bottoming",
+   "Bullish"
+  ],
+  "SIEMENS": [
+   "Impulse",
+   "Bearish",
+   "Topping"
+  ],
+  "SOLARINDS": [
+   "Topping",
+   "Bearish",
+   "Bearish"
+  ],
+  "SONACOMS": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "SRF": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "SUNPHARMA": [
+   "Impulse",
+   "Bottoming",
+   "Topping"
+  ],
+  "SUPREMEIND": [
+   "Bearish",
+   "Bearish",
+   "Bottoming"
+  ],
+  "SUZLON": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "SWIGGY": [
+   "No data",
+   "Bearish",
+   "Bearish"
+  ],
+  "SYRMA": [
+   "Impulse",
+   "Topping",
+   "Bearish"
+  ],
+  "TATACONSUM": [
+   "Bearish",
+   "Bullish",
+   "Impulse"
+  ],
+  "TATAELXSI": [
+   "Bottoming",
+   "Bullish",
+   "Bearish"
+  ],
+  "TATAPOWER": [
+   "Bearish",
+   "Bearish",
+   "Bearish"
+  ],
+  "TATASTEEL": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "TCS": [
+   "Bottoming",
+   "Topping",
+   "Bottoming"
+  ],
+  "TECHM": [
+   "Impulse",
+   "Topping",
+   "Bearish"
+  ],
+  "TIINDIA": [
+   "Bearish",
+   "Bottoming",
+   "Topping"
+  ],
+  "TITAN": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "TMPV": [
+   "Bottoming",
+   "Bottoming",
+   "Bearish"
+  ],
+  "TORNTPHARM": [
+   "Topping",
+   "Bearish",
+   "Topping"
+  ],
+  "TRENT": [
+   "Bottoming",
+   "Bullish",
+   "Topping"
+  ],
+  "TVSMOTOR": [
+   "Impulse",
+   "Topping",
+   "Topping"
+  ],
+  "UJJIVANSFB": [
+   "Topping",
+   "Bearish",
+   "Bullish"
+  ],
+  "ULTRACEMCO": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
+  ],
+  "UNIONBANK": [
+   "Impulse",
+   "Impulse",
+   "Impulse"
+  ],
+  "UNITDSPR": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "UNOMINDA": [
+   "Impulse",
+   "Impulse",
+   "Topping"
+  ],
+  "UPL": [
+   "Bearish",
+   "Bottoming",
+   "Impulse"
+  ],
+  "VBL": [
+   "Bottoming",
+   "Bottoming",
+   "Topping"
+  ],
+  "VEDL": [
+   "Bearish",
+   "Bullish",
+   "Topping"
+  ],
+  "VMM": [
+   "No data",
+   "Bottoming",
+   "Bullish"
+  ],
+  "VOLTAS": [
+   "Bottoming",
+   "Bottoming",
+   "Impulse"
+  ],
+  "WAAREEENER": [
+   "No data",
+   "Bottoming",
+   "Topping"
+  ],
+  "WIPRO": [
+   "Bottoming",
+   "Bullish",
+   "Bearish"
+  ],
+  "YESBANK": [
+   "Topping",
+   "Bottoming",
+   "Bullish"
+  ],
+  "ZYDUSLIFE": [
+   "Impulse",
+   "Bullish",
+   "Topping"
+  ]
+ },
  "levels": {
   "360ONE": {
    "c": 1201.15,
@@ -31568,6 +32675,12 @@
    "d200": 1425.09,
    "w20": 1288.83,
    "w50": 1416.84
+  },
+  "COFORGE": {
+   "c": 2142.3,
+   "d200": 1568.22,
+   "w20": 1879.14,
+   "w50": 1713.82
   },
   "COLPAL": {
    "c": 1755.5,
