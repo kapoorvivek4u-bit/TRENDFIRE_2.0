@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-23 14:15",
+ "generated_ist": "2026-11-23 14:30",
  "oi_asof": "2026-11-20",
  "indexes": [
   {
@@ -162,7 +162,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 25518.0,
+     "trigger": 25517.99,
      "stop": 25350.8
     }
    ],
@@ -670,7 +670,7 @@
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.5,
       "px_pct": -0.7,
@@ -1116,7 +1116,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63256.68,
+     "trigger": 63256.31,
      "stop": 62725.15
     }
    ],
@@ -2551,7 +2551,7 @@
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.5,
       "px_pct": -0.7,
