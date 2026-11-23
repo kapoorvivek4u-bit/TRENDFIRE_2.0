@@ -547,7 +547,8 @@ function walls(sym){
 const hasWall = sym => { const w = walls(sym); return !!(w && w.near.length); };
 function wallChips(sym){
   const w = walls(sym); if(!w || !w.known) return "";
-  if(!w.above.length) return chip("Clear road ✓", "var(--up)");
+  if(!w.above.length){ const lv = S().levels[sym];
+    return `<span class="chip" style="--c:var(--up)" title="${Object.keys(LV_NAMES).filter(k => lv[k] != null).map(k => `${LV_NAMES[k]} ${fmt(lv[k])}`).join(" · ")}: none within 15% above">✓ No 200 DMA / weekly EMA wall</span>`; }
   return w.above.map(x => x.d <= 4 ? `<span class="chip" style="--c:var(--warn)" title="${esc(x.name)} at ${fmt(x.v)}: likely resistance">⚠ ${esc(x.name)} ${x.d.toFixed(1)}% above</span>`
     : `<span class="chip" title="${esc(x.name)} at ${fmt(x.v)}">${esc(x.name)} ${x.d.toFixed(1)}% above</span>`).join("");
 }
