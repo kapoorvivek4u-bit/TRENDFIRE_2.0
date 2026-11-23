@@ -20,11 +20,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "BOSCHLTD": {
+  "BHARTIARTL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "BSE": {
+  "BHEL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "BOSCHLTD": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -40,11 +44,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "INDIANB": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "KARURVYSYA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "LAURUSLABS": {
+  "MAHABANK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -69,10 +77,6 @@
    "confirmed": "Not confirmed"
   },
   "SUNPHARMA": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "TITAN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -588,13 +592,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "BHARTIARTL": {
+  "BSE": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "BHEL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
   "COFORGE": {
    "final": "BUY NOW",
@@ -614,7 +614,7 @@
   },
   "ETERNAL": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "FEDERALBNK": {
    "final": "BUY NOW",
@@ -622,7 +622,7 @@
   },
   "GLENMARK": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "HEROMOTOCO": {
    "final": "BUY NOW",
@@ -637,10 +637,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "INDHOTEL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "INDIANB": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -660,11 +656,11 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "LODHA": {
+  "LAURUSLABS": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
-  "MAHABANK": {
+  "LODHA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -682,7 +678,7 @@
   },
   "MOTILALOFS": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "NYKAA": {
    "final": "BUY NOW",
@@ -719,6 +715,10 @@
   "RADICO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "TITAN": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "TVSMOTOR": {
    "final": "BUY NOW",
@@ -793,23 +793,23 @@
    "confirmed": "Not confirmed"
   },
   "ASTRAL": {
-   "final": "ALMOST READY (Bearish)",
+   "final": "SELL NOW",
    "confirmed": "Not confirmed"
   },
-  "KPITTECH": {
-   "final": "ALMOST READY (Bearish)",
-   "confirmed": "Not confirmed"
+  "KAYNES": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
-  "LTM": {
-   "final": "ALMOST READY (Bearish)",
-   "confirmed": "Not confirmed"
+  "PAGEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PIIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "SUPREMEIND": {
-   "final": "ALMOST READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "TMPV": {
-   "final": "ALMOST READY (Bearish)",
+   "final": "SELL NOW",
    "confirmed": "Not confirmed"
   },
   "HAL": {
@@ -820,17 +820,17 @@
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "KAYNES": {
-   "final": "SELL NOW",
+  "KPITTECH": {
+   "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "PAGEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
+  "LTM": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
   },
-  "PIIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
+  "TMPV": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
   }
  },
  "offset": 345306825,
