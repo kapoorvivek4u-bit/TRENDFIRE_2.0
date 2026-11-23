@@ -535,6 +535,22 @@ async function loadLive(){
 }
 const livePx = sym => { const s = CACHE["site.json"]; if(!s || !s._live || !LIVE || !LIVE._by) return null; return LIVE._by[sym] || null; };
 const liveTag = sym => { const q = livePx(sym); return q ? `<span class="livepx" title="Live ${esc(S()._live)}, a few minutes late">● ${fmt(q.close)} <b class="${cls(q.chg)}">${pct(q.chg, 2)}</b></span>` : ""; };
+/* Walls: 200-day SMA and 20/50-week EMA just above the price (within 4%). */
+const LV_NAMES = {d200:"200 DMA", w20:"20W EMA", w50:"50W EMA"};
+function walls(sym){
+  const lv = ((S() || {}).levels || {})[sym]; if(!lv) return null;
+  const q = livePx(sym), px = q ? q.close : lv.c;
+  const above = Object.keys(LV_NAMES).filter(k => lv[k] != null).map(k => ({k, name: LV_NAMES[k], v: lv[k], d: (lv[k] / px - 1) * 100}))
+    .filter(x => x.d >= 0 && x.d <= 15).sort((a,b) => a.d - b.d);
+  return {px, above, near: above.filter(x => x.d <= 4), known: Object.keys(LV_NAMES).filter(k => lv[k] != null).length};
+}
+const hasWall = sym => { const w = walls(sym); return !!(w && w.near.length); };
+function wallChips(sym){
+  const w = walls(sym); if(!w || !w.known) return "";
+  if(!w.above.length) return chip("Clear road ✓", "var(--up)");
+  return w.above.map(x => x.d <= 4 ? `<span class="chip" style="--c:var(--warn)" title="${esc(x.name)} at ${fmt(x.v)}: likely resistance">⚠ ${esc(x.name)} ${x.d.toFixed(1)}% above</span>`
+    : `<span class="chip" title="${esc(x.name)} at ${fmt(x.v)}">${esc(x.name)} ${x.d.toFixed(1)}% above</span>`).join("");
+}
 function applyLive(){
   const s = CACHE["site.json"];
   if(!s) return;
@@ -814,7 +830,7 @@ function setupCard(r, opts={}){
   return `<article class="sc" style="--stc:${stc}">
     <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div>
       <span style="display:flex;gap:6px;align-items:center">${rr && live ? `<span class="rr">R:R ${rr}</span>` : ""}${r.grade ? `<span class="grade ${live && r.grade === "A" ? "" : "b"}" title="Quality grade">${esc(r.grade === "Warning" ? "!" : r.grade)}</span>` : ""}</span></div>
-    <div class="chips">${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
+    <div class="chips">${wallChips(r.symbol)}${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
     ${r.chart ? miniChart(r.chart, r.symbol) : ""}
     ${statesHtml(r.states)}
     ${r.detail ? `<div class="detail">${esc(r.detail)}</div>` : ""}
@@ -1129,7 +1145,7 @@ function flipCard(p, i){
       <div class="face front">
         <div class="row1"><div style="min-width:0"><div class="symrow">${symLink(p.symbol, 18)}${starBtn(p.symbol)}</div><div class="sub">${esc(p.strategy ? p.strategy + ". " + p.strategy_name : p.bestNext ? "Best next · Ready, not every rule" : (p.market || ""))}${p.sector ? " · " + esc(p.sector) : ""}</div></div>
           <div class="rar"><b>${esc(p.grade)}</b><span>${gA ? "GOLD" : "SILVER"}</span></div></div>
-        <div class="chips">${headsChips(p.symbol, p.setup)}${chip(p.setup, "var(--info)")}${p.sector_stage ? chip(p.sector_stage, STAGE_C[p.sector_stage]) : ""}${p.size ? chip(p.size, /alf|ccordion/.test(p.size) ? "var(--warn)" : "var(--up)") : ""}${vkChip(p.vk)}</div>
+        <div class="chips">${wallChips(p.symbol)}${headsChips(p.symbol, p.setup)}${chip(p.setup, "var(--info)")}${p.sector_stage ? chip(p.sector_stage, STAGE_C[p.sector_stage]) : ""}${p.size ? chip(p.size, /alf|ccordion/.test(p.size) ? "var(--warn)" : "var(--up)") : ""}${vkChip(p.vk)}</div>
         <div class="fchart">${flipMini(p)}</div>
         ${flipStats(p)}
         <div class="foot">${p.rr ? `<span class="rr">R:R ${p.rr}</span>` : "<span></span>"}<span>tap to flip ↻</span></div>
@@ -1268,9 +1284,9 @@ async function pageAList(){
   const rows = Object.values(merged);
   const stage = UI.stage.alist || "Ready";
   const cnt = g => rows.filter(r => r.stage === g).length;
-  const shown = rows.filter(r => r.stage === stage);
+  const shown = rows.filter(r => r.stage === stage && (!UI.clear || !hasWall(r.symbol)));
   return pageHead("A list", "Every grade A setup on the site, F&O and Equity, in one place.") + subnav() +
-    `<div class="filters">${["Ready","Triggered","Watch"].map(g => `<button data-stage="alist:${g}" class="${stage===g?"on":""}">${g}<i>${cnt(g)}</i></button>`).join("")}</div>
+    `<div class="filters">${["Ready","Triggered","Watch"].map(g => `<button data-stage="alist:${g}" class="${stage===g?"on":""}">${g}<i>${cnt(g)}</i></button>`).join("")}<button data-clear="1" class="${UI.clear ? "on" : ""}">Clear road only</button></div>
      ${shown.length ? `<div class="cards">${shown.map(r => setupCard(r, {market:r.market})).join("")}</div>` : `<div class="empty">Nothing at this stage.</div>`}`;
 }
 
@@ -1314,14 +1330,14 @@ async function pageScanner(){
   else rows = (res.rows || []).filter(r => setup === "All" || r.setup === setup);
   const stage = UI.stage[key] || "Ready";
   const cnt = g => rows.filter(r => r.stage === g).length;
-  const shown = rows.filter(r => r.stage === stage).sort((a,b) => (a.grade||"Z").localeCompare(b.grade||"Z"));
+  const shown = rows.filter(r => r.stage === stage && (!UI.clear || !hasWall(r.symbol))).sort((a,b) => (a.grade||"Z").localeCompare(b.grade||"Z"));
   const nR = cnt("Ready");
   const headline = stage === "Ready" ? (nR ? `${plural(nR, "stock")} ${nR === 1 ? "is" : "are"} Ready.` : "No stocks are Ready right now.")
     : shown.length ? `${plural(shown.length, "stock")} ${stage === "Watch" ? "on Watch" : "Triggered"}.` : `Nothing ${stage === "Watch" ? "on Watch" : "Triggered"} right now.`;
   const mline = m.weekly_bull_pct != null ? `${m.regime} market: ${m.weekly_bull_pct}% bullish on Weekly${m.monthly_bull_pct != null ? `, ${m.monthly_bull_pct}% on Monthly` : ""}. Market line: ${m.turn || "n/a"}${m.daily_bull_hist ? ` (Daily ${m.daily_bull_hist.slice(-3).join(" → ")}%)` : ""}.` : "";
   const others = res.others || {};
   return pageHead(eqMode ? "Equity setups" : "F&O setups", `Scanned ${esc(when(res.generated_ist))} · ${res.stocks} stocks`) + subnav() + setupBar + patBar +
-    `<div class="filters">${["Ready","Watch","Triggered"].map(g => `<button data-stage="${key}:${g}" class="${stage===g?"on":""}">${g}<i>${cnt(g)}</i></button>`).join("")}</div>
+    `<div class="filters">${["Ready","Watch","Triggered"].map(g => `<button data-stage="${key}:${g}" class="${stage===g?"on":""}">${g}<i>${cnt(g)}</i></button>`).join("")}<button data-clear="1" class="${UI.clear ? "on" : ""}" title="Hide stocks with the 200 DMA or 20/50-week EMA within 4% above">Clear road only</button></div>
      <div class="headline">${headline}</div><div class="lead">${esc(mline)}</div><div class="meter"><i style="width:${m.weekly_bull_pct || 0}%"></i></div>
      <div class="cards" style="margin-top:14px">${shown.map(r => setupCard(r)).join("") || `<div class="empty">Nothing here right now.</div>`}</div>
      ${Object.keys(others).length ? `<div class="sec-h"><h2>Not on a setup</h2><span>Stage of the others</span></div>
@@ -1529,7 +1545,7 @@ async function pageWatchlist(){
     return `<article class="sc wlc" style="--stc:${b.best === 0 ? "var(--up)" : b.best === 2 ? "var(--warn)" : "transparent"}">
       <div class="row1"><div class="symrow">${symLink(w.symbol, 17)}<span class="px">${b.market || "Not scanned"}${b.close ? " · " + fmt(b.close) : ""}</span>${liveTag(w.symbol)}</div>
         <a class="more" href="#search" data-go="${esc(w.symbol)}" style="font-size:12px;font-weight:700;color:var(--accent)">Details ›</a></div>
-      <div class="chips">${b.rows.slice(0,3).map(r => chip(`${r.setup} · ${r.stage} · ${r.grade}`, SETUP_STAGE_C[r.stage])).join("")}${!b.rows.length && b.other ? chip(b.other) : ""}${b.vk ? vkChip(b.vk.final) : ""}${b.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${t ? chip(`${t.sector} · ${t.stage}`, STAGE_C[t.stage]) : ""}</div>
+      <div class="chips">${wallChips(w.symbol)}${b.rows.slice(0,3).map(r => chip(`${r.setup} · ${r.stage} · ${r.grade}`, SETUP_STAGE_C[r.stage])).join("")}${!b.rows.length && b.other ? chip(b.other) : ""}${b.vk ? vkChip(b.vk.final) : ""}${b.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${t ? chip(`${t.sector} · ${t.stage}`, STAGE_C[t.stage]) : ""}</div>
       ${b.rows[0] && (b.rows[0].trigger || b.rows[0].stop) ? levels(b.rows[0].trigger, b.rows[0].stop, b.rows[0].target, b.rows[0].stage === "Watch" ? "Above" : "Buy above") : ""}
       ${extraHtml(w.symbol)}
       <textarea class="note" id="note-${esc(w.symbol)}" placeholder="Remarks: your notes on this stock" maxlength="1000">${esc(w.note || "")}</textarea>
@@ -1712,7 +1728,7 @@ function intraCard(x, side, chains){
   return `<article class="sc" style="--stc:${c}">
     <div class="row1"><div class="symrow">${symLink(x.s)}<span class="px">${fmt(x.c)}</span><b class="num ${cls(x.chg)}" style="font-size:12.5px">${pct(x.chg, 2)}</b></div>
       <span class="grade" style="background:color-mix(in srgb,${c} 16%,transparent);color:${c}" title="Score">${sc}</span></div>
-    <div class="chips">${x.sec ? chip(x.sec) : ""}${x.res ? chip("Results " + x.res, "var(--warn)") : ""}${x.oi != null ? chip(`OI ${pct(x.oi)}`, x.oi > 0 ? "var(--accent2)" : "var(--muted)") : ""}${x.rvol ? chip(`Vol ${x.rvol}x`, x.rvol >= 1.5 ? "var(--accent2)" : "var(--muted)") : ""}</div>
+    <div class="chips">${wallChips(x.s)}${x.sec ? chip(x.sec) : ""}${x.res ? chip("Results " + x.res, "var(--warn)") : ""}${x.oi != null ? chip(`OI ${pct(x.oi)}`, x.oi > 0 ? "var(--accent2)" : "var(--muted)") : ""}${x.rvol ? chip(`Vol ${x.rvol}x`, x.rvol >= 1.5 ? "var(--accent2)" : "var(--muted)") : ""}</div>
     ${intraChart(x)}
     <div class="checks">${(tags || []).map(t => `<div>${esc(t)}</div>`).join("")}</div>
     <div class="lv"><div><small>VWAP</small><b>${fmt(x.vwap)}</b></div><div><small>30-min range</small><b>${fmt(x.orl)}–${fmt(x.orh)}</b></div><div><small>Day</small><b>${fmt(x.lo)}–${fmt(x.hi)}</b></div></div>
@@ -1843,6 +1859,7 @@ document.addEventListener("click", e => {
   if(d.strong){ UI.strong = d.strong; return rerender(); }
   if(d.trm){ UI.trMarket = d.trm; return rerender(); }
   if(d.itab){ UI.itab = d.itab; return rerender(); }
+  if(d.clear){ UI.clear = !UI.clear; return rerender(); }
   if(d.ich){ UI.ich = d.ich; return rerender(); }
   if(d.sm){ UI.strongMarket = d.sm; return rerender(); }
   if(d.more){ UI.more = true; return rerender(); }
