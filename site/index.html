@@ -680,7 +680,7 @@ const PAGES = [
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
-  ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-deals","Deals"],["market-stars","Stars"]]],
+  ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
 const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-scorecard","Scorecard"]]]] : []);
@@ -1203,7 +1203,7 @@ function prefetch(){
   ("requestIdleCallback" in window) ? requestIdleCallback(go, {timeout:3000}) : setTimeout(go, 1500);
 }
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
-  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
+  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
 
 
@@ -1803,11 +1803,50 @@ async function pageIntraday(){
     <nav class="subnav">${tabs.map(([k, t]) => `<button data-itab="${k}" class="${tab === k ? "on" : ""}">${t}</button>`).join("")}</nav>${body}`;
 }
 
+
+/* ============================================================ FII footprint */
+async function pageFII(){
+  const f = await getJSON("fii.json").catch(() => null);
+  if(!f) return pageHead("FII footprint", "") + subnav() + `<div class="empty">The FII footprint appears after this evening's scan (7 pm).</div>`;
+  const pt = f.participant, rows = (pt && pt.rows) || [], last = rows[rows.length - 1];
+  const dshort = d => new Date(d + "T00:00:00").toLocaleDateString("en-IN", {day:"numeric", month:"short"});
+  const big = (lab, v, sub, c) => `<div><small>${lab}</small><b style="font-size:22px${c ? ";color:" + c : ""}">${v}</b><span class="muted" style="display:block;font-size:11.5px">${sub}</span></div>`;
+  const part = last ? `<section class="card fade"><div class="ct"><h2>FII positions in F&amp;O<em>NSE participant-wise OI · ${esc(dshort(last.date))}</em></h2></div>
+      <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        ${big("Stock futures long", last.sf.long_pct + "%", `net ${last.sf.net >= 0 ? "+" : ""}${fmt(last.sf.net, 0)} contracts`, last.sf.long_pct >= 55 ? "var(--up)" : last.sf.long_pct <= 45 ? "var(--down)" : "")}
+        ${big("Index futures long", last.if.long_pct + "%", `net ${last.if.net >= 0 ? "+" : ""}${fmt(last.if.net, 0)} contracts`, last.if.long_pct >= 55 ? "var(--up)" : last.if.long_pct <= 45 ? "var(--down)" : "")}
+        ${big("Index calls", `${fmt(last.calls.long - last.calls.short, 0)}`, "net long (bought − sold)")}
+        ${big("Index puts", `${fmt(last.puts.long - last.puts.short, 0)}`, "net long (bought − sold)")}</div>
+      ${rows.length > 3 ? `<div class="two" style="margin-top:12px"><div><div class="sub-h">Stock futures long %, last ${rows.length} sessions</div><div style="height:50px;overflow:hidden;position:relative;margin-bottom:8px">${spark(rows.map(r => r.sf.long_pct), {h:50, color:"var(--accent2)"})}</div></div>
+        <div><div class="sub-h">Index futures long %</div><div style="height:50px;overflow:hidden;position:relative;margin-bottom:8px">${spark(rows.map(r => r.if.long_pct), {h:50, color:"var(--info)"})}</div></div></div>` : ""}
+      <div class="checks" style="margin-top:10px">${(pt.read || []).map(r => `<div>${esc(r)}</div>`).join("")}</div>
+      <div class="tw" style="margin-top:10px"><table class="t"><tr><th>Date</th><th class="n">Stock fut long %</th><th class="n">Stock fut net</th><th class="n">Index fut long %</th><th class="n">Index fut net</th></tr>
+      ${rows.slice().reverse().slice(0, 10).map(r => `<tr><td>${esc(dshort(r.date))}</td><td class="n">${r.sf.long_pct}%</td><td class="n ${cls(r.sf.net)}">${fmt(r.sf.net, 0)}</td><td class="n">${r.if.long_pct}%</td><td class="n ${cls(r.if.net)}">${fmt(r.if.net, 0)}</td></tr>`).join("")}</table></div>
+      <div class="muted" style="font-size:11.5px;margin-top:6px">This is all FII positions together, not stock by stock. NSE does not publish FII buying per stock.</div></section>`
+    : `<section class="card fade"><div class="empty">FII positions from NSE will appear after the evening scan.</div></section>`;
+  const deals = f.deals || [];
+  const dealsCard = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>FII bulk and block deals<em>F&amp;O stocks · last 30 days</em></h2></div>
+    ${deals.length ? deals.map(x => `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;gap:8px">${symLink(x.symbol, 14)}<b class="num ${cls(x.net_cr)}">net ₹${fmt(x.net_cr, 1)} Cr</b></div>
+      ${x.deals.map(dd => `<div class="muted" style="font-size:12px">${esc(dshort(dd.date))} · ${chip(dd.side === "BUY" ? "Buy" : "Sell", dd.side === "BUY" ? "var(--up)" : "var(--down)")} ${esc(dd.who)} · ₹${fmt(dd.value_cr, 1)} Cr at ${fmt(dd.price)}</div>`).join("")}</div>`).join("")
+      : `<div class="muted" style="font-size:12.5px">No foreign institution bulk or block deals in F&amp;O stocks in the last 30 days. Big FIIs rarely buy F&amp;O stocks through bulk deals; their buying mostly shows in futures OI (below) and in quarterly holdings.</div>`}</section>`;
+  const tab = UI.fiiTab || "acc", list = tab === "acc" ? (f.accumulation || []) : (f.distribution || []);
+  const card = x => `<article class="sc" style="--stc:${tab === "acc" ? "var(--up)" : "var(--down)"}">
+    <div class="row1"><div class="symrow">${symLink(x.symbol)}${starBtn(x.symbol)}${liveTag(x.symbol)}</div><span class="grade" title="Score">${x.score}</span></div>
+    <div class="chips">${wallChips(x.symbol)}${x.sector ? chip(x.sector) : ""}</div>
+    <div class="kv" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div><small>Fut OI 5d</small><b class="num" style="font-size:14px">${pct(x.oi5)}</b></div><div><small>Price 5d</small><b class="num ${cls(x.px5)}" style="font-size:14px">${pct(x.px5)}</b></div><div><small>Delivery</small><b class="num" style="font-size:14px">${x.deliv5 != null ? x.deliv5 + "%" : "—"}</b></div></div>
+    <div class="checks">${x.why.map(w => `<div>${esc(w)}</div>`).join("")}</div></article>`;
+  return pageHead("FII footprint", `What foreign institutions are doing in F&O, from NSE data · updated ${esc(when(f.generated_ist))}`) + subnav() + part + dealsCard +
+    `<div class="sec-h"><h2>Institution-style buying, stock by stock</h2><span>estimate · OI data ${esc(f.oi_asof || "")}</span></div>
+     <div class="lead" style="margin-bottom:10px">Futures open interest building with price over 5 sessions, delivery above its usual level and higher turnover: how big buyers usually leave tracks. This is an estimate, not confirmed FII buying.</div>
+     <div class="filters"><button data-fii="acc" class="${tab === "acc" ? "on" : ""}">Buying · ${(f.accumulation || []).length}</button><button data-fii="dist" class="${tab === "dist" ? "on" : ""}">Selling · ${(f.distribution || []).length}</button></div>
+     <div class="cards">${list.map(card).join("") || `<div class="empty">Nothing stands out right now.</div>`}</div>`;
+}
+
 /* ============================================================ render + events */
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -1861,6 +1900,7 @@ document.addEventListener("click", e => {
   if(d.trm){ UI.trMarket = d.trm; return rerender(); }
   if(d.itab){ UI.itab = d.itab; return rerender(); }
   if(d.clear){ UI.clear = !UI.clear; return rerender(); }
+  if(d.fii){ UI.fiiTab = d.fii; return rerender(); }
   if(d.ich){ UI.ich = d.ich; return rerender(); }
   if(d.sm){ UI.strongMarket = d.sm; return rerender(); }
   if(d.more){ UI.more = true; return rerender(); }
