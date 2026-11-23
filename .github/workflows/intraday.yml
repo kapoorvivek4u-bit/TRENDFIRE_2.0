@@ -1,0 +1,50 @@
+name: Intraday scan
+
+# Every 15 minutes in market hours (IST 9:15-15:30 = UTC 3:45-10:00). The script itself
+# skips weekends and times outside the session. Results go to the site, not to this repo.
+on:
+  schedule:
+    - cron: "*/15 3-10 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even outside market hours (uses the last session)"
+        type: boolean
+        default: false
+      dry:
+        description: "Dry run: keep the result as a download instead of sending it"
+        type: boolean
+        default: false
+
+concurrency:
+  group: intraday-scan
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            data/site.json
+            data/sectors.json
+            data/setups.json
+            intraday_scan.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install yfinance pandas numpy requests
+      - name: Scan
+        env:
+          INGEST_KEY: ${{ secrets.INGEST_KEY }}
+          DRY_RUN: ${{ inputs.dry && '1' || '' }}
+        run: python intraday_scan.py ${{ inputs.force && '--force' || '' }}
+      - if: ${{ inputs.dry }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: intraday-preview
+          path: intraday_preview.json
+          retention-days: 1
