@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-23 15:40",
- "oi_asof": "2026-11-20",
+ "generated_ist": "2026-11-23 19:45",
+ "oi_asof": "2026-11-23",
  "stocks": 256,
  "market": {
   "weekly_bull_pct": 23,
@@ -35,7 +35,7 @@
    "ext": 1.5,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 37% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 50% vs 45% before",
+   "detail": "Pullback 37% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 49% vs 45% before",
    "grade": "A",
    "trigger": null,
    "stop": 3712.76
@@ -53,28 +53,10 @@
    "ext": 0.1,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 18 days \u00b7 Up/down volume 2.1x \u00b7 Delivery 32% vs 23% before",
+   "detail": "Squeeze 18 days \u00b7 Up/down volume 2.1x \u00b7 Delivery 33% vs 23% before",
    "grade": "A",
    "trigger": null,
    "stop": 1384.92
-  },
-  {
-   "symbol": "ENGINERSIN",
-   "close": 298.4,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 1.0,
-   "setup": "Trend Pullback",
-   "stage": "Watch",
-   "detail": "Pullback 33% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 34% before",
-   "grade": "A",
-   "trigger": null,
-   "stop": 294.31
   },
   {
    "symbol": "MRPL",
@@ -89,7 +71,7 @@
    "ext": 0.1,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 17 days \u00b7 Up/down volume 1.3x \u00b7 Delivery 34% vs 23% before",
+   "detail": "Squeeze 17 days \u00b7 Up/down volume 1.3x \u00b7 Delivery 35% vs 24% before",
    "grade": "A",
    "trigger": null,
    "stop": 172.85
@@ -125,7 +107,7 @@
    "ext": 2.8,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 27% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 42% vs 36% before",
+   "detail": "Pullback 27% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 41% vs 35% before",
    "grade": "A",
    "trigger": null,
    "stop": 3993.0
@@ -143,7 +125,7 @@
    "ext": 1.6,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 28% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 42% vs 40% before",
+   "detail": "Pullback 28% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 44% vs 39% before",
    "grade": "A",
    "trigger": null,
    "stop": 233.85
@@ -161,7 +143,7 @@
    "ext": 2.9,
    "setup": "Trend Pullback",
    "stage": "Ready",
-   "detail": "Pullback 34% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 49% vs 43% before",
+   "detail": "Pullback 34% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 50% vs 44% before",
    "grade": "A",
    "trigger": 814.0,
    "stop": 777.44
@@ -185,6 +167,24 @@
    "stop": 417.16
   },
   {
+   "symbol": "ENGINERSIN",
+   "close": 298.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.0,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 33% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 35% vs 34% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 294.31
+  },
+  {
    "symbol": "HBLENGINE",
    "close": 770.0,
    "trend": "With trend",
@@ -197,7 +197,7 @@
    "ext": -0.2,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 68% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 36% before",
+   "detail": "Pullback 68% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 38% vs 36% before",
    "grade": "B",
    "trigger": null,
    "stop": 743.96
@@ -233,7 +233,7 @@
    "ext": 1.2,
    "setup": "Squeeze Break",
    "stage": "Ready",
-   "detail": "Squeeze 14 days, 5 bars to flip \u00b7 Up/down volume 1.1x \u00b7 Delivery 41% vs 39% before",
+   "detail": "Squeeze 14 days, 5 bars to flip \u00b7 Up/down volume 1.1x \u00b7 Delivery 42% vs 39% before",
    "grade": "B",
    "trigger": 24540.0,
    "stop": 23173.56
@@ -251,7 +251,7 @@
    "ext": -1.3,
    "setup": "Squeeze Break",
    "stage": "Ready",
-   "detail": "Squeeze 5 days, 20 bars to flip \u00b7 Up/down volume 2.1x \u00b7 Delivery 46% vs 48% before",
+   "detail": "Squeeze 5 days, 20 bars to flip \u00b7 Up/down volume 2.1x \u00b7 Delivery 45% vs 47% before",
    "grade": "B",
    "trigger": 349.0,
    "stop": 326.35
@@ -287,7 +287,7 @@
    "ext": 2.0,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 32% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 52% vs 52% before",
+   "detail": "Pullback 32% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 52% vs 51% before",
    "grade": "B",
    "trigger": null,
    "stop": 1261.97
@@ -305,7 +305,7 @@
    "ext": 0.2,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 55% \u00b7 Volume 0.3x in pullback \u00b7 Delivery 31% vs 34% before",
+   "detail": "Pullback 55% \u00b7 Volume 0.3x in pullback \u00b7 Delivery 32% vs 34% before",
    "grade": "B",
    "trigger": null,
    "stop": 1994.7
@@ -323,7 +323,7 @@
    "ext": -0.1,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 3 days \u00b7 Up/down volume 1.0x \u00b7 Delivery 39% vs 35% before",
+   "detail": "Squeeze 3 days \u00b7 Up/down volume 1.0x \u00b7 Delivery 37% vs 35% before",
    "grade": "B",
    "trigger": null,
    "stop": 287.52
@@ -341,7 +341,7 @@
    "ext": -0.5,
    "setup": "Squeeze Break",
    "stage": "Triggered",
-   "detail": "Squeeze 6 days \u00b7 Up/down volume 0.8x \u00b7 Delivery 71% vs 62% before",
+   "detail": "Squeeze 6 days \u00b7 Up/down volume 0.8x \u00b7 Delivery 72% vs 63% before",
    "grade": "B",
    "trigger": 192.04,
    "stop": 188.73
@@ -377,7 +377,7 @@
    "ext": 2.6,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 40% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 50% vs 54% before",
+   "detail": "Pullback 40% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 52% vs 53% before",
    "grade": "B",
    "trigger": null,
    "stop": 905.73
@@ -395,7 +395,7 @@
    "ext": -0.1,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 45% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 54% vs 56% before",
+   "detail": "Pullback 45% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 57% vs 55% before",
    "grade": "B",
    "trigger": null,
    "stop": 1576.64
@@ -413,7 +413,7 @@
    "ext": 2.5,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 36% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 33% vs 53% before",
+   "detail": "Pullback 36% \u00b7 Volume 0.5x in pullback \u00b7 Delivery 37% vs 51% before",
    "grade": "B",
    "trigger": null,
    "stop": 1734.52
@@ -431,7 +431,7 @@
    "ext": 0.7,
    "setup": "Trend Pullback",
    "stage": "Triggered",
-   "detail": "Pullback 67% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 51% vs 50% before",
+   "detail": "Pullback 67% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 51% vs 51% before",
    "grade": "C",
    "trigger": 1527.9,
    "stop": 1406.08
@@ -449,7 +449,7 @@
    "ext": 0.9,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 73% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 46% vs 52% before",
+   "detail": "Pullback 73% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 48% vs 52% before",
    "grade": "C",
    "trigger": null,
    "stop": 3612.06
@@ -467,7 +467,7 @@
    "ext": 1.5,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 33% \u00b7 Volume 1.3x in pullback \u00b7 Delivery 49% vs 51% before",
+   "detail": "Pullback 33% \u00b7 Volume 1.3x in pullback \u00b7 Delivery 50% vs 51% before",
    "grade": "Warning",
    "trigger": null,
    "stop": 214.32,
@@ -486,7 +486,7 @@
    "ext": 1.4,
    "setup": "Trend Pullback",
    "stage": "Ready",
-   "detail": "Pullback 66% \u00b7 Volume 1.5x in pullback \u00b7 Delivery 58% vs 53% before",
+   "detail": "Pullback 66% \u00b7 Volume 1.5x in pullback \u00b7 Delivery 60% vs 53% before",
    "grade": "Warning",
    "trigger": 1795.0,
    "stop": 1668.66,
@@ -494,6 +494,24 @@
   }
  ],
  "overspill": [
+  {
+   "symbol": "ABSLAMC",
+   "close": 928.85,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.5,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 52% vs 49% before",
+   "grade": "A",
+   "trigger": 968.65,
+   "stop": 798.9
+  },
   {
    "symbol": "ACUTAAS",
    "close": 3875.0,
@@ -507,7 +525,7 @@
    "ext": 1.5,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 Delivery 50% vs 45% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 Delivery 49% vs 45% before",
    "grade": "A",
    "trigger": 3805.49,
    "stop": 3712.76
@@ -525,7 +543,7 @@
    "ext": -1.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 34% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 45% vs 34% before",
    "grade": "A",
    "trigger": 1210.3,
    "stop": 1078.04
@@ -543,7 +561,7 @@
    "ext": -2.3,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 56% vs 50% before",
+   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 57% vs 50% before",
    "grade": "A",
    "trigger": 1023.15,
    "stop": 883.93
@@ -561,28 +579,28 @@
    "ext": 0.1,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 2.1% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 Delivery 32% vs 23% before",
+   "detail": "Daily spilled 2.1% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 Delivery 33% vs 23% before",
    "grade": "A",
    "trigger": 1451.5,
    "stop": 1374.55
   },
   {
-   "symbol": "ENGINERSIN",
-   "close": 298.4,
+   "symbol": "ENDURANCE",
+   "close": 2555.9,
    "trend": "With trend",
    "states": {
-    "M": "Impulse",
-    "W": "Impulse",
+    "M": "Topping",
+    "W": "Bottoming",
     "D": "Topping"
    },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 1.0,
-   "setup": "Daily Overspill",
-   "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 34% before",
+   "old": "\u274c Avoid",
+   "ext": 0.4,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 60% vs 57% before",
    "grade": "A",
-   "trigger": 295.63,
-   "stop": 294.31
+   "trigger": 2565.12,
+   "stop": 2197.6
   },
   {
    "symbol": "GRAPHITE",
@@ -597,7 +615,7 @@
    "ext": 0.9,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 0.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 37% before",
+   "detail": "Weekly spilled 0.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 45% vs 38% before",
    "grade": "A",
    "trigger": 744.71,
    "stop": 675.75
@@ -621,6 +639,24 @@
    "stop": 1793.41
   },
   {
+   "symbol": "JINDALSAW",
+   "close": 240.52,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "ext": -2.3,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 48% vs 45% before",
+   "grade": "A",
+   "trigger": 259.46,
+   "stop": 226.6
+  },
+  {
    "symbol": "KPIL",
    "close": 1312.6,
    "trend": "With trend",
@@ -633,7 +669,7 @@
    "ext": -1.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 2.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 62% vs 51% before",
+   "detail": "Weekly spilled 2.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 63% vs 52% before",
    "grade": "A",
    "trigger": 1342.77,
    "stop": 1249.4
@@ -651,7 +687,7 @@
    "ext": 1.2,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 41% vs 39% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 42% vs 39% before",
    "grade": "A",
    "trigger": 24108.88,
    "stop": 23048.81
@@ -675,6 +711,24 @@
    "stop": 4414.15
   },
   {
+   "symbol": "SCHNEIDER",
+   "close": 1008.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -2.8,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 9.9% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 47% vs 44% before",
+   "grade": "A",
+   "trigger": 1148.09,
+   "stop": 988.02
+  },
+  {
    "symbol": "SCI",
    "close": 255.59,
    "trend": "With trend",
@@ -687,7 +741,7 @@
    "ext": -1.2,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 13.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 42% vs 34% before",
+   "detail": "Weekly spilled 13.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 41% vs 34% before",
    "grade": "A",
    "trigger": 271.04,
    "stop": 232.98
@@ -705,7 +759,7 @@
    "ext": -0.9,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 59% vs 50% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 58% vs 50% before",
    "grade": "A",
    "trigger": 4267.77,
    "stop": 4161.66
@@ -747,24 +801,6 @@
    "stop": 2128.04
   },
   {
-   "symbol": "ZYDUSWELL",
-   "close": 465.85,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.2,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 8.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 45% vs 43% before",
-   "grade": "A",
-   "trigger": 492.45,
-   "stop": 441.22
-  },
-  {
    "symbol": "CYIENT",
    "close": 1160.5,
    "trend": "Early turn",
@@ -777,28 +813,10 @@
    "ext": 1.3,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 2.9% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 48% vs 37% before",
+   "detail": "Daily spilled 2.9% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 37% before",
    "grade": "A",
    "trigger": 1124.74,
    "stop": 1063.67
-  },
-  {
-   "symbol": "ABSLAMC",
-   "close": 928.85,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.5,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 52% vs 49% before",
-   "grade": "B",
-   "trigger": 968.65,
-   "stop": 798.9
   },
   {
    "symbol": "AJANTPHARM",
@@ -813,7 +831,7 @@
    "ext": -0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 59% vs 53% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 60% vs 52% before",
    "grade": "B",
    "trigger": 3358.4,
    "stop": 3193.5
@@ -831,7 +849,7 @@
    "ext": -3.8,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 12.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 35% vs 45% before",
+   "detail": "Weekly spilled 12.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 36% vs 45% before",
    "grade": "B",
    "trigger": 2354.29,
    "stop": 1961.07
@@ -849,7 +867,7 @@
    "ext": -0.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 34% vs 39% before",
+   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 35% vs 38% before",
    "grade": "B",
    "trigger": 2693.12,
    "stop": 2160.67
@@ -867,28 +885,28 @@
    "ext": 0.4,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 31% vs 48% before",
+   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 28% vs 48% before",
    "grade": "B",
    "trigger": 742.5,
    "stop": 670.36
   },
   {
-   "symbol": "ENDURANCE",
-   "close": 2555.9,
+   "symbol": "ENGINERSIN",
+   "close": 298.4,
    "trend": "With trend",
    "states": {
-    "M": "Topping",
-    "W": "Bottoming",
+    "M": "Impulse",
+    "W": "Impulse",
     "D": "Topping"
    },
-   "old": "\u274c Avoid",
-   "ext": 0.4,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 58% vs 56% before",
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.0,
+   "setup": "Daily Overspill",
+   "stage": "Triggered",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 Delivery 35% vs 34% before",
    "grade": "B",
-   "trigger": 2565.12,
-   "stop": 2197.6
+   "trigger": 295.63,
+   "stop": 294.31
   },
   {
    "symbol": "HBLENGINE",
@@ -903,7 +921,7 @@
    "ext": -0.2,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 12.8% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 36% vs 36% before",
+   "detail": "Weekly spilled 12.8% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 38% vs 36% before",
    "grade": "B",
    "trigger": 769.61,
    "stop": 646.7
@@ -921,7 +939,7 @@
    "ext": -2.5,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 38% vs 41% before",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 38% vs 40% before",
    "grade": "B",
    "trigger": 462.92,
    "stop": 391.52
@@ -957,7 +975,7 @@
    "ext": -3.0,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 22% vs 20% before",
+   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 23% vs 20% before",
    "grade": "B",
    "trigger": 67.34,
    "stop": 54.09
@@ -975,28 +993,10 @@
    "ext": 1.9,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 42% vs 45% before",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 42% vs 44% before",
    "grade": "B",
    "trigger": 140.51,
    "stop": 111.38
-  },
-  {
-   "symbol": "JINDALSAW",
-   "close": 240.52,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bearish",
-    "D": "Topping"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.3,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 45% before",
-   "grade": "B",
-   "trigger": 259.46,
-   "stop": 226.6
   },
   {
    "symbol": "KIRLOSENG",
@@ -1011,7 +1011,7 @@
    "ext": -2.0,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 43% vs 43% before",
+   "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 43% vs 42% before",
    "grade": "B",
    "trigger": 1909.33,
    "stop": 1461.57
@@ -1029,7 +1029,7 @@
    "ext": 1.5,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 Delivery 57% vs 59% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 Delivery 57% vs 58% before",
    "grade": "B",
    "trigger": 1971.47,
    "stop": 1936.12
@@ -1047,7 +1047,7 @@
    "ext": -2.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 53% vs 59% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 54% vs 58% before",
    "grade": "B",
    "trigger": 6451.99,
    "stop": 5183.61
@@ -1083,7 +1083,7 @@
    "ext": -2.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 11% vs 13% before",
+   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 12% vs 13% before",
    "grade": "B",
    "trigger": 276.63,
    "stop": 202.13
@@ -1101,7 +1101,7 @@
    "ext": 1.3,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 57% vs 56% before",
+   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 56% vs 56% before",
    "grade": "B",
    "trigger": 3434.11,
    "stop": 3147.69
@@ -1119,7 +1119,7 @@
    "ext": -1.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 48% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 45% vs 47% before",
    "grade": "B",
    "trigger": 338.88,
    "stop": 314.37
@@ -1137,28 +1137,10 @@
    "ext": -1.3,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 46% vs 48% before",
+   "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 45% vs 47% before",
    "grade": "B",
    "trigger": 347.06,
    "stop": 314.37
-  },
-  {
-   "symbol": "SCHNEIDER",
-   "close": 1008.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.8,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 9.9% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 45% before",
-   "grade": "B",
-   "trigger": 1148.09,
-   "stop": 988.02
   },
   {
    "symbol": "THANGAMAYL",
@@ -1173,7 +1155,7 @@
    "ext": -4.9,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 14.0% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 48% vs 49% before",
+   "detail": "Weekly spilled 14.0% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 49% vs 49% before",
    "grade": "B",
    "trigger": 4664.85,
    "stop": 3738.71
@@ -1191,7 +1173,7 @@
    "ext": -1.8,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 48% vs 56% before",
+   "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 47% vs 56% before",
    "grade": "B",
    "trigger": 478.8,
    "stop": 441.42
@@ -1209,10 +1191,28 @@
    "ext": 1.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 33% vs 39% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 34% vs 39% before",
    "grade": "B",
    "trigger": 1980.63,
    "stop": 1768.46
+  },
+  {
+   "symbol": "ZYDUSWELL",
+   "close": 465.85,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -1.2,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 8.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 44% vs 42% before",
+   "grade": "B",
+   "trigger": 492.45,
+   "stop": 441.22
   },
   {
    "symbol": "BEML",
@@ -1227,7 +1227,7 @@
    "ext": 0.2,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.3x in pullback \u00b7 Delivery 31% vs 34% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.3x in pullback \u00b7 Delivery 32% vs 34% before",
    "grade": "B",
    "trigger": 2026.17,
    "stop": 1994.7
@@ -1263,7 +1263,7 @@
    "ext": 0.2,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 46% vs 46% before",
+   "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 44% vs 46% before",
    "grade": "B",
    "trigger": 409.85,
    "stop": 365.57
@@ -1281,7 +1281,7 @@
    "ext": -0.1,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 0.6% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 Delivery 54% vs 56% before",
+   "detail": "Daily spilled 0.6% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 Delivery 57% vs 55% before",
    "grade": "B",
    "trigger": 1639.63,
    "stop": 1576.64
@@ -1299,7 +1299,7 @@
    "ext": -0.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 41% vs 44% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 43% vs 44% before",
    "grade": "C",
    "trigger": 1552.04,
    "stop": 1373.25
@@ -1317,7 +1317,7 @@
    "ext": -0.1,
    "setup": "Daily Overspill",
    "stage": "Watch",
-   "detail": "Daily spilled 14.0% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 41% vs 44% before",
+   "detail": "Daily spilled 14.0% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 43% vs 44% before",
    "grade": "C",
    "trigger": 1616.51,
    "stop": 1373.25
@@ -1353,7 +1353,7 @@
    "ext": 0.3,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 30% vs 30% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 30% vs 31% before",
    "grade": "C",
    "trigger": 826.59,
    "stop": 707.73
@@ -1371,7 +1371,7 @@
    "ext": -1.2,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 31% vs 42% before",
+   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 36% vs 41% before",
    "grade": "C",
    "trigger": 1204.83,
    "stop": 1050.49
@@ -1389,7 +1389,7 @@
    "ext": 0.7,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 2.9% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 51% vs 50% before",
+   "detail": "Weekly spilled 2.9% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 51% vs 51% before",
    "grade": "C",
    "trigger": 1469.85,
    "stop": 1258.48
@@ -1407,7 +1407,7 @@
    "ext": 0.4,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 50% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 43% vs 49% before",
    "grade": "C",
    "trigger": 819.12,
    "stop": 759.98
@@ -1425,7 +1425,7 @@
    "ext": 0.3,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 5.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.2x in pullback \u00b7 Delivery 40% vs 49% before",
+   "detail": "Weekly spilled 5.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.2x in pullback \u00b7 Delivery 40% vs 48% before",
    "grade": "C",
    "trigger": 590.76,
    "stop": 511.67
@@ -1443,7 +1443,7 @@
    "ext": -0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 49% vs 49% before",
+   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 51% vs 49% before",
    "grade": "C",
    "trigger": 546.81,
    "stop": 481.09
@@ -1461,7 +1461,7 @@
    "ext": 0.9,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 46% vs 52% before",
+   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 48% vs 52% before",
    "grade": "C",
    "trigger": 4029.25,
    "stop": 3612.06
@@ -1479,7 +1479,7 @@
    "ext": -1.5,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 2.0x in pullback \u00b7 Delivery 37% vs 28% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 2.0x in pullback \u00b7 Delivery 37% vs 29% before",
    "grade": "Warning",
    "trigger": 632.39,
    "stop": 579.54,
@@ -1517,7 +1517,7 @@
    "ext": 1.4,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 1.3% under the 50 EMA \u00b7 Volume 1.5x in pullback \u00b7 Delivery 58% vs 53% before",
+   "detail": "Daily spilled 1.3% under the 50 EMA \u00b7 Volume 1.5x in pullback \u00b7 Delivery 60% vs 53% before",
    "grade": "Warning",
    "trigger": 1723.16,
    "stop": 1668.66,
@@ -10284,5 +10284,1537 @@
   ]
  },
  "vk_labels": {},
- "notes": []
+ "notes": [],
+ "levels": {
+  "AADHARHFC": {
+   "c": 415.2,
+   "d200": 473.97,
+   "w20": 450.81,
+   "w50": 465.77
+  },
+  "AARTIIND": {
+   "c": 449.35,
+   "d200": 468.81,
+   "w20": 468.64,
+   "w50": 460.18
+  },
+  "AAVAS": {
+   "c": 1091.2,
+   "d200": 1303.77,
+   "w20": 1217.85,
+   "w50": 1333.09
+  },
+  "ABBOTINDIA": {
+   "c": 26125.0,
+   "d200": 26545.75,
+   "w20": 26401.99,
+   "w50": 27032.49
+  },
+  "ABDL": {
+   "c": 802.85,
+   "d200": 594.94,
+   "w20": 687.8,
+   "w50": 616.36
+  },
+  "ABREL": {
+   "c": 1257.0,
+   "d200": 1284.23,
+   "w20": 1218.86,
+   "w50": 1357.39
+  },
+  "ABSLAMC": {
+   "c": 928.85,
+   "d200": 998.8,
+   "w20": 968.65,
+   "w50": 954.79
+  },
+  "ACC": {
+   "c": 1255.8,
+   "d200": 1354.95,
+   "w20": 1261.03,
+   "w50": 1402.62
+  },
+  "ACE": {
+   "c": 1187.45,
+   "d200": 1001.15,
+   "w20": 1110.78,
+   "w50": 1060.36
+  },
+  "ACMESOLAR": {
+   "c": 411.6,
+   "d200": 339.84,
+   "w20": 392.63,
+   "w50": 347.51
+  },
+  "ACUTAAS": {
+   "c": 3875.0,
+   "d200": 2982.78,
+   "w20": 3447.11,
+   "w50": 2917.41
+  },
+  "AEGISLOG": {
+   "c": 1158.6,
+   "d200": 1018.32,
+   "w20": 1210.3,
+   "w50": 1062.54
+  },
+  "AEGISVOPAK": {
+   "c": 280.9,
+   "d200": 240.91,
+   "w20": 267.66,
+   "w50": 254.61
+  },
+  "AETHER": {
+   "c": 1596.9,
+   "d200": 1344.36,
+   "w20": 1552.04,
+   "w50": 1350.66
+  },
+  "AFCONS": {
+   "c": 220.22,
+   "d200": 287.68,
+   "w20": 250.19,
+   "w50": 296.55
+  },
+  "AFFLE": {
+   "c": 1616.6,
+   "d200": 1503.1,
+   "w20": 1529.68,
+   "w50": 1552.47
+  },
+  "AIAENG": {
+   "c": 3388.2,
+   "d200": 4059.79,
+   "w20": 3787.35,
+   "w50": 3883.98
+  },
+  "AIIL": {
+   "c": 546.35,
+   "d200": 513.51,
+   "w20": 541.83,
+   "w50": 526.41
+  },
+  "AJANTPHARM": {
+   "c": 3310.4,
+   "d200": 3209.28,
+   "w20": 3358.4,
+   "w50": 3177.35
+  },
+  "ANANTRAJ": {
+   "c": 441.95,
+   "d200": 537.5,
+   "w20": 520.59,
+   "w50": 538.92
+  },
+  "ANTHEM": {
+   "c": 957.35,
+   "d200": 789.73,
+   "w20": 870.21,
+   "w50": 812.9
+  },
+  "ANURAS": {
+   "c": 1313.6,
+   "d200": 1255.24,
+   "w20": 1230.35,
+   "w50": 1215.98
+  },
+  "APARINDS": {
+   "c": 14184.0,
+   "d200": 13849.28,
+   "w20": 15319.94,
+   "w50": 13643.52
+  },
+  "APOLLOTYRE": {
+   "c": 420.7,
+   "d200": 424.63,
+   "w20": 415.37,
+   "w50": 429.93
+  },
+  "APTUS": {
+   "c": 191.33,
+   "d200": 245.29,
+   "w20": 221.15,
+   "w50": 247.29
+  },
+  "ARE&M": {
+   "c": 729.8,
+   "d200": 824.65,
+   "w20": 781.32,
+   "w50": 837.6
+  },
+  "ASAHIINDIA": {
+   "c": 1178.45,
+   "d200": 911.98,
+   "w20": 989.2,
+   "w50": 930.48
+  },
+  "ASTERDM": {
+   "c": 790.35,
+   "d200": 724.85,
+   "w20": 739.57,
+   "w50": 711.83
+  },
+  "ATGL": {
+   "c": 550.45,
+   "d200": 613.81,
+   "w20": 595.48,
+   "w50": 615.01
+  },
+  "ATUL": {
+   "c": 5034.5,
+   "d200": 6336.76,
+   "w20": 5798.48,
+   "w50": 6141.64
+  },
+  "AVANTIFEED": {
+   "c": 700.35,
+   "d200": 1020.59,
+   "w20": 796.43,
+   "w50": 880.44
+  },
+  "AWL": {
+   "c": 167.8,
+   "d200": 187.9,
+   "w20": 179.38,
+   "w50": 197.49
+  },
+  "AZAD": {
+   "c": 2289.7,
+   "d200": 2219.11,
+   "w20": 2484.89,
+   "w50": 2237.57
+  },
+  "BAJAJHFL": {
+   "c": 80.32,
+   "d200": 84.74,
+   "w20": 82.67,
+   "w50": 88.69
+  },
+  "BALKRISIND": {
+   "c": 2345.3,
+   "d200": 2245.39,
+   "w20": 2236.35,
+   "w50": 2274.34
+  },
+  "BALRAMCHIN": {
+   "c": 619.25,
+   "d200": 575.91,
+   "w20": 632.39,
+   "w50": 585.33
+  },
+  "BATAINDIA": {
+   "c": 626.7,
+   "d200": 697.33,
+   "w20": 657.37,
+   "w50": 753.63
+  },
+  "BBOX": {
+   "c": 854.05,
+   "d200": 755.45,
+   "w20": 826.59,
+   "w50": 746.84
+  },
+  "BELRISE": {
+   "c": 238.05,
+   "d200": 218.38,
+   "w20": 226.5,
+   "w50": 209.18
+  },
+  "BEML": {
+   "c": 2008.1,
+   "d200": 1824.2,
+   "w20": 1949.5,
+   "w50": 1887.51
+  },
+  "BERGEPAINT": {
+   "c": 462.25,
+   "d200": 481.12,
+   "w20": 478.34,
+   "w50": 491.12
+  },
+  "BHARTIHEXA": {
+   "c": 1599.1,
+   "d200": 1561.67,
+   "w20": 1584.08,
+   "w50": 1582.34
+  },
+  "BLS": {
+   "c": 220.44,
+   "d200": 251.84,
+   "w20": 232.11,
+   "w50": 259.57
+  },
+  "BRIGADE": {
+   "c": 581.65,
+   "d200": 557.89,
+   "w20": 573.48,
+   "w50": 594.1
+  },
+  "BSOFT": {
+   "c": 304.7,
+   "d200": 329.27,
+   "w20": 308.77,
+   "w50": 334.94
+  },
+  "CANFINHOME": {
+   "c": 796.4,
+   "d200": 827.49,
+   "w20": 780.4,
+   "w50": 806.8
+  },
+  "CAPLIPOINT": {
+   "c": 2033.3,
+   "d200": 2201.31,
+   "w20": 2354.29,
+   "w50": 2240.94
+  },
+  "CARBORUNIV": {
+   "c": 977.1,
+   "d200": 1020.02,
+   "w20": 1072.75,
+   "w50": 1040.13
+  },
+  "CARTRADE": {
+   "c": 2613.5,
+   "d200": 2396.4,
+   "w20": 2693.12,
+   "w50": 2501.99
+  },
+  "CASTROLIND": {
+   "c": 190.35,
+   "d200": 186.92,
+   "w20": 190.77,
+   "w50": 190.64
+  },
+  "CCL": {
+   "c": 937.55,
+   "d200": 1079.3,
+   "w20": 1023.15,
+   "w50": 1020.74
+  },
+  "CEATLTD": {
+   "c": 3492.4,
+   "d200": 3479.73,
+   "w20": 3418.22,
+   "w50": 3452.82
+  },
+  "CEMPRO": {
+   "c": 1438.8,
+   "d200": 1047.3,
+   "w20": 1256.51,
+   "w50": 1087.77
+  },
+  "CESC": {
+   "c": 125.93,
+   "d200": 156.7,
+   "w20": 140.12,
+   "w50": 151.8
+  },
+  "CGCL": {
+   "c": 232.61,
+   "d200": 214.44,
+   "w20": 237.43,
+   "w50": 221.41
+  },
+  "CHAMBLFERT": {
+   "c": 369.6,
+   "d200": 433.45,
+   "w20": 401.07,
+   "w50": 432.48
+  },
+  "CHENNPETRO": {
+   "c": 1443.8,
+   "d200": 1196.52,
+   "w20": 1371.38,
+   "w50": 1197.9
+  },
+  "CHOICEIN": {
+   "c": 747.9,
+   "d200": 731.51,
+   "w20": 742.5,
+   "w50": 734.75
+  },
+  "CHOLAHLDNG": {
+   "c": 1357.1,
+   "d200": 1541.6,
+   "w20": 1453.82,
+   "w50": 1549.89
+  },
+  "CLEAN": {
+   "c": 689.35,
+   "d200": 769.8,
+   "w20": 755.55,
+   "w50": 826.23
+  },
+  "CLEANMAX": {
+   "c": 1250.2,
+   "w20": 1262.99
+  },
+  "CMPDI": {
+   "c": 183.95,
+   "w20": 203.29
+  },
+  "COHANCE": {
+   "c": 474.8,
+   "d200": 412.58,
+   "w20": 449.4,
+   "w50": 496.07
+  },
+  "CONCORDBIO": {
+   "c": 547.0,
+   "d200": 630.59,
+   "w20": 640.99,
+   "w50": 664.06
+  },
+  "CPPLUS": {
+   "c": 4074.1,
+   "d200": 3008.52,
+   "w20": 3727.79,
+   "w50": 3040.13
+  },
+  "CRAFTSMAN": {
+   "c": 11649.0,
+   "d200": 9250.8,
+   "w20": 10522.94,
+   "w50": 9306.01
+  },
+  "CREDITACC": {
+   "c": 983.8,
+   "d200": 1317.32,
+   "w20": 1216.57,
+   "w50": 1277.04
+  },
+  "CRISIL": {
+   "c": 4034.8,
+   "d200": 4322.42,
+   "w20": 4382.5,
+   "w50": 4428.95
+  },
+  "CUPID": {
+   "c": 362.15,
+   "d200": 197.73,
+   "w20": 297.81,
+   "w50": 214.05
+  },
+  "CYIENT": {
+   "c": 1160.5,
+   "d200": 964.03,
+   "w20": 1075.02,
+   "w50": 1056.38
+  },
+  "DALBHARAT": {
+   "c": 1564.4,
+   "d200": 1794.48,
+   "w20": 1648.93,
+   "w50": 1781.86
+  },
+  "DEEPAKFERT": {
+   "c": 1416.5,
+   "d200": 1303.09,
+   "w20": 1338.93,
+   "w50": 1331.2
+  },
+  "DEEPAKNTR": {
+   "c": 1520.9,
+   "d200": 1620.2,
+   "w20": 1588.36,
+   "w50": 1652.9
+  },
+  "DEVYANI": {
+   "c": 119.72,
+   "d200": 121.36,
+   "w20": 125.46,
+   "w50": 129.11
+  },
+  "DOMS": {
+   "c": 2131.0,
+   "d200": 2217.4,
+   "w20": 2113.29,
+   "w50": 2223.81
+  },
+  "ECLERX": {
+   "c": 1511.4,
+   "d200": 1690.04,
+   "w20": 1706.89,
+   "w50": 1742.83
+  },
+  "EIDPARRY": {
+   "c": 649.85,
+   "d200": 770.72,
+   "w20": 698.41,
+   "w50": 773.44
+  },
+  "EIHOTEL": {
+   "c": 333.4,
+   "d200": 312.54,
+   "w20": 310.61,
+   "w50": 321.29
+  },
+  "ELECON": {
+   "c": 438.5,
+   "d200": 454.64,
+   "w20": 444.5,
+   "w50": 464.05
+  },
+  "ELGIEQUIP": {
+   "c": 543.3,
+   "d200": 560.8,
+   "w20": 569.4,
+   "w50": 556.82
+  },
+  "EMAMILTD": {
+   "c": 416.7,
+   "d200": 413.92,
+   "w20": 395.73,
+   "w50": 429.06
+  },
+  "EMCURE": {
+   "c": 2309.9,
+   "d200": 1777.38,
+   "w20": 1999.39,
+   "w50": 1798.46
+  },
+  "EMMVEE": {
+   "c": 260.73,
+   "d200": 280.94,
+   "w20": 284.06,
+   "w50": 275.98
+  },
+  "ENDURANCE": {
+   "c": 2555.9,
+   "d200": 2577.16,
+   "w20": 2565.12,
+   "w50": 2570.33
+  },
+  "ENGINERSIN": {
+   "c": 298.4,
+   "d200": 242.94,
+   "w20": 272.39,
+   "w50": 247.2
+  },
+  "ESCORTS": {
+   "c": 2450.0,
+   "d200": 2990.01,
+   "w20": 2724.71,
+   "w50": 2970.92
+  },
+  "EXIDEIND": {
+   "c": 401.85,
+   "d200": 379.69,
+   "w20": 393.6,
+   "w50": 388.78
+  },
+  "FACT": {
+   "c": 751.0,
+   "d200": 815.22,
+   "w20": 772.03,
+   "w50": 809.0
+  },
+  "FINCABLES": {
+   "c": 1174.2,
+   "d200": 1083.32,
+   "w20": 1204.83,
+   "w50": 1102.86
+  },
+  "FIRSTCRY": {
+   "c": 168.71,
+   "d200": 210.04,
+   "w20": 181.9,
+   "w50": 226.26
+  },
+  "FIVESTAR": {
+   "c": 429.35,
+   "d200": 473.96,
+   "w20": 476.19,
+   "w50": 503.28
+  },
+  "FLUOROCHEM": {
+   "c": 4895.0,
+   "d200": 3983.03,
+   "w20": 4463.47,
+   "w50": 4121.81
+  },
+  "FRACTAL": {
+   "c": 809.4,
+   "w20": 802.57
+  },
+  "FSL": {
+   "c": 283.6,
+   "d200": 257.71,
+   "w20": 275.12,
+   "w50": 277.93
+  },
+  "GABRIEL": {
+   "c": 1507.9,
+   "d200": 1202.35,
+   "w20": 1384.37,
+   "w50": 1229.01
+  },
+  "GALLANTT": {
+   "c": 543.35,
+   "d200": 619.27,
+   "w20": 568.19,
+   "w50": 583.91
+  },
+  "GESHIP": {
+   "c": 1538.3,
+   "d200": 1433.21,
+   "w20": 1469.85,
+   "w50": 1379.76
+  },
+  "GICRE": {
+   "c": 333.6,
+   "d200": 362.74,
+   "w20": 341.63,
+   "w50": 357.47
+  },
+  "GILLETTE": {
+   "c": 7116.5,
+   "d200": 7706.06,
+   "w20": 7328.4,
+   "w50": 7738.64
+  },
+  "GLAND": {
+   "c": 3297.4,
+   "d200": 2389.29,
+   "w20": 2916.28,
+   "w50": 2501.05
+  },
+  "GLAXO": {
+   "c": 2701.2,
+   "d200": 2533.99,
+   "w20": 2629.15,
+   "w50": 2589.86
+  },
+  "GMDCLTD": {
+   "c": 466.55,
+   "d200": 574.49,
+   "w20": 509.03,
+   "w50": 532.66
+  },
+  "GODREJIND": {
+   "c": 1075.95,
+   "d200": 1072.22,
+   "w20": 1078.64,
+   "w50": 1084.51
+  },
+  "GPIL": {
+   "c": 217.95,
+   "d200": 253.4,
+   "w20": 227.0,
+   "w50": 238.87
+  },
+  "GRANULES": {
+   "c": 837.75,
+   "d200": 756.05,
+   "w20": 819.12,
+   "w50": 750.49
+  },
+  "GRAPHITE": {
+   "c": 789.9,
+   "d200": 702.81,
+   "w20": 744.71,
+   "w50": 694.02
+  },
+  "GRAVITA": {
+   "c": 1470.3,
+   "d200": 1609.84,
+   "w20": 1544.42,
+   "w50": 1610.97
+  },
+  "GROWW": {
+   "c": 216.46,
+   "d200": 190.81,
+   "w20": 201.14,
+   "w50": 188.9
+  },
+  "GRSE": {
+   "c": 2013.8,
+   "d200": 2481.72,
+   "w20": 2258.07,
+   "w50": 2380.56
+  },
+  "HBLENGINE": {
+   "c": 770.0,
+   "d200": 749.72,
+   "w20": 769.61,
+   "w50": 757.95
+  },
+  "HDBFS": {
+   "c": 567.7,
+   "d200": 657.59,
+   "w20": 605.56,
+   "w50": 659.69
+  },
+  "HEGAM": {
+   "c": 258.67,
+   "d200": 499.35,
+   "w20": 363.38,
+   "w50": 452.03
+  },
+  "HEXT": {
+   "c": 483.1,
+   "d200": 517.73,
+   "w20": 520.48,
+   "w50": 558.42
+  },
+  "HINDCOPPER": {
+   "c": 411.25,
+   "d200": 513.8,
+   "w20": 462.92,
+   "w50": 463.09
+  },
+  "HOMEFIRST": {
+   "c": 1023.8,
+   "d200": 1125.35,
+   "w20": 1109.56,
+   "w50": 1127.66
+  },
+  "HONASA": {
+   "c": 539.75,
+   "d200": 404.35,
+   "w20": 465.14,
+   "w50": 412.42
+  },
+  "HONAUT": {
+   "c": 29715.0,
+   "d200": 33378.7,
+   "w20": 32749.82,
+   "w50": 33961.55
+  },
+  "HSCL": {
+   "c": 552.95,
+   "d200": 600.46,
+   "w20": 609.94,
+   "w50": 589.21
+  },
+  "HUDCO": {
+   "c": 158.16,
+   "d200": 187.7,
+   "w20": 171.45,
+   "w50": 187.18
+  },
+  "ICICIAMC": {
+   "c": 2933.0,
+   "d200": 3108.24,
+   "w20": 3004.99,
+   "w50": 2990.83
+  },
+  "IDBI": {
+   "c": 78.44,
+   "d200": 84.04,
+   "w20": 82.02,
+   "w50": 84.55
+  },
+  "IFCI": {
+   "c": 58.77,
+   "d200": 68.0,
+   "w20": 67.34,
+   "w50": 66.15
+  },
+  "IGIL": {
+   "c": 431.1,
+   "d200": 347.47,
+   "w20": 371.0,
+   "w50": 361.52
+  },
+  "IGL": {
+   "c": 153.31,
+   "d200": 155.77,
+   "w20": 149.55,
+   "w50": 161.06
+  },
+  "IIFL": {
+   "c": 615.0,
+   "d200": 540.67,
+   "w20": 590.76,
+   "w50": 554.43
+  },
+  "IKS": {
+   "c": 1603.8,
+   "d200": 1659.49,
+   "w20": 1695.98,
+   "w50": 1677.21
+  },
+  "INDIACEM": {
+   "c": 320.65,
+   "d200": 374.69,
+   "w20": 343.05,
+   "w50": 362.27
+  },
+  "INDIAMART": {
+   "c": 1547.0,
+   "d200": 1895.36,
+   "w20": 1675.51,
+   "w50": 1883.4
+  },
+  "INOXINDIA": {
+   "c": 2088.0,
+   "d200": 1699.73,
+   "w20": 1962.4,
+   "w50": 1729.33
+  },
+  "INTELLECT": {
+   "c": 578.45,
+   "d200": 685.32,
+   "w20": 620.87,
+   "w50": 710.8
+  },
+  "IPCALAB": {
+   "c": 1815.9,
+   "d200": 1706.2,
+   "w20": 1851.48,
+   "w50": 1720.1
+  },
+  "IRCON": {
+   "c": 107.83,
+   "d200": 129.12,
+   "w20": 114.3,
+   "w50": 130.92
+  },
+  "IRCTC": {
+   "c": 447.2,
+   "d200": 513.71,
+   "w20": 472.15,
+   "w50": 531.41
+  },
+  "ITCHOTELS": {
+   "c": 184.12,
+   "d200": 164.66,
+   "w20": 168.29,
+   "w50": 172.14
+  },
+  "ITI": {
+   "c": 276.21,
+   "d200": 274.66,
+   "w20": 259.3,
+   "w50": 273.57
+  },
+  "J&KBANK": {
+   "c": 146.73,
+   "d200": 138.73,
+   "w20": 140.51,
+   "w50": 134.8
+  },
+  "JAINREC": {
+   "c": 278.7,
+   "d200": 357.44,
+   "w20": 302.24,
+   "w50": 336.76
+  },
+  "JBMA": {
+   "c": 477.35,
+   "d200": 601.63,
+   "w20": 553.69,
+   "w50": 596.04
+  },
+  "JINDALSAW": {
+   "c": 240.52,
+   "d200": 243.25,
+   "w20": 259.46,
+   "w50": 245.84
+  },
+  "JKCEMENT": {
+   "c": 5439.0,
+   "d200": 5303.64,
+   "w20": 5178.07,
+   "w50": 5306.13
+  },
+  "JKTYRE": {
+   "c": 368.15,
+   "d200": 400.26,
+   "w20": 361.96,
+   "w50": 383.32
+  },
+  "JMFINANCIL": {
+   "c": 110.49,
+   "d200": 125.79,
+   "w20": 119.05,
+   "w50": 126.07
+  },
+  "JSL": {
+   "c": 724.85,
+   "d200": 732.45,
+   "w20": 720.94,
+   "w50": 726.23
+  },
+  "JSWCEMENT": {
+   "c": 125.74,
+   "d200": 124.27,
+   "w20": 122.69,
+   "w50": 125.76
+  },
+  "JSWINFRA": {
+   "c": 353.55,
+   "d200": 303.21,
+   "w20": 332.38,
+   "w50": 314.0
+  },
+  "JUBLINGREA": {
+   "c": 559.2,
+   "d200": 653.71,
+   "w20": 625.29,
+   "w50": 651.34
+  },
+  "JWL": {
+   "c": 185.39,
+   "d200": 255.36,
+   "w20": 219.76,
+   "w50": 256.45
+  },
+  "JYOTICNC": {
+   "c": 1042.95,
+   "d200": 843.4,
+   "w20": 958.63,
+   "w50": 910.48
+  },
+  "KAJARIACER": {
+   "c": 1200.9,
+   "d200": 1126.02,
+   "w20": 1184.1,
+   "w50": 1150.08
+  },
+  "KEC": {
+   "c": 295.25,
+   "d200": 480.85,
+   "w20": 386.42,
+   "w50": 495.4
+  },
+  "KIMS": {
+   "c": 794.15,
+   "d200": 735.54,
+   "w20": 750.32,
+   "w50": 731.01
+  },
+  "KIRLOSBROS": {
+   "c": 1570.6,
+   "d200": 1723.31,
+   "w20": 1706.66,
+   "w50": 1734.1
+  },
+  "KIRLOSENG": {
+   "c": 1718.9,
+   "d200": 1851.81,
+   "w20": 1909.33,
+   "w50": 1753.52
+  },
+  "KPIL": {
+   "c": 1312.6,
+   "d200": 1283.97,
+   "w20": 1342.77,
+   "w50": 1293.81
+  },
+  "KPRMILL": {
+   "c": 1206.9,
+   "d200": 1029.15,
+   "w20": 1114.73,
+   "w50": 1062.1
+  },
+  "KSB": {
+   "c": 646.9,
+   "d200": 809.4,
+   "w20": 745.23,
+   "w50": 783.71
+  },
+  "LALPATHLAB": {
+   "c": 2040.5,
+   "d200": 1681.02,
+   "w20": 1886.26,
+   "w50": 1733.47
+  },
+  "LEMONTREE": {
+   "c": 127.63,
+   "d200": 113.19,
+   "w20": 115.09,
+   "w50": 119.73
+  },
+  "LENSKART": {
+   "c": 714.5,
+   "d200": 570.85,
+   "w20": 657.56,
+   "w50": 580.97
+  },
+  "LGEINDIA": {
+   "c": 1777.5,
+   "d200": 1592.45,
+   "w20": 1679.99,
+   "w50": 1631.67
+  },
+  "LINDEINDIA": {
+   "c": 6961.5,
+   "d200": 6767.17,
+   "w20": 6526.25,
+   "w50": 6602.38
+  },
+  "LLOYDSME": {
+   "c": 1700.1,
+   "d200": 1675.03,
+   "w20": 1781.74,
+   "w50": 1661.01
+  },
+  "LTFOODS": {
+   "c": 423.95,
+   "d200": 405.63,
+   "w20": 412.87,
+   "w50": 407.37
+  },
+  "LTTS": {
+   "c": 4222.6,
+   "d200": 3513.89,
+   "w20": 3771.16,
+   "w50": 3752.51
+  },
+  "M&MFIN": {
+   "c": 286.85,
+   "d200": 330.86,
+   "w20": 314.14,
+   "w50": 320.94
+  },
+  "MEDANTA": {
+   "c": 1500.2,
+   "d200": 1267.26,
+   "w20": 1372.47,
+   "w50": 1306.12
+  },
+  "MEESHO": {
+   "c": 253.11,
+   "d200": 189.74,
+   "w20": 221.28,
+   "w50": 198.99
+  },
+  "MGL": {
+   "c": 1088.9,
+   "d200": 1092.32,
+   "w20": 1093.65,
+   "w50": 1124.5
+  },
+  "MINDACORP": {
+   "c": 727.2,
+   "d200": 625.78,
+   "w20": 680.58,
+   "w50": 636.65
+  },
+  "MMTC": {
+   "c": 50.81,
+   "d200": 61.51,
+   "w20": 57.19,
+   "w50": 60.72
+  },
+  "MRF": {
+   "c": 129605.0,
+   "d200": 130669.27,
+   "w20": 127235.77,
+   "w50": 131143.31
+  },
+  "MRPL": {
+   "c": 175.36,
+   "d200": 172.06,
+   "w20": 170.86,
+   "w50": 166.47
+  },
+  "MTARTECH": {
+   "c": 5659.0,
+   "d200": 6036.01,
+   "w20": 6451.99,
+   "w50": 5623.22
+  },
+  "NATCOPHARM": {
+   "c": 806.55,
+   "d200": 925.92,
+   "w20": 842.25,
+   "w50": 892.06
+  },
+  "NAVA": {
+   "c": 550.15,
+   "d200": 580.4,
+   "w20": 555.46,
+   "w50": 565.74
+  },
+  "NCC": {
+   "c": 129.28,
+   "d200": 144.0,
+   "w20": 134.11,
+   "w50": 149.99
+  },
+  "NETWEB": {
+   "c": 4010.6,
+   "d200": 4209.27,
+   "w20": 4386.18,
+   "w50": 4083.12
+  },
+  "NEULANDLAB": {
+   "c": 20550.0,
+   "d200": 17903.12,
+   "w20": 20272.69,
+   "w50": 18367.49
+  },
+  "NH": {
+   "c": 1974.2,
+   "d200": 1841.62,
+   "w20": 1852.72,
+   "w50": 1831.94
+  },
+  "NIACL": {
+   "c": 149.34,
+   "d200": 165.07,
+   "w20": 167.37,
+   "w50": 169.55
+  },
+  "NLCINDIA": {
+   "c": 227.16,
+   "d200": 281.44,
+   "w20": 256.61,
+   "w50": 267.24
+  },
+  "NTPCGREEN": {
+   "c": 82.3,
+   "d200": 94.07,
+   "w20": 88.22,
+   "w50": 93.34
+  },
+  "NUVAMA": {
+   "c": 1758.3,
+   "d200": 1587.53,
+   "w20": 1737.42,
+   "w50": 1617.82
+  },
+  "NUVOCO": {
+   "c": 356.15,
+   "d200": 325.02,
+   "w20": 336.39,
+   "w50": 337.92
+  },
+  "OLECTRA": {
+   "c": 995.9,
+   "d200": 1185.96,
+   "w20": 1119.89,
+   "w50": 1196.24
+  },
+  "ONESOURCE": {
+   "c": 1601.8,
+   "d200": 1555.79,
+   "w20": 1564.29,
+   "w50": 1596.94
+  },
+  "PARADEEP": {
+   "c": 141.11,
+   "d200": 134.94,
+   "w20": 142.98,
+   "w50": 141.86
+  },
+  "PCBL": {
+   "c": 266.15,
+   "d200": 299.61,
+   "w20": 296.98,
+   "w50": 308.48
+  },
+  "PFOCUS": {
+   "c": 236.65,
+   "d200": 280.5,
+   "w20": 276.63,
+   "w50": 259.32
+  },
+  "PINELABS": {
+   "c": 160.46,
+   "d200": 169.28,
+   "w20": 165.44,
+   "w50": 179.77
+  },
+  "PIRAMALFIN": {
+   "c": 1970.2,
+   "d200": 1979.4,
+   "w20": 2039.78,
+   "w50": 1925.55
+  },
+  "POLYMED": {
+   "c": 1628.4,
+   "d200": 1548.84,
+   "w20": 1620.06,
+   "w50": 1658.39
+  },
+  "POONAWALLA": {
+   "c": 517.4,
+   "d200": 442.63,
+   "w20": 467.41,
+   "w50": 451.76
+  },
+  "PPLPHARMA": {
+   "c": 236.89,
+   "d200": 182.98,
+   "w20": 212.19,
+   "w50": 196.25
+  },
+  "PRIVISCL": {
+   "c": 3617.1,
+   "d200": 3304.14,
+   "w20": 3434.11,
+   "w50": 3233.34
+  },
+  "PTCIL": {
+   "c": 24425.0,
+   "d200": 19309.41,
+   "w20": 22360.04,
+   "w50": 19850.17
+  },
+  "PVRINOX": {
+   "c": 1699.7,
+   "d200": 1131.96,
+   "w20": 1367.87,
+   "w50": 1213.99
+  },
+  "PWL": {
+   "c": 139.76,
+   "d200": 116.65,
+   "w20": 129.2,
+   "w50": 125.12
+  },
+  "RAILTEL": {
+   "c": 245.55,
+   "d200": 290.4,
+   "w20": 262.34,
+   "w50": 291.28
+  },
+  "RAINBOW": {
+   "c": 1263.9,
+   "d200": 1323.39,
+   "w20": 1315.36,
+   "w50": 1336.32
+  },
+  "RAMCOCEM": {
+   "c": 814.8,
+   "d200": 924.49,
+   "w20": 845.7,
+   "w50": 905.04
+  },
+  "REDINGTON": {
+   "c": 331.3,
+   "d200": 291.88,
+   "w20": 338.88,
+   "w50": 306.42
+  },
+  "RHIM": {
+   "c": 354.5,
+   "d200": 388.43,
+   "w20": 371.22,
+   "w50": 396.36
+  },
+  "RITES": {
+   "c": 185.95,
+   "d200": 209.65,
+   "w20": 201.97,
+   "w50": 214.28
+  },
+  "RKFORGE": {
+   "c": 749.35,
+   "d200": 619.79,
+   "w20": 685.33,
+   "w50": 643.74
+  },
+  "RRKABEL": {
+   "c": 1822.7,
+   "d200": 2067.72,
+   "w20": 2197.88,
+   "w50": 2027.15
+  },
+  "RUBICON": {
+   "c": 1675.7,
+   "d200": 1279.34,
+   "w20": 1563.86,
+   "w50": 1294.91
+  },
+  "SAILIFE": {
+   "c": 1809.1,
+   "d200": 1262.88,
+   "w20": 1545.87,
+   "w50": 1306.64
+  },
+  "SAMMAANCAP": {
+   "c": 125.71,
+   "d200": 149.9,
+   "w20": 138.33,
+   "w50": 145.24
+  },
+  "SANSERA": {
+   "c": 4619.3,
+   "d200": 3189.46,
+   "w20": 4041.54,
+   "w50": 3259.59
+  },
+  "SARDAEN": {
+   "c": 455.75,
+   "d200": 514.38,
+   "w20": 482.1,
+   "w50": 498.11
+  },
+  "SCHAEFFLER": {
+   "c": 3607.9,
+   "d200": 3974.64,
+   "w20": 3790.6,
+   "w50": 3887.08
+  },
+  "SCHNEIDER": {
+   "c": 1008.8,
+   "d200": 1147.58,
+   "w20": 1148.09,
+   "w50": 1095.13
+  },
+  "SCI": {
+   "c": 255.59,
+   "d200": 278.41,
+   "w20": 271.04,
+   "w50": 266.57
+  },
+  "SHRIPISTON": {
+   "c": 4262.4,
+   "d200": 3849.91,
+   "w20": 4267.77,
+   "w50": 3821.49
+  },
+  "SHYAMMETL": {
+   "c": 1276.2,
+   "d200": 982.82,
+   "w20": 1135.3,
+   "w50": 1020.29
+  },
+  "SIGNATURE": {
+   "c": 859.85,
+   "d200": 811.47,
+   "w20": 784.81,
+   "w50": 851.18
+  },
+  "SJVN": {
+   "c": 54.96,
+   "d200": 68.11,
+   "w20": 60.41,
+   "w50": 68.78
+  },
+  "SOBHA": {
+   "c": 1251.1,
+   "d200": 1332.71,
+   "w20": 1263.42,
+   "w50": 1330.88
+  },
+  "STARHEALTH": {
+   "c": 564.1,
+   "d200": 531.29,
+   "w20": 553.56,
+   "w50": 530.54
+  },
+  "SUMICHEM": {
+   "c": 335.1,
+   "d200": 443.17,
+   "w20": 408.55,
+   "w50": 443.58
+  },
+  "SUNDARMFIN": {
+   "c": 4295.7,
+   "d200": 4625.23,
+   "w20": 4372.07,
+   "w50": 4534.16
+  },
+  "SUNTV": {
+   "c": 678.8,
+   "d200": 552.23,
+   "w20": 582.21,
+   "w50": 566.08
+  },
+  "SWANCORP": {
+   "c": 229.81,
+   "d200": 314.67,
+   "w20": 270.01,
+   "w50": 321.79
+  },
+  "SYNGENE": {
+   "c": 443.65,
+   "d200": 418.86,
+   "w20": 412.04,
+   "w50": 456.26
+  },
+  "TARIL": {
+   "c": 289.45,
+   "d200": 302.94,
+   "w20": 302.09,
+   "w50": 319.44
+  },
+  "TATACHEM": {
+   "c": 652.05,
+   "d200": 681.76,
+   "w20": 642.14,
+   "w50": 698.52
+  },
+  "TATACOMM": {
+   "c": 1723.6,
+   "d200": 1701.37,
+   "w20": 1728.14,
+   "w50": 1722.66
+  },
+  "TATAINVEST": {
+   "c": 586.95,
+   "d200": 647.61,
+   "w20": 616.92,
+   "w50": 646.13
+  },
+  "TATATECH": {
+   "c": 707.9,
+   "d200": 682.6,
+   "w20": 711.51,
+   "w50": 706.72
+  },
+  "TBOTEK": {
+   "c": 1545.0,
+   "d200": 1436.69,
+   "w20": 1566.3,
+   "w50": 1505.0
+  },
+  "TDPOWERSYS": {
+   "c": 605.3,
+   "d200": 599.03,
+   "w20": 662.15,
+   "w50": 578.03
+  },
+  "TECHNOE": {
+   "c": 910.45,
+   "d200": 1052.46,
+   "w20": 967.48,
+   "w50": 1050.57
+  },
+  "TEGA": {
+   "c": 1539.6,
+   "d200": 1719.67,
+   "w20": 1726.85,
+   "w50": 1735.16
+  },
+  "TEJASNET": {
+   "c": 400.35,
+   "d200": 475.29,
+   "w20": 464.29,
+   "w50": 504.68
+  },
+  "TENNIND": {
+   "c": 440.45,
+   "d200": 542.11,
+   "w20": 488.27,
+   "w50": 512.21
+  },
+  "THANGAMAYL": {
+   "c": 3772.0,
+   "d200": 4672.52,
+   "w20": 4664.85,
+   "w50": 4357.86
+  },
+  "THERMAX": {
+   "c": 2705.5,
+   "d200": 3792.57,
+   "w20": 3373.22,
+   "w50": 3593.85
+  },
+  "TIMKEN": {
+   "c": 3073.6,
+   "d200": 3274.67,
+   "w20": 3112.41,
+   "w50": 3180.96
+  },
+  "TITAGARH": {
+   "c": 717.6,
+   "d200": 780.58,
+   "w20": 763.58,
+   "w50": 795.23
+  },
+  "TORNTPOWER": {
+   "c": 1198.4,
+   "d200": 1388.36,
+   "w20": 1268.93,
+   "w50": 1333.08
+  },
+  "TRITURBINE": {
+   "c": 454.75,
+   "d200": 557.42,
+   "w20": 526.07,
+   "w50": 549.27
+  },
+  "UBL": {
+   "c": 1254.3,
+   "d200": 1381.18,
+   "w20": 1264.86,
+   "w50": 1402.1
+  },
+  "URBANCO": {
+   "c": 168.68,
+   "d200": 138.6,
+   "w20": 155.31,
+   "w50": 149.51
+  },
+  "USHAMART": {
+   "c": 453.95,
+   "d200": 469.92,
+   "w20": 478.8,
+   "w50": 462.87
+  },
+  "VIJAYA": {
+   "c": 1572.6,
+   "d200": 1269.62,
+   "w20": 1433.03,
+   "w50": 1297.74
+  },
+  "VTL": {
+   "c": 523.9,
+   "d200": 570.6,
+   "w20": 546.81,
+   "w50": 541.96
+  },
+  "WELCORP": {
+   "c": 2152.8,
+   "d200": 1639.03,
+   "w20": 2176.78,
+   "w50": 1733.96
+  },
+  "WELSPUNLIV": {
+   "c": 270.76,
+   "d200": 167.64,
+   "w20": 215.56,
+   "w50": 180.69
+  },
+  "WHIRLPOOL": {
+   "c": 808.6,
+   "d200": 833.64,
+   "w20": 820.19,
+   "w50": 891.93
+  },
+  "WOCKPHARMA": {
+   "c": 2152.3,
+   "d200": 1751.47,
+   "w20": 1980.63,
+   "w50": 1791.7
+  },
+  "ZEEL": {
+   "c": 71.64,
+   "d200": 88.26,
+   "w20": 79.52,
+   "w50": 89.57
+  },
+  "ZENSARTECH": {
+   "c": 529.6,
+   "d200": 511.7,
+   "w20": 505.82,
+   "w50": 546.47
+  },
+  "ZENTEC": {
+   "c": 1694.6,
+   "d200": 1634.83,
+   "w20": 1677.71,
+   "w50": 1636.48
+  },
+  "ZFCVINDIA": {
+   "c": 2159.6,
+   "d200": 2409.93,
+   "w20": 2308.23,
+   "w50": 2348.65
+  },
+  "ZYDUSWELL": {
+   "c": 465.85,
+   "d200": 493.92,
+   "w20": 492.45,
+   "w50": 483.88
+  }
+ }
 }

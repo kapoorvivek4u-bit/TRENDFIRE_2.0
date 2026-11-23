@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-23 15:40",
- "oi_asof": "2026-11-20",
+ "generated_ist": "2026-11-23 19:45",
+ "oi_asof": "2026-11-23",
  "stocks": 256,
  "market": {
   "weekly_bull_pct": 23,
@@ -37,7 +37,7 @@
    "grade": "B",
    "trigger": 2089.0,
    "stop": 1982.64,
-   "detail": "Broke out Thu 19 \u00b7 Volume 2.6x \u00b7 Base 14% deep \u00b7 RS 91 \u00b7 Delivery 33% vs 39% before"
+   "detail": "Broke out Thu 19 \u00b7 Volume 2.6x \u00b7 Base 14% deep \u00b7 RS 91 \u00b7 Delivery 34% vs 39% before"
   },
   {
    "symbol": "CRAFTSMAN",
@@ -73,7 +73,7 @@
    "grade": "A",
    "trigger": 1177.0,
    "stop": null,
-   "detail": "1.4% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 93 \u00b7 Delivery 48% vs 37% before"
+   "detail": "1.4% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 93 \u00b7 Delivery 47% vs 37% before"
   },
   {
    "symbol": "LTTS",
@@ -90,7 +90,41 @@
    "grade": "A",
    "trigger": 4347.4,
    "stop": null,
-   "detail": "2.9% below the breakout level \u00b7 Base 8% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 84 \u00b7 Delivery 42% vs 36% before"
+   "detail": "2.9% below the breakout level \u00b7 Base 8% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 84 \u00b7 Delivery 41% vs 35% before"
+  },
+  {
+   "symbol": "CEMPRO",
+   "close": 1438.8,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 63.3,
+   "grade": "B",
+   "trigger": 1452.4,
+   "stop": null,
+   "detail": "0.9% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 97 \u00b7 Delivery 51% vs 48% before"
+  },
+  {
+   "symbol": "HONASA",
+   "close": 539.75,
+   "trend": "",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 61.4,
+   "grade": "B",
+   "trigger": 543.0,
+   "stop": null,
+   "detail": "0.6% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 94 \u00b7 Delivery 48% vs 45% before"
   },
   {
    "symbol": "PVRINOX",
@@ -103,11 +137,11 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 71.0,
-   "grade": "A",
+   "score": 57.6,
+   "grade": "B",
    "trigger": 1747.0,
    "stop": null,
-   "detail": "2.7% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 52% vs 48% before"
+   "detail": "2.7% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 51% vs 48% before"
   },
   {
    "symbol": "GRAPHITE",
@@ -124,24 +158,7 @@
    "grade": "B",
    "trigger": 807.7,
    "stop": null,
-   "detail": "2.2% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 76 \u00b7 Delivery 46% vs 37% before"
-  },
-  {
-   "symbol": "CEMPRO",
-   "close": 1438.8,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Impulse"
-   },
-   "stage": "Ready",
-   "score": 50.0,
-   "grade": "C",
-   "trigger": 1452.4,
-   "stop": null,
-   "detail": "0.9% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 97 \u00b7 Delivery 51% vs 49% before"
+   "detail": "2.2% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 76 \u00b7 Delivery 45% vs 38% before"
   },
   {
    "symbol": "LALPATHLAB",
@@ -158,24 +175,7 @@
    "grade": "C",
    "trigger": 2079.0,
    "stop": null,
-   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 80 \u00b7 Delivery 57% vs 59% before"
-  },
-  {
-   "symbol": "HONASA",
-   "close": 539.75,
-   "trend": "",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "stage": "Ready",
-   "score": 48.1,
-   "grade": "C",
-   "trigger": 543.0,
-   "stop": null,
-   "detail": "0.6% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 94 \u00b7 Delivery 45% vs 46% before"
+   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 80 \u00b7 Delivery 57% vs 58% before"
   },
   {
    "symbol": "PWL",
