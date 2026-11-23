@@ -1,30 +1,30 @@
 {
- "generated_ist": "2026-11-23 14:35",
+ "generated_ist": "2026-11-23 15:40",
  "oi_asof": "2026-11-20",
  "stocks": 256,
  "market": {
-  "weekly_bull_pct": 24,
-  "monthly_bull_pct": 44,
+  "weekly_bull_pct": 23,
+  "monthly_bull_pct": 43,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
-   66,
    68,
    71,
    71,
    73,
-   75
+   75,
+   74
   ],
   "nifty": {
-   "state": "Bullish",
-   "mom": 1904.2
+   "state": "Topping",
+   "mom": 1805.2
   },
   "turn": "No clear turn"
  },
  "rows": [
   {
    "symbol": "ACUTAAS",
-   "close": 3833.5,
+   "close": 3875.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -32,17 +32,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 1.4,
+   "ext": 1.5,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 30% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 50% vs 45% before",
+   "detail": "Pullback 37% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 50% vs 45% before",
    "grade": "A",
    "trigger": null,
-   "stop": 3792.9
+   "stop": 3712.76
   },
   {
    "symbol": "CHENNPETRO",
-   "close": 1426.1,
+   "close": 1443.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -50,17 +50,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.2,
+   "ext": 0.1,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 19 days \u00b7 Up/down volume 2.7x \u00b7 Delivery 32% vs 23% before",
+   "detail": "Squeeze 18 days \u00b7 Up/down volume 2.1x \u00b7 Delivery 32% vs 23% before",
    "grade": "A",
    "trigger": null,
    "stop": 1384.92
   },
   {
    "symbol": "ENGINERSIN",
-   "close": 296.55,
+   "close": 298.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -68,7 +68,7 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.9,
+   "ext": 1.0,
    "setup": "Trend Pullback",
    "stage": "Watch",
    "detail": "Pullback 33% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 34% before",
@@ -77,8 +77,62 @@
    "stop": 294.31
   },
   {
+   "symbol": "MRPL",
+   "close": 175.36,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": 0.1,
+   "setup": "Squeeze Break",
+   "stage": "Watch",
+   "detail": "Squeeze 17 days \u00b7 Up/down volume 1.3x \u00b7 Delivery 34% vs 23% before",
+   "grade": "A",
+   "trigger": null,
+   "stop": 172.85
+  },
+  {
+   "symbol": "SANSERA",
+   "close": 4619.3,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.6,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 44% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 53% vs 47% before",
+   "grade": "A",
+   "trigger": null,
+   "stop": 4414.15
+  },
+  {
+   "symbol": "LTTS",
+   "close": 4222.6,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": 2.8,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 27% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 42% vs 36% before",
+   "grade": "A",
+   "trigger": null,
+   "stop": 3993.0
+  },
+  {
    "symbol": "PPLPHARMA",
-   "close": 239.3,
+   "close": 236.89,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -86,7 +140,7 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 1.9,
+   "ext": 1.6,
    "setup": "Trend Pullback",
    "stage": "Watch",
    "detail": "Pullback 28% \u00b7 Volume 0.2x in pullback \u00b7 Delivery 42% vs 40% before",
@@ -96,7 +150,7 @@
   },
   {
    "symbol": "ABDL",
-   "close": 794.3,
+   "close": 802.85,
    "trend": "",
    "states": {
     "M": "No data",
@@ -104,7 +158,7 @@
     "D": "Impulse"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 2.7,
+   "ext": 2.9,
    "setup": "Trend Pullback",
    "stage": "Ready",
    "detail": "Pullback 34% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 49% vs 43% before",
@@ -114,7 +168,7 @@
   },
   {
    "symbol": "IGIL",
-   "close": 422.2,
+   "close": 431.1,
    "trend": "",
    "states": {
     "M": "No data",
@@ -122,17 +176,35 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 2.1,
+   "ext": 2.6,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 24% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 53% vs 49% before",
+   "detail": "Pullback 24% \u00b7 Volume 0.3x in pullback \u00b7 Delivery 53% vs 49% before",
    "grade": "A",
    "trigger": null,
    "stop": 417.16
   },
   {
+   "symbol": "HBLENGINE",
+   "close": 770.0,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.2,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 68% \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 36% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 743.96
+  },
+  {
    "symbol": "IPCALAB",
-   "close": 1843.8,
+   "close": 1815.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -140,17 +212,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.9,
+   "ext": -1.4,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 20 days \u00b7 Up/down volume 0.5x \u00b7 Delivery 60% vs 56% before",
+   "detail": "Squeeze 19 days \u00b7 Up/down volume 0.6x \u00b7 Delivery 60% vs 56% before",
    "grade": "B",
    "trigger": null,
-   "stop": 1818.36
+   "stop": 1806.38
   },
   {
    "symbol": "PTCIL",
-   "close": 24120.0,
+   "close": 24425.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -158,53 +230,143 @@
     "D": "Bottoming"
    },
    "old": "\ud83c\udfc6 Prime Setup",
-   "ext": 0.8,
+   "ext": 1.2,
    "setup": "Squeeze Break",
    "stage": "Ready",
-   "detail": "Squeeze 13 days, 3 bars to flip \u00b7 Up/down volume 1.0x \u00b7 Delivery 41% vs 39% before",
+   "detail": "Squeeze 14 days, 5 bars to flip \u00b7 Up/down volume 1.1x \u00b7 Delivery 41% vs 39% before",
    "grade": "B",
-   "trigger": 24600.0,
+   "trigger": 24540.0,
    "stop": 23173.56
   },
   {
-   "symbol": "BSOFT",
-   "close": 303.15,
+   "symbol": "REDINGTON",
+   "close": 331.3,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bottoming"
+   },
+   "old": "\ud83c\udfc6 Prime Setup",
+   "ext": -1.3,
+   "setup": "Squeeze Break",
+   "stage": "Ready",
+   "detail": "Squeeze 5 days, 20 bars to flip \u00b7 Up/down volume 2.1x \u00b7 Delivery 46% vs 48% before",
+   "grade": "B",
+   "trigger": 349.0,
+   "stop": 326.35
+  },
+  {
+   "symbol": "RKFORGE",
+   "close": 749.35,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.2,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 28% \u00b7 Volume 0.3x in pullback \u00b7 Delivery 50% vs 49% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 738.47
+  },
+  {
+   "symbol": "SHYAMMETL",
+   "close": 1276.2,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 2.0,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 32% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 52% vs 52% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1261.97
+  },
+  {
+   "symbol": "BEML",
+   "close": 2008.1,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
-    "W": "Topping",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 0.2,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 55% \u00b7 Volume 0.3x in pullback \u00b7 Delivery 31% vs 34% before",
+   "grade": "B",
+   "trigger": null,
+   "stop": 1994.7
+  },
+  {
+   "symbol": "BSOFT",
+   "close": 304.7,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.2,
+   "ext": -0.1,
    "setup": "Squeeze Break",
    "stage": "Watch",
-   "detail": "Squeeze 3 days \u00b7 Up/down volume 1.1x \u00b7 Delivery 39% vs 35% before",
+   "detail": "Squeeze 3 days \u00b7 Up/down volume 1.0x \u00b7 Delivery 39% vs 35% before",
    "grade": "B",
    "trigger": null,
    "stop": 287.52
   },
   {
    "symbol": "CASTROLIND",
-   "close": 190.36,
+   "close": 190.35,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Topping",
-    "D": "Bottoming"
+    "D": "Bullish"
    },
-   "old": "\ud83c\udfc6 Prime Setup",
+   "old": "\u2705 Confirmed Bullish",
    "ext": -0.5,
    "setup": "Squeeze Break",
-   "stage": "Ready",
-   "detail": "Squeeze 6 days, 1 bars to flip \u00b7 Up/down volume 0.5x \u00b7 Delivery 71% vs 62% before",
+   "stage": "Triggered",
+   "detail": "Squeeze 6 days \u00b7 Up/down volume 0.8x \u00b7 Delivery 71% vs 62% before",
    "grade": "B",
    "trigger": 192.04,
    "stop": 188.73
   },
   {
+   "symbol": "COHANCE",
+   "close": 474.8,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Bottoming"
+   },
+   "old": "\ud83c\udfc6 Prime Setup",
+   "ext": 1.1,
+   "setup": "Squeeze Break",
+   "stage": "Ready",
+   "detail": "Squeeze 17 days, 1 bars to flip \u00b7 Up/down volume 4.4x \u00b7 Delivery 39% vs 47% before",
+   "grade": "B",
+   "trigger": 478.5,
+   "stop": 428.14
+  },
+  {
    "symbol": "ANTHEM",
-   "close": 951.05,
+   "close": 957.35,
    "trend": "",
    "states": {
     "M": "No data",
@@ -212,7 +374,7 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 2.5,
+   "ext": 2.6,
    "setup": "Trend Pullback",
    "stage": "Watch",
    "detail": "Pullback 40% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 50% vs 54% before",
@@ -222,7 +384,7 @@
   },
   {
    "symbol": "BHARTIHEXA",
-   "close": 1631.4,
+   "close": 1599.1,
    "trend": "",
    "states": {
     "M": "No data",
@@ -230,7 +392,7 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": 0.5,
+   "ext": -0.1,
    "setup": "Trend Pullback",
    "stage": "Watch",
    "detail": "Pullback 45% \u00b7 Volume 0.7x in pullback \u00b7 Delivery 54% vs 56% before",
@@ -240,7 +402,7 @@
   },
   {
    "symbol": "SAILIFE",
-   "close": 1800.7,
+   "close": 1809.1,
    "trend": "",
    "states": {
     "M": "No data",
@@ -257,26 +419,8 @@
    "stop": 1734.52
   },
   {
-   "symbol": "TEGA",
-   "close": 1579.2,
-   "trend": "Counter-trend",
-   "states": {
-    "M": "Bearish",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.0,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 4 days \u00b7 Up/down volume 0.2x \u00b7 Delivery 53% vs 41% before",
-   "grade": "B",
-   "trigger": null,
-   "stop": 1564.07
-  },
-  {
    "symbol": "GESHIP",
-   "close": 1531.6,
+   "close": 1538.3,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -284,7 +428,7 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": 0.6,
+   "ext": 0.7,
    "setup": "Trend Pullback",
    "stage": "Triggered",
    "detail": "Pullback 67% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 51% vs 50% before",
@@ -293,62 +437,8 @@
    "stop": 1406.08
   },
   {
-   "symbol": "HBLENGINE",
-   "close": 760.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bullish",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.5,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 2 days \u00b7 Up/down volume 0.6x \u00b7 Delivery 36% vs 36% before",
-   "grade": "C",
-   "trigger": null,
-   "stop": 754.64
-  },
-  {
-   "symbol": "PFOCUS",
-   "close": 252.7,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.9,
-   "setup": "Squeeze Break",
-   "stage": "Watch",
-   "detail": "Squeeze 15 days \u00b7 Up/down volume 0.2x \u00b7 Delivery 11% vs 13% before",
-   "grade": "C",
-   "trigger": null,
-   "stop": 247.5
-  },
-  {
-   "symbol": "REDINGTON",
-   "close": 331.3,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bottoming"
-   },
-   "old": "\ud83c\udfc6 Prime Setup",
-   "ext": -1.3,
-   "setup": "Squeeze Break",
-   "stage": "Ready",
-   "detail": "Squeeze 4 days, 10 bars to flip \u00b7 Up/down volume 1.0x \u00b7 Delivery 46% vs 48% before",
-   "grade": "C",
-   "trigger": 351.0,
-   "stop": 320.56
-  },
-  {
-   "symbol": "GROWW",
-   "close": 224.57,
+   "symbol": "CPPLUS",
+   "close": 4074.1,
    "trend": "",
    "states": {
     "M": "No data",
@@ -356,17 +446,36 @@
     "D": "Impulse"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 2.6,
+   "ext": 0.9,
    "setup": "Trend Pullback",
    "stage": "Watch",
-   "detail": "Pullback 27% \u00b7 Volume 1.2x in pullback \u00b7 Delivery 49% vs 51% before",
+   "detail": "Pullback 73% \u00b7 Volume 0.9x in pullback \u00b7 Delivery 46% vs 52% before",
    "grade": "C",
    "trigger": null,
-   "stop": 217.64
+   "stop": 3612.06
+  },
+  {
+   "symbol": "GROWW",
+   "close": 216.46,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.5,
+   "setup": "Trend Pullback",
+   "stage": "Watch",
+   "detail": "Pullback 33% \u00b7 Volume 1.3x in pullback \u00b7 Delivery 49% vs 51% before",
+   "grade": "Warning",
+   "trigger": null,
+   "stop": 214.32,
+   "warning_text": "Volume in the dip is heavier than in the up-move"
   },
   {
    "symbol": "LGEINDIA",
-   "close": 1740.7,
+   "close": 1777.5,
    "trend": "",
    "states": {
     "M": "No data",
@@ -374,10 +483,10 @@
     "D": "Bullish"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 0.8,
+   "ext": 1.4,
    "setup": "Trend Pullback",
    "stage": "Ready",
-   "detail": "Pullback 66% \u00b7 Volume 1.4x in pullback \u00b7 Delivery 58% vs 53% before",
+   "detail": "Pullback 66% \u00b7 Volume 1.5x in pullback \u00b7 Delivery 58% vs 53% before",
    "grade": "Warning",
    "trigger": 1795.0,
    "stop": 1668.66,
@@ -386,80 +495,8 @@
  ],
  "overspill": [
   {
-   "symbol": "AEGISLOG",
-   "close": 1184.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bearish",
-    "D": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.0,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 43% vs 34% before",
-   "grade": "A",
-   "trigger": 1215.75,
-   "stop": 1078.04
-  },
-  {
-   "symbol": "BALRAMCHIN",
-   "close": 618.6,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": -1.5,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily spilled 11.9% under the 50 EMA \u00b7 Volume 0.2x in pullback \u00b7 Delivery 37% vs 28% before",
-   "grade": "A",
-   "trigger": 649.98,
-   "stop": 579.54
-  },
-  {
-   "symbol": "CCL",
-   "close": 953.05,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.8,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 56% vs 50% before",
-   "grade": "A",
-   "trigger": 1032.17,
-   "stop": 883.93
-  },
-  {
-   "symbol": "CHENNPETRO",
-   "close": 1426.1,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.2,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily spilled 2.1% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 Delivery 32% vs 23% before",
-   "grade": "A",
-   "trigger": 1452.31,
-   "stop": 1374.55
-  },
-  {
-   "symbol": "ENGINERSIN",
-   "close": 296.55,
+   "symbol": "ACUTAAS",
+   "close": 3875.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -467,17 +504,89 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.9,
+   "ext": 1.5,
    "setup": "Daily Overspill",
+   "stage": "Triggered",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 Delivery 50% vs 45% before",
+   "grade": "A",
+   "trigger": 3805.49,
+   "stop": 3712.76
+  },
+  {
+   "symbol": "AEGISLOG",
+   "close": 1158.6,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Bottoming"
+   },
+   "old": "\u274c Avoid",
+   "ext": -1.3,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 43% vs 34% before",
+   "grade": "A",
+   "trigger": 1210.3,
+   "stop": 1078.04
+  },
+  {
+   "symbol": "CCL",
+   "close": 937.55,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "ext": -2.3,
+   "setup": "Weekly Overspill",
    "stage": "Watch",
+   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 56% vs 50% before",
+   "grade": "A",
+   "trigger": 1023.15,
+   "stop": 883.93
+  },
+  {
+   "symbol": "CHENNPETRO",
+   "close": 1443.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": 0.1,
+   "setup": "Daily Overspill",
+   "stage": "Ready",
+   "detail": "Daily spilled 2.1% under the 50 EMA \u00b7 Volume 0.8x in pullback \u00b7 Delivery 32% vs 23% before",
+   "grade": "A",
+   "trigger": 1451.5,
+   "stop": 1374.55
+  },
+  {
+   "symbol": "ENGINERSIN",
+   "close": 298.4,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.0,
+   "setup": "Daily Overspill",
+   "stage": "Triggered",
    "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 34% before",
    "grade": "A",
-   "trigger": 295.34,
+   "trigger": 295.63,
    "stop": 294.31
   },
   {
    "symbol": "GRAPHITE",
-   "close": 765.55,
+   "close": 789.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -485,17 +594,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.1,
+   "ext": 0.9,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
+   "stage": "Triggered",
    "detail": "Weekly spilled 0.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 37% before",
    "grade": "A",
-   "trigger": 739.95,
+   "trigger": 744.71,
    "stop": 675.75
   },
   {
    "symbol": "IPCALAB",
-   "close": 1843.8,
+   "close": 1815.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -503,35 +612,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.9,
+   "ext": -1.4,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.8x in pullback \u00b7 Delivery 60% vs 56% before",
    "grade": "A",
-   "trigger": 1855.23,
-   "stop": 1793.41
-  },
-  {
-   "symbol": "IPCALAB",
-   "close": 1843.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.9,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 60% vs 56% before",
-   "grade": "A",
-   "trigger": 1898.92,
+   "trigger": 1851.48,
    "stop": 1793.41
   },
   {
    "symbol": "KPIL",
-   "close": 1325.6,
+   "close": 1312.6,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -539,17 +630,17 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -0.8,
+   "ext": -1.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 2.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 62% vs 51% before",
+   "detail": "Weekly spilled 2.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 62% vs 51% before",
    "grade": "A",
-   "trigger": 1345.94,
+   "trigger": 1342.77,
    "stop": 1249.4
   },
   {
    "symbol": "PTCIL",
-   "close": 24120.0,
+   "close": 24425.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -557,17 +648,35 @@
     "D": "Bottoming"
    },
    "old": "\ud83c\udfc6 Prime Setup",
-   "ext": 0.8,
+   "ext": 1.2,
    "setup": "Daily Overspill",
    "stage": "Triggered",
    "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 41% vs 39% before",
    "grade": "A",
-   "trigger": 24075.6,
+   "trigger": 24108.88,
    "stop": 23048.81
   },
   {
+   "symbol": "SANSERA",
+   "close": 4619.3,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 1.6,
+   "setup": "Daily Overspill",
+   "stage": "Watch",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 Delivery 53% vs 47% before",
+   "grade": "A",
+   "trigger": 4511.69,
+   "stop": 4414.15
+  },
+  {
    "symbol": "SCI",
-   "close": 257.03,
+   "close": 255.59,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -575,125 +684,107 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -1.0,
+   "ext": -1.2,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly spilled 13.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 42% vs 34% before",
    "grade": "A",
-   "trigger": 272.66,
+   "trigger": 271.04,
    "stop": 232.98
   },
   {
    "symbol": "SHRIPISTON",
-   "close": 4222.0,
+   "close": 4262.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.9,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 59% vs 50% before",
+   "grade": "A",
+   "trigger": 4267.77,
+   "stop": 4161.66
+  },
+  {
+   "symbol": "WELCORP",
+   "close": 2152.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -1.5,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.8x in pullback \u00b7 Delivery 44% vs 39% before",
+   "grade": "A",
+   "trigger": 2176.78,
+   "stop": 2128.04
+  },
+  {
+   "symbol": "WELCORP",
+   "close": 2152.8,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -1.5,
+   "setup": "Daily Overspill",
+   "stage": "Watch",
+   "detail": "Daily spilled 10.7% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 44% vs 39% before",
+   "grade": "A",
+   "trigger": 2292.88,
+   "stop": 2128.04
+  },
+  {
+   "symbol": "ZYDUSWELL",
+   "close": 465.85,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
    "ext": -1.2,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 59% vs 50% before",
+   "detail": "Weekly spilled 8.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 45% vs 43% before",
    "grade": "A",
-   "trigger": 4268.33,
-   "stop": 4174.23
+   "trigger": 492.45,
+   "stop": 441.22
   },
   {
-   "symbol": "WELCORP",
-   "close": 2185.0,
-   "trend": "With trend",
+   "symbol": "CYIENT",
+   "close": 1160.5,
+   "trend": "Early turn",
    "states": {
-    "M": "Impulse",
+    "M": "Bottoming",
     "W": "Topping",
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": -1.3,
-   "setup": "Daily Overspill",
-   "stage": "Ready",
-   "detail": "Daily spilled 10.7% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 44% vs 39% before",
-   "grade": "A",
-   "trigger": 2307.63,
-   "stop": 2128.04
-  },
-  {
-   "symbol": "ZYDUSWELL",
-   "close": 448.05,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.2,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 45% vs 43% before",
-   "grade": "A",
-   "trigger": 495.25,
-   "stop": 442.76
-  },
-  {
-   "symbol": "CYIENT",
-   "close": 1155.5,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bullish",
-    "D": "Bottoming"
-   },
-   "old": "\u23f3 Building Momentum",
-   "ext": 1.1,
+   "ext": 1.3,
    "setup": "Daily Overspill",
    "stage": "Triggered",
    "detail": "Daily spilled 2.9% under the 50 EMA \u00b7 Volume 0.3x in pullback \u00b7 Delivery 48% vs 37% before",
    "grade": "A",
-   "trigger": 1120.97,
+   "trigger": 1124.74,
    "stop": 1063.67
   },
   {
-   "symbol": "LTTS",
-   "close": 4082.5,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bullish",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 1.9,
-   "setup": "Daily Overspill",
-   "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.2x in pullback \u00b7 Delivery 42% vs 36% before",
-   "grade": "A",
-   "trigger": 4078.55,
-   "stop": 3993.0
-  },
-  {
-   "symbol": "TBOTEK",
-   "close": 1547.4,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Topping",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": -0.9,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily spilled 8.9% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 56% vs 52% before",
-   "grade": "A",
-   "trigger": 1580.26,
-   "stop": 1477.64
-  },
-  {
    "symbol": "ABSLAMC",
-   "close": 935.5,
+   "close": 928.85,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -701,17 +792,17 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.3,
+   "ext": -0.5,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 52% vs 49% before",
+   "detail": "Weekly spilled 16.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 52% vs 49% before",
    "grade": "B",
-   "trigger": 972.84,
+   "trigger": 968.65,
    "stop": 798.9
   },
   {
    "symbol": "AJANTPHARM",
-   "close": 3317.7,
+   "close": 3310.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -719,17 +810,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.6,
+   "ext": -0.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 59% vs 53% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 59% vs 53% before",
    "grade": "B",
-   "trigger": 3363.46,
+   "trigger": 3358.4,
    "stop": 3193.5
   },
   {
    "symbol": "CAPLIPOINT",
-   "close": 2029.1,
+   "close": 2033.3,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -737,17 +828,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -4.0,
+   "ext": -3.8,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 35% vs 45% before",
+   "detail": "Weekly spilled 12.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 35% vs 45% before",
    "grade": "B",
-   "trigger": 2388.08,
-   "stop": 2009.07
+   "trigger": 2354.29,
+   "stop": 1961.07
   },
   {
    "symbol": "CARTRADE",
-   "close": 2655.7,
+   "close": 2613.5,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -755,89 +846,71 @@
     "D": "Bullish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.6,
+   "ext": -0.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
    "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 34% vs 39% before",
    "grade": "B",
-   "trigger": 2701.5,
+   "trigger": 2693.12,
    "stop": 2160.67
   },
   {
    "symbol": "CHOICEIN",
-   "close": 728.2,
+   "close": 747.9,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Bearish",
+    "W": "Bottoming",
     "D": "Topping"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.5,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 31% vs 48% before",
-   "grade": "B",
-   "trigger": 741.93,
-   "stop": 670.36
-  },
-  {
-   "symbol": "ENDURANCE",
-   "close": 2560.9,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bullish"
    },
    "old": "\u274c Avoid",
    "ext": 0.4,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 58% vs 56% before",
+   "stage": "Triggered",
+   "detail": "Weekly spilled 8.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 31% vs 48% before",
    "grade": "B",
-   "trigger": 2566.09,
+   "trigger": 742.5,
+   "stop": 670.36
+  },
+  {
+   "symbol": "ENDURANCE",
+   "close": 2555.9,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "ext": 0.4,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 14.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 58% vs 56% before",
+   "grade": "B",
+   "trigger": 2565.12,
    "stop": 2197.6
   },
   {
    "symbol": "HBLENGINE",
-   "close": 760.8,
+   "close": 770.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Bullish",
+    "W": "Impulse",
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -0.5,
+   "ext": -0.2,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
+   "stage": "Triggered",
    "detail": "Weekly spilled 12.8% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.7x in pullback \u00b7 Delivery 36% vs 36% before",
    "grade": "B",
-   "trigger": 769.56,
+   "trigger": 769.61,
    "stop": 646.7
   },
   {
-   "symbol": "HBLENGINE",
-   "close": 760.8,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bullish",
-    "D": "Bearish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -0.5,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily spilled 2.4% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 36% vs 36% before",
-   "grade": "B",
-   "trigger": 790.68,
-   "stop": 754.64
-  },
-  {
    "symbol": "HINDCOPPER",
-   "close": 419.05,
+   "close": 411.25,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -845,89 +918,107 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -2.1,
+   "ext": -2.5,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 38% vs 41% before",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 38% vs 41% before",
    "grade": "B",
-   "trigger": 468.36,
+   "trigger": 462.92,
    "stop": 391.52
   },
   {
    "symbol": "HSCL",
-   "close": 561.25,
+   "close": 552.95,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
+    "D": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "ext": -2.4,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 18.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 41% vs 40% before",
+   "grade": "B",
+   "trigger": 609.94,
+   "stop": 483.18
+  },
+  {
+   "symbol": "IFCI",
+   "close": 58.77,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "ext": -3.0,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 22% vs 20% before",
+   "grade": "B",
+   "trigger": 67.34,
+   "stop": 54.09
+  },
+  {
+   "symbol": "J&KBANK",
+   "close": 146.73,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
     "D": "Bullish"
+   },
+   "old": "\u274c Avoid",
+   "ext": 1.9,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 42% vs 45% before",
+   "grade": "B",
+   "trigger": 140.51,
+   "stop": 111.38
+  },
+  {
+   "symbol": "JINDALSAW",
+   "close": 240.52,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Bearish",
+    "D": "Topping"
+   },
+   "old": "\u274c Avoid",
+   "ext": -2.3,
+   "setup": "Weekly Overspill",
+   "stage": "Watch",
+   "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 45% before",
+   "grade": "B",
+   "trigger": 259.46,
+   "stop": 226.6
+  },
+  {
+   "symbol": "KIRLOSENG",
+   "close": 1718.9,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Bottoming"
    },
    "old": "\u274c Avoid",
    "ext": -2.0,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly spilled 18.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 41% vs 40% before",
+   "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 43% vs 43% before",
    "grade": "B",
-   "trigger": 615.94,
-   "stop": 483.18
-  },
-  {
-   "symbol": "IFCI",
-   "close": 59.82,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.6,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 19.3% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 22% vs 20% before",
-   "grade": "B",
-   "trigger": 68.24,
-   "stop": 54.09
-  },
-  {
-   "symbol": "J&KBANK",
-   "close": 149.73,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.2,
-   "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "detail": "Weekly spilled 17.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 42% vs 45% before",
-   "grade": "B",
-   "trigger": 139.86,
-   "stop": 111.38
-  },
-  {
-   "symbol": "JINDALSAW",
-   "close": 246.42,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Bearish",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.7,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 7.4% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.3x in pullback \u00b7 Delivery 47% vs 45% before",
-   "grade": "B",
-   "trigger": 261.46,
-   "stop": 226.6
+   "trigger": 1909.33,
+   "stop": 1461.57
   },
   {
    "symbol": "LALPATHLAB",
-   "close": 2006.0,
+   "close": 2040.5,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -935,35 +1026,35 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 1.1,
+   "ext": 1.5,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.7x in pullback \u00b7 Delivery 57% vs 59% before",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.8x in pullback \u00b7 Delivery 57% vs 59% before",
    "grade": "B",
-   "trigger": 1964.2,
+   "trigger": 1971.47,
    "stop": 1936.12
   },
   {
    "symbol": "MTARTECH",
-   "close": 5614.5,
+   "close": 5659.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
-    "D": "Bottoming"
+    "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -2.9,
+   "ext": -2.7,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.2x in pullback \u00b7 Delivery 53% vs 59% before",
+   "stage": "Watch",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.2x in pullback \u00b7 Delivery 53% vs 59% before",
    "grade": "B",
-   "trigger": 6535.46,
+   "trigger": 6451.99,
    "stop": 5183.61
   },
   {
    "symbol": "NEULANDLAB",
-   "close": 20642.0,
+   "close": 20550.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -971,66 +1062,48 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -0.1,
+   "ext": -0.2,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.8x in pullback \u00b7 Delivery 49% vs 49% before",
    "grade": "B",
-   "trigger": 20243.5,
+   "trigger": 20272.69,
    "stop": 18083.76
   },
   {
-   "symbol": "NLCINDIA",
-   "close": 233.79,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Topping"
-   },
-   "old": "\u274c Avoid",
-   "ext": -1.6,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 19.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 48% vs 44% before",
-   "grade": "B",
-   "trigger": 259.71,
-   "stop": 221.86
-  },
-  {
    "symbol": "PFOCUS",
-   "close": 252.7,
+   "close": 236.65,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Topping",
+    "W": "Bearish",
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.9,
+   "ext": -2.7,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly spilled 10.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.4x in pullback \u00b7 Delivery 11% vs 13% before",
    "grade": "B",
-   "trigger": 280.84,
+   "trigger": 276.63,
    "stop": 202.13
   },
   {
    "symbol": "PRIVISCL",
-   "close": 3565.5,
+   "close": 3617.1,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
-    "D": "Bullish"
+    "D": "Impulse"
    },
    "old": "\u274c Avoid",
-   "ext": 1.0,
+   "ext": 1.3,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.8x in pullback \u00b7 Delivery 57% vs 56% before",
+   "detail": "Weekly spilled 1.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 57% vs 56% before",
    "grade": "B",
-   "trigger": 3414.85,
+   "trigger": 3434.11,
    "stop": 3147.69
   },
   {
@@ -1046,9 +1119,9 @@
    "ext": -1.3,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.7x in pullback \u00b7 Delivery 46% vs 48% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 48% before",
    "grade": "B",
-   "trigger": 339.68,
+   "trigger": 338.88,
    "stop": 314.37
   },
   {
@@ -1064,32 +1137,32 @@
    "ext": -1.3,
    "setup": "Daily Overspill",
    "stage": "Ready",
-   "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 46% vs 48% before",
+   "detail": "Daily spilled 13.8% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 46% vs 48% before",
    "grade": "B",
-   "trigger": 348.72,
+   "trigger": 347.06,
    "stop": 314.37
   },
   {
    "symbol": "SCHNEIDER",
-   "close": 1042.4,
+   "close": 1008.8,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bearish",
-    "D": "Bottoming"
+    "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -2.1,
+   "ext": -2.8,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 9.9% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 45% before",
+   "stage": "Watch",
+   "detail": "Weekly spilled 9.9% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 46% vs 45% before",
    "grade": "B",
-   "trigger": 1162.75,
+   "trigger": 1148.09,
    "stop": 988.02
   },
   {
    "symbol": "THANGAMAYL",
-   "close": 3813.0,
+   "close": 3772.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1097,17 +1170,17 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -4.7,
+   "ext": -4.9,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 13.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 48% vs 49% before",
+   "detail": "Weekly spilled 14.0% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.5x in pullback \u00b7 Delivery 48% vs 49% before",
    "grade": "B",
-   "trigger": 4758.83,
-   "stop": 3780.42
+   "trigger": 4664.85,
+   "stop": 3738.71
   },
   {
    "symbol": "USHAMART",
-   "close": 461.15,
+   "close": 453.95,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1115,53 +1188,71 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -1.4,
+   "ext": -1.8,
    "setup": "Weekly Overspill",
    "stage": "Watch",
    "detail": "Weekly spilled 4.3% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 0.6x in pullback \u00b7 Delivery 48% vs 56% before",
    "grade": "B",
-   "trigger": 481.42,
+   "trigger": 478.8,
    "stop": 441.42
   },
   {
-   "symbol": "WELCORP",
-   "close": 2185.0,
+   "symbol": "WOCKPHARMA",
+   "close": 2152.3,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Topping",
-    "D": "Bottoming"
+    "W": "Bottoming",
+    "D": "Impulse"
    },
-   "old": "\u23f3 Building Momentum",
-   "ext": -1.3,
+   "old": "\u274c Avoid",
+   "ext": 1.8,
    "setup": "Weekly Overspill",
    "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 44% vs 39% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.4x in pullback \u00b7 Delivery 33% vs 39% before",
    "grade": "B",
-   "trigger": 2179.31,
-   "stop": 2128.04
+   "trigger": 1980.63,
+   "stop": 1768.46
   },
   {
    "symbol": "BEML",
-   "close": 2052.4,
+   "close": 2008.1,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 0.2,
+   "setup": "Daily Overspill",
+   "stage": "Watch",
+   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.3x in pullback \u00b7 Delivery 31% vs 34% before",
+   "grade": "B",
+   "trigger": 2026.17,
+   "stop": 1994.7
+  },
+  {
+   "symbol": "COHANCE",
+   "close": 474.8,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Bullish",
-    "D": "Topping"
+    "D": "Bottoming"
    },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 0.7,
+   "old": "\ud83c\udfc6 Prime Setup",
+   "ext": 1.1,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.3x in pullback \u00b7 Delivery 31% vs 34% before",
+   "detail": "Daily spilled 5.7% under the 50 EMA \u00b7 Volume 0.5x in pullback \u00b7 Delivery 39% vs 47% before",
    "grade": "B",
-   "trigger": 2028.07,
-   "stop": 1994.7
+   "trigger": 457.91,
+   "stop": 424.15
   },
   {
    "symbol": "ACMESOLAR",
-   "close": 405.4,
+   "close": 411.6,
    "trend": "",
    "states": {
     "M": "No data",
@@ -1169,17 +1260,17 @@
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": -0.2,
+   "ext": 0.2,
    "setup": "Daily Overspill",
-   "stage": "Watch",
+   "stage": "Triggered",
    "detail": "Daily spilled 9.9% under the 50 EMA \u00b7 Volume 0.4x in pullback \u00b7 Delivery 46% vs 46% before",
    "grade": "B",
-   "trigger": 409.67,
+   "trigger": 409.85,
    "stop": 365.57
   },
   {
    "symbol": "BHARTIHEXA",
-   "close": 1631.4,
+   "close": 1599.1,
    "trend": "",
    "states": {
     "M": "No data",
@@ -1187,71 +1278,53 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": 0.5,
+   "ext": -0.1,
    "setup": "Daily Overspill",
    "stage": "Watch",
    "detail": "Daily spilled 0.6% under the 50 EMA \u00b7 Volume 0.7x in pullback \u00b7 Delivery 54% vs 56% before",
    "grade": "B",
-   "trigger": 1643.89,
+   "trigger": 1639.63,
    "stop": 1576.64
   },
   {
-   "symbol": "RUBICON",
-   "close": 1718.7,
-   "trend": "",
+   "symbol": "AETHER",
+   "close": 1596.9,
+   "trend": "With trend",
    "states": {
-    "M": "No data",
+    "M": "Impulse",
     "W": "Topping",
     "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 1.2,
-   "setup": "Daily Overspill",
-   "stage": "Watch",
-   "detail": "Daily dipped into the 20-50 EMA zone \u00b7 Volume 0.5x in pullback \u00b7 Delivery 50% vs 53% before",
-   "grade": "B",
-   "trigger": 1663.94,
-   "stop": 1636.72
-  },
-  {
-   "symbol": "AETHER",
-   "close": 1620.3,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Impulse"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 0.2,
+   "ext": -0.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 41% vs 44% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 0.9x in pullback \u00b7 Delivery 41% vs 44% before",
    "grade": "C",
-   "trigger": 1547.32,
+   "trigger": 1552.04,
    "stop": 1373.25
   },
   {
    "symbol": "AETHER",
-   "close": 1620.3,
+   "close": 1596.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
-    "D": "Impulse"
+    "D": "Topping"
    },
    "old": "\u26a0\ufe0f Extended",
-   "ext": 0.2,
+   "ext": -0.1,
    "setup": "Daily Overspill",
    "stage": "Watch",
    "detail": "Daily spilled 14.0% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 41% vs 44% before",
    "grade": "C",
-   "trigger": 1618.58,
+   "trigger": 1616.51,
    "stop": 1373.25
   },
   {
    "symbol": "APARINDS",
-   "close": 14339.0,
+   "close": 14184.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1259,53 +1332,53 @@
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.9,
+   "ext": -2.1,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 43% vs 42% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 43% vs 42% before",
    "grade": "C",
-   "trigger": 15439.51,
+   "trigger": 15319.94,
    "stop": 13752.44
   },
   {
    "symbol": "BBOX",
-   "close": 896.4,
+   "close": 854.05,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Bottoming",
-    "D": "Impulse"
+    "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": 1.3,
+   "ext": 0.3,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 30% vs 30% before",
+   "stage": "Watch",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 30% vs 30% before",
    "grade": "C",
-   "trigger": 823.7,
+   "trigger": 826.59,
    "stop": 707.73
   },
   {
    "symbol": "FINCABLES",
-   "close": 1200.0,
+   "close": 1174.2,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
-    "D": "Bullish"
+    "D": "Topping"
    },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": -0.8,
+   "old": "\u26a0\ufe0f Extended",
+   "ext": -1.2,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.3x in pullback \u00b7 Delivery 31% vs 42% before",
+   "stage": "Watch",
+   "detail": "Weekly spilled 3.1% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.1x in pullback \u00b7 Delivery 31% vs 42% before",
    "grade": "C",
-   "trigger": 1208.06,
+   "trigger": 1204.83,
    "stop": 1050.49
   },
   {
    "symbol": "GESHIP",
-   "close": 1531.6,
+   "close": 1538.3,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1313,35 +1386,35 @@
     "D": "Bottoming"
    },
    "old": "\u23f3 Building Momentum",
-   "ext": 0.6,
+   "ext": 0.7,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
    "detail": "Weekly spilled 2.9% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.2x in pullback \u00b7 Delivery 51% vs 50% before",
    "grade": "C",
-   "trigger": 1462.64,
+   "trigger": 1469.85,
    "stop": 1258.48
   },
   {
    "symbol": "GRANULES",
-   "close": 822.65,
+   "close": 837.75,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Bearish",
+    "W": "Bottoming",
     "D": "Bottoming"
    },
    "old": "\u274c Avoid",
-   "ext": -0.0,
+   "ext": 0.4,
    "setup": "Weekly Overspill",
    "stage": "Triggered",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 1.0x in pullback \u00b7 Delivery 42% vs 50% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 42% vs 50% before",
    "grade": "C",
-   "trigger": 817.16,
+   "trigger": 819.12,
    "stop": 759.98
   },
   {
    "symbol": "IIFL",
-   "close": 611.95,
+   "close": 615.0,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -1349,147 +1422,91 @@
     "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": 0.2,
+   "ext": 0.3,
    "setup": "Weekly Overspill",
-   "stage": "Watch",
+   "stage": "Triggered",
    "detail": "Weekly spilled 5.5% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.2x in pullback \u00b7 Delivery 40% vs 49% before",
    "grade": "C",
-   "trigger": 588.21,
+   "trigger": 590.76,
    "stop": 511.67
   },
   {
-   "symbol": "KIRLOSENG",
-   "close": 1706.2,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bearish",
-    "D": "Bottoming"
-   },
-   "old": "\u274c Avoid",
-   "ext": -2.2,
-   "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 16.8% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.9x in pullback \u00b7 Delivery 43% vs 43% before",
-   "grade": "C",
-   "trigger": 1929.37,
-   "stop": 1461.57
-  },
-  {
    "symbol": "VTL",
-   "close": 528.35,
+   "close": 523.9,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
-    "D": "Bullish"
+    "D": "Topping"
    },
    "old": "\u274c Avoid",
-   "ext": -0.4,
+   "ext": -0.7,
    "setup": "Weekly Overspill",
-   "stage": "Ready",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 1.1x in pullback \u00b7 Delivery 49% vs 49% before",
+   "stage": "Watch",
+   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.0x in pullback \u00b7 Delivery 49% vs 49% before",
    "grade": "C",
-   "trigger": 549.22,
+   "trigger": 546.81,
    "stop": 481.09
   },
   {
    "symbol": "CPPLUS",
-   "close": 4026.2,
+   "close": 4074.1,
    "trend": "",
    "states": {
     "M": "No data",
-    "W": "Topping",
-    "D": "Bullish"
+    "W": "Impulse",
+    "D": "Impulse"
    },
-   "old": "\u2705 Confirmed Bullish",
-   "ext": 0.6,
+   "old": "\u26a0\ufe0f Extended",
+   "ext": 0.9,
    "setup": "Daily Overspill",
    "stage": "Triggered",
    "detail": "Daily spilled 5.2% under the 50 EMA \u00b7 Volume 0.9x in pullback \u00b7 Delivery 46% vs 52% before",
    "grade": "C",
-   "trigger": 4024.53,
+   "trigger": 4029.25,
    "stop": 3612.06
   },
   {
-   "symbol": "ASTERDM",
-   "close": 779.3,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "old": "\u274c Avoid",
-   "ext": 2.2,
-   "setup": "Weekly Overspill",
-   "stage": "Triggered",
-   "detail": "Weekly spilled 9.6% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 3.1x in pullback \u00b7 Delivery 51% vs 59% before",
-   "grade": "Warning",
-   "trigger": 734.23,
-   "stop": 636.72,
-   "warning_text": "Volume in the dip is heavier than in the up-move"
-  },
-  {
    "symbol": "BALRAMCHIN",
-   "close": 618.6,
+   "close": 619.25,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Topping",
+    "W": "Bearish",
     "D": "Topping"
    },
-   "old": "\u26a0\ufe0f Extended",
+   "old": "\u274c Avoid",
    "ext": -1.5,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 2.2x in pullback \u00b7 Delivery 37% vs 28% before",
+   "detail": "Weekly dipped into the 20-50 EMA zone \u00b7 Daily still falling \u00b7 Volume 2.0x in pullback \u00b7 Delivery 37% vs 28% before",
    "grade": "Warning",
-   "trigger": 633.77,
+   "trigger": 632.39,
    "stop": 579.54,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   },
   {
-   "symbol": "MRPL",
-   "close": 175.52,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Topping"
-   },
-   "old": "\u26a0\ufe0f Extended",
-   "ext": 0.2,
-   "setup": "Weekly Overspill",
-   "stage": "Watch",
-   "detail": "Weekly spilled 11.6% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 1.6x in pullback \u00b7 Delivery 34% vs 23% before",
-   "grade": "Warning",
-   "trigger": 170.39,
-   "stop": 142.83,
-   "warning_text": "Volume in the dip is heavier than in the up-move"
-  },
-  {
    "symbol": "TDPOWERSYS",
-   "close": 619.0,
+   "close": 605.3,
    "trend": "With trend",
    "states": {
     "M": "Topping",
-    "W": "Topping",
+    "W": "Bearish",
     "D": "Bearish"
    },
    "old": "\u274c Avoid",
-   "ext": -1.7,
+   "ext": -2.0,
    "setup": "Weekly Overspill",
    "stage": "Watch",
-   "detail": "Weekly spilled 2.7% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 2.5x in pullback \u00b7 Delivery 33% vs 41% before",
+   "detail": "Weekly spilled 2.7% under the 50 EMA \u00b7 Daily still falling \u00b7 Volume 2.2x in pullback \u00b7 Delivery 33% vs 41% before",
    "grade": "Warning",
-   "trigger": 668.13,
+   "trigger": 662.15,
    "stop": 555.94,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   },
   {
    "symbol": "LGEINDIA",
-   "close": 1740.7,
+   "close": 1777.5,
    "trend": "",
    "states": {
     "M": "No data",
@@ -1497,20 +1514,245 @@
     "D": "Bullish"
    },
    "old": "\u2705 Confirmed Bullish",
-   "ext": 0.8,
+   "ext": 1.4,
    "setup": "Daily Overspill",
    "stage": "Triggered",
-   "detail": "Daily spilled 1.3% under the 50 EMA \u00b7 Volume 1.4x in pullback \u00b7 Delivery 58% vs 53% before",
+   "detail": "Daily spilled 1.3% under the 50 EMA \u00b7 Volume 1.5x in pullback \u00b7 Delivery 58% vs 53% before",
    "grade": "Warning",
-   "trigger": 1717.44,
+   "trigger": 1723.16,
    "stop": 1668.66,
    "warning_text": "Volume in the dip is heavier than in the up-move"
   }
  ],
  "ranges": [
   {
+   "symbol": "ANURAS",
+   "close": 1313.6,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u26a0\ufe0f Extended",
+   "vk": null,
+   "ext": 3.2,
+   "detail": "15% pole, then a 5 days flag \u00b7 0.5 ranges under the top line \u00b7 Flag volume 0.7x the pole's (quiet)",
+   "grade": "A",
+   "clean": false,
+   "trigger": 1330.4,
+   "stop": 1290.61,
+   "target": 1531.3,
+   "target_why": "pole height added to the breakout",
+   "chart": {
+    "h": [
+     1138.0,
+     1160.0,
+     1188.0,
+     1182.1,
+     1155.5,
+     1150.8,
+     1152.5,
+     1158.0,
+     1169.9,
+     1205.0,
+     1209.6,
+     1210.7,
+     1306.0,
+     1323.0,
+     1330.4,
+     1327.0,
+     1330.0,
+     1339.5,
+     1337.7
+    ],
+    "l": [
+     1117.0,
+     1119.9,
+     1141.0,
+     1131.9,
+     1132.0,
+     1129.5,
+     1137.0,
+     1140.1,
+     1149.0,
+     1174.0,
+     1177.5,
+     1184.4,
+     1204.4,
+     1300.0,
+     1308.0,
+     1310.1,
+     1308.8,
+     1314.1,
+     1293.2
+    ],
+    "c": [
+     1129.6,
+     1151.4,
+     1182.0,
+     1143.5,
+     1139.0,
+     1139.6,
+     1145.4,
+     1151.8,
+     1165.2,
+     1198.3,
+     1191.9,
+     1201.8,
+     1300.6,
+     1316.8,
+     1317.5,
+     1321.1,
+     1327.0,
+     1329.4,
+     1313.6
+    ],
+    "lines": {
+     "pole": [
+      [
+       5.0,
+       1129.5
+      ],
+      [
+       14.0,
+       1330.4
+      ]
+     ],
+     "top": [
+      [
+       14.0,
+       1330.4
+      ],
+      [
+       18.0,
+       1330.4
+      ]
+     ]
+    },
+    "brk": null
+   },
+   "since": "2026-11-03 00:00"
+  },
+  {
+   "symbol": "ASAHIINDIA",
+   "close": 1178.45,
+   "trend": "With trend",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "setup": "Daily Flag",
+   "stage": "Ready",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": null,
+   "ext": 4.6,
+   "detail": "25% pole, then a 3 days flag \u00b7 0.5 ranges under the top line \u00b7 Flag volume 0.4x the pole's (quiet)",
+   "grade": "A",
+   "clean": false,
+   "trigger": 1199.0,
+   "stop": 1154.79,
+   "target": 1493.05,
+   "target_why": "pole height added to the breakout",
+   "chart": {
+    "h": [
+     913.1,
+     919.5,
+     926.4,
+     923.5,
+     925.15,
+     957.0,
+     1014.95,
+     1004.2,
+     1033.3,
+     1039.7,
+     1062.2,
+     1099.15,
+     1111.0,
+     1114.8,
+     1175.0,
+     1168.0,
+     1175.0,
+     1199.0,
+     1189.85,
+     1186.9
+    ],
+    "l": [
+     875.8,
+     901.1,
+     904.8,
+     906.2,
+     901.05,
+     904.95,
+     944.8,
+     952.0,
+     999.05,
+     995.55,
+     1026.4,
+     1055.65,
+     1085.55,
+     1094.0,
+     1107.1,
+     1136.8,
+     1142.55,
+     1157.3,
+     1157.1,
+     1164.2
+    ],
+    "c": [
+     906.55,
+     914.95,
+     919.1,
+     911.65,
+     904.95,
+     940.75,
+     991.45,
+     983.45,
+     1020.8,
+     1034.45,
+     1055.8,
+     1088.05,
+     1103.9,
+     1110.25,
+     1165.05,
+     1166.5,
+     1157.3,
+     1192.05,
+     1163.6,
+     1178.45
+    ],
+    "lines": {
+     "pole": [
+      [
+       5.0,
+       904.95
+      ],
+      [
+       17.0,
+       1199.0
+      ]
+     ],
+     "top": [
+      [
+       17.0,
+       1199.0
+      ],
+      [
+       19.0,
+       1199.0
+      ]
+     ]
+    },
+    "brk": null
+   },
+   "since": "2026-11-02 00:00"
+  },
+  {
    "symbol": "CHENNPETRO",
-   "close": 1426.1,
+   "close": 1443.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1521,14 +1763,15 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.2,
-   "detail": "9-week range under a falling trendline, 3 touches, 25% deep \u00b7 1.7 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
+   "ext": 0.1,
+   "detail": "9-week range under a falling trendline, 3 touches, 24% deep \u00b7 1.4 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
    "grade": "A",
-   "trigger": 1537.2,
-   "stop": 1433.37,
-   "target": 1917.05,
+   "trigger": 1534.15,
+   "stop": 1435.78,
+   "target": 1908.6,
    "chart": {
     "h": [
+     1423.2,
      1390.0,
      1376.0,
      1380.0,
@@ -1586,9 +1829,11 @@
      1452.0,
      1453.0,
      1441.9,
-     1438.4
+     1438.4,
+     1450.0
     ],
     "l": [
+     1367.0,
      1350.0,
      1333.2,
      1325.1,
@@ -1646,9 +1891,11 @@
      1401.0,
      1406.0,
      1408.1,
-     1408.0
+     1408.0,
+     1416.0
     ],
     "c": [
+     1375.0,
      1352.4,
      1341.1,
      1367.4,
@@ -1706,26 +1953,27 @@
      1410.4,
      1419.7,
      1424.7,
-     1426.1
+     1426.1,
+     1443.8
     ],
     "lines": {
      "top": [
       [
-       11.0,
+       12.0,
        1677.5
       ],
       [
-       57.0,
-       1537.2
+       59.0,
+       1534.15
       ]
      ],
      "floor": [
       [
-       11.0,
+       12.0,
        1325.1
       ],
       [
-       57.0,
+       59.0,
        1325.1
       ]
      ]
@@ -1735,7 +1983,7 @@
   },
   {
    "symbol": "CHENNPETRO",
-   "close": 1426.1,
+   "close": 1443.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -1746,13 +1994,13 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.2,
-   "detail": "5 weeks rectangle, 7 touches, 14% deep \u00b7 2.6 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
+   "ext": 0.1,
+   "detail": "5 weeks rectangle, 7 touches, 14% deep \u00b7 2.5 ranges under the top line \u00b7 Volume 0.7x in the pattern (quieter is better)",
    "grade": "A",
    "clean": false,
-   "trigger": 1601.12,
-   "stop": 1497.17,
-   "target": 1799.97,
+   "trigger": 1602.25,
+   "stop": 1503.75,
+   "target": 1801.09,
    "target_why": "rectangle height added to the top",
    "chart": {
     "h": [
@@ -1787,7 +2035,8 @@
      1452.0,
      1453.0,
      1441.9,
-     1438.4
+     1438.4,
+     1450.0
     ],
     "l": [
      1385.0,
@@ -1821,7 +2070,8 @@
      1401.0,
      1406.0,
      1408.1,
-     1408.0
+     1408.0,
+     1416.0
     ],
     "c": [
      1405.7,
@@ -1855,7 +2105,8 @@
      1410.4,
      1419.7,
      1424.7,
-     1426.1
+     1426.1,
+     1443.8
     ],
     "lines": {
      "top": [
@@ -1864,8 +2115,8 @@
        1573.0
       ],
       [
-       31.0,
-       1601.12
+       32.0,
+       1602.25
       ]
      ],
      "floor": [
@@ -1874,8 +2125,8 @@
        1374.16
       ],
       [
-       31.0,
-       1389.86
+       32.0,
+       1390.49
       ]
      ]
     },
@@ -1885,11 +2136,11 @@
   },
   {
    "symbol": "KAJARIACER",
-   "close": 1200.5,
+   "close": 1200.9,
    "trend": "With trend",
    "states": {
     "M": "Bullish",
-    "W": "Bearish",
+    "W": "Bottoming",
     "D": "Bullish"
    },
    "setup": "Daily Range",
@@ -1897,11 +2148,11 @@
    "old": "\u274c Avoid",
    "vk": null,
    "ext": 0.4,
-   "detail": "28-week range under a falling trendline, 4 touches, 17% deep \u00b7 2.8 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "detail": "28-week range under a falling trendline, 4 touches, 17% deep \u00b7 2.9 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "A",
-   "trigger": 1299.82,
-   "stop": 1243.68,
-   "target": 1522.43,
+   "trigger": 1300.19,
+   "stop": 1245.8,
+   "target": 1522.79,
    "chart": {
     "h": [
      950.9,
@@ -1962,7 +2213,8 @@
      1224.9,
      1226.9,
      1212.6,
-     1220.1
+     1220.1,
+     1214.9
     ],
     "l": [
      911.6,
@@ -2023,7 +2275,8 @@
      1141.0,
      1183.5,
      1165.0,
-     1155.6
+     1155.6,
+     1192.5
     ],
     "c": [
      934.65,
@@ -2084,7 +2337,8 @@
      1180.7,
      1196.6,
      1168.7,
-     1200.5
+     1200.5,
+     1200.9
     ],
     "lines": {
      "top": [
@@ -2093,8 +2347,8 @@
        1246.8
       ],
       [
-       58.67,
-       1299.82
+       59.0,
+       1300.19
       ]
      ],
      "floor": [
@@ -2103,7 +2357,7 @@
        1041.2
       ],
       [
-       58.67,
+       59.0,
        1041.2
       ]
      ]
@@ -2113,195 +2367,195 @@
   },
   {
    "symbol": "MRPL",
-   "close": 175.52,
+   "close": 175.36,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
-    "D": "Topping"
+    "D": "Bearish"
    },
    "setup": "Daily Range",
    "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended",
+   "old": "\u274c Avoid",
    "vk": null,
-   "ext": 0.2,
+   "ext": 0.1,
    "detail": "31-week range under a flat top, 6 touches, 25% deep \u00b7 1.9 ranges under the ceiling \u00b7 Volume 0.3x lately (quieter is better)",
    "grade": "A",
-   "trigger": 190.42,
-   "stop": 178.03,
-   "target": 238.03,
+   "trigger": 190.44,
+   "stop": 178.32,
+   "target": 238.1,
    "chart": {
     "h": [
      197.0,
-     195.95,
+     195.77,
      198.5,
      203.89,
      212.31,
-     198.44,
+     210.83,
      212.0,
      200.58,
      189.7,
      187.0,
-     180.79,
-     188.7,
+     181.95,
+     186.4,
      194.85,
-     177.15,
+     178.15,
      169.9,
-     161.58,
-     152.8,
+     167.1,
+     155.34,
      153.59,
-     157.5,
-     161.45,
+     152.1,
+     158.85,
+     169.82,
      171.25,
-     170.8,
-     157.5,
-     154.83,
+     158.93,
+     157.0,
      152.4,
      170.0,
      178.9,
      183.0,
-     174.21,
+     177.48,
      176.3,
+     174.05,
      183.0,
-     180.78,
      189.0,
      178.3,
      177.15,
      179.99,
      191.9,
-     170.6,
-     169.95,
+     176.07,
+     170.37,
      180.8,
      184.39,
-     186.39,
+     183.73,
      191.49,
-     190.3,
+     185.0,
      190.72,
      188.5,
+     180.0,
      181.26,
-     179.61,
-     177.56
+     177.71
     ],
     "l": [
-     186.11,
+     180.71,
      182.5,
-     189.55,
-     185.6,
+     189.1,
+     191.5,
      183.01,
-     177.04,
+     177.37,
      173.91,
      174.2,
      170.9,
-     175.8,
+     176.0,
      168.4,
-     175.3,
+     174.0,
      170.37,
-     155.5,
+     158.59,
      152.2,
-     149.28,
+     151.71,
      143.12,
      148.1,
      143.5,
-     150.65,
-     155.11,
-     153.61,
+     147.0,
+     150.81,
+     157.66,
      152.61,
      147.7,
+     146.05,
      144.3,
-     147.15,
      156.15,
-     168.61,
+     170.25,
      159.0,
-     165.3,
+     161.05,
+     162.25,
      161.2,
-     170.0,
      169.34,
-     169.22,
+     171.26,
      167.11,
+     169.47,
      170.75,
-     166.0,
      162.4,
-     162.76,
+     163.61,
+     162.5,
      161.5,
-     163.25,
      170.5,
-     166.64,
+     169.5,
      159.0,
      170.4,
+     171.5,
      171.14,
-     174.76,
      173.2,
-     174.56
+     174.27
     ],
     "c": [
-     191.12,
-     190.05,
-     196.86,
-     188.51,
-     190.03,
-     178.14,
-     184.78,
-     186.14,
-     182.14,
-     176.24,
-     174.93,
-     187.22,
+     193.72,
+     192.9,
+     192.27,
+     196.65,
+     206.55,
+     191.44,
+     192.05,
+     181.72,
+     184.14,
+     179.5,
+     175.8,
+     180.66,
+     172.1,
+     159.47,
+     167.94,
+     153.63,
+     148.13,
+     151.2,
+     147.02,
+     151.55,
+     161.01,
+     159.07,
+     156.23,
+     148.13,
+     146.49,
+     164.74,
+     174.49,
+     175.95,
+     163.41,
+     169.64,
+     162.96,
+     170.54,
+     173.98,
+     173.61,
+     171.42,
+     173.19,
+     175.86,
+     165.38,
+     164.49,
+     169.29,
+     182.86,
+     175.89,
      173.72,
-     155.74,
-     160.33,
-     150.32,
-     150.17,
-     150.41,
-     154.16,
-     160.34,
-     168.95,
-     154.19,
-     153.93,
-     150.0,
-     147.94,
-     156.96,
-     170.92,
-     169.75,
-     166.84,
-     170.97,
-     181.14,
-     177.15,
-     176.81,
-     170.8,
-     175.22,
-     172.96,
-     166.81,
-     167.03,
-     164.6,
-     164.76,
-     173.85,
-     185.26,
-     167.52,
-     189.44,
-     177.47,
-     175.67,
-     178.68,
-     176.18,
-     175.52
+     182.61,
+     173.15,
+     173.73,
+     176.65,
+     175.97,
+     175.36
     ],
     "lines": {
      "top": [
       [
-       9.5,
+       9.75,
        187.0
       ],
       [
-       48.0,
-       190.42
+       48.5,
+       190.44
       ]
      ],
      "floor": [
       [
-       9.5,
+       9.75,
        143.12
       ],
       [
-       48.0,
+       48.5,
        143.12
       ]
      ]
@@ -2311,23 +2565,23 @@
   },
   {
    "symbol": "PRIVISCL",
-   "close": 3565.5,
+   "close": 3617.1,
    "trend": "With trend",
    "states": {
     "M": "Topping",
     "W": "Bottoming",
-    "D": "Bullish"
+    "D": "Impulse"
    },
    "setup": "Daily Range",
    "stage": "Triggered",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 1.0,
+   "ext": 1.3,
    "detail": "7-week range under a falling trendline, 4 touches, 15% deep \u00b7 broke out Thu 19 \u00b7 Breakout volume 1.6x",
    "grade": "A",
-   "trigger": 3477.5,
-   "stop": 3261.99,
-   "target": 4014.9,
+   "trigger": 3471.0,
+   "stop": 3254.43,
+   "target": 3999.74,
    "chart": {
     "h": [
      3498.7,
@@ -2374,7 +2628,8 @@
      3440.6,
      3459.2,
      3600.0,
-     3571.0
+     3571.0,
+     3705.0
     ],
     "l": [
      3383.1,
@@ -2421,7 +2676,8 @@
      3320.0,
      3384.1,
      3427.6,
-     3501.0
+     3501.0,
+     3550.1
     ],
     "c": [
      3480.7,
@@ -2468,7 +2724,8 @@
      3430.7,
      3438.3,
      3535.0,
-     3565.5
+     3565.5,
+     3617.1
     ],
     "lines": {
      "top": [
@@ -2477,8 +2734,8 @@
        3705.0
       ],
       [
-       44.0,
-       3477.5
+       45.0,
+       3471.0
       ]
      ],
      "floor": [
@@ -2509,11 +2766,11 @@
    "old": "\ud83c\udfc6 Prime Setup",
    "vk": null,
    "ext": -1.3,
-   "detail": "5-week range under a falling trendline, 3 touches, 29% deep \u00b7 1.4 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "detail": "5-week range under a falling trendline, 3 touches, 29% deep \u00b7 1.3 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
    "grade": "A",
-   "trigger": 357.25,
-   "stop": 327.85,
-   "target": 461.31,
+   "trigger": 355.08,
+   "stop": 326.27,
+   "target": 458.51,
    "chart": {
     "h": [
      417.4,
@@ -2547,7 +2804,8 @@
      347.65,
      349.0,
      345.4,
-     339.05
+     339.05,
+     337.4
     ],
     "l": [
      404.0,
@@ -2581,7 +2839,8 @@
      338.3,
      336.0,
      332.5,
-     328.5
+     328.5,
+     327.5
     ],
     "c": [
      405.7,
@@ -2615,6 +2874,7 @@
      343.1,
      338.1,
      341.3,
+     331.3,
      331.3
     ],
     "lines": {
@@ -2624,8 +2884,8 @@
        411.5
       ],
       [
-       31.0,
-       357.25
+       32.0,
+       355.08
       ]
      ],
      "floor": [
@@ -2634,7 +2894,7 @@
        315.0
       ],
       [
-       31.0,
+       32.0,
        315.0
       ]
      ]
@@ -2644,7 +2904,7 @@
   },
   {
    "symbol": "SCI",
-   "close": 257.03,
+   "close": 255.59,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2655,12 +2915,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -1.0,
-   "detail": "6-week range under a falling trendline, 4 touches, 23% deep \u00b7 1.8 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "ext": -1.2,
+   "detail": "6-week range under a falling trendline, 4 touches, 24% deep \u00b7 2.0 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "A",
-   "trigger": 277.37,
-   "stop": 260.26,
-   "target": 342.5,
+   "trigger": 276.84,
+   "stop": 260.45,
+   "target": 342.21,
    "chart": {
     "h": [
      282.2,
@@ -2702,7 +2962,8 @@
      263.97,
      260.59,
      255.05,
-     258.75
+     258.75,
+     263.0
     ],
     "l": [
      278.7,
@@ -2744,7 +3005,8 @@
      258.6,
      253.65,
      247.06,
-     246.21
+     246.21,
+     253.52
     ],
     "c": [
      279.05,
@@ -2786,7 +3048,8 @@
      260.58,
      256.41,
      249.3,
-     257.03
+     257.03,
+     255.59
     ],
     "lines": {
      "top": [
@@ -2795,8 +3058,8 @@
        293.8
       ],
       [
-       39.0,
-       277.37
+       40.0,
+       276.84
       ]
      ],
      "floor": [
@@ -2805,7 +3068,7 @@
        233.45
       ],
       [
-       39.0,
+       40.0,
        233.45
       ]
      ]
@@ -2815,7 +3078,7 @@
   },
   {
    "symbol": "SHRIPISTON",
-   "close": 4222.0,
+   "close": 4262.4,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -2826,12 +3089,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -1.2,
-   "detail": "12-week range under a falling trendline, 3 touches, 15% deep \u00b7 4.3 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "ext": -0.9,
+   "detail": "12-week range under a falling trendline, 3 touches, 15% deep \u00b7 4.0 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "A",
-   "trigger": 4705.59,
-   "stop": 4525.95,
-   "target": 5414.21,
+   "trigger": 4704.25,
+   "stop": 4529.62,
+   "target": 5405.96,
    "chart": {
     "h": [
      4549.0,
@@ -2871,7 +3134,8 @@
      4358.9,
      4348.0,
      4365.0,
-     4302.6
+     4302.6,
+     4288.3
     ],
     "l": [
      4090.0,
@@ -2911,7 +3175,8 @@
      4275.5,
      4246.7,
      4265.0,
-     4212.8
+     4212.8,
+     4170.0
     ],
     "c": [
      4402.7,
@@ -2951,7 +3216,8 @@
      4298.7,
      4293.9,
      4287.7,
-     4222.0
+     4222.0,
+     4262.4
     ],
     "lines": {
      "top": [
@@ -2960,8 +3226,8 @@
        4785.8
       ],
       [
-       37.5,
-       4705.59
+       38.0,
+       4704.25
       ]
      ],
      "floor": [
@@ -2970,7 +3236,7 @@
        4150.0
       ],
       [
-       37.5,
+       38.0,
        4150.0
       ]
      ]
@@ -2979,149 +3245,194 @@
    }
   },
   {
-   "symbol": "SHYAMMETL",
-   "close": 1314.3,
+   "symbol": "TIMKEN",
+   "close": 3073.6,
    "trend": "With trend",
    "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Impulse"
+    "M": "Topping",
+    "W": "Bottoming",
+    "D": "Topping"
    },
-   "setup": "Daily Flag",
+   "setup": "Daily Range",
    "stage": "Ready",
-   "old": "\u2705 Confirmed Bullish",
+   "old": "\u274c Avoid",
    "vk": null,
-   "ext": 2.8,
-   "detail": "18% pole, then a 7 days flag \u00b7 0.7 ranges under the top line \u00b7 Flag volume 0.7x the pole's (quiet)",
+   "ext": 0.2,
+   "detail": "6-week range under a flat top, 3 touches, 16% deep \u00b7 1.0 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "A",
-   "clean": false,
-   "trigger": 1347.0,
-   "stop": 1277.94,
-   "target": 1595.3,
-   "target_why": "pole height added to the breakout",
+   "trigger": 3157.21,
+   "stop": 3025.54,
+   "target": 3661.47,
    "chart": {
     "h": [
-     1223.0,
-     1240.5,
-     1235.0,
-     1210.3,
-     1193.1,
-     1143.0,
-     1160.0,
-     1155.0,
-     1164.9,
-     1196.0,
-     1222.4,
-     1253.5,
-     1257.0,
-     1283.7,
-     1305.0,
-     1334.9,
-     1337.8,
-     1347.0,
-     1324.2,
-     1329.8,
-     1354.0,
-     1381.9,
-     1329.6,
-     1334.0
+     3315.0,
+     3268.6,
+     3221.1,
+     3213.8,
+     3145.0,
+     3122.2,
+     3149.9,
+     3169.9,
+     3178.8,
+     3144.7,
+     3044.4,
+     2988.6,
+     2972.6,
+     2946.9,
+     2917.0,
+     2928.6,
+     2904.0,
+     2864.6,
+     2827.7,
+     2760.3,
+     2818.9,
+     2799.9,
+     2833.2,
+     2878.0,
+     2910.0,
+     3039.4,
+     3030.0,
+     3100.0,
+     3141.1,
+     3132.6,
+     3067.8,
+     3081.9,
+     3103.6,
+     3132.4,
+     3131.8,
+     3160.0,
+     3140.0,
+     3120.7,
+     3122.9,
+     3117.9
     ],
     "l": [
-     1146.1,
-     1178.5,
-     1169.6,
-     1161.1,
-     1130.0,
-     1098.7,
-     1120.5,
-     1140.1,
-     1134.7,
-     1123.7,
-     1184.7,
-     1194.4,
-     1205.3,
-     1232.0,
-     1247.0,
-     1297.6,
-     1292.9,
-     1310.8,
-     1296.1,
-     1305.0,
-     1310.5,
-     1305.2,
-     1283.5,
-     1280.5
+     3242.9,
+     3192.0,
+     3134.5,
+     3065.0,
+     3075.0,
+     3083.1,
+     3103.8,
+     3111.0,
+     3096.0,
+     3005.2,
+     2953.0,
+     2911.1,
+     2862.8,
+     2855.0,
+     2846.0,
+     2848.0,
+     2837.9,
+     2765.8,
+     2727.0,
+     2687.9,
+     2702.6,
+     2741.5,
+     2775.0,
+     2770.0,
+     2798.3,
+     2833.6,
+     2966.3,
+     2974.0,
+     3049.3,
+     3015.0,
+     2994.0,
+     3006.2,
+     3052.9,
+     3082.6,
+     3067.5,
+     3084.7,
+     3095.9,
+     3065.8,
+     3069.0,
+     3051.6
     ],
     "c": [
-     1198.5,
-     1226.6,
-     1195.6,
-     1200.0,
-     1131.3,
-     1126.2,
-     1153.8,
-     1144.7,
-     1141.6,
-     1162.9,
-     1191.0,
-     1219.5,
-     1231.4,
-     1270.0,
-     1300.6,
-     1320.5,
-     1332.3,
-     1313.9,
-     1315.9,
-     1316.0,
-     1321.1,
-     1317.1,
-     1294.0,
-     1314.3
+     3256.9,
+     3206.1,
+     3180.5,
+     3086.2,
+     3136.0,
+     3098.8,
+     3132.3,
+     3156.9,
+     3132.0,
+     3015.6,
+     2962.8,
+     2927.0,
+     2929.0,
+     2888.6,
+     2884.4,
+     2889.6,
+     2860.8,
+     2795.6,
+     2748.1,
+     2730.1,
+     2759.5,
+     2775.5,
+     2803.4,
+     2855.8,
+     2852.0,
+     3016.7,
+     3008.3,
+     3071.5,
+     3124.6,
+     3057.8,
+     3014.2,
+     3070.4,
+     3096.9,
+     3120.3,
+     3118.4,
+     3148.5,
+     3103.6,
+     3096.9,
+     3100.8,
+     3073.6
     ],
     "lines": {
-     "pole": [
-      [
-       5.0,
-       1098.7
-      ],
-      [
-       17.0,
-       1347.0
-      ]
-     ],
      "top": [
       [
-       17.0,
-       1347.0
+       8.0,
+       3178.8
       ],
       [
-       23.0,
-       1347.0
+       39.0,
+       3157.21
+      ]
+     ],
+     "floor": [
+      [
+       8.0,
+       2687.9
+      ],
+      [
+       39.0,
+       2687.9
       ]
      ]
     },
     "brk": null
-   },
-   "since": "2026-10-26 00:00"
+   }
   },
   {
    "symbol": "WELCORP",
-   "close": 2185.0,
+   "close": 2152.8,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
     "W": "Topping",
-    "D": "Bottoming"
+    "D": "Bearish"
    },
    "setup": "Daily Falling Wedge",
    "stage": "Ready",
-   "old": "\u23f3 Building Momentum",
+   "old": "\u274c Avoid",
    "vk": null,
-   "ext": -1.3,
-   "detail": "6 weeks falling wedge, 8 touches, 16% deep \u00b7 0.5 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "ext": -1.5,
+   "detail": "6 weeks falling wedge, 8 touches, 16% deep \u00b7 0.6 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
    "grade": "A",
    "clean": false,
-   "trigger": 2252.59,
+   "trigger": 2231.65,
    "stop": 2128.04,
    "target": 2818.0,
    "target_why": "back to where the wedge started",
@@ -3161,7 +3472,8 @@
      2319.2,
      2270.9,
      2253.0,
-     2249.9
+     2249.9,
+     2225.0
     ],
     "l": [
      2700.9,
@@ -3198,7 +3510,8 @@
      2182.0,
      2217.4,
      2189.8,
-     2180.0
+     2180.0,
+     2141.7
     ],
     "c": [
      2717.0,
@@ -3235,7 +3548,8 @@
      2260.2,
      2224.9,
      2224.5,
-     2185.0
+     2185.0,
+     2152.8
     ],
     "lines": {
      "top": [
@@ -3244,8 +3558,8 @@
        2818.0
       ],
       [
-       34.0,
-       2252.59
+       35.0,
+       2231.65
       ]
      ],
      "floor": [
@@ -3254,8 +3568,8 @@
        2466.78
       ],
       [
-       34.0,
-       2003.76
+       35.0,
+       1986.61
       ]
      ]
     },
@@ -3265,174 +3579,177 @@
   },
   {
    "symbol": "BATAINDIA",
-   "close": 634.5,
+   "close": 626.7,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
-    "W": "Bottoming",
+    "W": "Bearish",
     "D": "Bearish"
    },
    "setup": "Daily Range",
    "stage": "Ready",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.4,
-   "detail": "13-week range under a falling trendline, 3 touches, 27% deep \u00b7 0.5 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "ext": -0.8,
+   "detail": "13-week range under a falling trendline, 3 touches, 27% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "A",
-   "trigger": 645.31,
-   "stop": 614.08,
-   "target": 816.53,
+   "trigger": 643.45,
+   "stop": 612.72,
+   "target": 816.3,
    "chart": {
     "h": [
-     694.45,
+     701.35,
+     704.95,
      708.0,
      704.95,
-     716.0,
+     742.95,
      747.5,
-     740.0,
-     726.25,
+     730.0,
      759.75,
      767.95,
-     758.0,
-     726.85,
-     709.35,
+     764.15,
+     730.0,
+     715.55,
      693.0,
-     685.5,
+     687.65,
      689.25,
+     680.25,
      682.0,
-     675.0,
-     666.95,
+     670.4,
+     664.0,
      656.9,
-     640.0,
      656.0,
+     643.2,
      644.0,
-     638.95,
      633.7,
-     627.0,
-     623.95,
+     628.9,
+     622.85,
      624.0,
+     617.1,
      619.05,
      623.95,
-     641.85,
      644.9,
      646.75,
+     642.6,
      683.0,
-     672.0,
-     651.0,
+     665.0,
      654.0,
      647.45,
-     650.75,
+     646.0,
+     653.5,
      654.6,
-     644.8,
-     633.6,
-     638.35
+     641.2,
+     638.35,
+     639.9
     ],
     "l": [
+     671.5,
      667.0,
-     691.05,
-     696.3,
+     693.0,
      691.15,
-     706.4,
-     717.75,
+     693.1,
+     710.05,
+     710.6,
      697.0,
-     708.0,
-     725.4,
-     710.15,
-     699.0,
+     715.75,
+     740.0,
+     707.6,
+     683.25,
      680.8,
-     678.8,
+     678.1,
      675.0,
      666.85,
-     671.0,
-     659.9,
-     651.15,
-     637.5,
+     667.5,
+     656.4,
+     643.0,
      626.3,
      624.9,
      629.05,
-     621.5,
+     626.0,
+     621.0,
      613.0,
      606.15,
-     608.0,
-     601.0,
-     599.65,
+     611.2,
+     600.15,
      599.6,
-     615.0,
-     624.0,
-     619.0,
+     613.0,
+     615.7,
+     622.05,
      605.95,
-     646.25,
+     619.0,
      626.6,
+     627.25,
      613.15,
      634.0,
-     635.15,
-     639.7,
-     630.0,
+     640.2,
+     631.15,
+     621.8,
      618.75,
-     619.5
+     622.9
     ],
     "c": [
-     689.95,
-     694.95,
-     700.05,
-     709.65,
-     730.05,
-     720.5,
-     699.85,
-     727.65,
-     758.1,
-     721.3,
-     701.05,
-     684.7,
-     681.6,
-     682.4,
-     670.45,
-     672.75,
-     663.85,
-     653.25,
-     640.15,
-     636.65,
-     635.2,
-     637.2,
-     629.8,
-     620.35,
-     613.0,
-     619.85,
-     603.35,
-     609.75,
-     619.35,
-     638.65,
-     631.1,
-     633.85,
-     662.4,
-     649.15,
-     637.75,
-     633.2,
-     638.05,
-     642.1,
-     642.15,
-     633.25,
-     627.2,
-     634.5
+     676.25,
+     699.65,
+     698.35,
+     696.15,
+     709.55,
+     728.1,
+     712.85,
+     715.15,
+     755.7,
+     753.1,
+     711.2,
+     686.25,
+     685.55,
+     681.3,
+     677.35,
+     677.4,
+     669.45,
+     661.05,
+     648.65,
+     630.65,
+     638.3,
+     631.75,
+     627.0,
+     624.7,
+     618.75,
+     611.05,
+     615.1,
+     613.25,
+     615.2,
+     616.05,
+     635.55,
+     636.5,
+     624.35,
+     660.8,
+     628.35,
+     649.8,
+     637.65,
+     639.25,
+     648.6,
+     632.25,
+     624.0,
+     634.5,
+     626.7
     ],
     "lines": {
      "top": [
       [
-       8.0,
+       8.5,
        767.95
       ],
       [
-       41.0,
-       645.31
+       42.0,
+       643.45
       ]
      ],
      "floor": [
       [
-       8.0,
+       8.5,
        599.6
       ],
       [
-       41.0,
+       42.0,
        599.6
       ]
      ]
@@ -3442,213 +3759,216 @@
   },
   {
    "symbol": "COHANCE",
-   "close": 462.3,
+   "close": 474.8,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
-    "W": "Bottoming",
+    "W": "Bullish",
     "D": "Bottoming"
    },
    "setup": "Daily Rectangle",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
+   "stage": "Ready",
+   "old": "\ud83c\udfc6 Prime Setup",
    "vk": null,
-   "ext": 0.5,
-   "detail": "17 weeks rectangle, 10 touches, 14% deep \u00b7 1.1 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "ext": 1.1,
+   "detail": "18 weeks rectangle, 10 touches, 14% deep \u00b7 0.4 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
    "grade": "A",
    "clean": false,
-   "trigger": 481.22,
-   "stop": 453.58,
-   "target": 546.78,
+   "trigger": 481.31,
+   "stop": 453.19,
+   "target": 546.87,
    "target_why": "rectangle height added to the top",
    "chart": {
     "h": [
      442.35,
-     413.75,
+     434.3,
      486.3,
+     472.15,
      470.0,
      470.0,
      461.9,
-     456.5,
-     448.0,
+     456.0,
      456.3,
-     452.0,
+     454.2,
+     445.9,
      473.7,
-     457.25,
-     445.4,
+     449.9,
+     439.8,
      436.5,
      433.7,
-     431.3,
      436.7,
+     431.9,
      466.95,
-     454.4,
      474.7,
-     452.75,
+     468.35,
+     459.8,
      466.9,
      484.0,
-     481.05,
+     460.25,
      467.2,
-     464.9,
+     459.25,
      476.5,
-     469.6,
      470.0,
      460.5,
-     453.3,
-     443.15,
-     446.65,
+     455.2,
+     445.2,
+     446.5,
      482.25,
-     465.55,
-     460.0,
+     468.55,
+     464.45,
      469.75,
-     455.05,
+     460.95,
+     459.2,
      475.5,
-     456.0,
      449.8,
+     448.8,
      471.55,
-     468.0,
      470.75,
-     465.75,
-     487.4,
+     461.4,
+     483.7,
      493.05,
+     481.3,
      453.15,
      458.2,
-     448.55,
      474.9,
      475.9,
-     458.4,
-     465.65
+     464.6,
+     460.0,
+     478.5
     ],
     "l": [
-     407.0,
+     422.15,
+     403.55,
      403.4,
-     405.95,
      444.1,
+     448.0,
      448.9,
-     449.15,
-     434.0,
+     449.8,
      417.25,
-     442.35,
-     430.1,
+     425.1,
+     436.0,
      429.1,
-     435.0,
-     420.1,
+     431.0,
+     433.1,
      411.0,
-     424.25,
+     419.15,
      420.8,
+     421.45,
      421.75,
      416.9,
-     432.85,
      443.0,
-     438.5,
+     441.15,
      437.8,
      444.05,
-     446.05,
+     448.35,
      441.0,
-     447.25,
+     449.3,
      444.0,
      452.2,
+     453.6,
      443.5,
      436.25,
-     434.15,
+     421.35,
      416.2,
-     428.05,
-     435.55,
-     451.1,
+     429.25,
+     451.2,
+     450.05,
      445.0,
-     440.8,
      435.0,
-     445.5,
+     442.2,
+     438.3,
      434.25,
      427.5,
-     432.25,
-     456.0,
-     451.05,
+     444.15,
+     453.0,
      437.4,
-     460.55,
-     442.15,
+     450.0,
+     471.7,
      436.85,
      436.15,
      425.0,
-     441.1,
-     453.3,
+     429.0,
+     455.15,
+     448.0,
      445.25,
-     451.05
+     453.2
     ],
     "c": [
-     413.8,
-     405.25,
-     462.35,
-     450.15,
-     451.15,
-     454.5,
-     442.35,
-     440.15,
-     449.75,
-     434.75,
-     441.9,
-     445.65,
-     422.1,
-     428.0,
-     431.3,
-     425.05,
-     424.9,
-     438.9,
-     447.0,
-     444.35,
-     440.65,
-     455.2,
-     475.55,
-     448.75,
-     462.35,
-     449.9,
-     460.0,
-     460.85,
-     449.55,
-     443.35,
-     440.2,
-     432.95,
-     438.0,
-     452.75,
-     454.15,
-     453.3,
-     444.0,
-     446.8,
-     455.45,
-     441.0,
-     437.35,
-     459.95,
-     457.7,
-     453.85,
-     463.55,
-     476.05,
-     444.3,
-     440.35,
-     449.0,
-     443.65,
-     471.65,
-     457.6,
-     456.4,
-     462.3
+     425.15,
+     405.85,
+     457.8,
+     458.05,
+     456.15,
+     452.6,
+     452.95,
+     430.8,
+     451.9,
+     438.8,
+     441.75,
+     450.7,
+     438.1,
+     417.1,
+     425.75,
+     425.3,
+     425.35,
+     429.45,
+     445.75,
+     463.95,
+     444.2,
+     444.75,
+     446.85,
+     463.0,
+     445.4,
+     454.0,
+     455.95,
+     458.3,
+     456.6,
+     451.6,
+     445.3,
+     423.6,
+     439.95,
+     460.45,
+     461.45,
+     459.25,
+     457.9,
+     451.3,
+     457.0,
+     442.4,
+     444.45,
+     445.6,
+     464.05,
+     461.8,
+     449.85,
+     479.25,
+     481.35,
+     447.05,
+     450.45,
+     433.55,
+     464.1,
+     458.6,
+     451.6,
+     459.45,
+     474.8
     ],
     "lines": {
      "top": [
       [
-       10.5,
+       11.0,
        473.7
       ],
       [
-       53.5,
-       481.22
+       54.5,
+       481.31
       ]
      ],
      "floor": [
       [
-       10.5,
+       11.0,
        408.14
       ],
       [
-       53.5,
-       424.64
+       54.5,
+       424.83
       ]
      ]
     },
@@ -3658,7 +3978,7 @@
   },
   {
    "symbol": "EIHOTEL",
-   "close": 334.15,
+   "close": 333.4,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -3669,12 +3989,12 @@
    "stage": "Triggered",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 2.9,
-   "detail": "17-week range under a falling trendline, 3 touches, 18% deep \u00b7 broke out Fri 20 \u00b7 Breakout volume 17.4x",
+   "ext": 2.7,
+   "detail": "17-week range under a falling trendline, 3 touches, 19% deep \u00b7 broke out Fri 20 \u00b7 Breakout volume 17.4x",
    "grade": "A",
-   "trigger": 325.0,
-   "stop": 308.55,
-   "target": 385.01,
+   "trigger": 324.8,
+   "stop": 308.36,
+   "target": 384.91,
    "chart": {
     "h": [
      325.0,
@@ -3730,7 +4050,7 @@
      326.0,
      318.1,
      323.0,
-     337.25
+     338.45
     ],
     "l": [
      312.0,
@@ -3842,7 +4162,7 @@
      316.55,
      310.45,
      310.0,
-     334.15
+     333.4
     ],
     "lines": {
      "top": [
@@ -3851,8 +4171,8 @@
        342.0
       ],
       [
-       53.0,
-       325.0
+       53.5,
+       324.8
       ]
      ],
      "floor": [
@@ -3870,197 +4190,8 @@
    }
   },
   {
-   "symbol": "RHIM",
-   "close": 351.25,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bearish",
-    "D": "Topping"
-   },
-   "setup": "Daily Range",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": -1.0,
-   "detail": "29-week range under a falling trendline, 5 touches, 29% deep \u00b7 5.5 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
-   "grade": "A",
-   "trigger": 418.24,
-   "stop": 399.22,
-   "target": 537.91,
-   "chart": {
-    "h": [
-     456.2,
-     430.0,
-     391.9,
-     383.95,
-     377.4,
-     369.0,
-     395.0,
-     399.1,
-     415.5,
-     426.7,
-     415.0,
-     414.75,
-     410.45,
-     402.0,
-     421.45,
-     420.9,
-     404.95,
-     385.0,
-     383.25,
-     391.9,
-     406.5,
-     443.8,
-     427.3,
-     415.1,
-     423.2,
-     411.95,
-     419.35,
-     433.0,
-     432.4,
-     381.95,
-     381.95,
-     377.8,
-     375.15,
-     387.55,
-     375.65,
-     401.0,
-     399.6,
-     390.4,
-     376.2,
-     375.5,
-     365.7,
-     367.0,
-     374.0,
-     368.15,
-     369.35,
-     354.8
-    ],
-    "l": [
-     429.15,
-     390.2,
-     361.9,
-     363.45,
-     336.2,
-     323.05,
-     350.85,
-     372.7,
-     394.65,
-     399.05,
-     398.1,
-     398.25,
-     380.1,
-     371.55,
-     388.0,
-     333.8,
-     342.05,
-     356.4,
-     367.35,
-     366.95,
-     353.0,
-     378.0,
-     380.75,
-     401.5,
-     391.0,
-     388.25,
-     383.3,
-     407.7,
-     378.05,
-     371.5,
-     365.85,
-     364.4,
-     361.35,
-     369.25,
-     360.5,
-     366.15,
-     378.3,
-     366.8,
-     362.9,
-     360.8,
-     341.25,
-     345.0,
-     345.4,
-     355.2,
-     326.2,
-     343.0
-    ],
-    "c": [
-     434.65,
-     395.55,
-     380.9,
-     381.2,
-     344.65,
-     364.15,
-     386.15,
-     395.5,
-     410.0,
-     411.2,
-     405.75,
-     410.45,
-     394.55,
-     386.45,
-     405.6,
-     344.65,
-     377.25,
-     367.8,
-     370.85,
-     379.65,
-     387.7,
-     384.2,
-     413.2,
-     409.0,
-     395.6,
-     395.65,
-     408.35,
-     423.35,
-     379.85,
-     374.75,
-     370.6,
-     368.2,
-     373.8,
-     375.8,
-     368.7,
-     383.8,
-     384.85,
-     369.45,
-     370.9,
-     361.4,
-     349.3,
-     348.3,
-     360.55,
-     364.05,
-     345.35,
-     351.25
-    ],
-    "lines": {
-     "top": [
-      [
-       9.0,
-       426.7
-      ],
-      [
-       45.25,
-       418.24
-      ]
-     ],
-     "floor": [
-      [
-       9.0,
-       326.2
-      ],
-      [
-       45.25,
-       326.2
-      ]
-     ]
-    },
-    "brk": null
-   }
-  },
-  {
    "symbol": "TORNTPOWER",
-   "close": 1225.4,
+   "close": 1198.4,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -4071,12 +4202,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.4,
-   "detail": "10-week range under a falling trendline, 3 touches, 15% deep \u00b7 1.4 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
+   "ext": -1.1,
+   "detail": "11-week range under a falling trendline, 3 touches, 15% deep \u00b7 2.2 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "A",
-   "trigger": 1274.93,
-   "stop": 1220.75,
-   "target": 1462.1,
+   "trigger": 1273.92,
+   "stop": 1220.61,
+   "target": 1465.15,
    "chart": {
     "h": [
      1324.5,
@@ -4111,7 +4242,8 @@
      1268.7,
      1239.9,
      1233.5,
-     1239.9
+     1239.9,
+     1235.4
     ],
     "l": [
      1259.0,
@@ -4146,7 +4278,8 @@
      1225.8,
      1218.0,
      1205.0,
-     1206.1
+     1206.1,
+     1193.0
     ],
     "c": [
      1264.1,
@@ -4181,7 +4314,8 @@
      1230.1,
      1224.7,
      1211.8,
-     1225.4
+     1225.4,
+     1198.4
     ],
     "lines": {
      "top": [
@@ -4190,8 +4324,8 @@
        1327.4
       ],
       [
-       32.5,
-       1274.93
+       33.0,
+       1273.92
       ]
      ],
      "floor": [
@@ -4200,7 +4334,7 @@
        1147.5
       ],
       [
-       32.5,
+       33.0,
        1147.5
       ]
      ]
@@ -4210,216 +4344,219 @@
   },
   {
    "symbol": "ZENSARTECH",
-   "close": 529.05,
+   "close": 529.6,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
     "W": "Bullish",
-    "D": "Topping"
+    "D": "Bearish"
    },
    "setup": "Daily Range",
    "stage": "Watch",
-   "old": "\u26a0\ufe0f Extended",
+   "old": "\u274c Avoid",
    "vk": null,
    "ext": 1.1,
-   "detail": "27-week range under a falling trendline, 4 touches, 23% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 0.3x lately (quieter is better)",
+   "detail": "27-week range under a falling trendline, 4 touches, 23% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 0.2x lately (quieter is better)",
    "grade": "A",
-   "trigger": 585.24,
-   "stop": 550.84,
-   "target": 718.93,
+   "trigger": 585.6,
+   "stop": 551.53,
+   "target": 719.23,
    "chart": {
     "h": [
      583.0,
-     569.2,
+     574.1,
      555.4,
+     549.45,
      562.9,
-     560.7,
-     570.4,
+     566.7,
      605.0,
      611.0,
-     572.9,
-     532.45,
-     532.95,
+     583.0,
+     553.4,
+     529.3,
      537.0,
-     504.9,
+     524.0,
      506.85,
      503.15,
-     509.8,
+     499.0,
      529.4,
-     509.5,
-     479.8,
+     519.85,
+     484.8,
      466.6,
      473.65,
-     457.7,
+     457.95,
      458.5,
+     482.5,
      522.4,
-     514.0,
-     547.4,
+     515.8,
      558.0,
-     533.45,
-     516.45,
+     549.8,
+     529.9,
+     541.5,
      553.1,
-     540.45,
      522.95,
+     507.65,
      509.95,
-     503.0,
-     495.85,
+     501.7,
+     493.75,
      496.4,
-     484.35,
      475.7,
+     475.55,
      475.95,
-     463.1,
+     450.55,
      479.9,
-     461.4,
-     439.3,
+     443.85,
+     436.0,
      452.0,
-     438.95,
      459.35,
      462.0,
-     507.0,
+     501.75,
      523.7,
-     517.85,
-     544.9,
+     522.3,
+     513.25,
      562.5,
+     570.8,
      582.0,
-     572.35,
-     560.85,
-     535.65
+     565.35,
+     539.35,
+     545.0
     ],
     "l": [
-     541.55,
-     535.85,
+     538.5,
+     537.3,
+     517.5,
      511.25,
-     519.25,
      544.0,
      540.6,
-     570.05,
-     564.4,
-     525.1,
-     509.15,
+     558.25,
+     578.0,
+     531.5,
+     510.85,
      509.1,
-     502.8,
+     514.0,
      481.2,
      470.1,
      486.5,
      485.0,
      488.7,
-     472.6,
+     476.5,
+     455.85,
      438.4,
-     443.2,
-     444.65,
+     449.0,
      441.1,
-     424.0,
+     430.85,
      423.0,
-     448.1,
+     461.0,
      442.55,
-     509.0,
-     509.8,
+     496.1,
+     514.0,
+     485.0,
      484.0,
-     502.2,
-     500.6,
-     497.45,
+     503.45,
+     497.6,
      497.0,
      489.8,
+     483.0,
      476.45,
-     475.05,
-     461.5,
+     468.55,
      456.0,
      455.6,
-     435.1,
+     448.0,
      421.0,
+     430.0,
      431.6,
-     426.6,
      416.15,
      420.15,
-     435.05,
-     439.9,
-     455.85,
-     495.15,
+     421.05,
+     436.25,
+     450.0,
+     489.0,
+     490.2,
      489.65,
      491.05,
-     530.25,
      518.55,
-     547.0,
-     523.05,
+     551.1,
+     536.5,
+     513.2,
      510.0
     ],
     "c": [
-     558.4,
-     544.6,
-     514.55,
-     552.7,
-     554.1,
-     563.35,
-     594.55,
-     566.15,
-     528.2,
-     509.95,
-     520.4,
-     508.65,
-     488.4,
-     490.35,
-     493.05,
-     494.15,
-     509.75,
-     474.7,
-     442.8,
-     464.2,
-     447.95,
-     453.2,
-     425.3,
-     516.1,
-     451.1,
-     540.2,
-     531.45,
-     513.9,
-     505.9,
-     534.95,
-     518.0,
-     500.65,
-     500.6,
-     490.8,
-     477.85,
-     476.9,
-     463.75,
-     472.95,
-     461.55,
-     436.95,
-     440.2,
-     436.45,
-     430.75,
-     436.7,
-     434.35,
-     439.3,
-     452.65,
-     504.45,
-     509.35,
-     505.3,
-     537.3,
-     533.15,
-     568.8,
-     559.75,
-     528.0,
-     529.05
+     579.45,
+     545.2,
+     525.55,
+     543.7,
+     549.75,
+     549.7,
+     602.65,
+     579.85,
+     548.25,
+     513.85,
+     525.0,
+     524.05,
+     484.95,
+     493.9,
+     488.8,
+     491.3,
+     519.95,
+     484.85,
+     457.25,
+     450.9,
+     462.75,
+     443.45,
+     433.4,
+     467.35,
+     467.7,
+     508.25,
+     513.1,
+     526.35,
+     487.05,
+     524.65,
+     507.95,
+     500.35,
+     498.85,
+     498.65,
+     484.9,
+     483.55,
+     471.85,
+     460.35,
+     465.45,
+     450.55,
+     425.25,
+     441.85,
+     432.6,
+     434.9,
+     422.1,
+     445.45,
+     448.55,
+     490.15,
+     513.15,
+     493.7,
+     497.0,
+     543.55,
+     565.75,
+     553.45,
+     539.1,
+     515.6,
+     529.6
     ],
     "lines": {
      "top": [
       [
-       11.0,
+       11.33,
        537.0
       ],
       [
-       55.67,
-       585.24
+       56.33,
+       585.6
       ]
      ],
      "floor": [
       [
-       11.0,
+       11.33,
        416.15
       ],
       [
-       55.67,
+       56.33,
        416.15
       ]
      ]
@@ -4429,7 +4566,7 @@
   },
   {
    "symbol": "ZENTEC",
-   "close": 1680.9,
+   "close": 1694.6,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
@@ -4440,12 +4577,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.1,
-   "detail": "10-week range under a falling trendline, 3 touches, 24% deep \u00b7 1.6 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "ext": 0.1,
+   "detail": "11-week range under a falling trendline, 3 touches, 24% deep \u00b7 1.4 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "A",
-   "trigger": 1785.47,
-   "stop": 1682.41,
-   "target": 2213.96,
+   "trigger": 1783.91,
+   "stop": 1685.04,
+   "target": 2208.57,
    "chart": {
     "h": [
      2012.4,
@@ -4480,7 +4617,8 @@
      1794.9,
      1784.2,
      1758.0,
-     1736.8
+     1736.8,
+     1715.0
     ],
     "l": [
      1852.4,
@@ -4515,7 +4653,8 @@
      1721.1,
      1695.0,
      1695.7,
-     1661.3
+     1661.3,
+     1671.8
     ],
     "c": [
      1982.4,
@@ -4550,7 +4689,8 @@
      1754.8,
      1732.3,
      1724.0,
-     1680.9
+     1680.9,
+     1694.6
     ],
     "lines": {
      "top": [
@@ -4559,8 +4699,8 @@
        1866.4
       ],
       [
-       32.5,
-       1785.47
+       33.0,
+       1783.91
       ]
      ],
      "floor": [
@@ -4569,7 +4709,7 @@
        1463.0
       ],
       [
-       32.5,
+       33.0,
        1463.0
       ]
      ]
@@ -4578,161 +4718,8 @@
    }
   },
   {
-   "symbol": "AADHARHFC",
-   "close": 416.9,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Bottoming",
-    "D": "Bottoming"
-   },
-   "setup": "Daily Falling Wedge",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": -1.9,
-   "detail": "10 weeks falling wedge, 7 touches, 12% deep \u00b7 1.5 ranges under the top line \u00b7 Volume 0.8x in the pattern (quieter is better)",
-   "grade": "A",
-   "clean": false,
-   "trigger": 439.24,
-   "stop": 410.38,
-   "target": 488.0,
-   "target_why": "back to where the wedge started",
-   "chart": {
-    "h": [
-     493.85,
-     479.8,
-     477.85,
-     481.15,
-     472.45,
-     479.5,
-     488.0,
-     485.0,
-     481.65,
-     460.75,
-     470.5,
-     470.7,
-     469.15,
-     454.2,
-     443.95,
-     452.7,
-     459.0,
-     460.25,
-     452.0,
-     445.65,
-     454.6,
-     454.2,
-     462.85,
-     447.25,
-     441.95,
-     436.1,
-     433.95,
-     448.8,
-     445.05,
-     447.4,
-     434.45,
-     432.5,
-     422.2
-    ],
-    "l": [
-     469.1,
-     459.75,
-     459.3,
-     464.05,
-     462.8,
-     463.8,
-     471.0,
-     468.2,
-     460.25,
-     444.5,
-     440.15,
-     453.7,
-     451.0,
-     441.3,
-     427.3,
-     427.55,
-     449.05,
-     443.15,
-     438.2,
-     435.05,
-     436.85,
-     436.5,
-     428.2,
-     428.0,
-     428.4,
-     416.05,
-     416.1,
-     417.3,
-     430.0,
-     427.05,
-     420.95,
-     413.0,
-     411.2
-    ],
-    "c": [
-     474.4,
-     462.55,
-     475.0,
-     465.8,
-     468.1,
-     475.4,
-     483.55,
-     479.65,
-     462.7,
-     448.35,
-     469.35,
-     466.05,
-     454.55,
-     444.5,
-     432.5,
-     448.4,
-     453.8,
-     450.55,
-     441.2,
-     441.75,
-     447.0,
-     452.2,
-     440.1,
-     435.65,
-     440.0,
-     423.55,
-     431.2,
-     429.65,
-     441.65,
-     432.5,
-     432.35,
-     414.95,
-     416.9
-    ],
-    "lines": {
-     "top": [
-      [
-       6.5,
-       488.0
-      ],
-      [
-       32.0,
-       439.24
-      ]
-     ],
-     "floor": [
-      [
-       6.5,
-       436.41
-      ],
-      [
-       32.0,
-       407.38
-      ]
-     ]
-    },
-    "brk": null
-   },
-   "since": "2026-09-04 00:00"
-  },
-  {
    "symbol": "ACMESOLAR",
-   "close": 405.4,
+   "close": 411.6,
    "trend": "",
    "states": {
     "M": "No data",
@@ -4743,12 +4730,12 @@
    "stage": "Ready",
    "old": "\u26a0\ufe0f Extended",
    "vk": null,
-   "ext": -0.2,
-   "detail": "6-week range under a falling trendline, 4 touches, 22% deep \u00b7 0.6 ranges under the ceiling \u00b7 Volume 0.3x lately (quieter is better)",
+   "ext": 0.2,
+   "detail": "6-week range under a falling trendline, 4 touches, 21% deep \u00b7 0.2 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
    "grade": "A",
-   "trigger": 415.49,
-   "stop": 389.76,
-   "target": 505.01,
+   "trigger": 414.26,
+   "stop": 388.91,
+   "target": 502.17,
    "chart": {
     "h": [
      476.4,
@@ -4790,7 +4777,8 @@
      410.25,
      416.05,
      411.3,
-     409.9
+     409.9,
+     421.0
     ],
     "l": [
      445.6,
@@ -4832,7 +4820,8 @@
      398.75,
      402.55,
      406.3,
-     398.65
+     398.65,
+     405.3
     ],
     "c": [
      452.3,
@@ -4874,7 +4863,8 @@
      403.6,
      409.7,
      409.15,
-     405.4
+     405.4,
+     411.6
     ],
     "lines": {
      "top": [
@@ -4883,8 +4873,8 @@
        453.65
       ],
       [
-       39.0,
-       415.49
+       40.0,
+       414.26
       ]
      ],
      "floor": [
@@ -4893,7 +4883,7 @@
        366.3
       ],
       [
-       39.0,
+       40.0,
        366.3
       ]
      ]
@@ -4903,23 +4893,23 @@
   },
   {
    "symbol": "CMPDI",
-   "close": 180.16,
+   "close": 183.95,
    "trend": "",
    "states": {
     "M": "No data",
     "W": "No data",
-    "D": "Bearish"
+    "D": "Bottoming"
    },
    "setup": "Daily Range",
    "stage": "Watch",
    "old": "\u2014 Insufficient Data",
    "vk": null,
-   "ext": -2.4,
-   "detail": "8-week range under a falling trendline, 3 touches, 25% deep \u00b7 1.7 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "ext": -1.9,
+   "detail": "8-week range under a falling trendline, 3 touches, 24% deep \u00b7 1.1 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
    "grade": "A",
-   "trigger": 192.98,
-   "stop": 180.99,
-   "target": 240.63,
+   "trigger": 192.32,
+   "stop": 181.01,
+   "target": 238.83,
    "chart": {
     "h": [
      243.99,
@@ -4971,7 +4961,8 @@
      193.08,
      186.45,
      182.7,
-     180.99
+     180.99,
+     184.95
     ],
     "l": [
      236.12,
@@ -5023,7 +5014,8 @@
      185.38,
      180.0,
      176.75,
-     176.67
+     176.67,
+     177.76
     ],
     "c": [
      236.85,
@@ -5075,7 +5067,8 @@
      186.45,
      181.18,
      178.55,
-     180.16
+     180.16,
+     183.95
     ],
     "lines": {
      "top": [
@@ -5084,8 +5077,8 @@
        218.76
       ],
       [
-       49.0,
-       192.98
+       50.0,
+       192.32
       ]
      ],
      "floor": [
@@ -5094,7 +5087,7 @@
        174.28
       ],
       [
-       49.0,
+       50.0,
        174.28
       ]
      ]
@@ -5104,7 +5097,7 @@
   },
   {
    "symbol": "FRACTAL",
-   "close": 818.45,
+   "close": 809.4,
    "trend": "",
    "states": {
     "M": "No data",
@@ -5112,157 +5105,160 @@
     "D": "Impulse"
    },
    "setup": "Daily Range",
-   "stage": "Ready",
+   "stage": "Watch",
    "old": "\u2014 Insufficient Data",
    "vk": null,
-   "ext": 1.1,
-   "detail": "12-week range under a falling trendline, 4 touches, 22% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
+   "ext": 0.8,
+   "detail": "13-week range under a falling trendline, 4 touches, 22% deep \u00b7 1.2 ranges under the ceiling \u00b7 Volume 0.4x lately (quieter is better)",
    "grade": "A",
-   "trigger": 849.22,
-   "stop": 796.56,
-   "target": 1033.5,
+   "trigger": 848.82,
+   "stop": 796.8,
+   "target": 1035.07,
    "chart": {
     "h": [
-     815.0,
+     799.95,
      822.7,
-     819.35,
+     810.5,
      823.0,
      842.65,
+     832.75,
      838.0,
-     834.0,
+     837.8,
      873.9,
-     861.9,
-     845.0,
-     857.0,
+     859.0,
+     847.55,
      860.0,
-     838.75,
-     830.0,
-     804.65,
-     784.3,
-     780.0,
+     850.1,
+     834.0,
+     821.95,
+     797.0,
+     781.1,
+     761.8,
      768.0,
      775.0,
-     768.8,
-     753.0,
+     758.95,
+     759.7,
      762.45,
      746.05,
-     745.5,
+     741.0,
      723.95,
-     721.4,
-     734.0,
+     725.2,
      743.7,
      828.7,
+     802.0,
      773.9,
-     764.55,
-     759.85,
+     764.0,
      759.7,
+     845.0,
      853.2,
-     829.9,
-     836.65,
+     808.0,
+     838.0,
      841.3,
-     811.95,
-     829.35
+     824.4,
+     831.95
     ],
     "l": [
+     770.0,
      760.7,
-     788.3,
      788.0,
+     789.15,
      799.9,
-     812.15,
+     805.05,
      784.35,
-     799.6,
-     813.95,
-     825.15,
+     804.0,
+     834.5,
      814.0,
-     829.0,
-     825.0,
+     821.1,
+     835.0,
+     816.4,
      815.0,
-     798.55,
-     774.1,
-     759.1,
+     791.2,
+     764.55,
+     743.1,
      735.0,
-     736.5,
-     745.0,
-     745.4,
+     744.9,
+     756.05,
+     740.8,
      735.0,
-     738.0,
      708.3,
-     718.0,
+     718.7,
      698.0,
      696.3,
-     710.25,
+     699.9,
+     715.65,
      709.5,
-     710.9,
+     720.6,
      720.3,
-     746.05,
+     745.2,
      734.05,
      702.3,
-     755.0,
-     781.65,
+     793.7,
      781.0,
-     797.35,
+     794.15,
+     795.35,
      782.8,
-     791.75
+     801.5
     ],
     "c": [
-     812.05,
-     797.8,
-     807.6,
-     805.6,
-     823.0,
-     834.35,
-     825.5,
-     855.25,
-     828.5,
-     829.55,
-     844.3,
-     827.8,
-     817.4,
-     801.2,
-     777.65,
-     764.45,
-     738.6,
-     764.35,
-     761.4,
-     749.25,
+     771.8,
+     803.45,
+     798.15,
+     817.7,
+     828.3,
+     810.75,
+     818.0,
+     834.2,
+     846.7,
+     834.2,
+     840.25,
+     852.15,
+     821.4,
+     825.45,
+     794.75,
+     766.65,
+     748.1,
+     750.75,
+     760.9,
+     761.65,
+     750.2,
+     753.15,
+     727.35,
+     742.15,
+     700.65,
+     700.25,
+     721.05,
+     736.95,
+     785.9,
+     728.4,
+     756.35,
+     749.65,
      742.1,
-     740.2,
-     725.05,
-     721.3,
-     707.6,
-     718.05,
-     732.55,
-     713.45,
-     752.4,
-     755.75,
-     754.25,
-     750.05,
-     732.8,
-     809.45,
-     786.9,
-     821.8,
-     803.1,
-     793.95,
-     818.45
+     835.65,
+     808.85,
+     789.15,
+     830.8,
+     798.25,
+     820.35,
+     809.4
     ],
     "lines": {
      "top": [
       [
-       7.5,
+       8.0,
        873.9
       ],
       [
-       38.5,
-       849.22
+       39.5,
+       848.82
       ]
      ],
      "floor": [
       [
-       7.5,
+       8.0,
        696.3
       ],
       [
-       38.5,
+       39.5,
        696.3
       ]
      ]
@@ -5272,7 +5268,7 @@
   },
   {
    "symbol": "ICICIAMC",
-   "close": 2961.4,
+   "close": 2933.0,
    "trend": "",
    "states": {
     "M": "No data",
@@ -5283,12 +5279,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.2,
-   "detail": "8-week range under a falling trendline, 3 touches, 22% deep \u00b7 2.0 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
+   "ext": -0.5,
+   "detail": "8-week range under a falling trendline, 3 touches, 23% deep \u00b7 2.4 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "A",
-   "trigger": 3125.93,
-   "stop": 2996.25,
-   "target": 3828.93,
+   "trigger": 3122.0,
+   "stop": 2995.99,
+   "target": 3830.92,
    "chart": {
     "h": [
      2995.9,
@@ -5342,7 +5338,8 @@
      3048.0,
      3009.9,
      2985.4,
-     2988.0
+     2988.0,
+     2976.5
     ],
     "l": [
      2958.5,
@@ -5396,7 +5393,8 @@
      2989.5,
      2936.2,
      2925.5,
-     2934.0
+     2934.0,
+     2925.1
     ],
     "c": [
      2970.9,
@@ -5450,7 +5448,8 @@
      3000.8,
      2949.1,
      2950.8,
-     2961.4
+     2961.4,
+     2933.0
     ],
     "lines": {
      "top": [
@@ -5459,8 +5458,8 @@
        3287.0
       ],
       [
-       51.0,
-       3125.93
+       52.0,
+       3122.0
       ]
      ],
      "floor": [
@@ -5469,7 +5468,7 @@
        2621.0
       ],
       [
-       51.0,
+       52.0,
        2621.0
       ]
      ]
@@ -5479,431 +5478,172 @@
   },
   {
    "symbol": "INOXINDIA",
-   "close": 2120.7,
+   "close": 2088.0,
    "trend": "",
    "states": {
     "M": "No data",
     "W": "Bearish",
-    "D": "Bullish"
+    "D": "Impulse"
    },
    "setup": "Daily Falling Wedge",
    "stage": "Triggered",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 1.4,
+   "ext": 1.0,
    "detail": "9 weeks falling wedge, 6 touches, 20% deep \u00b7 broke out Tue 17 \u00b7 Breakout volume 8.5x",
    "grade": "A",
    "clean": false,
-   "trigger": 1909.29,
+   "trigger": 1900.14,
    "stop": 1802.39,
    "target": 2339.5,
    "target_why": "back to where the wedge started",
    "chart": {
     "h": [
      1942.3,
-     1938.0,
-     2224.0,
      2267.9,
-     2165.2,
      2200.0,
-     2168.9,
      2195.0,
      2320.0,
-     2265.0,
      2253.1,
-     2235.9,
      2339.5,
-     2313.4,
      2265.0,
-     2043.9,
-     2063.1,
      2104.6,
-     2139.0,
      2175.5,
      2189.0,
-     2165.9,
      2174.3,
-     2153.6,
-     2092.4,
      2099.0,
-     2183.0,
      2202.2,
      2146.0,
-     2139.9,
      2081.8,
-     2079.0,
-     2099.0,
      2099.0,
      2098.7,
-     2075.0,
-     2042.7,
      2056.3,
      2015.9,
-     1934.7,
      1919.6,
-     1908.9,
      1950.9,
-     1944.2,
-     1925.0,
      1975.0,
-     1880.0,
      1906.3,
-     1966.4,
      2008.3,
      1970.9,
-     1928.8,
-     1959.3,
      1977.3,
      1986.9,
-     1977.5,
-     2054.9,
      2155.0,
      2183.1,
-     2162.1
+     2145.6
     ],
     "l": [
      1880.3,
-     1896.1,
      1916.9,
-     2115.2,
      2082.0,
-     2088.2,
      2076.4,
-     2087.9,
      2208.0,
-     2214.1,
      2137.7,
-     2174.9,
      2192.1,
-     2236.9,
-     1982.0,
      1930.8,
      1990.1,
-     2016.0,
      2075.0,
-     2097.7,
-     2144.0,
      2055.0,
-     2059.4,
      2043.1,
      2032.2,
-     2040.1,
      2013.2,
-     2074.9,
-     2068.0,
      2066.5,
-     2016.1,
      1980.0,
-     2056.2,
      2035.6,
-     2036.1,
      2010.0,
      1978.0,
-     1980.3,
-     1899.7,
      1871.0,
      1814.4,
-     1815.5,
      1876.0,
-     1891.1,
-     1868.2,
      1849.6,
      1835.1,
-     1847.0,
      1806.0,
-     1945.1,
      1821.7,
-     1881.7,
      1909.3,
-     1938.5,
-     1940.8,
      1892.5,
      1905.0,
-     1925.4,
-     2102.0,
-     2066.0
+     2066.0,
+     2074.8
     ],
     "c": [
-     1900.0,
      1926.7,
-     2177.9,
      2126.2,
-     2134.2,
      2165.9,
-     2099.4,
      2176.2,
-     2247.8,
      2231.4,
-     2215.9,
      2185.5,
-     2295.8,
      2246.6,
-     1992.8,
      1978.9,
-     2014.8,
      2098.8,
-     2089.2,
      2133.7,
-     2168.9,
      2064.8,
-     2156.8,
      2051.1,
-     2070.4,
      2052.5,
-     2168.3,
      2089.1,
-     2077.3,
      2082.0,
-     2039.3,
      2056.9,
-     2078.7,
      2083.9,
-     2066.5,
      2025.0,
-     1987.7,
      1999.4,
-     1930.1,
      1919.7,
-     1863.8,
      1900.7,
-     1914.4,
      1910.0,
-     1898.8,
      1860.2,
-     1843.9,
      1867.9,
-     1936.7,
      1996.4,
-     1870.2,
      1899.6,
-     1950.2,
      1960.9,
-     1961.9,
      1900.0,
-     1969.4,
      2123.2,
-     2127.6,
-     2120.7
+     2120.7,
+     2088.0
     ],
     "lines": {
      "top": [
       [
-       12.0,
+       6.0,
        2339.5
       ],
       [
-       59.0,
-       1909.29
+       30.0,
+       1900.14
       ]
      ],
      "floor": [
       [
-       12.0,
+       6.0,
        1911.93
       ],
       [
-       55.0,
+       27.5,
        1762.15
       ]
      ]
     },
-    "brk": 56.0
+    "brk": 28.0
    },
    "since": "2026-09-10 00:00"
   },
   {
    "symbol": "JAINREC",
-   "close": 288.1,
+   "close": 278.7,
    "trend": "",
    "states": {
     "M": "No data",
     "W": "Bottoming",
-    "D": "Bullish"
+    "D": "Topping"
    },
    "setup": "Daily Range",
-   "stage": "Ready",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": -0.1,
-   "detail": "12-week range under a falling trendline, 4 touches, 15% deep \u00b7 0.6 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
-   "grade": "A",
-   "trigger": 294.71,
-   "stop": 278.02,
-   "target": 338.9,
-   "chart": {
-    "h": [
-     352.8,
-     363.0,
-     327.15,
-     316.75,
-     306.0,
-     307.0,
-     303.3,
-     307.5,
-     303.75,
-     297.2,
-     293.35,
-     293.7,
-     289.6,
-     290.6,
-     302.55,
-     298.5,
-     286.9,
-     278.55,
-     299.8,
-     308.3,
-     292.95,
-     294.45,
-     292.75,
-     300.9,
-     296.0,
-     293.2,
-     293.75,
-     297.3,
-     291.35,
-     290.95,
-     288.0,
-     283.0,
-     285.0,
-     285.4,
-     289.45,
-     290.85,
-     291.95,
-     299.5,
-     295.8
-    ],
-    "l": [
-     333.0,
-     312.55,
-     311.3,
-     301.5,
-     294.0,
-     291.55,
-     293.0,
-     287.5,
-     292.3,
-     286.6,
-     283.1,
-     275.95,
-     272.55,
-     276.15,
-     282.55,
-     282.7,
-     271.35,
-     271.8,
-     271.0,
-     290.1,
-     280.15,
-     277.1,
-     278.65,
-     287.15,
-     278.75,
-     286.0,
-     284.1,
-     283.5,
-     277.5,
-     277.7,
-     279.05,
-     268.1,
-     264.3,
-     268.0,
-     275.0,
-     285.4,
-     273.8,
-     279.0,
-     283.0
-    ],
-    "c": [
-     348.2,
-     323.45,
-     315.35,
-     302.3,
-     303.0,
-     293.4,
-     296.2,
-     299.75,
-     294.3,
-     289.1,
-     287.95,
-     280.7,
-     279.8,
-     281.35,
-     295.85,
-     284.7,
-     274.8,
-     276.25,
-     291.25,
-     291.35,
-     281.75,
-     292.35,
-     290.45,
-     295.15,
-     288.7,
-     288.55,
-     292.8,
-     285.65,
-     289.6,
-     282.7,
-     280.55,
-     270.0,
-     273.25,
-     280.25,
-     284.1,
-     287.6,
-     289.5,
-     290.1,
-     288.1
-    ],
-    "lines": {
-     "top": [
-      [
-       7.5,
-       307.5
-      ],
-      [
-       38.5,
-       294.71
-      ]
-     ],
-     "floor": [
-      [
-       7.5,
-       264.3
-      ],
-      [
-       38.5,
-       264.3
-      ]
-     ]
-    },
-    "brk": null
-   }
-  },
-  {
-   "symbol": "JAINREC",
-   "close": 288.1,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "setup": "Daily Rectangle",
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.1,
-   "detail": "13 weeks rectangle, 9 touches, 12% deep \u00b7 1.0 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "ext": -1.0,
+   "detail": "13-week range under a falling trendline, 4 touches, 16% deep \u00b7 1.5 ranges under the ceiling \u00b7 Volume 0.6x lately (quieter is better)",
    "grade": "A",
-   "clean": false,
-   "trigger": 299.27,
-   "stop": 282.56,
-   "target": 333.34,
-   "target_why": "rectangle height added to the top",
+   "trigger": 294.51,
+   "stop": 277.61,
+   "target": 340.16,
    "chart": {
     "h": [
-     345.5,
-     346.45,
      345.6,
      363.0,
      332.35,
@@ -5943,11 +5683,9 @@
      290.8,
      292.0,
      299.5,
-     291.05
+     291.85
     ],
     "l": [
-     328.15,
-     331.45,
      333.0,
      321.2,
      312.55,
@@ -5987,11 +5725,9 @@
      281.1,
      273.8,
      279.0,
-     283.0
+     275.9
     ],
     "c": [
-     341.0,
-     337.95,
      343.15,
      350.2,
      322.55,
@@ -6031,27 +5767,209 @@
      282.4,
      286.85,
      293.0,
-     288.1
+     278.7
     ],
     "lines": {
      "top": [
       [
        8.0,
-       307.0
+       307.5
       ],
       [
-       41.0,
-       299.27
+       39.5,
+       294.51
       ]
      ],
      "floor": [
       [
        8.0,
+       264.3
+      ],
+      [
+       39.5,
+       264.3
+      ]
+     ]
+    },
+    "brk": null
+   }
+  },
+  {
+   "symbol": "JAINREC",
+   "close": 278.7,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bottoming",
+    "D": "Topping"
+   },
+   "setup": "Daily Rectangle",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": -1.0,
+   "detail": "14 weeks rectangle, 9 touches, 12% deep \u00b7 1.9 ranges under the top line \u00b7 Volume 0.5x in the pattern (quieter is better)",
+   "grade": "A",
+   "clean": false,
+   "trigger": 299.15,
+   "stop": 282.24,
+   "target": 333.22,
+   "target_why": "rectangle height added to the top",
+   "chart": {
+    "h": [
+     338.8,
+     346.45,
+     345.6,
+     352.8,
+     363.0,
+     327.15,
+     316.75,
+     306.0,
+     307.0,
+     303.3,
+     307.5,
+     303.75,
+     297.2,
+     293.35,
+     293.7,
+     289.6,
+     290.6,
+     302.55,
+     298.5,
+     286.9,
+     278.55,
+     299.8,
+     308.3,
+     292.95,
+     294.45,
+     292.75,
+     300.9,
+     296.0,
+     293.2,
+     293.75,
+     297.3,
+     291.35,
+     290.95,
+     288.0,
+     283.0,
+     285.0,
+     285.4,
+     289.45,
+     290.85,
+     291.95,
+     299.5,
+     295.8,
+     291.85
+    ],
+    "l": [
+     324.15,
+     328.15,
+     331.45,
+     333.0,
+     312.55,
+     311.3,
+     301.5,
+     294.0,
+     291.55,
+     293.0,
+     287.5,
+     292.3,
+     286.6,
+     283.1,
+     275.95,
+     272.55,
+     276.15,
+     282.55,
+     282.7,
+     271.35,
+     271.8,
+     271.0,
+     290.1,
+     280.15,
+     277.1,
+     278.65,
+     287.15,
+     278.75,
+     286.0,
+     284.1,
+     283.5,
+     277.5,
+     277.7,
+     279.05,
+     268.1,
+     264.3,
+     268.0,
+     275.0,
+     285.4,
+     273.8,
+     279.0,
+     283.0,
+     275.9
+    ],
+    "c": [
+     337.3,
+     338.45,
+     335.35,
+     348.2,
+     323.45,
+     315.35,
+     302.3,
+     303.0,
+     293.4,
+     296.2,
+     299.75,
+     294.3,
+     289.1,
+     287.95,
+     280.7,
+     279.8,
+     281.35,
+     295.85,
+     284.7,
+     274.8,
+     276.25,
+     291.25,
+     291.35,
+     281.75,
+     292.35,
+     290.45,
+     295.15,
+     288.7,
+     288.55,
+     292.8,
+     285.65,
+     289.6,
+     282.7,
+     280.55,
+     270.0,
+     273.25,
+     280.25,
+     284.1,
+     287.6,
+     289.5,
+     290.1,
+     288.1,
+     278.7
+    ],
+    "lines": {
+     "top": [
+      [
+       8.5,
+       307.0
+      ],
+      [
+       42.0,
+       299.15
+      ]
+     ],
+     "floor": [
+      [
+       8.5,
        272.93
       ],
       [
-       41.0,
-       262.38
+       42.0,
+       262.22
       ]
      ]
     },
@@ -6060,8 +5978,167 @@
    "since": "2026-08-14 00:00"
   },
   {
+   "symbol": "PIRAMALFIN",
+   "close": 1970.2,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Bearish",
+    "D": "Topping"
+   },
+   "setup": "Daily Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": -0.9,
+   "detail": "11-week range under a flat top, 3 touches, 28% deep \u00b7 4.5 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "grade": "A",
+   "trigger": 2326.15,
+   "stop": 2202.66,
+   "target": 2967.02,
+   "chart": {
+    "h": [
+     2120.2,
+     2090.4,
+     2079.8,
+     2135.4,
+     2218.0,
+     2252.2,
+     2299.9,
+     2324.0,
+     2262.0,
+     2290.8,
+     2326.4,
+     2316.0,
+     2299.0,
+     2324.5,
+     2304.8,
+     2250.3,
+     2170.0,
+     2174.4,
+     2046.0,
+     2046.9,
+     2009.5,
+     2043.1,
+     2055.2,
+     1990.9,
+     2038.0,
+     1970.0,
+     1903.9,
+     1876.0,
+     1939.0,
+     2132.0,
+     2201.0,
+     2168.2,
+     2160.0,
+     2126.9,
+     2075.6,
+     2067.7
+    ],
+    "l": [
+     2060.0,
+     2048.2,
+     2035.0,
+     2050.0,
+     2120.5,
+     2150.0,
+     2201.5,
+     2210.0,
+     2165.9,
+     2201.6,
+     2236.6,
+     2249.3,
+     2180.2,
+     2166.0,
+     2176.3,
+     1781.2,
+     2049.0,
+     2012.0,
+     1978.0,
+     1970.2,
+     1921.0,
+     1974.0,
+     1933.3,
+     1939.0,
+     1900.0,
+     1847.6,
+     1795.1,
+     1784.1,
+     1820.9,
+     1905.7,
+     2050.0,
+     2071.8,
+     2077.7,
+     2032.2,
+     1995.5,
+     1956.7
+    ],
+    "c": [
+     2073.3,
+     2057.7,
+     2060.5,
+     2128.1,
+     2184.1,
+     2221.4,
+     2278.4,
+     2226.1,
+     2232.9,
+     2261.0,
+     2310.5,
+     2255.6,
+     2201.1,
+     2300.2,
+     2206.7,
+     2104.3,
+     2149.0,
+     2043.9,
+     2002.6,
+     1981.5,
+     1971.2,
+     2036.3,
+     1974.7,
+     1948.7,
+     1952.0,
+     1898.3,
+     1803.8,
+     1817.0,
+     1912.6,
+     2119.6,
+     2070.7,
+     2150.6,
+     2104.7,
+     2060.9,
+     2017.8,
+     1970.2
+    ],
+    "lines": {
+     "top": [
+      [
+       7.0,
+       2324.0
+      ],
+      [
+       35.0,
+       2326.15
+      ]
+     ],
+     "floor": [
+      [
+       7.0,
+       1781.2
+      ],
+      [
+       35.0,
+       1781.2
+      ]
+     ]
+    },
+    "brk": null
+   }
+  },
+  {
    "symbol": "INDIACEM",
-   "close": 326.9,
+   "close": 320.65,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -6072,12 +6149,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.2,
-   "detail": "11-week range under a falling trendline, 3 touches, 28% deep \u00b7 1.4 ranges under the ceiling \u00b7 Volume 0.3x lately (quieter is better)",
+   "ext": -0.7,
+   "detail": "11-week range under a falling trendline, 3 touches, 29% deep \u00b7 2.3 ranges under the ceiling \u00b7 Volume 0.2x lately (quieter is better)",
    "grade": "A",
-   "trigger": 346.97,
-   "stop": 324.68,
-   "target": 445.68,
+   "trigger": 352.01,
+   "stop": 330.82,
+   "target": 454.11,
    "chart": {
     "h": [
      392.55,
@@ -6114,7 +6191,8 @@
      355.45,
      351.95,
      337.0,
-     332.3
+     332.3,
+     332.05
     ],
     "l": [
      382.2,
@@ -6151,7 +6229,8 @@
      342.15,
      335.0,
      303.6,
-     309.5
+     309.5,
+     319.1
     ],
     "c": [
      385.5,
@@ -6188,7 +6267,8 @@
      350.1,
      336.85,
      310.05,
-     326.9
+     326.9,
+     320.65
     ],
     "lines": {
      "top": [
@@ -6197,8 +6277,8 @@
        379.5
       ],
       [
-       34.5,
-       346.97
+       35.0,
+       352.01
       ]
      ],
      "floor": [
@@ -6207,7 +6287,7 @@
        286.5
       ],
       [
-       34.5,
+       35.0,
        286.5
       ]
      ]
@@ -6217,7 +6297,7 @@
   },
   {
    "symbol": "INDIAMART",
-   "close": 1538.1,
+   "close": 1547.0,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -6228,14 +6308,15 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -1.5,
-   "detail": "5-week range under a flat top, 3 touches, 12% deep \u00b7 2.1 ranges under the ceiling \u00b7 Volume 0.8x lately (quieter is better)",
+   "ext": -1.4,
+   "detail": "5-week range under a flat top, 3 touches, 12% deep \u00b7 2.0 ranges under the ceiling \u00b7 Volume 0.7x lately (quieter is better)",
    "grade": "A",
-   "trigger": 1644.25,
-   "stop": 1566.26,
-   "target": 1836.14,
+   "trigger": 1644.23,
+   "stop": 1569.54,
+   "target": 1835.01,
    "chart": {
     "h": [
+     1641.0,
      1648.0,
      1616.0,
      1623.4,
@@ -6268,9 +6349,11 @@
      1589.9,
      1561.2,
      1559.0,
-     1552.6
+     1552.6,
+     1553.8
     ],
     "l": [
+     1590.1,
      1565.1,
      1584.0,
      1575.0,
@@ -6303,9 +6386,11 @@
      1544.1,
      1540.1,
      1535.1,
-     1531.0
+     1531.0,
+     1536.2
     ],
     "c": [
+     1620.3,
      1591.5,
      1592.9,
      1605.3,
@@ -6338,26 +6423,27 @@
      1546.7,
      1549.2,
      1552.5,
-     1538.1
+     1538.1,
+     1547.0
     ],
     "lines": {
      "top": [
       [
-       6.0,
+       7.0,
        1644.9
       ],
       [
-       32.0,
-       1644.25
+       34.0,
+       1644.23
       ]
      ],
      "floor": [
       [
-       6.0,
+       7.0,
        1465.4
       ],
       [
-       32.0,
+       34.0,
        1465.4
       ]
      ]
@@ -6367,7 +6453,7 @@
   },
   {
    "symbol": "JUBLINGREA",
-   "close": 568.25,
+   "close": 559.2,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -6378,12 +6464,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -2.2,
-   "detail": "5-week range under a falling trendline, 3 touches, 18% deep \u00b7 1.6 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
+   "ext": -2.5,
+   "detail": "5-week range under a falling trendline, 3 touches, 19% deep \u00b7 2.0 ranges under the ceiling \u00b7 Volume 0.5x lately (quieter is better)",
    "grade": "A",
-   "trigger": 604.45,
-   "stop": 570.0,
-   "target": 715.07,
+   "trigger": 602.71,
+   "stop": 568.68,
+   "target": 714.8,
    "chart": {
     "h": [
      647.9,
@@ -6417,7 +6503,8 @@
      593.45,
      591.05,
      587.2,
-     573.7
+     573.7,
+     571.5
     ],
     "l": [
      629.15,
@@ -6451,7 +6538,8 @@
      587.0,
      580.15,
      572.0,
-     565.9
+     565.9,
+     557.75
     ],
     "c": [
      644.25,
@@ -6485,7 +6573,8 @@
      588.45,
      586.85,
      573.7,
-     568.25
+     568.25,
+     559.2
     ],
     "lines": {
      "top": [
@@ -6494,8 +6583,8 @@
        648.0
       ],
       [
-       31.0,
-       604.45
+       32.0,
+       602.71
       ]
      ],
      "floor": [
@@ -6504,7 +6593,7 @@
        544.0
       ],
       [
-       31.0,
+       32.0,
        544.0
       ]
      ]
@@ -6514,7 +6603,7 @@
   },
   {
    "symbol": "NUVOCO",
-   "close": 358.5,
+   "close": 356.15,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -6525,12 +6614,12 @@
    "stage": "Triggered",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 1.9,
+   "ext": 1.7,
    "detail": "14-week range under a falling trendline, 4 touches, 14% deep \u00b7 broke out Fri 20 \u00b7 Breakout volume 42.8x",
    "grade": "A",
-   "trigger": 351.7,
-   "stop": 334.37,
-   "target": 400.4,
+   "trigger": 351.61,
+   "stop": 334.77,
+   "target": 400.63,
    "chart": {
     "h": [
      358.8,
@@ -6674,7 +6763,7 @@
      341.4,
      345.55,
      348.2,
-     358.5
+     356.15
     ],
     "lines": {
      "top": [
@@ -6683,8 +6772,8 @@
        357.6
       ],
       [
-       45.0,
-       351.7
+       45.5,
+       351.61
       ]
      ],
      "floor": [
@@ -6703,7 +6792,7 @@
   },
   {
    "symbol": "AJANTPHARM",
-   "close": 3317.7,
+   "close": 3310.4,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -6714,12 +6803,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.6,
-   "detail": "10-week range under a flat top, 3 touches, 12% deep \u00b7 2.7 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
+   "ext": -0.7,
+   "detail": "10-week range under a flat top, 3 touches, 12% deep \u00b7 2.8 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
    "grade": "B",
-   "trigger": 3624.39,
-   "stop": 3446.21,
-   "target": 4071.31,
+   "trigger": 3624.71,
+   "stop": 3450.24,
+   "target": 4072.65,
    "chart": {
     "h": [
      3666.9,
@@ -6752,7 +6841,7 @@
      3362.0,
      3405.3,
      3340.0,
-     3325.0
+     3339.8
     ],
     "l": [
      3500.7,
@@ -6818,7 +6907,7 @@
      3284.0,
      3312.5,
      3270.3,
-     3317.7
+     3310.4
     ],
     "lines": {
      "top": [
@@ -6827,8 +6916,8 @@
        3609.0
       ],
       [
-       30.0,
-       3624.39
+       30.5,
+       3624.71
       ]
      ],
      "floor": [
@@ -6837,7 +6926,7 @@
        3199.9
       ],
       [
-       30.0,
+       30.5,
        3199.9
       ]
      ]
@@ -6847,7 +6936,7 @@
   },
   {
    "symbol": "CRAFTSMAN",
-   "close": 11723.0,
+   "close": 11649.0,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -6858,12 +6947,12 @@
    "stage": "Triggered",
    "old": "\u2705 Confirmed Bullish",
    "vk": null,
-   "ext": 1.8,
+   "ext": 1.6,
    "detail": "9-week range under a falling trendline, 4 touches, 17% deep \u00b7 broke out Mon 16 \u00b7 Breakout volume 0.3x",
    "grade": "B",
-   "trigger": 10934.0,
-   "stop": 10160.56,
-   "target": 12817.11,
+   "trigger": 10911.81,
+   "stop": 10141.26,
+   "target": 12803.04,
    "chart": {
     "h": [
      10800.0,
@@ -6929,7 +7018,7 @@
      10609.0,
      10991.0,
      11085.0,
-     11665.0
+     11304.0
     ],
     "c": [
      10375.0,
@@ -6962,7 +7051,7 @@
      11077.0,
      11195.0,
      11930.0,
-     11723.0
+     11649.0
     ],
     "lines": {
      "top": [
@@ -6971,8 +7060,8 @@
        11999.0
       ],
       [
-       30.0,
-       10934.0
+       30.5,
+       10911.81
       ]
      ],
      "floor": [
@@ -6991,23 +7080,23 @@
   },
   {
    "symbol": "GRANULES",
-   "close": 822.65,
+   "close": 837.75,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Bearish",
+    "W": "Bottoming",
     "D": "Bottoming"
    },
    "setup": "Daily Range",
-   "stage": "Ready",
+   "stage": "Triggered",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.0,
-   "detail": "9-week range under a falling trendline, 4 touches, 20% deep \u00b7 0.2 ranges under the ceiling \u00b7 Volume 2.3x lately (quieter is better)",
+   "ext": 0.4,
+   "detail": "9-week range under a falling trendline, 4 touches, 19% deep \u00b7 broke out Mon 23 \u00b7 Breakout volume 1.1x",
    "grade": "B",
-   "trigger": 830.82,
-   "stop": 779.55,
-   "target": 994.58,
+   "trigger": 828.76,
+   "stop": 777.47,
+   "target": 989.17,
    "chart": {
     "h": [
      844.75,
@@ -7066,7 +7155,8 @@
      824.5,
      818.0,
      810.5,
-     831.95
+     831.95,
+     842.85
     ],
     "l": [
      833.5,
@@ -7125,7 +7215,8 @@
      793.3,
      790.3,
      788.45,
-     795.7
+     795.7,
+     811.6
     ],
     "c": [
      836.65,
@@ -7184,7 +7275,8 @@
      815.5,
      797.5,
      801.2,
-     822.65
+     822.65,
+     837.75
     ],
     "lines": {
      "top": [
@@ -7193,8 +7285,8 @@
        923.65
       ],
       [
-       56.0,
-       830.82
+       57.0,
+       828.76
       ]
      ],
      "floor": [
@@ -7203,17 +7295,17 @@
        761.5
       ],
       [
-       56.0,
+       57.0,
        761.5
       ]
      ]
     },
-    "brk": null
+    "brk": 57.0
    }
   },
   {
    "symbol": "IPCALAB",
-   "close": 1843.8,
+   "close": 1815.9,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -7224,12 +7316,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.9,
-   "detail": "6-week range under a flat top, 3 touches, 10% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+   "ext": -1.4,
+   "detail": "7-week range under a flat top, 3 touches, 10% deep \u00b7 3.2 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
    "grade": "B",
-   "trigger": 2004.31,
-   "stop": 1905.4,
-   "target": 2208.57,
+   "trigger": 2004.92,
+   "stop": 1911.41,
+   "target": 2212.38,
    "chart": {
     "h": [
      2037.0,
@@ -7272,7 +7364,8 @@
      1880.5,
      1882.8,
      1890.5,
-     1879.0
+     1879.0,
+     1859.9
     ],
     "l": [
      1980.0,
@@ -7315,7 +7408,8 @@
      1822.0,
      1834.0,
      1845.1,
-     1825.1
+     1825.1,
+     1810.0
     ],
     "c": [
      1992.4,
@@ -7358,7 +7452,8 @@
      1834.4,
      1854.1,
      1860.0,
-     1843.8
+     1843.8,
+     1815.9
     ],
     "lines": {
      "top": [
@@ -7367,8 +7462,8 @@
        1984.9
       ],
       [
-       40.0,
-       2004.31
+       41.0,
+       2004.92
       ]
      ],
      "floor": [
@@ -7377,7 +7472,7 @@
        1797.0
       ],
       [
-       40.0,
+       41.0,
        1797.0
       ]
      ]
@@ -7387,7 +7482,7 @@
   },
   {
    "symbol": "KPIL",
-   "close": 1325.6,
+   "close": 1312.6,
    "trend": "With trend",
    "states": {
     "M": "Topping",
@@ -7398,12 +7493,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -0.8,
-   "detail": "21-week range under a falling trendline, 4 touches, 17% deep \u00b7 3.0 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+   "ext": -1.1,
+   "detail": "21-week range under a falling trendline, 4 touches, 17% deep \u00b7 3.5 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
    "grade": "B",
-   "trigger": 1445.46,
-   "stop": 1383.7,
-   "target": 1693.75,
+   "trigger": 1445.13,
+   "stop": 1385.12,
+   "target": 1695.82,
    "chart": {
     "h": [
      1282.4,
@@ -7449,7 +7544,7 @@
      1379.9,
      1399.9,
      1378.8,
-     1329.3
+     1335.9
     ],
     "l": [
      1225.0,
@@ -7495,7 +7590,7 @@
      1332.8,
      1315.4,
      1313.9,
-     1307.7
+     1305.3
     ],
     "c": [
      1251.5,
@@ -7541,7 +7636,7 @@
      1354.4,
      1345.8,
      1320.9,
-     1325.6
+     1312.6
     ],
     "lines": {
      "top": [
@@ -7550,8 +7645,8 @@
        1479.6
       ],
       [
-       43.0,
-       1445.46
+       43.33,
+       1445.13
       ]
      ],
      "floor": [
@@ -7560,7 +7655,7 @@
        1251.9
       ],
       [
-       43.0,
+       43.33,
        1251.9
       ]
      ]
@@ -7570,7 +7665,7 @@
   },
   {
    "symbol": "LALPATHLAB",
-   "close": 2006.0,
+   "close": 2040.5,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
@@ -7581,12 +7676,12 @@
    "stage": "Ready",
    "old": "\u26a0\ufe0f Extended",
    "vk": null,
-   "ext": 1.1,
-   "detail": "14-week range under a falling trendline, 4 touches, 10% deep \u00b7 0.8 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+   "ext": 1.5,
+   "detail": "14-week range under a falling trendline, 4 touches, 9% deep \u00b7 0.4 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
    "grade": "B",
-   "trigger": 2064.09,
-   "stop": 1957.15,
-   "target": 2260.72,
+   "trigger": 2065.19,
+   "stop": 1957.16,
+   "target": 2258.61,
    "chart": {
     "h": [
      1723.2,
@@ -7631,7 +7726,8 @@
      2065.0,
      2025.3,
      2015.5,
-     2028.2
+     2028.2,
+     2074.0
     ],
     "l": [
      1675.0,
@@ -7676,7 +7772,8 @@
      1998.1,
      1966.2,
      1950.0,
-     1940.0
+     1940.0,
+     2006.0
     ],
     "c": [
      1700.1,
@@ -7721,7 +7818,8 @@
      2008.8,
      2000.7,
      1965.4,
-     2006.0
+     2006.0,
+     2040.5
     ],
     "lines": {
      "top": [
@@ -7730,8 +7828,8 @@
        1988.9
       ],
       [
-       42.5,
-       2064.09
+       43.0,
+       2065.19
       ]
      ],
      "floor": [
@@ -7740,7 +7838,7 @@
        1797.8
       ],
       [
-       42.5,
+       43.0,
        1797.8
       ]
      ]
@@ -7749,207 +7847,24 @@
    }
   },
   {
-   "symbol": "TATACOMM",
-   "close": 1751.0,
-   "trend": "With trend",
-   "states": {
-    "M": "Topping",
-    "W": "Bottoming",
-    "D": "Topping"
-   },
-   "setup": "Daily Range",
-   "stage": "Triggered",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": 0.4,
-   "detail": "20-week range under a falling trendline, 3 touches, 29% deep \u00b7 broke out Fri 13 \u00b7 Breakout volume 0.8x",
-   "grade": "B",
-   "trigger": 1734.26,
-   "stop": 1649.38,
-   "target": 2234.33,
-   "chart": {
-    "h": [
-     1716.0,
-     1930.0,
-     2049.9,
-     2048.0,
-     2008.8,
-     2029.7,
-     1993.0,
-     2017.3,
-     2110.0,
-     2076.0,
-     2017.8,
-     1968.0,
-     1926.0,
-     1901.5,
-     1866.0,
-     1862.6,
-     1817.6,
-     1805.0,
-     1799.0,
-     1783.1,
-     1783.8,
-     1779.5,
-     1709.2,
-     1710.9,
-     1706.6,
-     1744.9,
-     1763.0,
-     1784.0,
-     1819.8,
-     1831.5,
-     1741.0,
-     1682.0,
-     1697.9,
-     1698.9,
-     1685.0,
-     1866.0,
-     1738.4,
-     1731.0,
-     1744.8,
-     1774.0,
-     1774.0,
-     1779.0,
-     1860.0,
-     1779.9
-    ],
-    "l": [
-     1573.8,
-     1630.2,
-     1884.5,
-     1907.4,
-     1895.1,
-     1857.7,
-     1915.0,
-     1890.2,
-     1902.0,
-     1978.1,
-     1900.0,
-     1876.2,
-     1858.8,
-     1829.4,
-     1801.0,
-     1680.0,
-     1713.0,
-     1727.8,
-     1751.0,
-     1721.5,
-     1705.2,
-     1686.0,
-     1652.9,
-     1650.0,
-     1640.2,
-     1690.0,
-     1685.0,
-     1718.2,
-     1740.0,
-     1725.0,
-     1666.6,
-     1630.0,
-     1617.5,
-     1622.0,
-     1621.0,
-     1643.1,
-     1658.0,
-     1605.1,
-     1645.0,
-     1674.2,
-     1684.4,
-     1700.0,
-     1755.0,
-     1735.0
-    ],
-    "c": [
-     1668.4,
-     1896.3,
-     2009.1,
-     1942.6,
-     1985.9,
-     1975.8,
-     1966.6,
-     1899.8,
-     2061.7,
-     1991.9,
-     1911.7,
-     1892.0,
-     1870.4,
-     1848.6,
-     1817.1,
-     1761.4,
-     1735.2,
-     1773.7,
-     1778.5,
-     1755.2,
-     1736.2,
-     1711.9,
-     1677.5,
-     1699.9,
-     1694.7,
-     1710.0,
-     1738.5,
-     1764.4,
-     1799.3,
-     1732.7,
-     1670.0,
-     1654.7,
-     1677.2,
-     1677.4,
-     1672.4,
-     1742.8,
-     1682.4,
-     1713.5,
-     1675.4,
-     1754.6,
-     1700.4,
-     1772.9,
-     1767.3,
-     1751.0
-    ],
-    "lines": {
-     "top": [
-      [
-       8.67,
-       2110.0
-      ],
-      [
-       43.33,
-       1734.26
-      ]
-     ],
-     "floor": [
-      [
-       8.67,
-       1605.1
-      ],
-      [
-       41.67,
-       1605.1
-      ]
-     ]
-    },
-    "brk": 41.67
-   }
-  },
-  {
    "symbol": "VIJAYA",
-   "close": 1572.3,
+   "close": 1572.6,
    "trend": "With trend",
    "states": {
     "M": "Impulse",
-    "W": "Bullish",
+    "W": "Impulse",
     "D": "Impulse"
    },
    "setup": "Daily Range",
    "stage": "Ready",
    "old": "\u2705 Confirmed Bullish",
    "vk": null,
-   "ext": 2.1,
-   "detail": "13-week range under a flat top, 3 touches, 15% deep \u00b7 0.3 ranges under the ceiling \u00b7 Volume 2.1x lately (quieter is better)",
+   "ext": 1.9,
+   "detail": "14-week range under a flat top, 3 touches, 15% deep \u00b7 0.3 ranges under the ceiling \u00b7 Volume 2.3x lately (quieter is better)",
    "grade": "B",
-   "trigger": 1590.63,
-   "stop": 1500.5,
-   "target": 1831.41,
+   "trigger": 1590.89,
+   "stop": 1497.4,
+   "target": 1831.66,
    "chart": {
     "h": [
      1348.5,
@@ -7994,7 +7909,7 @@
      1438.0,
      1498.0,
      1553.7,
-     1587.0
+     1637.0
     ],
     "l": [
      1303.0,
@@ -8084,7 +7999,7 @@
      1410.1,
      1467.4,
      1510.6,
-     1572.3
+     1572.6
     ],
     "lines": {
      "top": [
@@ -8093,8 +8008,8 @@
        1573.0
       ],
       [
-       42.0,
-       1590.63
+       42.5,
+       1590.89
       ]
      ],
      "floor": [
@@ -8103,7 +8018,7 @@
        1335.0
       ],
       [
-       42.0,
+       42.5,
        1335.0
       ]
      ]
@@ -8112,11 +8027,941 @@
    }
   },
   {
-   "symbol": "ABBOTINDIA",
-   "close": 26525.0,
+   "symbol": "LEMONTREE",
+   "close": 127.63,
    "trend": "Early turn",
    "states": {
     "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Impulse"
+   },
+   "setup": "Daily Range",
+   "stage": "Triggered",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": null,
+   "ext": 3.5,
+   "detail": "26-week range under a flat top, 5 touches, 17% deep \u00b7 broke out Mon 16 \u00b7 Breakout volume 1.4x",
+   "grade": "B",
+   "trigger": 122.08,
+   "stop": 116.15,
+   "target": 143.15,
+   "chart": {
+    "h": [
+     106.67,
+     108.4,
+     108.38,
+     109.09,
+     111.4,
+     114.82,
+     117.24,
+     117.3,
+     128.38,
+     122.25,
+     121.9,
+     122.9,
+     122.1,
+     114.39,
+     111.79,
+     118.31,
+     121.98,
+     114.72,
+     112.45,
+     108.96,
+     113.9,
+     113.5,
+     121.45,
+     121.43,
+     121.04,
+     122.65,
+     119.2,
+     117.05,
+     113.99,
+     112.16,
+     112.9,
+     114.58,
+     115.68,
+     112.4,
+     110.5,
+     110.15,
+     110.5,
+     110.45,
+     108.8,
+     107.1,
+     107.49,
+     106.67,
+     106.9,
+     108.87,
+     107.7,
+     111.6,
+     113.55,
+     113.46,
+     117.9,
+     115.24,
+     111.96,
+     111.7,
+     114.8,
+     120.55,
+     123.4,
+     125.6,
+     128.3,
+     129.9
+    ],
+    "l": [
+     99.61,
+     101.55,
+     100.5,
+     100.11,
+     102.8,
+     107.1,
+     108.51,
+     112.8,
+     113.7,
+     116.06,
+     116.4,
+     119.24,
+     111.0,
+     110.29,
+     106.9,
+     111.36,
+     113.17,
+     109.41,
+     106.8,
+     103.5,
+     104.29,
+     108.25,
+     114.0,
+     115.2,
+     117.41,
+     115.75,
+     116.41,
+     112.81,
+     110.0,
+     107.61,
+     109.91,
+     108.9,
+     112.32,
+     106.51,
+     107.89,
+     107.4,
+     107.58,
+     107.26,
+     105.12,
+     104.7,
+     105.13,
+     102.3,
+     100.88,
+     105.77,
+     102.96,
+     102.0,
+     106.8,
+     108.58,
+     110.02,
+     109.16,
+     106.65,
+     104.35,
+     108.23,
+     112.93,
+     114.8,
+     120.27,
+     122.21,
+     127.2
+    ],
+    "c": [
+     103.02,
+     106.45,
+     106.16,
+     100.42,
+     109.71,
+     113.45,
+     114.33,
+     113.13,
+     121.57,
+     118.61,
+     121.56,
+     121.81,
+     111.88,
+     111.23,
+     111.14,
+     116.76,
+     113.95,
+     110.56,
+     107.09,
+     103.68,
+     109.99,
+     113.04,
+     119.34,
+     116.65,
+     118.95,
+     116.93,
+     117.74,
+     114.12,
+     110.95,
+     109.36,
+     110.15,
+     114.03,
+     112.79,
+     109.36,
+     108.92,
+     108.08,
+     108.56,
+     107.69,
+     106.15,
+     104.95,
+     106.17,
+     102.58,
+     106.47,
+     107.92,
+     103.82,
+     107.67,
+     112.52,
+     110.69,
+     112.5,
+     109.82,
+     110.14,
+     111.34,
+     114.26,
+     117.39,
+     120.41,
+     123.31,
+     127.54,
+     127.63
+    ],
+    "lines": {
+     "top": [
+      [
+       11.33,
+       122.9
+      ],
+      [
+       57.0,
+       122.08
+      ]
+     ],
+     "floor": [
+      [
+       11.33,
+       100.88
+      ],
+      [
+       55.33,
+       100.88
+      ]
+     ]
+    },
+    "brk": 55.33
+   }
+  },
+  {
+   "symbol": "RHIM",
+   "close": 354.5,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "setup": "Daily Range",
+   "stage": "Watch",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": -0.7,
+   "detail": "29-week range under a falling trendline, 5 touches, 28% deep \u00b7 5.3 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 418.18,
+   "stop": 399.43,
+   "target": 536.74,
+   "chart": {
+    "h": [
+     456.2,
+     430.0,
+     391.9,
+     383.95,
+     377.4,
+     369.0,
+     395.0,
+     399.1,
+     415.5,
+     426.7,
+     415.0,
+     414.75,
+     410.45,
+     402.0,
+     421.45,
+     420.9,
+     404.95,
+     385.0,
+     383.25,
+     391.9,
+     406.5,
+     443.8,
+     427.3,
+     415.1,
+     423.2,
+     411.95,
+     419.35,
+     433.0,
+     432.4,
+     381.95,
+     381.95,
+     377.8,
+     375.15,
+     387.55,
+     375.65,
+     401.0,
+     399.6,
+     390.4,
+     376.2,
+     375.5,
+     365.7,
+     367.0,
+     374.0,
+     368.15,
+     369.35,
+     358.4
+    ],
+    "l": [
+     429.15,
+     390.2,
+     361.9,
+     363.45,
+     336.2,
+     323.05,
+     350.85,
+     372.7,
+     394.65,
+     399.05,
+     398.1,
+     398.25,
+     380.1,
+     371.55,
+     388.0,
+     333.8,
+     342.05,
+     356.4,
+     367.35,
+     366.95,
+     353.0,
+     378.0,
+     380.75,
+     401.5,
+     391.0,
+     388.25,
+     383.3,
+     407.7,
+     378.05,
+     371.5,
+     365.85,
+     364.4,
+     361.35,
+     369.25,
+     360.5,
+     366.15,
+     378.3,
+     366.8,
+     362.9,
+     360.8,
+     341.25,
+     345.0,
+     345.4,
+     355.2,
+     326.2,
+     343.0
+    ],
+    "c": [
+     434.65,
+     395.55,
+     380.9,
+     381.2,
+     344.65,
+     364.15,
+     386.15,
+     395.5,
+     410.0,
+     411.2,
+     405.75,
+     410.45,
+     394.55,
+     386.45,
+     405.6,
+     344.65,
+     377.25,
+     367.8,
+     370.85,
+     379.65,
+     387.7,
+     384.2,
+     413.2,
+     409.0,
+     395.6,
+     395.65,
+     408.35,
+     423.35,
+     379.85,
+     374.75,
+     370.6,
+     368.2,
+     373.8,
+     375.8,
+     368.7,
+     383.8,
+     384.85,
+     369.45,
+     370.9,
+     361.4,
+     349.3,
+     348.3,
+     360.55,
+     364.05,
+     345.35,
+     354.5
+    ],
+    "lines": {
+     "top": [
+      [
+       9.0,
+       426.7
+      ],
+      [
+       45.5,
+       418.18
+      ]
+     ],
+     "floor": [
+      [
+       9.0,
+       326.2
+      ],
+      [
+       45.5,
+       326.2
+      ]
+     ]
+    },
+    "brk": null
+   }
+  },
+  {
+   "symbol": "UBL",
+   "close": 1254.3,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "setup": "Daily Falling Wedge",
+   "stage": "Triggered",
+   "old": "\u274c Avoid",
+   "vk": null,
+   "ext": 0.7,
+   "detail": "10 weeks falling wedge, 7 touches, 14% deep \u00b7 broke out Thu 19 \u00b7 Breakout volume 0.6x",
+   "grade": "B",
+   "clean": false,
+   "trigger": 1225.04,
+   "stop": 1127.74,
+   "target": 1326.0,
+   "target_why": "back to where the wedge started",
+   "chart": {
+    "h": [
+     1381.2,
+     1367.3,
+     1362.2,
+     1386.8,
+     1345.2,
+     1322.9,
+     1326.0,
+     1305.1,
+     1279.0,
+     1268.0,
+     1251.8,
+     1260.0,
+     1248.1,
+     1289.7,
+     1258.8,
+     1213.8,
+     1197.6,
+     1211.5,
+     1194.0,
+     1228.0,
+     1229.0,
+     1208.9,
+     1192.3,
+     1155.9,
+     1317.4,
+     1208.0,
+     1215.0,
+     1246.4,
+     1241.3,
+     1235.1,
+     1219.9,
+     1276.0,
+     1283.0
+    ],
+    "l": [
+     1346.7,
+     1325.4,
+     1328.0,
+     1339.1,
+     1301.5,
+     1276.4,
+     1277.0,
+     1245.9,
+     1245.0,
+     1240.0,
+     1213.5,
+     1219.9,
+     1210.4,
+     1227.1,
+     1169.5,
+     1140.3,
+     1171.5,
+     1160.0,
+     1146.5,
+     1159.2,
+     1192.5,
+     1168.8,
+     1140.0,
+     1128.6,
+     1163.1,
+     1155.0,
+     1179.5,
+     1184.5,
+     1181.0,
+     1212.5,
+     1183.3,
+     1182.0,
+     1240.0
+    ],
+    "c": [
+     1354.8,
+     1348.9,
+     1348.6,
+     1346.6,
+     1308.5,
+     1282.6,
+     1279.4,
+     1252.5,
+     1256.7,
+     1241.8,
+     1216.8,
+     1227.8,
+     1242.3,
+     1251.3,
+     1210.2,
+     1188.8,
+     1178.3,
+     1162.7,
+     1164.8,
+     1206.8,
+     1201.6,
+     1179.8,
+     1142.6,
+     1143.6,
+     1191.7,
+     1178.1,
+     1204.5,
+     1189.7,
+     1221.0,
+     1216.0,
+     1206.7,
+     1271.6,
+     1254.3
+    ],
+    "lines": {
+     "top": [
+      [
+       6.5,
+       1326.0
+      ],
+      [
+       32.5,
+       1225.04
+      ]
+     ],
+     "floor": [
+      [
+       6.5,
+       1151.43
+      ],
+      [
+       31.0,
+       1117.53
+      ]
+     ]
+    },
+    "brk": 31.5
+   },
+   "since": "2026-09-04 00:00"
+  },
+  {
+   "symbol": "FRACTAL",
+   "close": 809.4,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "No data",
+    "D": "Impulse"
+   },
+   "setup": "Daily Rectangle",
+   "stage": "Watch",
+   "old": "\u2014 Insufficient Data",
+   "vk": null,
+   "ext": 0.8,
+   "detail": "13 weeks rectangle, 7 touches, 20% deep \u00b7 1.2 ranges under the top line \u00b7 Volume 2.4x in the pattern (quieter is better)",
+   "grade": "B",
+   "clean": false,
+   "trigger": 848.82,
+   "stop": 796.8,
+   "target": 1013.34,
+   "target_why": "rectangle height added to the top",
+   "chart": {
+    "h": [
+     799.95,
+     822.7,
+     810.5,
+     823.0,
+     842.65,
+     832.75,
+     838.0,
+     837.8,
+     873.9,
+     859.0,
+     847.55,
+     860.0,
+     850.1,
+     834.0,
+     821.95,
+     797.0,
+     781.1,
+     761.8,
+     768.0,
+     775.0,
+     758.95,
+     759.7,
+     762.45,
+     746.05,
+     741.0,
+     723.95,
+     725.2,
+     743.7,
+     828.7,
+     802.0,
+     773.9,
+     764.0,
+     759.7,
+     845.0,
+     853.2,
+     808.0,
+     838.0,
+     841.3,
+     824.4,
+     831.95
+    ],
+    "l": [
+     770.0,
+     760.7,
+     788.0,
+     789.15,
+     799.9,
+     805.05,
+     784.35,
+     804.0,
+     834.5,
+     814.0,
+     821.1,
+     835.0,
+     816.4,
+     815.0,
+     791.2,
+     764.55,
+     743.1,
+     735.0,
+     744.9,
+     756.05,
+     740.8,
+     735.0,
+     708.3,
+     718.7,
+     698.0,
+     696.3,
+     699.9,
+     715.65,
+     709.5,
+     720.6,
+     720.3,
+     745.2,
+     734.05,
+     702.3,
+     793.7,
+     781.0,
+     794.15,
+     795.35,
+     782.8,
+     801.5
+    ],
+    "c": [
+     771.8,
+     803.45,
+     798.15,
+     817.7,
+     828.3,
+     810.75,
+     818.0,
+     834.2,
+     846.7,
+     834.2,
+     840.25,
+     852.15,
+     821.4,
+     825.45,
+     794.75,
+     766.65,
+     748.1,
+     750.75,
+     760.9,
+     761.65,
+     750.2,
+     753.15,
+     727.35,
+     742.15,
+     700.65,
+     700.25,
+     721.05,
+     736.95,
+     785.9,
+     728.4,
+     756.35,
+     749.65,
+     742.1,
+     835.65,
+     808.85,
+     789.15,
+     830.8,
+     798.25,
+     820.35,
+     809.4
+    ],
+    "lines": {
+     "top": [
+      [
+       8.0,
+       873.9
+      ],
+      [
+       39.5,
+       848.82
+      ]
+     ],
+     "floor": [
+      [
+       8.0,
+       709.38
+      ],
+      [
+       39.5,
+       685.83
+      ]
+     ]
+    },
+    "brk": null
+   },
+   "since": "2026-08-20 00:00"
+  },
+  {
+   "symbol": "LGEINDIA",
+   "close": 1777.5,
+   "trend": "",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Bullish"
+   },
+   "setup": "Daily Range",
+   "stage": "Ready",
+   "old": "\u2705 Confirmed Bullish",
+   "vk": null,
+   "ext": 1.4,
+   "detail": "29-week range under a falling trendline, 3 touches, 11% deep \u00b7 0.8 ranges under the ceiling \u00b7 Volume 1.4x lately (quieter is better)",
+   "grade": "B",
+   "trigger": 1820.74,
+   "stop": 1734.55,
+   "target": 2024.79,
+   "chart": {
+    "h": [
+     1595.0,
+     1609.8,
+     1611.5,
+     1596.9,
+     1568.9,
+     1574.8,
+     1447.6,
+     1630.0,
+     1655.0,
+     1661.6,
+     1633.9,
+     1589.2,
+     1577.6,
+     1609.9,
+     1548.9,
+     1574.0,
+     1549.9,
+     1555.7,
+     1611.0,
+     1705.2,
+     1594.4,
+     1582.0,
+     1578.7,
+     1593.0,
+     1581.1,
+     1539.9,
+     1580.0,
+     1593.0,
+     1736.1,
+     1755.0,
+     1703.0,
+     1727.1,
+     1672.6,
+     1680.0,
+     1706.9,
+     1719.9,
+     1743.9,
+     1825.0,
+     1785.0,
+     1758.0,
+     1696.5,
+     1699.8,
+     1836.0,
+     1812.5,
+     1780.0,
+     1804.5
+    ],
+    "l": [
+     1541.1,
+     1501.0,
+     1512.2,
+     1520.1,
+     1450.0,
+     1380.1,
+     1304.1,
+     1417.5,
+     1513.0,
+     1525.5,
+     1572.2,
+     1496.5,
+     1478.3,
+     1496.0,
+     1462.4,
+     1500.0,
+     1465.4,
+     1498.9,
+     1506.0,
+     1560.2,
+     1544.0,
+     1531.0,
+     1537.3,
+     1513.9,
+     1515.8,
+     1506.0,
+     1484.8,
+     1534.1,
+     1546.6,
+     1614.6,
+     1620.0,
+     1656.5,
+     1634.0,
+     1626.1,
+     1599.0,
+     1649.0,
+     1687.2,
+     1692.7,
+     1705.0,
+     1680.0,
+     1588.0,
+     1615.8,
+     1660.0,
+     1722.2,
+     1672.0,
+     1679.7
+    ],
+    "c": [
+     1589.0,
+     1579.7,
+     1577.0,
+     1580.8,
+     1491.6,
+     1386.8,
+     1430.4,
+     1534.2,
+     1610.9,
+     1605.8,
+     1579.2,
+     1505.3,
+     1566.0,
+     1523.9,
+     1517.4,
+     1542.9,
+     1519.9,
+     1511.2,
+     1607.6,
+     1566.0,
+     1556.5,
+     1572.3,
+     1543.5,
+     1581.8,
+     1528.6,
+     1518.2,
+     1542.5,
+     1557.8,
+     1729.7,
+     1632.8,
+     1675.4,
+     1665.6,
+     1647.8,
+     1636.8,
+     1696.9,
+     1697.7,
+     1723.5,
+     1780.3,
+     1758.0,
+     1705.2,
+     1621.4,
+     1661.4,
+     1778.5,
+     1728.8,
+     1679.7,
+     1777.5
+    ],
+    "lines": {
+     "top": [
+      [
+       9.0,
+       1661.6
+      ],
+      [
+       45.5,
+       1820.74
+      ]
+     ],
+     "floor": [
+      [
+       9.0,
+       1462.4
+      ],
+      [
+       45.5,
+       1462.4
+      ]
+     ]
+    },
+    "brk": null
+   }
+  },
+  {
+   "symbol": "ABBOTINDIA",
+   "close": 26125.0,
+   "trend": "Counter-trend",
+   "states": {
+    "M": "Bearish",
     "W": "Bearish",
     "D": "Topping"
    },
@@ -8124,12 +8969,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 0.5,
-   "detail": "17-week range under a falling trendline, 4 touches, 16% deep \u00b7 1.2 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
+   "ext": -0.1,
+   "detail": "17-week range under a falling trendline, 4 touches, 16% deep \u00b7 1.8 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
    "grade": "B",
-   "trigger": 27357.81,
-   "stop": 26253.33,
-   "target": 31782.51,
+   "trigger": 27338.75,
+   "stop": 26251.52,
+   "target": 31828.06,
    "chart": {
     "h": [
      26490.0,
@@ -8294,7 +9139,7 @@
      26440.0,
      25815.0,
      25695.0,
-     26525.0
+     26125.0
     ],
     "lines": {
      "top": [
@@ -8303,8 +9148,8 @@
        28940.0
       ],
       [
-       52.0,
-       27357.81
+       52.5,
+       27338.75
       ]
      ],
      "floor": [
@@ -8313,7 +9158,7 @@
        24650.0
       ],
       [
-       52.0,
+       52.5,
        24650.0
       ]
      ]
@@ -8322,1046 +9167,8 @@
    }
   },
   {
-   "symbol": "LEMONTREE",
-   "close": 127.54,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bullish",
-    "D": "Impulse"
-   },
-   "setup": "Daily Range",
-   "stage": "Triggered",
-   "old": "\u2705 Confirmed Bullish",
-   "vk": null,
-   "ext": 3.5,
-   "detail": "26-week range under a flat top, 5 touches, 17% deep \u00b7 broke out Mon 16 \u00b7 Breakout volume 1.4x",
-   "grade": "B",
-   "trigger": 122.09,
-   "stop": 115.99,
-   "target": 143.17,
-   "chart": {
-    "h": [
-     106.67,
-     108.4,
-     108.38,
-     109.09,
-     111.4,
-     114.82,
-     117.24,
-     117.3,
-     128.38,
-     122.25,
-     121.9,
-     122.9,
-     122.1,
-     114.39,
-     111.79,
-     118.31,
-     121.98,
-     114.72,
-     112.45,
-     108.96,
-     113.9,
-     113.5,
-     121.45,
-     121.43,
-     121.04,
-     122.65,
-     119.2,
-     117.05,
-     113.99,
-     112.16,
-     112.9,
-     114.58,
-     115.68,
-     112.4,
-     110.5,
-     110.15,
-     110.5,
-     110.45,
-     108.8,
-     107.1,
-     107.49,
-     106.67,
-     106.9,
-     108.87,
-     107.7,
-     111.6,
-     113.55,
-     113.46,
-     117.9,
-     115.24,
-     111.96,
-     111.7,
-     114.8,
-     120.55,
-     123.4,
-     125.6,
-     128.3
-    ],
-    "l": [
-     99.61,
-     101.55,
-     100.5,
-     100.11,
-     102.8,
-     107.1,
-     108.51,
-     112.8,
-     113.7,
-     116.06,
-     116.4,
-     119.24,
-     111.0,
-     110.29,
-     106.9,
-     111.36,
-     113.17,
-     109.41,
-     106.8,
-     103.5,
-     104.29,
-     108.25,
-     114.0,
-     115.2,
-     117.41,
-     115.75,
-     116.41,
-     112.81,
-     110.0,
-     107.61,
-     109.91,
-     108.9,
-     112.32,
-     106.51,
-     107.89,
-     107.4,
-     107.58,
-     107.26,
-     105.12,
-     104.7,
-     105.13,
-     102.3,
-     100.88,
-     105.77,
-     102.96,
-     102.0,
-     106.8,
-     108.58,
-     110.02,
-     109.16,
-     106.65,
-     104.35,
-     108.23,
-     112.93,
-     114.8,
-     120.27,
-     122.21
-    ],
-    "c": [
-     103.02,
-     106.45,
-     106.16,
-     100.42,
-     109.71,
-     113.45,
-     114.33,
-     113.13,
-     121.57,
-     118.61,
-     121.56,
-     121.81,
-     111.88,
-     111.23,
-     111.14,
-     116.76,
-     113.95,
-     110.56,
-     107.09,
-     103.68,
-     109.99,
-     113.04,
-     119.34,
-     116.65,
-     118.95,
-     116.93,
-     117.74,
-     114.12,
-     110.95,
-     109.36,
-     110.15,
-     114.03,
-     112.79,
-     109.36,
-     108.92,
-     108.08,
-     108.56,
-     107.69,
-     106.15,
-     104.95,
-     106.17,
-     102.58,
-     106.47,
-     107.92,
-     103.82,
-     107.67,
-     112.52,
-     110.69,
-     112.5,
-     109.82,
-     110.14,
-     111.34,
-     114.26,
-     117.39,
-     120.41,
-     123.31,
-     127.54
-    ],
-    "lines": {
-     "top": [
-      [
-       11.33,
-       122.9
-      ],
-      [
-       56.67,
-       122.09
-      ]
-     ],
-     "floor": [
-      [
-       11.33,
-       100.88
-      ],
-      [
-       55.33,
-       100.88
-      ]
-     ]
-    },
-    "brk": 55.33
-   }
-  },
-  {
-   "symbol": "UBL",
-   "close": 1244.5,
-   "trend": "Early turn",
-   "states": {
-    "M": "Bottoming",
-    "W": "Bottoming",
-    "D": "Bullish"
-   },
-   "setup": "Daily Falling Wedge",
-   "stage": "Triggered",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": 0.4,
-   "detail": "10 weeks falling wedge, 7 touches, 14% deep \u00b7 broke out Thu 19 \u00b7 Breakout volume 0.6x",
-   "grade": "B",
-   "clean": false,
-   "trigger": 1226.99,
-   "stop": 1127.74,
-   "target": 1326.0,
-   "target_why": "back to where the wedge started",
-   "chart": {
-    "h": [
-     1381.2,
-     1367.3,
-     1362.2,
-     1386.8,
-     1345.2,
-     1322.9,
-     1326.0,
-     1305.1,
-     1279.0,
-     1268.0,
-     1251.8,
-     1260.0,
-     1248.1,
-     1289.7,
-     1258.8,
-     1213.8,
-     1197.6,
-     1211.5,
-     1194.0,
-     1228.0,
-     1229.0,
-     1208.9,
-     1192.3,
-     1155.9,
-     1317.4,
-     1208.0,
-     1215.0,
-     1246.4,
-     1241.3,
-     1235.1,
-     1219.9,
-     1276.0,
-     1283.0
-    ],
-    "l": [
-     1346.7,
-     1325.4,
-     1328.0,
-     1339.1,
-     1301.5,
-     1276.4,
-     1277.0,
-     1245.9,
-     1245.0,
-     1240.0,
-     1213.5,
-     1219.9,
-     1210.4,
-     1227.1,
-     1169.5,
-     1140.3,
-     1171.5,
-     1160.0,
-     1146.5,
-     1159.2,
-     1192.5,
-     1168.8,
-     1140.0,
-     1128.6,
-     1163.1,
-     1155.0,
-     1179.5,
-     1184.5,
-     1181.0,
-     1212.5,
-     1183.3,
-     1182.0,
-     1240.0
-    ],
-    "c": [
-     1354.8,
-     1348.9,
-     1348.6,
-     1346.6,
-     1308.5,
-     1282.6,
-     1279.4,
-     1252.5,
-     1256.7,
-     1241.8,
-     1216.8,
-     1227.8,
-     1242.3,
-     1251.3,
-     1210.2,
-     1188.8,
-     1178.3,
-     1162.7,
-     1164.8,
-     1206.8,
-     1201.6,
-     1179.8,
-     1142.6,
-     1143.6,
-     1191.7,
-     1178.1,
-     1204.5,
-     1189.7,
-     1221.0,
-     1216.0,
-     1206.7,
-     1271.6,
-     1244.5
-    ],
-    "lines": {
-     "top": [
-      [
-       6.5,
-       1326.0
-      ],
-      [
-       32.0,
-       1226.99
-      ]
-     ],
-     "floor": [
-      [
-       6.5,
-       1151.43
-      ],
-      [
-       31.0,
-       1117.53
-      ]
-     ]
-    },
-    "brk": 31.5
-   },
-   "since": "2026-09-04 00:00"
-  },
-  {
-   "symbol": "CONCORDBIO",
-   "close": 548.2,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Bearish",
-    "D": "Bearish"
-   },
-   "setup": "Daily Range",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": -2.9,
-   "detail": "5-week range under a falling trendline, 3 touches, 28% deep \u00b7 3.8 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
-   "grade": "B",
-   "trigger": 674.8,
-   "stop": 623.82,
-   "target": 861.78,
-   "chart": {
-    "h": [
-     687.5,
-     689.75,
-     685.5,
-     685.0,
-     694.3,
-     687.5,
-     697.8,
-     697.45,
-     683.4,
-     675.0,
-     642.0,
-     654.45,
-     639.85,
-     662.5,
-     696.95,
-     666.5,
-     640.65,
-     636.2,
-     605.0,
-     624.0,
-     662.0,
-     684.0,
-     663.0,
-     625.2,
-     614.1,
-     604.4,
-     612.0,
-     596.0,
-     584.4,
-     566.3,
-     561.0,
-     558.0
-    ],
-    "l": [
-     674.1,
-     678.0,
-     654.75,
-     663.0,
-     675.0,
-     667.75,
-     686.05,
-     675.0,
-     666.0,
-     638.05,
-     625.5,
-     626.45,
-     606.25,
-     612.5,
-     648.85,
-     631.3,
-     613.5,
-     607.55,
-     578.0,
-     583.5,
-     594.6,
-     654.0,
-     622.3,
-     592.5,
-     594.9,
-     595.8,
-     588.7,
-     577.9,
-     553.5,
-     545.9,
-     549.1,
-     546.1
-    ],
-    "c": [
-     684.4,
-     679.85,
-     665.4,
-     680.7,
-     677.2,
-     684.85,
-     691.05,
-     676.65,
-     669.5,
-     642.9,
-     635.0,
-     635.35,
-     614.65,
-     655.6,
-     687.65,
-     634.25,
-     615.3,
-     622.8,
-     581.75,
-     613.95,
-     655.5,
-     672.7,
-     632.6,
-     596.8,
-     597.2,
-     601.8,
-     594.0,
-     581.0,
-     554.8,
-     561.0,
-     556.4,
-     548.2
-    ],
-    "lines": {
-     "top": [
-      [
-       6.0,
-       697.8
-      ],
-      [
-       31.0,
-       674.8
-      ]
-     ],
-     "floor": [
-      [
-       6.0,
-       545.9
-      ],
-      [
-       31.0,
-       545.9
-      ]
-     ]
-    },
-    "brk": null
-   }
-  },
-  {
-   "symbol": "FRACTAL",
-   "close": 818.45,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "No data",
-    "D": "Impulse"
-   },
-   "setup": "Daily Rectangle",
-   "stage": "Watch",
-   "old": "\u2014 Insufficient Data",
-   "vk": null,
-   "ext": 1.1,
-   "detail": "13 weeks rectangle, 7 touches, 20% deep \u00b7 0.9 ranges under the top line \u00b7 Volume 2.4x in the pattern (quieter is better)",
-   "grade": "B",
-   "clean": false,
-   "trigger": 849.22,
-   "stop": 796.56,
-   "target": 1013.74,
-   "target_why": "rectangle height added to the top",
-   "chart": {
-    "h": [
-     815.0,
-     822.7,
-     819.35,
-     823.0,
-     842.65,
-     838.0,
-     834.0,
-     873.9,
-     861.9,
-     845.0,
-     857.0,
-     860.0,
-     838.75,
-     830.0,
-     804.65,
-     784.3,
-     780.0,
-     768.0,
-     775.0,
-     768.8,
-     753.0,
-     762.45,
-     746.05,
-     745.5,
-     723.95,
-     721.4,
-     734.0,
-     743.7,
-     828.7,
-     773.9,
-     764.55,
-     759.85,
-     759.7,
-     853.2,
-     829.9,
-     836.65,
-     841.3,
-     811.95,
-     829.35
-    ],
-    "l": [
-     760.7,
-     788.3,
-     788.0,
-     799.9,
-     812.15,
-     784.35,
-     799.6,
-     813.95,
-     825.15,
-     814.0,
-     829.0,
-     825.0,
-     815.0,
-     798.55,
-     774.1,
-     759.1,
-     735.0,
-     736.5,
-     745.0,
-     745.4,
-     735.0,
-     738.0,
-     708.3,
-     718.0,
-     698.0,
-     696.3,
-     710.25,
-     709.5,
-     710.9,
-     720.3,
-     746.05,
-     734.05,
-     702.3,
-     755.0,
-     781.65,
-     781.0,
-     797.35,
-     782.8,
-     791.75
-    ],
-    "c": [
-     812.05,
-     797.8,
-     807.6,
-     805.6,
-     823.0,
-     834.35,
-     825.5,
-     855.25,
-     828.5,
-     829.55,
-     844.3,
-     827.8,
-     817.4,
-     801.2,
-     777.65,
-     764.45,
-     738.6,
-     764.35,
-     761.4,
-     749.25,
-     742.1,
-     740.2,
-     725.05,
-     721.3,
-     707.6,
-     718.05,
-     732.55,
-     713.45,
-     752.4,
-     755.75,
-     754.25,
-     750.05,
-     732.8,
-     809.45,
-     786.9,
-     821.8,
-     803.1,
-     793.95,
-     818.45
-    ],
-    "lines": {
-     "top": [
-      [
-       7.5,
-       873.9
-      ],
-      [
-       38.5,
-       849.22
-      ]
-     ],
-     "floor": [
-      [
-       7.5,
-       709.38
-      ],
-      [
-       38.5,
-       686.21
-      ]
-     ]
-    },
-    "brk": null
-   },
-   "since": "2026-08-20 00:00"
-  },
-  {
-   "symbol": "LGEINDIA",
-   "close": 1740.7,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Impulse",
-    "D": "Bullish"
-   },
-   "setup": "Daily Range",
-   "stage": "Watch",
-   "old": "\u2705 Confirmed Bullish",
-   "vk": null,
-   "ext": 0.8,
-   "detail": "29-week range under a falling trendline, 3 touches, 11% deep \u00b7 1.4 ranges under the ceiling \u00b7 Volume 1.4x lately (quieter is better)",
-   "grade": "B",
-   "trigger": 1819.65,
-   "stop": 1733.93,
-   "target": 2027.88,
-   "chart": {
-    "h": [
-     1595.0,
-     1609.8,
-     1611.5,
-     1596.9,
-     1568.9,
-     1574.8,
-     1447.6,
-     1630.0,
-     1655.0,
-     1661.6,
-     1633.9,
-     1589.2,
-     1577.6,
-     1609.9,
-     1548.9,
-     1574.0,
-     1549.9,
-     1555.7,
-     1611.0,
-     1705.2,
-     1594.4,
-     1582.0,
-     1578.7,
-     1593.0,
-     1581.1,
-     1539.9,
-     1580.0,
-     1593.0,
-     1736.1,
-     1755.0,
-     1703.0,
-     1727.1,
-     1672.6,
-     1680.0,
-     1706.9,
-     1719.9,
-     1743.9,
-     1825.0,
-     1785.0,
-     1758.0,
-     1696.5,
-     1699.8,
-     1836.0,
-     1812.5,
-     1780.0,
-     1795.0
-    ],
-    "l": [
-     1541.1,
-     1501.0,
-     1512.2,
-     1520.1,
-     1450.0,
-     1380.1,
-     1304.1,
-     1417.5,
-     1513.0,
-     1525.5,
-     1572.2,
-     1496.5,
-     1478.3,
-     1496.0,
-     1462.4,
-     1500.0,
-     1465.4,
-     1498.9,
-     1506.0,
-     1560.2,
-     1544.0,
-     1531.0,
-     1537.3,
-     1513.9,
-     1515.8,
-     1506.0,
-     1484.8,
-     1534.1,
-     1546.6,
-     1614.6,
-     1620.0,
-     1656.5,
-     1634.0,
-     1626.1,
-     1599.0,
-     1649.0,
-     1687.2,
-     1692.7,
-     1705.0,
-     1680.0,
-     1588.0,
-     1615.8,
-     1660.0,
-     1722.2,
-     1672.0,
-     1679.7
-    ],
-    "c": [
-     1589.0,
-     1579.7,
-     1577.0,
-     1580.8,
-     1491.6,
-     1386.8,
-     1430.4,
-     1534.2,
-     1610.9,
-     1605.8,
-     1579.2,
-     1505.3,
-     1566.0,
-     1523.9,
-     1517.4,
-     1542.9,
-     1519.9,
-     1511.2,
-     1607.6,
-     1566.0,
-     1556.5,
-     1572.3,
-     1543.5,
-     1581.8,
-     1528.6,
-     1518.2,
-     1542.5,
-     1557.8,
-     1729.7,
-     1632.8,
-     1675.4,
-     1665.6,
-     1647.8,
-     1636.8,
-     1696.9,
-     1697.7,
-     1723.5,
-     1780.3,
-     1758.0,
-     1705.2,
-     1621.4,
-     1661.4,
-     1778.5,
-     1728.8,
-     1679.7,
-     1740.7
-    ],
-    "lines": {
-     "top": [
-      [
-       9.0,
-       1661.6
-      ],
-      [
-       45.25,
-       1819.65
-      ]
-     ],
-     "floor": [
-      [
-       9.0,
-       1462.4
-      ],
-      [
-       45.25,
-       1462.4
-      ]
-     ]
-    },
-    "brk": null
-   }
-  },
-  {
-   "symbol": "PIRAMALFIN",
-   "close": 2017.8,
-   "trend": "",
-   "states": {
-    "M": "No data",
-    "W": "Bearish",
-    "D": "Topping"
-   },
-   "setup": "Daily Range",
-   "stage": "Watch",
-   "old": "\u274c Avoid",
-   "vk": null,
-   "ext": -0.4,
-   "detail": "11-week range under a flat top, 3 touches, 27% deep \u00b7 3.9 ranges under the ceiling \u00b7 Volume 0.9x lately (quieter is better)",
-   "grade": "B",
-   "trigger": 2326.12,
-   "stop": 2202.77,
-   "target": 2951.85,
-   "chart": {
-    "h": [
-     2120.2,
-     2090.4,
-     2079.8,
-     2135.4,
-     2218.0,
-     2252.2,
-     2299.9,
-     2324.0,
-     2262.0,
-     2290.8,
-     2326.4,
-     2316.0,
-     2299.0,
-     2324.5,
-     2304.8,
-     2250.3,
-     2170.0,
-     2174.4,
-     2046.0,
-     2046.9,
-     2009.5,
-     2043.1,
-     2055.2,
-     1990.9,
-     2038.0,
-     1970.0,
-     1903.9,
-     1876.0,
-     1939.0,
-     2132.0,
-     2201.0,
-     2168.2,
-     2160.0,
-     2126.9,
-     2075.6
-    ],
-    "l": [
-     2060.0,
-     2048.2,
-     2035.0,
-     2050.0,
-     2120.5,
-     2150.0,
-     2201.5,
-     2210.0,
-     2165.9,
-     2201.6,
-     2236.6,
-     2249.3,
-     2180.2,
-     2166.0,
-     2176.3,
-     1781.2,
-     2049.0,
-     2012.0,
-     1978.0,
-     1970.2,
-     1921.0,
-     1974.0,
-     1933.3,
-     1939.0,
-     1900.0,
-     1847.6,
-     1795.1,
-     1784.1,
-     1820.9,
-     1905.7,
-     2050.0,
-     2071.8,
-     2077.7,
-     2032.2,
-     1995.5
-    ],
-    "c": [
-     2073.3,
-     2057.7,
-     2060.5,
-     2128.1,
-     2184.1,
-     2221.4,
-     2278.4,
-     2226.1,
-     2232.9,
-     2261.0,
-     2310.5,
-     2255.6,
-     2201.1,
-     2300.2,
-     2206.7,
-     2104.3,
-     2149.0,
-     2043.9,
-     2002.6,
-     1981.5,
-     1971.2,
-     2036.3,
-     1974.7,
-     1948.7,
-     1952.0,
-     1898.3,
-     1803.8,
-     1817.0,
-     1912.6,
-     2119.6,
-     2070.7,
-     2150.6,
-     2104.7,
-     2060.9,
-     2017.8
-    ],
-    "lines": {
-     "top": [
-      [
-       7.0,
-       2324.0
-      ],
-      [
-       34.5,
-       2326.12
-      ]
-     ],
-     "floor": [
-      [
-       7.0,
-       1781.2
-      ],
-      [
-       34.5,
-       1781.2
-      ]
-     ]
-    },
-    "brk": null
-   }
-  },
-  {
    "symbol": "APOLLOTYRE",
-   "close": 417.85,
+   "close": 420.7,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -9369,182 +9176,176 @@
     "D": "Impulse"
    },
    "setup": "Daily Range",
-   "stage": "Watch",
+   "stage": "Ready",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 0.6,
-   "detail": "30-week range under a falling trendline, 3 touches, 20% deep \u00b7 5.5 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
+   "ext": 0.8,
+   "detail": "14-week range under a falling trendline, 4 touches, 18% deep \u00b7 0.9 ranges under the ceiling \u00b7 Volume 1.3x lately (quieter is better)",
    "grade": "B",
-   "trigger": 483.1,
-   "stop": 464.53,
-   "target": 580.16,
+   "trigger": 431.09,
+   "stop": 413.11,
+   "target": 509.99,
    "chart": {
     "h": [
-     482.3,
-     465.05,
-     446.5,
-     441.25,
-     428.0,
-     424.75,
-     423.75,
-     444.0,
-     446.0,
-     449.25,
-     444.55,
-     439.45,
-     418.85,
-     409.0,
-     428.75,
-     399.2,
-     406.0,
-     399.0,
-     397.35,
-     443.9,
-     434.0,
-     439.4,
-     461.6,
-     454.15,
      437.25,
+     432.25,
      431.7,
+     431.45,
+     425.0,
      431.4,
-     445.35,
+     438.35,
+     451.8,
+     451.75,
      452.0,
      448.25,
-     444.25,
+     446.65,
+     438.95,
+     442.9,
      467.4,
+     448.0,
      451.0,
-     440.75,
+     443.7,
+     439.8,
+     430.0,
      424.3,
+     419.45,
      429.55,
-     413.8,
+     418.75,
+     411.35,
+     405.5,
      429.0,
+     412.95,
+     406.25,
      408.15,
-     406.85,
+     406.6,
+     404.6,
      438.45,
-     416.1,
+     417.45,
+     409.1,
      391.0,
+     389.0,
+     393.6,
+     403.85,
      435.75,
      431.95,
+     427.25,
      433.15,
-     423.25
+     420.9,
+     424.2
     ],
     "l": [
-     440.5,
-     450.8,
-     426.55,
-     413.0,
-     392.05,
-     397.85,
-     402.25,
-     401.5,
-     426.0,
-     437.45,
-     421.9,
-     406.95,
-     399.6,
-     394.6,
-     365.3,
-     368.85,
-     379.8,
-     384.0,
-     378.05,
-     405.2,
-     418.4,
-     419.15,
-     432.3,
-     434.25,
-     421.75,
-     422.5,
+     424.6,
+     422.55,
+     423.05,
      413.4,
+     418.0,
      422.35,
+     423.5,
+     435.5,
      432.15,
+     438.95,
      440.5,
+     435.25,
      426.5,
      427.75,
+     440.0,
+     439.2,
      435.85,
-     419.0,
+     432.2,
+     428.25,
+     410.05,
      408.0,
+     405.05,
      402.15,
-     396.2,
+     407.9,
+     401.0,
+     395.5,
      386.3,
      392.85,
+     399.35,
+     397.05,
      396.35,
-     399.25,
+     397.3,
+     400.1,
+     403.05,
+     382.0,
      375.0,
      378.05,
-     382.0,
+     378.2,
+     390.95,
      408.0,
+     409.0,
+     420.0,
+     417.0,
      412.3,
-     414.1
+     413.5
     ],
     "c": [
-     453.5,
-     454.05,
-     439.75,
-     417.65,
-     419.75,
-     404.7,
-     415.25,
-     436.1,
-     441.6,
-     441.95,
-     428.55,
-     409.45,
-     409.25,
-     401.8,
-     375.9,
-     393.25,
-     391.75,
-     384.85,
-     396.3,
-     428.0,
-     421.8,
-     431.65,
-     454.35,
-     440.6,
-     430.65,
-     424.35,
-     424.1,
-     438.35,
-     445.95,
-     444.1,
-     429.3,
-     443.05,
-     442.7,
-     420.8,
-     417.65,
-     409.3,
-     397.95,
-     404.7,
-     407.6,
-     401.35,
-     416.75,
-     386.85,
-     379.45,
-     418.85,
+     432.05,
+     428.7,
+     426.6,
+     419.65,
+     423.85,
      423.2,
-     415.1,
-     417.85
+     436.6,
+     444.9,
+     445.0,
+     443.0,
+     443.05,
+     436.7,
+     427.35,
+     439.7,
+     441.4,
+     443.25,
+     438.95,
+     434.15,
+     429.55,
+     411.5,
+     419.55,
+     406.2,
+     412.15,
+     409.3,
+     405.7,
+     400.1,
+     406.75,
+     404.75,
+     401.55,
+     401.7,
+     401.2,
+     399.95,
+     408.85,
+     410.05,
+     384.15,
+     383.3,
+     386.35,
+     389.9,
+     402.4,
+     415.95,
+     423.85,
+     420.8,
+     418.7,
+     419.4,
+     420.7
     ],
     "lines": {
      "top": [
       [
-       9.25,
-       449.25
+       9.0,
+       452.0
       ],
       [
-       46.25,
-       483.1
+       44.5,
+       431.09
       ]
      ],
      "floor": [
       [
-       9.25,
-       365.3
+       9.0,
+       375.0
       ],
       [
-       46.25,
-       365.3
+       44.5,
+       375.0
       ]
      ]
     },
@@ -9553,177 +9354,180 @@
   },
   {
    "symbol": "CESC",
-   "close": 127.69,
+   "close": 125.93,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
     "W": "Bottoming",
-    "D": "Bullish"
+    "D": "Topping"
    },
    "setup": "Daily Falling Wedge",
    "stage": "Ready",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -1.6,
-   "detail": "13 weeks falling wedge, 6 touches, 22% deep \u00b7 0.2 ranges under the top line \u00b7 Volume 1.5x in the pattern (quieter is better)",
+   "ext": -2.0,
+   "detail": "14 weeks falling wedge, 6 touches, 22% deep \u00b7 0.5 ranges under the top line \u00b7 Volume 1.5x in the pattern (quieter is better)",
    "grade": "B",
    "clean": false,
-   "trigger": 128.63,
+   "trigger": 127.97,
    "stop": 121.91,
    "target": 172.0,
    "target_why": "back to where the wedge started",
    "chart": {
     "h": [
-     164.99,
+     166.76,
      165.32,
-     165.54,
+     165.2,
+     165.95,
      169.1,
-     167.49,
-     165.38,
+     166.45,
+     165.84,
      166.31,
-     165.5,
      172.0,
      171.75,
-     160.2,
+     162.26,
      157.79,
      156.15,
-     152.29,
-     147.94,
+     154.17,
+     148.63,
      151.11,
      150.0,
      153.42,
+     152.48,
      146.76,
      143.21,
      144.33,
-     144.22,
-     142.44,
-     139.84,
-     136.39,
+     143.15,
+     140.75,
+     136.59,
      136.9,
-     134.13,
+     136.12,
+     133.9,
      138.81,
      139.49,
-     138.9,
-     136.17,
-     131.94,
+     137.3,
+     134.13,
+     130.48,
      127.4,
-     128.5,
      128.93,
-     131.67,
+     131.1,
      135.2,
+     131.55,
      133.01,
-     132.4,
-     128.6,
-     127.54,
-     129.89
+     130.31,
+     127.44,
+     129.89,
+     127.99
     ],
     "l": [
+     162.0,
      161.52,
-     161.65,
+     161.84,
      161.98,
-     163.62,
-     163.05,
+     164.1,
      162.11,
+     162.29,
      160.4,
      160.0,
-     165.6,
-     158.5,
+     167.9,
+     155.9,
      154.7,
      152.86,
-     151.5,
-     145.42,
+     147.83,
+     144.01,
      143.55,
-     145.91,
+     145.0,
      143.9,
-     145.21,
-     141.1,
+     144.65,
      140.7,
      140.71,
-     142.0,
-     137.63,
+     141.12,
+     139.6,
+     135.9,
      132.5,
      129.75,
-     131.7,
+     130.52,
      128.31,
-     128.59,
-     135.32,
-     135.25,
-     130.81,
-     123.66,
+     133.05,
+     135.55,
+     133.0,
+     128.62,
+     123.49,
      122.15,
-     122.76,
-     124.21,
-     127.5,
+     124.0,
+     124.99,
+     127.9,
      124.6,
-     127.01,
-     127.67,
+     129.5,
      124.9,
      123.45,
-     124.76
+     123.5,
+     123.7
     ],
     "c": [
-     163.18,
-     163.88,
-     164.93,
-     165.98,
-     163.52,
-     163.94,
-     161.01,
-     164.83,
-     170.22,
-     159.66,
-     155.09,
-     154.0,
-     152.13,
-     146.16,
-     146.44,
-     146.5,
-     146.05,
-     147.58,
-     141.7,
-     141.56,
-     143.47,
-     142.56,
-     139.86,
-     133.87,
-     131.62,
-     134.43,
-     128.73,
-     136.27,
-     138.86,
-     135.9,
-     131.62,
-     124.79,
-     123.45,
-     128.14,
-     126.47,
-     130.94,
-     126.25,
-     131.1,
-     128.48,
-     125.81,
-     126.93,
-     127.69
+     162.68,
+     162.32,
+     164.12,
+     165.57,
+     164.76,
+     162.48,
+     164.58,
+     162.43,
+     167.83,
+     167.98,
+     156.61,
+     155.27,
+     153.33,
+     148.11,
+     145.15,
+     147.96,
+     145.44,
+     149.67,
+     145.37,
+     141.67,
+     141.53,
+     142.52,
+     139.89,
+     136.18,
+     133.85,
+     133.73,
+     131.18,
+     133.23,
+     136.35,
+     135.85,
+     133.35,
+     129.96,
+     124.75,
+     123.61,
+     124.63,
+     128.52,
+     130.25,
+     128.94,
+     130.34,
+     127.06,
+     124.28,
+     127.69,
+     125.93
     ],
     "lines": {
      "top": [
       [
-       8.0,
+       8.5,
        172.0
       ],
       [
-       41.0,
-       128.63
+       42.0,
+       127.97
       ]
      ],
      "floor": [
       [
-       8.0,
+       8.5,
        144.47
       ],
       [
-       41.0,
-       114.4
+       42.0,
+       113.95
       ]
      ]
     },
@@ -9733,23 +9537,23 @@
   },
   {
    "symbol": "GILLETTE",
-   "close": 7090.5,
+   "close": 7116.5,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
-    "W": "Bearish",
+    "W": "Bottoming",
     "D": "Bearish"
    },
    "setup": "Daily Range",
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": -1.0,
-   "detail": "16-week range under a falling trendline, 3 touches, 17% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
+   "ext": -0.8,
+   "detail": "16-week range under a falling trendline, 3 touches, 17% deep \u00b7 2.4 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
    "grade": "B",
-   "trigger": 7528.57,
-   "stop": 7251.69,
-   "target": 8845.18,
+   "trigger": 7521.43,
+   "stop": 7251.82,
+   "target": 8831.98,
    "chart": {
     "h": [
      7760.0,
@@ -9855,7 +9659,7 @@
      7212.0,
      7065.5,
      7090.0,
-     7082.0
+     7055.0
     ],
     "c": [
      7679.5,
@@ -9908,7 +9712,7 @@
      7247.0,
      7098.5,
      7153.5,
-     7090.5
+     7116.5
     ],
     "lines": {
      "top": [
@@ -9917,8 +9721,8 @@
        8100.0
       ],
       [
-       50.0,
-       7528.57
+       50.5,
+       7521.43
       ]
      ],
      "floor": [
@@ -9927,7 +9731,7 @@
        6860.0
       ],
       [
-       50.0,
+       50.5,
        6860.0
       ]
      ]
@@ -9937,7 +9741,7 @@
   },
   {
    "symbol": "JKCEMENT",
-   "close": 5438.7,
+   "close": 5439.0,
    "trend": "Counter-trend",
    "states": {
     "M": "Bearish",
@@ -9948,12 +9752,12 @@
    "stage": "Watch",
    "old": "\u274c Avoid",
    "vk": null,
-   "ext": 2.0,
-   "detail": "27-week range under a falling trendline, 3 touches, 20% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 1.2x lately (quieter is better)",
+   "ext": 1.9,
+   "detail": "27-week range under a falling trendline, 3 touches, 20% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 1.1x lately (quieter is better)",
    "grade": "B",
-   "trigger": 5869.81,
-   "stop": 5603.02,
-   "target": 7023.0,
+   "trigger": 5870.77,
+   "stop": 5601.81,
+   "target": 7024.09,
    "chart": {
     "h": [
      5188.0,
@@ -10130,7 +9934,7 @@
      5052.4,
      5155.1,
      5151.8,
-     5438.7
+     5439.0
     ],
     "lines": {
      "top": [
@@ -10139,8 +9943,8 @@
        5740.0
       ],
       [
-       56.33,
-       5869.81
+       56.67,
+       5870.77
       ]
      ],
      "floor": [
@@ -10149,7 +9953,7 @@
        4671.5
       ],
       [
-       56.33,
+       56.67,
        4671.5
       ]
      ]
@@ -10161,60 +9965,52 @@
  "recent_breakouts": {},
  "others": {
   "Running": [
+   "ACC",
    "ACE",
-   "AETHER",
    "ANURAS",
    "APOLLOTYRE",
    "ASAHIINDIA",
-   "BBOX",
-   "CEATLTD",
+   "ASTERDM",
    "CEMPRO",
    "CRAFTSMAN",
    "CUPID",
    "EIHOTEL",
-   "ELECON",
    "EMAMILTD",
    "FLUOROCHEM",
    "FRACTAL",
    "GABRIEL",
    "HONASA",
+   "IGL",
+   "INOXINDIA",
    "ITCHOTELS",
    "JKCEMENT",
    "JKTYRE",
    "JSWINFRA",
-   "JYOTICNC",
    "KIMS",
    "LEMONTREE",
-   "LINDEINDIA",
-   "LTFOODS",
    "MEESHO",
    "MINDACORP",
    "MRF",
    "NUVOCO",
    "POONAWALLA",
-   "PVRINOX",
+   "PRIVISCL",
    "PWL",
-   "SHYAMMETL",
    "SIGNATURE",
    "SOBHA",
    "STARHEALTH",
    "SUNTV",
-   "URBANCO",
    "VIJAYA",
    "WELSPUNLIV",
    "WOCKPHARMA"
   ],
   "Stretched": [],
   "Fading": [
-   "BEML",
+   "ACMESOLAR",
+   "EMCURE",
    "GLAND",
    "LALPATHLAB",
    "LENSKART",
-   "LTTS",
-   "MRPL",
-   "RUBICON",
-   "SANSERA",
-   "ZENSARTECH"
+   "PINELABS"
   ]
  },
  "old_labels": {
@@ -10234,7 +10030,6 @@
    "AIIL",
    "AJANTPHARM",
    "ANANTRAJ",
-   "ANURAS",
    "APARINDS",
    "APOLLOTYRE",
    "APTUS",
@@ -10247,6 +10042,7 @@
    "AZAD",
    "BAJAJHFL",
    "BALKRISIND",
+   "BALRAMCHIN",
    "BATAINDIA",
    "BBOX",
    "BELRISE",
@@ -10269,7 +10065,6 @@
    "CHOICEIN",
    "CHOLAHLDNG",
    "CLEAN",
-   "COHANCE",
    "CONCORDBIO",
    "CREDITACC",
    "CRISIL",
@@ -10308,7 +10103,6 @@
    "HEXT",
    "HINDCOPPER",
    "HOMEFIRST",
-   "HONASA",
    "HONAUT",
    "HSCL",
    "HUDCO",
@@ -10325,7 +10119,6 @@
    "IPCALAB",
    "IRCON",
    "IRCTC",
-   "ITCHOTELS",
    "ITI",
    "J&KBANK",
    "JAINREC",
@@ -10350,12 +10143,14 @@
    "LINDEINDIA",
    "LLOYDSME",
    "LTFOODS",
+   "LTTS",
    "M&MFIN",
    "MEDANTA",
    "MGL",
    "MINDACORP",
    "MMTC",
    "MRF",
+   "MRPL",
    "MTARTECH",
    "NATCOPHARM",
    "NAVA",
@@ -10376,13 +10171,13 @@
    "PIRAMALFIN",
    "POLYMED",
    "PRIVISCL",
-   "PWL",
    "RAILTEL",
    "RAINBOW",
    "RAMCOCEM",
    "RHIM",
    "RITES",
    "RRKABEL",
+   "RUBICON",
    "SAMMAANCAP",
    "SARDAEN",
    "SCHAEFFLER",
@@ -10401,6 +10196,7 @@
    "TATACOMM",
    "TATAINVEST",
    "TATATECH",
+   "TBOTEK",
    "TDPOWERSYS",
    "TECHNOE",
    "TEGA",
@@ -10415,76 +10211,76 @@
    "UBL",
    "USHAMART",
    "VTL",
+   "WELCORP",
    "WOCKPHARMA",
    "ZEEL",
+   "ZENSARTECH",
    "ZENTEC",
    "ZFCVINDIA",
    "ZYDUSWELL"
   ],
   "\u2705 Confirmed Bullish": [
    "ABDL",
-   "ACE",
    "ASAHIINDIA",
-   "CPPLUS",
+   "CASTROLIND",
    "CRAFTSMAN",
-   "CUPID",
-   "FINCABLES",
    "FLUOROCHEM",
-   "GABRIEL",
+   "HONASA",
    "LEMONTREE",
    "LGEINDIA",
-   "MEESHO",
    "POONAWALLA",
-   "SHYAMMETL",
+   "PWL",
    "SUNTV",
-   "SYNGENE",
    "VIJAYA",
    "WELSPUNLIV"
   ],
   "\u26a0\ufe0f Extended": [
+   "ACE",
    "ACMESOLAR",
    "ACUTAAS",
    "AETHER",
    "ANTHEM",
-   "BALRAMCHIN",
+   "ANURAS",
    "BEML",
+   "CPPLUS",
+   "CUPID",
    "EMCURE",
    "ENGINERSIN",
+   "FINCABLES",
+   "GABRIEL",
    "GLAND",
    "GRAPHITE",
    "GROWW",
    "IGIL",
+   "ITCHOTELS",
    "JYOTICNC",
    "LALPATHLAB",
    "LENSKART",
-   "LTTS",
-   "MRPL",
+   "MEESHO",
    "PINELABS",
    "PPLPHARMA",
    "PVRINOX",
    "RKFORGE",
-   "RUBICON",
    "SAILIFE",
    "SANSERA",
-   "TBOTEK",
+   "SHYAMMETL",
+   "SYNGENE",
    "URBANCO",
-   "WHIRLPOOL",
-   "ZENSARTECH"
-  ],
-  "\ud83c\udfc6 Prime Setup": [
-   "CASTROLIND",
-   "PTCIL",
-   "REDINGTON"
+   "WHIRLPOOL"
   ],
   "\u2014 Insufficient Data": [
    "CLEANMAX",
    "CMPDI",
    "FRACTAL"
   ],
+  "\ud83c\udfc6 Prime Setup": [
+   "COHANCE",
+   "PTCIL",
+   "REDINGTON"
+  ],
   "\u23f3 Building Momentum": [
    "CYIENT",
-   "GESHIP",
-   "WELCORP"
+   "GESHIP"
   ]
  },
  "vk_labels": {},
