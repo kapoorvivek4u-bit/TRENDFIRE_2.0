@@ -847,11 +847,11 @@ function indexStrip(){
     const fut = oiw ? chip(tag(oiw, lx && lx.oiq), oiside > 0 ? "var(--up)" : oiside < 0 ? "var(--down)" : "var(--warn)") : "";
     const pcrv = lx && lx.pcr != null ? lx.pcr : x.pcr;
     return `<a class="card ix fade" href="#${["index","index-bank","index-midcap","index-fin","index-next50"][["NIFTY","BANKNIFTY","MIDCAP","FINNIFTY","NEXT50"].indexOf(x.key)] || "index"}" title="${esc(x.name)}">
-      <div class="n"><span>${esc(x.name)}</span><span class="num ${cls(x.chg5)}" title="5 days">${pct(x.chg5)} 5D</span></div>
+      <div class="n"><span title="${esc(x.note || "")}">${esc(x.note ? "Nifty Midcap 50" : x.name)}</span><span class="num ${cls(x.chg5)}" title="5 days">${pct(x.chg5)} 5D</span></div>
       <div class="v">${fmt(x.close)}</div>
       <div class="c ${cls(x.chg1)}">${x.chg1 >= 0 ? "▲" : "▼"} ${pct(x.chg1, 2)}<span class="muted" style="font-size:10.5px;font-weight:600;margin-left:6px">${x.live_at ? "live " + esc((String(x.live_at).match(/\d{1,2}:\d{2}/) || [""])[0]) : "last close"}</span></div>
       ${spark(x.spark)}
-      <div class="chips">${x.vk && VK_SHORT[x.vk] ? chip(VK_SHORT[x.vk][0] + (stale ? " · " + eod : ""), VK_SHORT[x.vk][1]) : ""}${fut}${pcrv ? chip(tag("PCR " + pcrv, lx && lx.pcr != null)) : ""}</div></a>`;
+      <div class="chips">${x.vk && VK_SHORT[x.vk] ? chip(VK_SHORT[x.vk][0] + (stale ? " · " + eod : ""), VK_SHORT[x.vk][1]) : ""}${fut}${pcrv ? chip(tag((x.note ? "Midcap Select PCR " : "PCR ") + pcrv, lx && lx.pcr != null)) : ""}</div></a>`;
   }).join("")}</div>`;
 }
 function gauge(score){
