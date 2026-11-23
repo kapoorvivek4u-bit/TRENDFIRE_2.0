@@ -494,6 +494,7 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .checks div.no{color:var(--down)}.checks div.no::before{content:"✗";color:var(--down)}
 .ichart{width:100%;height:auto;display:block;font-family:Inter,sans-serif}
 .ilegend{display:flex;gap:10px;font-size:10.5px;color:var(--muted);margin-top:2px}.ilegend i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:4px;vertical-align:2px}
+.livepx{font-family:var(--f-num);font-size:11.5px;font-weight:600;color:var(--muted);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -532,6 +533,8 @@ async function loadLive(){
   try{ const r = await fetch("/api/live", {cache:"no-store"}); if(r.ok) LIVE = await r.json(); }catch(e){}
   applyLive();
 }
+const livePx = sym => { const s = CACHE["site.json"]; if(!s || !s._live || !LIVE || !LIVE._by) return null; return LIVE._by[sym] || null; };
+const liveTag = sym => { const q = livePx(sym); return q ? `<span class="livepx" title="Live ${esc(S()._live)}, a few minutes late">● ${fmt(q.close)} <b class="${cls(q.chg)}">${pct(q.chg, 2)}</b></span>` : ""; };
 function applyLive(){
   const s = CACHE["site.json"];
   if(!s) return;
@@ -539,6 +542,7 @@ function applyLive(){
   if(!s._orig) s._orig = {heatmap: s.heatmap, gainers: s.gainers, losers: s.losers, adv: (s.market||{}).adv, dec: (s.market||{}).dec};
   if(!LIVE || !LIVE.rows || LIVE.session !== today){ s._live = null; return; }
   const by = Object.fromEntries(LIVE.rows.map(([sym, c, chg, sec]) => [sym, {symbol: sym, close: c, chg, sector: sec}]));
+  LIVE._by = by;
   s.heatmap = (s._orig.heatmap || []).map(g => { const stocks = g.stocks.map(x => by[x.symbol] ? {...x, chg: by[x.symbol].chg, close: by[x.symbol].close} : x).sort((a,b) => b.chg - a.chg);
     return {...g, stocks, avg: +(stocks.reduce((a,x) => a + (x.chg || 0), 0) / (stocks.length || 1)).toFixed(2)}; });
   const rows = Object.values(by).filter(x => x.chg != null).map(x => ({...x, sector: x.sector || "Others"}));
@@ -605,10 +609,11 @@ function spark(vals, {h=46, fill=true, color, w=200} = {}){
     <circle cx="${last[0]}" cy="${last[1]}" r="3" fill="${col}"/></svg>`;
 }
 
-function miniChart(ch){
+function miniChart(ch, sym){
   try{
-    const H = ch.h, L = ch.l, C = ch.c, N = C.length;
-    const ys = H.concat(L, Object.values(ch.lines||{}).flatMap(l => l.map(p => p[1])));
+    const lq = sym ? livePx(sym) : null;
+    const H = ch.h, L = ch.l, C = ch.c, N = C.length + (lq ? 1 : 0);
+    const ys = H.concat(L, Object.values(ch.lines||{}).flatMap(l => l.map(p => p[1])), lq ? [lq.close] : []);
     let lo = Math.min(...ys), hi = Math.max(...ys); const pad = (hi-lo)*.06 || 1; lo -= pad; hi += pad;
     const W = 300, Hh = 64, X = i => (i+.5)/N*W, Y = v => (hi-v)/(hi-lo)*Hh;
     const ne = 'vector-effect="non-scaling-stroke"';
@@ -621,6 +626,8 @@ function miniChart(ch){
       const [c,d,w] = sty[k] || ["var(--muted)","",1.5];
       s += `<line x1="${X(x0)}" y1="${Y(y0)}" x2="${X(x1)}" y2="${Y(y1)}" stroke="${c}" stroke-width="${w}" stroke-dasharray="${d}" opacity="${k==="pole"?.45:.95}" ${ne}/>`;
     }
+    if(lq){ const i = N - 1, col = lq.chg >= 0 ? "var(--up)" : "var(--down)";
+      s += `<line x1="${X(i-1)}" y1="${Y(C[C.length-1])}" x2="${X(i)}" y2="${Y(lq.close)}" stroke="${col}" stroke-width="1.6" stroke-dasharray="3 2" ${ne}/><circle cx="${X(i)}" cy="${Y(lq.close)}" r="2.6" fill="${col}"/>`; }
     return `<svg class="mini" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" aria-hidden="true" style="width:100%;height:64px;display:block">${s}</svg>`;
   }catch(e){ return ""; }
 }
@@ -801,10 +808,10 @@ function setupCard(r, opts={}){
   const rr = r.rr || ((r.trigger && r.stop && r.trigger > r.stop) ? ((r.target && r.target > r.trigger) ? ((r.target - r.trigger)/(r.trigger - r.stop)).toFixed(1) : 2) : null);
   const entry = r.entry ?? r.trigger, tword = r.target_why && r.target ? "Target" : (r.target_word && r.target_word !== "2R" ? "Target" : "Target 2R");
   return `<article class="sc" style="--stc:${stc}">
-    <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px">${fmt(r.close)}</span></div>
+    <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div>
       <span style="display:flex;gap:6px;align-items:center">${rr && live ? `<span class="rr">R:R ${rr}</span>` : ""}${r.grade ? `<span class="grade ${live && r.grade === "A" ? "" : "b"}" title="Quality grade">${esc(r.grade === "Warning" ? "!" : r.grade)}</span>` : ""}</span></div>
     <div class="chips">${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
-    ${r.chart ? miniChart(r.chart) : ""}
+    ${r.chart ? miniChart(r.chart, r.symbol) : ""}
     ${statesHtml(r.states)}
     ${r.detail ? `<div class="detail">${esc(r.detail)}</div>` : ""}
     ${opts.checks ? `<div class="checks">${opts.checks.map(c => `<div>${esc(c)}</div>`).join("")}${(opts.bonus||[]).map(c => `<div class="bonus">${esc(c)}</div>`).join("")}</div>` : ""}
@@ -888,7 +895,7 @@ function tradeCard(p){
       <span style="display:flex;gap:6px;align-items:center">${p.rr ? `<span class="rr">R:R ${p.rr}</span>` : ""}<span class="grade ${p.grade === "A" ? "" : "b"}">${esc(p.grade)}</span></span></div>
     <div class="muted" style="font-size:11.5px;font-weight:600;margin-top:-4px">${esc(p.strategy ? p.strategy + ". " + p.strategy_name : p.market)}${p.sector ? " · " + esc(p.sector) : ""}</div>
     <div class="chips">${chip(p.setup, "var(--info)")}${chip(p.market)}${p.size ? chip(p.size, /alf|ccordion/.test(p.size) ? "var(--warn)" : "var(--up)") : ""}${vkChip(p.vk)}</div>
-    ${p.chart ? miniChart(p.chart) : ""}
+    ${p.chart ? miniChart(p.chart, p.symbol) : ""}
     <div class="why">${esc(p.detail || "")}</div>${levels(p.entry, p.stop, p.target)}</article>`;
 }
 function tradesCard(){
@@ -1088,7 +1095,7 @@ function candleChart(k, p){
 function flipMini(p){
   const k = (S().candles || {})[p.symbol];
   if(k) return candleChart(k, p);
-  if(p.chart) return miniChart(p.chart).replace('height:64px','height:96px');
+  if(p.chart) return miniChart(p.chart, p.symbol).replace('height:64px','height:96px');
   return `${statesHtml(p.states)}<div class="why" style="font-size:12px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">${esc(p.detail || "")}</div>`;
 }
 function flipStats(p){
@@ -1325,7 +1332,9 @@ function bigChart(vals){
 async function pageIndex(){
   const ij = await getJSON("index.json");
   const key = IX_KEYS[route()] || "NIFTY";
-  const x = (ij.indexes || []).find(i => i.key === key);
+  let x = (ij.indexes || []).find(i => i.key === key);
+  const si = ((S() || {}).indexes || []).find(i => i.key === key);
+  if(x && si && si.live_at) x = {...x, close: si.close, chg1: si.chg1, chg5: si.chg5, spark: si.spark, live_at: si.live_at};
   if(!x || x.close == null) return pageHead("Index", "") + subnav() + `<div class="empty">No data for this index yet.</div>`;
   const vk = x.vk || {}, fr = x.futures || {}, op = x.options || {};
   const futBox = w => w ? `<div><small>${w.sessions === 1 ? "Last session" : w.sessions + " sessions"}</small><b class="${w.side > 0 ? "up" : w.side < 0 ? "down" : ""}" style="font-size:14px;font-family:var(--f-ui)">${esc(w.word)}</b><div class="muted num" style="font-size:11.5px">OI ${pct(w.oi_pct)} · price ${pct(w.px_pct)}</div></div>` : "";
@@ -1336,7 +1345,7 @@ async function pageIndex(){
    <div class="grid">
     <section class="card fade"><div class="ixhero"><div style="min-width:0">
       <div class="val">${fmt(x.close)}</div>
-      <div class="num ${cls(x.chg1)}" style="font-weight:700;margin:6px 0 10px">${pct(x.chg1, 2)} today · ${pct(x.chg5, 2)} in 5 days</div>
+      <div class="num ${cls(x.chg1)}" style="font-weight:700;margin:6px 0 10px">${pct(x.chg1, 2)} today · ${pct(x.chg5, 2)} in 5 days${x.live_at ? ` <span class="muted" style="font-weight:600;font-size:11.5px">· live ${esc((String(x.live_at).match(/\d{1,2}:\d{2}/) || [""])[0])}</span>` : ""}</div>
       <div class="bigchart">${bigChart(x.spark)}</div>
       <div class="muted" style="font-size:11.5px">Last ${x.spark ? x.spark.length : 0} sessions, daily close.${x.chart_note ? " " + esc(x.chart_note) : ""}</div></div>
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -1407,7 +1416,7 @@ async function pageStrongest(){
 const EV_C = s => s > 0 ? "var(--up)" : s < 0 ? "var(--down)" : "var(--muted)";
 function unusualCard(r){
   return `<article class="sc" style="--stc:${r.bias === "Buying" ? "var(--up)" : r.bias === "Selling" ? "var(--down)" : "var(--muted)"}">
-    <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px">${fmt(r.close)}</span></div><span class="grade b num" title="Score">${r.score}</span></div>
+    <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div><span class="grade b num" title="Score">${r.score}</span></div>
     <div class="chips">${chip(r.bias, r.bias === "Buying" ? "var(--up)" : r.bias === "Selling" ? "var(--down)" : "var(--muted)")}${r.moved === false ? chip("Quiet: no big move yet", "var(--accent2)") : ""}${chip(`${pct(r.move_pct)} in 3 sessions`, r.move_pct >= 0 ? "var(--up)" : "var(--down)")}</div>
     ${statesHtml(r.states)}
     <div style="display:grid;gap:5px">${(r.events || []).map(e => `<div class="ev" style="--c:${EV_C(e.side)}"><i></i><div><span class="w">${esc(e.when)}</span> ${esc(e.text)}</div></div>`).join("")}</div>

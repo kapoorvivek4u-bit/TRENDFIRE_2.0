@@ -851,7 +851,7 @@ def seo_data(out, fo, sj, uj, oi, px, ctx):
 
 
 # ---------------------------------------------------------------- live index quotes (NSE) for the dashboard cards
-LIVE_NAMES = {"NIFTY": "NIFTY 50", "BANKNIFTY": "NIFTY BANK", "MIDCAP": "NIFTY MIDCAP SELECT",
+LIVE_NAMES = {"NIFTY": "NIFTY 50", "BANKNIFTY": "NIFTY BANK", "MIDCAP": "NIFTY MIDCAP SELECT", "MIDCAP50": "NIFTY MIDCAP 50",
               "FINNIFTY": "NIFTY FINANCIAL SERVICES", "NEXT50": "NIFTY NEXT 50"}
 
 
@@ -924,7 +924,7 @@ def run(now=None):
 
     live, live_at = live_indexes()
     for x in indexes:
-        q = live.get(x["key"])
+        q = live.get("MIDCAP50" if x["key"] == "MIDCAP" and x.get("note") else x["key"])   # chart is Midcap 50 when Yahoo lacks Midcap Select
         if not q:
             continue
         sp = x["spark"]
