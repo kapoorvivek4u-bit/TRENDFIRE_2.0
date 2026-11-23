@@ -879,6 +879,117 @@ def live_indexes():
         return {}, None
 
 
+# ---------------------------------------------------------------- Top 5 positional (2-4 weeks), F&O only
+TOP_LOG = os.path.join(DATA, "top5_log.csv")
+
+
+def top5(fo, sj, uj, out, five, now):
+    """Rank every Ready / Triggered F&O setup on everything the site knows and keep the best five.
+    Each pick carries its checklist, so the score can be read line by line."""
+    hu = out.get("heads_up") or {}
+    ban, results = set(hu.get("ban") or []), hu.get("results") or {}
+    strong = {x["symbol"]: x for x in sj.get("strongest_fo") or []}
+    unusual = {r["symbol"]: r for r in uj.get("rows", [])}
+    lv = out.get("levels") or {}
+    track = {x["setup"]: x for x in (out.get("scorecard") or {}).get("setups", []) if x.get("market") == "F&O"}
+    try:
+        with open(os.path.join(DATA, "fii.json")) as f:
+            fii_acc = {x["symbol"]: x for x in json.load(f).get("accumulation", [])}
+    except Exception:
+        fii_acc = {}
+    weather = (out.get("strength") or {}).get("score")
+    picks = []
+    for r in setup_rows(fo):
+        if r.get("stage") not in ("Ready", "Triggered") or r.get("grade") not in ("A", "B"):
+            continue
+        s = r["symbol"]
+        c = card(r, "F&O")
+        e, st = c.get("entry"), c.get("stop")
+        if not (e and st and e > st) or s in ban:
+            continue
+        res = results.get(s)
+        if res and (dt.date.fromisoformat(res) - now.date()).days <= 14:
+            continue                                            # results inside the holding period
+        px = c.get("close") or e
+        risk = (e - st) / e * 100
+        if c["stage"] == "Triggered" and px > e * 1.03:
+            continue                                            # already ran away from the entry
+        chk = []
+
+        def add(label, pts, ok=None):
+            chk.append({"t": label, "p": round(pts, 1), "ok": pts > 0 if ok is None else ok})
+
+        add(f"Grade {c['grade']} {c['setup']} ({c['stage']})", 15 if c["grade"] == "A" else 8)
+        tr = track.get(c["setup"])
+        if tr and (tr.get("closed") or 0) >= 10 and tr.get("avg_r") is not None:
+            add(f"{c['setup']} record: {tr['win_pct']}% wins, {tr['avg_r']:+.2f}R avg ({tr['closed']} closed)", 5 if tr["avg_r"] > 0 else -5)
+        stt = c.get("states") or {}
+        w, d_, m = stt.get("W"), stt.get("D"), stt.get("M")
+        add(f"Weekly {w or 'n/a'}", 10 if w in ("Impulse", "Bullish") else 4 if w == "Bottoming" else -6 if w in ("Bearish", "Topping") else 0)
+        add(f"Daily {d_ or 'n/a'}", 6 if d_ in ("Impulse", "Bullish") else 3 if d_ == "Bottoming" else -3 if d_ == "Topping" else -4 if d_ == "Bearish" else 0)
+        if m:
+            add(f"Monthly {m}", 4 if m in ("Impulse", "Bullish") else -3 if m == "Topping" else -5 if m == "Bearish" else 0)
+        sg = strong.get(s)
+        if sg:
+            add(f"Strength rank {sg['rank']} of {len(strong)} (score {sg['score']})", sg["score"] * 0.15)
+            if sg.get("hi52") is not None and sg["hi52"] >= -5:
+                add("Within 5% of its 52-week high", 3)
+        ss = c.get("sector_stage")
+        if ss:
+            add(f"{c.get('sector')} sector {ss.lower()}", {"Leading": 8, "Improving": 5, "Weakening": -3, "Lagging": -6}.get(ss, 0))
+        L = lv.get(s) or {}
+        walls = sorted([(n, (L[k] / px - 1) * 100) for k, n in (("d200", "200 DMA"), ("w20", "20W EMA"), ("w50", "50W EMA"))
+                        if L.get(k) and 0 <= (L[k] / px - 1) * 100 <= 4], key=lambda x: x[1])
+        if L:
+            if walls:
+                add(f"{walls[0][0]} only {walls[0][1]:.1f}% above (resistance)", -8 if walls[0][1] <= 2 else -4)
+            else:
+                add("No 200 DMA / weekly EMA wall within 4%", 6)
+            if L.get("d200"):
+                add("Above the 200 DMA" if px > L["d200"] else "Below the 200 DMA", 3 if px > L["d200"] else -5)
+        f5 = five.get(s) or {}
+        if f5.get("oi5") is not None and f5.get("px5") is not None:
+            if f5["oi5"] >= 3 and f5["px5"] > 0:
+                add(f"Long build-up: futures OI {f5['oi5']:+.0f}% in 5 days", 5)
+            elif f5["oi5"] >= 3 and f5["px5"] < 0:
+                add(f"Short build-up: futures OI {f5['oi5']:+.0f}% as price fell", -5)
+        if s in fii_acc:
+            add("Institution-style buying (FII footprint)", 4)
+        u = unusual.get(s)
+        if u and u.get("bias") in ("Buying", "Selling"):
+            add(f"Unusual activity: {u['bias'].lower()}", 3 if u["bias"] == "Buying" else -4)
+        vk = c.get("vk")
+        if vk:
+            add(f"VK {vk.title()}", 4 if vk == "BUY NOW" else 2 if vk == "ALMOST READY (Bullish)" else -4 if "Bearish" in vk or vk == "SELL NOW" else 0)
+        if c.get("rr"):
+            add(f"Reward {c['rr']}x the risk", 3 if c["rr"] >= 2 else -2)
+        add(f"Risk {risk:.1f}% to the stop", 3 if risk <= 5 else 0 if risk <= 8 else -5)
+        if c.get("ext") is not None and c["ext"] > 4:
+            add(f"Stretched: {c['ext']} ranges above the 50 EMA", -4)
+        score = round(sum(x["p"] for x in chk), 1)
+        picks.append({**{k: c.get(k) for k in ("symbol", "setup", "stage", "grade", "close", "entry", "stop", "target", "rr",
+                                                 "target_word", "sector", "sector_stage", "states", "vk", "detail")},
+                      "risk_pct": round(risk, 1), "score": score, "checks": sorted([x for x in chk if x["p"]], key=lambda x: -x["p"]),
+                      "cautions": [x["t"] for x in chk if x["p"] < 0]})
+    best = {}
+    for p in sorted(picks, key=lambda x: -x["score"]):
+        best.setdefault(p["symbol"], p)                         # one setup per stock
+    top = list(best.values())[:5]
+    note = None
+    if weather is not None and weather < 45:
+        note = f"Weak market (weather {weather}): positional longs have lower odds; size down or wait."
+    try:                                                         # keep a daily record to check later how the picks did
+        day = now.strftime("%Y-%m-%d")
+        log = pd.read_csv(TOP_LOG) if os.path.exists(TOP_LOG) else pd.DataFrame(columns=["date"])
+        if not (log["date"].astype(str) == day).any() and top:
+            new = pd.DataFrame([{"date": day, "rank": i + 1, "symbol": p["symbol"], "setup": p["setup"], "score": p["score"],
+                                 "entry": p["entry"], "stop": p["stop"], "target": p["target"], "close": p["close"]} for i, p in enumerate(top)])
+            pd.concat([log, new], ignore_index=True).to_csv(TOP_LOG, index=False)
+    except Exception as ex:
+        print("site_data: top5 log skipped:", ex)
+    return {"picks": top, "considered": len(best), "weather": weather, "note": note, "at": now.strftime("%Y-%m-%d %H:%M")}
+
+
 # ---------------------------------------------------------------- build
 def run(now=None):
     global SECTORS
@@ -1054,6 +1165,10 @@ def run(now=None):
     lv = dict((eq or {}).get("levels") or {})
     lv.update(fo.get("levels") or {})
     out["levels"] = lv                                      # 200 DMA, 20/50 week EMA per stock
+    try:
+        out["top5"] = top5(fo, sj, uj, out, five, now)
+    except Exception as ex:
+        print("site_data: top5 failed:", ex)
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
     write_names()

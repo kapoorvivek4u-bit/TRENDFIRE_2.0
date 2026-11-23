@@ -259,7 +259,7 @@ function stripLevels(x) {
   return x;
 }
 async function memberData(env, ctx, name, r) {
-  const key = new Request(`https://tradeready.cache/member-v1/${name}`);
+  const key = new Request(`https://tradeready.cache/member-v2/${name}`);
   const hit = await caches.default.match(key);
   const head = { "content-type": "application/json", "cache-control": "private, max-age=60" };
   if (hit) return new Response(hit.body, { headers: head });
@@ -268,6 +268,7 @@ async function memberData(env, ctx, name, r) {
   const d = stripLevels(JSON.parse(txt));
   if (name === "site.json") {
     delete d.scorecard;                                          // the scorecard is for the admin only
+    delete d.top5;                                               // ranked picks with levels: full access only
     const gate = g => /size/i.test(g || "") ? "Open" : g;        // no position-size advice
     for (const st of d.strategies || []) { st.gate = gate(st.gate); delete st.exit; st.rules = (st.rules || []).filter(r => !/^Size:/i.test(r)).map(r => r.replace(/\s*\((full|half) size\)/gi, "")); }
     for (const g of Object.values(d.gates || {})) g.gate = gate(g.gate);
