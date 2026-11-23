@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-23 19:30",
+ "generated_ist": "2026-11-23 22:42",
  "oi_asof": "2026-11-23",
- "stocks": 218,
+ "stocks": 217,
  "market": {
   "weekly_bull_pct": 35,
   "monthly_bull_pct": 52,
@@ -27920,7 +27920,6 @@
    "AXISBANK",
    "BANKINDIA",
    "BLUESTARCO",
-   "COFORGE",
    "CUB",
    "DLF",
    "ICICIGI",
@@ -30411,22 +30410,6 @@
     "confirmed": "CONFIRMED \u2014 Buy ON"
    },
    {
-    "symbol": "COFORGE",
-    "close": 2142.3,
-    "states": {
-     "M": "Impulse",
-     "W": "Topping",
-     "D": "Bullish",
-     "H": "Impulse"
-    },
-    "signal": "ALL 3 ALIGNED BULLISH",
-    "ma": "ONLY BUY",
-    "advice": "PERFECT FOR CASH SWING TRADE \u2014 M+W+D bullish + Daily SQZ ON. Hold 2-4 weeks!",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON"
-   },
-   {
     "symbol": "CUB",
     "close": 245.54,
     "states": {
@@ -31300,7 +31283,9 @@
    }
   ]
  },
- "notes": [],
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ],
  "levels": {
   "360ONE": {
    "c": 1201.15,
@@ -31583,12 +31568,6 @@
    "d200": 1425.09,
    "w20": 1288.83,
    "w50": 1416.84
-  },
-  "COFORGE": {
-   "c": 2142.3,
-   "d200": 1568.22,
-   "w20": 1879.14,
-   "w50": 1713.82
   },
   "COLPAL": {
    "c": 1755.5,
