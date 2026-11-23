@@ -1,8 +1,7 @@
 name: Deals scan
 
 on:
-  schedule:
-    - cron: "30 13 * * 1-5"     # 19:00 IST, after NSE publishes the day's bulk and block deals
+  # Started by the site (worker.js runSchedule) on a fixed timetable; GitHub cron ran hours late.
   workflow_dispatch:
 
 permissions:

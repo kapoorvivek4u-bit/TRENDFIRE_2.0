@@ -10,5 +10,6 @@
   "vars": { "REPO": "kapoorvivek4u-bit/trendfire_2.0" },
   "kv_namespaces": [{ "binding": "USERS", "id": "a7d72d7ccec14ca4b0bc1dddf0c4489d" }],
   "d1_databases": [{ "binding": "DB", "database_name": "tradeready-stats", "database_id": "8803b20c-0101-4e98-beda-b4ad081b5954" }],
+  "triggers": { "crons": ["*/15 * * * *"] },
   "observability": { "enabled": true }
 }

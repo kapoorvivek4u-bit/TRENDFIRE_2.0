@@ -383,6 +383,34 @@ async function kiteReminder(env) {
     body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: "Good morning. Kite is not connected yet today.\nTap to connect: https://tradeready.in/kite/login" }) });
 }
 
+// ------------------------------------------------------------------ scan timetable
+// GitHub's own cron runs hours late or not at all at busy times, so the site starts the scans itself.
+// Cloudflare calls scheduled() every 15 minutes; times below are IST, weekdays only.
+const IST_DAY = t => new Date(t + 5.5 * 3600e3);
+const at = (h, m) => h * 60 + m;
+const TIMETABLE = {
+  "intraday.yml": m => m >= at(9, 15) && m <= at(15, 30),
+  "scan.yml":     m => [at(10, 15), at(11, 15), at(12, 15), at(13, 15), at(14, 15), at(15, 15), at(16, 15), at(19, 30)].includes(m),
+  "unusual.yml":  m => [at(10, 30), at(11, 30), at(12, 30), at(13, 30), at(14, 30), at(15, 30), at(16, 30), at(19, 45)].includes(m),
+  "sector.yml":   m => m === at(16, 45),
+  "deals.yml":    m => m === at(19, 0),
+  "equity.yml":   m => m === at(19, 45),
+};
+async function runSchedule(env, when) {
+  const d = IST_DAY(when || Date.now());
+  const wd = d.getUTCDay(), m = Math.round((d.getUTCHours() * 60 + d.getUTCMinutes()) / 15) * 15;
+  const jobs = [];
+  if (wd !== 0 && wd !== 6) {
+    if (m === at(8, 45)) jobs.push(kiteReminder(env));
+    if (env.GH_TOKEN) for (const [wf, due] of Object.entries(TIMETABLE)) {
+      if (!due(m)) continue;
+      jobs.push(gh(env, "POST", `/actions/workflows/${wf}/dispatches`, { ref: "main" })
+        .then(([code]) => console.log("dispatch", wf, code)).catch(e => console.log("dispatch failed", wf, e.message)));
+    }
+  }
+  await Promise.all(jobs);
+}
+
 // pages and files anyone may open without signing in
 const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favicon.svg", "/apple-touch-icon.png",
   "/icon-192.png", "/icon-512.png", "/manifest.webmanifest", "/robots.txt",
@@ -426,7 +454,7 @@ async function api(req, env, url, user) {
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(kiteReminder(env));
+    ctx.waitUntil(runSchedule(env, event.scheduledTime));
   },
   async fetch(req, env, ctx) {
     const url = new URL(req.url), p = url.pathname;

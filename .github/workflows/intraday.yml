@@ -3,8 +3,7 @@ name: Intraday scan
 # Every 15 minutes in market hours (IST 9:15-15:30 = UTC 3:45-10:00). The script itself
 # skips weekends and times outside the session. Results go to the site, not to this repo.
 on:
-  schedule:
-    - cron: "*/15 3-10 * * 1-5"
+  # Started by the site (worker.js runSchedule) on a fixed timetable; GitHub cron ran hours late.
   workflow_dispatch:
     inputs:
       force:
