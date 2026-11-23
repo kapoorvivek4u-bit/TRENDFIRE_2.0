@@ -8,11 +8,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ANGELONE": {
+  "APLAPOLLO": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "APLAPOLLO": {
+  "BOSCHLTD": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -28,15 +28,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "GAIL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "GLENMARK": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "INDIGO": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "KALYANKJIL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -56,11 +52,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "PAYTM": {
+  "NAVINFLUOR": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "PRESTIGE": {
+  "PAYTM": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -572,6 +568,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "ANGELONE": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "APOLLOHOSP": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -589,10 +589,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "BHEL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "BOSCHLTD": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -620,10 +616,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "GAIL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "HEROMOTOCO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -644,9 +636,17 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "INDIGO": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "JSWSTEEL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "KALYANKJIL": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "KOTAKBANK": {
    "final": "BUY NOW",
@@ -654,7 +654,7 @@
   },
   "LODHA": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MAHABANK": {
    "final": "BUY NOW",
@@ -669,10 +669,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MOTHERSON": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "NAVINFLUOR": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -708,6 +704,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "PRESTIGE": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "RADICO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -734,7 +734,7 @@
   },
   "ZYDUSLIFE": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "AMBUJACEM": {
    "final": "COMING CLOSE TO READY (Bearish)",
@@ -800,11 +800,11 @@
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "LTM": {
+  "KPITTECH": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "PAGEIND": {
+  "LTM": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -824,9 +824,9 @@
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "KPITTECH": {
+  "PAGEIND": {
    "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
+   "confirmed": "Not confirmed"
   },
   "PIIND": {
    "final": "SELL NOW",
