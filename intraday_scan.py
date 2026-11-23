@@ -72,9 +72,12 @@ def option_chain(nse, symbol, kind="Indices", near=8):
     exps = (info or {}).get("expiryDates") or []
     if not exps:
         return None
-    exp = exps[0]
-    j = nse.get(f"option-chain-v3?type={kind}&symbol={requests.utils.quote(symbol)}&expiry={exp}")
-    rows = ((j or {}).get("records") or {}).get("data") or []
+    rows = []
+    for exp in exps[:2]:                              # on expiry day after the close, the next expiry
+        j = nse.get(f"option-chain-v3?type={kind}&symbol={requests.utils.quote(symbol)}&expiry={exp}")
+        rows = ((j or {}).get("records") or {}).get("data") or []
+        if rows and any((d.get("CE") or {}).get("openInterest") for d in rows):
+            break
     if not rows:
         return None
     spot = None

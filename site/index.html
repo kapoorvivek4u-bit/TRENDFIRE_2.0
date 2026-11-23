@@ -483,6 +483,10 @@ a.tbtn{color:var(--ink)}
 .installhint button{font-size:16px;color:var(--muted);padding:6px}
 @media (min-width:960px){.installhint{display:none}}
 @media (display-mode: standalone){.top{padding-top:calc(12px + env(safe-area-inset-top,0px))}}
+.ich{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:7px}
+.ich b{color:var(--ink);font-family:var(--f-num)}
+table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.ocbar{display:flex;min-width:90px}.ocbar i{display:block;height:9px;border-radius:3px;opacity:.7}
 </style>
 </head>
 <body>
@@ -593,6 +597,7 @@ function miniChart(ch){
 
 /* ============================================================ icons */
 const I = {
+  bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>',
   today:'<path d="M3 12l9-8 9 8M5 10v10h14V10"/>',
   scanner:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/>',
   index:'<path d="M3 17l5-6 4 3 5-7 4 4"/><path d="M3 21h18"/>',
@@ -621,7 +626,7 @@ const PAGES = [
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["admin","Admin","users",[["admin","Users"],["admin-scorecard","Scorecard"]]]] : []);
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-scorecard","Scorecard"]]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
 function subnav(){
@@ -1608,11 +1613,101 @@ async function pageAdmin(){
     <p class="foot-note">Your own visits as admin are not counted. Visits count at most once an hour per person. Page views and logins are kept for 120 days. People stay signed in for 30 days, so closing the site does not sign them out.</p>`;
 }
 
+
+/* ============================================================ intraday + BTST (admin only) */
+let INTRA = null, INTRA_AT = 0, INTRA_TIMER = null;
+async function intraLoad(force){
+  if(!force && INTRA && Date.now() - INTRA_AT < 60e3) return INTRA;
+  try{ const r = await fetch("/api/intraday", {cache:"no-store"}); INTRA = await r.json(); INTRA_AT = Date.now(); }
+  catch(e){ INTRA = INTRA || {error:"Could not reach the server."}; }
+  return INTRA;
+}
+const IQ = {long:["Long build-up","var(--up)"], short:["Short build-up","var(--down)"], cover:["Short covering","var(--info)"], unwind:["Long unwinding","var(--warn)"]};
+function intraChainMini(c){
+  if(!c) return "";
+  return `<div class="ich"><span>PCR <b>${c.pcr ?? "—"}</b></span><span>Call wall <b class="down">${c.res && c.res[0] ? fmt(c.res[0].k, 0) : "—"}</b></span><span>Put base <b class="up">${c.sup && c.sup[0] ? fmt(c.sup[0].k, 0) : "—"}</b></span><span>Max pain <b>${fmt(c.max_pain, 0)}</b></span><span>Move <b>±${c.move_pct ?? "—"}%</b></span></div>`;
+}
+function intraCard(x, side, chains){
+  const L = side === "L" || side === "BL", tags = side === "L" ? x.tl : side === "S" ? x.ts : side === "BL" ? x.btl : x.bts;
+  const sc = side === "L" ? x.L : side === "S" ? x.S : side === "BL" ? x.bl : x.bs;
+  const c = L ? "var(--up)" : "var(--down)";
+  return `<article class="sc" style="--stc:${c}">
+    <div class="row1"><div class="symrow">${symLink(x.s)}<span class="px">${fmt(x.c)}</span><b class="num ${cls(x.chg)}" style="font-size:12.5px">${pct(x.chg, 2)}</b></div>
+      <span class="grade" style="background:color-mix(in srgb,${c} 16%,transparent);color:${c}" title="Score">${sc}</span></div>
+    <div class="chips">${x.sec ? chip(x.sec) : ""}${x.res ? chip("Results " + x.res, "var(--warn)") : ""}${x.oi != null ? chip(`OI ${pct(x.oi)}`, x.oi > 0 ? "var(--accent2)" : "var(--muted)") : ""}${x.rvol ? chip(`Vol ${x.rvol}x`, x.rvol >= 1.5 ? "var(--accent2)" : "var(--muted)") : ""}</div>
+    ${x.spark && x.spark.length > 3 ? `<div style="height:40px;overflow:hidden;position:relative">${spark(x.spark.filter(v => v != null), {h:40, color:c})}</div>` : ""}
+    <div class="checks">${(tags || []).map(t => `<div>${esc(t)}</div>`).join("")}</div>
+    <div class="lv"><div><small>VWAP</small><b>${fmt(x.vwap)}</b></div><div><small>30-min range</small><b>${fmt(x.orl)}–${fmt(x.orh)}</b></div><div><small>Day</small><b>${fmt(x.lo)}–${fmt(x.hi)}</b></div></div>
+    ${intraChainMini(chains[x.s])}
+  </article>`;
+}
+function intraIndex(k, x, c){
+  if(!x) return "";
+  return `<section class="card fade"><div class="ct"><h2>${k === "NIFTY" ? "Nifty 50" : "Bank Nifty"}<em>${c ? "expiry " + esc(c.expiry) : ""}</em></h2><b class="num ${cls(x.chg)}">${pct(x.chg, 2)}</b></div>
+    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><b class="num" style="font-size:28px;letter-spacing:-.03em">${fmt(x.c)}</b>
+      <span class="muted" style="font-size:12px">Day ${fmt(x.lo)}–${fmt(x.hi)} · 30-min ${fmt(x.orl)}–${fmt(x.orh)} ${x.orb === 1 ? "· above range" : x.orb === -1 ? "· below range" : "· inside range"}</span></div>
+    ${x.spark && x.spark.length > 3 ? `<div style="height:56px;margin:8px 0 12px;overflow:hidden;position:relative">${spark(x.spark.filter(v => v != null), {h:56, color: x.chg >= 0 ? "var(--up)" : "var(--down)"})}</div>` : ""}
+    ${c ? `${intraChainMini(c)}<div class="detail" style="margin-top:8px">${esc(c.read)}</div>
+      <div class="kv" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px">
+        <div><small>Calls added today</small><b style="font-size:13px">${(c.ce_add || []).map(a => fmt(a.k, 0)).join(" · ") || "—"}</b></div>
+        <div><small>Puts added today</small><b style="font-size:13px">${(c.pe_add || []).map(a => fmt(a.k, 0)).join(" · ") || "—"}</b></div></div>` : `<div class="muted" style="font-size:12px;margin-top:8px">Option chain not available this run.</div>`}
+  </section>`;
+}
+function intraChainTable(c){
+  const mx = Math.max(1, ...c.rows.map(r => Math.max(r.ce_oi, r.pe_oi)));
+  const bar = (v, col, right) => `<span class="ocbar" style="justify-content:${right ? "flex-start" : "flex-end"}"><i style="width:${v / mx * 100}%;background:${col}"></i></span>`;
+  return `<section class="card fade"><div class="ct"><h2>${esc(c.symbol)} option chain<em>${esc(c.expiry)} · spot ${fmt(c.spot)}</em></h2></div>
+    ${intraChainMini(c)}<div class="detail" style="margin:8px 0">${esc(c.read)}</div>
+    <div class="tw"><table class="t oc"><tr><th class="n">Call OI chg</th><th>Call OI</th><th class="n">Call LTP</th><th class="n">Strike</th><th class="n">Put LTP</th><th>Put OI</th><th class="n">Put OI chg</th></tr>
+    ${c.rows.map(r => `<tr class="${r.k === c.atm ? "atm" : ""}"><td class="n ${cls(r.ce_chg)}">${fmt(r.ce_chg / 1e3, 1)}k</td><td>${bar(r.ce_oi, "var(--down)")}</td><td class="n">${fmt(r.ce_ltp)}</td>
+      <td class="n"><b>${fmt(r.k, 0)}</b></td><td class="n">${fmt(r.pe_ltp)}</td><td>${bar(r.pe_oi, "var(--up)", true)}</td><td class="n ${cls(r.pe_chg)}">${fmt(r.pe_chg / 1e3, 1)}k</td></tr>`).join("")}</table></div></section>`;
+}
+async function pageIntraday(){
+  if(!isAdmin()) return pageHead("Intraday", "") + `<div class="empty">Admin only.</div>`;
+  if(!INTRA_TIMER) INTRA_TIMER = setInterval(async () => { if(route() === "intraday" && document.visibilityState === "visible"){ await intraLoad(true); rerender(); } }, 120e3);
+  const res = await intraLoad();
+  const d = res && res.latest;
+  if(!d) return pageHead("Intraday & BTST", "") + `<div class="empty">${esc((res && res.error) || "No intraday scan yet. It runs every 15 minutes from 9:15 am on trading days.")}</div>`;
+  const today = istDay(Date.now()), live = d.session === today;
+  const tab = UI.itab || "long", chains = d.chains || {};
+  const tabs = [["long", `Long · ${d.longs.length}`], ["short", `Short · ${d.shorts.length}`], ["btst", `BTST · ${d.btst.length}`], ["stbt", `STBT · ${d.stbt.length}`], ["oi", "OI build-up"], ["chain", "Option chains"]];
+  let body = "";
+  if(tab === "long") body = `<div class="cards">${d.longs.map(x => intraCard(x, "L", chains)).join("")}</div>`;
+  if(tab === "short") body = `<div class="cards">${d.shorts.map(x => intraCard(x, "S", chains)).join("")}</div>`;
+  if(tab === "btst" || tab === "stbt"){
+    const L = tab === "btst", list = L ? d.btst : d.stbt;
+    const past = (res.past || []).find(p => p.session < d.session);
+    const review = past ? `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>${L ? "BTST" : "STBT"} from ${esc(past.session)}<em>how they did since</em></h2></div>
+      ${(L ? past.btst : past.stbt).map(p => { const now = (d.prices || {})[p.s], ch = now && p.c ? (now / p.c - 1) * 100 * (L ? 1 : -1) : null;
+        return `<div class="mv"><span>${symLink(p.s, 14)} <span class="muted">at ${fmt(p.c)} · score ${p.score}</span></span><b class="${cls(ch)}">${ch == null ? "—" : pct(ch, 2)}</b></div>`; }).join("") || `<div class="muted">None that day.</div>`}
+      <div class="muted" style="font-size:11.5px;margin-top:6px">${L ? "Gain" : "Gain on the short"} from that day's close to the latest price.</div></section>` : "";
+    body = `<div class="muted" style="font-size:12.5px;margin-bottom:10px">${d.final ? "Final list for today (after 3:10 pm)." : "Early read. The list firms up after 3 pm; the final one is saved at 3:10 pm."} Stocks with results due are left out.</div>
+      <div class="cards">${list.map(x => intraCard(x, L ? "BL" : "BS", chains)).join("") || `<div class="empty">Nothing scores 5 or more yet.</div>`}</div>${review}`;
+  }
+  if(tab === "oi") body = `<div class="muted" style="font-size:12.5px;margin-bottom:10px">Today's change in total F&amp;O open interest per stock (NSE, ${esc(d.oi_time || "")}) against today's price move.</div>
+    <div class="cards">${Object.keys(IQ).map(k => `<section class="card"><div class="ct"><h2 style="color:${IQ[k][1]}">${IQ[k][0]}<em>${(d.board[k] || []).length}</em></h2></div>
+      ${(d.board[k] || []).map(r => `<div class="mv"><span>${symLink(r.s, 14)} <span class="muted" style="font-size:11.5px">${esc(r.sec || "")}</span></span><span class="num"><span class="muted">OI ${pct(r.oi)}</span> <b class="${cls(r.chg)}">${pct(r.chg, 2)}</b></span></div>`).join("") || `<div class="muted">None</div>`}</section>`).join("")}</div>`;
+  if(tab === "chain"){
+    const keys = Object.keys(chains), pick = keys.includes(UI.ich) ? UI.ich : keys[0];
+    body = keys.length ? `<div class="filters">${keys.map(k => `<button data-ich="${esc(k)}" class="${k === pick ? "on" : ""}">${esc(k)}</button>`).join("")}</div>${intraChainTable(chains[pick])}` : `<div class="empty">No option chains this run.</div>`;
+  }
+  const b = d.breadth || {};
+  return pageHead("Intraday & BTST", `${live ? "Today" : "Last session " + esc(d.session)} · scan ${esc(d.at)} IST · candles a few minutes late · refreshes every 2 min`) +
+    (live ? "" : `<div class="empty" style="margin-bottom:12px;text-align:left">Market closed: showing the last session. The scan restarts at 9:15 am on the next trading day.</div>`) +
+    `<div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:14px">
+      <div><small>F&amp;O up / down</small><b><span class="up">${b.up ?? "—"}</span> / <span class="down">${b.down ?? "—"}</span></b></div>
+      <div><small>Above VWAP</small><b>${b.above_vwap ?? "—"} of ${b.n ?? "—"}</b></div>
+      <div><small>Nifty</small><b class="${cls((d.index.NIFTY || {}).chg)}">${pct((d.index.NIFTY || {}).chg, 2)}</b></div>
+      <div><small>Bank Nifty</small><b class="${cls((d.index.BANKNIFTY || {}).chg)}">${pct((d.index.BANKNIFTY || {}).chg, 2)}</b></div></div>
+    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));margin-bottom:16px">${intraIndex("NIFTY", d.index.NIFTY, chains.NIFTY)}${intraIndex("BANKNIFTY", d.index.BANKNIFTY, chains.BANKNIFTY)}</div>
+    <nav class="subnav">${tabs.map(([k, t]) => `<button data-itab="${k}" class="${tab === k ? "on" : ""}">${t}</button>`).join("")}</nav>${body}`;
+}
+
 /* ============================================================ render + events */
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin};
+  "market-deals":pageDeals, "market-stars":pageStars, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -1623,7 +1718,7 @@ async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const adminOnly = r === "watchlist" || r.startsWith("admin") || r.endsWith("scorecard");   // the scorecard is for the admin only
+  const adminOnly = r === "watchlist" || r === "intraday" || r.startsWith("admin") || r.endsWith("scorecard");   // the scorecard is for the admin only
   const fn = (adminOnly && !isAdmin()) ? pageDashboard : (VIEWS[r] || pageDashboard);
   let html;
   const need = (NEEDS[r] || []).filter(f => !CACHE[f]);
@@ -1664,6 +1759,8 @@ document.addEventListener("click", e => {
   if(d.star){ e.preventDefault(); return toggleStar(d.star); }
   if(d.strong){ UI.strong = d.strong; return rerender(); }
   if(d.trm){ UI.trMarket = d.trm; return rerender(); }
+  if(d.itab){ UI.itab = d.itab; return rerender(); }
+  if(d.ich){ UI.ich = d.ich; return rerender(); }
   if(d.sm){ UI.strongMarket = d.sm; return rerender(); }
   if(d.more){ UI.more = true; return rerender(); }
   if(d.setup != null && b.tagName === "A"){ UI.setup.fo = d.setup; return; }
