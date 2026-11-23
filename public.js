@@ -252,7 +252,14 @@ ${body}
 </html>`;
 }
 
-export function renderPublic(s, sj) {
+export function renderPublic(s, sj, live) {
+  // During the day, the 15-minute scan's prices replace last session's movers and advance/decline.
+  const todayIST = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
+  if (live && live.session === todayIST && (live.rows || []).length) {
+    const rows = live.rows.filter(r => r[2] != null).map(([symbol, close, chg, sector]) => ({ symbol, close, chg, sector: sector || "" }));
+    s = { ...s, market: { ...(s.market || {}), adv: rows.filter(r => r.chg > 0).length, dec: rows.filter(r => r.chg <= 0).length },
+          gainers: rows.slice().sort((a, b) => b.chg - a.chg).slice(0, 8), losers: rows.slice().sort((a, b) => a.chg - b.chg).slice(0, 8), _live: live.at };
+  }
   const st = s.strength || {}, m = s.market || {};
   const [kind, word] = WX(st.score ?? 50);
   const gen = s.generated_ist || "";
@@ -354,7 +361,7 @@ export function renderPublic(s, sj) {
   </section>
 
   <section class="blk">
-    <div class="sh"><h2>Movers and heads-up</h2><p>Biggest F&amp;O moves of the day, stocks in the F&amp;O ban, and results coming up.</p></div>
+    <div class="sh"><h2>Movers and heads-up</h2><p>Biggest F&amp;O moves ${s._live ? `today (live ${esc(String(s._live).slice(-5))}, a few minutes late)` : "of the last session"}, stocks in the F&amp;O ban, and results coming up.</p></div>
     <div class="heads">
       <div class="oib" style="--c:var(--up)"><div class="oih"><b>Top gainers</b><span>F&amp;O</span></div>${mover(s.gainers)}</div>
       <div class="oib" style="--c:var(--down)"><div class="oih"><b>Top losers</b><span>F&amp;O</span></div>${mover(s.losers)}</div>
@@ -402,7 +409,9 @@ export async function publicPage(env, ctx) {
     .then(r => r.ok ? r.json() : null).catch(() => null);
   const [s, sj] = await Promise.all([get("site.json"), get("sectors.json")]);
   if (!s) return null;
-  const html = renderPublic(s, sj);
+  let live = null;
+  try { live = env.USERS ? await env.USERS.get("live:latest", "json") : null; } catch (e) {}
+  const html = renderPublic(s, sj, live);
   const put = caches.default.put(key, new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=300" } }));
   ctx && ctx.waitUntil ? ctx.waitUntil(put) : await put;
   return out(html);

@@ -795,6 +795,7 @@ function renderShell(){
 /* ============================================================ shared cards */
 function levels(entry, stop, target, word="Buy above", tword){
   if(!FULL() || (!entry && !stop)) return "";
+  if(!entry) return `<div class="lv"><div style="grid-column:span 2"><small>${esc(word)}</small><b class="muted" style="font-size:12px">Waits for a trigger</b></div><div><small>Stop</small><b class="down">${fmt(stop)}</b></div></div>`;
   if(!target && entry && stop && entry > stop) target = entry + 2*(entry - stop);
   return `<div class="lv"><div><small>${esc(word)}</small><b>${fmt(entry)}</b></div><div><small>Stop</small><b class="down">${stop ? fmt(stop) : "on breakout"}</b></div><div><small>${esc(tword || "Target 2R")}</small><b class="up">${fmt(target)}</b></div></div>`;
 }
@@ -959,7 +960,7 @@ function moneyCard(){
   const boxes = q ? `<div class="quad">${q.boxes.map(b => `<div class="q" style="--c:${C[b.key]}"><h3><span>${esc(b.name)}</span><b>${b.count}</b></h3><div class="hint">${H[b.key]}</div>
       <ol>${b.top.slice(0,4).map(t => `<li><span>${esc(t.symbol)}</span><span>OI ${pct(t.oi,0)}</span></li>`).join("")}</ol></div>`).join("")}</div>` : "";
   const bu = S().buildup || {}, sq = (S().squeeze || []).filter(x => /on|trapped/i.test(x.stage));
-  return `<section class="card s6 fade"><div class="ct"><h2>Big money<em>${esc(q ? q.date.slice(5) : "")}</em></h2><a class="more" href="#market-unusual">Unusual ›</a></div>
+  return `<section class="card s6 fade"><div class="ct"><h2>Big money<em>${q ? "OI · " + esc(new Date(q.date + "T00:00:00").toLocaleDateString("en-IN", {day:"numeric", month:"short"})) : ""}</em></h2><a class="more" href="#market-unusual">Unusual ›</a></div>
     ${boxes}
     ${(bu.building||[]).length ? `<div class="sub-h">Big positions building · flat price</div><div class="chips">${bu.building.map(x => chip(`${x.symbol} OI ${pct(x.oi,0)}`, "var(--warn)")).join("")}${(bu.starting||[]).slice(0,4).map(x => chip(x.symbol + " starting")).join("")}</div>` : ""}
     ${sq.length ? `<div class="sub-h">Short squeeze watch</div><div class="chips">${sq.slice(0,6).map(x => chip(`${x.symbol} · ${x.stage}`, x.stage === "Squeeze on" ? "var(--up)" : "var(--info)")).join("")}</div>` : ""}</section>`;
@@ -996,7 +997,7 @@ function watchCard(){
   const n = items.filter(w => ready.has(w.symbol)).length;
   return `<section class="card fade"><div class="ct"><h2>Watchlist<em>${WATCH.length} · ${n} ready</em></h2><a class="more" href="#watchlist">Open ›</a></div>
     <div class="wl">${items.map(w => `<a class="${ready.has(w.symbol) ? "rdy" : ""}" href="${tv(w.symbol)}" target="_blank" rel="noopener" title="${esc(w.note || "")}">
-      <b>${esc(w.symbol)}</b><span>${S().closes[w.symbol] ? fmt(S().closes[w.symbol]) : "Equity"}</span>${ready.has(w.symbol) ? "<em>READY</em>" : ""}</a>`).join("")}</div></section>`;
+      <b>${esc(w.symbol)}</b><span>${livePx(w.symbol) ? `<span class="${cls(livePx(w.symbol).chg)}">${fmt(livePx(w.symbol).close)} ${pct(livePx(w.symbol).chg, 1)}</span>` : S().closes[w.symbol] ? fmt(S().closes[w.symbol]) : "Equity"}</span>${ready.has(w.symbol) ? "<em>READY</em>" : ""}</a>`).join("")}</div></section>`;
 }
 function greet(){ const h = +new Date().toLocaleString("en-US", {hour:"numeric", hour12:false, timeZone:"Asia/Kolkata"});
   return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"; }
@@ -1026,7 +1027,7 @@ function bellStrip(){
   else if(mins < open){ const left = open - mins; c = "var(--warn)"; a = "Opening bell in"; b = left >= 60 ? `${Math.floor(left/60)}h ${left%60}m` : `${left} min`;
     sub = `${plural((s.picks||[]).length, FULL() ? "trade" : "setup")} ${FULL() ? "on the list" : "passing every rule"} · ${s.ready_count} setups Ready`; }
   else if(mins <= close){ c = "var(--up)"; a = "Market open"; b = last; sub = `Last scan ${last} · refreshes about every hour · ${s.ready_count} setups Ready`; }
-  else { c = "var(--accent2)"; a = "Closing bell recap"; b = "3:30"; sub = `${(s.picks||[]).length} trades passed every rule · ${s.market.adv} up, ${s.market.dec} down · breadth ${hist.slice(-1)[0] ?? "—"}%`; }
+  else { c = "var(--accent2)"; a = "Closing bell recap"; b = "3:30"; sub = `${plural((s.picks||[]).length, "trade")} passed every rule · ${s.market.adv} up, ${s.market.dec} down · breadth ${hist.slice(-1)[0] ?? "—"}%`; }
   const rib = hist.map((v,i) => `<i style="height:${Math.max(6, v/100*26)}px;--c:${v >= 70 ? "var(--up)" : v >= 40 ? "var(--warn)" : "var(--down)"};animation-delay:${i*70}ms" title="Daily breadth ${v}%"></i>`).join("");
   const kiteChip = (KITE && !KITE.connected && !weekend) ? `<a href="/kite/login" class="count" style="--c:var(--down);text-decoration:none">Kite not connected · Connect ›</a>` : "";
   return `<section class="bell" aria-label="Market clock"><div class="state">${kiteChip}<span class="bdot" style="--c:${c}"></span>${a} <span class="count" style="--c:${c}">${esc(b)}</span><span class="bsub">${esc(sub)}</span></div>
@@ -1368,15 +1369,15 @@ async function pageIndex(){
     <section class="card s6 fade"><div class="ct"><h2>Futures OI</h2>${fr.price ? `<span class="num muted" style="font-size:12px">Fut ${fmt(fr.price)}</span>` : ""}</div>
       <div class="kv">${futBox(fr.day)}${futBox(fr.week)}</div>
       ${(fr.pcr_hist || []).length > 1 ? `<div class="sub-h">PCR, last ${fr.pcr_hist.length} sessions</div><div style="display:flex;align-items:center;gap:12px"><div style="flex:1">${spark(fr.pcr_hist, {h:40, color:"var(--accent2)"})}</div><b class="num">${fr.pcr_hist[fr.pcr_hist.length-1]}</b></div>` : ""}</section>
-    <section class="card s6 fade"><div class="ct"><h2>Options<em>${esc(op.expiry || "")}</em></h2></div>
+    <section class="card s6 fade"><div class="ct"><h2>Options<em>${op.expiry ? "expiry " + esc(op.expiry) + " · " : ""}data ${esc(ij.oi_asof || "")}</em></h2></div>
       <div class="kv"><div><small>Spot</small><b>${fmt(op.spot)}</b></div><div><small>PCR</small><b class="${op.pcr >= 1 ? "up" : "down"}">${op.pcr ?? "—"}</b></div>
         <div><small>Max pain</small><b>${fmt(op.max_pain, 0)}</b></div><div><small>Range</small><b style="font-size:13px">${fmt((op.support||[{}])[0].strike, 0)} – ${fmt((op.resistance||[{}])[0].strike, 0)}</b></div></div>
       <div class="two" style="margin-top:12px"><div><div class="sub-h" style="margin-top:0">Resistance (calls)</div>${strikeList(op.resistance, "var(--down)")}</div><div><div class="sub-h" style="margin-top:0">Support (puts)</div>${strikeList(op.support, "var(--up)")}</div></div>
-      ${(op.new_oi || []).length ? `<div class="sub-h">Fresh OI today</div><div class="chips">${op.new_oi.map(n => chip(`${fmt(n.strike,0)} ${n.type} +${fmt(n.chg_oi/1e5,1)} L`, n.type === "PE" ? "var(--up)" : "var(--down)")).join("")}</div>` : ""}</section>
+      ${(op.new_oi || []).length ? `<div class="sub-h">Fresh OI · ${esc(ij.oi_asof || "last session")}</div><div class="chips">${op.new_oi.map(n => chip(`${fmt(n.strike,0)} ${n.type} +${fmt(n.chg_oi/1e5,1)} L`, n.type === "PE" ? "var(--up)" : "var(--down)")).join("")}</div>` : ""}</section>
     ${ladder.length ? `<section class="card s6 fade"><div class="ct"><h2>OI by strike</h2><span class="muted" style="font-size:11.5px"><span class="down">Calls</span> · <span class="up">Puts</span></span></div>
       <div class="ladder">${ladder.map(l => `<div class="lad"><span class="ce"><i style="width:${100*l.ce/lmx}%"></i></span><span class="s ${l.strike === atm ? "atm" : ""}">${fmt(l.strike,0)}</span><span class="pe"><i style="width:${100*l.pe/lmx}%"></i></span></div>`).join("")}</div></section>` : ""}
     <section class="card s6 fade"><div class="ct"><h2>Heavyweights<em>${(x.board||[]).length}</em></h2></div>
-      <div class="tw"><table class="t"><tr><th>Stock</th><th>VK</th><th>Setup</th><th>OI today</th></tr>
+      <div class="tw"><table class="t"><tr><th>Stock</th><th>VK</th><th>Setup</th><th>OI · ${esc(ij.oi_asof || "last session")}</th></tr>
       ${(x.board || []).slice(0, 30).map(b => `<tr><td><a class="num" style="font-weight:700" href="${tv(b.symbol)}" target="_blank" rel="noopener">${esc(b.symbol)}</a></td><td>${vkChip(b.vk) || '<span class="muted">—</span>'}</td>
         <td style="font-size:12px">${esc(b.setup || "—")}${b.grade ? ` · ${esc(b.grade)}` : ""}</td><td>${b.oi ? chip(b.oi.word, b.oi.side > 0 ? "var(--up)" : b.oi.side < 0 ? "var(--down)" : "var(--warn)") : ""}</td></tr>`).join("")}</table></div></section>
     ${(x.setups || []).length ? `<section class="card fade"><div class="ct"><h2>Index setups</h2></div><div class="cards">${x.setups.map(r => setupCard({...r, symbol: r.symbol || x.name})).join("")}</div></section>` : ""}
@@ -1526,7 +1527,7 @@ async function pageWatchlist(){
   const sec = (CACHE["sectors.json"] || {}).map || {};
   const item = w => { const b = briefs[w.symbol], t = sec[w.symbol];
     return `<article class="sc wlc" style="--stc:${b.best === 0 ? "var(--up)" : b.best === 2 ? "var(--warn)" : "transparent"}">
-      <div class="row1"><div class="symrow">${symLink(w.symbol, 17)}<span class="px">${b.market || "Not scanned"}${b.close ? " · " + fmt(b.close) : ""}</span></div>
+      <div class="row1"><div class="symrow">${symLink(w.symbol, 17)}<span class="px">${b.market || "Not scanned"}${b.close ? " · " + fmt(b.close) : ""}</span>${liveTag(w.symbol)}</div>
         <a class="more" href="#search" data-go="${esc(w.symbol)}" style="font-size:12px;font-weight:700;color:var(--accent)">Details ›</a></div>
       <div class="chips">${b.rows.slice(0,3).map(r => chip(`${r.setup} · ${r.stage} · ${r.grade}`, SETUP_STAGE_C[r.stage])).join("")}${!b.rows.length && b.other ? chip(b.other) : ""}${b.vk ? vkChip(b.vk.final) : ""}${b.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${t ? chip(`${t.sector} · ${t.stage}`, STAGE_C[t.stage]) : ""}</div>
       ${b.rows[0] && (b.rows[0].trigger || b.rows[0].stop) ? levels(b.rows[0].trigger, b.rows[0].stop, b.rows[0].target, b.rows[0].stage === "Watch" ? "Above" : "Buy above") : ""}
@@ -1614,11 +1615,11 @@ async function pageAdmin(){
   if(d.error) return pageHead("Admin", "Who signed in", `<a class="btn2" href="/logout">${ico("logout")} Sign out</a>`) + `<div class="empty">${esc(d.error)}</div>`;
   const users = (d.users || []).filter(u => u.role !== "admin"), today = istDay(Date.now());
   const byEmail = Object.fromEntries(users.map(u => [u.email.toLowerCase(), u]));
-  const hasStats = !st.error, online = hasStats ? st.online : [], todayUsers = hasStats ? st.today_users : users.filter(u => istDay(Date.parse(u.seen || 0)) === today).map(u => ({email:u.email.toLowerCase(), last:Date.parse(u.seen)}));
+  const hasStats = !st.error && Array.isArray(st.online), online = hasStats ? st.online : [], todayUsers = hasStats ? (st.today_users || []) : users.filter(u => istDay(Date.parse(u.seen || 0)) === today).map(u => ({email:u.email.toLowerCase(), last:Date.parse(u.seen)}));
   const week = users.filter(u => Date.now() - Date.parse(u.seen || u.last || 0) < 7*864e5).length;
   const signups = {}; users.forEach(u => { if(u.first){ const k = istDay(Date.parse(u.first)); signups[k] = (signups[k] || 0) + 1; } });
   const newWeek = users.filter(u => Date.now() - Date.parse(u.first || 0) < 7*864e5).length;
-  const top = {}; (hasStats ? st.per_user : []).forEach(r => { (top[r.email] = top[r.email] || []).push(r); });
+  const top = {}; (hasStats ? (st.per_user || []) : []).forEach(r => { (top[r.email] = top[r.email] || []).push(r); });
   const k = KITE || {};
   const kiteCard = `<section class="card fade" style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
     <div><div class="ct" style="margin:0 0 6px"><h2>Kite Connect</h2></div>
@@ -1632,7 +1633,7 @@ async function pageAdmin(){
     ${!hasStats ? noDb : online.length ? online.map(o => person(o.email, `<div style="text-align:right;font-size:12px"><b>${esc(pageLabel(o.page || ""))}</b><div class="muted">${esc(o.device || "")}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody right now. Online means the site is open on their screen, checked every 2 minutes.</div>`}</section>`;
   const todayCard = `<section class="card fade"><div class="ct"><h2>Opened today<em>${todayUsers.length}</em></h2></div>
     ${todayUsers.length ? todayUsers.map(t => person(t.email, `<div style="text-align:right;font-size:12px;white-space:nowrap">${t.views ? `<b>${t.views} pages</b>` : ""}<div class="muted">last ${ago(new Date(t.last).toISOString())}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody yet today.</div>`}</section>`;
-  const pages = hasStats ? st.pages : [], pmax = Math.max(1, ...pages.map(p => p.views));
+  const pages = hasStats ? (st.pages || []) : [], pmax = Math.max(1, ...pages.map(p => p.views));
   const pagesCard = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>Popular pages<em>last 30 days</em></h2></div>
     ${!hasStats ? noDb : pages.length ? `<div class="tw"><table class="t"><tr><th>Page</th><th style="width:45%"></th><th class="n">Views</th><th class="n">People</th></tr>
       ${pages.map(p => `<tr><td style="white-space:nowrap"><b>${esc(pageLabel(p.page))}</b></td><td><div class="meter" style="margin:0;max-width:none"><i style="width:${p.views/pmax*100}%;background:var(--accent)"></i></div></td><td class="n">${p.views}</td><td class="n">${p.users}</td></tr>`).join("")}</table></div>`
