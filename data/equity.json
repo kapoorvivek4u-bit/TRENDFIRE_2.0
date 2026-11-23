@@ -1,17 +1,17 @@
 {
- "generated_ist": "2026-11-22 09:31",
+ "generated_ist": "2026-11-23 11:27",
  "oi_asof": "2026-11-20",
- "stocks": 255,
+ "stocks": 256,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 43,
+  "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
    66,
    68,
    71,
-   72,
+   71,
    73,
    75
   ],
@@ -744,6 +744,24 @@
    "grade": "B",
    "trigger": 2388.08,
    "stop": 2009.07
+  },
+  {
+   "symbol": "CARTRADE",
+   "close": 2655.7,
+   "trend": "With trend",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bullish"
+   },
+   "old": "\u274c Avoid",
+   "ext": -0.6,
+   "setup": "Weekly Overspill",
+   "stage": "Ready",
+   "detail": "Weekly spilled 12.5% under the 50 EMA \u00b7 Daily turning up \u00b7 Volume 0.5x in pullback \u00b7 Delivery 34% vs 39% before",
+   "grade": "B",
+   "trigger": 2701.5,
+   "stop": 2160.67
   },
   {
    "symbol": "CHOICEIN",
@@ -10240,6 +10258,7 @@
    "CANFINHOME",
    "CAPLIPOINT",
    "CARBORUNIV",
+   "CARTRADE",
    "CCL",
    "CEATLTD",
    "CEMPRO",
@@ -10469,7 +10488,5 @@
   ]
  },
  "vk_labels": {},
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ]
+ "notes": []
 }

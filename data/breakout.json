@@ -1,17 +1,17 @@
 {
- "generated_ist": "2026-11-22 09:31",
+ "generated_ist": "2026-11-23 11:27",
  "oi_asof": "2026-11-20",
  "stocks": 256,
  "market": {
   "weekly_bull_pct": 24,
-  "monthly_bull_pct": 43,
+  "monthly_bull_pct": 44,
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
    66,
    68,
    71,
-   72,
+   71,
    73,
    75
   ],
@@ -50,7 +50,7 @@
     "D": "Impulse"
    },
    "stage": "Triggered",
-   "score": 57.1,
+   "score": 57.2,
    "grade": "B",
    "trigger": 11400.0,
    "stop": 11029.58,
@@ -86,7 +86,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 72.3,
+   "score": 72.4,
    "grade": "A",
    "trigger": 762.75,
    "stop": null,
@@ -137,7 +137,7 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 58.1,
+   "score": 58.2,
    "grade": "B",
    "trigger": 3429.0,
    "stop": null,
@@ -171,7 +171,7 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 36.8,
+   "score": 36.4,
    "grade": "C",
    "trigger": 140.25,
    "stop": null,
