@@ -1051,6 +1051,9 @@ def run(now=None):
     except Exception as ex:
         print("site_data: heads-up failed:", ex)
     out["new"] = new_today()
+    lv = dict((eq or {}).get("levels") or {})
+    lv.update(fo.get("levels") or {})
+    out["levels"] = lv                                      # 200 DMA, 20/50 week EMA per stock
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
     write_names()

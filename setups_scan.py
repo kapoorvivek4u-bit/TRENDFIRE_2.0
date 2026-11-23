@@ -1483,6 +1483,29 @@ def log_ready(res):
     new.drop_duplicates(["date", "symbol", "setup"], keep="first").to_csv(path, index=False)
 
 
+def key_levels(daily):
+    """Big moving averages that often act as a wall: 200-day SMA, 20- and 50-week EMA.
+    The site compares them with today's price to flag resistance just above."""
+    out = {}
+    for sym, df in (daily or {}).items():
+        try:
+            c = df["Close"].dropna()
+            if len(c) < 60:
+                continue
+            w = c.resample("W-FRI").last().dropna()
+            lv = {"c": round(float(c.iloc[-1]), 2)}
+            if len(c) >= 200:
+                lv["d200"] = round(float(c.rolling(200).mean().iloc[-1]), 2)
+            if len(w) >= 20:
+                lv["w20"] = round(float(w.ewm(span=20, adjust=False).mean().iloc[-1]), 2)
+            if len(w) >= 50:
+                lv["w50"] = round(float(w.ewm(span=50, adjust=False).mean().iloc[-1]), 2)
+            out[sym] = lv
+        except Exception:
+            continue
+    return out
+
+
 def main_live():
     os.makedirs(CFG["data_dir"], exist_ok=True)
     now = dt.datetime.now(IST)
@@ -1510,6 +1533,7 @@ def main_live():
         notes.append(f"{missing} stocks skipped (too little price history or no data).")
     res = build_result(rows, now, latest.strftime("%Y-%m-%d"), fetch_vix(), notes,
                        fetch_nifty(now))
+    res["levels"] = key_levels(daily)
     with open(os.path.join(CFG["data_dir"], "setups.json"), "w") as f:
         json.dump(res, f, indent=1)
     log_ready(res)

@@ -522,6 +522,7 @@ def main_live():
         notes.append(f"{missing} stocks skipped (too little price history or no data).")
     res = E.build_result(rows, now, hist["date"].max().strftime("%Y-%m-%d"), None, notes,
                          E.fetch_nifty(now))
+    res["levels"] = E.key_levels(daily)
     with open(os.path.join(CFG["data_dir"], "equity.json"), "w") as f:
         json.dump(res, f, indent=1)
     log_ready(res)
