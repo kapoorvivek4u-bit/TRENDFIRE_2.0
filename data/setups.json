@@ -1,9 +1,9 @@
 {
- "generated_ist": "2026-11-23 11:26",
+ "generated_ist": "2026-11-23 11:31",
  "oi_asof": "2026-11-20",
- "stocks": 218,
+ "stocks": 217,
  "market": {
-  "weekly_bull_pct": 30,
+  "weekly_bull_pct": 29,
   "monthly_bull_pct": 52,
   "vix": 17.9,
   "regime": "Weak",
@@ -3061,40 +3061,6 @@
    "grade": "C",
    "trigger": 160.94,
    "stop": 157.94
-  },
-  {
-   "symbol": "COFORGE",
-   "close": 2129.3,
-   "trend": "With trend",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Topping",
-    "H": "Impulse"
-   },
-   "setup": "Daily Overspill",
-   "stage": "Triggered",
-   "old": "\u26a0\ufe0f Extended (Gaining)",
-   "ext": 1.9,
-   "vk": {
-    "final": "BUY NOW",
-    "signal": "ALL 3 ALIGNED BULLISH",
-    "ma": "ONLY BUY",
-    "advice": "PERFECT FOR CASH SWING TRADE \u2014 M+W+D bullish + Daily SQZ ON. Hold 2-4 weeks!",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON",
-    "status": {
-     "M": "BULLISH RUN",
-     "W": "TOPPING",
-     "D": "TOPPING",
-     "H": "BULLISH RUN"
-    }
-   },
-   "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.2x in pullback \u00b7 OI -34% in up-leg, +23% in pullback",
-   "grade": "C",
-   "trigger": 2018.83,
-   "stop": 1973.15
   },
   {
    "symbol": "GRASIM",
@@ -23966,7 +23932,6 @@
    "APLAPOLLO",
    "BHARTIARTL",
    "BOSCHLTD",
-   "COFORGE",
    "DRREDDY",
    "ETERNAL",
    "GLENMARK",
@@ -24158,7 +24123,6 @@
   ],
   "\u26a0\ufe0f Extended (Gaining)": [
    "ATHERENERG",
-   "COFORGE",
    "DIVISLAB",
    "INDHOTEL",
    "JINDALSTEL",
@@ -26605,22 +26569,6 @@
     "confirmed": "CONFIRMED \u2014 Buy ON"
    },
    {
-    "symbol": "COFORGE",
-    "close": 2129.3,
-    "states": {
-     "M": "Impulse",
-     "W": "Topping",
-     "D": "Topping",
-     "H": "Impulse"
-    },
-    "signal": "ALL 3 ALIGNED BULLISH",
-    "ma": "ONLY BUY",
-    "advice": "PERFECT FOR CASH SWING TRADE \u2014 M+W+D bullish + Daily SQZ ON. Hold 2-4 weeks!",
-    "daily": "Daily Signal ON (Bullish)",
-    "hourly": "Aligned \u2014 can buy now",
-    "confirmed": "CONFIRMED \u2014 Buy ON"
-   },
-   {
     "symbol": "CUB",
     "close": 247.73,
     "states": {
@@ -27558,5 +27506,7 @@
    }
   ]
  },
- "notes": []
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ]
 }
