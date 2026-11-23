@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-23 15:39",
+ "generated_ist": "2026-11-23 16:07",
  "oi_asof": "2026-11-20",
  "indexes": [
   {
@@ -444,7 +444,7 @@
      "symbol": "BHARTIARTL",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 0.4,
       "px_pct": 1.9,
@@ -564,7 +564,7 @@
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 14.5,
       "px_pct": 1.7,
@@ -648,7 +648,7 @@
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.5,
       "px_pct": -0.7,
@@ -672,7 +672,7 @@
      "symbol": "HINDUNILVR",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 5.2,
       "px_pct": 3.3,
@@ -816,7 +816,7 @@
      "symbol": "SBILIFE",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 9.5,
       "px_pct": 2.0,
@@ -900,7 +900,7 @@
      "symbol": "JIOFIN",
      "vk": null,
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -0.1,
       "px_pct": -1.1,
@@ -1386,7 +1386,7 @@
      "symbol": "CANBK",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 2.1,
       "px_pct": 5.1,
@@ -2262,7 +2262,7 @@
      "symbol": "SRF",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -1.6,
       "px_pct": 1.2,
@@ -2736,7 +2736,7 @@
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 14.5,
       "px_pct": 1.7,
@@ -2760,7 +2760,7 @@
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 3.5,
       "px_pct": -0.7,
@@ -2783,7 +2783,7 @@
     {
      "symbol": "LICHSGFIN",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": -0.9,
@@ -2844,7 +2844,7 @@
      "symbol": "SBILIFE",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 9.5,
       "px_pct": 2.0,
@@ -2880,7 +2880,7 @@
      "symbol": "JIOFIN",
      "vk": null,
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -0.1,
       "px_pct": -1.1,
@@ -3267,7 +3267,7 @@
      "symbol": "TVSMOTOR",
      "vk": "BUY NOW",
      "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 12.9,
       "px_pct": 1.9,
@@ -3314,8 +3314,8 @@
     {
      "symbol": "BOSCHLTD",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Daily Overspill \u00b7 Watch",
-     "grade": "Warning",
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -1.9,
       "px_pct": -0.6,
@@ -3339,7 +3339,7 @@
      "symbol": "GAIL",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -4.4,
       "px_pct": 1.7,
@@ -3435,7 +3435,7 @@
      "symbol": "BRITANNIA",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
+     "grade": "B",
      "oi": {
       "oi_pct": 3.3,
       "px_pct": 2.4,
@@ -3447,7 +3447,7 @@
      "symbol": "CANBK",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 2.1,
       "px_pct": 5.1,
