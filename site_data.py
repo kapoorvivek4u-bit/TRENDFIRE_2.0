@@ -850,6 +850,35 @@ def seo_data(out, fo, sj, uj, oi, px, ctx):
     return res
 
 
+# ---------------------------------------------------------------- live index quotes (NSE) for the dashboard cards
+LIVE_NAMES = {"NIFTY": "NIFTY 50", "BANKNIFTY": "NIFTY BANK", "MIDCAP": "NIFTY MIDCAP SELECT",
+              "FINNIFTY": "NIFTY FINANCIAL SERVICES", "NEXT50": "NIFTY NEXT 50"}
+
+
+def live_indexes():
+    """Today's index level and change from NSE, so the cards never show yesterday's move during the day."""
+    try:
+        import requests
+        s = requests.Session()
+        s.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+                          "Accept": "application/json, text/plain, */*", "Referer": "https://www.nseindia.com/option-chain"})
+        s.get("https://www.nseindia.com/option-chain", timeout=20)
+        r = s.get("https://www.nseindia.com/api/allIndices", timeout=25)
+        if not r.ok:
+            return {}, None
+        j = r.json()
+        by = {d.get("index"): d for d in j.get("data", [])}
+        out = {}
+        for k, n in LIVE_NAMES.items():
+            d = by.get(n)
+            if d and d.get("last") and d.get("previousClose"):
+                out[k] = {"last": float(d["last"]), "prev": float(d["previousClose"]), "chg": float(d.get("percentChange") or 0)}
+        return out, j.get("timestamp")
+    except Exception as ex:
+        print("site_data: live index quotes skipped:", ex)
+        return {}, None
+
+
 # ---------------------------------------------------------------- build
 def run(now=None):
     global SECTORS
@@ -892,6 +921,19 @@ def run(now=None):
             "sup": (op.get("support") or [{}])[0].get("strike"),
             "rs20": r1(r20 - n20) if r20 is not None and n20 is not None and x["key"] != "NIFTY" else None,
             "r20": r1(r20), "note": x.get("chart_note")})
+
+    live, live_at = live_indexes()
+    for x in indexes:
+        q = live.get(x["key"])
+        if not q:
+            continue
+        sp = x["spark"]
+        prev_day = abs(q["prev"] / sp[-1] - 1) < 0.002 if sp else False      # spark ends at yesterday's close
+        x["close"], x["chg1"], x["live_at"] = round(q["last"], 2), r1(q["chg"], 2), live_at
+        if prev_day:
+            x["spark"] = sp + [round(q["last"], 2)]
+            if len(sp) >= 5:
+                x["chg5"] = r1((q["last"] / sp[-5] - 1) * 100)
 
     # strategies and setups
     data = {"F&O": fo, "Equity": eq, "Breakout": bo,
