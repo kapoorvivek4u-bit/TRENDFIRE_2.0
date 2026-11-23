@@ -295,6 +295,68 @@ def btst(x, oi, ctx):
     return f(lng), f(sht)
 
 
+# ------------------------------------------------------------------ index bias: Nifty / Bank Nifty
+HEAVY = {"NIFTY": ["HDFCBANK", "RELIANCE", "ICICIBANK", "INFY", "BHARTIARTL", "TCS", "LT", "ITC", "SBIN", "AXISBANK"],
+         "BANKNIFTY": ["HDFCBANK", "ICICIBANK", "SBIN", "KOTAKBANK", "AXISBANK", "INDUSINDBK"]}
+
+
+def members(name):
+    try:
+        return [x.strip() for x in open(os.path.join(DATA, name)).read().split()[1:] if x.strip()]
+    except Exception:
+        return []
+
+
+def index_bias(key, ix, chain, rows, cd):
+    """Checklist and score for an index, from its own chart, its stocks and its option writers."""
+    if not ix:
+        return None
+    mem = set(members("nifty50.csv" if key == "NIFTY" else "banknifty.csv"))
+    st = [x for x in rows if x["s"] in mem]
+    by = {x["s"]: x for x in rows}
+    bull, bear = [], []
+
+    def add(ok_bull, ok_bear, txt_bull, txt_bear, w=1):
+        if ok_bull:
+            bull.append((txt_bull, w))
+        elif ok_bear:
+            bear.append((txt_bear, w))
+
+    add(ix["orb"] == 1, ix["orb"] == -1, "Above 30-min range", "Below 30-min range", 2)
+    add((ix["pos"] or 0) >= 0.7, (ix["pos"] or 1) <= 0.3, "Trading in the top third of the day", "Trading in the bottom third of the day")
+    if st:
+        av = sum(1 for x in st if x["above_vwap"]) / len(st) * 100
+        up = sum(1 for x in st if x["chg"] > 0) / len(st) * 100
+        add(av >= 60, av <= 40, f"{av:.0f}% of its stocks above VWAP", f"Only {av:.0f}% of its stocks above VWAP", 2)
+        add(up >= 60, up <= 40, f"{up:.0f}% of its stocks up", f"Only {up:.0f}% of its stocks up")
+    hv = [by[s] for s in HEAVY[key] if s in by]
+    if hv:
+        hup = sum(1 for x in hv if x["chg"] > 0 and x["above_vwap"])
+        hdn = sum(1 for x in hv if x["chg"] < 0 and not x["above_vwap"])
+        add(hup >= len(hv) * 0.6, hdn >= len(hv) * 0.6, f"{hup} of {len(hv)} heavyweights up and above VWAP",
+            f"{hdn} of {len(hv)} heavyweights down and below VWAP", 2)
+    if chain:
+        if chain.get("pcr") is not None:
+            add(chain["pcr"] >= 1.1, chain["pcr"] <= 0.8, f"PCR {chain['pcr']}: put writers in control", f"PCR {chain['pcr']}: call writers in control")
+        cc, cp = chain.get("chg_ce") or 0, chain.get("chg_pe") or 0
+        add(cp > 1.3 * max(cc, 0) and cp > 0, cc > 1.3 * max(cp, 0) and cc > 0, "More puts written today than calls (support building)",
+            "More calls written today than puts (resistance building)", 2)
+        mp = chain.get("max_pain")
+        if mp and ix.get("c"):
+            add(ix["c"] > mp, ix["c"] < mp, f"Above max pain {mp:g}", f"Below max pain {mp:g}")
+    sq = squeeze_15m(cd[key]) if key in cd else None
+    if sq and sq.get("fired"):
+        add(sq["dir"] > 0, sq["dir"] < 0, "15-min squeeze fired up", "15-min squeeze fired down", 2)
+    elif sq and sq.get("on"):
+        bull.append(("15-min squeeze on: a move is building", 0)) if sq["dir"] > 0 else bear.append(("15-min squeeze on: a move is building", 0))
+    b, r = sum(w for _, w in bull), sum(w for _, w in bear)
+    tot = b + r
+    score = round(50 + 50 * (b - r) / tot) if tot else 50                 # 0 = fully bearish, 100 = fully bullish
+    word = "Bullish" if score >= 65 else "Bearish" if score <= 35 else "Mixed"
+    return {"score": score, "word": word, "bull": [t for t, _ in bull], "bear": [t for t, _ in bear],
+            "heavy": [{"s": x["s"], "chg": x["chg"], "vw": x["above_vwap"]} for x in hv]}
+
+
 # ------------------------------------------------------------------ main
 def main(force=False):
     now = dt.datetime.now(IST)
@@ -374,6 +436,13 @@ def main(force=False):
                 chains[x["s"]] = c
         except Exception as ex:
             print("chain", x["s"], "failed:", ex)
+
+    for k in ("NIFTY", "BANKNIFTY"):
+        try:
+            if k in idx:
+                idx[k]["bias"] = index_bias(k, idx[k], chains.get(k), rows, cd)
+        except Exception as ex:
+            print("bias", k, "failed:", ex)
 
     # live OI build-up board: every stock with an OI read and a price read
     board = {"long": [], "short": [], "cover": [], "unwind": []}

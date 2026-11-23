@@ -487,6 +487,11 @@ a.tbtn{color:var(--ink)}
 .ich b{color:var(--ink);font-family:var(--f-num)}
 table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .ocbar{display:flex;min-width:90px}.ocbar i{display:block;height:9px;border-radius:3px;opacity:.7}
+.bias{margin:10px 0 4px;padding:12px;border-radius:14px;background:color-mix(in srgb,var(--bc) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--bc) 30%,transparent)}
+.bias .bh{display:flex;justify-content:space-between;align-items:baseline}.bias .bh b{font-family:var(--f-head);font-size:20px;color:var(--bc)}.bias .bh span{font-size:12px;color:var(--muted);font-family:var(--f-num)}
+.bmeter{height:6px;border-radius:9px;background:linear-gradient(90deg,var(--down),var(--warn) 50%,var(--up));margin-top:6px;position:relative;opacity:.85}
+.bmeter i{position:absolute;top:-3px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:3px solid var(--ink);transform:translateX(-50%);left:0}
+.checks div.no{color:var(--down)}.checks div.no::before{content:"✗";color:var(--down)}
 </style>
 </head>
 <body>
@@ -1646,6 +1651,11 @@ function intraIndex(k, x, c){
   return `<section class="card fade"><div class="ct"><h2>${k === "NIFTY" ? "Nifty 50" : "Bank Nifty"}<em>${c ? "expiry " + esc(c.expiry) : ""}</em></h2><b class="num ${cls(x.chg)}">${pct(x.chg, 2)}</b></div>
     <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><b class="num" style="font-size:28px;letter-spacing:-.03em">${fmt(x.c)}</b>
       <span class="muted" style="font-size:12px">Day ${fmt(x.lo)}–${fmt(x.hi)} · 30-min ${fmt(x.orl)}–${fmt(x.orh)} ${x.orb === 1 ? "· above range" : x.orb === -1 ? "· below range" : "· inside range"}</span></div>
+    ${x.bias ? (() => { const bi = x.bias, bc = bi.word === "Bullish" ? "var(--up)" : bi.word === "Bearish" ? "var(--down)" : "var(--warn)";
+      return `<div class="bias" style="--bc:${bc}"><div class="bh"><b>${esc(bi.word)}</b><span>bias score ${bi.score}/100</span></div>
+        <div class="bmeter"><i style="left:${bi.score}%"></i></div>
+        <div class="checks" style="margin-top:8px">${bi.bull.map(t => `<div>${esc(t)}</div>`).join("")}${bi.bear.map(t => `<div class="no">${esc(t)}</div>`).join("")}</div>
+        ${(bi.heavy || []).length ? `<div class="chips" style="margin-top:8px">${bi.heavy.map(h => chip(`${h.s} ${pct(h.chg, 1)}`, h.chg > 0 && h.vw ? "var(--up)" : h.chg < 0 && !h.vw ? "var(--down)" : "var(--muted)")).join("")}</div>` : ""}</div>`; })() : ""}
     ${x.spark && x.spark.length > 3 ? `<div style="height:56px;margin:8px 0 12px;overflow:hidden;position:relative">${spark(x.spark.filter(v => v != null), {h:56, color: x.chg >= 0 ? "var(--up)" : "var(--down)"})}</div>` : ""}
     ${c ? `${intraChainMini(c)}<div class="detail" style="margin-top:8px">${esc(c.read)}</div>
       <div class="kv" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px">
