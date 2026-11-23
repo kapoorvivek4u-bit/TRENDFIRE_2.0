@@ -1165,6 +1165,15 @@ def run(now=None):
     lv = dict((eq or {}).get("levels") or {})
     lv.update(fo.get("levels") or {})
     out["levels"] = lv                                      # 200 DMA, 20/50 week EMA per stock
+    try:                                                     # Monthly / Weekly / Daily table: Impulse or Corrective
+        strong = {x["symbol"]: x for x in sj.get("strongest_fo") or []}
+        mv = {s: f.get("px5") for s, f in five.items()}
+        out["mtf"] = sorted([{"s": s, "M": st[0], "W": st[1], "D": st[2], "c": (strong.get(s) or {}).get("close"),
+                              "sec": (SECTORS.get(s) or {}).get("sector") or (strong.get(s) or {}).get("sector") or "Others",
+                              "rk": (strong.get(s) or {}).get("rank"), "d5": mv.get(s)}
+                             for s, st in (fo.get("mtf") or {}).items()], key=lambda x: (x["rk"] or 999, x["s"]))
+    except Exception as ex:
+        print("site_data: mtf failed:", ex)
     try:
         out["top5"] = top5(fo, sj, uj, out, five, now)
     except Exception as ex:

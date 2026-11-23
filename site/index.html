@@ -503,6 +503,9 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .t5d{margin-top:6px;font-size:12px}.t5d summary{cursor:pointer;color:var(--muted)}.t5d ul{margin:6px 0 0;padding-left:16px;display:grid;gap:2px}.t5d b{display:inline-block;min-width:34px}
 .t5w{margin:0 0 10px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn);font-size:12.5px}
 @media (max-width:560px){.t5{grid-template-columns:auto 1fr}.t5 .r{grid-column:2;text-align:left;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.t5 .r>div{margin:0!important}}
+.mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
+.mtft td{vertical-align:middle;white-space:nowrap}.mtft .sh{display:none}
+@media (max-width:640px){.mtft .hs{display:none}.mtft .sh{display:inline}.mtft .symrow{flex-wrap:nowrap}.mtft td,.mtft th{padding-left:4px;padding-right:4px}.mtft .chip{font-size:10.5px;padding:2px 6px}.mtft button.star{display:none}}
 </style>
 </head>
 <body>
@@ -684,7 +687,7 @@ const symLink = (s, size=16) => `<a class="sym" style="font-size:${size}px" href
 /* ============================================================ routes */
 const PAGES = [
   ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"]]],
+  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
@@ -1042,6 +1045,35 @@ async function pageDashboard(){
     </div>`;
 }
 
+
+/* ============================================================ Monthly / Weekly / Daily: Impulse or Corrective */
+const MTF_TF = [["M","Monthly"],["W","Weekly"],["D","Daily"]];
+const mtfKind = v => v === "Impulse" ? "Impulse" : !v || v === "No data" ? "No data" : "Corrective";
+function pageMTF(){
+  const all = S().mtf || [];
+  if(!all.length) return pageHead("Impulse table", "") + subnav() + `<div class="empty">The table fills after the next scan.</div>`;
+  UI.mtf = UI.mtf || {M:"All", W:"All", D:"All"};
+  const f = UI.mtf, pass = (r, skip) => MTF_TF.every(([k]) => k === skip || f[k] === "All" || mtfKind(r[k]) === f[k]);
+  const rows = all.filter(r => pass(r));
+  const seg = ([k, name]) => `<div class="mtfg"><span class="lbl">${name}</span><div class="seg">${["All","Impulse","Corrective"].map(v => {
+      const n = v === "All" ? all.filter(r => pass(r, k)).length : all.filter(r => pass(r, k) && mtfKind(r[k]) === v).length;
+      return `<button data-mtf="${k}:${v}" class="${f[k]===v?"on":""}">${v}<i>${n}</i></button>`; }).join("")}</div></div>`;
+  const cell = v => { const k = mtfKind(v);
+    return k === "Impulse" ? `<td><span class="chip" style="--c:var(--up)"><span class="hs">Impulse</span><span class="sh">Imp</span></span></td>` : k === "No data" ? `<td class="muted">—</td>`
+      : `<td><span class="chip" style="--c:${v === "Bearish" ? "var(--down)" : "var(--muted)"}"><span class="hs">Corrective</span><span class="sh">Corr</span></span> <span class="muted hs" style="font-size:11px">${esc(v)}</span></td>`; };
+  const preset = (label, M, W, D) => `<button data-mtfp="${M}${W}${D}" class="${f.M===M&&f.W===W&&f.D===D?"on":""}">${label}</button>`;
+  return pageHead("Impulse table", `${all.length} F&O stocks · Monthly, Weekly and Daily trend · scan ${esc(when(S().generated_ist))}`) + subnav() + `
+    <section class="card fade"><div class="mtfbar">${MTF_TF.map(seg).join("")}</div>
+      <div class="filters" style="margin-top:10px"><span class="muted" style="font-size:12px;align-self:center">Quick:</span>
+        ${preset("All three Impulse","Impulse","Impulse","Impulse")}${preset("M + W Impulse, Daily resting","Impulse","Impulse","Corrective")}${preset("Weekly Impulse, Daily resting","All","Impulse","Corrective")}${preset("Reset","All","All","All")}</div>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Impulse = momentum above zero and rising, price above the 20 EMA, 20 EMA above the 50 EMA and rising. Anything else is Corrective; the small word shows which phase (Bullish, Topping, Bottoming, Bearish).</div></section>
+    <section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div>
+      ${rows.length ? `<div class="tw"><table class="t mtft"><tr><th>Stock</th><th class="hs">Sector</th><th><span class="hs">Monthly</span><span class="sh">M</span></th><th><span class="hs">Weekly</span><span class="sh">W</span></th><th><span class="hs">Daily</span><span class="sh">D</span></th><th class="n">Price</th><th class="n hs">5 days</th></tr>
+      ${rows.map(r => { const q = livePx(r.s);
+        return `<tr><td><div class="symrow">${symLink(r.s, 13.5)}${starBtn(r.s)}</div></td><td class="muted hs">${esc(r.sec)}</td>${cell(r.M)}${cell(r.W)}${cell(r.D)}
+        <td class="n">${fmt(q ? q.close : r.c)}${q ? ` <b class="${cls(q.chg)}" style="font-size:11px">${pct(q.chg, 1)}</b>` : ""}</td><td class="n hs ${cls(r.d5)}">${r.d5 == null ? "—" : pct(r.d5, 1)}</td></tr>`; }).join("")}</table></div>`
+      : `<div class="empty">No stock matches all three filters right now.</div>`}</section>`;
+}
 
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
@@ -1872,7 +1904,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -1926,6 +1958,8 @@ document.addEventListener("click", e => {
   if(d.trm){ UI.trMarket = d.trm; return rerender(); }
   if(d.itab){ UI.itab = d.itab; return rerender(); }
   if(d.clear){ UI.clear = !UI.clear; return rerender(); }
+  if(d.mtf){ const [k, v] = d.mtf.split(":"); UI.mtf = {...(UI.mtf || {M:"All",W:"All",D:"All"}), [k]: v}; return rerender(); }
+  if(d.mtfp){ const v = d.mtfp.match(/All|Impulse|Corrective/g); UI.mtf = {M:v[0], W:v[1], D:v[2]}; return rerender(); }
   if(d.fii){ UI.fiiTab = d.fii; return rerender(); }
   if(d.ich){ UI.ich = d.ich; return rerender(); }
   if(d.sm){ UI.strongMarket = d.sm; return rerender(); }

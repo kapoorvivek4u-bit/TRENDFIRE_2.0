@@ -1303,7 +1303,8 @@ def build_result(rows, now, fo_asof, vix, notes, nifty=None):
                        "vix": vix, "regime": regime, **turn},
             "rows": setups, "overspill": spills, "ranges": ranges,
             "recent_breakouts": breakouts, "others": others,
-            "old_labels": old_labels, "vk_labels": vk_labels, "notes": notes}
+            "old_labels": old_labels, "vk_labels": vk_labels, "notes": notes,
+            "mtf": {r["symbol"]: [r["states"].get(k) for k in "MWD"] for r in valid}}   # every stock's M/W/D state
 
 
 # ------------------------------------------------------------------ network
