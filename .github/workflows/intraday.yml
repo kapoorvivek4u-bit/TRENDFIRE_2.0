@@ -43,8 +43,5 @@ jobs:
           DRY_RUN: ${{ inputs.dry && '1' || '' }}
         run: python intraday_scan.py ${{ inputs.force && '--force' || '' }}
       - if: ${{ inputs.dry }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: intraday-preview
-          path: intraday_preview.json
-          retention-days: 1
+        name: Print the result (dry run)
+        run: python -c "import gzip,base64;print('PREVIEW:'+base64.b64encode(gzip.compress(open('intraday_preview.json','rb').read())).decode())"

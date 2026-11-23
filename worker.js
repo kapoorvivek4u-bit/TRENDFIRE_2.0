@@ -391,6 +391,14 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
   if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user) }); }
+  if (p === "/api/intraday" && req.method === "GET") {
+    if (!admin) return json({ error: "Admin only." }, 403);
+    const latest = await env.USERS.get("intraday:latest", "json");
+    const past = [];                                     // recent BTST lists, newest first
+    const l = await env.USERS.list({ prefix: "btst:" });
+    for (const k of l.keys.map(k => k.name).sort().reverse().slice(0, 8)) { const v = await env.USERS.get(k, "json"); if (v) past.push(v); }
+    return new Response(JSON.stringify({ latest, past }), { headers: { "content-type": "application/json", "cache-control": "no-store" } });
+  }
   if (p === "/api/admin/full") {
     if (!admin) return json({ error: "Admin only." }, 403);
     if (req.method === "GET") return json({ list: await fullList(env) });
@@ -427,6 +435,21 @@ export default {
       if (p === "/auth/callback") return await googleCallback(env, req, url);
       if (p === "/auth/admin" && req.method === "POST") return await adminSignIn(env, req);
       if (p === "/logout") return redirect("/login", [cookie("tr_s", "", 0)]);
+      if (p === "/api/ingest/intraday" && req.method === "POST") {   // the intraday scan sends its result here
+        const want = env.INGEST_KEY || (env.SESSION_SECRET ? await hmac(env, "ingest:intraday") : "");
+        const got = req.headers.get("x-ingest-key") || "";
+        if (!want || !(await sameText(env, got, want))) return json({ error: "Not allowed." }, 403);
+        if (!env.USERS) return json({ error: "USERS storage missing." }, 500);
+        const body = await req.text();
+        let d; try { d = JSON.parse(body); } catch (e) { return json({ error: "Bad JSON." }, 400); }
+        await env.USERS.put("intraday:latest", body, { expirationTtl: 60 * 60 * 24 * 5 });
+        if (d.final && d.session) {                      // keep the day's last BTST / STBT list to check next morning
+          await env.USERS.put("btst:" + d.session, JSON.stringify({ session: d.session, at: d.at,
+            btst: (d.btst || []).map(x => ({ s: x.s, c: x.c, score: x.bl })), stbt: (d.stbt || []).map(x => ({ s: x.s, c: x.c, score: x.bs })) }),
+            { expirationTtl: 60 * 60 * 24 * 40 });
+        }
+        return json({ ok: true, bytes: body.length });
+      }
       if (p === "/api/kite/token") {                     // for scans and the VM, with their own key
         if (!env.KITE_PULL_KEY || req.headers.get("x-kite-key") !== env.KITE_PULL_KEY) return json({ error: "Not allowed." }, 403);
         const t = await kiteToken(env);
