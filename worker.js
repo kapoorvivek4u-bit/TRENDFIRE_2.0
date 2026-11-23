@@ -419,6 +419,10 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
   if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user) }); }
+  if (p === "/api/live" && req.method === "GET") {           // today's prices for the dashboard (no levels)
+    const v = env.USERS ? await env.USERS.get("live:latest") : null;
+    return new Response(v || "{}", { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
+  }
   if (p === "/api/intraday" && req.method === "GET") {
     if (!admin) return json({ error: "Admin only." }, 403);
     const latest = await env.USERS.get("intraday:latest", "json");
@@ -471,6 +475,8 @@ export default {
         const body = await req.text();
         let d; try { d = JSON.parse(body); } catch (e) { return json({ error: "Bad JSON." }, 400); }
         await env.USERS.put("intraday:latest", body, { expirationTtl: 60 * 60 * 24 * 5 });
+        if (d.live) await env.USERS.put("live:latest", JSON.stringify({ at: d.at, session: d.session, rows: d.live,
+          index: Object.fromEntries(Object.entries(d.index || {}).map(([k, x]) => [k, { c: x.c, chg: x.chg }])) }), { expirationTtl: 60 * 60 * 24 * 5 });
         if (d.final && d.session) {                      // keep the day's last BTST / STBT list to check next morning
           await env.USERS.put("btst:" + d.session, JSON.stringify({ session: d.session, at: d.at,
             btst: (d.btst || []).map(x => ({ s: x.s, c: x.c, score: x.bl })), stbt: (d.stbt || []).map(x => ({ s: x.s, c: x.c, score: x.bs })) }),

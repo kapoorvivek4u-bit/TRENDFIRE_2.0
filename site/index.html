@@ -521,9 +521,32 @@ async function getJSON(name, fresh){
   if(!r) r = await fetch(DATA_BASE + name + t, {cache:"no-store"});
   if(!r.ok) throw new Error(name + " " + r.status);
   CACHE[name] = await r.json();
+  if(name === "site.json") applyLive();
   return CACHE[name];
 }
 const S = () => CACHE["site.json"];
+/* Live prices (every 15 min in market hours) laid over the last-session heatmap, movers and advance/decline. */
+let LIVE = null;
+async function loadLive(){
+  if(window.SNAP) return;
+  try{ const r = await fetch("/api/live", {cache:"no-store"}); if(r.ok) LIVE = await r.json(); }catch(e){}
+  applyLive();
+}
+function applyLive(){
+  const s = CACHE["site.json"];
+  if(!s) return;
+  const today = new Date(Date.now() + 5.5*3600e3).toISOString().slice(0,10);
+  if(!s._orig) s._orig = {heatmap: s.heatmap, gainers: s.gainers, losers: s.losers, adv: (s.market||{}).adv, dec: (s.market||{}).dec};
+  if(!LIVE || !LIVE.rows || LIVE.session !== today){ s._live = null; return; }
+  const by = Object.fromEntries(LIVE.rows.map(([sym, c, chg, sec]) => [sym, {symbol: sym, close: c, chg, sector: sec}]));
+  s.heatmap = (s._orig.heatmap || []).map(g => { const stocks = g.stocks.map(x => by[x.symbol] ? {...x, chg: by[x.symbol].chg, close: by[x.symbol].close} : x).sort((a,b) => b.chg - a.chg);
+    return {...g, stocks, avg: +(stocks.reduce((a,x) => a + (x.chg || 0), 0) / (stocks.length || 1)).toFixed(2)}; });
+  const rows = Object.values(by).filter(x => x.chg != null).map(x => ({...x, sector: x.sector || "Others"}));
+  s.gainers = rows.slice().sort((a,b) => b.chg - a.chg).slice(0, 8);
+  s.losers = rows.slice().sort((a,b) => a.chg - b.chg).slice(0, 8);
+  s.market.adv = rows.filter(x => x.chg > 0).length; s.market.dec = rows.length - s.market.adv;
+  s._live = (String(LIVE.at).match(/\d{1,2}:\d{2}$/) || [""])[0];
+}
 
 async function loadWatch(){
   if(!isAdmin()){ WATCH = []; return; }
@@ -931,11 +954,11 @@ function heatCard(){
   return `<section class="card fade"><div class="ct"><h2>F&O heatmap<em>by sector</em></h2><span class="legend">−4%<i></i>+4%</span></div>
     <div class="heat">${groups.map(g => `<div class="hs"><h4><span>${esc(g.sector)}</span><span class="${cls(g.avg)}">${pct(g.avg,2)}</span></h4>
       <div class="tiles">${g.stocks.slice(0, 12).map(tile).join("")}</div></div>`).join("")}</div>
-    <div class="muted" style="font-size:11.5px;margin-top:10px">Last session, futures price. Biggest 12 sectors shown, up to 12 stocks each.</div></section>`;
+    <div class="muted" style="font-size:11.5px;margin-top:10px">${S()._live ? `<b class="up">● Live ${esc(S()._live)}</b> (a few minutes late)` : "Last session, futures price"}. Biggest 12 sectors shown, up to 12 stocks each.</div></section>`;
 }
 function moversCard(){
   const row = x => `<a class="mv" href="${tv(x.symbol)}" target="_blank" rel="noopener"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span><span class="muted num">${fmt(x.close)}</span> <b class="${cls(x.chg)}">${pct(x.chg,2)}</b></span></a>`;
-  return `<section class="card s6 fade"><div class="ct"><h2>Top movers<em>F&O</em></h2></div>
+  return `<section class="card s6 fade"><div class="ct"><h2>Top movers<em>F&O · ${S()._live ? "live " + esc(S()._live) : "last session"}</em></h2></div>
     <div class="two"><div><div class="sub-h" style="margin-top:0">Gainers</div>${S().gainers.slice(0,6).map(row).join("")}</div>
     <div><div class="sub-h" style="margin-top:0">Losers</div>${S().losers.slice(0,6).map(row).join("")}</div></div></section>`;
 }
@@ -1836,7 +1859,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
     if(q){ setTimeout(() => toast(q === "ok" ? "Kite connected for today ✓" : q === "failed" ? "Kite login did not finish. Try again." : "Kite login cancelled"), 600);
            history.replaceState(null, "", location.pathname + location.hash); } }
   renderShell();
-  try{ await getJSON("site.json"); }
+  try{ await getJSON("site.json"); await loadLive(); }
   catch(e){
     document.getElementById("main").innerHTML = `<div class="soon"><h1>No dashboard data yet</h1><p>The dashboard file is made by the Setups scan. Run that scan once on GitHub (Actions → Setups scan → Run workflow), then reload this page.</p></div>`;
     return;
@@ -1845,6 +1868,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
   getJSON("sectors.json").catch(() => null);
   render();
   setInterval(async () => { try{ await getJSON("site.json", true); await loadWatch(); if(route() === "today") rerender(); }catch(e){} }, 5*60*1000);
+  setInterval(async () => { if(document.visibilityState !== "visible") return; await loadLive(); if(route() === "today" || route().startsWith("market")) rerender(); }, 2*60*1000);
   if(isAdmin()) pollScans();
   if("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(() => {});
   installHint();

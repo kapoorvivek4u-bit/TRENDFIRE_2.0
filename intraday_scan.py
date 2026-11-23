@@ -474,7 +474,8 @@ def main(force=False):
                        "n": len(rows)},
            "index": idx, "chains": chains, "board": board,
            "longs": longs, "shorts": shorts, "btst": bl, "stbt": bs,
-           "prices": {x["s"]: x["c"] for x in rows}}
+           "prices": {x["s"]: x["c"] for x in rows},
+           "live": [[x["s"], x["c"], x["chg"], x["sec"]] for x in rows]}
     shown = {x["s"] for x in longs + shorts + bl + bs}
     for x in rows + list(idx.values()):
         if x["s"] in shown or x["s"] in idx:
