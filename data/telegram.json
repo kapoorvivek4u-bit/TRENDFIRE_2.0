@@ -20,14 +20,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "APLAPOLLO": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "BHARTIARTL": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "BHEL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -117,6 +109,14 @@
    "confirmed": "Not confirmed"
   },
   "AMBER": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "AMBUJACEM": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "APLAPOLLO": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -736,9 +736,29 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "AMBUJACEM": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
+  "ASTRAL": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "INOXWIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "KAYNES": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PAGEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PIIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "SUPREMEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "BANDHANBNK": {
    "final": "COMING CLOSE TO READY (Bearish)",
@@ -776,10 +796,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "INOXWIND": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "JUBLFOOD": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -791,26 +807,6 @@
   "TIINDIA": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
-  },
-  "ASTRAL": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "KAYNES": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PAGEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PIIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "SUPREMEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "HAL": {
    "final": "COMING CLOSE TO READY (Bullish)",
