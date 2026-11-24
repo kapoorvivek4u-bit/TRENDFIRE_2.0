@@ -1595,7 +1595,14 @@ async function pageScanner(){
     const match = (k, r) => k === "All" || (k === "Clean wedge" ? r.clean : r.setup.includes(k));
     patBar = `<div class="filters">${PATS.map(k => `<button data-pat="${k}" class="${UI.pat===k?"on":""}">${k}<i>${all.filter(r => match(k, r)).length}</i></button>`).join("")}</div>`;
     rows = all.filter(r => match(UI.pat, r));
-  } else if(setup === "Overspill") rows = res.overspill || [];
+  } else if(setup === "Overspill"){
+    const all = res.overspill || [];
+    const TFS = ["All","Weekly","Daily","Hourly"], tf = UI.spill || "All";
+    const inTf = (k, r) => k === "All" || r.setup.startsWith(k);
+    patBar = `<div class="filters">${TFS.map(k => `<button data-spill="${k}" class="${tf===k?"on":""}">${k === "All" ? "All overspills" : k + " Overspill"}<i>${all.filter(r => inTf(k, r)).length}</i></button>`).join("")}</div>
+      <div class="muted" style="font-size:12px;margin:-4px 0 10px">Overspill = an uptrend dips into its 20–50 EMA zone and turns up. Weekly: 2–4 week trade · Daily: 5–10 days · Hourly: 3–5 days.</div>`;
+    rows = all.filter(r => inTf(tf, r));
+  }
   else if(setup === "Breakout") rows = (bo.broke || []).concat(bo.setting || []);
   else rows = (res.rows || []).filter(r => setup === "All" || r.setup === setup);
   const stage = UI.stage[key] || "Ready";
@@ -2193,6 +2200,7 @@ document.addEventListener("click", e => {
   if(d.setup != null && b.tagName === "A"){ UI.setup.fo = d.setup; return; }
   if(d.setup != null){ const k = route() === "scanner-equity" ? "eq" : "fo"; UI.setup[k] = d.setup; if(d.setup === "Patterns") UI.pat = "All"; return rerender(); }
   if(d.pat){ UI.pat = d.pat; return rerender(); }
+  if(d.spill){ UI.spill = d.spill; return rerender(); }
   if(d.stage){ const [k, g] = d.stage.split(":"); UI.stage[k] = g; return rerender(); }
   if(d.vk){ UI.vk = d.vk; return rerender(); }
   if(d.lean){ UI.lean = d.lean; return rerender(); }
