@@ -705,7 +705,7 @@ const PAGES = [
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-scorecard","Scorecard"]]]]
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-alerts","Alerts"],["admin-scorecard","Scorecard"]]]]
   : PRO() && USER ? [["intraday","Intraday","bolt",[]],["admin","My tools","users",[["admin-holdings","My holdings"],["admin-scorecard","Scorecard"],["intraday","Intraday"]]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
@@ -1212,6 +1212,64 @@ document.addEventListener("submit", e => { if(e.target.id !== "hform") return; e
   const v = id => document.getElementById(id).value.trim();
   const s = v("h-s").toUpperCase(); if(!s) return;
   holdAdd({s, avg: v("h-avg") ? +v("h-avg") : null, qty: v("h-qty") ? +v("h-qty") : null, note: v("h-note")}); });
+
+/* ============================================================ admin: alert watchlist (email + Telegram) */
+let ALR = null;
+const ALR_EV = {level:"Price crosses your level", entry:"Price crosses the setup entry", vol:"Volume 2x+ the usual (price up)", oi:"OI long build-up 3%+ today",
+  orb:"Opening-range breakout above VWAP", sq:"15-min squeeze fires up", setup:"Setup turns Ready / Triggered", dimp:"Daily flips to Impulse", wimp:"Weekly flips to Impulse", vk:"VK turns Buy now"};
+const ALR_MAP = {Swing:["level","entry","vol","oi","orb","sq","setup","dimp","vk"], Positional:["level","entry","oi","setup","dimp","wimp","vk"],
+  Squeeze:["level","entry","vol","sq","setup","vk"], Breakout:["level","entry","vol","oi","orb","setup"], Overspill:["level","entry","vol","setup","dimp"]};
+async function alrCall(body){
+  const r = await fetch("/api/admin/alerts", body ? {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(body)} : {cache:"no-store"}).then(r => r.json()).catch(() => ({error:"Could not reach the server."}));
+  if(!r.error) ALR = r; return r; }
+async function pageAlerts(){
+  if(!isAdmin()) return pageHead("Alerts", "") + `<div class="empty">Admin only.</div>`;
+  if(!ALR) await alrCall();
+  if(!ALR || ALR.error) return pageHead("Alerts", "") + subnav() + `<div class="empty">${esc((ALR && ALR.error) || "Could not load.")}</div>`;
+  const a = ALR, ch = a.ch || {}, strats = a.strats || {}, names = Object.keys((S().levels || {})).sort();
+  const st = s => { const m = (S().mtf || []).find(r => r.s === s), rd = (S().ready || []).find(r => r.symbol === s), q = livePx(s);
+    return {m, rd, px: q ? q.close : m ? m.c : (S().closes || {})[s]}; };
+  const row = it => { const x = st(it.s);
+    return `<tr><td><div class="symrow">${symLink(it.s, 13.5)}</div>${it.note ? `<div class="muted" style="font-size:11.5px">${esc(it.note)}</div>` : ""}</td>
+      <td>${esc(it.strat)}</td><td class="n">${it.level ? "₹" + fmt(it.level) : "—"}</td><td class="n">${fmt(x.px)}${liveTag(it.s) ? "" : ""}</td>
+      <td>${x.m ? ["M","W","D"].map(k => { const v = x.m[k]; return !v || v === "No data" ? "" : chip(`${k} ${v === "Impulse" ? "Imp" : (MTF_PH[v]||[v])[0]}`, v === "Impulse" ? "var(--up)" : (MTF_PH[v]||[0,"var(--muted)"])[1]); }).join("") : `<span class="muted">—</span>`}</td>
+      <td>${x.rd ? chip(`${x.rd.setup} ${x.rd.stage}`, SETUP_STAGE_C[x.rd.stage] || "var(--muted)") : `<span class="muted">—</span>`}</td>
+      <td><button class="hx" data-adel="${esc(it.s)}" title="Remove">✕</button></td></tr>`; };
+  const chs = `${chip(ch.mail ? "Email ready" : "Email not set up", ch.mail ? "var(--up)" : "var(--warn)")} ${chip(ch.tg ? "Telegram ready" : "Telegram not set up", ch.tg ? "var(--up)" : "var(--warn)")}`;
+  return pageHead("Alert watchlist", "Your 10–15 stocks, checked every 15 minutes in market hours. One email + Telegram per event, no repeats in a day.") + subnav() + `
+    <section class="card fade"><div class="ct"><h2>Settings<em>${a.on ? "Alerts ON" : "Alerts paused"}</em></h2><span style="display:flex;gap:6px;flex-wrap:wrap">${chs}</span></div>
+      <form id="aform-cfg" class="hform" autocomplete="off" style="margin-top:4px">
+        <input id="a-email" type="email" placeholder="Email for alerts (must be verified in Cloudflare)" value="${esc(a.email || "")}">
+        <button class="btn2" type="submit">Save email</button>
+        <button class="btn2" type="button" data-aon="${a.on ? "0" : "1"}">${a.on ? "Pause alerts" : "Resume alerts"}</button>
+        <button class="btn2" type="button" data-atest="1">Send a test alert</button></form>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Saved only in the site's private store, never in the public repo. Evening summary email at 8:00 pm with every stock's trend, setup and the day's alerts.</div></section>
+    <section class="card" style="margin-top:12px"><div class="ct"><h2>Stocks<em>${a.items.length}</em></h2></div>
+      <form id="aform" class="hform" autocomplete="off">
+        <input id="a-s" list="a-names" placeholder="Symbol, e.g. SBIN" required style="text-transform:uppercase">
+        <select id="a-strat" class="in">${Object.entries(strats).map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join("")}</select>
+        <input id="a-level" type="number" step="0.05" min="0" placeholder="Alert level ₹ (optional)">
+        <input id="a-note" placeholder="Note (optional)">
+        <button class="btn2" type="submit">Add / update</button>
+        <datalist id="a-names">${names.map(n => `<option value="${n}">`).join("")}</datalist></form>
+      ${a.items.length ? `<div class="tw" style="margin-top:12px"><table class="t mtft"><tr><th>Stock</th><th>Strategy</th><th class="n">Level</th><th class="n">Price</th><th>M / W / D</th><th>Setup now</th><th></th></tr>${a.items.map(row).join("")}</table></div>`
+        : `<div class="empty" style="margin-top:12px">Add your first stock above.</div>`}</section>
+    <section class="card" style="margin-top:12px"><div class="ct"><h2>What sends an alert</h2></div>
+      <div class="tw"><table class="t"><tr><th>Event</th>${Object.keys(ALR_MAP).map(k => `<th>${k}</th>`).join("")}</tr>
+      ${Object.entries(ALR_EV).map(([k, n]) => `<tr><td>${esc(n)}</td>${Object.keys(ALR_MAP).map(s => `<td style="text-align:center">${ALR_MAP[s].includes(k) ? "✓" : ""}</td>`).join("")}</tr>`).join("")}</table></div>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Every alert also carries the setup's entry, stop and target, the M/W/D trend and a chart link. A short build-up (OI up, price falling) sends a warning. Data is a few minutes late.</div></section>
+    <section class="card" style="margin-top:12px"><div class="ct"><h2>Recent alerts<em>${(a.log || []).length}</em></h2></div>
+      ${(a.log || []).length ? `<div class="list">${a.log.map(l => `<div class="li"><div style="min-width:0"><b>${esc(l.s)}</b> <span class="muted" style="font-size:12px">${esc(l.strat)}</span><div style="font-size:13px">${esc(l.text)}</div></div><div class="r muted" style="font-size:12px">${esc(when(new Date(Date.parse(l.t) + 5.5*3600e3).toISOString().slice(0,16).replace("T"," ")))}</div></div>`).join("")}</div>`
+        : `<div class="muted" style="font-size:12.5px">No alerts yet.</div>`}</section>`;
+}
+async function alrSaveItems(items){ const r = await alrCall({items}); if(r.error) toast(r.error); rerender(); }
+document.addEventListener("submit", e => {
+  if(e.target.id === "aform"){ e.preventDefault(); const v = id => document.getElementById(id).value.trim();
+    const s = v("a-s").toUpperCase(); if(!s) return;
+    const items = (ALR.items || []).filter(i => i.s !== s); items.push({s, strat: v("a-strat"), level: v("a-level") ? +v("a-level") : null, note: v("a-note")});
+    alrSaveItems(items); }
+  if(e.target.id === "aform-cfg"){ e.preventDefault(); alrCall({email: document.getElementById("a-email").value.trim()}).then(r => { toast(r.error || "Email saved"); rerender(); }); }
+});
 
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
@@ -2046,7 +2104,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "admin-holdings":pageHoldings, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2057,7 +2115,7 @@ async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const adminOnly = r === "watchlist" || r === "admin";
+  const adminOnly = r === "watchlist" || r === "admin" || r === "admin-alerts";
   const proOnly = r === "intraday" || r.startsWith("admin-") || r.endsWith("scorecard");   // admin, or everyone while features are opened
   const fn = adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
     : proOnly && !PRO() ? pageDashboard : (VIEWS[r] || pageDashboard);
@@ -2106,6 +2164,9 @@ document.addEventListener("click", e => {
   if(d.itab){ UI.itab = d.itab; return rerender(); }
   if(d.clear){ UI.clear = !UI.clear; return rerender(); }
   if(d.mtf){ const [k, v] = d.mtf.split(":"); UI.mtf = {...(UI.mtf || {M:"All",W:"All",D:"All"}), [k]: v}; return rerender(); }
+  if(d.adel){ if(ALR) alrSaveItems((ALR.items || []).filter(i => i.s !== d.adel)); return; }
+  if(d.aon){ alrCall({on: d.aon === "1"}).then(() => rerender()); return; }
+  if(d.atest){ toast("Sending test…"); alrCall({test: true}).then(r => { toast(`Email: ${r.mail || r.error} · Telegram: ${r.tg || "—"}`); alrCall().then(() => rerender()); }); return; }
   if(d.hdel){ if(HOLD) holdSave((HOLD.items || []).filter(i => i.s !== d.hdel)); return; }
   if(d.hadd){ holdAdd({s: d.hadd}); return; }
   if(d.mtfp){ const v = d.mtfp.split("|"); UI.mtf = {M:v[0], W:v[1], D:v[2]}; return rerender(); }

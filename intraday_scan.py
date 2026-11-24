@@ -476,6 +476,11 @@ def main(force=False):
            "longs": longs, "shorts": shorts, "btst": bl, "stbt": bs,
            "prices": {x["s"]: x["c"] for x in rows},
            "live": [[x["s"], x["c"], x["chg"], x["sec"]] for x in rows],
+           # per stock, for the alert watchlist: price, % chg, relative volume, OI % chg, above VWAP,
+           # opening-range break (1 up, -1 down), 15-min squeeze fired up (1) / down (-1), day high, day low
+           "watch": {x["s"]: [x["c"], x["chg"], x["rvol"], x["oi"], 1 if x.get("above_vwap") else 0, x["orb"],
+                              ((x.get("sq") or {}).get("dir") or 0) if (x.get("sq") or {}).get("fired") else 0,
+                              x.get("hi"), x.get("lo")] for x in rows},
            "ixlive": {k: {"pcr": (chains.get(k) or {}).get("pcr"),
                           "oi": (oi.get(k) or {}).get("oi"),
                           "oiq": (lambda o, c: None if o is None or c is None or abs(o) < 0.5 else

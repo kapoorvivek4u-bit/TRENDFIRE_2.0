@@ -1,3 +1,4 @@
+import { alertsGet, alertsPut, alertsLog, checkAlerts, testAlert, eveningDigest, channels, STRATS } from "./alerts.js";
 import { publicPage } from "./public.js";
 import { isPublicPage, servePublicPage } from "./pages.js";
 // tradeready.in server (Cloudflare Worker). It does four jobs:
@@ -407,6 +408,8 @@ async function runSchedule(env, when) {
   const jobs = [];
   if (wd !== 0 && wd !== 6) {
     if (m === at(8, 45)) jobs.push(kiteReminder(env));
+    if (m === at(16, 45) || m === at(19, 45)) jobs.push(checkAlerts(env, null).catch(e => console.log("alerts failed", e.message)));   // setups from the after-market scans
+    if (m === at(20, 0)) jobs.push(eveningDigest(env).catch(e => console.log("digest failed", e.message)));
     if (env.GH_TOKEN) for (const [wf, due] of Object.entries(TIMETABLE)) {
       if (!due(m)) continue;
       jobs.push(gh(env, "POST", `/actions/workflows/${wf}/dispatches`, { ref: "main" })
@@ -440,6 +443,16 @@ async function api(req, env, url, user) {
     if (!admin) return json({ error: "Admin only." }, 403);
     if (req.method === "GET") return json({ list: await fullList(env) });
     if (req.method === "POST") { const r = await changeFull(env, await req.json().catch(() => ({}))); return json(r, r.error ? 400 : 200); }
+  }
+  if (p === "/api/admin/alerts") {                       // the admin's alert watchlist (KV only)
+    if (!admin) return json({ error: "Admin only." }, 403);
+    if (req.method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      if (b.test) return json(await testAlert(env));
+      await alertsPut(env, b);
+    }
+    return json({ ...(await alertsGet(env)), log: (await alertsLog(env)).slice(0, 60), ch: await channels(env),
+      strats: Object.fromEntries(Object.entries(STRATS).map(([k, v]) => [k, v.name])) });
   }
   if (p === "/api/admin/open") {
     if (!admin) return json({ error: "Admin only." }, 403);
@@ -507,6 +520,7 @@ export default {
             btst: (d.btst || []).map(x => ({ s: x.s, c: x.c, score: x.bl })), stbt: (d.stbt || []).map(x => ({ s: x.s, c: x.c, score: x.bs })) }),
             { expirationTtl: 60 * 60 * 24 * 40 });
         }
+        if (d.watch) ctx.waitUntil(checkAlerts(env, d).then(r => console.log("alerts", JSON.stringify(r))).catch(e => console.log("alerts failed", e.message)));
         return json({ ok: true, bytes: body.length });
       }
       if (p === "/api/kite/token") {                     // for scans and the VM, with their own key
