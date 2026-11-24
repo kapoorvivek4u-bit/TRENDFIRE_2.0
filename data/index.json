@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-24 14:15",
+ "generated_ist": "2026-11-24 15:15",
  "oi_asof": "2026-11-23",
  "indexes": [
   {
@@ -395,8 +395,8 @@
     {
      "symbol": "INDIGO",
      "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Overspill \u00b7 Ready",
+     "grade": "Warning",
      "oi": {
       "oi_pct": 19.1,
       "px_pct": -0.4,
@@ -426,6 +426,18 @@
       "px_pct": -4.7,
       "word": "Short build-up",
       "side": -1
+     }
+    },
+    {
+     "symbol": "ULTRACEMCO",
+     "vk": "BUY NOW",
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -0.9,
+      "px_pct": 3.0,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -479,7 +491,7 @@
     {
      "symbol": "SUNPHARMA",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Weekly Overspill \u00b7 Triggered",
+     "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": -3.1,
@@ -880,18 +892,6 @@
      "oi": {
       "oi_pct": -0.6,
       "px_pct": 0.2,
-      "word": "No big change",
-      "side": 0
-     }
-    },
-    {
-     "symbol": "ULTRACEMCO",
-     "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "C",
-     "oi": {
-      "oi_pct": -0.9,
-      "px_pct": 3.0,
       "word": "No big change",
       "side": 0
      }
@@ -2021,7 +2021,7 @@
     {
      "symbol": "HEROMOTOCO",
      "vk": "BUY NOW",
-     "setup": "Weekly Overspill \u00b7 Triggered",
+     "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "A",
      "oi": {
       "oi_pct": 4.5,
@@ -3305,18 +3305,6 @@
      }
     },
     {
-     "symbol": "ADANIGREEN",
-     "vk": "ALMOST READY (Bullish)",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": 10.1,
-      "px_pct": -0.7,
-      "word": "Big positions building",
-      "side": 0
-     }
-    },
-    {
      "symbol": "BOSCHLTD",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Hourly Overspill \u00b7 Watch",
@@ -3607,8 +3595,8 @@
     {
      "symbol": "POLYCAB",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "B",
+     "setup": "Daily Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": 10.9,
       "px_pct": -6.4,
@@ -3680,7 +3668,7 @@
      "symbol": "VBL",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Ready",
-     "grade": "A",
+     "grade": "B",
      "oi": {
       "oi_pct": 2.3,
       "px_pct": -2.1,
@@ -3710,6 +3698,18 @@
       "px_pct": -3.1,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "ADANIGREEN",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 10.1,
+      "px_pct": -0.7,
+      "word": "Big positions building",
+      "side": 0
      }
     },
     {

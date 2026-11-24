@@ -12,10 +12,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ADANIGREEN": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "ANANDRATHI": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -560,10 +556,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "ULTRACEMCO": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "UPL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -729,6 +721,10 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "TVSMOTOR": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "ULTRACEMCO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
