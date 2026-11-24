@@ -1494,7 +1494,14 @@ def key_levels(daily):
             if len(c) < 60:
                 continue
             w = c.resample("W-FRI").last().dropna()
-            lv = {"c": round(float(c.iloc[-1]), 2)}
+            lv = {"c": round(float(c.iloc[-1]), 2),
+                  "e20": round(float(c.ewm(span=20, adjust=False).mean().iloc[-1]), 2)}   # for the chase meter
+            if {"High", "Low"} <= set(df.columns):
+                h, l = df["High"].reindex(c.index), df["Low"].reindex(c.index)
+                tr = pd.concat([h - l, (h - c.shift()).abs(), (l - c.shift()).abs()], axis=1).max(axis=1)
+                a = tr.rolling(20).mean().iloc[-1]
+                if pd.notna(a) and a > 0:
+                    lv["a"] = round(float(a), 2)           # 20-day average true range
             if len(c) >= 200:
                 lv["d200"] = round(float(c.rolling(200).mean().iloc[-1]), 2)
             if len(w) >= 20:

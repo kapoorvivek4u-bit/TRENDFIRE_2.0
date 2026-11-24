@@ -137,7 +137,7 @@ export async function checkAlerts(env, d) {
       if (v.vk === "BUY NOW" && prev.vk && prev.vk !== "BUY NOW") add("vk", "VK turned Buy now");
       st.prev[s] = { D: v.D || prev.D, W: v.W || prev.W, vk: v.vk || prev.vk, setup: v.setup ? v.setup.name + v.setup.stage : null };
     }
-    if (ev.length) out.push({ it, v, c, chg, ev });
+    if (ev.length) { if (site) v.chase = chaseLine((site.levels || {})[s], c ?? (site.closes || {})[s]); out.push({ it, v, c, chg, ev }); }
   }
   await env.USERS.put(K_STATE, JSON.stringify(st), { expirationTtl: 60 * 60 * 24 * 30 });
   if (!out.length) return { sent: 0 };
@@ -148,8 +148,15 @@ export async function checkAlerts(env, d) {
   return { sent: out.length, ...res };
 }
 
+function chaseLine(lv, c) {
+  if (!lv || !lv.e20 || !lv.a || c == null) return null;
+  const x = (c - lv.e20) / lv.a, n = `${x >= 0 ? "+" : ""}${x.toFixed(1)} ATR from the 20 EMA ₹${fmt(lv.e20)}`;
+  return x > 2.5 ? `🔴 Don't chase (${n}): wait for a pullback` : x > 1 ? `🟡 Wait for a dip (${n})`
+    : x >= -1.5 ? `🟢 Good entry zone (${n})` : `⚪ Below the 20 EMA (${n}): wait for it to turn up`;
+}
 function lines(o) {
   const v = o.v || {}, bits = [];
+  if (v.chase) bits.push(v.chase);
   if (v.setup) bits.push(`${v.setup.name} ${v.setup.stage} · grade ${v.setup.grade}` + (v.setup.entry ? ` · entry ₹${fmt(v.setup.entry)} · stop ₹${fmt(v.setup.stop)} · target ₹${fmt(v.setup.target)} · R:R ${v.setup.rr ?? "—"}` : ""));
   if (v.M || v.W || v.D) bits.push(`M ${v.M || "—"} · W ${v.W || "—"} · D ${v.D || "—"}${v.vk ? " · VK " + v.vk : ""}${v.sec ? " · " + v.sec : ""}`);
   if (v.top5) bits.push("In today's Top 5 positional");
