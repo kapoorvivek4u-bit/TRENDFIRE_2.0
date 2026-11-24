@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-24 11:30",
+ "generated_ist": "2026-11-24 12:30",
  "oi_asof": "2026-11-23",
  "squeeze": [
   {
@@ -1440,37 +1440,6 @@
    }
   },
   {
-   "symbol": "AMBUJACEM",
-   "score": 3.5,
-   "bias": "Selling",
-   "events": [
-    {
-     "when": "Mon 23",
-     "text": "2 hours of unusual volume, peak 5.2x at 10:15",
-     "side": 0
-    },
-    {
-     "when": "Mon 23",
-     "text": "Day's volume 2.7x usual",
-     "side": -1
-    },
-    {
-     "when": "Mon 23",
-     "text": "OI +6% in a day, price -2.1%: short build-up",
-     "side": -1
-    }
-   ],
-   "close": 391.95,
-   "move_pct": 1.9,
-   "moved": false,
-   "vs_high": "2.2% below its 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Topping"
-   },
-   "setup": "Swing Pullback \u00b7 Watch"
-  },
-  {
    "symbol": "KAYNES",
    "score": 3.5,
    "bias": "Selling",
@@ -1732,6 +1701,24 @@
     "W": "Bottoming",
     "D": "Bullish"
    }
+  },
+  {
+   "symbol": "AMBUJACEM",
+   "score": 3.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Mon 23",
+     "text": "2 hours of unusual volume, peak 5.2x at 10:15",
+     "side": 0
+    },
+    {
+     "when": "Mon 23",
+     "text": "OI +6% in a day, price -2.1%: short build-up",
+     "side": -1
+    }
+   ],
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "AUBANK",
