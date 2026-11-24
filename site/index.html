@@ -506,6 +506,17 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
 .mtft td{vertical-align:middle;white-space:nowrap}.mtfph{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.mtfph button{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:transparent;color:var(--c);border-radius:999px;padding:3px 9px;font:600 11.5px inherit;cursor:pointer}.mtfph button.on{background:color-mix(in srgb,var(--c) 16%,transparent)}.mtfph i{font-style:normal;opacity:.65;margin-left:4px}.mtft .sh{display:none}
 @media (max-width:640px){.mtft .hs{display:none}.mtft .sh{display:inline}.mtft .symrow{flex-wrap:nowrap}.mtft td,.mtft th{padding-left:3px;padding-right:3px}.mtft .symrow a{font-size:12.5px!important}.mtft td.n{font-size:11.5px!important}.mtft .chip{font-size:10.5px;padding:2px 5px}.mtft td.n{font-size:12px}.mtft button.star{display:none}}
+.hsum{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end}.hbig{font:800 34px/1 var(--head,inherit);margin:4px 0 6px}
+.hbar{width:min(260px,70vw);height:8px;border-radius:9px;background:color-mix(in srgb,var(--muted) 18%,transparent);overflow:hidden}.hbar i{display:block;height:100%;background:var(--up);border-radius:9px}
+.hcats{display:flex;flex-wrap:wrap;gap:6px}
+.hcat{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;padding:4px 10px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);white-space:nowrap}.hcat i{font-style:normal;font-weight:600;opacity:.75}
+.hform{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:14px}.hform input{min-width:0;padding:9px 11px;border-radius:10px;border:1px solid var(--line);background:var(--card,transparent);color:inherit;font:inherit}
+.hlist{display:grid;gap:10px;margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))}
+.hd{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--card,transparent);min-width:0}
+.hdt{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}.hdt .hcat{flex-direction:column;gap:0;padding:6px 10px;border-radius:12px;min-width:56px}.hdt .hcat i{font-size:16px}
+.hx{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 4px}
+.hdo{margin-top:8px;font-size:13px;padding:7px 10px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 8%,transparent);border-radius:0 8px 8px 0}
+.hwarn{margin-top:6px;font-size:12px;color:var(--warn)}.hfix{margin-top:6px;font-size:12px;color:var(--muted)}.hfix b{color:inherit}
 </style>
 </head>
 <body>
@@ -694,7 +705,7 @@ const PAGES = [
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-scorecard","Scorecard"]]]] : []);
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-scorecard","Scorecard"]]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
 function subnav(){
@@ -1081,6 +1092,124 @@ function pageMTF(){
         <td class="n">${fmt(q ? q.close : r.c)}${q ? ` <b class="${cls(q.chg)} hs" style="font-size:11px">${pct(q.chg, 1)}</b>` : ""}</td><td class="n hs ${cls(r.d5)}">${r.d5 == null ? "—" : pct(r.d5, 1)}</td></tr>`; }).join("")}</table></div>`
       : `<div class="empty">No stock matches all three filters right now.</div>`}</section>`;
 }
+
+/* ============================================================ admin: my holdings, rated */
+let HOLD = null;                       // {items:[{s, avg, qty, note, added}], at}
+const HOLD_CAT = [[80,"Best","var(--up)"],[65,"Good","var(--info)"],[50,"Hold","var(--warn)"],[30,"Weak","var(--accent2)"],[-1e9,"Exit","var(--down)"]];
+const HOLD_DO = {
+  Best: "Strong on every timeframe. Hold, and add on a dip to the 20-day EMA.",
+  Good: "Healthy trend. Hold and trail the stop under the level shown.",
+  Hold: "Okay to keep, but don't add. Upgrade it when the items below turn green.",
+  Weak: "Trend is slipping. Tighten the stop or cut half; swap it if it doesn't improve in a week or two.",
+  Exit: "Trend is broken on the bigger timeframes. Not worth holding: exit and move the money to a Best/Good stock."};
+const ST_PTS = {W:{Impulse:15, Bullish:8, Topping:2, Bottoming:-4, Bearish:-15}, M:{Impulse:10, Bullish:6, Topping:0, Bottoming:-3, Bearish:-10}, D:{Impulse:6, Bullish:4, Topping:1, Bottoming:-1, Bearish:-6}};
+const TF_NAME = {M:"Monthly", W:"Weekly", D:"Daily"};
+function rateHolding(h){
+  const s = S(), sym = h.s, fo = (s.mtf || []).find(r => r.s === sym), eqs = (s.mtf_eq || {})[sym];
+  const st = fo ? {M:fo.M, W:fo.W, D:fo.D} : eqs ? {M:eqs[0], W:eqs[1], D:eqs[2]} : null;
+  const lv = (s.levels || {})[sym], q = livePx(sym);
+  const px = q ? q.close : fo && fo.c != null ? fo.c : lv ? lv.c : null;
+  if(!st && !lv) return {sym, h, px, known:false};
+  let score = 42; const why = [], fix = [], warn = [];
+  const add = (t, p, need) => { if(!p) return; score += p; why.push({t, p: Math.round(p*10)/10}); if(p < 0 && need) fix.push({t: need, p}); };
+  if(st) for(const k of ["W","M","D"]){ const v = st[k]; if(!v || v === "No data") continue;
+    add(`${TF_NAME[k]} ${v === "Impulse" ? "Impulse" : "Corrective · " + v}`, ST_PTS[k][v] || 0,
+      k === "D" ? null : `${TF_NAME[k]} back to Impulse (now ${v})`); }
+  if(fo && fo.sc != null) add(`Strength rank ${fo.rk} of ${(s.mtf || []).length} (score ${fo.sc})`, (fo.sc - 50) * 0.2, "Relative strength vs Nifty to improve");
+  const ss = fo ? fo.ss : null;
+  if(ss) add(`${fo.sec} sector ${ss.toLowerCase()}`, {Leading:6, Improving:3, Weakening:-3, Lagging:-6}[ss] || 0, `${fo.sec} sector to turn Improving/Leading`);
+  if(lv && px){
+    if(lv.d200) add(px > lv.d200 ? `Above the 200 DMA (${fmt(lv.d200)})` : `Below the 200 DMA (${fmt(lv.d200)})`, px > lv.d200 ? 5 : -10, `Close back above the 200 DMA ₹${fmt(lv.d200)}`);
+    const w = walls(sym); if(w && w.near.length) add(`${w.near[0].name} ${w.near[0].d.toFixed(1)}% above: upside capped near term`, -3, `Clear the ${w.near[0].name} at ₹${fmt(w.near[0].v)}`);
+  }
+  if(fo && fo.oi5 != null && fo.d5 != null && Math.abs(fo.oi5) >= 3){
+    if(fo.oi5 > 0) add(fo.d5 > 0 ? `Long build-up: OI ${pct(fo.oi5,0)}, price ${pct(fo.d5)} in 5 days` : `Short build-up: OI ${pct(fo.oi5,0)}, price ${pct(fo.d5)} in 5 days`, fo.d5 > 0 ? 4 : -6, "Shorts to cover (OI falling as price rises)");
+    else if(fo.d5 < 0) add(`Long unwinding: OI ${pct(fo.oi5,0)}, price ${pct(fo.d5)} in 5 days`, -3, "Longs to stop exiting");
+  }
+  const fii = CACHE["fii.json"] || {};
+  if((fii.accumulation || []).some(x => x.symbol === sym)) add("FII-style buying (FII footprint)", 4);
+  if((fii.distribution || []).some(x => x.symbol === sym)) add("FII-style selling (FII footprint)", -5, "Big-player selling to stop");
+  const un = ((CACHE["unusual.json"] || {}).rows || []).find(r => r.symbol === sym);
+  if(un && un.bias === "Buying") add("Unusual activity: buying", 2);
+  if(un && un.bias === "Selling") add("Unusual activity: selling", -4, "Unusual selling to stop");
+  const vk = (s.vk || {})[sym];
+  if(vk === "BUY NOW") add("VK Buy now", 3); else if(vk === "SELL NOW") add("VK Sell now", -5, "VK sell signal to clear");
+  const rd = (s.ready || []).find(r => r.symbol === sym && (r.stage === "Ready" || r.stage === "Triggered"));
+  if(rd) add(`Fresh ${rd.setup} setup (${rd.stage}): good place to add`, 5);
+  const hu = s.heads_up || {};
+  if((hu.ban || []).includes(sym)) warn.push("In the F&O ban list today");
+  if(hu.results && hu.results[sym]) warn.push(`Results on ${hu.results[sym]}: expect a big move`);
+  if(h.avg && px){ const pl = (px / h.avg - 1) * 100; if(pl <= -8 && score < 65) warn.push(`${pct(pl)} from your buy price and the trend isn't helping`); }
+  if(!st) warn.push("Trend states not scanned for this stock yet (cash stock outside the scan list)");
+  score = Math.max(0, Math.min(100, Math.round(score)));
+  const cat = HOLD_CAT.find(c => score >= c[0]);
+  const below = lv && px ? [["w20","20-week EMA"],["d200","200 DMA"],["w50","50-week EMA"]].filter(([k]) => lv[k] && lv[k] < px).map(([k,n]) => ({k, n, v: lv[k]})) : [];
+  const stopAt = below.length ? below.reduce((a, b) => b.v > a.v ? b : a) : null;
+  return {sym, h, px, q, known:true, st, score, cat:cat[1], color:cat[2], why: why.sort((a,b) => b.p - a.p), fix: fix.sort((a,b) => a.p - b.p).slice(0, 3), warn, stopAt, fo};
+}
+function swapIdeas(have){
+  const s = S(), out = [], seen = new Set(have);
+  for(const p of ((s.top5 || {}).picks || [])) if(!seen.has(p.symbol)){ seen.add(p.symbol); out.push({s:p.symbol, why:`Top 5 positional · ${p.setup}`}); }
+  for(const r of (s.mtf || []).filter(r => r.M === "Impulse" && r.W === "Impulse" && (r.D === "Topping" || r.D === "Bullish")).sort((a,b) => (b.sc||0) - (a.sc||0)))
+    if(!seen.has(r.s)){ seen.add(r.s); out.push({s:r.s, why:`M + W Impulse, Daily ${r.D.toLowerCase()} · strength ${r.sc ?? "—"}`}); }
+  return out.slice(0, 8);
+}
+async function holdLoad(){ if(HOLD) return HOLD;
+  HOLD = await fetch("/api/admin/holdings", {cache:"no-store"}).then(r => r.json()).catch(() => ({error:"Could not reach the server."}));
+  if(!HOLD.items) HOLD = {items:[], error: HOLD.error}; return HOLD; }
+async function holdSave(items){
+  const r = await fetch("/api/admin/holdings", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({items})}).then(r => r.json()).catch(() => null);
+  HOLD = r && r.items ? r : {items, error:"Not saved: could not reach the server."}; rerender(); }
+async function pageHoldings(){
+  if(!isAdmin()) return pageHead("My holdings", "") + `<div class="empty">Admin only.</div>`;
+  await Promise.all([holdLoad(), getJSON("fii.json").catch(() => null), getJSON("unusual.json").catch(() => null)]);
+  const items = HOLD.items || [], rated = items.map(rateHolding);
+  const order = {Best:0, Good:1, Hold:2, Weak:3, Exit:4};
+  rated.sort((a,b) => (a.known ? order[a.cat] : 9) - (b.known ? order[b.cat] : 9) || (b.score||0) - (a.score||0));
+  const known = rated.filter(r => r.known), cnt = c => known.filter(r => r.cat === c).length;
+  const health = known.length ? Math.round(100 * (cnt("Best") + cnt("Good")) / known.length) : 0;
+  const names = Object.keys((S().levels || {})).sort();
+  const row = r => { const h = r.h, pl = h.avg && r.px ? (r.px / h.avg - 1) * 100 : null;
+    if(!r.known) return `<div class="hd"><div class="hdt"><span class="hcat" style="--c:var(--muted)">?</span><div style="min-width:0"><b>${esc(h.s)}</b> <span class="muted" style="font-size:12px">Not found in the scan data. Check the NSE symbol.</span></div><button class="hx" data-hdel="${esc(h.s)}" title="Remove">✕</button></div></div>`;
+    return `<div class="hd"><div class="hdt"><span class="hcat" style="--c:${r.color}">${r.cat}<i>${r.score}</i></span>
+      <div style="min-width:0"><div class="symrow">${symLink(h.s, 15)}${starBtn(h.s)}${r.fo ? `<span class="muted" style="font-size:12px">${esc(r.fo.sec)}</span>` : `<span class="muted" style="font-size:12px">Cash</span>`}${liveTag(h.s)}</div>
+        <div class="chips" style="margin-top:5px">${r.st ? ["M","W","D"].map(k => { const v = r.st[k]; return !v || v === "No data" ? "" : chip(`${k} ${v === "Impulse" ? "Impulse" : (MTF_PH[v]||[v])[0]}`, v === "Impulse" ? "var(--up)" : (MTF_PH[v]||[0,"var(--muted)"])[1]); }).join("") : ""}
+          ${r.stopAt ? chip(`Stop idea: below ${r.stopAt.n} ₹${fmt(r.stopAt.v)}`, "var(--muted)") : ""}
+          ${pl != null ? chip(`${pct(pl)} on ₹${fmt(h.avg)}${h.qty ? " × " + h.qty : ""}`, pl >= 0 ? "var(--up)" : "var(--down)") : ""}</div></div>
+      <button class="hx" data-hdel="${esc(h.s)}" title="Remove">✕</button></div>
+      <div class="hdo" style="--c:${r.color}">${esc(HOLD_DO[r.cat])}</div>
+      ${r.warn.length ? `<div class="hwarn">${r.warn.map(esc).join(" · ")}</div>` : ""}
+      ${r.fix.length && r.cat !== "Best" ? `<div class="hfix"><b>To move up:</b> ${r.fix.map(x => esc(x.t)).join(" · ")}</div>` : ""}
+      ${h.note ? `<div class="muted" style="font-size:12px;margin-top:4px">Note: ${esc(h.note)}</div>` : ""}
+      <details class="t5d"><summary>Why ${r.cat} · ${r.why.length} checks</summary><ul>${r.why.map(c => `<li class="${c.p > 0 ? "up" : "down"}"><b>${c.p > 0 ? "+" : ""}${c.p}</b> ${esc(c.t)}</li>`).join("")}</ul></details></div>`; };
+  const weak = known.filter(r => r.cat === "Weak" || r.cat === "Exit");
+  const swaps = swapIdeas(items.map(x => x.s));
+  return pageHead("My holdings", `Private to you · rated on the ${esc(when(S().generated_ist))} scan${HOLD.at ? ` · list saved ${esc(when(HOLD.at.slice(0,16).replace("T"," ")))}` : ""}`) + subnav() + `
+    ${HOLD.error ? `<div class="hwarn" style="margin-bottom:12px">${esc(HOLD.error)}</div>` : ""}
+    <section class="card fade"><div class="hsum">
+      <div><div class="lbl">Good + Best</div><div class="hbig">${health}%</div><div class="hbar"><i style="width:${health}%"></i></div><div class="muted" style="font-size:11.5px;margin-top:4px">Goal: 100% of holdings in Good or Best</div></div>
+      <div class="hcats">${HOLD_CAT.map(([, c, col]) => `<span class="hcat" style="--c:${col}">${c}<i>${cnt(c)}</i></span>`).join("")}</div></div>
+      <form id="hform" class="hform" autocomplete="off">
+        <input id="h-s" list="h-names" placeholder="Symbol, e.g. SBIN" required style="text-transform:uppercase">
+        <input id="h-avg" type="number" step="0.05" min="0" placeholder="Buy price (optional)">
+        <input id="h-qty" type="number" step="1" min="0" placeholder="Qty (optional)">
+        <input id="h-note" placeholder="Note (optional)">
+        <button class="btn2" type="submit">Add / update</button>
+        <datalist id="h-names">${names.map(n => `<option value="${n}">`).join("")}</datalist></form>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Saved only in the site's private store, never in the public GitHub repo. Members never see this page. Score 0–100 from the Monthly/Weekly/Daily trend, strength rank, sector, 200 DMA and weekly EMA walls, futures OI, FII footprint, unusual activity, VK and fresh setups: Best 80+, Good 65+, Hold 50+, Weak 30+, Exit below 30.</div></section>
+    ${rated.length ? `<div class="hlist">${rated.map(row).join("")}</div>` : `<div class="empty" style="margin-top:12px">Add your first stock above.</div>`}
+    ${weak.length || swaps.length ? `<section class="card" style="margin-top:12px"><div class="ct"><h2>Swap ideas<em>${weak.length ? `to replace ${weak.map(r => r.sym).join(", ")}` : "stronger names you don't hold"}</em></h2></div>
+      <div class="list">${swaps.map(x => { const r = rateHolding({s:x.s}); return `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(x.s, 14)}${starBtn(x.s)}</div><div class="muted" style="font-size:12px;margin-top:3px">${esc(x.why)}</div></div>
+        <div class="r">${r.known ? `<span class="hcat" style="--c:${r.color}">${r.cat}<i>${r.score}</i></span>` : ""}<div style="margin-top:4px"><button class="btn2" data-hadd="${esc(x.s)}" style="padding:3px 9px;font-size:11.5px" title="Add to My holdings">+ Add</button></div></div></div>`; }).join("")}</div>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Same scoring as your holdings. Check the chart and the entry on the Scanner before buying.</div></section>` : ""}`;
+}
+async function holdAdd(x){ const items = (HOLD.items || []).filter(i => i.s !== x.s); const old = (HOLD.items || []).find(i => i.s === x.s);
+  items.push({...old, ...Object.fromEntries(Object.entries(x).filter(([, v]) => v !== "" && v != null)), added: (old && old.added) || new Date(Date.now() + 5.5*3600e3).toISOString().slice(0,10)});
+  await holdSave(items); }
+document.addEventListener("submit", e => { if(e.target.id !== "hform") return; e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const s = v("h-s").toUpperCase(); if(!s) return;
+  holdAdd({s, avg: v("h-avg") ? +v("h-avg") : null, qty: v("h-qty") ? +v("h-qty") : null, note: v("h-note")}); });
 
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
@@ -1911,7 +2040,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "admin-holdings":pageHoldings, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -1966,6 +2095,8 @@ document.addEventListener("click", e => {
   if(d.itab){ UI.itab = d.itab; return rerender(); }
   if(d.clear){ UI.clear = !UI.clear; return rerender(); }
   if(d.mtf){ const [k, v] = d.mtf.split(":"); UI.mtf = {...(UI.mtf || {M:"All",W:"All",D:"All"}), [k]: v}; return rerender(); }
+  if(d.hdel){ if(HOLD) holdSave((HOLD.items || []).filter(i => i.s !== d.hdel)); return; }
+  if(d.hadd){ holdAdd({s: d.hadd}); return; }
   if(d.mtfp){ const v = d.mtfp.split("|"); UI.mtf = {M:v[0], W:v[1], D:v[2]}; return rerender(); }
   if(d.fii){ UI.fiiTab = d.fii; return rerender(); }
   if(d.ich){ UI.ich = d.ich; return rerender(); }

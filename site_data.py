@@ -1170,8 +1170,13 @@ def run(now=None):
         mv = {s: f.get("px5") for s, f in five.items()}
         out["mtf"] = sorted([{"s": s, "M": st[0], "W": st[1], "D": st[2], "c": (strong.get(s) or {}).get("close"),
                               "sec": (SECTORS.get(s) or {}).get("sector") or (strong.get(s) or {}).get("sector") or "Others",
-                              "rk": (strong.get(s) or {}).get("rank"), "d5": mv.get(s)}
+                              "rk": (strong.get(s) or {}).get("rank"), "d5": mv.get(s),
+                              "sc": (strong.get(s) or {}).get("score"), "r1m": (strong.get(s) or {}).get("r1m"),
+                              "r3m": (strong.get(s) or {}).get("r3m"), "hi52": (strong.get(s) or {}).get("hi52"),
+                              "oi5": (five.get(s) or {}).get("oi5"), "ss": (SECTORS.get(s) or {}).get("stage")}
                              for s, st in (fo.get("mtf") or {}).items()], key=lambda x: (x["rk"] or 999, x["s"]))
+        fos = set((fo.get("mtf") or {}))                   # cash-only stocks, used by the admin holdings check
+        out["mtf_eq"] = {s: st for s, st in (eq.get("mtf") or {}).items() if s not in fos}
     except Exception as ex:
         print("site_data: mtf failed:", ex)
     try:

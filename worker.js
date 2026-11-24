@@ -437,6 +437,20 @@ async function api(req, env, url, user) {
     if (req.method === "GET") return json({ list: await fullList(env) });
     if (req.method === "POST") { const r = await changeFull(env, await req.json().catch(() => ({}))); return json(r, r.error ? 400 : 200); }
   }
+  if (p === "/api/admin/holdings") {                     // the admin's own holdings: kept in KV, never in the public repo
+    if (!admin) return json({ error: "Admin only." }, 403);
+    if (req.method === "GET") return json((await env.USERS.get("holdings:v1", "json")) || { items: [] });
+    if (req.method === "POST") {
+      const b = await req.json().catch(() => ({}));
+      const items = (Array.isArray(b.items) ? b.items : []).slice(0, 200).map(x => ({
+        s: String(x.s || "").toUpperCase().replace(/[^A-Z0-9&\-]/g, "").slice(0, 20),
+        avg: +x.avg > 0 ? +(+x.avg).toFixed(2) : null, qty: +x.qty > 0 ? Math.round(+x.qty) : null,
+        note: String(x.note || "").slice(0, 120), added: String(x.added || "").slice(0, 10) })).filter(x => x.s);
+      const v = { items, at: new Date().toISOString() };
+      await env.USERS.put("holdings:v1", JSON.stringify(v));
+      return json(v);
+    }
+  }
   if (p === "/api/hit" && req.method === "POST") return await hit(env, req, user);
   if (p === "/api/admin/stats" && req.method === "GET") return admin ? json(await adminStats(env)) : json({ error: "Admin only." }, 403);
   if (p === "/api/kite/status" && req.method === "GET") return admin ? json(await kiteStatus(env)) : json({ error: "Admin only." }, 403);
