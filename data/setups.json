@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-24 10:15",
+ "generated_ist": "2026-11-24 11:15",
  "oi_asof": "2026-11-23",
- "stocks": 217,
+ "stocks": 218,
  "market": {
   "weekly_bull_pct": 34,
   "monthly_bull_pct": 52,
@@ -3619,6 +3619,40 @@
    "grade": "B",
    "trigger": 1372.81,
    "stop": 1354.19
+  },
+  {
+   "symbol": "BHARTIARTL",
+   "close": 2128.5,
+   "trend": "Early turn",
+   "states": {
+    "M": "Bottoming",
+    "W": "Impulse",
+    "D": "Topping",
+    "H": "Bearish"
+   },
+   "setup": "Hourly Overspill",
+   "stage": "Watch",
+   "old": "\u26a0\ufe0f Extended (Weakening)",
+   "ext": 4.2,
+   "vk": {
+    "final": "ALMOST READY (Bullish)",
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed",
+    "status": {
+     "M": "BOTTOMING",
+     "W": "BULLISH RUN",
+     "D": "TOPPING",
+     "H": "BEARISH RUN"
+    }
+   },
+   "detail": "Spilled 0.2% under the 50 EMA \u00b7 Volume 1.1x in pullback \u00b7 OI +2% in up-leg",
+   "grade": "B",
+   "trigger": 2140.15,
+   "stop": 2120.25
   },
   {
    "symbol": "ICICIBANK",
@@ -27224,6 +27258,7 @@
   ],
   "Fading": [
    "ANANDRATHI",
+   "BHARTIARTL",
    "BOSCHLTD",
    "DRREDDY",
    "ETERNAL",
@@ -27413,6 +27448,7 @@
   "\u26a0\ufe0f Extended (Weakening)": [
    "ANANDRATHI",
    "BANKBARODA",
+   "BHARTIARTL",
    "BOSCHLTD",
    "CANBK",
    "DRREDDY",
@@ -27552,6 +27588,22 @@
     "signal": "ALL 3 ALIGNED BULLISH",
     "ma": "ONLY BUY",
     "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
+    "daily": "Daily Signal ON (Bullish)",
+    "hourly": "Dip on Hourly \u2014 watch, buy on turn",
+    "confirmed": "Not confirmed"
+   },
+   {
+    "symbol": "BHARTIARTL",
+    "close": 2128.5,
+    "states": {
+     "M": "Bottoming",
+     "W": "Impulse",
+     "D": "Topping",
+     "H": "Bearish"
+    },
+    "signal": "W+D BULLISH (M lagging)",
+    "ma": "ONLY BUY",
+    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
     "daily": "Daily Signal ON (Bullish)",
     "hourly": "Dip on Hourly \u2014 watch, buy on turn",
     "confirmed": "Not confirmed"
@@ -30802,9 +30854,7 @@
    }
   ]
  },
- "notes": [
-  "1 stocks skipped (too little price history or no data)."
- ],
+ "notes": [],
  "mtf": {
   "360ONE": [
    "Impulse",
@@ -30960,6 +31010,11 @@
    "Topping",
    "Bearish",
    "Bearish"
+  ],
+  "BHARTIARTL": [
+   "Bottoming",
+   "Impulse",
+   "Topping"
   ],
   "BHEL": [
    "Impulse",
@@ -32078,6 +32133,12 @@
    "d200": 1905.57,
    "w20": 1871.11,
    "w50": 1800.23
+  },
+  "BHARTIARTL": {
+   "c": 2161.7,
+   "d200": 1895.52,
+   "w20": 1945.15,
+   "w50": 1912.54
   },
   "BHEL": {
    "c": 415.7,
