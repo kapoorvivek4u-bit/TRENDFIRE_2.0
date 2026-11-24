@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-24 12:15",
+ "generated_ist": "2026-11-24 13:15",
  "oi_asof": "2026-11-23",
  "indexes": [
   {
@@ -1347,6 +1347,18 @@
      }
     },
     {
+     "symbol": "AUBANK",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -9.6,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
      "setup": "Daily Cup \u00b7 Triggered",
@@ -1428,18 +1440,6 @@
       "px_pct": -1.4,
       "word": "Long unwinding",
       "side": -1
-     }
-    },
-    {
-     "symbol": "AUBANK",
-     "vk": null,
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -9.6,
-      "px_pct": 1.6,
-      "word": "Short covering",
-      "side": 1
      }
     }
    ]
@@ -2139,6 +2139,18 @@
      }
     },
     {
+     "symbol": "AUBANK",
+     "vk": "NO SIGNAL",
+     "setup": "Weekly Overspill \u00b7 Ready",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -9.6,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "BHARATFORG",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
@@ -2280,18 +2292,6 @@
       "px_pct": -1.4,
       "word": "Long unwinding",
       "side": -1
-     }
-    },
-    {
-     "symbol": "AUBANK",
-     "vk": null,
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -9.6,
-      "px_pct": 1.6,
-      "word": "Short covering",
-      "side": 1
      }
     },
     {
