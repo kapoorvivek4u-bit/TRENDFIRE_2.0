@@ -199,7 +199,7 @@ export function sitemap(d) {
   const lm = (d && d.oi_asof) || new Date().toISOString().slice(0, 10);
   const urls = [["/", "1.0"], ["/oi-buildup", "0.9"], ["/fo-ban-list", "0.9"], ["/sector-rotation", "0.8"], ["/strongest-stocks", "0.8"], ["/stocks", "0.8"]]
     .concat(Object.keys((d && d.stocks) || {}).sort().map(s => [`/stock/${encodeURIComponent(s)}`, "0.6"]))
-    .concat([["/privacy", "0.2"], ["/terms", "0.2"]]);
+    .concat([["/guide", "0.6"], ["/privacy", "0.2"], ["/terms", "0.2"]]);
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, p]) =>
     `<url><loc>https://tradeready.in${u}</loc><lastmod>${lm}</lastmod><changefreq>daily</changefreq><priority>${p}</priority></url>`).join("\n")}\n</urlset>\n`;
 }

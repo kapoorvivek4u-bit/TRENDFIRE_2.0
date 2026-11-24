@@ -419,7 +419,7 @@ async function runSchedule(env, when) {
 // pages and files anyone may open without signing in
 const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favicon.svg", "/apple-touch-icon.png",
   "/icon-192.png", "/icon-512.png", "/manifest.webmanifest", "/robots.txt",
-  "/privacy", "/privacy.html", "/terms", "/terms.html", "/sitemap.xml", "/og-image.png", "/sw.js"]);
+  "/privacy", "/privacy.html", "/terms", "/terms.html", "/guide", "/guide.html", "/sitemap.xml", "/og-image.png", "/sw.js"]);
 
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
@@ -531,7 +531,7 @@ export default {
         out.headers.set("cache-control", "no-cache");
         return out;
       }
-      if (OPEN.has(p)) {
+      if (OPEN.has(p) || /^\/guide\/[\w.-]+\.jpg$/.test(p)) {
         if (user && (p === "/login" || p === "/login.html")) return redirect("/");
         return env.ASSETS.fetch(req);          // /login serves login.html, /admin serves admin.html
       }

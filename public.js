@@ -245,7 +245,7 @@ ${body}
 </main>
 <footer><div class="wrap">
   <div class="row"><div>${NAV.slice(1).map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join("")}</div></div>
-  <div class="row" style="margin-top:10px"><div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/login">Sign in</a><a href="/admin">Admin</a></div><div>© ${new Date().getFullYear()} TradeReady · tradeready.in</div></div>
+  <div class="row" style="margin-top:10px"><div><a href="/guide">How to use</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/login">Sign in</a><a href="/admin">Admin</a></div><div>© ${new Date().getFullYear()} TradeReady · tradeready.in</div></div>
   <p style="margin:12px 0 0;max-width:90ch">For study and tracking only. TradeReady is not a SEBI-registered investment adviser or research analyst, and nothing on this site is a recommendation to buy or sell. Market data can be delayed or wrong; check with your broker before you trade.</p>
 </div></footer>
 </body>

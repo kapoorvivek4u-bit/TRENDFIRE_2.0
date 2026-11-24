@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TradeReady Guide</title>
+<meta name="description" content="How to use TradeReady: the daily routine, every page, all 7 strategies, setups, stages, grades and every short form (OI, PCR, VK, EMA, DMA, R:R, ATR) explained in simple words.">
+<link rel="canonical" href="https://tradeready.in/guide">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--surface:#fff;--surface2:#f4f3fb;--line:#e6e3f3;--ink:#1e1b4b;--muted:#6b6894;--accent:#4f46e5;--accent2:#7c3aed;--up:#0f8a5f;--down:#e03131;--warn:#d9480f;--info:#2563eb;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#0f0f11;--surface:#18181b;--surface2:#1f1f23;--line:#2a2a2f;--ink:#f2f2f2;--muted:#9a9aa2;--accent:#c6ff3d;--accent2:#22d3ee;--up:#b9f53c;--down:#ff5c5c;--warn:#ff8a3d;--info:#22d3ee;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding-block:24px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font:700 20px "Space Grotesk",Inter,sans-serif;color:var(--ink);text-decoration:none}
+.brand i{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:grid;place-items:center;color:#fff;font-style:normal;font-size:18px}
+.btn{display:inline-block;padding:9px 16px;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none;font-size:14px}
+@media (prefers-color-scheme: dark){.btn{color:#111}}
+h1{font:700 clamp(32px,6vw,52px)/1.08 "Space Grotesk",Inter,sans-serif;margin:34px 0 12px;text-wrap:balance;letter-spacing:-.01em}
+h2{font:700 clamp(24px,4vw,32px)/1.2 "Space Grotesk",Inter,sans-serif;margin:56px 0 10px;padding-top:18px;border-top:1px solid var(--line);text-wrap:balance}
+h3{font:700 19px/1.3 "Space Grotesk",Inter,sans-serif;margin:30px 0 8px}
+h4{font-size:15.5px;margin:20px 0 6px}
+p,li{max-width:72ch}
+.lead{font-size:18px;color:var(--muted);max-width:64ch}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:22px 0;padding:0;list-style:none}
+.toc a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:var(--ink);font-weight:600;font-size:14px}
+.toc a b{color:var(--accent);margin-right:6px;font-family:"JetBrains Mono",monospace}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0}
+.tip{border-left:4px solid var(--up);background:color-mix(in srgb,var(--up) 8%,var(--surface))}
+.warn{border-left:4px solid var(--warn);background:color-mix(in srgb,var(--warn) 8%,var(--surface))}
+figure{margin:16px 0 22px}
+figure img{display:block;max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 6px 24px rgba(30,27,75,.08)}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px;align-items:start}
+.tw{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px;background:var(--surface);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--surface2)}
+td:first-child{font-weight:700;white-space:nowrap}
+.chip{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12.5px;font-weight:700;background:color-mix(in srgb,var(--c,var(--muted)) 14%,transparent);color:var(--c,var(--muted));white-space:nowrap}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 10px 44px;max-width:none}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+@media (prefers-color-scheme: dark){.steps li::before{color:#111}}
+.strat{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:16px 18px;margin:14px 0}
+.strat h3{margin:0 0 4px}
+.strat .hz{font-size:13px;color:var(--muted);font-weight:600}
+.strat ul{margin:8px 0;padding-left:20px}
+.gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.gl div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px}
+.gl b{display:block;font-family:"JetBrains Mono",monospace;color:var(--accent);font-size:14px}
+code{font-family:"JetBrains Mono",monospace;font-size:.92em;background:var(--surface2);padding:1px 6px;border-radius:6px}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top"><a class="brand" href="/"><i>↗</i>TradeReady</a><a class="btn" href="/">Open TradeReady</a></div>
+
+<h1>How to use TradeReady</h1>
+<p class="lead">A complete, plain-English guide: what to open first, what every page shows, how the 7 strategies work, and what every short form on the site means. Read section 1 and 2 first (5 minutes). The rest is reference you can come back to.</p>
+
+<ul class="toc">
+  <li><a href="#start"><b>1</b>Getting started</a></li>
+  <li><a href="#routine"><b>2</b>The 5-minute daily routine</a></li>
+  <li><a href="#today"><b>3</b>Today: the dashboard</a></li>
+  <li><a href="#weather"><b>4</b>Market weather</a></li>
+  <li><a href="#strategies"><b>5</b>The 7 strategies</a></li>
+  <li><a href="#scanner"><b>6</b>Scanner and setup cards</a></li>
+  <li><a href="#setups"><b>7</b>Every setup explained</a></li>
+  <li><a href="#impulse"><b>8</b>Impulse table</a></li>
+  <li><a href="#index"><b>9</b>Index pages</a></li>
+  <li><a href="#market"><b>10</b>Market pages</a></li>
+  <li><a href="#pro"><b>11</b>Pro tools</a></li>
+  <li><a href="#glossary"><b>12</b>Short forms A to Z</a></li>
+  <li><a href="#faq"><b>13</b>Common questions</a></li>
+</ul>
+
+<div class="card warn"><b>Important.</b> TradeReady is a scanner and study tool. It filters NSE stocks by trend, momentum, volume and open interest so you look at fewer, better charts. It is not investment advice and not a tip service. Always check the chart yourself, decide your own entry and stop, and size every trade so a loss is small.</div>
+
+<!-- ============================================================ 1 -->
+<h2 id="start">1. Getting started</h2>
+<ol class="steps">
+  <li><b>Sign in</b> at <a href="/login">tradeready.in/login</a> with your Google account. You stay signed in on that device until you tap <b>Sign out</b> (bottom of the left menu on desktop, top-right icon on phone).</li>
+  <li><b>Install it like an app (optional).</b> iPhone: open the site in Safari → Share button → <b>Add to Home Screen</b>. Android: Chrome menu ⋮ → <b>Install app</b> / Add to Home screen. It then opens full screen like a normal app.</li>
+  <li><b>Find your way around.</b> On desktop the menu is on the left. On phone it is the bar at the bottom: <b>Today · Scanner · Index · Search · Market</b>. Most pages have small tabs under the title (for example Scanner → F&amp;O · Equity · Impulse table).</li>
+  <li><b>Refresh.</b> Data updates on its own. To force fresh data tap the ⟳ button at the top. If the app looks old after an update, pull down to refresh or close and reopen it.</li>
+  <li><b>Tap a stock name</b> anywhere to open its chart on TradingView in a new tab.</li>
+</ol>
+<figure><img src="/guide/18-phone.jpg" alt="TradeReady on a phone: Today page with the market clock, heads-up strip and index cards" width="390" style="width:100%;max-width:300px" loading="lazy"><figcaption>On a phone: the market clock on top, then today's heads-up, then index cards. Menu at the bottom.</figcaption></figure>
+
+<h3>When does the data update?</h3>
+<div class="tw"><table>
+<tr><th>What</th><th>When (IST, trading days)</th></tr>
+<tr><td>Setups scan (F&amp;O)</td><td>Every hour 10:15 to 15:15, then 16:15 and 19:30</td></tr>
+<tr><td>Unusual activity</td><td>Every hour 10:30 to 15:30, then 16:30 and 19:45</td></tr>
+<tr><td>Live index and stock prices</td><td>Every 15 minutes, 9:15 to 15:30 (a few minutes late)</td></tr>
+<tr><td>Sectors</td><td>16:45</td></tr>
+<tr><td>Bulk and block deals, FII footprint</td><td>19:00</td></tr>
+<tr><td>Equity (cash) scan</td><td>19:45</td></tr>
+</table></div>
+<p class="muted">Setups use <b>completed</b> candles only: the daily scan looks at yesterday's close until today's candle is finished, and the hourly scan at the last finished hour. That is on purpose, so a signal does not appear and vanish inside a half-formed candle. Prices on the cards are refreshed live during market hours.</p>
+
+<!-- ============================================================ 2 -->
+<h2 id="routine">2. The 5-minute daily routine</h2>
+<div class="two">
+<div>
+<h4>Before 9:15 (or the evening before)</h4>
+<ol class="steps">
+  <li><b>Market weather</b> (Today page). Score 55+ = normal trading. 40 to 55 = trade small and only the best. Under 40 = mostly sit out or protect profits.</li>
+  <li><b>Heads-up strip.</b> Avoid stocks in the <b>F&amp;O ban</b> and stocks with <b>results</b> in the next few days.</li>
+  <li><b>Strategies page.</b> See which strategies are <b>Open</b> today and which stocks pass all their rules. These are your shortlist.</li>
+</ol>
+</div>
+<div>
+<h4>During and after the market</h4>
+<ol class="steps" start="4">
+  <li><b>Scanner → Ready.</b> Open each Ready stock's chart. Prefer grade A, <span class="chip" style="--c:var(--up)">With trend</span>, a Leading or Improving sector and <span class="chip" style="--c:var(--up)">✓ No 200 DMA / weekly EMA wall</span>.</li>
+  <li><b>Wait for the trigger.</b> A setup is Ready before it triggers. Enter only when price confirms (see each strategy's exit line). Put the stop in at once.</li>
+  <li><b>Evening.</b> Check Big money (OI), Unusual and the Impulse table for tomorrow's list.</li>
+</ol>
+</div>
+</div>
+<div class="card tip"><b>Rule of thumb.</b> The site is built top-down: <b>market → sector → stock → setup → trigger</b>. A good setup in a bad market or a lagging sector fails far more often. If the top layers are weak, trade less.</div>
+
+<!-- ============================================================ 3 -->
+<h2 id="today">3. Today: the dashboard</h2>
+<p>Everything you need before you trade, on one screen. From top to bottom:</p>
+<figure><img src="/guide/01-dashboard.jpg" alt="Today page on desktop: market clock, heads-up strip, five index cards, market weather and the morning headline" width="1300" height="1000" loading="lazy"><figcaption>The Today page (desktop).</figcaption></figure>
+
+<h3>Market clock</h3>
+<figure><img src="/guide/02-bell.jpg" alt="Market clock bar: Market open, last scan time, setups Ready and a 6-day breadth ribbon" loading="lazy"></figure>
+<p>Shows whether the market is open, the time of the last scan, how many setups are Ready, and a small <b>breadth ribbon</b>: 6 bars, one per session, showing the % of F&amp;O stocks bullish on the Daily chart (green 70%+, orange 40 to 70%, red under 40%).</p>
+
+<h3>Heads-up strip</h3>
+<ul>
+  <li><b>New today</b>: setups that turned Ready since the last session. Tap to open the Scanner.</li>
+  <li><b>F&amp;O ban</b>: stocks whose open interest crossed 95% of the exchange limit (MWPL). No fresh F&amp;O positions are allowed in them; avoid.</li>
+  <li><b>Results soon</b>: company results within the next days. Expect a big gap either way; most traders avoid holding through results.</li>
+</ul>
+
+<h3>Index cards</h3>
+<p>Nifty 50, Bank Nifty, Nifty Midcap 50, Fin Nifty and Nifty Next 50. Each card shows the level, today's % change (marked <code>live 15:30</code> when it is a live price), the 5-day change (<code>5D</code>), a 1-month chart, and chips:</p>
+<ul>
+  <li><b>VK</b> chip: the index's VK reading (see <a href="#g-vk">VK</a>).</li>
+  <li><b>OI chip</b>: what futures money did (Long build-up, Short covering, Big positions building and so on).</li>
+  <li><b>PCR</b>: put-call ratio of the option chain. Chips carry the date of the data, so you always know if a reading is from today or the last session.</li>
+</ul>
+<p>Tap a card for the full index page.</p>
+
+<h3>Morning headline</h3>
+<p>A newspaper-style summary: which sectors lead and drag, how many stocks rose and fell, breadth, and how many setups are Ready. Below it, sectors ranked by their 1-day move.</p>
+
+<h3>Big money (OI quadrants)</h3>
+<figure><img src="/guide/16-money-flow.jpg" alt="Big money card with four boxes: long build-up, short build-up, short covering and long unwinding" width="489" style="width:100%;max-width:420px" loading="lazy"><figcaption>How futures traders positioned in the last session.</figcaption></figure>
+<div class="tw"><table>
+<tr><th>Box</th><th>Price</th><th>Open interest</th><th>What it usually means</th></tr>
+<tr><td style="color:var(--up)">Long build-up</td><td>Up</td><td>Up</td><td>New buyers coming in. Bullish.</td></tr>
+<tr><td style="color:var(--down)">Short build-up</td><td>Down</td><td>Up</td><td>New sellers coming in. Bearish.</td></tr>
+<tr><td style="color:var(--info)">Short covering</td><td>Up</td><td>Down</td><td>Sellers running away. Sharp but often short rallies.</td></tr>
+<tr><td style="color:var(--warn)">Long unwinding</td><td>Down</td><td>Down</td><td>Buyers booking out. Weakness without fresh shorts.</td></tr>
+</table></div>
+<p><b>Big positions building · flat price</b>: OI rising sharply while price barely moves: someone is building a large position, direction not yet clear. <b>Short squeeze watch</b>: heavy shorts and price holding up, so shorts may be trapped.</p>
+
+<h3>Other dashboard cards</h3>
+<ul>
+  <li><b>Ready now</b>: the best Ready setups, F&amp;O or Equity.</li>
+  <li><b>Strongest stocks</b>: ranked by strength score (see <a href="#market">Strongest</a>).</li>
+  <li><b>VK board</b>: how many stocks are in each VK state.</li>
+  <li><b>Movers and heatmap</b>: today's biggest gainers and losers and a sector heatmap (live during market hours).</li>
+  <li><b>Sectors</b>: each sector with its stage (Leading, Improving, Weakening, Lagging).</li>
+</ul>
+
+<!-- ============================================================ 4 -->
+<h2 id="weather">4. Market weather</h2>
+<div class="two">
+<figure><img src="/guide/03-weather.jpg" alt="Market weather card showing a score and a weather picture" loading="lazy"></figure>
+<figure><img src="/guide/04-weather-parts.jpg" alt="Inside the score: six bars for daily breadth, weekly breadth, Nifty trend, sectors, money flow and VIX" loading="lazy"></figure>
+</div>
+<p>One score from 0 to 100 that says how friendly the market is for long trades, drawn as weather:</p>
+<div class="tw"><table>
+<tr><th>Score</th><th>Weather</th><th>How to trade</th></tr>
+<tr><td>70+</td><td>☀️ Clear skies</td><td>Broad strength. Normal size, most setups work.</td></tr>
+<tr><td>55 to 69</td><td>⛅ Partly sunny</td><td>Okay. Be selective, favour A grades and leading sectors.</td></tr>
+<tr><td>40 to 54</td><td>🌧 Light showers</td><td>Weak. Half size, fewer trades, tight stops.</td></tr>
+<tr><td>Under 40</td><td>⛈ Storm warning</td><td>Hostile. Mostly cash; protect what you have.</td></tr>
+</table></div>
+<p><b>The six parts</b> (tap the card to see them):</p>
+<ul>
+  <li><b>Daily breadth</b>: % of F&amp;O stocks bullish on the Daily chart. Short-term mood.</li>
+  <li><b>Weekly breadth</b>: % bullish on the Weekly chart. The real health of the market; under 40% is weak.</li>
+  <li><b>Nifty trend</b>: Nifty's Weekly and Daily state.</li>
+  <li><b>Sectors</b>: how many of 20 sectors are Leading or Improving.</li>
+  <li><b>Money flow</b>: % of F&amp;O stocks with long build-up or short covering.</li>
+  <li><b>VIX</b>: India VIX, the fear gauge. Lower VIX scores higher.</li>
+</ul>
+<p><b>Market line</b> (shown under the parts and used by the strategies):</p>
+<ul>
+  <li><b>Turning up</b>: daily breadth rose by several points over 3 sessions and Nifty's Daily is not bearish. Best time to buy dips.</li>
+  <li><b>No clear turn</b>: nothing decisive. Strategies run at half size or wait.</li>
+  <li><b>Falling / Still falling</b>: breadth dropping fast or Nifty Daily bearish. Most buy strategies close.</li>
+  <li><b>Overheated</b>: daily breadth 85%+. Rallies are stretched; expect a cooldown.</li>
+</ul>
+
+<!-- ============================================================ 5 -->
+<h2 id="strategies">5. The 7 strategies</h2>
+<p>Today → <b>Strategies</b>. Each strategy is a fixed set of rules. The page shows whether it is <b>Open</b> today (the market allows it), which stocks pass <b>every</b> rule, and which are close ("Dipping now, next to turn"). Use them as complete checklists: if a stock is not listed, it failed at least one rule.</p>
+<figure><img src="/guide/05-strategies.jpg" alt="Strategies page listing the seven strategies with their status" width="1300" height="1000" loading="lazy"></figure>
+<p><b>Gate</b> = the market condition the strategy needs. "Open" means allowed today; "half size" means allowed with smaller positions; "Closed" means skip it today.</p>
+
+<div class="strat"><h3>1 · Sector Leader Swing</h3><div class="hz">F&amp;O · 3 to 5 days</div>
+<p><b>Idea:</b> buy a short hourly dip in a strong stock inside a strong sector.</p>
+<ul><li>Market Turning up with daily breadth under 85% (full size), or No clear turn (half size)</li>
+<li>Swing Pullback setup, stage Ready, grade A, With trend</li>
+<li>Not extended: under 4 ranges (ATR) above the 50 EMA</li>
+<li>Sector Leading or Improving, its index Daily bullish, 50%+ of its stocks weekly bullish</li></ul>
+<p><b>Entry and exit:</b> enter on an hourly close above the entry level. Book half at 2R, trail the rest under hourly swing lows, exit by day 5 if it has not worked.</p></div>
+
+<div class="strat"><h3>2 · Cooldown Buy</h3><div class="hz">F&amp;O and Equity · 5 to 10 days</div>
+<p><b>Idea:</b> buy strong stocks on their daily pullback; best right after an overheated rally cools down.</p>
+<ul><li>Market not Still falling, and Nifty Daily not Bearish</li>
+<li>Full size when a cooldown is under way (daily breadth was 85%+ in the last 6 sessions and has cooled to 60 to 78%), otherwise half</li>
+<li>Trend Pullback or Daily Overspill, stage Ready, grade A</li>
+<li>Under 2 ranges above the 50 EMA (near value); sector not Lagging</li></ul>
+<p><b>Entry and exit:</b> daily close above the entry level. Half at 2R, trail the rest under the 20 EMA.</p></div>
+
+<div class="strat"><h3>3 · Squeeze Coil</h3><div class="hz">F&amp;O and Equity · 3 to 10 days</div>
+<p><b>Idea:</b> catch a coiled stock as momentum turns up, before the breakout.</p>
+<ul><li>Market No clear turn, or Turning up with daily breadth under 70%</li>
+<li>Squeeze Break setup, stage Ready, grade A or B; sector Leading or Improving</li>
+<li>Bonus: old label 🏆 Prime Setup, or Unusual page shows Buying</li></ul>
+<p><b>Entry and exit:</b> daily close above the 5-day high, ideally on above-normal volume. Half at 2R; exit when the Daily turns Topping.</p></div>
+
+<div class="strat"><h3>4 · Weekly Overspill Positional</h3><div class="hz">F&amp;O and Equity · 2 to 4 weeks</div>
+<p><b>Idea:</b> buy a long uptrend when the weekly chart dips into its 20 to 50 EMA zone and the Daily turns up.</p>
+<ul><li>Market anything except Still falling</li>
+<li>Weekly Overspill, stage Ready, grade A, With trend; sector not Lagging</li>
+<li>Bonus (Equity): delivery higher than before</li></ul>
+<p><b>Entry and exit ("accordion"):</b> one third now, one third on a daily close above the entry level, the last third when Weekly momentum turns up. The stop is wide, so size the first lot to cost only your normal risk. Trail under the weekly 20 EMA.</p></div>
+
+<div class="strat"><h3>5 · Unusual Activity Confluence</h3><div class="hz">F&amp;O and Equity · 3 to 5 days</div>
+<p><b>Idea:</b> big money showing up in a stock that is already on a setup.</p>
+<ul><li>Market anything except Still falling</li>
+<li>Unusual page: bias Buying, score 4 or more</li>
+<li>Also on a setup, stage Watch or Ready, grade not Warning</li>
+<li>Weekly Bullish or Impulse; sector Leading or Improving</li></ul>
+<p><b>Entry:</b> when the setup is Ready, on its entry level. Watch-stage names are listed so you can set price alerts.</p></div>
+
+<div class="strat"><h3>6 · Equity Base Breakout</h3><div class="hz">Equity · 8 to 10 days</div>
+<p><b>Idea:</b> buy a midcap or smallcap breaking out of a tight base on volume.</p>
+<ul><li>Equity market Turning up with daily breadth under 85%</li>
+<li>Breakout page: Ready (close to the level), grade A</li>
+<li>RS 80 or more, base 20% deep or less, volume inside the base below usual</li>
+<li>Sector Leading or Improving (or not classified)</li></ul>
+<p><b>Entry and exit:</b> daily close above the breakout level on volume at least 1.5× usual; no volume, no trade. Stop about one daily range below the level. Exit if it closes back inside the base within 3 days.</p></div>
+
+<div class="strat"><h3>7 · Breakout + Trend Overspill</h3><div class="hz">F&amp;O · 3 to 7 days</div>
+<p><b>Idea:</b> after a range breakout, buy the first hourly dips into the 20 to 50 EMA zone of the new trend.</p>
+<ul><li>Market anything except Still falling (half size when Overheated)</li>
+<li>A range breakout in the last 15 sessions that still holds (price above the old ceiling)</li>
+<li>Weekly or Daily in Impulse; Hourly Overspill, stage Ready, dip quality A</li>
+<li>Not extended (under 4 ranges above the Daily 50 EMA); sector not Lagging</li></ul>
+<p><b>Entry and exit:</b> hourly close above the hourly 20 EMA. Stop under the spill low. Half at 2R, trail the rest under the hourly 50 EMA. Best on the first or second dip after the breakout.</p></div>
+
+<h3>A list</h3>
+<p>Today → <b>A list</b>: every grade-A setup across F&amp;O and Equity on one page, with stage filters (Ready / Triggered / Watch) and the <b>Clear road only</b> filter.</p>
+
+<!-- ============================================================ 6 -->
+<h2 id="scanner">6. Scanner and setup cards</h2>
+<figure><img src="/guide/06-scanner.jpg" alt="F&amp;O Scanner with setup filters, stage filters and setup cards" width="1300" height="1000" loading="lazy"></figure>
+<p><b>Tabs:</b> F&amp;O (about 218 futures stocks) · Equity (cash stocks outside F&amp;O) · Impulse table.<br>
+<b>Setup filter:</b> All · Squeeze · Swing · Trend · Overspill · Patterns · VK (Equity also has Breakout).<br>
+<b>Stage filter:</b> Ready · Watch · Triggered, with counts.<br>
+<b>Clear road only:</b> hides stocks that have the 200 DMA, 20-week EMA or 50-week EMA within 4% above the price. Those levels often act as a ceiling, so stocks with a clear road have more room to run.</p>
+
+<h3>Reading a setup card</h3>
+<figure><img src="/guide/07-setup-card.jpg" alt="One setup card: symbol, price, grade badge and chips for walls, setup, stage, trend, VK, sector and timeframe states" style="width:100%;max-width:420px" loading="lazy"></figure>
+<ul>
+  <li><b>Symbol and price</b>, plus a live price during market hours. Top right: the <b>grade</b> badge (A, B, C or ! for Warning).</li>
+  <li><b>Wall chip</b>: <span class="chip" style="--c:var(--up)">✓ No 200 DMA / weekly EMA wall</span> or <span class="chip" style="--c:var(--warn)">⚠ 50W EMA 2.2% above</span> (resistance close overhead).</li>
+  <li><b>Setup · Stage · Trend</b>: e.g. Swing Pullback · Ready · With trend.</li>
+  <li><b>VK</b> chip and <b>sector · sector stage</b>.</li>
+  <li><b>M · W · D · H</b> chips: Monthly, Weekly, Daily, Hourly state (see <a href="#impulse">states</a>).</li>
+  <li><b>Detail line</b>: why it qualified, e.g. "Pullback 26% · Volume 0.7x in pullback · OI +113% in up-leg". Volume under 1x in the pullback means sellers are quiet (good).</li>
+</ul>
+
+<h3>Stages</h3>
+<div class="tw"><table>
+<tr><th>Stage</th><th>Meaning</th><th>What to do</th></tr>
+<tr><td style="color:var(--warn)">Watch</td><td>The pattern is forming but momentum has not turned yet.</td><td>Add to your list, set alerts. Do not buy yet.</td></tr>
+<tr><td style="color:var(--up)">Ready</td><td>Momentum is turning; the trigger level is close.</td><td>Plan the trade: entry above the trigger, stop below the pullback low.</td></tr>
+<tr><td style="color:var(--info)">Triggered</td><td>Price already crossed the trigger.</td><td>Only enter if it is still near the entry; do not chase.</td></tr>
+<tr><td>Running</td><td>No setup; the stock is in a Daily impulse.</td><td>Hold if you own it; wait for the next pullback.</td></tr>
+<tr><td>Stretched</td><td>More than 3 ATR above the 20 EMA.</td><td>Too far from value; risky to buy, consider booking some.</td></tr>
+<tr><td>Fading</td><td>Daily momentum falling 3 bars in a row while Weekly is still up.</td><td>A pause or pullback is likely; tighten stops.</td></tr>
+</table></div>
+
+<h3>Grades</h3>
+<p>Graded on the last close using volume and futures open interest:</p>
+<ul>
+  <li><b>A</b>: both checks pass: volume dried up in the pullback <i>and</i> OI rose in the up-move without short build-up in the dip.</li>
+  <li><b>B</b>: one of the two passes.</li>
+  <li><b>C</b>: neither passes.</li>
+  <li><b>! Warning</b>: short build-up during the pullback (price down, OI up 3%+). Sellers are pressing; avoid.</li>
+</ul>
+
+<h3>Trend tag (from the Monthly chart)</h3>
+<ul>
+  <li><span class="chip" style="--c:var(--up)">With trend</span>: Monthly is Bullish or Topping. The big trend is up. Best.</li>
+  <li><span class="chip" style="--c:var(--info)">Early turn</span>: Monthly is Bottoming. A new uptrend may be starting; smaller size.</li>
+  <li><span class="chip" style="--c:var(--down)">Counter-trend</span>: Monthly is Bearish. Buying against the big trend; quick trades only.</li>
+</ul>
+
+<h3>Old labels (from the original TrendFire)</h3>
+<ul>
+  <li>🏆 <b>Prime Setup</b>: Daily momentum below zero but rising, with a squeeze on. Coiled and turning.</li>
+  <li>✅ <b>Confirmed Bullish</b>: Daily momentum above zero and rising.</li>
+  <li>⏳ <b>Building Momentum</b>: Daily momentum below zero but rising.</li>
+  <li>🎯 <b>Consolidating</b> / ⚠️ <b>Extended</b>: the Hourly is resting, or the move is stretched.</li>
+</ul>
+
+<!-- ============================================================ 7 -->
+<h2 id="setups">7. Every setup explained</h2>
+<div class="gl">
+<div><b>Squeeze Break</b>Bollinger Bands move inside the Keltner Channel (a "squeeze": price is coiling quietly). Weekly momentum is up, Daily momentum is below zero and turning up. Ready when it turns; the entry is the 5-day high.</div>
+<div><b>Swing Pullback</b>Daily is in Impulse; the Hourly pulls back 20 to 75% of its last up-leg on lighter volume, then turns up. A 3 to 5 day trade.</div>
+<div><b>Trend Pullback</b>Weekly in Impulse; the Daily pulls back 20 to 75% of its up-leg (the leg must be at least 3 ATR) on drying volume, then turns up.</div>
+<div><b>Overspill (Hourly / Daily / Weekly)</b>In an uptrend, price "spills" back from well above the 20 EMA into the 20 to 50 EMA zone (the value zone), then turns up. Weekly Overspill = positional, Daily = swing, Hourly = short swing.</div>
+<div><b>Range (breakout)</b>A long sideways range with a flat or falling ceiling touched 3+ times. Ready when price is within 1 ATR of the ceiling.</div>
+<div><b>Flag</b>A sharp rise (the pole, 10%+ on Daily) followed by a short, quiet drift that gives back at most a third. Breakout needs 1.5× volume.</div>
+<div><b>Rectangle</b>Price boxed between a flat top and a flat bottom. Ready near the top line.</div>
+<div><b>Wedge / Clean wedge</b>Falling wedge: two falling lines that narrow. Clean wedge = narrowed to 40% or less of its starting width (tighter, better).</div>
+<div><b>VCP</b>Volatility Contraction Pattern: after a run up, a base whose swings get smaller each time (for example 20%, 10%, 5%) on falling volume. Breakout above the last small swing high.</div>
+<div><b>Cup</b>A rounded U-shaped base after an uptrend, often with a small handle. Breakout above the cup's rim.</div>
+<div><b>Breakout (Equity)</b>A tight base in a mid/smallcap, with relative strength 80+; Ready when price is close to the breakout level.</div>
+<div><b>VK tab</b>All stocks grouped by their VK reading (Buy now, Almost ready, Coming close, No signal and the bearish versions), with the VK advice line.</div>
+</div>
+
+<!-- ============================================================ 8 -->
+<h2 id="impulse">8. Impulse table and the trend states</h2>
+<p>Scanner → <b>Impulse table</b>: all F&amp;O stocks with their Monthly, Weekly and Daily state in one table. Filter each timeframe by <b>Impulse</b> or <b>Corrective</b>, and Corrective by its phase.</p>
+<figure><img src="/guide/08-impulse-table.jpg" alt="Impulse table with Monthly, Weekly and Daily filters and a table of stocks" width="1300" height="1000" loading="lazy"></figure>
+<p>States come from the <b>momentum</b> line (TTM squeeze momentum: how far price is from its recent average, smoothed) and the EMAs:</p>
+<div class="tw"><table>
+<tr><th>State</th><th>Short</th><th>Rule</th><th>Meaning</th></tr>
+<tr><td style="color:var(--up)">Impulse</td><td>Imp</td><td>Momentum above zero and rising, price above 20 EMA, 20 EMA above 50 EMA and rising</td><td>A clean, strong up-move</td></tr>
+<tr><td style="color:var(--info)">Bullish</td><td>Bull</td><td>Momentum above zero and rising, but EMAs not fully lined up</td><td>Up, but not yet a clean impulse; or a pause ending</td></tr>
+<tr><td style="color:var(--warn)">Topping</td><td>Top</td><td>Momentum above zero but falling</td><td>Still up, catching its breath (a shallow pause)</td></tr>
+<tr><td style="color:var(--accent2)">Bottoming</td><td>Bottom</td><td>Momentum below zero but rising</td><td>Down-move losing force; may turn up</td></tr>
+<tr><td style="color:var(--down)">Bearish</td><td>Bear</td><td>Momentum below zero and falling</td><td>Falling</td></tr>
+</table></div>
+<p><b>Corrective</b> = anything that is not Impulse. <b>M / W / D / H</b> = Monthly / Weekly / Daily / Hourly.</p>
+<div class="card tip"><b>Best way to use it.</b> Tap <b>"M + W Impulse, Daily Topping"</b>: the big trend is up and the stock is resting. Star them, then buy when the Daily flips back to Impulse and a setup appears. "All three Impulse" stocks are strong but usually stretched: hold, don't chase. If a stock you hold turns Weekly Corrective, tighten your stop.</div>
+
+<!-- ============================================================ 9 -->
+<h2 id="index">9. Index pages</h2>
+<figure><img src="/guide/09-index.jpg" alt="Nifty 50 index page with chart, states, option chain readings and support and resistance" width="1300" height="1000" loading="lazy"></figure>
+<p>Index → Nifty 50 · Bank Nifty · Fin Nifty · Midcap · Nifty Next 50. Each page shows the chart, M/W/D/H states, the VK reading, futures OI side, <b>PCR</b>, <b>max pain</b>, option-chain <b>support and resistance</b> (strikes with the biggest put and call OI) and relative strength against Nifty.</p>
+
+<!-- ============================================================ 10 -->
+<h2 id="market">10. Market pages</h2>
+<h3>Sectors</h3>
+<figure><img src="/guide/10-sectors.jpg" alt="Sectors page with each sector's stage and returns" width="1300" height="1000" loading="lazy"></figure>
+<p>Each sector index is compared with Nifty (a relative rotation view):</p>
+<ul>
+  <li><span class="chip" style="--c:var(--up)">Leading</span>: stronger than Nifty and gaining. Best place to buy.</li>
+  <li><span class="chip" style="--c:var(--info)">Improving</span>: weaker than Nifty but gaining. Next leaders often come from here.</li>
+  <li><span class="chip" style="--c:var(--warn)">Weakening</span>: stronger than Nifty but losing steam.</li>
+  <li><span class="chip" style="--c:var(--down)">Lagging</span>: weaker and losing. Avoid longs.</li>
+</ul>
+
+<h3>Strongest</h3>
+<figure><img src="/guide/11-strongest.jpg" alt="Strongest stocks ranked by score with reason chips" width="1300" height="1000" loading="lazy"></figure>
+<p>Every F&amp;O stock (and Nifty 50) ranked by a 0 to 100 strength score: 3-month and 1-month return against Nifty (relative strength), distance from the 52-week high, and trend. The chips under each stock say why it scores high.</p>
+
+<h3>Unusual</h3>
+<figure><img src="/guide/12-unusual.jpg" alt="Unusual activity page listing stocks with buying or selling bias and events" width="1300" height="1000" loading="lazy"></figure>
+<p>Spots what is <b>not normal for that stock</b> in the last 1 to 3 days, measured against its own history: volume spikes (hourly volume compared with the same hour on other days), wide-range days, gaps that held, unusual OI jumps and high delivery. Each stock gets a <b>score</b> (today counts fully, yesterday 0.7, two days ago 0.5) and a <b>bias</b>: Buying, Selling or Mixed.</p>
+
+<h3>FII footprint</h3>
+<figure><img src="/guide/13-fii.jpg" alt="FII footprint page with participant open interest and stock accumulation" width="1300" height="1000" loading="lazy"></figure>
+<ul>
+  <li><b>Participant OI</b>: how much of the market's index and stock futures FIIs hold long versus short (from NSE's daily participant file). Above 50% long = FIIs net bullish.</li>
+  <li><b>FII deals</b>: bulk/block deals by foreign institutions (high-frequency traders removed).</li>
+  <li><b>Accumulation / Distribution</b>: stocks where futures OI and price rose together over 5 to 10 sessions with higher delivery and turnover: the footprint big players usually leave.</li>
+</ul>
+
+<h3>Deals and Stars</h3>
+<div class="two">
+<figure><img src="/guide/14-deals.jpg" alt="Deals page: bulk and block deals tagged by buyer type" loading="lazy"></figure>
+<figure><img src="/guide/15-stars.jpg" alt="Stars page: holdings of well-known investors" loading="lazy"></figure>
+</div>
+<p><b>Deals</b>: NSE bulk and block deals, tagged Mutual fund, Star investor, Insurance or Other, with 30-day net mutual-fund buying per stock. <b>Stars</b>: which well-known investors hold 1% or more of a company, quarter by quarter, from the shareholding filings.</p>
+
+<h3>Search</h3>
+<p>Type any NSE symbol to see everything the site knows about it on one page: setups, states, strength, OI, sector, deals.</p>
+
+<!-- ============================================================ 11 -->
+<h2 id="pro">11. Pro tools</h2>
+<p>These appear only for accounts with full access (shown under <b>My tools</b>).</p>
+<ul>
+  <li><b>Trade levels</b> on cards: <b>Buy above</b> (entry trigger), <b>Stop</b>, <b>Target</b> and <b>R:R</b>. Members without full access see the same setups without these levels, and "Signal on" instead of Buy now / Sell now.</li>
+  <li><b>Top 5 positional</b> (Today page): the five best F&amp;O setups for a 2 to 4 week hold, ranked on every signal the site has (grade, setup record, M/W/D trend, strength, sector, walls, OI build-up, FII footprint, unusual activity, VK, R:R, stop distance). Tap "Why it ranks here" for every point.</li>
+  <li><b>Intraday &amp; BTST</b>: live OI build-up, index bias, option chain, intraday long/short lists and BTST/STBT candidates near the close.</li>
+  <li><b>Scorecard</b>: how past Ready signals actually did: win %, average R, by setup.</li>
+  <li><b>My holdings</b>: type the stocks you hold and each gets a rating. Your list is private to your account.</li>
+</ul>
+<figure><img src="/guide/17-holdings.jpg" alt="My holdings page: Good plus Best percentage, add form and rated stock cards" width="1300" height="1000" loading="lazy"><figcaption>My holdings: aim to have every holding in Good or Best.</figcaption></figure>
+<div class="tw"><table>
+<tr><th>Rating</th><th>Score</th><th>Meaning and action</th></tr>
+<tr><td style="color:var(--up)">Best</td><td>80+</td><td>Strong on every timeframe. Hold; add on a dip to the 20-day EMA.</td></tr>
+<tr><td style="color:var(--info)">Good</td><td>65 to 79</td><td>Healthy trend. Hold; trail the stop under the level shown.</td></tr>
+<tr><td style="color:var(--warn)">Hold</td><td>50 to 64</td><td>Okay to keep, don't add. "To move up" lists what must improve.</td></tr>
+<tr><td style="color:var(--accent2)">Weak</td><td>30 to 49</td><td>Trend slipping. Tighten the stop or cut half; swap if no improvement in 1 to 2 weeks.</td></tr>
+<tr><td style="color:var(--down)">Exit</td><td>Under 30</td><td>Bigger trend broken. Move the money to a Best/Good stock (see Swap ideas).</td></tr>
+</table></div>
+
+<!-- ============================================================ 12 -->
+<h2 id="glossary">12. Short forms A to Z</h2>
+<div class="gl">
+<div><b>2R, R, R:R</b>R = your risk (entry minus stop). 2R = a profit of twice that risk. R:R = reward ÷ risk; 2 or more is good.</div>
+<div><b>5D</b>Change over the last 5 sessions.</div>
+<div><b>A / B / C / !</b>Setup grade (section 6). ! = Warning.</div>
+<div><b>Adv / Dec</b>Number of stocks up (advances) and down (declines).</div>
+<div><b>ATR</b>Average True Range: a stock's normal daily move. "2 ranges above the 50 EMA" = 2 ATRs above it.</div>
+<div><b>Breadth</b>% of stocks bullish on a timeframe. "Wk bull 50%" = half the stocks weekly bullish.</div>
+<div><b>BTST / STBT</b>Buy Today Sell Tomorrow / Sell Today Buy Tomorrow: overnight trades.</div>
+<div><b>Bull / Top / Bottom / Bear</b>Corrective phases: Bullish, Topping, Bottoming, Bearish (section 8).</div>
+<div><b>Corr</b>Corrective: not in Impulse.</div>
+<div><b>DMA</b>Daily Moving Average (simple). 200 DMA = average of the last 200 daily closes; the line between long-term up and down.</div>
+<div><b>Delivery %</b>Share of traded shares actually taken into demat (not intraday). Higher = real buying.</div>
+<div><b>DII / FII</b>Domestic / Foreign Institutional Investors (mutual funds, insurers / foreign funds).</div>
+<div><b>EMA</b>Exponential Moving Average: an average that weights recent prices more. 20 EMA = short trend, 50 EMA = medium trend.</div>
+<div><b>20W EMA, 50W EMA</b>20-week and 50-week EMAs on the weekly chart: long-term support/resistance.</div>
+<div><b>Ext / Extended</b>How many ATRs the price is above its 50 EMA. Over 4 = stretched.</div>
+<div><b>F&amp;O</b>Futures &amp; Options: about 218 stocks with derivatives on NSE.</div>
+<div><b>F&amp;O ban</b>OI above 95% of the market-wide limit (MWPL); no new positions allowed.</div>
+<div><b>HFT</b>High-frequency trading firms (removed from FII deal counts).</div>
+<div><b>Imp</b>Impulse: strong clean up-move (section 8).</div>
+<div><b>IST</b>Indian Standard Time; all times on the site are IST.</div>
+<div><b>M / W / D / H</b>Monthly / Weekly / Daily / Hourly chart.</div>
+<div><b>Max pain</b>The option strike where option buyers lose the most at expiry; price often drifts toward it near expiry.</div>
+<div><b>Momentum</b>The TTM squeeze momentum line: above zero = up-move, rising = gaining force.</div>
+<div><b>MWPL</b>Market-Wide Position Limit for a stock's derivatives.</div>
+<div><b>OI</b>Open Interest: number of futures/option contracts still open. Rising OI = new money coming in.</div>
+<div><b>PCR</b>Put-Call Ratio of option OI. Above 1 = more puts written (support, mildly bullish); under 0.7 = more calls written (resistance).</div>
+<div><b>Pullback / Dip</b>A temporary fall inside an uptrend.</div>
+<div><b>RS</b>Relative Strength: how a stock did versus Nifty. RS 80 = better than 80% of stocks.</div>
+<div><b>RRG stages</b>Leading, Improving, Weakening, Lagging (section 10).</div>
+<div><b>SMA</b>Simple Moving Average.</div>
+<div><b>Squeeze / SQZ</b>Bollinger Bands inside Keltner Channels: very low volatility before a big move.</div>
+<div><b>Spill / Overspill</b>A pullback into the 20 to 50 EMA zone of an uptrend.</div>
+<div><b>Trigger / Entry</b>The price that confirms the setup ("Buy above").</div>
+<div id="g-vk"><b>VK</b>The VK System: reads Monthly, Weekly, Daily and Hourly momentum together. <i>Buy now</i>: Monthly, Weekly and Daily momentum line up and the turn is confirmed. <i>Almost ready</i>: aligned, waiting for the Daily/Hourly turn. <i>Coming close to ready</i>: forming. <i>No signal</i>: mixed. "Signal on" is shown instead of Buy now/Sell now for members.</div>
+<div><b>VIX</b>India VIX: expected volatility for the next 30 days. High = fear.</div>
+<div><b>Wall</b>200 DMA, 20W EMA or 50W EMA just above the price (within 4%): likely resistance.</div>
+</div>
+
+<!-- ============================================================ 13 -->
+<h2 id="faq">13. Common questions</h2>
+<h4>Why does a chart show yesterday's candle during the day?</h4>
+<p>Setups are found on completed candles only, so they don't flicker. Prices, index cards, movers and the heatmap are overlaid live (every 15 minutes, a few minutes late) and marked <code>live</code>.</p>
+<h4>Why don't I see Buy above / Stop / Target?</h4>
+<p>Trade levels are shown only to accounts with full access. Everyone sees the same setups, stages, grades and states.</p>
+<h4>A stock is Ready. Should I buy?</h4>
+<p>Ready means "plan it", not "buy now". Check the market weather, the sector stage, walls overhead and the chart. Enter only when price confirms, with a stop.</p>
+<h4>Why is a stock missing from the Impulse table or Strongest?</h4>
+<p>New listings may not have enough monthly history ("No data"). The F&amp;O list follows NSE; renamed or demerged stocks use their new NSE symbol.</p>
+<h4>The app looks old after an update.</h4>
+<p>Pull down to refresh, or close and reopen the app.</p>
+
+<footer>TradeReady is for study and tracking only. It is not investment advice, not a recommendation to buy or sell, and not a SEBI-registered research service. Markets carry risk; past signals do not guarantee future results. · <a href="/">Open TradeReady</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></footer>
+</div>
+</body>
+</html>
