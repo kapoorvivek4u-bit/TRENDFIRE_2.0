@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-23 19:45",
- "oi_asof": "2026-11-23",
- "stocks": 256,
+ "generated_ist": "2026-11-24 19:46",
+ "oi_asof": "2026-11-24",
+ "stocks": 255,
  "market": {
   "weekly_bull_pct": 23,
   "monthly_bull_pct": 43,
@@ -10,8 +10,8 @@
   "daily_bull_hist": [
    68,
    71,
-   71,
-   73,
+   72,
+   74,
    75,
    74
   ],
@@ -37,7 +37,7 @@
    "grade": "B",
    "trigger": 2089.0,
    "stop": 1982.64,
-   "detail": "Broke out Thu 19 \u00b7 Volume 2.6x \u00b7 Base 14% deep \u00b7 RS 91 \u00b7 Delivery 34% vs 39% before"
+   "detail": "Broke out Thu 19 \u00b7 Volume 2.6x \u00b7 Base 14% deep \u00b7 RS 91 \u00b7 Delivery 35% vs 39% before"
   },
   {
    "symbol": "CRAFTSMAN",
@@ -86,11 +86,11 @@
     "D": "Bearish"
    },
    "stage": "Ready",
-   "score": 72.0,
+   "score": 71.9,
    "grade": "A",
    "trigger": 4347.4,
    "stop": null,
-   "detail": "2.9% below the breakout level \u00b7 Base 8% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 84 \u00b7 Delivery 41% vs 35% before"
+   "detail": "2.9% below the breakout level \u00b7 Base 8% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 84 \u00b7 Delivery 40% vs 35% before"
   },
   {
    "symbol": "CEMPRO",
@@ -124,7 +124,7 @@
    "grade": "B",
    "trigger": 543.0,
    "stop": null,
-   "detail": "0.6% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 94 \u00b7 Delivery 48% vs 45% before"
+   "detail": "0.6% below the breakout level \u00b7 Base 19% deep \u00b7 Volume in base 1.2x usual \u00b7 RS 94 \u00b7 Delivery 52% vs 43% before"
   },
   {
    "symbol": "PVRINOX",
@@ -141,7 +141,7 @@
    "grade": "B",
    "trigger": 1747.0,
    "stop": null,
-   "detail": "2.7% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 51% vs 48% before"
+   "detail": "2.7% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 49% vs 48% before"
   },
   {
    "symbol": "GRAPHITE",
@@ -154,11 +154,11 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 56.2,
+   "score": 56.1,
    "grade": "B",
    "trigger": 807.7,
    "stop": null,
-   "detail": "2.2% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 76 \u00b7 Delivery 45% vs 38% before"
+   "detail": "2.2% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 76 \u00b7 Delivery 44% vs 38% before"
   },
   {
    "symbol": "LALPATHLAB",
@@ -171,11 +171,11 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 48.9,
+   "score": 48.8,
    "grade": "C",
    "trigger": 2079.0,
    "stop": null,
-   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 80 \u00b7 Delivery 57% vs 58% before"
+   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 80 \u00b7 Delivery 58% vs 58% before"
   },
   {
    "symbol": "PWL",
@@ -188,11 +188,11 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 40.1,
+   "score": 40.0,
    "grade": "C",
    "trigger": 141.1,
    "stop": null,
-   "detail": "0.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.3x usual \u00b7 RS 86 \u00b7 Delivery 30% vs 31% before"
+   "detail": "0.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.3x usual \u00b7 RS 86 \u00b7 Delivery 29% vs 31% before"
   }
  ],
  "notes": []

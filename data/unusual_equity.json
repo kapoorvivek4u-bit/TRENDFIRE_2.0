@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-23 19:45",
- "oi_asof": "2026-11-23",
- "stocks": 256,
+ "generated_ist": "2026-11-24 19:46",
+ "oi_asof": "2026-11-24",
+ "stocks": 255,
  "rows": [
   {
    "symbol": "EIHOTEL",
@@ -41,7 +41,7 @@
   },
   {
    "symbol": "ITI",
-   "score": 5.7,
+   "score": 5.0,
    "bias": "Buying",
    "events": [
     {
@@ -53,11 +53,6 @@
      "when": "Mon 23",
      "text": "Range 3.1x normal, closed +12.4%",
      "side": 1
-    },
-    {
-     "when": "Fri 20",
-     "text": "Delivery 37% vs 26% usual",
-     "side": -1
     }
    ],
    "close": 276.21,
