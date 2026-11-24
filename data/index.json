@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-24 11:51",
+ "generated_ist": "2026-11-24 12:15",
  "oi_asof": "2026-11-23",
  "indexes": [
   {
@@ -128,7 +128,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 25490.32,
+     "trigger": 25490.58,
      "stop": 25293.61
     }
    ],
@@ -1082,7 +1082,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63139.52,
+     "trigger": 63139.21,
      "stop": 62444.16
     }
    ],
@@ -1347,18 +1347,6 @@
      }
     },
     {
-     "symbol": "AUBANK",
-     "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Ready",
-     "grade": "B",
-     "oi": {
-      "oi_pct": -9.6,
-      "px_pct": 1.6,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
      "setup": "Daily Cup \u00b7 Triggered",
@@ -1440,6 +1428,18 @@
       "px_pct": -1.4,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "AUBANK",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -9.6,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
      }
     }
    ]
@@ -2139,18 +2139,6 @@
      }
     },
     {
-     "symbol": "AUBANK",
-     "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Ready",
-     "grade": "B",
-     "oi": {
-      "oi_pct": -9.6,
-      "px_pct": 1.6,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "BHARATFORG",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
@@ -2292,6 +2280,18 @@
       "px_pct": -1.4,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "AUBANK",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -9.6,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2468,7 +2468,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 28354.13,
+     "trigger": 28354.12,
      "stop": 28084.57
     }
    ],
