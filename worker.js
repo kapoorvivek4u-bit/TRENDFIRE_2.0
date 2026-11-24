@@ -232,8 +232,12 @@ async function fullList(env) {
   FULL_CACHE = { at: Date.now(), list };
   return list;
 }
+async function openAll(env) {                               // temporary: every signed-in user gets every feature
+  const v = env.USERS ? await env.USERS.get("open:all") : null;
+  return v === "1";
+}
 async function hasFull(env, user) {
-  return user.role === "admin" || (await fullList(env)).includes(String(user.email || "").toLowerCase());
+  return user.role === "admin" || (await openAll(env)) || (await fullList(env)).includes(String(user.email || "").toLowerCase());
 }
 async function changeFull(env, body) {
   const list = new Set(await fullList(env));
@@ -419,13 +423,13 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
 
 async function api(req, env, url, user) {
   const p = url.pathname, admin = user.role === "admin";
-  if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user) }); }
+  if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user), open: await openAll(env) }); }
   if (p === "/api/live" && req.method === "GET") {           // today's prices for the dashboard (no levels)
     const v = env.USERS ? await env.USERS.get("live:latest") : null;
     return new Response(v || "{}", { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
   }
   if (p === "/api/intraday" && req.method === "GET") {
-    if (!admin) return json({ error: "Admin only." }, 403);
+    if (!admin && !(await openAll(env))) return json({ error: "Admin only." }, 403);
     const latest = await env.USERS.get("intraday:latest", "json");
     const past = [];                                     // recent BTST lists, newest first
     const l = await env.USERS.list({ prefix: "btst:" });
@@ -437,9 +441,15 @@ async function api(req, env, url, user) {
     if (req.method === "GET") return json({ list: await fullList(env) });
     if (req.method === "POST") { const r = await changeFull(env, await req.json().catch(() => ({}))); return json(r, r.error ? 400 : 200); }
   }
-  if (p === "/api/admin/holdings") {                     // the admin's own holdings: kept in KV, never in the public repo
+  if (p === "/api/admin/open") {
     if (!admin) return json({ error: "Admin only." }, 403);
-    if (req.method === "GET") return json((await env.USERS.get("holdings:v1", "json")) || { items: [] });
+    if (req.method === "POST") { const b = await req.json().catch(() => ({})); await env.USERS.put("open:all", b.on ? "1" : "0"); }
+    return json({ on: await openAll(env) });
+  }
+  if (p === "/api/admin/holdings") {                     // each person's own holdings: kept in KV, never in the public repo
+    if (!admin && !(await openAll(env))) return json({ error: "Not available." }, 403);
+    const hkey = admin ? "holdings:v1" : "holdings:u:" + String(user.email || "").toLowerCase();
+    if (req.method === "GET") return json((await env.USERS.get(hkey, "json")) || { items: [] });
     if (req.method === "POST") {
       const b = await req.json().catch(() => ({}));
       const items = (Array.isArray(b.items) ? b.items : []).slice(0, 200).map(x => ({
@@ -447,7 +457,7 @@ async function api(req, env, url, user) {
         avg: +x.avg > 0 ? +(+x.avg).toFixed(2) : null, qty: +x.qty > 0 ? Math.round(+x.qty) : null,
         note: String(x.note || "").slice(0, 120), added: String(x.added || "").slice(0, 10) })).filter(x => x.s);
       const v = { items, at: new Date().toISOString() };
-      await env.USERS.put("holdings:v1", JSON.stringify(v));
+      await env.USERS.put(hkey, JSON.stringify(v));
       return json(v);
     }
   }
@@ -539,7 +549,7 @@ export default {
         const r = await fetch(`https://raw.githubusercontent.com/${env.REPO}/main/data/${m[1]}`,
                               { cf: { cacheTtl: 60, cacheEverything: true } });
         if (r.ok && !(await hasFull(env, user))) return await memberData(env, ctx, m[1], r);   // no trade levels
-        if (m[1] === "site.json" && user.role !== "admin" && r.ok) {      // the scorecard is for the admin only
+        if (m[1] === "site.json" && user.role !== "admin" && r.ok && !(await openAll(env))) {      // the scorecard is for the admin only
           const d = await r.json(); delete d.scorecard;
           return new Response(JSON.stringify(d), { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
         }

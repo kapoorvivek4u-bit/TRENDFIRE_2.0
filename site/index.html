@@ -705,7 +705,8 @@ const PAGES = [
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-scorecard","Scorecard"]]]] : []);
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-scorecard","Scorecard"]]]]
+  : PRO() && USER ? [["intraday","Intraday","bolt",[]],["admin","My tools","users",[["admin-holdings","My holdings"],["admin-scorecard","Scorecard"],["intraday","Intraday"]]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
 function subnav(){
@@ -730,6 +731,7 @@ const flip = () => setTheme(isDark() ? "light" : "dark");
 
 let USER = null, KITE = null;                 // {email, name, role} from /api/me
 const isAdmin = () => !USER || USER.role === "admin";
+const PRO = () => isAdmin() || !!(USER && USER.open);      // admin, or everyone while "open all features" is on
 async function apiPost(path, body){
   const r = await fetch(path, {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify(body || {})});
   if(r.status === 401){ location.href = "/login"; return null; }
@@ -825,8 +827,8 @@ function renderShell(){
        ${USER ? `<div class="me">${USER.picture ? `<img src="${esc(USER.picture)}" alt="" referrerpolicy="no-referrer">` : `<span class="av">${esc((USER.name || USER.email || "?")[0].toUpperCase())}</span>`}<span>${esc(USER.name || USER.email)}</span><a href="/logout" title="Sign out" aria-label="Sign out" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700">${ico("logout")}Sign out</a></div>` : ""}</div>`;
   document.getElementById("top").innerHTML = brand +
     `<div class="top-r">${marketPill()}<button class="tbtn" data-act="refresh" aria-label="Refresh data">${ico("refresh")}</button><button class="tbtn" data-act="theme" aria-label="Switch theme">${ico(isDark() ? "sun" : "moon")}</button>${USER ? `<a class="tbtn" href="${isAdmin() ? "#admin" : "/logout"}" aria-label="${isAdmin() ? "Admin" : "Sign out"}">${ico(isAdmin() ? "users" : "logout")}</a>` : ""}</div>`;
-  const TABS = isAdmin() ? TABS_ALL : ["today","scanner","index","search","market"];
-  document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = PAGES.find(x => x[0]===k);
+  const TABS = isAdmin() ? TABS_ALL : PRO() ? ["today","scanner","index","admin","market"] : ["today","scanner","index","search","market"];
+  document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = visiblePages().find(x => x[0]===k);
     return `<a href="#${k}" class="${r===k?"on":""}">${ico(p[2])}${p[1]}</a>`; }).join("");
   rightRail();
 }
@@ -965,7 +967,7 @@ function tradesCard(){
   const gates = Object.entries(S().gates || {}).map(([n,g]) => chip(`${n}. ${g.name}: ${g.count}`, g.count ? "var(--up)" : g.open ? "var(--muted)" : "var(--down)")).join("");
   return `<section class="card fade"><div class="ct"><h2>${FULL() ? "Today's trades" : "Setups passing every rule"}<em>${picks.length}</em></h2>
       <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="seg"><button data-trm="F&O" class="${mk==="F&O"?"on":""}">F&O · ${nFo}</button><button data-trm="Equity" class="${mk==="Equity"?"on":""}">Equity · ${nEq}</button></span>
-      ${isAdmin() ? `<a class="more" href="#admin-scorecard">Scorecard ›</a>` : ""}<a class="more" href="#today-strategies">All strategies ›</a></span></div>
+      ${PRO() ? `<a class="more" href="#admin-scorecard">Scorecard ›</a>` : ""}<a class="more" href="#today-strategies">All strategies ›</a></span></div>
     ${body}<div class="chips" style="margin-top:12px">${gates}</div></section>`;
 }
 function readyCard(){
@@ -1161,7 +1163,7 @@ async function holdSave(items){
   const r = await fetch("/api/admin/holdings", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({items})}).then(r => r.json()).catch(() => null);
   HOLD = r && r.items ? r : {items, error:"Not saved: could not reach the server."}; rerender(); }
 async function pageHoldings(){
-  if(!isAdmin()) return pageHead("My holdings", "") + `<div class="empty">Admin only.</div>`;
+  if(!PRO()) return pageHead("My holdings", "") + `<div class="empty">Not available.</div>`;
   await Promise.all([holdLoad(), getJSON("fii.json").catch(() => null), getJSON("unusual.json").catch(() => null)]);
   const items = HOLD.items || [], rated = items.map(rateHolding);
   const order = {Best:0, Good:1, Hold:2, Weak:3, Exit:4};
@@ -1196,7 +1198,7 @@ async function pageHoldings(){
         <input id="h-note" placeholder="Note (optional)">
         <button class="btn2" type="submit">Add / update</button>
         <datalist id="h-names">${names.map(n => `<option value="${n}">`).join("")}</datalist></form>
-      <div class="muted" style="font-size:11.5px;margin-top:8px">Saved only in the site's private store, never in the public GitHub repo. Members never see this page. Score 0–100 from the Monthly/Weekly/Daily trend, strength rank, sector, 200 DMA and weekly EMA walls, futures OI, FII footprint, unusual activity, VK and fresh setups: Best 80+, Good 65+, Hold 50+, Weak 30+, Exit below 30.</div></section>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Saved only in the site's private store, never in the public GitHub repo. Only you can see your list. Score 0–100 from the Monthly/Weekly/Daily trend, strength rank, sector, 200 DMA and weekly EMA walls, futures OI, FII footprint, unusual activity, VK and fresh setups: Best 80+, Good 65+, Hold 50+, Weak 30+, Exit below 30.</div></section>
     ${rated.length ? `<div class="hlist">${rated.map(row).join("")}</div>` : `<div class="empty" style="margin-top:12px">Add your first stock above.</div>`}
     ${weak.length || swaps.length ? `<section class="card" style="margin-top:12px"><div class="ct"><h2>Swap ideas<em>${weak.length ? `to replace ${weak.map(r => r.sym).join(", ")}` : "stronger names you don't hold"}</em></h2></div>
       <div class="list">${swaps.map(x => { const r = rateHolding({s:x.s}); return `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(x.s, 14)}${starBtn(x.s)}</div><div class="muted" style="font-size:12px;margin-top:3px">${esc(x.why)}</div></div>
@@ -1850,11 +1852,15 @@ async function pageAdmin(){
       ${pages.map(p => `<tr><td style="white-space:nowrap"><b>${esc(pageLabel(p.page))}</b></td><td><div class="meter" style="margin:0;max-width:none"><i style="width:${p.views/pmax*100}%;background:var(--accent)"></i></div></td><td class="n">${p.views}</td><td class="n">${p.users}</td></tr>`).join("")}</table></div>`
       : `<div class="muted" style="font-size:12.5px">No page views yet. They start counting from now.</div>`}</section>`;
   const fullList = (fl && fl.list) || [];
+  const openOn = !!(USER && USER.open);
+  const openCard = `<section class="card fade" style="margin-bottom:14px;border-color:${openOn ? "var(--warn)" : "var(--line)"}"><div class="ct"><h2>All features for everyone<em>${openOn ? "ON" : "OFF"}</em></h2>
+      <button class="btn2${openOn ? " danger" : ""}" data-openall="${openOn ? "0" : "1"}">${openOn ? "Turn off" : "Turn on"}</button></div>
+    <div class="muted" style="font-size:12.5px">${openOn ? "Every signed-in user now sees trade levels, Buy now / Sell now, Top 5, Intraday, Scorecard and their own My holdings. Users page and your Watchlist stay yours. Turn this off when the trial ends." : "Temporary switch: gives every signed-in user trade levels, Buy now / Sell now, Top 5, Intraday, Scorecard and their own private My holdings."}</div></section>`;
   const fullCard = `<section class="card fade" style="margin-bottom:14px"><div class="ct"><h2>Full access<em>${fullList.length}</em></h2></div>
     <div class="muted" style="font-size:12.5px;margin-bottom:10px">Only you and these people see Buy above / Stop / Target, R:R and Buy now / Sell now signals. Everyone else sees setups without trade levels.</div>
     ${fullList.map(e => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">${esc(e)}</span><button class="btn2 danger" data-fullrm="${esc(e)}">Remove</button></div>`).join("") || `<div class="muted" style="font-size:12.5px">Nobody added yet.</div>`}
     <form id="full-form" class="inrow" style="margin-top:12px"><input id="full-email" class="in" type="email" placeholder="name@gmail.com" autocomplete="off"><button class="btn2" type="submit">Give full access</button></form></section>`;
-  return pageHead("Admin", "Who uses the site, when, and what they open", `<a class="btn2" href="/logout">${ico("logout")} Sign out</a>`) + subnav() + kiteCard + fullCard + `
+  return pageHead("Admin", "Who uses the site, when, and what they open", `<a class="btn2" href="/logout">${ico("logout")} Sign out</a>`) + subnav() + kiteCard + openCard + fullCard + `
     <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:14px">
       <div><small>Users</small><b>${users.length}</b></div><div><small>Online now</small><b>${hasStats ? online.length : "—"}</b></div>
       <div><small>Opened today</small><b>${todayUsers.length}</b></div><div><small>Active this week</small><b>${week}</b></div><div><small>New this week</small><b>${newWeek}</b></div></div>
@@ -1957,7 +1963,7 @@ function intraChainTable(c){
       <td class="n"><b>${fmt(r.k, 0)}</b></td><td class="n">${fmt(r.pe_ltp)}</td><td>${bar(r.pe_oi, "var(--up)", true)}</td><td class="n ${cls(r.pe_chg)}">${fmt(r.pe_chg / 1e3, 1)}k</td></tr>`).join("")}</table></div></section>`;
 }
 async function pageIntraday(){
-  if(!isAdmin()) return pageHead("Intraday", "") + `<div class="empty">Admin only.</div>`;
+  if(!PRO()) return pageHead("Intraday", "") + `<div class="empty">Not available.</div>`;
   if(!INTRA_TIMER) INTRA_TIMER = setInterval(async () => { if(route() === "intraday" && document.visibilityState === "visible"){ await intraLoad(true); rerender(); } }, 120e3);
   const res = await intraLoad();
   const d = res && res.latest;
@@ -2051,8 +2057,10 @@ async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const adminOnly = r === "watchlist" || r === "intraday" || r.startsWith("admin") || r.endsWith("scorecard");   // the scorecard is for the admin only
-  const fn = (adminOnly && !isAdmin()) ? pageDashboard : (VIEWS[r] || pageDashboard);
+  const adminOnly = r === "watchlist" || r === "admin";
+  const proOnly = r === "intraday" || r.startsWith("admin-") || r.endsWith("scorecard");   // admin, or everyone while features are opened
+  const fn = adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
+    : proOnly && !PRO() ? pageDashboard : (VIEWS[r] || pageDashboard);
   let html;
   const need = (NEEDS[r] || []).filter(f => !CACHE[f]);
   const sk = need.length && !render.keepScroll ? setTimeout(() => { if(id === RENDER_ID) main.innerHTML = skeleton(); }, 120) : null;
@@ -2078,6 +2086,9 @@ async function fullChange(body){
 }
 
 document.addEventListener("click", e => {
+  const oa = e.target.closest("[data-openall]");
+  if(oa){ fetch("/api/admin/open", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({on: oa.dataset.openall === "1"})})
+    .then(r => r.json()).then(j => { USER.open = !!j.on; toast(j.on ? "All features are open to everyone" : "Back to the normal member view"); rerender(); }).catch(() => toast("Could not reach the server.")); return; }
   const fr = e.target.closest("[data-fullrm]");
   if(fr){ fullChange({email: fr.dataset.fullrm, remove: true}); return; }
   const sc = e.target.closest("[data-sharecard]");
