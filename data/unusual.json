@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-24 14:30",
+ "generated_ist": "2026-11-24 15:30",
  "oi_asof": "2026-11-23",
  "squeeze": [
   {
@@ -278,7 +278,7 @@
     },
     {
      "when": "Fri 20",
-     "text": "5 hours of unusual volume, peak 6.8x at 12:15, absorption",
+     "text": "6 hours of unusual volume, peak 6.8x at 12:15, absorption",
      "side": 1
     }
    ],
@@ -928,7 +928,8 @@
    "states": {
     "W": "Bullish",
     "D": "Topping"
-   }
+   },
+   "setup": "Trend Pullback \u00b7 Watch"
   },
   {
    "symbol": "TATAELXSI",
@@ -1232,6 +1233,47 @@
     "W": "Bottoming",
     "D": "Topping"
    }
+  },
+  {
+   "symbol": "IDFCFIRSTB",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Mon 23",
+     "text": "3 hours of unusual volume, peak 2.9x at 10:15, absorption",
+     "side": 1
+    },
+    {
+     "when": "Mon 23",
+     "text": "Day's volume 2.2x usual",
+     "side": -1
+    },
+    {
+     "when": "Fri 20",
+     "text": "1 hour of unusual volume, peak 2.6x at 11:15",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Day's volume 2.6x usual",
+     "side": 1
+    },
+    {
+     "when": "Thu 19",
+     "text": "Range 2.1x normal, closed +4.4%",
+     "side": 1
+    }
+   ],
+   "close": 85.4,
+   "move_pct": 3.6,
+   "moved": true,
+   "vs_high": "2.5% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
+   },
+   "setup": "Swing Pullback \u00b7 Watch"
   },
   {
    "symbol": "NATIONALUM",
@@ -1584,7 +1626,7 @@
    "events": [
     {
      "when": "Mon 23",
-     "text": "1 hour of unusual volume, peak 2.8x at 15:15",
+     "text": "1 hour of unusual volume, peak 3.0x at 15:15",
      "side": 1
     },
     {
@@ -1619,7 +1661,7 @@
    "events": [
     {
      "when": "Mon 23",
-     "text": "1 hour of unusual volume, peak 2.6x at 15:15, absorption",
+     "text": "1 hour of unusual volume, peak 2.8x at 15:15, absorption",
      "side": 0
     },
     {
@@ -1721,7 +1763,7 @@
     },
     {
      "when": "Fri 20",
-     "text": "3 hours of unusual volume, peak 4.4x at 14:15, absorption",
+     "text": "3 hours of unusual volume, peak 5.1x at 15:15, absorption",
      "side": 0
     },
     {
@@ -1873,6 +1915,26 @@
    "states": {
     "W": "Bottoming",
     "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "GVT&D",
+   "score": 3.0,
+   "bias": "Mixed",
+   "events": [
+    {
+     "when": "Mon 23",
+     "text": "1 hour of unusual volume, peak 4.1x at 15:15, absorption",
+     "side": 0
+    }
+   ],
+   "close": 4195.0,
+   "move_pct": -2.9,
+   "moved": false,
+   "vs_high": "6.0% below its 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Topping"
    }
   },
   {
