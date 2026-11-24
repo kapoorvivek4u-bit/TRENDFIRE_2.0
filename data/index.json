@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-24 15:15",
+ "generated_ist": "2026-11-24 16:16",
  "oi_asof": "2026-11-23",
  "indexes": [
   {
@@ -128,7 +128,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 25490.32,
+     "trigger": 25490.58,
      "stop": 25293.61
     }
    ],
@@ -1082,7 +1082,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63139.52,
+     "trigger": 63139.21,
      "stop": 62444.16
     }
    ],
@@ -2468,7 +2468,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 28354.13,
+     "trigger": 28354.12,
      "stop": 28084.57
     }
    ],
@@ -3305,6 +3305,18 @@
      }
     },
     {
+     "symbol": "ADANIGREEN",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 10.1,
+      "px_pct": -0.7,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
      "symbol": "BOSCHLTD",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Hourly Overspill \u00b7 Watch",
@@ -3698,18 +3710,6 @@
       "px_pct": -3.1,
       "word": "Long unwinding",
       "side": -1
-     }
-    },
-    {
-     "symbol": "ADANIGREEN",
-     "vk": null,
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": 10.1,
-      "px_pct": -0.7,
-      "word": "Big positions building",
-      "side": 0
      }
     },
     {
