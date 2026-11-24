@@ -20,6 +20,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "APLAPOLLO": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "BHARTIARTL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -113,14 +117,6 @@
    "confirmed": "Not confirmed"
   },
   "AMBER": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "AMBUJACEM": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "APLAPOLLO": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -560,6 +556,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "ULTRACEMCO": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "UPL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -728,10 +728,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "ULTRACEMCO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "UNITDSPR": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -740,29 +736,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "ASTRAL": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "INOXWIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "KAYNES": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PAGEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PIIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "SUPREMEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
+  "AMBUJACEM": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
   },
   "BANDHANBNK": {
    "final": "COMING CLOSE TO READY (Bearish)",
@@ -800,6 +776,10 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
+  "INOXWIND": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
   "JUBLFOOD": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -811,6 +791,26 @@
   "TIINDIA": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
+  },
+  "ASTRAL": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "KAYNES": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PAGEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "PIIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
+  },
+  "SUPREMEIND": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "HAL": {
    "final": "COMING CLOSE TO READY (Bullish)",
