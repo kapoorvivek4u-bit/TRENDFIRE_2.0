@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-25 11:15",
+ "generated_ist": "2026-11-25 12:15",
  "oi_asof": null,
  "indexes": [
   {
@@ -12,7 +12,7 @@
     "M": "Bottoming",
     "W": "Bullish",
     "D": "Topping",
-    "H": "Bullish"
+    "H": "Impulse"
    },
    "vk": {
     "final": "NO SIGNAL",
@@ -344,8 +344,8 @@
     {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -3.6,
       "px_pct": 3.6,
@@ -368,8 +368,8 @@
     {
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Triggered",
-     "grade": "B",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 17.2,
       "px_pct": 1.5,
@@ -824,7 +824,7 @@
    "setups": [
     {
      "symbol": "BANKNIFTY",
-     "close": 64007.9,
+     "close": 63967.65,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -898,6 +898,18 @@
      }
     },
     {
+     "symbol": "IDFCFIRSTB",
+     "vk": "BUY NOW",
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -5.4,
+      "px_pct": 4.9,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "KOTAKBANK",
      "vk": "BUY NOW",
      "setup": "Swing Pullback \u00b7 Watch",
@@ -919,18 +931,6 @@
       "px_pct": -0.8,
       "word": "Long unwinding",
       "side": -1
-     }
-    },
-    {
-     "symbol": "IDFCFIRSTB",
-     "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "C",
-     "oi": {
-      "oi_pct": -5.4,
-      "px_pct": 4.9,
-      "word": "Short covering",
-      "side": 1
      }
     },
     {
@@ -972,8 +972,8 @@
     {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -3.6,
       "px_pct": 3.6,
@@ -1153,7 +1153,7 @@
    "setups": [
     {
      "symbol": "MIDCAP",
-     "close": 17797.95,
+     "close": 17812.75,
      "trend": "With trend",
      "states": {
       "M": "Topping",
@@ -1187,7 +1187,7 @@
     },
     {
      "symbol": "MIDCAP",
-     "close": 17797.95,
+     "close": 17812.75,
      "trend": "With trend",
      "states": {
       "M": "Topping",
@@ -1214,213 +1214,216 @@
       }
      },
      "ext": 1.3,
-     "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 2.2 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+     "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 2.0 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
      "grade": "B",
-     "trigger": 17958.83,
-     "stop": 17812.5,
-     "target": 20085.94,
+     "trigger": 17958.76,
+     "stop": 17811.16,
+     "target": 20084.09,
      "chart": {
       "h": [
        18093.0,
        18046.6,
-       17938.35,
+       17953.75,
        18034.4,
-       17792.3,
-       17605.15,
+       17849.4,
+       17661.95,
        17789.75,
-       17844.65,
+       17837.15,
        17894.75,
        17948.75,
        17937.05,
        17979.65,
-       17726.8,
+       17801.25,
        17557.4,
-       17474.1,
-       17238.85,
-       17178.3,
+       17497.2,
+       17262.05,
+       17205.35,
        17149.05,
-       17027.4,
-       16984.25,
-       17106.9,
+       17039.35,
+       16989.5,
+       17087.75,
        17119.7,
        17039.45,
        16774.5,
        16911.3,
-       16910.4,
-       16974.0,
+       16892.3,
+       16950.25,
        17047.0,
        17075.75,
-       17011.9,
+       17046.05,
        16993.4,
-       16878.95,
-       16578.2,
+       16958.95,
+       16643.5,
        16484.65,
-       16390.7,
-       16206.2,
-       16464.85,
-       16490.9,
-       16599.2,
+       16410.8,
+       16163.75,
+       16437.4,
+       16478.35,
+       16575.25,
        16656.4,
-       16591.7,
+       16630.5,
        16751.7,
-       16864.4,
-       17042.3,
-       17395.55,
+       16839.75,
+       17027.9,
+       17384.0,
        17460.75,
-       17525.25,
-       17589.5,
+       17490.0,
+       17532.9,
        17807.15,
        17891.75,
        17962.45,
        17941.6,
-       17885.1,
+       17872.65,
        17889.35,
-       17713.05,
-       17753.15,
+       17798.05,
+       17725.6,
        17889.2,
        17964.1,
-       17866.0
+       17866.0,
+       17825.8
       ],
       "l": [
        17950.15,
        17886.55,
        17655.95,
-       17780.2,
+       17803.4,
+       17556.35,
        17373.75,
-       17426.9,
-       17561.85,
-       17723.5,
-       17828.2,
+       17560.1,
+       17720.9,
+       17814.3,
        17853.3,
        17812.45,
-       17677.1,
+       17880.85,
        17498.95,
        17379.05,
        17222.0,
        17025.55,
-       16997.95,
+       17009.1,
        16893.55,
        16652.8,
        16839.1,
-       16893.65,
+       16888.65,
        16939.05,
-       16618.55,
+       16692.4,
        16523.15,
-       16693.7,
+       16690.9,
+       16766.75,
        16734.4,
-       16735.8,
        16877.25,
        16933.35,
        16821.5,
        16836.1,
-       16564.5,
+       16567.5,
+       16361.75,
        16215.15,
-       16329.35,
        15886.85,
        15871.6,
-       16175.15,
+       16141.6,
        16306.4,
-       16452.5,
-       16459.35,
+       16432.25,
+       16523.65,
        16458.7,
-       16568.95,
-       16675.25,
+       16493.2,
+       16657.2,
        16817.2,
-       17039.7,
+       16995.6,
        17180.1,
        17197.15,
-       17443.5,
+       17410.9,
+       17531.5,
        17648.8,
-       17669.0,
        17764.3,
-       17726.65,
+       17734.95,
        17670.95,
-       17621.75,
+       17769.1,
        17573.3,
        17476.7,
        17592.95,
        17681.3,
-       17704.25
+       17704.25,
+       17772.2
       ],
       "c": [
-       18026.15,
-       17934.1,
-       17818.35,
-       17789.2,
-       17436.15,
-       17560.1,
-       17723.75,
-       17839.95,
-       17864.65,
-       17880.45,
-       17915.85,
-       17719.35,
-       17518.05,
-       17451.75,
-       17238.0,
-       17168.1,
-       17071.3,
-       16975.4,
-       16974.85,
-       16911.25,
-       17096.4,
-       16973.5,
-       16637.1,
-       16706.75,
-       16806.0,
-       16856.85,
-       16974.0,
-       16986.7,
-       17012.4,
-       16924.35,
-       16867.9,
-       16577.55,
-       16378.45,
-       16410.8,
-       16011.9,
-       16199.35,
-       16412.5,
-       16474.85,
-       16581.45,
-       16492.9,
-       16513.3,
-       16674.8,
-       16839.7,
-       17042.3,
-       17374.0,
-       17254.65,
-       17492.1,
-       17589.5,
-       17666.7,
-       17825.3,
-       17845.5,
-       17810.0,
-       17864.65,
-       17711.9,
-       17583.65,
-       17744.05,
-       17840.7,
-       17767.95,
-       17797.95
+       18028.65,
+       17942.5,
+       17823.4,
+       17820.35,
+       17556.35,
+       17588.7,
+       17741.65,
+       17816.5,
+       17876.45,
+       17900.35,
+       17881.0,
+       17979.65,
+       17505.2,
+       17468.6,
+       17237.55,
+       17202.05,
+       17010.15,
+       16990.4,
+       16840.35,
+       16886.6,
+       17080.5,
+       16964.85,
+       16702.65,
+       16740.75,
+       16870.5,
+       16827.65,
+       16941.8,
+       16997.1,
+       17043.25,
+       16902.25,
+       16950.65,
+       16593.0,
+       16500.2,
+       16380.95,
+       16012.4,
+       16142.05,
+       16431.45,
+       16435.6,
+       16542.05,
+       16656.4,
+       16491.75,
+       16674.75,
+       16836.85,
+       17008.3,
+       17371.1,
+       17282.95,
+       17490.0,
+       17532.9,
+       17711.95,
+       17815.4,
+       17831.3,
+       17734.95,
+       17862.9,
+       17821.3,
+       17590.35,
+       17724.4,
+       17866.55,
+       17801.0,
+       17797.95,
+       17812.75
       ],
       "lines": {
        "top": [
         [
-         11.67,
+         11.83,
          17979.65
         ],
         [
-         58.67,
-         17958.83
+         59.0,
+         17958.76
         ]
        ],
        "floor": [
         [
-         11.67,
+         11.83,
          15871.6
         ],
         [
-         58.67,
+         59.0,
          15871.6
         ]
        ]
@@ -1506,6 +1509,18 @@
      }
     },
     {
+     "symbol": "MCX",
+     "vk": "BUY NOW",
+     "setup": "Daily Overspill \u00b7 Triggered",
+     "grade": "Warning",
+     "oi": {
+      "oi_pct": 9.3,
+      "px_pct": -3.8,
+      "word": "Short build-up",
+      "side": -1
+     }
+    },
+    {
      "symbol": "PAYTM",
      "vk": "BUY NOW",
      "setup": "Daily Overspill \u00b7 Watch",
@@ -1520,8 +1535,8 @@
     {
      "symbol": "PERSISTENT",
      "vk": "BUY NOW",
-     "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": -1.0,
       "px_pct": 5.3,
@@ -1563,18 +1578,6 @@
       "px_pct": 0.0,
       "word": "Big positions building",
       "side": 0
-     }
-    },
-    {
-     "symbol": "MCX",
-     "vk": "ALMOST READY (Bullish)",
-     "setup": "Daily Overspill \u00b7 Triggered",
-     "grade": "Warning",
-     "oi": {
-      "oi_pct": 9.3,
-      "px_pct": -3.8,
-      "word": "Short build-up",
-      "side": -1
      }
     },
     {
@@ -1653,7 +1656,7 @@
      "symbol": "INDUSTOWER",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": 4.4,
       "px_pct": -3.7,
@@ -1664,8 +1667,8 @@
     {
      "symbol": "LICI",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Falling Wedge \u00b7 Triggered",
+     "grade": "A",
      "oi": {
       "oi_pct": 8.3,
       "px_pct": 1.6,
@@ -1769,7 +1772,7 @@
     "M": "Bottoming",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Bullish"
+    "H": "Impulse"
    },
    "vk": {
     "final": "BUY NOW",
@@ -1856,13 +1859,13 @@
    "setups": [
     {
      "symbol": "FINNIFTY",
-     "close": 28986.15,
+     "close": 28978.5,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
       "W": "Impulse",
       "D": "Impulse",
-      "H": "Bullish"
+      "H": "Impulse"
      },
      "old": "\u26a0\ufe0f Extended (Gaining)",
      "ext": 4.0,
@@ -1980,8 +1983,8 @@
     {
      "symbol": "AXISBANK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
-     "grade": "C",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -3.6,
       "px_pct": 3.6,
@@ -1992,8 +1995,8 @@
     {
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Triggered",
-     "grade": "B",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 17.2,
       "px_pct": 1.5,
@@ -2040,7 +2043,7 @@
     {
      "symbol": "LICHSGFIN",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Swing Pullback \u00b7 Watch",
      "grade": "Warning",
      "oi": {
       "oi_pct": -1.3,
@@ -2256,7 +2259,7 @@
    "setups": [
     {
      "symbol": "NEXT50",
-     "close": 72784.2,
+     "close": 72828.1,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -2428,7 +2431,7 @@
     {
      "symbol": "GAIL",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "C",
      "oi": {
       "oi_pct": -2.0,
@@ -2584,8 +2587,8 @@
     {
      "symbol": "DLF",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": -2.1,
       "px_pct": 5.3,
@@ -2728,8 +2731,8 @@
     {
      "symbol": "SIEMENS",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "Warning",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -14.2,
       "px_pct": 0.3,

@@ -48,10 +48,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "IDFCFIRSTB": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "INDIANB": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -68,11 +64,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "MCX": {
+  "NAVINFLUOR": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "NAVINFLUOR": {
+  "NYKAA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -590,7 +586,7 @@
   },
   "ABCAPITAL": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ADANIPORTS": {
    "final": "BUY NOW",
@@ -646,6 +642,10 @@
   },
   "ICICIBANK": {
    "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "IDFCFIRSTB": {
+   "final": "BUY NOW",
    "confirmed": "Not confirmed"
   },
   "INDHOTEL": {
@@ -680,15 +680,15 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "MCX": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "MOTHERSON": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MOTILALOFS": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "NYKAA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
