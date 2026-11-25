@@ -4,10 +4,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ABCAPITAL": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "ADANIENSOL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -52,7 +48,7 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ICICIBANK": {
+  "IDFCFIRSTB": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -61,6 +57,10 @@
    "confirmed": "Not confirmed"
   },
   "JSWSTEEL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "KARURVYSYA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -588,6 +588,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "ABCAPITAL": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "ADANIPORTS": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -640,9 +644,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "IDFCFIRSTB": {
+  "ICICIBANK": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
   "INDHOTEL": {
    "final": "BUY NOW",
@@ -653,10 +657,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "KALYANKJIL": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "KARURVYSYA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -698,7 +698,7 @@
   },
   "PAYTM": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PERSISTENT": {
    "final": "BUY NOW",
@@ -766,7 +766,7 @@
   },
   "TMPV": {
    "final": "SELL NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "BANDHANBNK": {
    "final": "COMING CLOSE TO READY (Bearish)",
