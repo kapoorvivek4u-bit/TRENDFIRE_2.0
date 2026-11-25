@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-25 13:15",
+ "generated_ist": "2026-11-25 14:15",
  "oi_asof": null,
  "indexes": [
   {
@@ -12,7 +12,7 @@
     "M": "Bottoming",
     "W": "Bullish",
     "D": "Topping",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "vk": {
     "final": "NO SIGNAL",
@@ -152,12 +152,24 @@
     {
      "symbol": "BSE",
      "vk": "BUY NOW",
-     "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "B",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 0.3,
       "px_pct": -3.2,
       "word": "No big change",
+      "side": 0
+     }
+    },
+    {
+     "symbol": "DRREDDY",
+     "vk": "BUY NOW",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 10.4,
+      "px_pct": 0.1,
+      "word": "Big positions building",
       "side": 0
      }
     },
@@ -188,8 +200,8 @@
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "B",
      "oi": {
       "oi_pct": 4.3,
       "px_pct": 0.0,
@@ -222,21 +234,9 @@
      }
     },
     {
-     "symbol": "ULTRACEMCO",
-     "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -0.9,
-      "px_pct": 3.0,
-      "word": "No big change",
-      "side": 0
-     }
-    },
-    {
      "symbol": "ADANIPORTS",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Trend Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": 9.6,
@@ -258,18 +258,6 @@
      }
     },
     {
-     "symbol": "DRREDDY",
-     "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "Warning",
-     "oi": {
-      "oi_pct": 10.4,
-      "px_pct": 0.1,
-      "word": "Big positions building",
-      "side": 0
-     }
-    },
-    {
      "symbol": "JSWSTEEL",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Trend Pullback \u00b7 Watch",
@@ -284,7 +272,7 @@
     {
      "symbol": "KOTAKBANK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": 1.6,
@@ -303,6 +291,18 @@
       "px_pct": -0.5,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "ULTRACEMCO",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -0.9,
+      "px_pct": 3.0,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -368,8 +368,8 @@
     {
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": 17.2,
       "px_pct": 1.5,
@@ -452,8 +452,8 @@
     {
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Cup \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": 11.2,
       "px_pct": -5.0,
@@ -464,8 +464,8 @@
     {
      "symbol": "HINDALCO",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "Warning",
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": 14.5,
       "px_pct": -2.9,
@@ -512,8 +512,8 @@
     {
      "symbol": "LT",
      "vk": "NO SIGNAL",
-     "setup": "Daily Flag \u00b7 Watch",
-     "grade": "B",
+     "setup": "Hourly Overspill \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": 8.7,
       "px_pct": -1.0,
@@ -608,7 +608,7 @@
     {
      "symbol": "RELIANCE",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": 23.6,
@@ -620,8 +620,8 @@
     {
      "symbol": "SBILIFE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": 13.4,
       "px_pct": -1.0,
@@ -824,7 +824,7 @@
    "setups": [
     {
      "symbol": "BANKNIFTY",
-     "close": 63292.2,
+     "close": 63579.1,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -858,7 +858,7 @@
     },
     {
      "symbol": "BANKNIFTY",
-     "close": 63292.2,
+     "close": 63579.1,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -867,7 +867,7 @@
       "H": "Bearish"
      },
      "setup": "Hourly Overspill",
-     "stage": "Watch",
+     "stage": "Triggered",
      "old": "\u26a0\ufe0f Extended (Weakening)",
      "ext": 4.4,
      "vk": {
@@ -887,7 +887,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63332.02,
+     "trigger": 63355.55,
      "stop": 62444.16
     }
    ],
@@ -922,8 +922,8 @@
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "B",
      "oi": {
       "oi_pct": 4.3,
       "px_pct": 0.0,
@@ -958,7 +958,7 @@
     {
      "symbol": "KOTAKBANK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": 1.6,
@@ -970,8 +970,8 @@
     {
      "symbol": "PNB",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Daily Flag \u00b7 Watch",
-     "grade": "B",
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": -4.1,
       "px_pct": 3.8,
@@ -982,7 +982,7 @@
     {
      "symbol": "UNIONBANK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": 2.6,
@@ -1187,7 +1187,7 @@
    "setups": [
     {
      "symbol": "MIDCAP",
-     "close": 17690.95,
+     "close": 17717.1,
      "trend": "With trend",
      "states": {
       "M": "Topping",
@@ -1221,7 +1221,7 @@
     },
     {
      "symbol": "MIDCAP",
-     "close": 17690.95,
+     "close": 17717.1,
      "trend": "With trend",
      "states": {
       "M": "Topping",
@@ -1248,11 +1248,11 @@
       }
      },
      "ext": 1.3,
-     "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 3.4 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+     "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 3.1 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
      "grade": "B",
-     "trigger": 17958.68,
-     "stop": 17806.07,
-     "target": 20098.64,
+     "trigger": 17958.61,
+     "stop": 17804.73,
+     "target": 20095.4,
      "chart": {
       "h": [
        18093.0,
@@ -1376,7 +1376,7 @@
        17592.95,
        17681.3,
        17704.25,
-       17688.5
+       17671.2
       ],
       "c": [
        18028.65,
@@ -1438,7 +1438,7 @@
        17866.55,
        17801.0,
        17797.95,
-       17690.95
+       17717.1
       ],
       "lines": {
        "top": [
@@ -1447,8 +1447,8 @@
          17979.65
         ],
         [
-         59.17,
-         17958.68
+         59.33,
+         17958.61
         ]
        ],
        "floor": [
@@ -1457,7 +1457,7 @@
          15871.6
         ],
         [
-         59.17,
+         59.33,
          15871.6
         ]
        ]
@@ -1639,18 +1639,6 @@
      }
     },
     {
-     "symbol": "BHARATFORG",
-     "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
-     "oi": {
-      "oi_pct": 6.3,
-      "px_pct": 0.2,
-      "word": "Big positions building",
-      "side": 0
-     }
-    },
-    {
      "symbol": "DIXON",
      "vk": "NO SIGNAL",
      "setup": null,
@@ -1737,8 +1725,8 @@
     {
      "symbol": "POLICYBZR",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -10.9,
       "px_pct": 0.9,
@@ -1783,6 +1771,18 @@
      }
     },
     {
+     "symbol": "BHARATFORG",
+     "vk": null,
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": 6.3,
+      "px_pct": 0.2,
+      "word": "Big positions building",
+      "side": 0
+     }
+    },
+    {
      "symbol": "SWIGGY",
      "vk": null,
      "setup": null,
@@ -1806,7 +1806,7 @@
     "M": "Bottoming",
     "W": "Impulse",
     "D": "Impulse",
-    "H": "Impulse"
+    "H": "Topping"
    },
    "vk": {
     "final": "BUY NOW",
@@ -1893,13 +1893,13 @@
    "setups": [
     {
      "symbol": "FINNIFTY",
-     "close": 28625.9,
+     "close": 28759.2,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
       "W": "Impulse",
       "D": "Impulse",
-      "H": "Impulse"
+      "H": "Topping"
      },
      "old": "\u26a0\ufe0f Extended",
      "ext": 4.0,
@@ -1969,8 +1969,8 @@
     {
      "symbol": "BSE",
      "vk": "BUY NOW",
-     "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "B",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 0.3,
       "px_pct": -3.2,
@@ -1981,8 +1981,8 @@
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "B",
      "oi": {
       "oi_pct": 4.3,
       "px_pct": 0.0,
@@ -2005,7 +2005,7 @@
     {
      "symbol": "KOTAKBANK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": 1.6,
@@ -2029,8 +2029,8 @@
     {
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": 17.2,
       "px_pct": 1.5,
@@ -2053,8 +2053,8 @@
     {
      "symbol": "HDFCLIFE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Cup \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": 11.2,
       "px_pct": -5.0,
@@ -2065,7 +2065,7 @@
     {
      "symbol": "ICICIGI",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": -2.0,
@@ -2137,8 +2137,8 @@
     {
      "symbol": "SBILIFE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": 13.4,
       "px_pct": -1.0,
@@ -2293,7 +2293,7 @@
    "setups": [
     {
      "symbol": "NEXT50",
-     "close": 72290.25,
+     "close": 72481.7,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -2327,7 +2327,7 @@
     },
     {
      "symbol": "NEXT50",
-     "close": 72290.25,
+     "close": 72481.7,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -2354,11 +2354,11 @@
       }
      },
      "ext": 1.2,
-     "detail": "8-week range under a falling trendline, 3 touches, 10% deep \u00b7 6.2 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+     "detail": "9-week range under a falling trendline, 3 touches, 10% deep \u00b7 5.6 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
      "grade": "B",
-     "trigger": 74329.24,
-     "stop": 73687.74,
-     "target": 81945.46,
+     "trigger": 74335.71,
+     "stop": 73693.08,
+     "target": 81932.48,
      "chart": {
       "h": [
        73075.85,
@@ -2470,7 +2470,7 @@
        72129.75,
        72429.75,
        72230.35,
-       72288.35
+       72241.45
       ],
       "c": [
        72654.95,
@@ -2526,7 +2526,7 @@
        72848.15,
        72690.35,
        72828.1,
-       72290.25
+       72481.7
       ],
       "lines": {
        "top": [
@@ -2535,8 +2535,8 @@
          72407.1
         ],
         [
-         53.0,
-         74329.24
+         53.14,
+         74335.71
         ]
        ],
        "floor": [
@@ -2545,7 +2545,7 @@
          64999.8
         ],
         [
-         53.0,
+         53.14,
          64999.8
         ]
        ]
@@ -2657,7 +2657,7 @@
     {
      "symbol": "BOSCHLTD",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": -6.9,
@@ -2681,7 +2681,7 @@
     {
      "symbol": "GAIL",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": -2.0,
@@ -2705,8 +2705,8 @@
     {
      "symbol": "PNB",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Daily Flag \u00b7 Watch",
-     "grade": "B",
+     "setup": "Swing Pullback \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": -4.1,
       "px_pct": 3.8,
@@ -2717,8 +2717,8 @@
     {
      "symbol": "TVSMOTOR",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "Warning",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 16.3,
       "px_pct": 1.8,
@@ -2729,7 +2729,7 @@
     {
      "symbol": "UNIONBANK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": 2.6,
@@ -2801,7 +2801,7 @@
     {
      "symbol": "BRITANNIA",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
+     "setup": "Hourly Range \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": 3.1,
@@ -2897,7 +2897,7 @@
     {
      "symbol": "IOC",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": 9.0,
