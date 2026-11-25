@@ -24,7 +24,7 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ANANDRATHI": {
+  "AXISBANK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -73,6 +73,14 @@
    "confirmed": "Not confirmed"
   },
   "KOTAKBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "LODHA": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "LT": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -160,10 +168,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "AXISBANK": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "BAJAJ-AUTO": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -244,6 +248,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "DABUR": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "DATAPATTNS": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -276,11 +284,11 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "GODREJPROP": {
+  "GODREJCP": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "GRASIM": {
+  "GODREJPROP": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -377,10 +385,6 @@
    "confirmed": "Not confirmed"
   },
   "LICI": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "LT": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -608,6 +612,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "ANANDRATHI": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "ANGELONE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -652,6 +660,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "GRASIM": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "HEROMOTOCO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -676,13 +688,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "LODHA": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "MAHABANK": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MANKIND": {
    "final": "BUY NOW",
@@ -754,7 +762,7 @@
   },
   "KPITTECH": {
    "final": "SELL NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "PAGEIND": {
    "final": "SELL NOW",
@@ -788,15 +796,7 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "DABUR": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "DMART": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "GODREJCP": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
