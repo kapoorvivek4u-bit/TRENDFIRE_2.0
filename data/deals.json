@@ -1,7 +1,7 @@
 {
- "generated_ist": "2026-11-24 19:00",
- "asof": "2026-11-23",
- "days": 6,
+ "generated_ist": "2026-11-25 19:00",
+ "asof": "2026-11-25",
+ "days": 7,
  "stocks": {
   "ALKEM": {
    "mf_net_cr": 301.9,
@@ -52,6 +52,20 @@
    "last": "2026-11-17",
    "text": "Funds bought net Rs 72 Cr (Axis MF, Edelweiss MF)"
   },
+  "MEDANTA": {
+   "mf_net_cr": 1111.0,
+   "mf_buyers": [
+    "Canara Robeco MF",
+    "HDFC MF",
+    "SBI MF",
+    "WhiteOak MF"
+   ],
+   "mf_sellers": [],
+   "ins_net_cr": null,
+   "stars": [],
+   "last": "2026-11-25",
+   "text": "Funds bought net Rs 1,111 Cr (Canara Robeco MF, HDFC MF, SBI MF\u2026)"
+  },
   "NEOGEN": {
    "mf_net_cr": -41.2,
    "mf_buyers": [
@@ -67,6 +81,466 @@
   }
  },
  "recent": [
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Dunearn Investments (Mauritius) Pte Ltd",
+   "cat": "Other",
+   "value_cr": 604.5,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Dunearn Investments (Mauritius) Pte Ltd",
+   "cat": "Other",
+   "value_cr": 604.5,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "APLAPOLLO",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 510.9,
+   "price": 1470.09
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "APLAPOLLO",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Graviton Research Capital Llp",
+   "cat": "Other",
+   "value_cr": 510.8,
+   "price": 1469.25
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "APLAPOLLO",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Smallcap World Fund Inc",
+   "cat": "Other",
+   "value_cr": 433.6,
+   "price": 1411.37
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "HDFC MF",
+   "cat": "MF",
+   "value_cr": 418.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "HDFC MF",
+   "cat": "MF",
+   "value_cr": 418.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Dunearn Investments (Mauritius) Pte Ltd",
+   "cat": "Other",
+   "value_cr": 325.5,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Dunearn Investments (Mauritius) Pte Ltd",
+   "cat": "Other",
+   "value_cr": 325.5,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "HDFC MF",
+   "cat": "MF",
+   "value_cr": 150.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 81.9,
+   "price": 144.01
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 80.8,
+   "price": 144.41
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Fairbridge Capital (Mauritius) Limited",
+   "cat": "Other",
+   "value_cr": 74.8,
+   "price": 141.17
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 66.4,
+   "price": 143.95
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Alphagrep Securities Private Limited",
+   "cat": "Other",
+   "value_cr": 66.3,
+   "price": 143.83
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "GREAVESCOT",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 65.6,
+   "price": 304.95
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "GREAVESCOT",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Hrti Private Limited",
+   "cat": "Other",
+   "value_cr": 63.6,
+   "price": 305.38
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 62.4,
+   "price": 144.87
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Microcurves Trading Private Limited",
+   "cat": "Other",
+   "value_cr": 62.3,
+   "price": 144.79
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Norges Bank On Account Of The Government",
+   "cat": "Other",
+   "value_cr": 57.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Norges Bank On Account Of The Government",
+   "cat": "Other",
+   "value_cr": 57.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "GREAVESCOT",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 56.5,
+   "price": 304.97
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "GREAVESCOT",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 54.1,
+   "price": 303.78
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "FINCABLES",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Orbitelectricals Private Limited",
+   "cat": "Other",
+   "value_cr": 53.3,
+   "price": 1159.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "FINCABLES",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Aruna Mukesh Katara",
+   "cat": "Other",
+   "value_cr": 53.3,
+   "price": 1159.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "AGIIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Thakkar Nileshkumar Farshuram Huf",
+   "cat": "Other",
+   "value_cr": 48.5,
+   "price": 303.32
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "JWL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 44.8,
+   "price": 208.56
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "JWL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Qe Securities Llp",
+   "cat": "Other",
+   "value_cr": 44.4,
+   "price": 209.91
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Dsp India Fund Ifsc",
+   "cat": "Other",
+   "value_cr": 43.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Clt Research Tech Private Ltd",
+   "cat": "Other",
+   "value_cr": 39.9,
+   "price": 145.33
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Clt Research Tech Private Ltd",
+   "cat": "Other",
+   "value_cr": 39.9,
+   "price": 145.26
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Nk Securities Research Private Limited",
+   "cat": "Other",
+   "value_cr": 39.9,
+   "price": 146.04
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Nk Securities Research Private Limited",
+   "cat": "Other",
+   "value_cr": 39.9,
+   "price": 145.98
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 38.3,
+   "price": 144.48
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "THOMASCOOK",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Junomoneta Finsol Private Limited",
+   "cat": "Other",
+   "value_cr": 38.3,
+   "price": 144.37
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "AGIIL",
+   "kind": "bulk",
+   "side": "BUY",
+   "who": "Arihant Capital Markets Limited",
+   "cat": "Other",
+   "value_cr": 32.0,
+   "price": 305.03
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "AGIIL",
+   "kind": "bulk",
+   "side": "SELL",
+   "who": "Arihant Capital Markets Limited",
+   "cat": "Other",
+   "value_cr": 30.0,
+   "price": 304.8
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Citigroup Global Markets Singapore Pte L",
+   "cat": "Other",
+   "value_cr": 30.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "INDGN",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Rajesh Bhaskaran Nair",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 655.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "INDGN",
+   "kind": "block",
+   "side": "SELL",
+   "who": "Aarabhi Partners Consultants Llp",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 655.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "WhiteOak MF",
+   "cat": "MF",
+   "value_cr": 25.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "SBI MF",
+   "cat": "MF",
+   "value_cr": 25.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "SBI MF",
+   "cat": "MF",
+   "value_cr": 25.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "WhiteOak MF",
+   "cat": "MF",
+   "value_cr": 25.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Canara Robeco MF",
+   "cat": "MF",
+   "value_cr": 25.0,
+   "price": 1460.0
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "MEDANTA",
+   "kind": "block",
+   "side": "BUY",
+   "who": "Goldman Sachs Bank Europe Se",
+   "cat": "Other",
+   "value_cr": 25.0,
+   "price": 1460.0
+  },
   {
    "date": "2026-11-23",
    "symbol": "LENSKART",
