@@ -1,38 +1,28 @@
 {
- "generated_ist": "2026-11-24 19:46",
- "oi_asof": "2026-11-24",
- "stocks": 255,
+ "generated_ist": "2026-11-25 19:45",
+ "oi_asof": "2026-11-25",
+ "stocks": 256,
  "rows": [
   {
-   "symbol": "EIHOTEL",
-   "score": 5.7,
+   "symbol": "JWL",
+   "score": 5.0,
    "bias": "Buying",
    "events": [
     {
-     "when": "Mon 23",
-     "text": "Day's volume 7.0x usual, flush absorbed",
+     "when": "Wed 25",
+     "text": "Day's volume 50.5x usual",
      "side": 1
     },
     {
-     "when": "Fri 20",
-     "text": "Day's volume 29.1x usual",
-     "side": 1
-    },
-    {
-     "when": "Fri 20",
-     "text": "Range 2.9x normal, closed +7.8%",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Day's volume 5.1x usual, flush absorbed",
+     "when": "Wed 25",
+     "text": "Range 4.3x normal, closed +20.0%",
      "side": 1
     }
    ],
-   "close": 333.4,
-   "move_pct": 6.4,
+   "close": 222.46,
+   "move_pct": 13.8,
    "moved": true,
-   "vs_high": "1.1% below its 20-day high",
+   "vs_high": "At a 20-day high",
    "states": {
     "M": "Bottoming",
     "W": "Bottoming",
@@ -40,10 +30,46 @@
    }
   },
   {
-   "symbol": "ITI",
+   "symbol": "VIJAYA",
    "score": 5.0,
    "bias": "Buying",
    "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 7.8x usual, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Mon 23",
+     "text": "Day's volume 3.9x usual",
+     "side": 0
+    },
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 4.9x usual",
+     "side": 1
+    }
+   ],
+   "close": 1627.7,
+   "move_pct": 7.8,
+   "moved": false,
+   "vs_high": "0.6% below its 20-day high",
+   "states": {
+    "M": "Bullish",
+    "W": "Bullish",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "ITI",
+   "score": 4.4,
+   "bias": "Mixed",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 20.2x usual",
+     "side": -1
+    },
     {
      "when": "Mon 23",
      "text": "Day's volume 161.0x usual",
@@ -55,10 +81,156 @@
      "side": 1
     }
    ],
-   "close": 276.21,
-   "move_pct": 10.6,
+   "close": 257.6,
+   "move_pct": 3.6,
    "moved": true,
-   "vs_high": "1.4% below its 20-day high",
+   "vs_high": "9.6% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bottoming",
+    "D": "Topping"
+   }
+  },
+  {
+   "symbol": "BRIGADE",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 16.5x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Range 2.1x normal, closed +1.4%",
+     "side": 1
+    }
+   ],
+   "close": 589.7,
+   "move_pct": 4.2,
+   "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bearish",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "CANHLIFE",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 6.8x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Range 2.3x normal, closed +6.8%",
+     "side": 1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 2.4x usual",
+     "side": -1
+    }
+   ],
+   "close": 132.96,
+   "move_pct": 4.0,
+   "moved": true,
+   "vs_high": "5.0% below its 20-day high",
+   "states": {
+    "M": "No data",
+    "W": "Bearish",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "CEATLTD",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 6.9x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Range 2.1x normal, closed +2.5%",
+     "side": 1
+    }
+   ],
+   "close": 3579.4,
+   "move_pct": 1.1,
+   "moved": true,
+   "vs_high": "0.4% below its 20-day high",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Topping"
+   }
+  },
+  {
+   "symbol": "COHANCE",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 29.0x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Range 2.5x normal, closed +3.1%",
+     "side": 1
+    }
+   ],
+   "close": 489.55,
+   "move_pct": 6.6,
+   "moved": true,
+   "vs_high": "0.7% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Bullish",
+    "D": "Bullish"
+   },
+   "setup": "Squeeze Break \u00b7 Triggered"
+  },
+  {
+   "symbol": "EIHOTEL",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 4.3x usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 23",
+     "text": "Day's volume 6.3x usual, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 26.2x usual",
+     "side": 1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Range 2.8x normal, closed +7.8%",
+     "side": 1
+    }
+   ],
+   "close": 340.25,
+   "move_pct": 9.8,
+   "moved": true,
+   "vs_high": "At a 20-day high",
    "states": {
     "M": "Bottoming",
     "W": "Bottoming",
@@ -66,35 +238,109 @@
    }
   },
   {
-   "symbol": "LTFOODS",
-   "score": 4.3,
+   "symbol": "PPLPHARMA",
+   "score": 4.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 7.1x usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Gap down 3.8%, held",
+     "side": -1
+    }
+   ],
+   "close": 232.54,
+   "move_pct": -3.0,
+   "moved": true,
+   "vs_high": "8.4% below its 20-day high",
+   "states": {
+    "M": "Bottoming",
+    "W": "Topping",
+    "D": "Topping"
+   },
+   "setup": "Trend Pullback \u00b7 Watch"
+  },
+  {
+   "symbol": "NUVOCO",
+   "score": 3.5,
    "bias": "Buying",
    "events": [
     {
+     "when": "Wed 25",
+     "text": "Day's volume 5.2x usual",
+     "side": 1
+    },
+    {
      "when": "Fri 20",
-     "text": "Day's volume 3.9x usual, flush absorbed",
+     "text": "Day's volume 57.4x usual",
      "side": 1
     },
     {
-     "when": "Thu 19",
-     "text": "Day's volume 88.3x usual",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Range 3.6x normal, closed +4.7%",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Gap up 3.2%, held",
+     "when": "Fri 20",
+     "text": "Range 2.7x normal, closed +3.0%",
      "side": 1
     }
    ],
-   "close": 423.95,
-   "move_pct": 1.1,
+   "close": 363.35,
+   "move_pct": 4.4,
    "moved": true,
-   "vs_high": "8.1% below its 20-day high",
+   "vs_high": "3.2% below its 20-day high",
+   "states": {
+    "M": "Bearish",
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "CREDITACC",
+   "score": 3.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 6.0x usual",
+     "side": 1
+    },
+    {
+     "when": "Mon 23",
+     "text": "Day's volume 2.1x usual",
+     "side": 0
+    },
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 2.6x usual",
+     "side": 1
+    }
+   ],
+   "close": 1019.8,
+   "move_pct": 5.1,
+   "moved": false,
+   "vs_high": "11.4% below its 20-day high",
+   "states": {
+    "M": "Topping",
+    "W": "Bearish",
+    "D": "Bearish"
+   }
+  },
+  {
+   "symbol": "DEVYANI",
+   "score": 3.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 9.5x usual",
+     "side": 1
+    }
+   ],
+   "close": 125.57,
+   "move_pct": 1.5,
+   "moved": false,
+   "vs_high": "5.9% below its 20-day high",
    "states": {
     "M": "Bottoming",
     "W": "Bearish",
@@ -102,191 +348,191 @@
    }
   },
   {
-   "symbol": "WELSPUNLIV",
-   "score": 4.0,
+   "symbol": "J&KBANK",
+   "score": 3.0,
    "bias": "Buying",
    "events": [
     {
-     "when": "Mon 23",
-     "text": "Day's volume 3.6x usual, flush absorbed",
+     "when": "Wed 25",
+     "text": "Day's volume 3.7x usual",
      "side": 1
     },
     {
-     "when": "Fri 20",
-     "text": "Day's volume 6.1x usual",
+     "when": "Wed 25",
+     "text": "Range 2.3x normal, closed +5.9%",
      "side": 1
     }
    ],
-   "close": 270.76,
-   "move_pct": 5.8,
-   "moved": false,
-   "vs_high": "1.2% below its 20-day high",
+   "close": 155.32,
+   "move_pct": 6.0,
+   "moved": true,
+   "vs_high": "At a 20-day high",
    "states": {
     "M": "Bullish",
-    "W": "Bullish",
+    "W": "Bottoming",
     "D": "Bullish"
    }
   },
   {
-   "symbol": "KIRLOSBROS",
-   "score": 3.5,
-   "bias": "Buying",
+   "symbol": "KPRMILL",
+   "score": 3.0,
+   "bias": "Selling",
    "events": [
     {
+     "when": "Wed 25",
+     "text": "Day's volume 4.9x usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Delivery 74% vs 50% usual",
+     "side": -1
+    },
+    {
+     "when": "Tue 24",
+     "text": "Delivery 79% vs 49% usual",
+     "side": 0
+    },
+    {
      "when": "Fri 20",
-     "text": "Day's volume 5.3x usual, flush absorbed",
-     "side": 1
+     "text": "Day's volume 2.3x usual",
+     "side": 0
     }
    ],
-   "close": 1570.6,
-   "move_pct": -1.1,
+   "close": 1173.0,
+   "move_pct": -1.4,
    "moved": false,
-   "vs_high": "15.7% below its 20-day high",
+   "vs_high": "6.0% below its 20-day high",
    "states": {
-    "M": "Bearish",
+    "M": "Bullish",
+    "W": "Bottoming",
+    "D": "Topping"
+   }
+  },
+  {
+   "symbol": "LLOYDSME",
+   "score": 3.0,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 5.0x usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Range 2.7x normal, closed -5.5%",
+     "side": -1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 2.6x usual",
+     "side": -1
+    }
+   ],
+   "close": 1606.0,
+   "move_pct": -7.3,
+   "moved": true,
+   "vs_high": "13.6% below its 20-day high",
+   "states": {
+    "M": "No data",
     "W": "Bearish",
     "D": "Bearish"
    }
   },
   {
-   "symbol": "TATATECH",
-   "score": 3.1,
+   "symbol": "TATACHEM",
+   "score": 3.0,
    "bias": "Buying",
    "events": [
     {
+     "when": "Wed 25",
+     "text": "Day's volume 2.1x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Delivery 45% vs 30% usual",
+     "side": 1
+    },
+    {
      "when": "Mon 23",
-     "text": "Day's volume 2.4x usual",
+     "text": "Day's volume 3.1x usual",
+     "side": 1
+    },
+    {
+     "when": "Fri 20",
+     "text": "Day's volume 5.1x usual",
      "side": -1
     },
     {
      "when": "Fri 20",
-     "text": "Day's volume 12.1x usual",
-     "side": 1
-    },
-    {
-     "when": "Fri 20",
-     "text": "Range 2.4x normal, closed +3.4%",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Day's volume 16.9x usual",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Range 3.9x normal, closed +7.2%",
-     "side": 1
+     "text": "Range 2.1x normal, closed -1.7%",
+     "side": -1
     }
    ],
-   "close": 707.9,
-   "move_pct": 7.8,
+   "close": 663.1,
+   "move_pct": 2.0,
    "moved": true,
-   "vs_high": "3.8% below its 20-day high",
+   "vs_high": "2.3% below its 20-day high",
    "states": {
-    "M": "No data",
-    "W": "Bearish",
-    "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "CANFINHOME",
-   "score": 3.0,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Mon 23",
-     "text": "Day's volume 6.0x usual",
-     "side": 1
-    }
-   ],
-   "close": 796.4,
-   "move_pct": 3.3,
-   "moved": false,
-   "vs_high": "0.5% below its 20-day high",
-   "states": {
-    "M": "Topping",
+    "M": "Bottoming",
     "W": "Bottoming",
     "D": "Bullish"
    }
   },
   {
-   "symbol": "INTELLECT",
+   "symbol": "TORNTPOWER",
    "score": 3.0,
-   "bias": "Buying",
+   "bias": "Selling",
    "events": [
     {
-     "when": "Mon 23",
-     "text": "Day's volume 7.1x usual",
-     "side": 1
+     "when": "Wed 25",
+     "text": "Day's volume 3.7x usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Range 2.2x normal, closed -3.0%",
+     "side": -1
     }
    ],
-   "close": 578.45,
-   "move_pct": 9.3,
-   "moved": false,
-   "vs_high": "6.6% below its 20-day high",
+   "close": 1162.8,
+   "move_pct": -5.8,
+   "moved": true,
+   "vs_high": "9.4% below its 20-day high",
    "states": {
     "M": "Bearish",
     "W": "Bottoming",
-    "D": "Bottoming"
+    "D": "Topping"
    }
   },
   {
-   "symbol": "LINDEINDIA",
+   "symbol": "WHIRLPOOL",
    "score": 3.0,
-   "bias": "Buying",
+   "bias": "Selling",
    "events": [
     {
-     "when": "Mon 23",
-     "text": "Day's volume 8.1x usual",
-     "side": 1
+     "when": "Wed 25",
+     "text": "Day's volume 3.0x usual",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Delivery 78% vs 39% usual",
+     "side": -1
     }
    ],
-   "close": 6961.5,
-   "move_pct": 1.4,
+   "close": 791.1,
+   "move_pct": -4.7,
    "moved": false,
-   "vs_high": "1.8% below its 20-day high",
+   "vs_high": "8.9% below its 20-day high",
    "states": {
-    "M": "Bullish",
-    "W": "Bottoming",
-    "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "PWL",
-   "score": 3.0,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Mon 23",
-     "text": "Day's volume 3.3x usual",
-     "side": 1
-    },
-    {
-     "when": "Fri 20",
-     "text": "Day's volume 3.6x usual",
-     "side": 0
-    },
-    {
-     "when": "Thu 19",
-     "text": "Day's volume 12.4x usual, flush absorbed",
-     "side": 1
-    },
-    {
-     "when": "Thu 19",
-     "text": "Range 2.1x normal, closed +6.3%",
-     "side": 1
-    }
-   ],
-   "close": 139.76,
-   "move_pct": 9.1,
-   "moved": true,
-   "vs_high": "0.3% below its 20-day high",
-   "states": {
-    "M": "No data",
-    "W": "Bullish",
-    "D": "Bullish"
-   }
+    "M": "Bottoming",
+    "W": "Topping",
+    "D": "Bearish"
+   },
+   "setup": "Squeeze Break \u00b7 Watch"
   }
  ],
  "notes": []
