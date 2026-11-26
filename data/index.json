@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-26 08:28",
+ "generated_ist": "2026-11-26 10:15",
  "oi_asof": "2026-11-25",
  "indexes": [
   {
@@ -324,8 +324,8 @@
     {
      "symbol": "DRREDDY",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Triggered",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": -8.3,
       "px_pct": 1.0,
@@ -348,8 +348,8 @@
     {
      "symbol": "ETERNAL",
      "vk": "BUY NOW",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": -8.3,
       "px_pct": -0.0,
@@ -394,6 +394,18 @@
      }
     },
     {
+     "symbol": "SUNPHARMA",
+     "vk": "BUY NOW",
+     "setup": "Weekly Overspill \u00b7 Triggered",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -17.8,
+      "px_pct": 1.5,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "TITAN",
      "vk": "BUY NOW",
      "setup": "Weekly Overspill \u00b7 Triggered",
@@ -408,7 +420,7 @@
     {
      "symbol": "ADANIPORTS",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Trend Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": -4.1,
@@ -478,22 +490,10 @@
      }
     },
     {
-     "symbol": "SUNPHARMA",
-     "vk": "ALMOST READY (Bullish)",
-     "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "B",
-     "oi": {
-      "oi_pct": -17.8,
-      "px_pct": 1.5,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "ULTRACEMCO",
      "vk": "ALMOST READY (Bullish)",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -8.3,
       "px_pct": 4.4,
@@ -552,8 +552,8 @@
     {
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Triggered",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 11.5,
       "px_pct": 3.5,
@@ -612,7 +612,7 @@
     {
      "symbol": "HDFCBANK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Swing Pullback \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": -18.6,
@@ -696,8 +696,8 @@
     {
      "symbol": "MARUTI",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": 6.1,
       "px_pct": 12.6,
@@ -708,8 +708,8 @@
     {
      "symbol": "MAXHEALTH",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -9.8,
       "px_pct": 5.1,
@@ -768,7 +768,7 @@
     {
      "symbol": "RELIANCE",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": 9.7,
@@ -984,7 +984,7 @@
    "setups": [
     {
      "symbol": "BANKNIFTY",
-     "close": 63703.25,
+     "close": 63728.6,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -1018,7 +1018,7 @@
     },
     {
      "symbol": "BANKNIFTY",
-     "close": 63703.25,
+     "close": 63728.6,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -1047,7 +1047,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63413.83,
+     "trigger": 63443.95,
      "stop": 62444.16
     }
    ],
@@ -1303,7 +1303,7 @@
      "symbol": "PNB",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -18.8,
       "px_pct": -0.8,
@@ -1350,8 +1350,8 @@
     {
      "symbol": "CANBK",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "A",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -1.9,
       "px_pct": -0.4,
@@ -1362,7 +1362,7 @@
     {
      "symbol": "HDFCBANK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Swing Pullback \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": -18.6,
@@ -1420,7 +1420,7 @@
     "M": "Topping",
     "W": "Bottoming",
     "D": "Topping",
-    "H": "Bearish"
+    "H": "Bottoming"
    },
    "vk": {
     "final": "ALMOST READY (Bullish)",
@@ -1434,7 +1434,7 @@
      "M": "TOPPING",
      "W": "BOTTOMING",
      "D": "TOPPING",
-     "H": "BEARISH RUN"
+     "H": "BOTTOMING"
     }
    },
    "old": "\u274c Avoid",
@@ -1507,13 +1507,13 @@
    "setups": [
     {
      "symbol": "MIDCAP",
-     "close": 17777.4,
+     "close": 17903.35,
      "trend": "With trend",
      "states": {
       "M": "Topping",
       "W": "Bottoming",
       "D": "Topping",
-      "H": "Bearish"
+      "H": "Bottoming"
      },
      "setup": "Weekly Overspill",
      "stage": "Watch",
@@ -1530,7 +1530,7 @@
        "M": "TOPPING",
        "W": "BOTTOMING",
        "D": "TOPPING",
-       "H": "BEARISH RUN"
+       "H": "BOTTOMING"
       }
      },
      "ext": 1.6,
@@ -1541,16 +1541,16 @@
     },
     {
      "symbol": "MIDCAP",
-     "close": 17777.4,
+     "close": 17903.35,
      "trend": "With trend",
      "states": {
       "M": "Topping",
       "W": "Bottoming",
       "D": "Topping",
-      "H": "Bearish"
+      "H": "Bottoming"
      },
      "setup": "Hourly Range",
-     "stage": "Watch",
+     "stage": "Ready",
      "old": "\u274c Avoid",
      "vk": {
       "final": "ALMOST READY (Bullish)",
@@ -1564,220 +1564,196 @@
        "M": "TOPPING",
        "W": "BOTTOMING",
        "D": "TOPPING",
-       "H": "BEARISH RUN"
+       "H": "BOTTOMING"
       }
      },
      "ext": 1.6,
-     "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 2.5 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
+     "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 0.7 ranges under the ceiling \u00b7 Volume 1.0x lately (quieter is better)",
      "grade": "B",
-     "trigger": 17958.46,
-     "stop": 17812.67,
-     "target": 20087.98,
+     "trigger": 17958.39,
+     "stop": 17805.47,
+     "target": 20072.92,
      "chart": {
       "h": [
        18109.45,
        18046.6,
-       17953.75,
-       17954.7,
+       17938.35,
        18034.4,
-       17661.95,
+       17752.45,
        17789.75,
        17837.15,
-       17892.85,
+       17894.75,
        17948.75,
-       17930.5,
-       17979.15,
+       17945.85,
        17979.65,
-       17568.25,
+       17683.5,
        17497.2,
-       17273.95,
-       17216.0,
+       17262.05,
+       17178.3,
        17149.05,
-       17039.35,
        16989.5,
        17084.5,
        17119.7,
-       17053.4,
-       16813.8,
-       16829.7,
+       17039.45,
+       16774.5,
        16911.3,
        16910.4,
        17030.7,
        17075.75,
-       17052.65,
+       17046.05,
        16993.4,
-       16961.75,
-       16827.25,
+       16855.9,
        16500.2,
-       16425.55,
+       16447.1,
        16163.75,
-       16414.7,
-       16478.35,
+       16464.85,
        16570.5,
-       16648.4,
+       16599.2,
        16656.4,
        16751.7,
-       16839.4,
-       17027.9,
-       17377.15,
+       16839.75,
+       17042.3,
+       17410.35,
        17460.75,
-       17454.5,
        17529.85,
        17807.15,
        17891.75,
        17962.45,
        17941.6,
-       17875.55,
        17889.35,
-       17825.8,
+       17852.6,
        17674.3,
-       17838.8,
+       17889.2,
        17964.1,
        17866.0,
-       17825.8
+       17914.25
       ],
       "l": [
        17950.15,
        17886.55,
        17655.95,
-       17733.7,
-       17570.4,
+       17750.2,
        17373.75,
-       17560.1,
+       17542.15,
        17714.85,
-       17774.5,
-       17853.3,
+       17814.3,
+       17837.2,
        17812.45,
-       17873.45,
-       17534.05,
+       17673.25,
        17382.35,
-       17231.05,
+       17222.0,
        17025.55,
-       17030.55,
        16997.95,
+       16745.35,
        16652.8,
-       16839.1,
        16859.85,
-       16992.25,
-       16767.95,
+       16939.05,
+       16618.55,
        16523.15,
-       16690.9,
-       16766.75,
+       16748.1,
        16734.4,
-       16825.7,
+       16735.8,
        16933.35,
        16821.5,
        16836.1,
-       16728.95,
-       16361.75,
+       16389.05,
        16215.15,
        15886.85,
        15871.6,
-       16101.8,
+       16141.6,
        16306.4,
-       16367.45,
-       16484.45,
+       16452.5,
        16458.7,
        16487.45,
        16636.6,
-       16792.35,
-       16988.0,
-       17351.45,
+       16817.2,
+       17039.7,
        17180.1,
-       17410.9,
-       17490.9,
+       17320.45,
+       17443.5,
        17648.8,
        17764.3,
-       17779.15,
+       17726.65,
        17670.95,
-       17714.55,
-       17573.3,
+       17582.25,
        17476.7,
        17592.95,
        17681.3,
-       17704.25,
+       17688.5,
        17671.2
       ],
       "c": [
-       17974.25,
-       17916.35,
-       17736.1,
-       17929.75,
-       17581.0,
-       17592.45,
+       18028.65,
+       17934.1,
+       17846.05,
+       17752.25,
+       17574.65,
        17753.35,
-       17785.0,
-       17876.95,
-       17929.25,
-       17878.6,
-       17963.1,
-       17555.0,
+       17816.5,
+       17864.65,
+       17852.8,
+       17944.0,
+       17682.25,
        17386.3,
-       17257.3,
-       17163.55,
-       17119.2,
-       17028.7,
-       16847.95,
-       16907.45,
+       17237.55,
+       17168.1,
+       17125.25,
+       16830.95,
+       16883.2,
        17066.8,
-       17036.75,
-       16797.6,
-       16745.8,
-       16786.7,
-       16777.75,
-       16832.9,
+       16964.85,
+       16637.1,
+       16753.05,
+       16818.9,
+       16784.25,
        16937.75,
-       17029.25,
-       16913.6,
-       16907.75,
-       16767.85,
-       16436.65,
-       16369.5,
+       17043.25,
+       16924.35,
+       16855.1,
+       16396.0,
+       16426.65,
        15909.9,
-       16112.4,
-       16395.3,
-       16421.85,
-       16500.65,
-       16640.7,
-       16528.0,
+       16142.05,
+       16412.5,
+       16546.45,
+       16547.7,
+       16560.8,
        16662.7,
-       16796.45,
-       16997.85,
-       17353.6,
-       17432.4,
-       17453.2,
-       17494.95,
+       16836.85,
+       17042.3,
+       17406.0,
+       17330.6,
+       17475.0,
        17738.2,
-       17799.4,
-       17910.25,
-       17875.45,
-       17774.15,
-       17828.35,
-       17642.8,
+       17815.4,
+       17845.5,
+       17771.65,
+       17812.45,
+       17597.8,
        17660.7,
-       17837.65,
-       17774.1,
-       17758.95,
-       17777.4
+       17866.55,
+       17767.95,
+       17690.95,
+       17903.35
       ],
       "lines": {
        "top": [
         [
-         12.0,
+         10.29,
          17979.65
         ],
         [
-         59.83,
-         17958.46
+         51.43,
+         17958.39
         ]
        ],
        "floor": [
         [
-         12.0,
+         10.29,
          15871.6
         ],
         [
-         59.83,
+         51.43,
          15871.6
         ]
        ]
@@ -2037,8 +2013,8 @@
     {
      "symbol": "PERSISTENT",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "B",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": -14.5,
       "px_pct": 4.2,
@@ -2085,7 +2061,7 @@
     {
      "symbol": "INDIANB",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": -2.5,
@@ -2122,7 +2098,7 @@
      "symbol": "BHARATFORG",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -4.4,
       "px_pct": 1.6,
@@ -2181,8 +2157,8 @@
     {
      "symbol": "LICI",
      "vk": "NO SIGNAL",
-     "setup": "Daily Falling Wedge \u00b7 Triggered",
-     "grade": "B",
+     "setup": "Hourly Range \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": -14.0,
       "px_pct": 2.4,
@@ -2229,8 +2205,8 @@
     {
      "symbol": "SRF",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": -7.0,
       "px_pct": 2.6,
@@ -2373,7 +2349,7 @@
    "setups": [
     {
      "symbol": "FINNIFTY",
-     "close": 28764.95,
+     "close": 28773.4,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
@@ -2669,8 +2645,8 @@
     {
      "symbol": "BAJAJFINSV",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Triggered",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 11.5,
       "px_pct": 3.5,
@@ -2681,7 +2657,7 @@
     {
      "symbol": "HDFCBANK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Swing Pullback \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": -18.6,
@@ -2717,7 +2693,7 @@
     {
      "symbol": "LICHSGFIN",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": -8.2,
@@ -2846,7 +2822,7 @@
     "M": "Impulse",
     "W": "Bottoming",
     "D": "Topping",
-    "H": "Bearish"
+    "H": "Bottoming"
    },
    "vk": {
     "final": "ALMOST READY (Bullish)",
@@ -2860,7 +2836,7 @@
      "M": "BULLISH RUN",
      "W": "BOTTOMING",
      "D": "TOPPING",
-     "H": "BEARISH RUN"
+     "H": "BOTTOMING"
     }
    },
    "old": "\u274c Avoid",
@@ -2933,13 +2909,13 @@
    "setups": [
     {
      "symbol": "NEXT50",
-     "close": 72778.95,
+     "close": 72958.75,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
       "W": "Bottoming",
       "D": "Topping",
-      "H": "Bearish"
+      "H": "Bottoming"
      },
      "setup": "Weekly Overspill",
      "stage": "Watch",
@@ -2956,7 +2932,7 @@
        "M": "BULLISH RUN",
        "W": "BOTTOMING",
        "D": "TOPPING",
-       "H": "BEARISH RUN"
+       "H": "BOTTOMING"
       }
      },
      "ext": 1.8,
@@ -3224,7 +3200,7 @@
     {
      "symbol": "BOSCHLTD",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Triggered",
+     "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": -23.5,
@@ -3248,7 +3224,7 @@
     {
      "symbol": "GAIL",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Hourly Overspill \u00b7 Ready",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": -6.4,
@@ -3273,7 +3249,7 @@
      "symbol": "PNB",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "B",
+     "grade": "C",
      "oi": {
       "oi_pct": -18.8,
       "px_pct": -0.8,
@@ -3284,8 +3260,8 @@
     {
      "symbol": "TVSMOTOR",
      "vk": "ALMOST READY (Bullish)",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": -3.2,
       "px_pct": 3.5,
@@ -3356,8 +3332,8 @@
     {
      "symbol": "BPCL",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Range \u00b7 Watch",
+     "grade": "C",
      "oi": {
       "oi_pct": 1.8,
       "px_pct": 1.7,
@@ -3380,8 +3356,8 @@
     {
      "symbol": "CANBK",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "A",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -1.9,
       "px_pct": -0.4,
@@ -3464,8 +3440,8 @@
     {
      "symbol": "IOC",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "B",
      "oi": {
       "oi_pct": -6.2,
       "px_pct": 1.6,
@@ -3488,8 +3464,8 @@
     {
      "symbol": "JINDALSTEL",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "A",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": -1.9,
       "px_pct": -1.8,
@@ -3500,7 +3476,7 @@
     {
      "symbol": "MAZDOCK",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
+     "setup": "Hourly Range \u00b7 Ready",
      "grade": "C",
      "oi": {
       "oi_pct": -24.6,
@@ -3596,8 +3572,8 @@
     {
      "symbol": "TORNTPHARM",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "A",
+     "setup": "Hourly Range \u00b7 Ready",
+     "grade": "C",
      "oi": {
       "oi_pct": -0.7,
       "px_pct": 5.2,
