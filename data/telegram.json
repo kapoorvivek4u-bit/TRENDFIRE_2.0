@@ -32,6 +32,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "BAJFINANCE": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "BHARTIARTL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -56,11 +60,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "FEDERALBNK": {
+  "EICHERMOT": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "GAIL": {
+  "FEDERALBNK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -129,6 +133,10 @@
    "confirmed": "Not confirmed"
   },
   "UNIONBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "ZYDUSLIFE": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -628,7 +636,7 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "BAJFINANCE": {
+  "AUROPHARMA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -644,13 +652,13 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "EICHERMOT": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "ETERNAL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "GAIL": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "GLENMARK": {
    "final": "BUY NOW",
@@ -706,7 +714,7 @@
   },
   "NAVINFLUOR": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "OBEROIRLTY": {
    "final": "BUY NOW",
@@ -748,10 +756,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "ZYDUSLIFE": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "ASTRAL": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -761,6 +765,10 @@
    "confirmed": "Not confirmed"
   },
   "PAGEIND": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "PIIND": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -817,10 +825,6 @@
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "KPITTECH": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PIIND": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
