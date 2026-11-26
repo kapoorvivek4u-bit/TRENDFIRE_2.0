@@ -165,16 +165,20 @@ async function logVisit(env, req, user) {        // at most one write per user p
   await env.USERS.put(key, JSON.stringify({ ...prev, seen: new Date().toISOString(), visits: (prev.visits || 0) + 1,
                                             place: place(req) || prev.place, device: device(req) }));
 }
+let LOG_CACHE = { at: 0, v: null };
 async function adminLog(env) {
   if (!env.USERS) return { error: "The login log needs the USERS storage (KV) connected." };
-  const users = [], logins = [];
+  if (LOG_CACHE.v && Date.now() - LOG_CACHE.at < 30e3) return LOG_CACHE.v;     // the Admin page re-opened within 30 s
+  const getAll = async names => (await Promise.all(names.map(n => env.USERS.get(n, "json").catch(() => null)))).filter(Boolean);
+  const keys = [];
   let cur;
   do { const r = await env.USERS.list({ prefix: "u:", cursor: cur }); cur = r.list_complete ? null : r.cursor;
-       for (const k of r.keys) { const v = await env.USERS.get(k.name, "json"); if (v) users.push(v); } } while (cur);
-  const r = await env.USERS.list({ prefix: "l:", limit: 100 });
-  for (const k of r.keys) { const v = await env.USERS.get(k.name, "json"); if (v) logins.push(v); }
+       keys.push(...r.keys.map(k => k.name)); } while (cur);
+  const lk = (await env.USERS.list({ prefix: "l:", limit: 100 })).keys.map(k => k.name);
+  const [users, logins] = await Promise.all([getAll(keys), getAll(lk)]);        // all reads at once, not one by one
   users.sort((a, b) => (b.seen || b.last || "").localeCompare(a.seen || a.last || ""));
-  return { users, logins };
+  LOG_CACHE = { at: Date.now(), v: { users, logins } };
+  return LOG_CACHE.v;
 }
 
 // ------------------------------------------------------------------ page views and online now (D1 database "DB")
@@ -206,11 +210,12 @@ async function hit(env, req, user) {             // a page opened, or a 2-minute
   } catch (e) { console.log("hit failed", e.message); }
   return json({ ok: true });
 }
-async function adminStats(env) {
+async function adminStats(env, ctx) {
   const d = await db(env);
   if (!d) return { error: "no-db" };
   const now = Date.now(), since = istDay(now - 29 * 864e5), today = istDay(now);
-  await d.prepare("DELETE FROM hits WHERE ts < ?").bind(now - 120 * 864e5).run();
+  const prune = d.prepare("DELETE FROM hits WHERE ts < ?").bind(now - 120 * 864e5).run().catch(() => null);   // housekeeping, not waited on
+  if (ctx) ctx.waitUntil(prune); else await prune;
   const [daily, pages, perUser, todayRows, online] = await d.batch([
     d.prepare("SELECT day, COUNT(DISTINCT email) AS users, COUNT(*) AS views FROM hits WHERE day >= ? GROUP BY day ORDER BY day").bind(since),
     d.prepare("SELECT page, COUNT(*) AS views, COUNT(DISTINCT email) AS users FROM hits WHERE day >= ? GROUP BY page ORDER BY views DESC").bind(since),
@@ -233,9 +238,12 @@ async function fullList(env) {
   FULL_CACHE = { at: Date.now(), list };
   return list;
 }
+let OPEN_CACHE = { at: 0, v: false };
 async function openAll(env) {                               // temporary: every signed-in user gets every feature
-  const v = env.USERS ? await env.USERS.get("open:all") : null;
-  return v === "1";
+  if (Date.now() - OPEN_CACHE.at < 30e3) return OPEN_CACHE.v;
+  const v = env.USERS ? (await env.USERS.get("open:all")) === "1" : false;
+  OPEN_CACHE = { at: Date.now(), v };
+  return v;
 }
 async function hasFull(env, user) {
   return user.role === "admin" || (await openAll(env)) || (await fullList(env)).includes(String(user.email || "").toLowerCase());
@@ -425,9 +433,9 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
   "/icon-192.png", "/icon-512.png", "/manifest.webmanifest", "/robots.txt",
   "/privacy", "/privacy.html", "/terms", "/terms.html", "/guide", "/guide.html", "/sitemap.xml", "/og-image.png", "/sw.js"]);
 
-async function api(req, env, url, user) {
+async function api(req, env, url, user, ctx) {
   const p = url.pathname, admin = user.role === "admin";
-  if (p === "/api/me") { await logVisit(env, req, user); return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user), open: await openAll(env) }); }
+  if (p === "/api/me") { const lv = logVisit(env, req, user).catch(() => null); if (ctx) ctx.waitUntil(lv); else await lv; return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user), open: await openAll(env) }); }
   if (p === "/api/live" && req.method === "GET") {           // today's prices for the dashboard (no levels)
     const v = env.USERS ? await env.USERS.get("live:latest") : null;
     return new Response(v || "{}", { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
@@ -457,7 +465,7 @@ async function api(req, env, url, user) {
   }
   if (p === "/api/admin/open") {
     if (!admin) return json({ error: "Admin only." }, 403);
-    if (req.method === "POST") { const b = await req.json().catch(() => ({})); await env.USERS.put("open:all", b.on ? "1" : "0"); }
+    if (req.method === "POST") { const b = await req.json().catch(() => ({})); await env.USERS.put("open:all", b.on ? "1" : "0"); OPEN_CACHE = { at: Date.now(), v: !!b.on }; }
     return json({ on: await openAll(env) });
   }
   if (p === "/api/admin/holdings") {                     // each person's own holdings: kept in KV, never in the public repo
@@ -476,7 +484,7 @@ async function api(req, env, url, user) {
     }
   }
   if (p === "/api/hit" && req.method === "POST") return await hit(env, req, user);
-  if (p === "/api/admin/stats" && req.method === "GET") return admin ? json(await adminStats(env)) : json({ error: "Admin only." }, 403);
+  if (p === "/api/admin/stats" && req.method === "GET") return admin ? json(await adminStats(env, ctx)) : json({ error: "Admin only." }, 403);
   if (p === "/api/kite/status" && req.method === "GET") return admin ? json(await kiteStatus(env)) : json({ error: "Admin only." }, 403);
   if (!env.GH_TOKEN) return json({ error: "GH_TOKEN is not set in the Cloudflare secrets." }, 503);
   if (p === "/api/watch" && req.method === "GET") {
@@ -571,10 +579,11 @@ export default {
         return new Response(r.body, { status: r.status, headers: {
           "content-type": r.ok ? "application/json" : "text/plain", "cache-control": "private, max-age=60" } });
       }
-      if (p.startsWith("/api/")) return await api(req, env, url, user);
+      if (p.startsWith("/api/")) return await api(req, env, url, user, ctx);
       const res = await env.ASSETS.fetch(req);
       const out = new Response(res.body, res);
       out.headers.set("cache-control", "private, no-cache");
+      if (p === "/" || p === "/index.html") out.headers.set("x-tr-app", "1");   // the service worker keeps only the signed-in app
       return out;
     } catch (e) {
       return json({ error: "Server error: " + e.message }, 500);

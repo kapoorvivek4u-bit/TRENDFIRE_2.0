@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
 /* Layout: desktop = fixed left rail + 12-col content grid; phone = top bar + bottom tab bar, one column.
    Themes: Graphite & Neon (dark) and Sand & Indigo (light), the two looks Vivek picked. */
@@ -535,18 +535,39 @@ let WATCH = [], WATCH_LIVE = false;
 const UI = { strong: "fo", strongMarket: "fo", setup: {}, stage: {}, pat: "All", vk: null, lean: "All", umarket: "F&O",
              star: "All", more: false, search: "", dealSide: "All" };
 
+let ADMIN_D = null;
+const SAVED_TRIED = {};
 async function getJSON(name, fresh){
   if(CACHE[name] && !fresh) return CACHE[name];
   if(window.SNAP && window.SNAP.files && window.SNAP.files[name]){ CACHE[name] = window.SNAP.files[name]; return CACHE[name]; }
+  // instant open: use the copy saved on this phone (under 12 hours old), then fetch the fresh one quietly
+  if(!fresh && !SAVED_TRIED[name] && "caches" in window){
+    SAVED_TRIED[name] = 1;
+    try{
+      const hit = await caches.match(location.origin + "/data/" + name);
+      const age = hit ? Date.now() - Date.parse(hit.headers.get("date") || 0) : Infinity;
+      if(hit && age < 12 * 3600e3){
+        CACHE[name] = await hit.json();
+        if(name === "site.json") applyLive();
+        netJSON(name).then(j => { const old = CACHE[name];
+          if(JSON.stringify(j).length !== JSON.stringify(old).length || (j.generated_ist && j.generated_ist !== old.generated_ist)){
+            CACHE[name] = j; if(name === "site.json") applyLive(); rerender(); } }).catch(() => null);
+        return CACHE[name];
+      }
+    }catch(e){}
+  }
+  CACHE[name] = await netJSON(name);
+  if(name === "site.json") applyLive();
+  return CACHE[name];
+}
+async function netJSON(name){
   const t = "?t=" + Math.floor(Date.now()/60000);
   let r = null;
   try{ r = await fetch("/data/" + name + t); if(r.status === 401){ location.href = "/login"; throw new Error("signed out"); }
        if(!r.ok || !(r.headers.get("content-type") || "").includes("json")) r = null; }catch(e){ if(e.message === "signed out") throw e; r = null; }
   if(!r) r = await fetch(DATA_BASE + name + t, {cache:"no-store"});
   if(!r.ok) throw new Error(name + " " + r.status);
-  CACHE[name] = await r.json();
-  if(name === "site.json") applyLive();
-  return CACHE[name];
+  return await r.json();
 }
 const S = () => CACHE["site.json"];
 /* Live prices (every 15 min in market hours) laid over the last-session heatmap, movers and advance/decline. */
@@ -1974,7 +1995,12 @@ const avatar = (u, s=28) => u && u.picture ? `<img src="${esc(u.picture)}" alt="
 async function pageAdmin(){
   if(!isAdmin()) return pageHead("Admin", "") + `<div class="empty">Admin only.</div>`;
   const get = u => fetch(u, {cache:"no-store"}).then(r => r.json()).catch(() => ({error:"Could not reach the server."}));
-  const [d, st, fl] = await Promise.all([get("/api/admin/log"), get("/api/admin/stats"), get("/api/admin/full")]);
+  // show the last copy at once (if under 5 minutes old) and refresh it in the background
+  const load = () => Promise.all([get("/api/admin/log"), get("/api/admin/stats"), get("/api/admin/full")]).then(v => (ADMIN_D = {at: Date.now(), v}, v));
+  let v;
+  if(ADMIN_D && Date.now() - ADMIN_D.at < 300e3){ v = ADMIN_D.v; if(Date.now() - ADMIN_D.at > 20e3) load().then(() => { if(route() === "admin") rerender(); }); }
+  else v = await load();
+  const [d, st, fl] = v;
   if(d.error) return pageHead("Admin", "Who signed in", `<a class="btn2" href="/logout">${ico("logout")} Sign out</a>`) + `<div class="empty">${esc(d.error)}</div>`;
   const users = (d.users || []).filter(u => u.role !== "admin"), today = istDay(Date.now());
   const byEmail = Object.fromEntries(users.map(u => [u.email.toLowerCase(), u]));
@@ -2291,22 +2317,23 @@ addEventListener("hashchange", () => { render(); scrollTo(0,0); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 
 (async function boot(){
+  const siteP = getJSON("site.json").catch(e => e);   // start the data download at once, alongside the sign-in check
   try{
     const r = await fetch("/api/me", {cache:"no-store"});
     if(r.status === 401){ location.href = "/login"; return; }
     if(r.ok) USER = await r.json();
   }catch(e){ USER = null; }          // no server (preview): show everything
-  if(USER && USER.role === "admin"){ try{ const r = await fetch("/api/kite/status", {cache:"no-store"}); if(r.ok) KITE = await r.json(); }catch(e){} }
+  if(USER && USER.role === "admin") fetch("/api/kite/status", {cache:"no-store"}).then(r => r.ok ? r.json() : null)
+    .then(k => { if(k){ KITE = k; renderShell(); if(route() === "today") rerender(); } }).catch(() => null);   // not waited on
   { const q = new URLSearchParams(location.search).get("kite");
     if(q){ setTimeout(() => toast(q === "ok" ? "Kite connected for today ✓" : q === "failed" ? "Kite login did not finish. Try again." : "Kite login cancelled"), 600);
            history.replaceState(null, "", location.pathname + location.hash); } }
   renderShell();
-  try{ await getJSON("site.json"); await loadLive(); }
+  try{ const sj = await siteP; if(sj instanceof Error) throw sj; await Promise.all([loadLive(), loadWatch()]); applyLive(); }
   catch(e){
     document.getElementById("main").innerHTML = `<div class="soon"><h1>No dashboard data yet</h1><p>The dashboard file is made by the Setups scan. Run that scan once on GitHub (Actions → Setups scan → Run workflow), then reload this page.</p></div>`;
     return;
   }
-  await loadWatch();
   getJSON("sectors.json").catch(() => null);
   render();
   setInterval(async () => { try{ await getJSON("site.json", true); await loadWatch(); if(route() === "today") rerender(); }catch(e){} }, 5*60*1000);
