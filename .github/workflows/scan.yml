@@ -33,6 +33,9 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: python tg_alerts.py || echo "Telegram step failed; scan results are still saved"
 
+      - name: Options check for the strongest stocks
+        run: python options_scan.py || echo "Options step failed; scan results are still saved"
+
       - name: Save results to the repo
         run: |
           git config user.name "setups-bot"

@@ -569,6 +569,7 @@ export default {
       const m = p.match(/^\/data\/([A-Za-z0-9_.\-]+\.json)$/);
       if (m) {
         if (m[1] === "watchlist.json" && user.role !== "admin") return json([]);
+        if (m[1] === "options.json" && !(await hasFull(env, user))) return json({ locked: true });   // option ideas: full access only
         const r = await fetch(`https://raw.githubusercontent.com/${env.REPO}/main/data/${m[1]}`,
                               { cf: { cacheTtl: 60, cacheEverything: true } });
         if (r.ok && !(await hasFull(env, user))) return await memberData(env, ctx, m[1], r);   // no trade levels

@@ -505,6 +505,8 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 @media (max-width:560px){.t5{grid-template-columns:auto 1fr}.t5 .r{grid-column:2;text-align:left;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.t5 .r>div{margin:0!important}}
 .mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
 .mtft td{vertical-align:middle;white-space:nowrap}
+.optbox{margin:10px 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--up) 8%,transparent);border:1px solid color-mix(in srgb,var(--up) 25%,transparent)}
+.optk{font:800 16px/1.2 "JetBrains Mono",monospace;margin-bottom:8px}.optg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 10px}.optg small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.optg b{font-family:"JetBrains Mono",monospace;font-size:13.5px}
 .hitn{border:0;cursor:pointer;font:700 11px/1 inherit;padding:3px 6px;margin-left:4px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);vertical-align:middle;flex:none}
 .hitpop{position:fixed;inset:0;z-index:60;background:rgba(15,12,40,.35);display:grid;place-items:end center;padding:16px max(16px,env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px))}
 .hitcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;width:min(520px,100%);max-height:80vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
@@ -740,7 +742,7 @@ function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : nu
 /* ============================================================ routes */
 const PAGES = [
   ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["lab","🧪 VK Experimentals"]]],
+  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["lab","🧪 VK Experimentals"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
@@ -898,7 +900,7 @@ function setupCard(r, opts={}){
   return `<article class="sc" style="--stc:${stc}">
     <div class="row1"><div class="symrow">${symLink(r.symbol, 16, false)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div>
       <span style="display:flex;gap:6px;align-items:center">${rr && live ? `<span class="rr">R:R ${rr}</span>` : ""}${r.grade ? `<span class="grade ${live && r.grade === "A" ? "" : "b"}" title="Quality grade">${esc(r.grade === "Warning" ? "!" : r.grade)}</span>` : ""}</span></div>
-    <div class="chips">${chaseChip(r.symbol)}${wallChips(r.symbol)}${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
+    <div class="chips">${chaseChip(r.symbol)}${optChip(r.symbol)}${wallChips(r.symbol)}${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
     ${r.chart ? miniChart(r.chart, r.symbol) : ""}
     ${statesHtml(r.states)}
     ${r.detail ? `<div class="detail">${esc(r.detail)}</div>` : ""}
@@ -1430,6 +1432,36 @@ function pageHits(){
       : `<div class="empty">No stock matches these filters right now.</div>`}</section>`;
 }
 
+/* ============================================================ Options check (calls, full access only) */
+const OPT = () => CACHE["options.json"] && !CACHE["options.json"].locked ? CACHE["options.json"] : null;
+const optOf = s => { const o = OPT(); return o ? (o.rows || []).find(r => r.s === s) : null; };
+function optChip(s){ if(!FULL()) return ""; const r = optOf(s); if(!r) return "";
+  return r.idea ? `<a class="chip" href="#scanner-options" style="--c:var(--up);text-decoration:none" title="Options confirm ${r.passed}/5">📈 ${fmt(r.idea.strike, 0)} CE ₹${fmt(r.idea.ltp)} · ${r.passed}/5</a>`
+    : `<a class="chip" href="#scanner-options" style="--c:var(--muted);text-decoration:none" title="Options do not confirm">Options ${r.passed}/5</a>`; }
+async function pageOptions(){
+  const head = pageHead("Options check", "Calls for the strongest stocks, only when the option chain agrees") + subnav();
+  if(!FULL()) return head + `<div class="empty">Option ideas are available with full access.</div>`;
+  const o = await getJSON("options.json").catch(() => null);
+  if(!o || o.locked || !o.rows) return head + `<div class="empty">The first options check runs with the next scan.</div>`;
+  const show = UI.optAll ? o.rows : o.rows.filter(r => r.idea);
+  const card = r => { const i = r.idea, q = livePx(r.s);
+    return `<article class="sc" style="--stc:${i ? "var(--up)" : "var(--line)"}">
+      <div class="row1"><div class="symrow">${symLink(r.s, 16)}${starBtn(r.s)}<span class="px">${fmt(q ? q.close : r.spot)}</span>${liveTag(r.s)}</div>
+        <span class="hcat" style="--c:${r.passed >= 4 ? "var(--up)" : r.passed === 3 ? "var(--warn)" : "var(--muted)"}">${r.passed}/5</span></div>
+      <div class="chips">${r.why.map(w => chip(w, "var(--info)")).join("")}${chip(`Expiry ${r.expiry} · ${r.left} sessions`, "var(--muted)")}</div>
+      ${i ? `<div class="optbox"><div class="optk">${esc(r.s)} ${fmt(i.strike, 0)} CE</div>
+          <div class="optg"><div><small>Premium</small><b>₹${fmt(i.ltp)}</b></div><div><small>Lot</small><b>${i.lot ?? "—"}</b></div><div><small>Cost / lot</small><b>${i.cost ? "₹" + fmt(i.cost, 0) : "—"}</b></div>
+          <div><small>Breakeven</small><b>₹${fmt(i.breakeven)}</b></div><div><small>Delta</small><b>${i.delta}</b></div><div><small>IV</small><b>${i.iv}%</b></div></div>
+          ${i.tgt_prem != null ? `<div class="up" style="font-size:12.5px;margin-top:6px">If ${esc(r.s)} reaches ₹${fmt(i.tgt_px)} (setup target): about ₹${fmt(i.tgt_prem)} (${pct(i.tgt_pct, 0)})</div>` : ""}
+          ${i.stop_prem != null ? `<div class="down" style="font-size:12.5px">If it hits ₹${fmt(i.stop_px)} (setup stop): about ₹${fmt(i.stop_prem)} (${pct(i.stop_pct, 0)}): exit there</div>` : ""}</div>`
+        : `<div class="detail">Options don't confirm (${r.passed}/5): trade the future or cash, or wait.</div>`}
+      <div class="checks">${r.checks.map(c => `<div style="color:${c.ok ? "var(--up)" : "var(--muted)"}">${c.ok ? "✓" : "✗"} ${esc(c.t)}</div>`).join("")}</div>
+      ${r.warn.length ? `<div class="hwarn">⚠️ ${esc(r.warn.join(" · "))}</div>` : ""}</article>`; };
+  return head + `<section class="card fade"><div class="filters"><button data-optall="0" class="${!UI.optAll ? "on" : ""}">With a call idea<i>${o.ideas}</i></button><button data-optall="1" class="${UI.optAll ? "on" : ""}">All checked<i>${o.checked}</i></button></div>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Checks Top 5, 🔥5+ scan stocks and grade-A Ready/Triggered F&O setups. 5 option checks: put writing below the price, calls unwinding above, PCR, IV vs the stock's own 20-day move, max pain. 3 of 5 or more gives a call idea: ATM or 1 strike in the money (delta near 0.6), current month if over 10 sessions left, else next. Estimates use Black-Scholes and today's IV. Option chain from NSE, a few minutes late · checked ${esc(when(o.generated_ist))}.</div></section>
+    ${show.length ? `<div class="cards" style="margin-top:12px">${show.map(card).join("")}</div>` : `<div class="empty" style="margin-top:12px">No stock has options confirming right now. Tap "All checked" to see why.</div>`}`;
+}
+
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
   const t = S().top5; if(!FULL() || !t || !(t.picks || []).length) return "";
@@ -1437,7 +1469,7 @@ function top5Card(){
     const state = px < p.stop ? chip("Below the stop now", "var(--down)") : p.stage === "Triggered" || px >= p.entry ? chip("Above the entry", "var(--up)") : chip(`${((p.entry/px - 1)*100).toFixed(1)}% to the entry`, "var(--muted)");
     return `<div class="t5"><span class="t5r">${i+1}</span><div style="min-width:0">
       <div class="symrow">${symLink(p.symbol, 15, false)}${starBtn(p.symbol)}<span class="muted" style="font-size:12px">${esc(p.sector || "")}</span>${liveTag(p.symbol)}</div>
-      <div class="chips" style="margin-top:5px">${headsChips(p.symbol, p.setup)}${chip(p.setup, "var(--info)")}${chip("Grade " + p.grade, p.grade === "A" ? "var(--up)" : "var(--muted)")}${chaseChip(p.symbol)}${state}${wallChips(p.symbol)}</div>
+      <div class="chips" style="margin-top:5px">${headsChips(p.symbol, p.setup)}${chip(p.setup, "var(--info)")}${chip("Grade " + p.grade, p.grade === "A" ? "var(--up)" : "var(--muted)")}${chaseChip(p.symbol)}${optChip(p.symbol)}${state}${wallChips(p.symbol)}</div>
       <details class="t5d"><summary>Why it ranks here · ${p.checks.length} checks${p.cautions.length ? ` · ${p.cautions.length} caution${p.cautions.length > 1 ? "s" : ""}` : ""}</summary>
         <ul>${p.checks.map(c => `<li class="${c.p > 0 ? "up" : "down"}"><b>${c.p > 0 ? "+" : ""}${c.p}</b> ${esc(c.t)}</li>`).join("")}</ul></details></div>
       <div class="r"><span class="t5s" title="Total score">${p.score}</span><div style="margin-top:5px">↑ ${fmt(p.entry)}</div><div class="down">✕ ${fmt(p.stop)} <span class="muted">(${p.risk_pct}%)</span></div><div class="up">◎ ${fmt(p.target)} <span class="muted">R:R ${p.rr}</span></div></div></div>`; };
@@ -1616,7 +1648,7 @@ function prefetch(){
   ("requestIdleCallback" in window) ? requestIdleCallback(go, {timeout:3000}) : setTimeout(go, 1500);
 }
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
-  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
+  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
 
 
@@ -2275,7 +2307,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2343,6 +2375,7 @@ document.addEventListener("click", e => {
   if(d.hadd){ holdAdd({s: d.hadd}); return; }
   if(d.hits){ e.preventDefault(); hitsSheet(d.hits); return; }
   if(d.hitclose){ document.querySelector(".hitpop")?.remove(); return; }
+  if(d.optall != null && b.dataset.optall !== undefined){ UI.optAll = d.optall === "1"; return rerender(); }
   if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
   if(d.hitearly){ UI.hitEarly = !UI.hitEarly; return rerender(); }
   if(d.hitgood){ UI.hitGood = !UI.hitGood; return rerender(); }
@@ -2394,6 +2427,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
     return;
   }
   getJSON("sectors.json").catch(() => null);
+  if(FULL()) getJSON("options.json").then(() => { if(route() === "today" || route().startsWith("scanner")) rerender(); }).catch(() => null);
   render();
   setInterval(async () => { try{ await getJSON("site.json", true); await loadWatch(); if(route() === "today") rerender(); }catch(e){} }, 5*60*1000);
   setInterval(async () => { if(document.visibilityState !== "visible") return; await loadLive(); if(route() === "today" || route().startsWith("market")) rerender(); }, 2*60*1000);
