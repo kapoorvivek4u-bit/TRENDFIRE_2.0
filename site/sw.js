@@ -22,8 +22,14 @@ self.addEventListener("fetch", e => {
     e.respondWith(caches.match("/").then(hit => {
       const net = fetch(req).then(res => res.headers.get("x-tr-app") ? save("/", res) : res);
       if (!hit) return net;
-      const slow = new Promise(r => setTimeout(() => r(hit), 3000));
-      return Promise.race([net.catch(() => hit), slow]);
+      let usedSaved = false;
+      const slow = new Promise(r => setTimeout(() => { usedSaved = true; r(hit); }, 3000));
+      net.then(async res => {                              // the saved copy was shown: tell the page if the new one differs
+        if (!usedSaved || !res.ok) return;
+        const [a, b] = await Promise.all([hit.clone().text(), res.clone().text()]).catch(() => ["", ""]);
+        if (a && b && a !== b) (await self.clients.matchAll()).forEach(c => c.postMessage("tr-new-version"));
+      }).catch(() => {});
+      return Promise.race([net.catch(() => (usedSaved = true, hit)), slow]);
     }));
     return;
   }
