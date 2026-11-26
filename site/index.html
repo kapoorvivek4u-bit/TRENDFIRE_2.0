@@ -1116,10 +1116,11 @@ function greet(){ const h = +new Date().toLocaleString("en-US", {hour:"numeric",
 async function pageDashboard(){
   return `<div class="head"><div><h1>${greet()}, Trader</h1><div class="sub">Here's the market before you trade. <a href="/guide" target="_blank" rel="noopener" style="font-weight:700">New here? How to use TradeReady ›</a></div></div>
       <div class="stamp"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST · refreshes hourly</div></div>
-    ${subnav()}${bellStrip()}${headsUpCard()}${indexStrip()}
+    ${subnav()}
+    <div class="grid">${flowMiniCard()}${weatherCard()}${newsCard()}</div>
+    <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
     <div class="grid">
-      ${weatherCard()}${newsCard()}
-      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${top5Card()}${flowMiniCard()}${mostScannedCard()}
+      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${top5Card()}${mostScannedCard()}
       ${tradesCard()}
       ${partsCard()}${vkCard()}
       ${strongestCard()}${readyCard()}
