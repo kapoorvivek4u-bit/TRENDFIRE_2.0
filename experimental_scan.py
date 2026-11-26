@@ -166,18 +166,19 @@ def rs_lead(daily, nifty, fo_syms):
         new_hi_days = int((rs.iloc[-10:] >= rs.iloc[:-10].max() * 0.999).sum())   # RS at a new high in the last 10 days
         below = (cc.iloc[-1] / px_hi - 1) * 100
         stats["rs_hi"] += int(new_hi_days > 0)
-        if new_hi_days == 0 or rs.iloc[-1] < rs_hi * 0.98 or below > -3:
+        if new_hi_days == 0 or rs.iloc[-1] < rs_hi * 0.98:
             continue
+        lead = below <= -3                                   # price still well under its own high: the real "lead"
         nifty_dd = (nn.iloc[-1] / nn.max() - 1) * 100
         r3 = (cc.iloc[-1] / cc.iloc[-63] - 1) * 100 if len(cc) > 63 else None
         n3 = (nn.iloc[-1] / nn.iloc[-63] - 1) * 100 if len(nn) > 63 else None
         sma200 = cc.rolling(200).mean().iloc[-1]
         score = 50 + min(new_hi_days, 5) * 4 + max(-15, min(15, ((r3 or 0) - (n3 or 0)))) + (10 if cc.iloc[-1] > sma200 else -10) \
-            - abs(below + 8) * 0.8                                         # sweet spot about 6-10% under the high
-        out.append({"s": s, "c": r1(cc.iloc[-1], 2), "below": r1(below), "rs_days": new_hi_days,
+            - abs(below + 8) * 0.8 + (25 if lead else 0)                   # sweet spot about 6-10% under the high
+        out.append({"s": s, "c": r1(cc.iloc[-1], 2), "below": r1(below), "rs_days": new_hi_days, "lead": bool(lead),
                     "r3": r1(r3), "n3": r1(n3), "nifty_dd": r1(nifty_dd), "a200": bool(cc.iloc[-1] > sma200),
                     "spark": [r1(x, 4) for x in (rs.iloc[-60:] / rs.iloc[-60]).tolist()], "fo": s in fo_syms, "score": r1(score)})
-    print(f"rs lead: {stats['stocks']} stocks with a year of data, {stats['rs_hi']} with RS at a 52-week high, {len(out)} also under their price high")
+    print(f"rs lead: {stats['stocks']} stocks with a year of data, {stats['rs_hi']} with RS at a 52-week high, {sum(x['lead'] for x in out)} also 3%+ under their price high")
     return sorted(out, key=lambda x: -x["score"])[:40]
 
 

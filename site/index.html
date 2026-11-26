@@ -504,7 +504,8 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .t5w{margin:0 0 10px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn);font-size:12.5px}
 @media (max-width:560px){.t5{grid-template-columns:auto 1fr}.t5 .r{grid-column:2;text-align:left;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.t5 .r>div{margin:0!important}}
 .mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
-.mtft td{vertical-align:middle;white-space:nowrap}.mtfph{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.mtfph button{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:transparent;color:var(--c);border-radius:999px;padding:3px 9px;font:600 11.5px inherit;cursor:pointer}.mtfph button.on{background:color-mix(in srgb,var(--c) 16%,transparent)}.mtfph i{font-style:normal;opacity:.65;margin-left:4px}.mtft .sh{display:none}
+.mtft td{vertical-align:middle;white-space:nowrap}.labt td{vertical-align:middle;white-space:nowrap}.labinfo p{margin:4px 0 10px;font-size:13.5px;line-height:1.55;max-width:70ch}.lab2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:4px 22px}
+.cdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin:0 2px 0 5px;vertical-align:middle;flex:none;cursor:help}.mtfph{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.mtfph button{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:transparent;color:var(--c);border-radius:999px;padding:3px 9px;font:600 11.5px inherit;cursor:pointer}.mtfph button.on{background:color-mix(in srgb,var(--c) 16%,transparent)}.mtfph i{font-style:normal;opacity:.65;margin-left:4px}.mtft .sh{display:none}
 @media (max-width:640px){.mtft .hs{display:none}.mtft .sh{display:inline}.mtft .symrow{flex-wrap:nowrap}.mtft td,.mtft th{padding-left:3px;padding-right:3px}.mtft .symrow a{font-size:12.5px!important}.mtft td.n{font-size:11.5px!important}.mtft .chip{font-size:10.5px;padding:2px 5px}.mtft td.n{font-size:12px}.mtft button.star{display:none}}
 .hsum{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end}.hbig{font:800 34px/1 var(--head,inherit);margin:4px 0 6px}
 .hbar{width:min(260px,70vw);height:8px;border-radius:9px;background:color-mix(in srgb,var(--muted) 18%,transparent);overflow:hidden}.hbar i{display:block;height:100%;background:var(--up);border-radius:9px}
@@ -573,7 +574,7 @@ function chase(sym, px){
   const q = livePx(sym), p = px ?? (q ? q.close : lv.c); if(p == null) return null;
   const x = (p - lv.e20) / lv.a;
   const z = x > 2.5 ? ["🔴","Don't chase","var(--down)","far above its 20 EMA: wait for a pullback"]
-    : x > 1 ? ["🟡","Wait for a dip","var(--warn)","a bit stretched: a dip toward the 20 EMA is a better entry"]
+    : x > 1 ? ["🟡","Wait for a dip","#e0a400","a bit stretched: a dip toward the 20 EMA is a better entry"]
     : x >= -1.5 ? ["🟢","Good entry zone","var(--up)","close to its 20 EMA: low-risk area if the trend is up"]
     : ["⚪","Below 20 EMA","var(--muted)","under its 20 EMA: wait for it to turn back up"];
   return {x, icon:z[0], label:z[1], color:z[2], why:z[3], e20:lv.e20};
@@ -689,6 +690,7 @@ function miniChart(ch, sym){
 
 /* ============================================================ icons */
 const I = {
+  flask:'<path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
   bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>',
   today:'<path d="M3 12l9-8 9 8M5 10v10h14V10"/>',
   scanner:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/>',
@@ -706,15 +708,18 @@ const I = {
 };
 const ico = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
 const starBtn = s => !isAdmin() ? "" : `<button class="star ${inWatch(s) ? "on" : ""}" data-star="${esc(s)}" aria-label="${inWatch(s) ? "Remove from" : "Add to"} watchlist" title="Watchlist">${ico("watch")}</button>`;
-const symLink = (s, size=16) => `<a class="sym" style="font-size:${size}px" href="${tv(s)}" target="_blank" rel="noopener">${esc(s)}</a>`;
+const symLink = (s, size=16, dot=true) => `<a class="sym" style="font-size:${size}px" href="${tv(s)}" target="_blank" rel="noopener">${esc(s)}</a>${dot ? chaseDot(s) : ""}`;
+function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : null;
+  return c ? `<i class="cdot" style="--c:${c.color}" title="${c.icon} ${esc(c.label)}: ${c.x >= 0 ? "+" : ""}${c.x.toFixed(1)} ATR from the 20 EMA"></i>` : ""; }catch(e){ return ""; } }
 
 /* ============================================================ routes */
 const PAGES = [
   ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"]]],
+  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["lab","🧪 VK Experimentals"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
+  ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"]]],
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
@@ -816,15 +821,15 @@ function rightRail(){
   if(isAdmin() && WATCH.length){
     const ready = new Set(s.ready_syms || []);
     const items = WATCH.slice().sort((a,b) => (ready.has(b.symbol) - ready.has(a.symbol)) || a.symbol.localeCompare(b.symbol));
-    mine = `<section class="rp"><h3>Watchlist<a href="#watchlist">${WATCH.length} ›</a></h3>${items.slice(0, 12).map(w => `<div class="row"><a href="${tv(w.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(w.symbol)}</a><span>${ready.has(w.symbol) ? chip("Ready", "var(--up)") : ""} <span class="num muted">${s.closes[w.symbol] ? fmt(s.closes[w.symbol]) : ""}</span></span></div>`).join("")}</section>`;
+    mine = `<section class="rp"><h3>Watchlist<a href="#watchlist">${WATCH.length} ›</a></h3>${items.slice(0, 12).map(w => `<div class="row"><a href="${tv(w.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(w.symbol)}</a>${chaseDot(w.symbol)}<span>${ready.has(w.symbol) ? chip("Ready", "var(--up)") : ""} <span class="num muted">${s.closes[w.symbol] ? fmt(s.closes[w.symbol]) : ""}</span></span></div>`).join("")}</section>`;
   } else {
-    mine = `<section class="rp"><h3>Strongest F&O<a href="#market-strongest">All ›</a></h3>${(s.strongest_fo||[]).slice(0, 8).map(x => `<div class="row"><a href="${tv(x.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(x.symbol)}</a><span class="muted" style="font-size:11.5px">${esc(x.sector || "")}</span><b class="num">${x.score}</b></div>`).join("")}</section>`;
+    mine = `<section class="rp"><h3>Strongest F&O<a href="#market-strongest">All ›</a></h3>${(s.strongest_fo||[]).slice(0, 8).map(x => `<div class="row"><a href="${tv(x.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(x.symbol)}</a>${chaseDot(x.symbol)}<span class="muted" style="font-size:11.5px">${esc(x.sector || "")}</span><b class="num">${x.score}</b></div>`).join("")}</section>`;
   }
   const bu = (s.buildup || {}).building || [], sq = (s.squeeze || []).filter(x => /on|trapped/i.test(x.stage));
   const money = (bu.length || sq.length) ? `<section class="rp"><h3>Big money<a href="#market-unusual">Open ›</a></h3>
       ${bu.map(x => `<div class="row"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span class="muted" style="font-size:11.5px">building</span><b class="num up">OI ${pct(x.oi,0)}</b></div>`).join("")}
       ${sq.slice(0, 5).map(x => `<div class="row"><span class="num" style="font-weight:700">${esc(x.symbol)}</span>${chip(x.stage, x.stage === "Squeeze on" ? "var(--up)" : "var(--info)")}</div>`).join("")}</section>` : "";
-  const mv = `<section class="rp"><h3>Top movers</h3>${s.gainers.slice(0,4).concat(s.losers.slice(0,4)).map(x => `<div class="row"><a href="${tv(x.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(x.symbol)}</a><b class="num ${cls(x.chg)}">${pct(x.chg,2)}</b></div>`).join("")}</section>`;
+  const mv = `<section class="rp"><h3>Top movers</h3>${s.gainers.slice(0,4).concat(s.losers.slice(0,4)).map(x => `<div class="row"><a href="${tv(x.symbol)}" target="_blank" rel="noopener" class="num" style="font-weight:700">${esc(x.symbol)}</a>${chaseDot(x.symbol)}<b class="num ${cls(x.chg)}">${pct(x.chg,2)}</b></div>`).join("")}</section>`;
   el.innerHTML = pulse + ix + mine + money + mv + `<div class="when">Scan ${esc(when(s.generated_ist))} IST</div>`;
 }
 function renderShell(){
@@ -866,7 +871,7 @@ function setupCard(r, opts={}){
   const rr = r.rr || ((r.trigger && r.stop && r.trigger > r.stop) ? ((r.target && r.target > r.trigger) ? ((r.target - r.trigger)/(r.trigger - r.stop)).toFixed(1) : 2) : null);
   const entry = r.entry ?? r.trigger, tword = r.target_why && r.target ? "Target" : (r.target_word && r.target_word !== "2R" ? "Target" : "Target 2R");
   return `<article class="sc" style="--stc:${stc}">
-    <div class="row1"><div class="symrow">${symLink(r.symbol)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div>
+    <div class="row1"><div class="symrow">${symLink(r.symbol, 16, false)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div>
       <span style="display:flex;gap:6px;align-items:center">${rr && live ? `<span class="rr">R:R ${rr}</span>` : ""}${r.grade ? `<span class="grade ${live && r.grade === "A" ? "" : "b"}" title="Quality grade">${esc(r.grade === "Warning" ? "!" : r.grade)}</span>` : ""}</span></div>
     <div class="chips">${chaseChip(r.symbol)}${wallChips(r.symbol)}${headsChips(r.symbol, r.setup)}${opts.market ? chip(opts.market) : ""}${chip(r.setup, "var(--info)")}${chip(r.stage, stc)}${r.trend ? chip(r.trend, TREND_C[r.trend]) : ""}${vkChip(vk)}${r.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${r.ext != null && r.ext >= 4 ? chip("Extended", "var(--warn)") : ""}${r.clean ? chip("Clean wedge", "var(--up)") : ""}${t && t.sector ? chip(`${t.sector} · ${t.stage || ""}`, STAGE_C[t.stage]) : ""}${opts.size ? chip(opts.size, /alf|ccordion|Alert/.test(opts.size) ? "var(--warn)" : "var(--up)") : ""}</div>
     ${r.chart ? miniChart(r.chart, r.symbol) : ""}
@@ -1029,7 +1034,7 @@ function heatCard(){
     <div class="muted" style="font-size:11.5px;margin-top:10px">${S()._live ? `<b class="up">● Live ${esc(S()._live)}</b> (a few minutes late)` : `Last session, futures price <span title="${esc(S()._liveWhy || "")}">(live: ${esc(S()._liveWhy || "not loaded")})</span>`}. Biggest 12 sectors shown, up to 12 stocks each.</div></section>`;
 }
 function moversCard(){
-  const row = x => `<a class="mv" href="${tv(x.symbol)}" target="_blank" rel="noopener"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span><span class="muted num">${fmt(x.close)}</span> <b class="${cls(x.chg)}">${pct(x.chg,2)}</b></span></a>`;
+  const row = x => `<a class="mv" href="${tv(x.symbol)}" target="_blank" rel="noopener"><span class="num" style="font-weight:700">${esc(x.symbol)}</span><span><span class="muted num">${fmt(x.close)}</span> <b class="${cls(x.chg)}">${pct(x.chg,2)}</b></span></a>${chaseDot(x.symbol)}`;
   return `<section class="card s6 fade"><div class="ct"><h2>Top movers<em>F&O · ${S()._live ? "live " + esc(S()._live) : "last session"}</em></h2></div>
     <div class="two"><div><div class="sub-h" style="margin-top:0">Gainers</div>${S().gainers.slice(0,6).map(row).join("")}</div>
     <div><div class="sub-h" style="margin-top:0">Losers</div>${S().losers.slice(0,6).map(row).join("")}</div></div></section>`;
@@ -1105,7 +1110,7 @@ function pageMTF(){
     <section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div>
       ${rows.length ? `<div class="tw"><table class="t mtft"><tr><th>Stock</th><th class="hs">Sector</th><th><span class="hs">Monthly</span><span class="sh">M</span></th><th><span class="hs">Weekly</span><span class="sh">W</span></th><th><span class="hs">Daily</span><span class="sh">D</span></th><th title="Chase meter: distance from the 20 EMA in ATRs"><span class="hs">Chase</span><span class="sh">Ch</span></th><th class="n">Price</th><th class="n hs">5 days</th></tr>
       ${rows.map(r => { const q = livePx(r.s);
-        return `<tr><td><div class="symrow">${symLink(r.s, 13.5)}${starBtn(r.s)}</div></td><td class="muted hs">${esc(r.sec)}</td>${cell(r.M)}${cell(r.W)}${cell(r.D)}<td>${chaseCell(r.s)}</td>
+        return `<tr><td><div class="symrow">${symLink(r.s, 13.5, false)}${starBtn(r.s)}</div></td><td class="muted hs">${esc(r.sec)}</td>${cell(r.M)}${cell(r.W)}${cell(r.D)}<td>${chaseCell(r.s)}</td>
         <td class="n">${fmt(q ? q.close : r.c)}${q ? ` <b class="${cls(q.chg)} hs" style="font-size:11px">${pct(q.chg, 1)}</b>` : ""}</td><td class="n hs ${cls(r.d5)}">${r.d5 == null ? "—" : pct(r.d5, 1)}</td></tr>`; }).join("")}</table></div>`
       : `<div class="empty">No stock matches all three filters right now.</div>`}</section>`;
 }
@@ -1189,7 +1194,7 @@ async function pageHoldings(){
   const row = r => { const h = r.h, pl = h.avg && r.px ? (r.px / h.avg - 1) * 100 : null;
     if(!r.known) return `<div class="hd"><div class="hdt"><span class="hcat" style="--c:var(--muted)">?</span><div style="min-width:0"><b>${esc(h.s)}</b> <span class="muted" style="font-size:12px">Not found in the scan data. Check the NSE symbol.</span></div><button class="hx" data-hdel="${esc(h.s)}" title="Remove">✕</button></div></div>`;
     return `<div class="hd"><div class="hdt"><span class="hcat" style="--c:${r.color}">${r.cat}<i>${r.score}</i></span>
-      <div style="min-width:0"><div class="symrow">${symLink(h.s, 15)}${starBtn(h.s)}${r.fo ? `<span class="muted" style="font-size:12px">${esc(r.fo.sec)}</span>` : `<span class="muted" style="font-size:12px">Cash</span>`}${liveTag(h.s)}</div>
+      <div style="min-width:0"><div class="symrow">${symLink(h.s, 15, false)}${starBtn(h.s)}${r.fo ? `<span class="muted" style="font-size:12px">${esc(r.fo.sec)}</span>` : `<span class="muted" style="font-size:12px">Cash</span>`}${liveTag(h.s)}</div>
         <div class="chips" style="margin-top:5px">${r.st ? ["M","W","D"].map(k => { const v = r.st[k]; return !v || v === "No data" ? "" : chip(`${k} ${v === "Impulse" ? "Impulse" : (MTF_PH[v]||[v])[0]}`, v === "Impulse" ? "var(--up)" : (MTF_PH[v]||[0,"var(--muted)"])[1]); }).join("") : ""}
           ${chaseChip(h.s)}${r.stopAt ? chip(`Stop idea: below ${r.stopAt.n} ₹${fmt(r.stopAt.v)}`, "var(--muted)") : ""}
           ${pl != null ? chip(`${pct(pl)} on ₹${fmt(h.avg)}${h.qty ? " × " + h.qty : ""}`, pl >= 0 ? "var(--up)" : "var(--down)") : ""}</div></div>
@@ -1245,7 +1250,7 @@ async function pageAlerts(){
   const st = s => { const m = (S().mtf || []).find(r => r.s === s), rd = (S().ready || []).find(r => r.symbol === s), q = livePx(s);
     return {m, rd, px: q ? q.close : m ? m.c : (S().closes || {})[s]}; };
   const row = it => { const x = st(it.s);
-    return `<tr><td><div class="symrow">${symLink(it.s, 13.5)}</div>${it.note ? `<div class="muted" style="font-size:11.5px">${esc(it.note)}</div>` : ""}</td>
+    return `<tr><td><div class="symrow">${symLink(it.s, 13.5, false)}</div>${it.note ? `<div class="muted" style="font-size:11.5px">${esc(it.note)}</div>` : ""}</td>
       <td>${esc(it.strat)}</td><td class="n">${it.level ? "₹" + fmt(it.level) : "—"}</td><td class="n">${fmt(x.px)}</td><td>${chaseChip(it.s)}</td>
       <td>${x.m ? ["M","W","D"].map(k => { const v = x.m[k]; return !v || v === "No data" ? "" : chip(`${k} ${v === "Impulse" ? "Imp" : (MTF_PH[v]||[v])[0]}`, v === "Impulse" ? "var(--up)" : (MTF_PH[v]||[0,"var(--muted)"])[1]); }).join("") : `<span class="muted">—</span>`}</td>
       <td>${x.rd ? chip(`${x.rd.setup} ${x.rd.stage}`, SETUP_STAGE_C[x.rd.stage] || "var(--muted)") : `<span class="muted">—</span>`}</td>
@@ -1286,13 +1291,78 @@ document.addEventListener("submit", e => {
   if(e.target.id === "aform-cfg"){ e.preventDefault(); alrCall({email: document.getElementById("a-email").value.trim()}).then(r => { toast(r.error || "Email saved"); rerender(); }); }
 });
 
+/* ============================================================ VK Experimentals (lab scanners) */
+const LAB_TABS = [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"]];
+const LAB_INFO = {
+  lab: {t:"Chup-chap kharidari", sub:"Delivery absorption: big money buying quietly",
+    how:"Price stayed flat (−1% to +1.5%) while the value of shares taken into delivery was 2× or more its 20-day average and delivery % was 55 or higher. Funds that buy in size avoid pushing the price, so the footprint shows up in delivery before it shows up in price.",
+    use:"Shortlist, don't buy blind. Prefer stocks already in an uptrend (🟢 dot, setups page) and repeat quiet days. Enter when price leaves the range with volume. A 🧾 deal tag means a bulk/block deal may explain the delivery: weaker signal."},
+  "lab-rs": {t:"RS lead", sub:"Relative strength at a new high before the price",
+    how:"The stock ÷ Nifty line made a 52-week high in the last 10 sessions (and is within 2% of it) while the price itself is still 3% or more under its own 52-week high. The stock is holding up far better than the market: when the market turns, these usually lead.",
+    use:"The best ones are 6–10% under their high, above the 200 DMA, with a calm chart. Add them to your alert watchlist and buy the breakout or the first setup (Squeeze, Trend Pullback, Overspill)."},
+  "lab-iv": {t:"Squeeze + cheap volatility", sub:"Coiled price and cheap options together",
+    how:"Daily squeeze ON (Bollinger Bands inside Keltner Channels) for 5+ days and 20-day historical volatility (HV) in the bottom 25% of its 1-year range. Weekly not bearish. ATM option IV is saved every day for these stocks; after 40 days of history the IV rank is shown and used.",
+    use:"Option buyers: premiums are cheap when volatility is low, so a breakout lifts them more. Wait for the squeeze to fire (momentum turning, price out of the range). Futures/cash traders: same trigger as Squeeze Break."},
+  "lab-expiry": {t:"Expiry short squeeze", sub:"Trapped shorts near the monthly expiry",
+    how:"Earlier in this series futures OI rose 8%+ while price fell (shorts built). In the last 3 sessions price is rising and above its 20 EMA, near-month OI is falling (shorts closing), and the futures premium over spot is improving. Rollover = next-month share of OI: low rollover means shorts are closing, not carrying over.",
+    use:"Only meaningful in the last 5 sessions before the monthly expiry. Short, sharp trades: enter on strength, tight stop under the day's low, exit into expiry day."}
+};
+async function pageLab(){
+  const r = route(), key = LAB_INFO[r] ? r : "lab", info = LAB_INFO[key];
+  const x = await getJSON("experimental.json").catch(() => null);
+  const tabs = `<nav class="subnav" aria-label="Lab scanners">${LAB_TABS.map(([h, n]) => `<a href="#${h}" class="${key === h ? "on" : ""}">${n}</a>`).join("")}</nav>`;
+  const head = pageHead("VK Experimentals", `New scanners under test${x ? ` · scanned ${esc(when(x.generated_ist))}` : ""}`) + tabs + `
+    <section class="card fade labinfo"><div class="ct"><h2>${esc(info.t)}<em>${esc(info.sub)}</em></h2></div><span class="chip" style="--c:var(--warn);margin:-4px 0 8px">🧪 Experimental · not tested yet</span>
+      <div class="lab2"><div><div class="lbl">How it works</div><p>${esc(info.how)}</p></div><div><div class="lbl">How to use it</div><p>${esc(info.use)}</p></div></div>
+      <div class="muted" style="font-size:11.5px">Every evening's top 10 are logged, so after a few weeks we can see if this scanner actually works. Runs at 8:30 pm on trading days.</div></section>`;
+  if(!x) return head + `<div class="empty" style="margin-top:12px">The first run arrives after tonight's 8:30 pm scan.</div>`;
+  const fo = r => r.fo === false ? chip("Cash", "var(--muted)") : chip("F&O", "var(--info)");
+  const table = (cols, rows, empty) => rows.length ? `<section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div><div class="tw"><table class="t labt"><tr>${cols.map(c => `<th class="${c[2] || ""}">${c[0]}</th>`).join("")}</tr>
+    ${rows.map(row => `<tr>${cols.map(c => `<td class="${c[2] || ""}">${c[1](row)}</td>`).join("")}</tr>`).join("")}</table></div></section>`
+    : `<div class="empty" style="margin-top:12px">${empty}</div>`;
+  const stock = r => `<div class="symrow">${symLink(r.s, 13.5, false)}${starBtn(r.s)}</div>`;
+  const px = r => { const q = livePx(r.s); return `${fmt(q ? q.close : r.c)}${q ? ` <b class="${cls(q.chg)}" style="font-size:11px">${pct(q.chg, 1)}</b>` : ""}`; };
+  const nn = v => v == null ? "—" : v;
+  if(key === "lab") return head + table([
+      ["Stock", stock], ["", fo], ["Price", px, "n"], ["Day", r => `<span class="${cls(r.chg)}">${pct(r.chg)}</span>`, "n"],
+      ["Delivery value", r => `<b>${r.ratio}×</b> <span class="muted">₹${fmt(r.cr)} Cr</span>`, "n"],
+      ["Delivery %", r => `<b>${r.dp}%</b> <span class="muted">vs ${r.dp20}%</span>`, "n"],
+      ["Quiet days (5)", r => `${r.quiet}${r.quiet >= 2 ? " 🔁" : ""}`, "n"], ["5 days", r => `<span class="${cls(r.d5)}">${pct(r.d5)}</span>`, "n"],
+      ["Chase", r => chaseCell(r.s)], ["", r => r.deal ? `<span title="Bulk/block deal in the last few days">🧾 deal</span>` : ""]],
+    x.delivery || [], `No quiet delivery buying on ${esc(x.deliv_asof || "the last session")}.`) +
+    `<div class="muted" style="font-size:11.5px;margin-top:8px">Delivery data: NSE, session of ${esc(x.deliv_asof || "—")}. 🔁 = quiet buying on 2 or more of the last 5 days. Stocks trading under ₹5 Cr a day are left out.</div>`;
+  if(key === "lab-rs") return head + (x.nifty_dd != null ? `<div class="muted" style="margin:12px 0 0;font-size:12.5px">Nifty is ${pct(x.nifty_dd)} from its 52-week high.</div>` : "") + table([
+      ["Stock", stock], ["", fo], ["Price", px, "n"], ["Under its high", r => `<b class="${r.lead ? "down" : "muted"}">${pct(r.below)}</b>`, "n"], ["", r => r.lead ? chip("RS leads price", "var(--up)") : chip("Price at high too", "var(--muted)")],
+      ["RS new high", r => `${r.rs_days} of 10 days`, "n"], ["3 months", r => `${pct(r.r3)} <span class="muted">vs Nifty ${pct(r.n3)}</span>`, "n"],
+      ["200 DMA", r => r.a200 ? chip("Above", "var(--up)") : chip("Below", "var(--down)")], ["RS line, 3 months", r => spark(r.spark)], ["Chase", r => chaseCell(r.s)]],
+    x.rs_lead || [], "No stock has its RS line at a 52-week high right now.") + `<div class="muted" style="font-size:11.5px;margin-top:8px"><b>RS leads price</b> = the real signal (price still 3%+ under its high). <b>Price at high too</b> = strong, but the move is already visible. When the market falls, the lead list grows.</div>`;
+  if(key === "lab-iv") return head + table([
+      ["Stock", stock], ["Price", px, "n"], ["Squeeze", r => `${r.sq_days} days${r.turning ? ` <span class="up" title="Momentum turning up">▲</span>` : ""}`, "n"],
+      ["HV 20d", r => `${nn(r.hv)}%`, "n"], ["HV rank (1 yr)", r => `<b class="${r.hv_rank <= 10 ? "up" : ""}">${r.hv_rank}%</b>`, "n"],
+      ["ATM IV", r => r.iv ? `${r.iv}%` : "—", "n"], ["IV rank", r => r.iv_rank != null ? `<b>${r.iv_rank}%</b>` : `<span class="muted" title="IV history is being collected">${r.iv_days}/40 days</span>`, "n"],
+      ["Weekly", r => r.w ? chip(r.w, STATE_C[r.w] || "var(--muted)") : "—"], ["Chase", r => chaseCell(r.s)]],
+    x.squeeze_iv || [], "No F&O stock is in a squeeze with volatility this low right now.");
+  const e = x.expiry || {};
+  return head + `<section class="card" style="margin-top:12px;border-color:${e.window ? "var(--up)" : "var(--line)"}"><div class="ct"><h2>${e.window ? "Expiry week is on" : "Not expiry week yet"}<em>Monthly expiry ${esc(e.expiry || "—")}${e.days_left != null ? ` · ${e.days_left} session${e.days_left === 1 ? "" : "s"} left` : ""}</em></h2></div>
+      <div class="muted" style="font-size:12.5px">${esc(e.note || "Watch these in the last sessions before expiry.")}</div></section>` + table([
+      ["Stock", stock], ["Price", px, "n"], ["Shorts built", r => `OI <b>${pct(r.built)}</b> <span class="muted">price ${pct(r.fell)}</span>`, "n"],
+      ["Last 3 days", r => `price <b class="up">${pct(r.px3)}</b> <span class="muted">OI ${pct(r.oi3)}</span>`, "n"],
+      ["Rollover", r => r.roll != null ? `${r.roll}%` : "—", "n"], ["Futures premium", r => `${r.basis0 != null ? pct(r.basis0, 2) + " → " : ""}<b>${pct(r.basis, 2)}</b>`, "n"], ["Chase", r => chaseCell(r.s)]],
+    e.rows || [], "No trapped-short setups in this series.");
+}
+function spark(v){
+  if(!v || v.length < 2) return "—";
+  const mn = Math.min(...v), mx = Math.max(...v), w = 110, h = 26, f = i => (i / (v.length - 1)) * w, g = y => h - 2 - ((y - mn) / (mx - mn || 1)) * (h - 4);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-label="RS line"><polyline fill="none" stroke="var(--up)" stroke-width="1.6" points="${v.map((y, i) => `${f(i).toFixed(1)},${g(y).toFixed(1)}`).join(" ")}"/></svg>`;
+}
+
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
   const t = S().top5; if(!FULL() || !t || !(t.picks || []).length) return "";
   const row = (p, i) => { const q = livePx(p.symbol), px = q ? q.close : p.close;
     const state = px < p.stop ? chip("Below the stop now", "var(--down)") : p.stage === "Triggered" || px >= p.entry ? chip("Above the entry", "var(--up)") : chip(`${((p.entry/px - 1)*100).toFixed(1)}% to the entry`, "var(--muted)");
     return `<div class="t5"><span class="t5r">${i+1}</span><div style="min-width:0">
-      <div class="symrow">${symLink(p.symbol, 15)}${starBtn(p.symbol)}<span class="muted" style="font-size:12px">${esc(p.sector || "")}</span>${liveTag(p.symbol)}</div>
+      <div class="symrow">${symLink(p.symbol, 15, false)}${starBtn(p.symbol)}<span class="muted" style="font-size:12px">${esc(p.sector || "")}</span>${liveTag(p.symbol)}</div>
       <div class="chips" style="margin-top:5px">${headsChips(p.symbol, p.setup)}${chip(p.setup, "var(--info)")}${chip("Grade " + p.grade, p.grade === "A" ? "var(--up)" : "var(--muted)")}${chaseChip(p.symbol)}${state}${wallChips(p.symbol)}</div>
       <details class="t5d"><summary>Why it ranks here · ${p.checks.length} checks${p.cautions.length ? ` · ${p.cautions.length} caution${p.cautions.length > 1 ? "s" : ""}` : ""}</summary>
         <ul>${p.checks.map(c => `<li class="${c.p > 0 ? "up" : "down"}"><b>${c.p > 0 ? "+" : ""}${c.p}</b> ${esc(c.t)}</li>`).join("")}</ul></details></div>
@@ -1519,7 +1589,7 @@ async function pageScorecard(){
       <div class="muted" style="font-size:11.5px;margin-top:8px">Holding limit: Swing and Hourly Overspill 5 days; Squeeze, Trend and Daily Overspill 10 days; Weekly Overspill 20 days. A day that touches both stop and target counts as a stop. Daily prices, so intraday order is unknown.</div></section>
     <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Latest results</h2></div>
       ${(sc.recent || []).length ? `<div class="tw"><table class="t"><tr><th>Signal</th><th>Stock</th><th>Setup</th><th>Result</th><th class="n">R</th><th class="n">Days</th></tr>
-      ${sc.recent.map(x => `<tr><td class="num" style="white-space:nowrap">${esc(x.date.slice(5))}</td><td><a class="num" style="font-weight:700" href="${tv(x.symbol)}" target="_blank" rel="noopener">${esc(x.symbol)}</a> <span class="muted" style="font-size:11px">${esc(x.grade || "")}</span></td>
+      ${sc.recent.map(x => `<tr><td class="num" style="white-space:nowrap">${esc(x.date.slice(5))}</td><td><a class="num" style="font-weight:700" href="${tv(x.symbol)}" target="_blank" rel="noopener">${esc(x.symbol)}</a>${chaseDot(x.symbol)} <span class="muted" style="font-size:11px">${esc(x.grade || "")}</span></td>
         <td style="font-size:12px">${esc(x.setup)}</td><td>${chip((RES[x.result]||[x.result])[0], (RES[x.result]||[0,"var(--muted)"])[1])}</td><td class="n ${rc(x.r)}">${fmtR(x.r)}</td><td class="n">${x.days ?? "—"}</td></tr>`).join("")}</table></div>`
         : `<div class="empty">No trade has finished yet. Results appear as signals hit their target or stop.</div>`}</section>`;
 }
@@ -1618,7 +1688,7 @@ async function pageScanner(){
      <div class="headline">${headline}</div><div class="lead">${esc(mline)}</div><div class="meter"><i style="width:${m.weekly_bull_pct || 0}%"></i></div>
      <div class="cards" style="margin-top:14px">${shown.map(r => setupCard(r)).join("") || `<div class="empty">Nothing here right now.</div>`}</div>
      ${Object.keys(others).length ? `<div class="sec-h"><h2>Not on a setup</h2><span>Stage of the others</span></div>
-       ${Object.entries(others).map(([k, v]) => `<div class="sub-h">${esc(k)} · ${v.length}</div><div class="chips">${v.map(s => `<a href="${tv(s)}" target="_blank" rel="noopener">${chip(s, k === "Running" ? "var(--up)" : k === "Fading" ? "var(--down)" : "var(--warn)")}</a>`).join("")}</div>`).join("")}` : ""}`;
+       ${Object.entries(others).map(([k, v]) => `<div class="sub-h">${esc(k)} · ${v.length}</div><div class="chips">${v.map(s => `<a href="${tv(s)}" target="_blank" rel="noopener">${chip(s, k === "Running" ? "var(--up)" : k === "Fading" ? "var(--down)" : "var(--warn)")}</a>${chaseDot(s)}`).join("")}</div>`).join("")}` : ""}`;
 }
 
 /* ============================================================ INDEX */
@@ -1671,7 +1741,7 @@ async function pageIndex(){
       <div class="ladder">${ladder.map(l => `<div class="lad"><span class="ce"><i style="width:${100*l.ce/lmx}%"></i></span><span class="s ${l.strike === atm ? "atm" : ""}">${fmt(l.strike,0)}</span><span class="pe"><i style="width:${100*l.pe/lmx}%"></i></span></div>`).join("")}</div></section>` : ""}
     <section class="card s6 fade"><div class="ct"><h2>Heavyweights<em>${(x.board||[]).length}</em></h2></div>
       <div class="tw"><table class="t"><tr><th>Stock</th><th>VK</th><th>Setup</th><th>OI · ${esc(ij.oi_asof || "last session")}</th></tr>
-      ${(x.board || []).slice(0, 30).map(b => `<tr><td><a class="num" style="font-weight:700" href="${tv(b.symbol)}" target="_blank" rel="noopener">${esc(b.symbol)}</a></td><td>${vkChip(b.vk) || '<span class="muted">—</span>'}</td>
+      ${(x.board || []).slice(0, 30).map(b => `<tr><td><a class="num" style="font-weight:700" href="${tv(b.symbol)}" target="_blank" rel="noopener">${esc(b.symbol)}</a>${chaseDot(b.symbol)}</td><td>${vkChip(b.vk) || '<span class="muted">—</span>'}</td>
         <td style="font-size:12px">${esc(b.setup || "—")}${b.grade ? ` · ${esc(b.grade)}` : ""}</td><td>${b.oi ? chip(b.oi.word, b.oi.side > 0 ? "var(--up)" : b.oi.side < 0 ? "var(--down)" : "var(--warn)") : ""}</td></tr>`).join("")}</table></div></section>
     ${(x.setups || []).length ? `<section class="card fade"><div class="ct"><h2>Index setups</h2></div><div class="cards">${x.setups.map(r => setupCard({...r, symbol: r.symbol || x.name})).join("")}</div></section>` : ""}
    </div>`;
@@ -1703,7 +1773,7 @@ async function pageSectors(){
     <div class="kv" style="grid-template-columns:repeat(3,1fr)"><div><small>1W vs Nifty</small><b class="${cls(s.rw)}" style="font-size:14px">${pct(s.rw)}</b></div><div><small>2W</small><b class="${cls(s.r2w)}" style="font-size:14px">${pct(s.r2w)}</b></div><div><small>1M</small><b class="${cls(s.r1)}" style="font-size:14px">${pct(s.r1)}</b></div></div>
     <div class="detail">Index Daily ${esc(s.idx_d || "n/a")} · Daily bullish ${s.d_bull ?? "—"}% · Weekly bullish ${s.wk_bull ?? "—"}% · ${s.n} stocks</div>
     ${(s.trail || []).length > 2 ? `<div style="height:34px">${spark(s.trail.map(t => t.rs), {h:34, color:STAGE_C[s.stage]})}</div>` : ""}
-    <div class="chips">${(s.top || []).map(t => `<a href="${tv(t.symbol)}" target="_blank" rel="noopener">${chip(`${t.symbol} ${pct(t.r1)}`, t.r1 >= 0 ? "var(--up)" : "var(--down)")}</a>`).join("")}</div></article>`;
+    <div class="chips">${(s.top || []).map(t => `<a href="${tv(t.symbol)}" target="_blank" rel="noopener">${chip(`${t.symbol} ${pct(t.r1)}`, t.r1 >= 0 ? "var(--up)" : "var(--down)")}</a>${chaseDot(t.symbol)}`).join("")}</div></article>`;
   return pageHead("Sectors", `Rotation vs Nifty · as of ${esc(sj.asof || "")}`) + subnav() +
     `<div class="grid"><section class="card s7 fade rrg"><div class="ct"><h2>Sector rotation</h2></div>${rrg(secs)}
        <div class="muted" style="font-size:11.5px">Right = stronger than Nifty. Up = gaining strength. Sectors usually move clockwise: Improving → Leading → Weakening → Lagging.</div></section>
@@ -1745,7 +1815,7 @@ async function pageUnusual(){
     const mv = res.oi_moves || [];
     body = `<div class="headline">OI over ${res.oi_days || 7} sessions</div><div class="lead">Unusual for each stock, after removing the market-wide change.</div>
       <section class="card" style="margin-top:12px"><div class="tw"><table class="t"><tr><th>Stock</th><th class="n">OI</th><th class="n">Price</th><th>Reading</th></tr>
-      ${mv.map(x => `<tr><td><a class="num" style="font-weight:700" href="${tv(x.symbol)}" target="_blank" rel="noopener">${esc(x.symbol)}</a></td><td class="n ${cls(x.oi)}">${pct(x.oi)}</td><td class="n ${cls(x.px)}">${pct(x.px)}</td><td>${chip(x.text, EV_C(x.side))}</td></tr>`).join("")}</table></div></section>`;
+      ${mv.map(x => `<tr><td><a class="num" style="font-weight:700" href="${tv(x.symbol)}" target="_blank" rel="noopener">${esc(x.symbol)}</a>${chaseDot(x.symbol)}</td><td class="n ${cls(x.oi)}">${pct(x.oi)}</td><td class="n ${cls(x.px)}">${pct(x.px)}</td><td>${chip(x.text, EV_C(x.side))}</td></tr>`).join("")}</table></div></section>`;
   } else if(lean === "Short squeeze"){
     const sq = res.squeeze || [];
     body = `<div class="headline">Short squeeze watch</div><div class="lead">Shorts built on a down day and are still in, while price has climbed back above where they sold.</div>
@@ -1775,7 +1845,7 @@ async function pageDeals(){
      <div class="sec-h"><h2>All deals</h2><span>${rec.length}</span></div>
      <div class="filters">${["All","Buy","Sell"].map(x => `<button data-ds="${x}" class="${side===x?"on":""}">${x}</button>`).join("")}</div>
      <section class="card"><div class="tw"><table class="t"><tr><th>Date</th><th>Stock</th><th>Side</th><th>Who</th><th class="n">₹ Cr</th><th class="n">Price</th></tr>
-     ${rec.slice(0, 150).map(r => `<tr><td class="num" style="white-space:nowrap">${esc(r.date.slice(5))}</td><td><a class="num" style="font-weight:700" href="${tv(r.symbol)}" target="_blank" rel="noopener">${esc(r.symbol)}</a></td>
+     ${rec.slice(0, 150).map(r => `<tr><td class="num" style="white-space:nowrap">${esc(r.date.slice(5))}</td><td><a class="num" style="font-weight:700" href="${tv(r.symbol)}" target="_blank" rel="noopener">${esc(r.symbol)}</a>${chaseDot(r.symbol)}</td>
        <td>${chip(r.side === "BUY" ? "Buy" : "Sell", r.side === "BUY" ? "var(--up)" : "var(--down)")}</td><td style="font-size:12px">${esc(r.who)} <span class="muted">· ${esc(r.cat)}, ${esc(r.kind)}</span></td><td class="n">${fmt(r.value_cr, 1)}</td><td class="n">${fmt(r.price)}</td></tr>`).join("")}</table></div></section>`;
 }
 async function pageStars(){
@@ -1857,7 +1927,7 @@ async function pageSearch(){
     const stars = ((CACHE["stars.json"] || {}).rows || []).filter(r => r.symbol === q);
     const sh = (t2, n="") => `<div class="sec-h"><h2>${t2}</h2><span>${n}</span></div>`;
     body = `<section class="card fade"><div class="row1" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">
-        <div><div class="symrow"><a class="big-sym" href="${tv(q)}" target="_blank" rel="noopener">${esc(q)}</a>${starBtn(q)}</div><div class="muted">${esc(names[q] || "")}</div></div>
+        <div><div class="symrow"><a class="big-sym" href="${tv(q)}" target="_blank" rel="noopener">${esc(q)}</a>${chaseDot(q)}${starBtn(q)}</div><div class="muted">${esc(names[q] || "")}</div></div>
         <div style="text-align:right"><div class="num" style="font-size:22px;font-weight:800">${fmt(b.close)}</div><div class="muted" style="font-size:12px">${esc(b.market || "Not scanned")}</div></div></div>
         <div class="chips" style="margin-top:10px">${b.vk ? vkChip(b.vk.final) : ""}${b.old === "🏆 Prime Setup" ? chip("🏆 Prime Setup", "var(--warn)") : ""}${t ? chip(`${t.sector} · ${t.stage}`, STAGE_C[t.stage]) : ""}${b.other ? chip(b.other) : ""}${strong ? chip(`Strength #${strong.rank} · ${strong.score}`, "var(--accent2)") : ""}</div>
         ${strong ? `<div class="chips" style="margin-top:8px">${strong.reasons.map(r => chip(r.text, R_COLOR[r.kind])).join("")}</div>` : ""}</section>
@@ -2126,7 +2196,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
