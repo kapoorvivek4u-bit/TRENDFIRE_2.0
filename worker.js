@@ -143,6 +143,14 @@ function place(req) {
   const c = req.cf || {};
   return [c.city, c.region, c.country].filter(Boolean).join(", ");
 }
+// In-app browsers (Instagram, Facebook, LinkedIn, Android web views) are blocked by Google sign-in.
+const inApp = req => /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Snapchat|Line\/|MicroMessenger|; wv\)/.test(req.headers.get("user-agent") || "");
+async function logFail(env, req, reason) {       // failed sign-ins, so the admin can see who tried and why (kept 30 days)
+  const now = Date.now(), row = { at: new Date(now).toISOString(), reason, place: place(req), device: device(req) + (inApp(req) ? " · in-app browser" : ""),
+    ua: (req.headers.get("user-agent") || "").slice(0, 160) };
+  console.log("LOGIN FAILED", JSON.stringify(row));
+  try { if (env.USERS) await env.USERS.put(`f:${String(9999999999999 - now).padStart(13, "0")}`, JSON.stringify(row), { expirationTtl: 60 * 60 * 24 * 30 }); } catch (e) {}
+}
 async function logLogin(env, req, user, how) {
   const now = Date.now(), at = new Date(now).toISOString();
   const row = { email: user.email, name: user.name || "", role: user.role, how, at, place: place(req), device: device(req) };
@@ -176,9 +184,10 @@ async function adminLog(env) {
   do { const r = await env.USERS.list({ prefix: "u:", cursor: cur }); cur = r.list_complete ? null : r.cursor;
        keys.push(...r.keys.map(k => k.name)); } while (cur);
   const lk = (await env.USERS.list({ prefix: "l:", limit: 100 })).keys.map(k => k.name);
-  const [users, logins] = await Promise.all([getAll(keys), getAll(lk)]);        // all reads at once, not one by one
+  const fk = (await env.USERS.list({ prefix: "f:", limit: 50 })).keys.map(k => k.name);
+  const [users, logins, fails] = await Promise.all([getAll(keys), getAll(lk), getAll(fk)]);        // all reads at once, not one by one
   users.sort((a, b) => (b.seen || b.last || "").localeCompare(a.seen || a.last || ""));
-  LOG_CACHE = { at: Date.now(), v: { users, logins } };
+  LOG_CACHE = { at: Date.now(), v: { users, logins, fails } };
   return LOG_CACHE.v;
 }
 
@@ -303,7 +312,8 @@ async function memberData(env, ctx, name, r) {
 }
 
 // ------------------------------------------------------------------ Google and admin sign-in
-function googleStart(env, url) {
+async function googleStart(env, url, req) {
+  if (req && inApp(req)) { await logFail(env, req, "In-app browser (Google blocks sign-in there)"); return redirect("/login?e=inapp"); }
   const state = crypto.randomUUID();
   const q = new URLSearchParams({ client_id: env.GOOGLE_CLIENT_ID, redirect_uri: `${url.origin}/auth/callback`,
     response_type: "code", scope: "openid email profile", state, prompt: "select_account" });
@@ -311,19 +321,23 @@ function googleStart(env, url) {
 }
 async function googleCallback(env, req, url) {
   const st = (req.headers.get("cookie") || "").match(/(?:^|;\s*)tr_st=([^;]+)/);
-  if (!st || st[1] !== url.searchParams.get("state") || !url.searchParams.get("code")) return redirect("/login?e=state");
+  const gErr = url.searchParams.get("error");
+  if (gErr) { await logFail(env, req, gErr === "access_denied" ? "Cancelled on the Google screen" : "Google error: " + gErr); return redirect("/login?e=cancel"); }
+  if (!st || st[1] !== url.searchParams.get("state") || !url.searchParams.get("code")) {
+    await logFail(env, req, !st ? "Sign-in cookie missing (often an in-app browser or a link opened in another app)" : "Sign-in took too long or was started twice");
+    return redirect("/login?e=state"); }
   const r = await fetch("https://oauth2.googleapis.com/token", { method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ code: url.searchParams.get("code"), client_id: env.GOOGLE_CLIENT_ID,
       client_secret: env.GOOGLE_CLIENT_SECRET, redirect_uri: `${url.origin}/auth/callback`, grant_type: "authorization_code" }) });
   const t = await r.json().catch(() => ({}));
-  if (!t.id_token) return redirect("/login?e=google");
+  if (!t.id_token) { await logFail(env, req, "Google did not return a token: " + (t.error || r.status)); return redirect("/login?e=google"); }
   let p;
   try { p = JSON.parse(fromB64url(t.id_token.split(".")[1])); } catch (e) { return redirect("/login?e=google"); }
   if (p.aud !== env.GOOGLE_CLIENT_ID || !/accounts\.google\.com$/.test(p.iss || "") || !p.email || !p.email_verified)
     return redirect("/login?e=google");
   const user = { email: p.email, name: p.name || "", picture: p.picture || "", role: "user" };
-  await logLogin(env, req, user, "Google");
+  try { await logLogin(env, req, user, "Google"); } catch (e) { console.log("logLogin failed", e.message); await logFail(env, req, "Signed in, but saving the login failed: " + e.message + " (" + user.email + ")"); }
   return redirect("/", [cookie("tr_s", await makeSession(env, user), SESSION_DAYS * 86400), cookie("tr_st", "", 0)]);
 }
 async function adminSignIn(env, req) {
@@ -527,7 +541,7 @@ export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url), p = url.pathname;
     try {
-      if (p === "/auth/google") return googleStart(env, url);
+      if (p === "/auth/google") return await googleStart(env, url, req);
       if (p === "/auth/callback") return await googleCallback(env, req, url);
       if (p === "/auth/admin" && req.method === "POST") return await adminSignIn(env, req);
       if (p === "/logout") return redirect("/login", [cookie("tr_s", "", 0)]);

@@ -2532,6 +2532,11 @@ async function pageAdmin(){
     <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Recent logins<em>last 100</em></h2></div>
       <div class="tw"><table class="t"><tr><th>When</th><th>Who</th><th>How</th><th>Place</th><th>Device</th></tr>
       ${(d.logins || []).map(l => `<tr><td style="white-space:nowrap">${dt(l.at)}</td><td>${esc(l.name || l.email)}<div class="muted" style="font-size:11.5px">${esc(l.email)}</div></td><td>${chip(l.how, l.role === "admin" ? "var(--warn)" : "var(--info)")}</td><td style="font-size:12px">${esc(l.place || "")}</td><td style="font-size:12px">${esc(l.device || "")}</td></tr>`).join("")}</table></div></section>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Sign-in problems<em>last 30 days</em></h2></div>
+      ${(d.fails || []).length ? `<div class="tw"><table class="t"><tr><th>When</th><th>What went wrong</th><th>Place</th><th>Device</th></tr>
+      ${d.fails.map(f => `<tr><td style="white-space:nowrap">${dt(f.at)}</td><td>${esc(f.reason)}</td><td style="font-size:12px">${esc(f.place || "")}</td><td style="font-size:12px">${esc(f.device || "")}</td></tr>`).join("")}</table></div>`
+      : `<div class="muted">None. Everyone who tried got in.</div>`}
+      <div class="muted" style="font-size:11.5px;margin-top:8px">Google does not say who it was before sign-in finishes, so these rows show place and device only. Most failures are links opened inside Instagram, Facebook or another app's own browser.</div></section>
     <p class="foot-note">Your own visits as admin are not counted. Visits count at most once an hour per person. Page views and logins are kept for 120 days. People stay signed in for 30 days, so closing the site does not sign them out.</p>`;
 }
 

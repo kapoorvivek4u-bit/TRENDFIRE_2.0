@@ -94,8 +94,16 @@ h1 em{font-style:normal;color:var(--lime)}
 </div>
 <script>
 const e = new URLSearchParams(location.search).get("e");
-if(e){ const el = document.getElementById("err"); el.classList.add("on");
-  el.textContent = e === "state" ? "The sign-in took too long or was opened in another tab. Please try again." : "Google sign-in did not finish. Please try again."; }
+const inApp = /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Snapchat|Line\/|MicroMessenger|; wv\)/.test(navigator.userAgent);
+const el = document.getElementById("err");
+if(inApp || e === "inapp"){ el.classList.add("on");
+  el.innerHTML = '<b>Open this page in Chrome or Safari to sign in.</b><br>Google does not allow sign-in inside Instagram, Facebook or other apps. Tap ⋮ or ··· at the top and choose "Open in browser", or copy the link: <button type="button" id="cp" style="margin-top:8px;font:inherit;font-weight:700;padding:6px 12px;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer">Copy link</button>';
+  document.getElementById("cp").onclick = ev => { const t = "https://tradeready.in/login";
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => ev.target.textContent = "Copied. Paste it in Chrome or Safari", () => ev.target.textContent = t); };
+} else if(e){ el.classList.add("on");
+  el.textContent = e === "cancel" ? "Sign-in was cancelled on the Google screen. Tap Continue with Google to try again."
+    : e === "state" ? "The sign-in could not finish. If you opened this link from WhatsApp, Instagram or another app, open it in Chrome or Safari instead, then try again."
+    : "Google sign-in did not finish. Please try again."; }
 </script>
 </body>
 </html>
