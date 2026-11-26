@@ -1792,13 +1792,27 @@ function flowAnimate(state, id = "flowc"){
 }
 /* small live version for the Today page */
 function flowMiniCard(){
-  setTimeout(() => flowData().then(d => { const live = d && d.live, rows = (live && live.rows) || [], box = document.getElementById("flowmini-box");
-    if(!box) return; if(!rows.length){ box.innerHTML = `<div class="empty">Fills in during market hours (every 15 min from 9:15).</div>`; return; }
+  flowMiniWatch();
+  return flowMiniHTML();
+}
+/* The card's HTML lands after async page work, and the page re-renders on live updates,
+   so a watcher starts the chart whenever an unstarted #flowmini canvas is on screen. */
+function flowMiniWatch(){
+  if(flowMiniWatch.on) return; flowMiniWatch.on = true;
+  setInterval(() => { const cv = document.getElementById("flowmini"); if(!cv || cv.dataset.on) return; cv.dataset.on = "1"; flowMiniStart(); }, 300);
+}
+function flowMiniStart(){
+  flowData().then(d => { const live = d && d.live, rows = (live && live.rows) || [], box = document.getElementById("flowmini-box");
+    if(!box) return; if(!d){ const cv = document.getElementById("flowmini"); if(cv) setTimeout(() => delete cv.dataset.on, 5000); return; }
+    if(!rows.length){ box.innerHTML = `<div class="empty">Fills in during market hours (every 15 min from 9:15).</div>`; return; }
     const {nodes, mkt} = flowNodes(rows.map(r => [r[0], r[2], r[6], r[5], r[3]]));
     const ins = nodes.filter(n => n.rel > 0.15).slice(0, 3), outs = nodes.filter(n => n.rel < -0.15).slice(-3).reverse();
     const el = document.getElementById("flowmini-txt");
     if(el) el.innerHTML = `<div><span class="up">▲ In:</span> ${ins.map(n => esc(n.name)).join(", ") || "—"}</div><div><span class="down">▼ Out:</span> ${outs.map(n => esc(n.name)).join(", ") || "—"}</div><div class="muted">as of ${esc(String(live.at || "").slice(11, 16))} IST</div>`;
-    flowAnimate({nodes, links: flowLinks(nodes), mkt, label: "MARKET", mini: true}, "flowmini"); }).catch(() => null), 0);
+    flowAnimate({nodes, links: flowLinks(nodes), mkt, label: "MARKET", mini: true}, "flowmini"); })
+    .catch(() => { const cv = document.getElementById("flowmini"); if(cv) delete cv.dataset.on; });
+}
+function flowMiniHTML(){
   return `<section class="card fade"><div class="ct"><h2>⚡ Money flow<em>live, every 15 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
     <div id="flowmini-box"><div class="flowstage flowmini"><canvas id="flowmini" aria-label="Money flow between sectors"></canvas></div>
     <div id="flowmini-txt" class="flowminitxt"></div></div>
