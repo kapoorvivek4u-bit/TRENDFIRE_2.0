@@ -115,7 +115,7 @@ const TUT_TEXT = {
   "tut-trapped": ["Why some stocks suddenly fly up: trapped shorts", "Price falls and OI rises: shorts pile in. Price turns up through their level: they're trapped. Their buying back pushes price up faster. TradeReady lists trapped shorts every day.", "#shortsqueeze #shortcovering #openinterest"] };
 const BASE = "#stockmarketindia #nifty50 #banknifty #nse #fno #optionstrading #swingtrading #sharemarket #stockmarket #trading #marketupdate";
 const WXW = sc => sc >= 70 ? "Clear skies" : sc >= 55 ? "Partly sunny" : sc >= 40 ? "Light showers" : "Storm warning";
-const tutIndex = d => { let n = 0; for (let t = Date.UTC(2026, 10, 30); t <= d.getTime(); t += 864e5) { const w = new Date(t).getUTCDay(); if (w === 1 || w === 3 || w === 5) n++; } return Math.max(0, n - 1) % TUTS.length; };
+const tutIndex = d => { let n = 0; for (let t = Date.UTC(2026, 10, 25); t <= d.getTime(); t += 864e5) { const w = new Date(t).getUTCDay(); if (w === 1 || w === 3 || w === 5) n++; } return Math.max(0, n - 1) % TUTS.length; };
 
 function readJSON(f) { try { return JSON.parse(fs.readFileSync(path.join(DATA, f), "utf8")); } catch (e) { return null; } }
 function sceneData(base) {
