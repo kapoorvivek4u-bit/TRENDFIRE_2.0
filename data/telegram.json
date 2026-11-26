@@ -16,10 +16,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ADANIPORTS": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "ADANIPOWER": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -92,15 +88,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "MOTHERSON": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "NAVINFLUOR": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "NYKAA": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "PERSISTENT": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -124,19 +120,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "TVSMOTOR": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "ULTRACEMCO": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "UNIONBANK": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "UNOMINDA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -624,6 +612,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "ADANIPORTS": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "ANANDRATHI": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -694,7 +686,7 @@
   },
   "LODHA": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MANKIND": {
    "final": "BUY NOW",
@@ -708,6 +700,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "MOTHERSON": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "MOTILALOFS": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -717,10 +713,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PAYTM": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "PERSISTENT": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -744,9 +736,17 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "TVSMOTOR": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "UNITDSPR": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "UNOMINDA": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "ZYDUSLIFE": {
    "final": "BUY NOW",
