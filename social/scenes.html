@@ -1,0 +1,332 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- More kit formats, filmed by social/make_kit.js: ?mode=weather | oi | rotation | week | tut-chase | tut-flow | tut-impulse | tut-chain | tut-trapped
+     720x1280 shot at 1.5x. Everything is driven by setT(t) (seconds), so frames are exact. Option A: no stock names. -->
+<style>
+*{box-sizing:border-box}html,body{margin:0;overflow:hidden;background:#0d1117;color:#e6edf3;font-family:Inter,"Inter Display",system-ui,sans-serif}
+body{width:720px;height:1280px;position:relative}
+.mono{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace}
+.top{position:absolute;left:36px;right:36px;top:44px;display:flex;align-items:center;gap:12px;z-index:5}
+.logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#6d5efc,#4f46e5);display:grid;place-items:center}
+.brand{font-weight:800;font-size:24px;letter-spacing:-.02em}.brand b{color:#8b7dff}
+.when{margin-left:auto;font-weight:600;font-size:15px;color:#7d8590}
+.tag{position:absolute;left:36px;top:112px;font-size:17px;font-weight:800;letter-spacing:.14em;color:#c6ff3d}
+.foot{position:absolute;left:36px;right:36px;bottom:44px;font-size:15px;color:#6e7681;display:flex;justify-content:space-between;z-index:5}
+.dn{color:#f85149}.up{color:#3fb950}.lime{color:#c6ff3d}.blu{color:#58a6ff}.org{color:#f0883e}.mut{color:#7d8590}
+.sc{position:absolute;inset:0;opacity:0}
+.intro{display:grid;place-items:center;text-align:center;padding:0 50px}
+.intro h1{font-size:62px;line-height:1.05;letter-spacing:-.04em;margin:0;font-weight:800}.intro p{font-size:24px;color:#9aa4b2;margin-top:18px}
+.h{position:absolute;left:36px;right:36px;top:146px}
+.h h1{margin:0;font-size:44px;line-height:1.1;letter-spacing:-.03em;font-weight:800}.h p{margin:10px 0 0;font-size:21px;color:#9aa4b2;line-height:1.35}
+.out{background:#0d1117;padding:250px 44px 0}
+.out h2{font-size:46px;letter-spacing:-.03em;margin:0 0 26px;font-weight:800;line-height:1.08}
+.out .lst{font-size:27px;line-height:1.5;color:#c9d1d9}
+.cta{margin-top:46px;background:#c6ff3d;color:#0d1117;border-radius:20px;padding:26px 28px;font-size:30px;font-weight:800;line-height:1.2}
+.cta small{display:block;font-size:19px;font-weight:600;margin-top:6px;opacity:.75}
+.dis{margin-top:24px;font-size:16px;color:#6e7681;line-height:1.4}
+/* weather */
+.gauge{position:absolute;left:110px;top:330px;width:500px;height:300px}
+.gnum{position:absolute;left:0;right:0;top:470px;text-align:center;font-size:120px;font-weight:800;letter-spacing:-.05em}
+.glab{position:absolute;left:0;right:0;top:612px;text-align:center;font-size:30px;font-weight:700}
+.gadv{position:absolute;left:60px;right:60px;top:670px;text-align:center;font-size:22px;color:#9aa4b2;line-height:1.4}
+.sky{position:absolute;right:40px;top:300px;width:150px;height:125px}
+.bars{position:absolute;left:36px;right:36px;top:330px}
+.bar{margin-bottom:26px}.bar .t{display:flex;justify-content:space-between;font-size:24px;font-weight:700}.bar .t span:last-child{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace}
+.bar .tr{height:16px;border-radius:9px;background:#21262d;margin-top:9px;overflow:hidden}.bar .tr i{display:block;height:100%;border-radius:9px;width:0}
+.bar small{display:block;font-size:17px;color:#7d8590;margin-top:7px}
+.hist{display:flex;gap:10px;align-items:flex-end;height:250px;margin-top:10px}.hist div{flex:1;text-align:center;font-size:15px;color:#7d8590}
+.hist i{display:block;border-radius:8px 8px 3px 3px;margin-bottom:8px}
+/* oi */
+.grid4{position:absolute;left:36px;right:36px;top:350px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{border-radius:22px;padding:24px 22px;background:#161b22;border:2px solid var(--c);min-height:260px;opacity:0}
+.box .n{font-size:84px;font-weight:800;letter-spacing:-.04em;color:var(--c);font-family:"JetBrains Mono","DejaVu Sans Mono",monospace}
+.box b{display:block;font-size:26px;margin-top:4px}.box small{display:block;font-size:18px;color:#9aa4b2;margin-top:10px;line-height:1.35}
+.verdict{position:absolute;left:36px;right:36px;top:960px;font-size:28px;font-weight:700;line-height:1.35;opacity:0}
+/* rotation */
+.rrg{position:absolute;left:26px;top:330px;width:668px;height:668px}
+.moves{position:absolute;left:36px;right:36px;top:1010px;font-size:22px;line-height:1.5;opacity:0}
+/* tutorials */
+.chart{position:absolute;left:20px;top:330px;width:680px;height:560px}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:30px;font-weight:800;padding:12px 22px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
+.chipbox{position:absolute;left:0;right:0;top:910px;text-align:center}
+.legend{position:absolute;left:36px;right:36px;top:330px;display:grid;gap:22px}
+.legend .row{display:flex;gap:18px;align-items:center;font-size:24px;line-height:1.35;opacity:0}
+.legend .row .chip{flex:none;font-size:24px;padding:10px 18px}
+.mock{position:absolute;left:36px;right:36px;top:340px;display:grid;gap:14px}
+.mock .r{background:#161b22;border:1px solid #30363d;border-radius:16px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-size:24px;opacity:0}
+.cell{display:inline-block;padding:6px 14px;border-radius:999px;font-size:19px;font-weight:800;margin-left:8px}
+</style></head><body>
+<div class="top"><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+<div class="brand">Trade<b>Ready</b></div><div class="when mono" id="when"></div></div>
+<div id="stage"></div>
+<div class="foot"><span>tradeready.in</span><span>Not investment advice</span></div>
+<script>
+window.__cbs = []; window.requestAnimationFrame = cb => { __cbs.push(cb); return 1; }; window.cancelAnimationFrame = () => {};
+window.__step = () => { const c = __cbs; __cbs = []; c.forEach(f => f(0)); };
+</script>
+<script src="../site/river.js"></script>
+<script>
+const D = window.__DATA || {}, mode = new URLSearchParams(location.search).get("mode") || "weather";
+const $ = id => document.getElementById(id), clamp = v => Math.max(0, Math.min(1, v)), ease = v => 1 - Math.pow(1 - clamp(v), 3);
+const fade = (t, a, b, e = .4) => clamp(Math.min((t - a) / e, (b - t) / e));
+const pct = (x, d = 2) => (x > 0 ? "+" : "") + Number(x).toFixed(d) + "%";
+$("when").textContent = mode.startsWith("tut-") ? "TUTORIAL" : (D.dateLabel || "").toUpperCase() + (D.at ? " · " + D.at + " IST" : "");
+const scene = (id, cls, html) => `<div class="sc ${cls}" id="${id}">${html}</div>`;
+const outro = (title, list, sub) => scene("s_out", "out", `<h2>${title}</h2><div class="lst">${list}</div>
+  <div class="cta">${sub || "See it live, free"}<br>tradeready.in<small>NSE F&amp;O market read, updated through the day</small></div>
+  <div class="dis">A study of market data. Not a tip, not investment advice.</div>`);
+const show = (id, t, a, b, rise = 14) => { const el = $(id); if(!el) return 0; const o = fade(t, a, b); el.style.opacity = o; el.style.transform = `translateY(${(1 - o) * rise}px)`; return o; };
+const COL = { long: "#3fb950", short: "#f85149", cover: "#58a6ff", unwind: "#f0883e" };
+const SKY = {
+  sun: `<circle cx="70" cy="50" r="22" fill="#fbbf24"/><g stroke="#fbbf24" stroke-width="4" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a => { const r = a * Math.PI / 180; return `<line x1="${70 + Math.cos(r) * 31}" y1="${50 + Math.sin(r) * 31}" x2="${70 + Math.cos(r) * 39}" y2="${50 + Math.sin(r) * 39}"/>`; }).join("")}</g>`,
+  partly: `<circle cx="58" cy="42" r="20" fill="#fbbf24"/><path d="M40 82h52a16 16 0 0 0 0-32 22 22 0 0 0-42 6 13 13 0 0 0-10 26z" fill="#e6edf3"/>`,
+  rain: `<path d="M30 64h60a17 17 0 0 0 0-34 24 24 0 0 0-46 6 14 14 0 0 0-14 28z" fill="#c9d1d9"/><g stroke="#60a5fa" stroke-width="3" stroke-linecap="round"><line x1="44" y1="74" x2="40" y2="86"/><line x1="62" y1="74" x2="58" y2="86"/><line x1="80" y1="74" x2="76" y2="86"/></g>`,
+  storm: `<path d="M30 60h60a17 17 0 0 0 0-34 24 24 0 0 0-46 6 14 14 0 0 0-14 28z" fill="#8b93a8"/><path d="M62 62l-10 16h10l-6 14 16-20h-10l6-10z" fill="#fbbf24"/>` };
+const WX = sc => sc >= 70 ? ["sun", "Clear skies"] : sc >= 55 ? ["partly", "Partly sunny"] : sc >= 40 ? ["rain", "Light showers"] : ["storm", "Storm warning"];
+const scoreCol = v => v >= 60 ? "#3fb950" : v >= 40 ? "#e3b341" : "#f85149";
+let setT = () => {};
+
+/* ---------------- Monday: market weather ---------------- */
+if (mode === "weather") {
+  const w = D.weather, [sky, word] = WX(w.score), hist = (w.history || []).slice(-6);
+  const arc = (p) => { const a0 = Math.PI, a1 = Math.PI + Math.PI * p, R = 220, cx = 250, cy = 260;
+    return `M ${cx + R * Math.cos(a0)} ${cy + R * Math.sin(a0)} A ${R} ${R} 0 0 1 ${cx + R * Math.cos(a1)} ${cy + R * Math.sin(a1)}`; };
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>How's the market weather this week?</h1><p>One score for the whole NSE F&amp;O market</p></div>`)
+    + scene("s1", "", `<div class="tag">MARKET WEATHER</div><div class="h"><h1>${word}</h1><p>A 0–100 read of breadth, trend, sectors, money flow and VIX</p></div>
+      <svg class="sky" viewBox="0 0 120 100">${SKY[sky]}</svg>
+      <svg class="gauge" viewBox="0 0 500 300"><path d="${arc(1)}" stroke="#21262d" stroke-width="34" fill="none" stroke-linecap="round"/>
+        <path id="garc" d="${arc(.001)}" stroke="${scoreCol(w.score)}" stroke-width="34" fill="none" stroke-linecap="round"/></svg>
+      <div class="gnum mono" id="gnum">0</div><div class="glab" style="color:${scoreCol(w.score)}">${w.label} · ${w.trend}</div><div class="gadv">Built from breadth, Nifty trend, sectors, money flow and India VIX</div>`)
+    + scene("s2", "", `<div class="tag">WHAT'S BEHIND THE ${w.score}</div><div class="h"><h1>Six readings, 0–100 each</h1></div>
+      <div class="bars" style="top:300px">${w.parts.map((p, i) => `<div class="bar"><div class="t"><span>${p.name}</span><span style="color:${scoreCol(p.value)}">${p.value}</span></div>
+        <div class="tr"><i id="b${i}" style="background:${scoreCol(p.value)}"></i></div><small>${p.why}</small></div>`).join("")}</div>`)
+    + outro("Weather, last 6 days", `<div class="hist">${hist.map(h => `<div><i style="height:${Math.max(16, h.score * 2.6)}px;background:${scoreCol(h.score)}"></i>${h.score}<br>${h.date.slice(8)}</div>`).join("")}</div>`, "Check the weather before you trade");
+  setT = t => { show("s0", t, -1, 2.6); const o = show("s1", t, 2.6, 9.6);
+    const p = ease((t - 3) / 2.4) * w.score / 100; $("garc").setAttribute("d", arc(Math.max(.001, p))); $("gnum").textContent = Math.round(p * 100);
+    show("s2", t, 9.6, 16); w.parts.forEach((x, i) => { $("b" + i).style.width = ease((t - 10 - i * .45) / 1) * x.value + "%"; });
+    show("s_out", t, 16, 99, 30); };
+}
+
+/* ---------------- Tuesday: OI build-up map (counts only) ---------------- */
+if (mode === "oi") {
+  const q = D.oi, B = Object.fromEntries(q.boxes.map(b => [b.key, b])), tot = q.boxes.reduce((a, b) => a + b.count, 0) || 1;
+  const MEAN = { long: "Price ↑ OI ↑<br>fresh buying", short: "Price ↓ OI ↑<br>fresh selling", cover: "Price ↑ OI ↓<br>sellers running", unwind: "Price ↓ OI ↓<br>buyers leaving" };
+  const bull = Math.round((B.long.count + B.cover.count) / tot * 100);
+  const tilt = bull >= 60 ? "More F&O stocks on the up side" : bull <= 40 ? "More F&O stocks on the down side" : "A mixed day: no clear side";
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>What did F&amp;O traders do ${D.oiDay || "today"}?</h1><p>Every F&amp;O stock sorted into 4 boxes</p></div>`)
+    + scene("s1", "", `<div class="tag">OI BUILD-UP MAP</div><div class="h"><h1>Price + open interest</h1><p>What both did together tells you who is in control</p></div>
+      <div class="grid4">${["long", "short", "cover", "unwind"].map(k => `<div class="box" id="x${k}" style="--c:${COL[k]}"><div class="n" id="n${k}">0</div><b>${B[k].name}</b><small>${MEAN[k]}</small></div>`).join("")}</div>
+      <div class="verdict" id="verd"><span style="color:${bull >= 60 ? "#3fb950" : bull <= 40 ? "#f85149" : "#e3b341"}">${bull}%</span> of F&amp;O stocks saw long build-up or short covering.<br><span class="mut">${tilt}.</span></div>`)
+    + outro("How to read it", `<span class="up">Long build-up</span> = new buyers<br><span class="dn">Short build-up</span> = new sellers<br><span class="blu">Short covering</span> = sellers exiting<br><span class="org">Long unwinding</span> = buyers exiting`, "See every stock in each box");
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 16);
+    ["long", "short", "cover", "unwind"].forEach((k, i) => { const a = 3.2 + i * .9, el = $("x" + k); el.style.opacity = clamp((t - a) / .4); el.style.transform = `scale(${.92 + .08 * ease((t - a) / .5)})`;
+      $("n" + k).textContent = Math.round(ease((t - a) / 1.4) * B[k].count); });
+    const v = $("verd"); v.style.opacity = clamp((t - 9.5) / .5);
+    show("s_out", t, 16, 99, 30); };
+}
+
+/* ---------------- Wednesday: sector rotation ---------------- */
+if (mode === "rotation") {
+  const S = D.sectors.filter(s => s.ratio != null && s.mom != null), W = 668, P = 40;
+  const xr = Math.max(...S.map(s => Math.abs(s.ratio - 1)), .01) * 1.25, yr = Math.max(...S.map(s => Math.abs(s.mom)), .005) * 1.25;
+  const sq = v => Math.sign(v) * Math.sqrt(Math.min(1, Math.abs(v)));            // square-root scale spreads the crowded middle
+  const X = v => P + (1 + sq((v - 1) / xr)) / 2 * (W - 2 * P), Y = v => W - P - (1 + sq(v / yr)) / 2 * (W - 2 * P);
+  const SC = { Leading: "#3fb950", Improving: "#58a6ff", Weakening: "#e3b341", Lagging: "#f85149" };
+  const SH = {"Consumer Durables":"Cons. Durables","Construction Materials":"Cons. Materials","Capital Goods":"Cap. Goods","Consumer Services":"Cons. Svcs","Metals & Mining":"Metals"};
+  const order = S.slice().sort((a, b) => (b.ratio - 1) + b.mom * 4 - ((a.ratio - 1) + a.mom * 4));
+  const q = (x, y, t, c, a = "start") => `<text x="${x}" y="${y}" font-size="17" font-weight="800" fill="${c}" text-anchor="${a}" letter-spacing="2">${t}</text>`;
+  const moves = (D.moves || []).slice(0, 4);
+  const lead = S.filter(s => s.stage === "Leading").map(s => s.name), imp = S.filter(s => s.stage === "Improving").map(s => s.name);
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>Which sectors are taking the lead?</h1><p>20 NSE sectors against Nifty</p></div>`)
+    + scene("s1", "", `<div class="tag">SECTOR ROTATION</div><div class="h"><h1>${lead.length} leading, ${imp.length} improving</h1><p>Right = beating Nifty · Up = gaining speed. Sectors travel clockwise.</p></div>
+      <svg class="rrg" viewBox="0 0 ${W} ${W}">
+        <rect x="${X(1)}" y="${P}" width="${W - P - X(1)}" height="${Y(0) - P}" fill="#3fb950" opacity=".09"/><rect x="${P}" y="${P}" width="${X(1) - P}" height="${Y(0) - P}" fill="#58a6ff" opacity=".09"/>
+        <rect x="${P}" y="${Y(0)}" width="${X(1) - P}" height="${W - P - Y(0)}" fill="#f85149" opacity=".08"/><rect x="${X(1)}" y="${Y(0)}" width="${W - P - X(1)}" height="${W - P - Y(0)}" fill="#e3b341" opacity=".08"/>
+        <line x1="${X(1)}" x2="${X(1)}" y1="${P}" y2="${W - P}" stroke="#30363d" stroke-width="2"/><line x1="${P}" x2="${W - P}" y1="${Y(0)}" y2="${Y(0)}" stroke="#30363d" stroke-width="2"/>
+        ${q(W - P - 10, P + 28, "LEADING", "#3fb950", "end")}${q(P + 10, P + 28, "IMPROVING", "#58a6ff")}${q(P + 10, W - P - 14, "LAGGING", "#f85149")}${q(W - P - 10, W - P - 14, "WEAKENING", "#e3b341", "end")}
+        ${(() => { const pts = order.map(s => ({s, cx: X(s.ratio), cy: Y(s.mom)})), placed = [];
+          pts.slice().sort((a, b) => a.cy - b.cy).forEach(p => {            // place each name where it overlaps no other name or dot
+            const nm = SH[p.s.name] || p.s.name, w = nm.length * 9.6 + 4;
+            const boxAt = (r, ly) => r ? [p.cx + 14, ly - 15, p.cx + 14 + w, ly + 5] : [p.cx - 14 - w, ly - 15, p.cx - 14, ly + 5];
+            const hits = bx => placed.some(q => !(bx[2] < q.bx[0] || bx[0] > q.bx[2] || bx[3] < q.bx[1] || bx[1] > q.bx[3]))
+              || pts.some(o => o !== p && o.cx > bx[0] - 10 && o.cx < bx[2] + 10 && o.cy > bx[1] - 10 && o.cy < bx[3] + 10)
+              || bx[0] < P + 4 || bx[2] > W - P - 4 || bx[3] > W - P - 30 || bx[1] < P + 34;
+            let best = null;
+            for (const d of [0, 20, -20, 40, -40, 60, -60, 80, -80, 100, -100, 120, -120, 140, -140]) for (const r of [p.cx < W - 170, !(p.cx < W - 170)]) {
+              const bx = boxAt(r, p.cy + 6 + d); if (!best && !hits(bx)) best = { r, ly: p.cy + 6 + d, bx }; }
+            if (!best) { const r = p.cx < W - 170; best = { r, ly: p.cy + 6, bx: boxAt(r, p.cy + 6) }; }
+            Object.assign(p, best); placed.push(p); });
+          return pts.map((p, i) => `<g id="d${i}" opacity="0"><circle cx="${p.cx}" cy="${p.cy}" r="11" fill="${SC[p.s.stage] || "#7d8590"}" stroke="#0d1117" stroke-width="3"/>
+            ${Math.abs(p.ly - p.cy - 6) > 2 ? `<line x1="${p.cx}" y1="${p.cy}" x2="${p.r ? p.cx + 14 : p.cx - 14}" y2="${p.ly - 6}" stroke="#484f58" stroke-width="1.5"/>` : ""}
+            <text x="${p.r ? p.cx + 16 : p.cx - 16}" y="${p.ly}" text-anchor="${p.r ? "start" : "end"}" font-size="17" font-weight="700" fill="#e6edf3">${SH[p.s.name] || p.s.name}</text></g>`).join(""); })()}
+      </svg>
+      <div class="moves" id="mv">${moves.length ? `<b style="color:#c6ff3d;letter-spacing:.1em;font-size:16px">MOVED THIS WEEK</b><br>${moves.map(m => `${m.name}: <span style="color:${SC[m.from]}">${m.from}</span> → <span style="color:${SC[m.to]}">${m.to}</span>`).join("<br>")}` : ""}</div>`)
+    + outro("Where each sector stands", `<span class="up">Leading:</span> ${lead.join(", ") || "none"}<br><span class="blu">Improving:</span> ${imp.join(", ") || "none"}`, "Watch the rotation every day");
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 16);
+    order.forEach((s, i) => { const a = 3.4 + i * .28, g = $("d" + i); g.setAttribute("opacity", clamp((t - a) / .3)); });
+    $("mv").style.opacity = clamp((t - 10.5) / .5); show("s_out", t, 16, 99, 30); };
+}
+
+/* ---------------- Friday: week in review (sectors only) ---------------- */
+if (mode === "week") {
+  const wk = D.week, up = wk.best.slice(0, 3), dn = wk.worst.slice(0, 3), w = D.weather;
+  const row = (s, c) => `<div style="display:flex;justify-content:space-between;font-size:30px;font-weight:600;padding:13px 0;border-bottom:1px solid #21262d"><span>${s.name}</span><span class="mono ${c}">${pct(s.rw, 1)}</span></div>`;
+  const wf = wk.wxFrom, wt = w.score;
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>The week in 20 seconds</h1><p>${wk.range}</p></div>`)
+    + scene("s1", "", `<div class="tag">BEST SECTORS THIS WEEK</div><div class="h"><h1>Where money went</h1><p>Sector move over 5 days, compared with Nifty</p></div>
+      <div style="position:absolute;left:36px;right:36px;top:340px">${up.map(s => row(s, "up")).join("")}</div>
+      <div style="position:absolute;left:36px;right:36px;top:640px"><div class="tag" style="position:static;color:#f85149;margin-bottom:8px">WORST SECTORS</div>${dn.map(s => row(s, "dn")).join("")}</div>`)
+    + scene("s2", "", `<div class="tag">MARKET WEATHER</div><div class="h"><h1>${wf != null ? (wt > wf ? "Weather improved" : wt < wf ? "Weather got worse" : "Weather unchanged") : "Weather now"}</h1><p>Monday → Friday</p></div>
+      <div style="position:absolute;left:0;right:0;top:420px;text-align:center;font-weight:800;letter-spacing:-.04em">
+        ${wf != null ? `<span class="mono" style="font-size:110px;color:${scoreCol(wf)}">${wf}</span><span style="font-size:70px;color:#7d8590;margin:0 26px">→</span>` : ""}<span class="mono" style="font-size:110px;color:${scoreCol(wt)}">${wt}</span>
+        <div style="font-size:30px;margin-top:16px;color:#9aa4b2;letter-spacing:0">${WX(wt)[1]} · ${w.label}</div></div>
+      ${(D.ban || []).length ? `<div style="position:absolute;left:36px;right:36px;top:820px;font-size:24px;line-height:1.5"><b style="letter-spacing:.12em;font-size:16px;color:#f0883e">F&amp;O BAN LIST NOW</b><br>${D.ban.length} stock${D.ban.length > 1 ? "s" : ""}: ${D.ban.join(", ")}<br><span class="mut" style="font-size:19px">No new F&amp;O positions allowed in these until they exit the ban.</span></div>` : ""}`)
+    + outro("See you Monday", `Every day on TradeReady:<br>⚡ money flow · ☀️ weather<br>🔄 sector rotation · 🏦 OI build-up`, "Follow along, free");
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 9.6); show("s2", t, 9.6, 16); show("s_out", t, 16, 99, 30); };
+}
+
+/* ---------------- Tutorial: chase meter ---------------- */
+if (mode === "tut-chase") {
+  const N = 120, ema = [], px = [];
+  for (let i = 0; i < N; i++) { const b = 100 + i * .18; ema.push(b);
+    px.push(b + 2.2 * Math.sin(i / 9) + (i > 60 && i < 92 ? (i - 60) * .32 * Math.max(0, 1 - Math.max(0, i - 84) / 8) : 0) - (i > 98 ? (i - 98) * .25 : 0)); }
+  const atr = 2.2, lo = Math.min(...px, ...ema) - 6, hi = Math.max(...px) + 4, CW = 680, CH = 560, PL = 20, PR = 20;
+  const X = i => PL + i / (N - 1) * (CW - PL - PR), Y = v => CH - 20 - (v - lo) / (hi - lo) * (CH - 40);
+  const band = (a, b, c) => `<path d="${ema.map((e, i) => `${i ? "L" : "M"}${X(i)} ${Y(e + b * atr)}`).join(" ")} ${ema.map((e, i) => `L${X(N - 1 - i)} ${Y(ema[N - 1 - i] + a * atr)}`).join(" ")} Z" fill="${c}" opacity=".16"/>`;
+  const line = (arr, c, w, id) => `<path ${id ? `id="${id}"` : ""} d="${arr.map((v, i) => `${i ? "L" : "M"}${X(i)} ${Y(v)}`).join(" ")}" stroke="${c}" stroke-width="${w}" fill="none" stroke-linejoin="round"/>`;
+  const Z = x => x > 2.5 ? ["🔴", "Don't chase", "#f85149"] : x > 1 ? ["🟡", "Wait for a dip", "#e0a400"] : x >= -1.5 ? ["🟢", "Good entry zone", "#3fb950"] : ["⚪", "Below 20 EMA", "#9aa4b2"];
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>Bought a strong stock… and it fell next day?</h1><p>You probably chased it. Here's how to tell.</p></div>`)
+    + scene("s1", "", `<div class="tag">TUTORIAL · CHASE METER</div><div class="h" id="th"></div>
+      <svg class="chart" viewBox="0 0 ${CW} ${CH}">${band(-1.5, 1, "#3fb950")}${band(1, 2.5, "#e0a400")}${band(2.5, 6, "#f85149")}
+        ${line(ema, "#8b7dff", 3)}<text x="${CW - 24}" y="${Y(ema[N - 1]) + 30}" fill="#8b7dff" font-size="18" font-weight="700" text-anchor="end">20 EMA</text>
+        <clipPath id="clip"><rect id="cr" x="0" y="0" width="0" height="${CH}"/></clipPath><g clip-path="url(#clip)">${line(px, "#e6edf3", 3.5)}</g>
+        <circle id="dot" r="11" fill="#fff" stroke="#0d1117" stroke-width="3"/></svg>
+      <div class="chipbox"><span class="chip" id="chip"></span><div class="mono mut" id="atr" style="font-size:20px;margin-top:14px"></div></div>`)
+    + scene("s2", "", `<div class="tag">TUTORIAL · CHASE METER</div><div class="h"><h1>Distance from the 20 EMA, in ATRs</h1><p>ATR = how much the stock normally moves in a day</p></div>
+      <div class="legend" style="top:360px">${[["🟢", "Good entry zone", "#3fb950", "Near the 20 EMA (−1.5 to +1 ATR). Low-risk area if the trend is up."], ["🟡", "Wait for a dip", "#e0a400", "1 to 2.5 ATR above. Stretched: a dip back is usually better."], ["🔴", "Don't chase", "#f85149", "More than 2.5 ATR above. Most chases fail here."], ["⚪", "Below 20 EMA", "#9aa4b2", "Under the average. Wait for it to turn back up."]]
+        .map((z, i) => `<div class="row" id="l${i}"><span class="chip" style="--c:${z[2]}">${z[0]} ${z[1]}</span><span>${z[3]}</span></div>`).join("")}</div>`)
+    + outro("Every stock, one dot", `TradeReady puts this dot next to every F&amp;O stock, so you see at a glance if it's a good time to look or a time to wait.`, "Try the chase meter, free");
+  const caps = [[2.6, 6.5, "<h1>The blue line is the 20 EMA</h1><p>Green = close to it. Yellow = stretched. Red = far above.</p>"],
+                [6.5, 10.5, "<h1>Watch the dot climb</h1><p>The further above the EMA, the riskier a new buy.</p>"],
+                [10.5, 14, "<h1>…and snap back</h1><p>Stretched stocks often pull back to the EMA first.</p>"]];
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 14); show("s2", t, 14, 18.4); show("s_out", t, 18.4, 99, 30);
+    const c = caps.find(c => t >= c[0] && t < c[1]) || caps[0]; $("th").innerHTML = c[2]; $("th").style.opacity = Math.min(fade(t, c[0], c[1]), 1);
+    const k = Math.min(N - 1, Math.max(0, Math.round((t - 3) / 10.6 * (N - 1))));
+    $("cr").setAttribute("width", X(k) + 2); $("dot").setAttribute("cx", X(k)); $("dot").setAttribute("cy", Y(px[k]));
+    const x = (px[k] - ema[k]) / atr, z = Z(x); $("chip").textContent = z[0] + " " + z[1]; $("chip").style.setProperty("--c", z[2]); $("dot").setAttribute("fill", z[2]);
+    $("atr").textContent = (x >= 0 ? "+" : "") + x.toFixed(1) + " ATR from the 20 EMA";
+    for (let i = 0; i < 4; i++) { const el = $("l" + i); if (el) el.style.opacity = clamp((t - 14.6 - i * .6) / .4); } };
+}
+
+/* shared helper for tutorials: captions that swap at set times */
+function capSwap(id, caps, t) { const c = caps.find(c => t >= c[0] && t < c[1]); const el = $(id); if (!el) return;
+  if (!c) { el.style.opacity = 0; return; } if (el.dataset.k !== String(c[0])) { el.innerHTML = c[2]; el.dataset.k = String(c[0]); }
+  el.style.opacity = Math.min(1, fade(t, c[0], c[1])); }
+
+/* ---------------- Tutorial: reading the money-flow river ---------------- */
+if (mode === "tut-flow") {
+  const EX = [["Realty", 2.1, 900], ["IT", 1.6, 2400], ["Pharma", .9, 1300], ["Metals", -1.8, 1700], ["PSU Banks", -1.3, 1500], ["Power", -.8, 900]]
+    .map(([n, r, v]) => ({ id: n, name: n, rel: r, chg: r, size: v }));
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>Where is money moving today?</h1><p>How to read the money-flow river in 20 seconds</p></div>`)
+    + scene("s1", "", `<div class="tag">TUTORIAL · MONEY FLOW</div><div class="h" id="th"></div>
+      <canvas id="cv" style="position:absolute;left:14px;top:330px;width:692px;height:720px"></canvas>
+      <div class="mut" style="position:absolute;left:36px;bottom:96px;font-size:17px">Example picture, not today's data</div>`)
+    + outro("Read it in 3 steps", `1. <span class="dn">Left</span>: sectors money is leaving<br>2. <span class="up">Right</span>: where it is going<br>3. Thicker band = bigger shift`, "Watch it live every 10 minutes");
+  const R = river($("cv"), { nodes: EX, mkt: .2, label: "MARKET", fs: 1.5, max: 3, lab: 200, minH: 90, top: 60 });
+  const caps = [[2.6, 6.4, "<h1><span class='dn'>Left</span> = money leaving</h1><p>Sectors doing worse than the whole market</p>"],
+    [6.4, 10, "<h1><span class='up'>Right</span> = money arriving</h1><p>Sectors doing better than the market</p>"],
+    [10, 13.4, "<h1>Thicker band = bigger shift</h1><p>Here most money left Metals and went into Realty</p>"],
+    [13.4, 16.4, "<h1>Tap a sector on the site</h1><p>…and the same river shows its stocks</p>"]];
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 16.4); capSwap("th", caps, t);
+    $("cv").style.opacity = clamp((t - 2.4) / .6);
+    R.focus(t >= 6.6 && t < 10 ? "Realty" : t >= 3 && t < 6.4 ? "Metals" : t >= 10.2 && t < 13.4 ? "Metals" : null);
+    show("s_out", t, 16.4, 99, 30); };
+}
+
+/* ---------------- Tutorial: impulse vs corrective ---------------- */
+if (mode === "tut-impulse") {
+  const CW = 680, CH = 300;
+  const imp = [0, 30, 20, 62, 50, 92, 80, 120, 108, 150].map((v, i) => [i / 9 * CW, CH - 20 - v * 1.6]);
+  const cor = [0, 40, 12, 48, 18, 44, 10, 42, 16, 38].map((v, i) => [i / 9 * CW, CH - 60 - v * 2.4]);
+  const path = (pts, id, c) => `<path id="${id}" d="${pts.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join(" ")}" stroke="${c}" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`;
+  const cell = (v, c) => `<span class="cell" style="background:color-mix(in srgb,${c} 20%,transparent);color:${c}">${v}</span>`;
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>Is the trend running… or resting?</h1><p>Impulse vs corrective, on 3 timeframes</p></div>`)
+    + scene("s1", "", `<div class="tag">TUTORIAL · IMPULSE TABLE</div><div class="h" id="th"></div>
+      <div style="position:absolute;left:20px;top:340px;font-size:24px;font-weight:800;color:#3fb950">IMPULSE</div>
+      <svg style="position:absolute;left:20px;top:370px;width:680px;height:300px" viewBox="0 0 ${CW} ${CH}">${path(imp, "pi", "#3fb950")}</svg>
+      <div style="position:absolute;left:20px;top:700px;font-size:24px;font-weight:800;color:#e3b341">CORRECTIVE</div>
+      <svg style="position:absolute;left:20px;top:730px;width:680px;height:300px" viewBox="0 0 ${CW} ${CH}">${path(cor, "pc", "#e3b341")}</svg>`)
+    + scene("s2", "", `<div class="tag">TUTORIAL · IMPULSE TABLE</div><div class="h"><h1>Check all three</h1><p>Monthly · Weekly · Daily, side by side for every F&amp;O stock</p></div>
+      <div class="mock" style="top:380px">
+        <div class="r" id="m0"><b>Stock A</b><span>${cell("M Imp", "#3fb950")}${cell("W Imp", "#3fb950")}${cell("D Imp", "#3fb950")}</span></div>
+        <div class="r" id="m1"><b>Stock B</b><span>${cell("M Imp", "#3fb950")}${cell("W Imp", "#3fb950")}${cell("D Rest", "#e3b341")}</span></div>
+        <div class="r" id="m2"><b>Stock C</b><span>${cell("M Bear", "#f85149")}${cell("W Corr", "#e3b341")}${cell("D Imp", "#3fb950")}</span></div></div>
+      <div class="legend" style="top:720px">
+        <div class="row" id="k0"><span class="chip" style="--c:#3fb950">A</span><span>All three running: strongest trend, but often stretched</span></div>
+        <div class="row" id="k1"><span class="chip" style="--c:#e3b341">B</span><span>Big trend up, Daily resting: a pause inside an uptrend</span></div>
+        <div class="row" id="k2"><span class="chip" style="--c:#f85149">C</span><span>Daily bounce against a falling Monthly: be careful</span></div></div>`)
+    + outro("Big picture first", `Monthly and Weekly tell you the trend.<br>Daily tells you if it's running or resting.`, "Try the impulse table, free");
+  const caps = [[2.6, 6.8, "<h1>Impulse = moving with force</h1><p>Big moves one way, small pullbacks</p>"],
+    [6.8, 10.6, "<h1>Corrective = resting</h1><p>Choppy, overlapping, going sideways</p>"]];
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 10.6); capSwap("th", caps, t);
+    $("pi").style.strokeDashoffset = 1 - ease((t - 3) / 3); $("pc").style.strokeDashoffset = 1 - ease((t - 6.8) / 3);
+    show("s2", t, 10.6, 17); for (let i = 0; i < 3; i++) { $("m" + i).style.opacity = clamp((t - 11.2 - i * .4) / .4); $("k" + i).style.opacity = clamp((t - 12.6 - i * .9) / .4); }
+    show("s_out", t, 17, 99, 30); };
+}
+
+/* ---------------- Tutorial: option chain in 10 seconds ---------------- */
+if (mode === "tut-chain") {
+  const rows = [[1040, 14, 2], [1020, 9, 3], [1000, 22, 6], [980, 7, 9], [960, 4, 12], [940, 2, 19], [920, 1, 8]];
+  const mx = 22;
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>An option chain looks scary.</h1><p>Read it in 10 seconds: find the ceiling and the floor</p></div>`)
+    + scene("s1", "", `<div class="tag">TUTORIAL · OPTION CHAIN</div><div class="h" id="th"></div>
+      <div style="position:absolute;left:36px;right:36px;top:360px">
+        <div style="display:grid;grid-template-columns:1fr 130px 1fr;font-size:18px;font-weight:800;color:#7d8590;letter-spacing:.1em;margin-bottom:10px"><span style="text-align:right;padding-right:14px">CALL OI</span><span style="text-align:center">STRIKE</span><span style="padding-left:14px">PUT OI</span></div>
+        ${rows.map((r, i) => `<div style="display:grid;grid-template-columns:1fr 130px 1fr;align-items:center;height:62px;border-top:1px solid #21262d" id="cr${i}">
+          <div style="display:flex;justify-content:flex-end;padding-right:14px"><i id="ce${i}" style="display:block;height:26px;border-radius:6px;background:#f85149;width:0"></i></div>
+          <div class="mono" style="text-align:center;font-size:26px;font-weight:700">${r[0]}</div>
+          <div style="padding-left:14px"><i id="pe${i}" style="display:block;height:26px;border-radius:6px;background:#3fb950;width:0"></i></div></div>`).join("")}
+        <div class="mono" style="position:absolute;right:0;top:-46px;font-size:20px;color:#9aa4b2">Price now: 975</div>
+      </div>
+      <div class="chipbox" style="top:880px" id="chips"></div>`)
+    + outro("On TradeReady", `Tap any stock and the chain is read for you in plain English: <span class="dn">writers covering</span>, <span class="up">puts strong</span>, ceiling and floor.`, "Open any option chain, free");
+  const caps = [[2.6, 6, "<h1>Red = call OI, green = put OI</h1><p>Big bars = lots of option sellers sitting there</p>"],
+    [6, 9.6, "<h1>Biggest call bar = <span class='dn'>ceiling</span></h1><p>Call sellers defend 1000. Price often stalls below it.</p>"],
+    [9.6, 13.2, "<h1>Biggest put bar = <span class='up'>floor</span></h1><p>Put sellers defend 940. Price often holds above it.</p>"],
+    [13.2, 16.6, "<h1>Watch the change</h1><p>Ceiling bars shrinking = call writers covering, the ceiling is weakening</p>"]];
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 16.6); capSwap("th", caps, t);
+    rows.forEach((r, i) => { const g = ease((t - 3 - i * .12) / 1); let ce = r[1];
+      if (i === 2 && t > 13.4) ce = r[1] - (r[1] - 8) * ease((t - 13.6) / 1.6);
+      $("ce" + i).style.width = g * ce / mx * 100 + "%"; $("pe" + i).style.width = g * r[2] / mx * 100 + "%";
+      $("cr" + i).style.background = (i === 2 && t >= 6 && t < 9.6) || (i === 5 && t >= 9.6 && t < 13.2) || (i === 2 && t >= 13.2) ? "rgba(198,255,61,.08)" : "transparent"; });
+    $("chips").innerHTML = t >= 13.8 ? `<span class="chip" style="--c:#f85149">Writers covering</span>` : t >= 9.6 ? `<span class="chip" style="--c:#3fb950">Floor 940</span>` : t >= 6 ? `<span class="chip" style="--c:#f85149">Ceiling 1000</span>` : "";
+    show("s_out", t, 16.6, 99, 30); };
+}
+
+/* ---------------- Tutorial: trapped shorts ---------------- */
+if (mode === "tut-trapped") {
+  const N = 90, px = [], oi = [];
+  for (let i = 0; i < N; i++) { const down = i < 40 ? 100 - i * .45 : i < 52 ? 82 + (i - 40) * .05 : 82.6 + (i - 52) * .62 + (i > 70 ? (i - 70) * .35 : 0);
+    px.push(down + Math.sin(i / 3) * .6); oi.push(i < 45 ? 40 + i * 1.2 : i < 60 ? 94 : Math.max(30, 94 - (i - 60) * 2.2)); }
+  const lo = Math.min(...px) - 3, hi = Math.max(...px) + 3, CW = 680, CH = 380;
+  const X = i => i / (N - 1) * CW, Y = v => CH - (v - lo) / (hi - lo) * CH;
+  $("stage").innerHTML = scene("s0", "intro", `<div><h1>Why do some stocks suddenly fly up?</h1><p>Often it's sellers who got trapped</p></div>`)
+    + scene("s1", "", `<div class="tag">TUTORIAL · TRAPPED SHORTS</div><div class="h" id="th"></div>
+      <svg style="position:absolute;left:20px;top:340px;width:680px;height:380px" viewBox="0 0 ${CW} ${CH}">
+        <line x1="0" x2="${CW}" y1="${Y(px[44])}" y2="${Y(px[44])}" stroke="#58a6ff" stroke-dasharray="6 6" stroke-width="2" id="lvl" opacity="0"/>
+        <clipPath id="clp"><rect id="cr" width="0" height="${CH}"/></clipPath>
+        <path clip-path="url(#clp)" d="${px.map((v, i) => (i ? "L" : "M") + X(i) + " " + Y(v)).join(" ")}" stroke="#e6edf3" stroke-width="4" fill="none" stroke-linejoin="round"/></svg>
+      <div style="position:absolute;left:20px;top:742px;font-size:17px;font-weight:800;color:#7d8590;letter-spacing:.1em">OPEN INTEREST (short positions)</div>
+      <div style="position:absolute;left:20px;right:20px;top:772px;height:170px;display:flex;align-items:flex-end;gap:2px">${oi.map((v, i) => `<i id="o${i}" style="flex:1;height:0;background:${i < 60 ? "#f85149" : "#58a6ff"};border-radius:2px 2px 0 0;opacity:.85"></i>`).join("")}</div>`)
+    + outro("Spot them early", `Price falling + OI rising = shorts piling in.<br>Then price turns up through their level = trap.<br>TradeReady lists trapped shorts every day.`, "See the trapped-shorts list, free");
+  const caps = [[2.6, 6.6, "<h1>1. Sellers pile in</h1><p>Price falls, open interest rises: fresh short positions</p>"],
+    [6.6, 10, "<h1>2. Price stops falling</h1><p>The shorts are now sitting at this level</p>"],
+    [10, 13.6, "<h1>3. Price turns up through it</h1><p>Shorts are losing money: they're trapped</p>"],
+    [13.6, 17, "<h1>4. They rush to buy back</h1><p>OI drops, and their buying pushes price up faster</p>"]];
+  setT = t => { show("s0", t, -1, 2.6); show("s1", t, 2.6, 17); capSwap("th", caps, t);
+    const k = Math.min(N - 1, Math.round(clamp((t - 3) / 13) * (N - 1)));
+    $("cr").setAttribute("width", X(k) + 2); $("lvl").setAttribute("opacity", t > 6.8 ? .9 : 0);
+    for (let i = 0; i < N; i++) $("o" + i).style.height = i <= k ? oi[i] / 100 * 170 + "px" : "0";
+    show("s_out", t, 17, 99, 30); };
+}
+window.setT = setT;
+</script></body></html>

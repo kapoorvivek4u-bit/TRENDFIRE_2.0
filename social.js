@@ -3,7 +3,7 @@
 import { alertsGet, sendMail } from "./alerts.js";
 
 const TTL = 60 * 60 * 24 * 8, IDX = "soc:index";
-const TYPES = { video: ["video/mp4", "mp4"], cover: ["image/jpeg", "jpg"], post: ["image/jpeg", "jpg"] };
+const TYPES = { video: ["video/mp4", "mp4"], cover: ["image/jpeg", "jpg"], post: ["image/jpeg", "jpg"], tut: ["video/mp4", "mp4"] };
 // Files arrive one per request as raw bytes (?d=DATE&f=video|cover|post): no decoding, so it stays within CPU limits.
 export async function socialFileIngest(env, req, url) {
   const d = url.searchParams.get("d") || "", f = url.searchParams.get("f") || "";

@@ -533,6 +533,7 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .sockcaps{display:grid;gap:10px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
 .sockh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:13px}
 .sockcap textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:13px/1.45 var(--f-ui,Inter),sans-serif;background:var(--surface2);color:var(--ink);resize:vertical}
+.socktut{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
 .sockheld{background:color-mix(in srgb,var(--warn) 14%,transparent);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 .newver .btn2{padding:5px 12px;font-size:12px}
@@ -1838,7 +1839,7 @@ async function pageSocial(){
     const when = new Date(d + "T00:00:00+05:30").toLocaleDateString("en-IN", {weekday:"short", day:"numeric", month:"short", timeZone:"Asia/Kolkata"});
     return `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>${i === 0 ? "Latest kit" : "Earlier"}<em>${esc(when)} · data ${esc(m.at || "")} IST</em></h2></div>
       ${(m.held || []).length ? `<div class="sockheld">⚠️ Held for a check: ${m.held.map(esc).join(" ")} You can still post it if it looks right.</div>` : ""}
-      <p style="font-size:17px;font-weight:700;margin:0 0 12px">${esc(m.headline || "")} <span class="muted" style="font-weight:500;font-size:13px">· F&amp;O market ${m.mkt > 0 ? "+" : ""}${m.mkt}%</span></p>
+      <p style="font-size:17px;font-weight:700;margin:0 0 12px">${m.format ? `<span class="chip" style="--c:var(--accent);margin-right:8px">${({flow:"⚡ Money flow", weather:"☀️ Market weather", oi:"🏦 OI build-up", rotation:"🔄 Sector rotation", week:"📅 Week in review"})[m.format] || m.format}${m.big ? " · big-move day" : ""}</span>` : ""}${esc(m.headline || "")} <span class="muted" style="font-weight:500;font-size:13px">· F&amp;O market ${m.mkt > 0 ? "+" : ""}${m.mkt}%</span></p>
       <div class="sockgrid">
         <div class="sockmedia"><video src="${file(d, "video")}" controls playsinline preload="${i === 0 ? "metadata" : "none"}" poster="${file(d, "cover")}"></video>
           <a class="btn2" href="${file(d, "video", 1)}" download>⬇ Video (Reel / Short)</a></div>
@@ -1846,6 +1847,10 @@ async function pageSocial(){
         <div class="sockmedia"><img src="${file(d, "post")}" alt="Picture post" loading="lazy"><a class="btn2" href="${file(d, "post", 1)}" download>⬇ Picture post</a></div>
       </div>
       <div class="sockcaps">${box("ig" + k, "Instagram caption", m.instagram || "")}${box("yt" + k, "YouTube title", m.youtube_title || "")}${box("yd" + k, "YouTube description", m.youtube_desc || "")}${box("x" + k, "X (Twitter)", m.x || "")}${box("wa" + k, "WhatsApp", m.whatsapp || "")}</div>
+      ${m.tutorial ? `<div class="socktut"><div class="ct" style="margin:0 0 10px"><h2>📚 Bonus tutorial<em>post it in the morning, separate from the daily post</em></h2></div>
+        <p style="font-weight:700;margin:0 0 10px">${esc(m.tutorial.headline)}</p>
+        <div class="sockgrid"><div class="sockmedia"><video src="${file(d, "tut")}" controls playsinline preload="none"></video><a class="btn2" href="${file(d, "tut", 1)}" download>⬇ Tutorial video</a></div>
+          <div class="sockcaps" style="grid-column:span 2;margin:0">${box("ti" + k, "Instagram caption", m.tutorial.instagram)}${box("tt" + k, "YouTube title", m.tutorial.youtube_title)}${box("td" + k, "YouTube description", m.tutorial.youtube_desc)}${box("tx" + k, "X (Twitter)", m.tutorial.x)}</div></div></div>` : ""}
     </section>`; };
   return head + `<div class="muted" style="font-size:12.5px;margin-bottom:4px">How to post: download the video → open Instagram → Reel → pick it → paste the caption → add a trending sound at low volume → share. Same video for YouTube Shorts.</div>` + days.map(day).join("");
 }
