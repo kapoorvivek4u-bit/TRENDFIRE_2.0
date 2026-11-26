@@ -279,6 +279,7 @@ async function memberData(env, ctx, name, r) {
   const txt = (await r.text()).replaceAll('"BUY NOW"', '"SIGNAL ON (Bullish)"').replaceAll('"SELL NOW"', '"SIGNAL ON (Bearish)"')
     .replaceAll("VK Buy now", "VK signal on").replaceAll("VK Sell now", "VK signal on");
   const d = stripLevels(JSON.parse(txt));
+  if (name === "bear.json") delete d.bottom5;                    // ranked short picks with levels: full access only
   if (name === "site.json") {
     delete d.scorecard;                                          // the scorecard is for the admin only
     delete d.top5;                                               // ranked picks with levels: full access only

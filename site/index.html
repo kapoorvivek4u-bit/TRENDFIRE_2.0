@@ -505,6 +505,7 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 @media (max-width:560px){.t5{grid-template-columns:auto 1fr}.t5 .r{grid-column:2;text-align:left;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.t5 .r>div{margin:0!important}}
 .mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
 .mtft td{vertical-align:middle;white-space:nowrap}
+.bearban{border-left:4px solid var(--down);background:color-mix(in srgb,var(--down) 7%,var(--surface));font-size:13.5px}
 .optbox{margin:10px 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--up) 8%,transparent);border:1px solid color-mix(in srgb,var(--up) 25%,transparent)}
 .optk{font:800 16px/1.2 "JetBrains Mono",monospace;margin-bottom:8px}.optg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 10px}.optg small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.optg b{font-family:"JetBrains Mono",monospace;font-size:13.5px}
 .hitn{border:0;cursor:pointer;font:700 11px/1 inherit;padding:3px 6px;margin-left:4px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);vertical-align:middle;flex:none}
@@ -742,7 +743,7 @@ function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : nu
 /* ============================================================ routes */
 const PAGES = [
   ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["lab","🧪 VK Experimentals"]]],
+  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["scanner-bear","🐻 Bearish"],["lab","🧪 VK Experimentals"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
@@ -1093,7 +1094,7 @@ async function pageDashboard(){
     ${subnav()}${bellStrip()}${headsUpCard()}${indexStrip()}
     <div class="grid">
       ${weatherCard()}${newsCard()}
-      ${top5Card()}${mostScannedCard()}
+      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${top5Card()}${mostScannedCard()}
       ${tradesCard()}
       ${partsCard()}${vkCard()}
       ${strongestCard()}${readyCard()}
@@ -1462,6 +1463,84 @@ async function pageOptions(){
     ${show.length ? `<div class="cards" style="margin-top:12px">${show.map(card).join("")}</div>` : `<div class="empty" style="margin-top:12px">No stock has options confirming right now. Tap "All checked" to see why.</div>`}`;
 }
 
+/* ============================================================ Bearish side (shorts via futures or puts) */
+const BEAR = () => CACHE["bear.json"] || null;
+/* short chase meter: a short is best sold on a bounce toward the 20 EMA, not after a big fall */
+function chaseBear(sym, px){
+  const lv = ((S() || {}).levels || {})[sym]; if(!lv || !lv.e20 || !lv.a) return null;
+  const q = livePx(sym), p = px ?? (q ? q.close : lv.c); if(p == null) return null;
+  const x = (p - lv.e20) / lv.a;
+  const z = x < -2.5 ? ["🔴","Don't chase","var(--down)","far under its 20 EMA: wait for a bounce to sell"]
+    : x < -1 ? ["🟡","Wait for a bounce","#e0a400","a bit stretched down: a bounce toward the 20 EMA is a better short"]
+    : x <= 1.5 ? ["🟢","Good short zone","var(--up)","near its 20 EMA: low-risk short if the trend is down"]
+    : ["⚪","Above 20 EMA","var(--muted)","above its 20 EMA: wait for it to turn down"];
+  return {x, icon:z[0], label:z[1], color:z[2], why:z[3], e20:lv.e20};
+}
+const chaseBearChip = sym => { const c = chaseBear(sym); if(!c) return "";
+  return `<span class="chip" style="--c:${c.color}" title="Short chase meter: ${c.x >= 0 ? "+" : ""}${c.x.toFixed(1)} ATR from the 20 EMA (₹${fmt(c.e20)}), ${esc(c.why)}">${c.icon} ${esc(c.label)} · ${c.x >= 0 ? "+" : ""}${c.x.toFixed(1)}</span>`; };
+function supportChips(sym){
+  const lv = ((S() || {}).levels || {})[sym]; if(!lv) return "";
+  const q = livePx(sym), px = q ? q.close : lv.c;
+  const below = Object.keys(LV_NAMES).filter(k => lv[k] != null).map(k => ({name: LV_NAMES[k], v: lv[k], d: (1 - lv[k] / px) * 100})).filter(x => x.d >= 0 && x.d <= 4).sort((a,b) => a.d - b.d);
+  return below.length ? `<span class="chip" style="--c:var(--warn)" title="${esc(below[0].name)} at ${fmt(below[0].v)}: likely support under a short">⚠ ${esc(below[0].name)} ${below[0].d.toFixed(1)}% below</span>`
+    : `<span class="chip" style="--c:var(--up)">✓ No 200 DMA / weekly EMA support near</span>`;
+}
+function bearCard(r){
+  const live = r.stage === "Ready" || r.stage === "Triggered", stc = {Ready:"var(--down)", Triggered:"var(--warn)", Watch:"var(--muted)"}[r.stage];
+  const sec = ((CACHE["sectors.json"] || {}).map || {})[r.symbol] || {};
+  return `<article class="sc" style="--stc:${stc}">
+    <div class="row1"><div class="symrow">${symLink(r.symbol, 16, false)}${starBtn(r.symbol)}<span class="px" title="Last close">${fmt(r.close)}</span>${liveTag(r.symbol)}</div>
+      <span style="display:flex;gap:6px;align-items:center">${r.rr && live && FULL() ? `<span class="rr">R:R ${r.rr}</span>` : ""}<span class="grade ${live && r.grade === "A" ? "" : "b"}" title="Quality grade">${esc(r.grade === "Warning" ? "!" : r.grade)}</span></span></div>
+    <div class="chips">${chaseBearChip(r.symbol)}${supportChips(r.symbol)}${chip("🐻 " + r.setup, "var(--down)")}${chip(r.stage, stc)}${sec.sector ? chip(`${sec.sector} · ${sec.stage || ""}`, STAGE_C[sec.stage]) : ""}</div>
+    ${statesHtml(r.states)}
+    ${r.detail ? `<div class="detail">${esc(r.detail)}${r.oi ? " · " + esc(r.oi) : ""}</div>` : ""}
+    ${levels(r.entry, r.stop, r.target, r.stage === "Watch" ? "Below" : "Sell below", "Target")}
+  </article>`;
+}
+function bottom5Card(){
+  const b = BEAR(); if(!FULL() || !b || !b.bottom5 || !(b.bottom5.picks || []).length) return "";
+  const row = (p, i) => `<div class="t5"><span class="t5r" style="color:var(--down)">${i+1}</span><div style="min-width:0">
+      <div class="symrow">${symLink(p.symbol, 15, false)}${starBtn(p.symbol)}<span class="muted" style="font-size:12px">${esc(p.sector || "")}</span>${liveTag(p.symbol)}</div>
+      <div class="chips" style="margin-top:5px">${chaseBearChip(p.symbol)}${chip("🐻 " + p.setup, "var(--down)")}${chip("Grade " + p.grade, p.grade === "A" ? "var(--down)" : "var(--muted)")}${chip(p.stage, "var(--warn)")}${supportChips(p.symbol)}</div>
+      <details class="t5d"><summary>Why it ranks here · ${p.checks.length} checks${p.cautions.length ? ` · ${p.cautions.length} caution${p.cautions.length > 1 ? "s" : ""}` : ""}</summary>
+        <ul>${p.checks.map(c => `<li class="${c.p > 0 ? "up" : "down"}"><b>${c.p > 0 ? "+" : ""}${c.p}</b> ${esc(c.t)}</li>`).join("")}</ul></details></div>
+      <div class="r"><span class="t5s" style="--up:var(--down)">${p.score}</span><div style="margin-top:5px">↓ ${fmt(p.entry)}</div><div class="down">✕ ${fmt(p.stop)} <span class="muted">(${p.risk_pct}%)</span></div><div class="up">◎ ${fmt(p.target)} <span class="muted">R:R ${p.rr}</span></div></div></div>`;
+  return `<section class="card fade" style="grid-column:1/-1"><div class="ct"><h2>🐻 Bottom 5 positional<em>F&O shorts · 1–3 weeks · picked from ${b.bottom5.considered} setups</em></h2><a class="more" href="#scanner-bear">All bearish ›</a></div>
+    <div class="t5g">${b.bottom5.picks.map(row).join("")}</div>
+    <div class="muted" style="font-size:11.5px;margin-top:10px">Shorts through futures or puts only (cash can be shorted intraday only). ↓ sell below · ✕ stop above · ◎ target. Stops are tighter for shorts: rallies can be sharp. Experimental: every day's picks are logged.</div></section>`;
+}
+function weakestCard(){
+  const b = BEAR(); if(!b || !(b.weakest || []).length) return "";
+  return `<section class="card s5 fade"><div class="ct"><h2>Weakest stocks<em>F&O · vs Nifty</em></h2><a class="more" href="#scanner-bear">All ›</a></div>
+    <div class="list">${b.weakest.slice(0, 8).map(x => `<div class="st"><span class="rk" style="color:var(--down)">#${x.rank}</span><div style="min-width:0"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${symLink(x.symbol, 14)}<span class="muted" style="font-size:12px">${esc(x.sector || "")} · ${fmt(x.close)}</span></div>
+      <div class="chips">${x.why.slice(0, 4).map(w => chip(w, "var(--down)")).join("")}</div></div><span class="scr" style="color:var(--down)">${x.score}</span></div>`).join("")}</div></section>`;
+}
+function bearBanner(){
+  const b = BEAR(); if(!b || !b.bear_mode) return "";
+  return `<section class="card fade bearban" style="grid-column:1/-1"><b>🐻 Bear mode is on</b> <span class="muted">Market weather ${b.weather ?? "—"}${b.turn ? " · " + esc(b.turn) : ""}. Shorts and the weakest stocks are shown first; buy setups work less often in this market.</span></section>`;
+}
+async function pageBear(){
+  const b = await getJSON("bear.json").catch(() => null);
+  const tab = UI.bearTab || "setups";
+  const head = pageHead("🐻 Bearish side", `F&O shorts through futures or puts${b ? ` · ${esc(when(b.generated_ist))} · daily bars of ${esc(b.asof || "")}` : ""}`) + subnav() +
+    `<div class="filters">${[["setups","Short setups"],["weakest","Weakest stocks"]].concat(FULL() ? [["bottom5","🐻 Bottom 5"]] : []).map(([k, n]) => `<button data-beartab="${k}" class="${tab === k ? "on" : ""}">${n}</button>`).join("")}</div>`;
+  if(!b) return head + `<div class="empty">The bearish scan runs with the next scan.</div>`;
+  const note = b.bear_mode ? bearBanner() : `<div class="muted" style="font-size:12.5px;margin:4px 0 12px">Market weather ${b.weather ?? "—"}: not a bear market right now, so shorts are counter-trend. Keep them small and quick, or wait.</div>`;
+  if(tab === "weakest") return head + note + `<section class="card"><div class="list">${(b.weakest || []).slice(0, 40).map(x => `<div class="st"><span class="rk" style="color:var(--down)">#${x.rank}</span>
+      <div style="min-width:0"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${symLink(x.symbol, 14.5)}${starBtn(x.symbol)}<span class="muted" style="font-size:12px">${esc(x.sector || "")} · ${fmt(x.close)}</span></div>
+      <div class="sbar"><i style="width:${x.score}%;background:var(--down)"></i></div>
+      <div class="chips">${x.why.map(w => chip(w, "var(--down)")).join("")}${chip(`${pct(x.hi52)} from 52-week high`, "var(--muted)")}</div></div><span class="scr" style="color:var(--down)">${x.score}</span></div>`).join("")}</div>
+    <div class="muted" style="font-size:11.5px;margin-top:10px">Score 0–100: 3-month and 1-month return vs Nifty, closeness to the 52-week low, below the 200 DMA. The mirror of Strongest.</div></section>`;
+  if(tab === "bottom5" && FULL()) return head + note + `<div class="grid">${bottom5Card() || `<div class="empty">No short passes the Bottom 5 checks today.</div>`}</div>`;
+  const stage = UI.bearStage || "Ready";
+  const rows = (b.setups || []).filter(r => r.stage === stage && (!UI.bearSet || r.setup === UI.bearSet));
+  const sets = ["Bear Pullback","Breakdown","Bear Squeeze"];
+  return head + note + `<div class="filters">${["All"].concat(sets).map(k => `<button data-bearset="${k}" class="${(UI.bearSet || "All") === k ? "on" : ""}">${k}<i>${(b.setups || []).filter(r => k === "All" || r.setup === k).length}</i></button>`).join("")}</div>
+    <div class="filters">${["Ready","Triggered","Watch"].map(g => `<button data-bearstage="${g}" class="${stage === g ? "on" : ""}">${g}<i>${(b.setups || []).filter(r => r.stage === g && (!UI.bearSet || r.setup === UI.bearSet)).length}</i></button>`).join("")}</div>
+    <div class="muted" style="font-size:12px;margin:-2px 0 10px">Bear Pullback: in a downtrend, a rally back to the 20–50 EMA that turns down. Breakdown: sitting on a 55-day floor, or broke it on volume. Bear Squeeze: a squeeze firing downward. Grade A = volume and futures OI both agree.</div>
+    ${rows.length ? `<div class="cards">${rows.map(bearCard).join("")}</div>` : `<div class="empty">No ${esc(stage)} short setups${UI.bearSet ? " for " + esc(UI.bearSet) : ""}.</div>`}`;
+}
+
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
   const t = S().top5; if(!FULL() || !t || !(t.picks || []).length) return "";
@@ -1648,7 +1727,7 @@ function prefetch(){
   ("requestIdleCallback" in window) ? requestIdleCallback(go, {timeout:3000}) : setTimeout(go, 1500);
 }
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
-  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
+  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
 
 
@@ -2307,7 +2386,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2376,6 +2455,9 @@ document.addEventListener("click", e => {
   if(d.hits){ e.preventDefault(); hitsSheet(d.hits); return; }
   if(d.hitclose){ document.querySelector(".hitpop")?.remove(); return; }
   if(d.optall != null && b.dataset.optall !== undefined){ UI.optAll = d.optall === "1"; return rerender(); }
+  if(d.beartab){ UI.bearTab = d.beartab; return rerender(); }
+  if(d.bearset){ UI.bearSet = d.bearset === "All" ? null : d.bearset; return rerender(); }
+  if(d.bearstage){ UI.bearStage = d.bearstage; return rerender(); }
   if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
   if(d.hitearly){ UI.hitEarly = !UI.hitEarly; return rerender(); }
   if(d.hitgood){ UI.hitGood = !UI.hitGood; return rerender(); }
@@ -2427,6 +2509,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
     return;
   }
   getJSON("sectors.json").catch(() => null);
+  getJSON("bear.json").then(b => { if(b && b.bear_mode && route() === "today") rerender(); }).catch(() => null);
   if(FULL()) getJSON("options.json").then(() => { if(route() === "today" || route().startsWith("scanner")) rerender(); }).catch(() => null);
   render();
   setInterval(async () => { try{ await getJSON("site.json", true); await loadWatch(); if(route() === "today") rerender(); }catch(e){} }, 5*60*1000);
