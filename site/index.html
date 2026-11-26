@@ -1673,9 +1673,14 @@ const OSIG = {cover:["🟢 Call writers covering","var(--up)","Call OI falling j
   pbuy:["🔴 Puts being bought","var(--down)","Put OI and premiums rising under the price: hedging or bets on a fall."],
   bull:["Bullish bias","var(--up)","Overall chain reading Bullish or Mildly bullish."],
   bear:["Bearish bias","var(--down)","Overall chain reading Bearish or Mildly bearish."],
+  "b:Bullish":["Bullish","var(--up)","Chain score 3 or more: several bullish readings together."],
+  "b:Mildly bullish":["Mildly bullish","var(--up)","Chain score 1–2: leaning bullish, one or two readings in favour."],
+  "b:Neutral":["Neutral","var(--muted)","Chain score 0: readings cancel out."],
+  "b:Mildly bearish":["Mildly bearish","var(--down)","Chain score −1 to −2: leaning bearish."],
+  "b:Bearish":["Bearish","var(--down)","Chain score −3 or less: several bearish readings together."],
   pcrhi:["PCR 1.2+","var(--up)","Put-heavy chain: a supportive floor."],
   pcrlo:["PCR under 0.7","var(--down)","Call-heavy chain: the upside is crowded with sellers."]};
-const oMatch = (k, r) => k === "all" ? true : k === "both" ? r.sig.includes("cover") && r.sig.includes("pstrong")
+const oMatch = (k, r) => k === "all" ? true : k.startsWith("b:") ? r.bias === k.slice(2) : k === "both" ? r.sig.includes("cover") && r.sig.includes("pstrong")
   : k === "bull" ? r.score >= 1 : k === "bear" ? r.score <= -1 : k === "pcrhi" ? (r.pcr || 0) >= 1.2 : k === "pcrlo" ? r.pcr != null && r.pcr < 0.7 : r.sig.includes(k);
 async function pageOScreen(){
   const x = await getJSON("chain_screen.json").catch(() => null);
@@ -1683,9 +1688,11 @@ async function pageOScreen(){
   if(!x || !x.rows) return head + `<div class="empty">The first full chain scan runs in market hours (hourly from 10:45).</div>`;
   const f = UI.osig || "cover", all = x.rows;
   const strong = s => { const m = (S().mtf || []).find(r => r.s === s), h = hitsOf(s); return (m && m.M === "Impulse" && m.W === "Impulse") || (h && h.n >= 3); };
-  const rows = all.filter(r => oMatch(f, r) && (!UI.ostrong || strong(r.s))).sort((a, b) => f === "cwrite" || f === "pexit" || f === "pbuy" || f === "bear" || f === "pcrlo" ? a.score - b.score : b.score - a.score);
+  const rows = all.filter(r => oMatch(f, r) && (!UI.ostrong || strong(r.s))).sort((a, b) => ["cwrite","pexit","pbuy","bear","pcrlo","b:Mildly bearish","b:Bearish"].includes(f) ? a.score - b.score : b.score - a.score);
   const sigChip = k => OSIG[k] ? chip(OSIG[k][0].replace(/^🟢🟢 |^🟢 |^🔴 /, ""), OSIG[k][1]) : "";
-  return head + `<section class="card fade"><div class="filters">${Object.keys(OSIG).map(k => `<button data-osig="${k}" class="${f === k ? "on" : ""}" title="${esc(OSIG[k][2])}">${OSIG[k][0]}<i>${all.filter(r => oMatch(k, r)).length}</i></button>`).join("")}</div>
+  const btn = k => `<button data-osig="${esc(k)}" class="${f === k ? "on" : ""}" title="${esc(OSIG[k][2])}">${OSIG[k][0]}<i>${all.filter(r => oMatch(k, r)).length}</i></button>`;
+  return head + `<section class="card fade"><div class="filters">${Object.keys(OSIG).filter(k => !k.startsWith("b:")).map(k => `<button data-osig="${k}" class="${f === k ? "on" : ""}" title="${esc(OSIG[k][2])}">${OSIG[k][0]}<i>${all.filter(r => oMatch(k, r)).length}</i></button>`).join("")}</div>
+      <div class="filters" style="margin-top:6px"><span class="muted" style="font-size:12px;align-self:center">Bias:</span>${Object.keys(OSIG).filter(k => k.startsWith("b:")).map(btn).join("")}</div>
       <div class="filters" style="margin-top:6px"><button data-ostrong="1" class="${UI.ostrong ? "on" : ""}" title="Monthly + Weekly Impulse, or in 3+ scans">📈 Strong chart only</button></div>
       <div class="muted" style="font-size:12px;margin-top:8px"><b>${esc(OSIG[f][0])}</b>: ${esc(OSIG[f][2])} Tap a stock to open its full chain.</div></section>
     <section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div>
