@@ -217,7 +217,8 @@ def read_stock(s, df, nifty_chg):
             "gap": r1((op / pc - 1) * 100, 2), "hi": r1(hi, 2), "lo": r1(lo, 2), "pc": r1(pc, 2),
             "vwap": r1(vwap, 2), "above_vwap": vwap is not None and c > vwap, "reclaim": reclaim, "lose": lose,
             "orh": r1(orh, 2), "orl": r1(orl, 2), "orb": orb, "rvol": r1(rvol, 2), "pos": r1(pos, 2),
-            "sq": sq, "spark": [r1(x, 2) for x in t.Close.iloc[-40:].tolist()], "date": str(today), "_t": t, "_vw": vw_series}
+            "sq": sq, "spark": [r1(x, 2) for x in t.Close.iloc[-40:].tolist()], "date": str(today), "_t": t, "_vw": vw_series,
+            "tv": r1(float((tp * t.Volume).sum()) / 1e7, 1)}                 # traded value today, Rs crore (cash market, yfinance)
 
 
 def bars(x):
@@ -475,7 +476,8 @@ def main(force=False):
            "index": idx, "chains": chains, "board": board,
            "longs": longs, "shorts": shorts, "btst": bl, "stbt": bs,
            "prices": {x["s"]: x["c"] for x in rows},
-           "live": [[x["s"], x["c"], x["chg"], x["sec"]] for x in rows],
+           # live rows: symbol, price, % chg, sector, relative volume, futures OI % chg today, traded value Rs Cr
+           "live": [[x["s"], x["c"], x["chg"], x["sec"], x.get("rvol"), x.get("oi"), x.get("tv")] for x in rows],
            # per stock, for the alert watchlist: price, % chg, relative volume, OI % chg, above VWAP,
            # opening-range break (1 up, -1 down), 15-min squeeze fired up (1) / down (-1), day high, day low
            "watch": {x["s"]: [x["c"], x["chg"], x["rvol"], x["oi"], 1 if x.get("above_vwap") else 0, x["orb"],

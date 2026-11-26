@@ -448,6 +448,11 @@ async function api(req, env, url, user, ctx) {
   const p = url.pathname, admin = user.role === "admin";
   if (p === "/api/me") { const lv = logVisit(env, req, user).catch(() => null); if (ctx) ctx.waitUntil(lv); else await lv; return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user), open: await openAll(env) }); }
   if (p === "/api/chain" && req.method === "GET") return json(await getChain(env, url.searchParams.get("s"), url.searchParams.get("exp") || "", gh));
+  if (p === "/api/flow" && req.method === "GET") {         // money flow: latest live rows + today's snapshots
+    const live = env.USERS ? await env.USERS.get("live:latest", "json") : null;
+    const hist = live && live.session ? await env.USERS.get("flow:" + live.session, "json") : null;
+    return new Response(JSON.stringify({ live, hist: hist || [] }), { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
+  }
   if (p === "/api/live" && req.method === "GET") {           // today's prices for the dashboard (no levels)
     const v = env.USERS ? await env.USERS.get("live:latest") : null;
     return new Response(v || "{}", { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
@@ -536,6 +541,13 @@ export default {
         await env.USERS.put("intraday:latest", body, { expirationTtl: 60 * 60 * 24 * 5 });
         if (d.live) await env.USERS.put("live:latest", JSON.stringify({ at: d.at, session: d.session, rows: d.live,
           index: Object.fromEntries(Object.entries(d.index || {}).map(([k, x]) => [k, { c: x.c, chg: x.chg, ...((d.ixlive || {})[k] || {}) }])) }), { expirationTtl: 60 * 60 * 24 * 5 });
+        if (d.live && d.session) {                       // money-flow replay: one small snapshot per run, kept 3 days
+          const key = "flow:" + d.session, hist = (await env.USERS.get(key, "json")) || [];
+          const t = String(d.at || "").slice(11, 16);
+          if (!hist.length || hist[hist.length - 1].at !== t)
+            hist.push({ at: t, rows: d.live.map(r => [r[0], r[2], r[6] ?? null, r[5] ?? null]) });
+          await env.USERS.put(key, JSON.stringify(hist.slice(-40)), { expirationTtl: 60 * 60 * 24 * 3 });
+        }
         if (d.final && d.session) {                      // keep the day's last BTST / STBT list to check next morning
           await env.USERS.put("btst:" + d.session, JSON.stringify({ session: d.session, at: d.at,
             btst: (d.btst || []).map(x => ({ s: x.s, c: x.c, score: x.bl })), stbt: (d.stbt || []).map(x => ({ s: x.s, c: x.c, score: x.bs })) }),

@@ -517,6 +517,15 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .chaint tr.atm td{background:color-mix(in srgb,var(--accent) 9%,transparent)}.chaint tr.itmc td:nth-child(-n+4){background:color-mix(in srgb,var(--warn) 6%,transparent)}.chaint tr.itmp td:nth-child(n+6){background:color-mix(in srgb,var(--warn) 6%,transparent)}
 .chaint tr.spotl td{padding:2px 7px;font-size:11px;font-weight:700;color:var(--accent);border-top:2px solid var(--accent);background:transparent!important}
 .oib{display:block;height:4px;width:var(--w);background:var(--c);border-radius:3px;margin-top:3px;opacity:.7;max-width:100%}
+.flowgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start}
+.flowstage{position:relative;background:radial-gradient(ellipse at center,#151528 0%,#0b0b12 72%);border:1px solid #262636;border-radius:18px;overflow:hidden;padding:10px 12px 12px;color:#e6e6f0}
+.flowstage canvas{display:block;width:100%;aspect-ratio:1.45;cursor:default}
+.flowtop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:30px}.flowhint{margin-left:auto;font-size:11.5px;color:#9a9ab0}
+.flowlive{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#3ef0a0;background:rgba(62,240,160,.1);padding:4px 10px;border-radius:999px}
+.flowlive i{width:7px;height:7px;border-radius:50%;background:#3ef0a0;box-shadow:0 0 10px #3ef0a0;animation:flowp 1.2s infinite}@keyframes flowp{50%{opacity:.3}}
+.flowslide{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#9a9ab0;margin-top:6px}.flowslide input{flex:1;accent-color:#c6ff3d}
+.flowside{display:grid;gap:12px}.flowside .card{margin:0}.bar2{height:4px;border-radius:3px;margin:4px 0 0 auto;max-width:100%}
+@media (max-width:900px){.flowgrid{grid-template-columns:1fr}.flowstage canvas{aspect-ratio:1}}
 .bearban{border-left:4px solid var(--down);background:color-mix(in srgb,var(--down) 7%,var(--surface));font-size:13.5px}
 .optbox{margin:10px 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--up) 8%,transparent);border:1px solid color-mix(in srgb,var(--up) 25%,transparent)}
 .optk{font:800 16px/1.2 "JetBrains Mono",monospace;margin-bottom:8px}.optg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 10px}.optg small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.optg b{font-family:"JetBrains Mono",monospace;font-size:13.5px}
@@ -760,7 +769,7 @@ const PAGES = [
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
   ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]]],
-  ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
+  ["market","Market","market", [["market","Sectors"],["market-flow","⚡ Money flow"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
 const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-alerts","Alerts"],["admin-scorecard","Scorecard"]]]]
@@ -1270,6 +1279,7 @@ async function pageHoldings(){
 async function holdAdd(x){ const items = (HOLD.items || []).filter(i => i.s !== x.s); const old = (HOLD.items || []).find(i => i.s === x.s);
   items.push({...old, ...Object.fromEntries(Object.entries(x).filter(([, v]) => v !== "" && v != null)), added: (old && old.added) || new Date(Date.now() + 5.5*3600e3).toISOString().slice(0,10)});
   await holdSave(items); }
+document.addEventListener("change", e => { if(e.target && e.target.id === "flowr"){ const v = +e.target.value, mx = +e.target.max; UI.flowIdx = v >= mx ? null : v; clearTimeout(window.__flowT); window.__flowT = setTimeout(rerender, 120); } });
 document.addEventListener("submit", e => { if(e.target.id !== "hform") return; e.preventDefault();
   const v = id => document.getElementById(id).value.trim();
   const s = v("h-s").toUpperCase(); if(!s) return;
@@ -1734,6 +1744,122 @@ async function pageOScreen(){
         <td class="n">${r.max_pain != null ? fmt(r.max_pain, 0) : "—"}<div class="muted" style="font-size:11px">${r.max_pain ? pct((r.max_pain / r.spot - 1) * 100) : ""}</div></td>
         <td>${chaseCell(r.s)}</td></tr>`; }).join("")}</table></div>` : `<div class="empty">No stock shows this right now.</div>`}
     <div class="muted" style="font-size:11.5px;margin-top:8px">Nearest expiry. "Calls above" = % change of call OI over the 5 strikes above the price (negative = writers covering). "Puts below" = % change of put OI over the 5 strikes under the price (positive = put writing). NSE data, read hourly in market hours and once after the close.</div></section>`;
+}
+
+/* ============================================================ Money flow: live sector and stock flow (every 15 min, animation always on) */
+let FLOW = null, FLOW_RAF = null;
+async function flowData(){
+  if(FLOW && Date.now() - FLOW._t < 60e3) return FLOW;
+  const r = await fetch("/api/flow?t=" + Math.floor(Date.now() / 60e3), {cache:"no-store"}).then(r => r.json()).catch(() => null);
+  FLOW = r ? {...r, _t: Date.now()} : null; return FLOW;
+}
+/* rows: [sym, chg, tv, oi, sec]. Returns nodes for the sector view or one sector's stocks. */
+function flowNodes(rows, sector){
+  const val = r => (r[2] && r[2] > 0 ? r[2] : 1);                       // traded value (Rs Cr), or 1 if unknown
+  const push = r => r[1] * (r[3] != null && Math.abs(r[3]) >= 2 && Math.sign(r[3]) === 1 ? 1.3 : 1);   // fresh OI adds weight
+  if(!sector){
+    const by = {};
+    for(const r of rows){ const k = r[4] || "Others"; if(k === "Unclassified" || k === "Others") continue; (by[k] = by[k] || []).push(r); }
+    const all = rows.reduce((a, r) => (a.v += val(r), a.s += r[1] * val(r), a), {v:0, s:0}), mkt = all.v ? all.s / all.v : 0;
+    return {mkt, nodes: Object.entries(by).filter(([, l]) => l.length >= 2).map(([k, l]) => { const v = l.reduce((a, r) => a + val(r), 0);
+      const chg = l.reduce((a, r) => a + push(r) * val(r), 0) / v; return {id:k, name:k, chg, rel: chg - mkt, size: v, n: l.length,
+        money: l.reduce((a, r) => a + r[1] / 100 * val(r), 0)}; }).sort((a, b) => b.rel - a.rel)};
+  }
+  const l = rows.filter(r => r[4] === sector).sort((a, b) => val(b) - val(a)).slice(0, 16);
+  const v = l.reduce((a, r) => a + val(r), 0), mkt = v ? l.reduce((a, r) => a + r[1] * val(r), 0) / v : 0;
+  return {mkt, nodes: l.map(r => ({id:r[0], name:r[0], chg:r[1], rel: push(r) - mkt, size: val(r), oi: r[3], tv: r[2], money: r[1] / 100 * val(r)}))
+    .sort((a, b) => b.rel - a.rel)};
+}
+function flowLinks(nodes){
+  const ins = nodes.filter(n => n.rel > 0.15), outs = nodes.filter(n => n.rel < -0.15), L = [];
+  for(const o of outs) for(const i of ins){ const w = (-o.rel) * i.rel * Math.sqrt(Math.min(o.size, i.size) + 1); if(w > 0) L.push({o, i, w}); }
+  L.sort((a, b) => b.w - a.w); const top = L.slice(0, 18), mx = top.length ? top[0].w : 1;
+  top.forEach(f => f.k = f.w / mx); return top;
+}
+function flowAnimate(state){
+  cancelAnimationFrame(FLOW_RAF);
+  const cv = document.getElementById("flowc");
+  if(!cv || !cv.getBoundingClientRect().width){ state.tries = (state.tries || 0) + 1; if(state.tries < 60) FLOW_RAF = requestAnimationFrame(() => flowAnimate(state)); return; }
+  const g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
+  let W, H;
+  const size = () => { const r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  size();
+  const {nodes, links, mkt, label} = state;
+  const mxs = Math.max(1, ...nodes.map(n => n.size));
+  nodes.forEach((n, i) => n.a = -Math.PI / 2 + i * 2 * Math.PI / nodes.length);
+  const R = () => Math.min(W, H) * (W < 520 ? 0.25 : 0.37);
+  const SHORTN = {"Consumer Durables":"Cons. Durables","Construction Materials":"Cons. Materials","Capital Goods":"Cap. Goods","Metals & Mining":"Metals","Consumer Services":"Cons. Svcs"};
+  const nm = n => W < 520 ? (SHORTN[n.name] || n.name) : n.name;
+  const pos = n => [W / 2 + Math.cos(n.a) * R(), H / 2 + Math.sin(n.a) * R()];
+  const rad = n => (W < 520 ? 6 : 9) + Math.sqrt(n.size / mxs) * (W < 520 ? 11 : 22);
+  const parts = []; links.forEach(f => { for(let j = 0; j < Math.max(2, Math.round(f.k * 14)); j++) parts.push({f, t: Math.random(), sp: 0.002 + Math.random() * 0.003}); });
+  const col = v => v > 0.15 ? [62,240,160] : v < -0.15 ? [255,92,108] : [154,154,176];
+  const ctrl = (a, b) => [W / 2 + (a[0] + b[0] - W) / 2 * 0.25, H / 2 + (a[1] + b[1] - H) / 2 * 0.25];
+  state.hit = (x, y) => nodes.find(n => { const [px, py] = pos(n); return Math.hypot(px - x, py - y) <= rad(n) + 6; });
+  const frame = () => {
+    if(!document.getElementById("flowc")){ cancelAnimationFrame(FLOW_RAF); return; }
+    const r = cv.getBoundingClientRect(); if(Math.abs(r.width - W) > 2) size();
+    g.clearRect(0, 0, W, H);
+    for(const f of links){ const a = pos(f.o), b = pos(f.i), c = ctrl(a, b), gr = g.createLinearGradient(a[0], a[1], b[0], b[1]);
+      gr.addColorStop(0, "rgba(255,92,108,.16)"); gr.addColorStop(1, "rgba(62,240,160,.2)");
+      g.strokeStyle = gr; g.lineWidth = 0.8 + f.k * 5; g.beginPath(); g.moveTo(a[0], a[1]); g.quadraticCurveTo(c[0], c[1], b[0], b[1]); g.stroke(); }
+    g.globalCompositeOperation = "lighter";
+    for(const p of parts){ p.t += p.sp; if(p.t > 1) p.t = 0; const a = pos(p.f.o), b = pos(p.f.i), c = ctrl(a, b), u = 1 - p.t;
+      const x = u * u * a[0] + 2 * u * p.t * c[0] + p.t * p.t * b[0], y = u * u * a[1] + 2 * u * p.t * c[1] + p.t * p.t * b[1];
+      const m = p.t, rr = 255 * (1 - m) + 62 * m | 0, gg = 92 * (1 - m) + 240 * m | 0, bb = 108 * (1 - m) + 160 * m | 0;
+      const gl = g.createRadialGradient(x, y, 0, x, y, 8); gl.addColorStop(0, `rgba(${rr},${gg},${bb},.95)`); gl.addColorStop(1, `rgba(${rr},${gg},${bb},0)`);
+      g.fillStyle = gl; g.beginPath(); g.arc(x, y, 8, 0, 7); g.fill(); g.fillStyle = "#fff"; g.beginPath(); g.arc(x, y, 1.4, 0, 7); g.fill(); }
+    g.globalCompositeOperation = "source-over";
+    const tm = performance.now() / 1000;
+    for(const n of nodes){ const [x, y] = pos(n), r0 = rad(n), c = col(n.rel), pl = 1 + 0.06 * Math.sin(tm * 3 + n.a * 4);
+      const halo = g.createRadialGradient(x, y, r0 * .6, x, y, r0 * 2.2 * pl); halo.addColorStop(0, `rgba(${c},.32)`); halo.addColorStop(1, `rgba(${c},0)`);
+      g.fillStyle = halo; g.beginPath(); g.arc(x, y, r0 * 2.2 * pl, 0, 7); g.fill();
+      g.fillStyle = "#14141d"; g.strokeStyle = `rgba(${c},.95)`; g.lineWidth = 2; g.beginPath(); g.arc(x, y, r0, 0, 7); g.fill(); g.stroke();
+      g.fillStyle = `rgb(${c})`; g.font = `700 ${W < 520 ? 9 : 11}px Inter,system-ui`; g.textAlign = "center"; g.fillText((n.chg > 0 ? "+" : "") + n.chg.toFixed(1) + "%", x, y + 4);
+      const lr = R() + r0 + (W < 520 ? 6 : 16), lx = W / 2 + Math.cos(n.a) * lr, ly = H / 2 + Math.sin(n.a) * lr;
+      g.fillStyle = "#e6e6f0"; g.font = `600 ${W < 520 ? 9.5 : 12}px Inter,system-ui`; g.textAlign = Math.cos(n.a) > .2 ? "left" : Math.cos(n.a) < -.2 ? "right" : "center"; g.fillText(nm(n), lx, ly + 4); }
+    g.fillStyle = "rgba(198,255,61,.9)"; g.font = "700 13px Inter"; g.textAlign = "center"; g.fillText(label, W / 2, H / 2 - 4);
+    g.fillStyle = "#9a9ab0"; g.font = "12px Inter"; g.fillText(`${mkt >= 0 ? "+" : ""}${mkt.toFixed(2)}% (value-weighted)`, W / 2, H / 2 + 14);
+    FLOW_RAF = requestAnimationFrame(frame);
+  };
+  frame();
+  cv.onclick = e => { const r = cv.getBoundingClientRect(), n = state.hit(e.clientX - r.left, e.clientY - r.top); if(!n) return;
+    if(UI.flowSec) openSheet(n.id); else { UI.flowSec = n.id; rerender(); } };
+  cv.onmousemove = e => { const r = cv.getBoundingClientRect(); cv.style.cursor = state.hit(e.clientX - r.left, e.clientY - r.top) ? "pointer" : "default"; };
+}
+async function pageFlow(){
+  const d = await flowData();
+  const head = pageHead("⚡ Money flow", "Where money is moving today, between sectors and inside each sector") + subnav();
+  const live = d && d.live, rows0 = (live && live.rows) || [];
+  if(!rows0.length) return head + `<div class="empty">Money flow fills in during market hours (every 15 minutes from 9:15).</div>`;
+  const secOf = Object.fromEntries(rows0.map(r => [r[0], r[3]]));
+  const hist = (d.hist || []).filter(h => h.rows && h.rows.length);
+  const idx = UI.flowIdx != null && UI.flowIdx < hist.length ? UI.flowIdx : null;
+  const rows = idx != null ? hist[idx].rows.map(r => [r[0], r[1], r[2], r[3], secOf[r[0]]]) : rows0.map(r => [r[0], r[2], r[6], r[5], r[3]]);
+  const at = idx != null ? hist[idx].at : String(live.at || "").slice(11, 16);
+  const today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10), isToday = live.session === today;
+  const sec = UI.flowSec && rows.some(r => r[4] === UI.flowSec) ? UI.flowSec : null;
+  const {nodes, mkt} = flowNodes(rows, sec), links = flowLinks(nodes);
+  setTimeout(() => flowAnimate({nodes, links, mkt, label: sec ? sec.toUpperCase() : "MARKET"}), 0);
+  const ins = nodes.filter(n => n.rel > 0.15).slice(0, 6), outs = nodes.filter(n => n.rel < -0.15).slice(-6).reverse();
+  const money = sec ? [...nodes].sort((a, b) => b.money - a.money) : null;
+  const li = (n, c) => `<div class="li" ${sec ? `data-fsym="${esc(n.id)}"` : `data-fsec="${esc(n.id)}"`} style="cursor:pointer"><div style="min-width:0"><b>${esc(n.name)}</b>${sec && n.tv ? `<div class="muted" style="font-size:11.5px">₹${fmt(n.tv, 0)} Cr traded${n.oi != null ? ` · OI ${pct(n.oi, 1)}` : ""}</div>` : sec ? "" : `<div class="muted" style="font-size:11.5px">${n.n} stocks · ₹${fmt(n.size, 0)} Cr traded</div>`}</div>
+    <div class="r"><b class="${c}">${n.chg > 0 ? "+" : ""}${n.chg.toFixed(2)}%</b><div class="bar2" style="width:${Math.min(100, Math.abs(n.rel) * 30)}%;background:var(--${c === "up" ? "up" : "down"})"></div></div></div>`;
+  const nextAt = (() => { const [h, m] = at.split(":").map(Number); const t = h * 60 + m + 15; return t > 930 ? "tomorrow 9:15" : `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`; })();
+  return head + `<div class="flowgrid">
+    <section class="flowstage"><div class="flowtop">${sec ? `<button class="btn2" data-fback="1" style="padding:5px 10px;font-size:12px">← All sectors</button>` : ""}
+        <span class="flowlive"><i></i>${isToday && idx == null ? "LIVE" : idx != null ? "REPLAY" : "LAST SESSION"} ${esc(at)}</span>
+        <span class="flowhint">${sec ? "Tap a stock for its panel" : "Tap a sector to see its stocks"}</span></div>
+      <canvas id="flowc" aria-label="Money flow animation"></canvas>
+      ${hist.length > 1 ? `<div class="flowslide"><span>${esc(hist[0].at)}</span><input type="range" id="flowr" min="0" max="${hist.length - 1}" value="${idx ?? hist.length - 1}" aria-label="Replay the day"><span>${esc(hist[hist.length - 1].at)}</span>${idx != null ? `<button class="btn2" data-flive="1" style="padding:3px 9px;font-size:11.5px">Back to live</button>` : ""}</div>` : ""}</section>
+    <div class="flowside">
+      ${sec ? `<section class="card"><div class="ct"><h2>Most money in<em>${esc(sec)}</em></h2></div><div class="list">${money.filter(n => n.money > 0).slice(0, 6).map(n => li(n, "up")).join("") || `<div class="muted">None right now.</div>`}</div></section>
+        <section class="card"><div class="ct"><h2>Most money out<em>${esc(sec)}</em></h2></div><div class="list">${money.filter(n => n.money < 0).reverse().slice(0, 6).map(n => li(n, "down")).join("") || `<div class="muted">None right now.</div>`}</div></section>`
+      : `<section class="card"><div class="ct"><h2>Money coming in</h2></div><div class="list">${ins.map(n => li(n, "up")).join("") || `<div class="muted">No clear inflow.</div>`}</div></section>
+        <section class="card"><div class="ct"><h2>Money going out</h2></div><div class="list">${outs.map(n => li(n, "down")).join("") || `<div class="muted">No clear outflow.</div>`}</div></section>`}
+      <section class="card"><div class="ct"><h2>Biggest flows now</h2></div><div class="list">${links.slice(0, 5).map(f => `<div class="li"><span><span class="down">${esc(f.o.name)}</span> → <span class="up">${esc(f.i.name)}</span></span></div>`).join("") || `<div class="muted">Calm: no strong flows.</div>`}</div></section>
+    </div></div>
+    <div class="muted" style="font-size:11.5px;margin-top:10px">Updated ${esc(at)} IST${isToday ? ` · next about ${nextAt}` : ""}. Circle size = traded value today; colour = moving better (green) or worse (red) than the ${sec ? "sector" : "market"} average, weighted by traded value, with extra weight where futures OI is building. The flow lines are a reading of where money is leaving and arriving, not an exchange record of money moving from one stock to another. Prices a few minutes late.</div>`;
 }
 
 /* ============================================================ Top 5 positional (full access only) */
@@ -2583,7 +2709,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2632,6 +2758,8 @@ async function fullChange(body){
 
 document.addEventListener("click", e => {
   if(e.target.classList && e.target.classList.contains("hitpop")){ if(e.target.classList.contains("sheetp")) closeSheet(); else e.target.remove(); return; }
+  const fl = e.target.closest && e.target.closest("[data-fsec],[data-fsym]");
+  if(fl){ if(fl.dataset.fsym) openSheet(fl.dataset.fsym); else { UI.flowSec = fl.dataset.fsec; rerender(); } return; }
   const oa = e.target.closest("[data-openall]");
   if(oa){ fetch("/api/admin/open", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({on: oa.dataset.openall === "1"})})
     .then(r => r.json()).then(j => { USER.open = !!j.on; toast(j.on ? "All features are open to everyone" : "Back to the normal member view"); rerender(); }).catch(() => toast("Could not reach the server.")); return; }
@@ -2665,6 +2793,8 @@ document.addEventListener("click", e => {
   if(d.beartab){ UI.bearTab = d.beartab; return rerender(); }
   if(d.bearset){ UI.bearSet = d.bearset === "All" ? null : d.bearset; return rerender(); }
   if(d.bearstage){ UI.bearStage = d.bearstage; return rerender(); }
+  if(d.fback){ UI.flowSec = null; return rerender(); }
+  if(d.flive){ UI.flowIdx = null; return rerender(); }
   if(d.osig){ UI.osig = d.osig; return rerender(); }
   if(d.ostrong){ UI.ostrong = !UI.ostrong; return rerender(); }
   if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
