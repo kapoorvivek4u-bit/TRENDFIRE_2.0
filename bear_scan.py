@@ -344,7 +344,8 @@ def main():
     weather = (site.get("strength") or {}).get("score")
     turn = (site.get("market") or {}).get("turn")
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"), "asof": str(max(d.index[-1] for d in daily.values()).date()) if daily else None,
-           "bear_mode": bool((weather is not None and weather < 40) or turn in ("Falling", "Still falling")), "weather": weather, "turn": turn,
+           "bear_mode": bool(weather is not None and (weather < 40 or (weather < 50 and turn in ("Falling", "Still falling")))),
+           "weather": weather, "turn": turn,
            "setups": rows, "counts": {st: sum(1 for r in rows if r["stage"] == st) for st in ("Ready", "Triggered", "Watch")},
            "weakest": weak[:60], "bottom5": {"picks": b5, "considered": considered}}
     with open(os.path.join(DATA, "bear.json"), "w") as f:
