@@ -149,7 +149,7 @@ def delivery_absorption(dl, universe, deal_syms, fo_syms):
 
 # ------------------------------------------------------------------ 2. RS lead
 def rs_lead(daily, nifty, fo_syms):
-    out = []
+    out, stats = [], {"stocks": 0, "rs_hi": 0}
     n = nifty["Close"].dropna()
     for s, df in daily.items():
         c = df["Close"].dropna()
@@ -158,13 +158,15 @@ def rs_lead(daily, nifty, fo_syms):
         j = c.index.intersection(n.index)
         if len(j) < 200:
             continue
+        stats["stocks"] += 1
         cc, nn = c.loc[j].iloc[-250:], n.loc[j].iloc[-250:]
         rs = cc / nn
         rs_hi = rs.max()
         px_hi = cc.max()
-        new_hi_days = int((rs.iloc[-5:] >= rs.iloc[:-5].max() * 0.999).sum())     # RS at a new high in the last 5 days
+        new_hi_days = int((rs.iloc[-10:] >= rs.iloc[:-10].max() * 0.999).sum())   # RS at a new high in the last 10 days
         below = (cc.iloc[-1] / px_hi - 1) * 100
-        if new_hi_days == 0 or rs.iloc[-1] < rs_hi * 0.99 or below > -4:
+        stats["rs_hi"] += int(new_hi_days > 0)
+        if new_hi_days == 0 or rs.iloc[-1] < rs_hi * 0.98 or below > -3:
             continue
         nifty_dd = (nn.iloc[-1] / nn.max() - 1) * 100
         r3 = (cc.iloc[-1] / cc.iloc[-63] - 1) * 100 if len(cc) > 63 else None
@@ -175,6 +177,7 @@ def rs_lead(daily, nifty, fo_syms):
         out.append({"s": s, "c": r1(cc.iloc[-1], 2), "below": r1(below), "rs_days": new_hi_days,
                     "r3": r1(r3), "n3": r1(n3), "nifty_dd": r1(nifty_dd), "a200": bool(cc.iloc[-1] > sma200),
                     "spark": [r1(x, 4) for x in (rs.iloc[-60:] / rs.iloc[-60]).tolist()], "fo": s in fo_syms, "score": r1(score)})
+    print(f"rs lead: {stats['stocks']} stocks with a year of data, {stats['rs_hi']} with RS at a 52-week high, {len(out)} also under their price high")
     return sorted(out, key=lambda x: -x["score"])[:40]
 
 
@@ -360,7 +363,7 @@ def main():
 
     res = {"generated_ist": now.strftime("%Y-%m-%d %H:%M"), "deliv_asof": str(dl["date"].max().date()),
            "delivery": deliv, "rs_lead": rs, "squeeze_iv": sq, "expiry": ex,
-           "nifty_dd": rs[0]["nifty_dd"] if rs else None}
+           "nifty_dd": r1((nifty["Close"].iloc[-1] / nifty["Close"].iloc[-250:].max() - 1) * 100)}
     with open(os.path.join(DATA, "experimental.json"), "w") as f:
         json.dump(res, f, separators=(",", ":"), allow_nan=False, default=str)
     log_picks(res, now)
