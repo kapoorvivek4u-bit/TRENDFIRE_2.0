@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-25 19:45",
- "oi_asof": "2026-11-25",
+ "generated_ist": "2026-11-26 19:45",
+ "oi_asof": "2026-11-26",
  "stocks": 256,
  "market": {
   "weekly_bull_pct": 23,
@@ -8,58 +8,41 @@
   "vix": null,
   "regime": "Weak",
   "daily_bull_hist": [
-   71,
    72,
    74,
+   76,
    75,
-   74,
+   73,
    73
   ],
   "nifty": {
    "state": "Topping",
-   "mom": 1776.1
+   "mom": 1725.9
   },
   "turn": "No clear turn"
  },
  "broke": [],
  "setting": [
   {
-   "symbol": "SANSERA",
-   "close": 4708.5,
+   "symbol": "PTCIL",
+   "close": 24875.0,
    "trend": "With trend",
    "setup": "Base Breakout",
    "states": {
     "M": "Impulse",
-    "W": "Impulse",
-    "D": "Topping"
-   },
-   "stage": "Ready",
-   "score": 80.8,
-   "grade": "A",
-   "trigger": 4849.9,
-   "stop": null,
-   "detail": "2.9% below the breakout level \u00b7 Base 14% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 98 \u00b7 Delivery 51% vs 48% before"
-  },
-  {
-   "symbol": "CYIENT",
-   "close": 1151.2,
-   "trend": "Early turn",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Bottoming",
     "W": "Topping",
     "D": "Bottoming"
    },
    "stage": "Ready",
-   "score": 78.2,
+   "score": 83.2,
    "grade": "A",
-   "trigger": 1186.8,
+   "trigger": 25415.0,
    "stop": null,
-   "detail": "3.0% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 93 \u00b7 Delivery 45% vs 38% before"
+   "detail": "2.1% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 96 \u00b7 Delivery 43% vs 39% before"
   },
   {
    "symbol": "GLAND",
-   "close": 3348.4,
+   "close": 3370.8,
    "trend": "With trend",
    "setup": "Base Breakout",
    "states": {
@@ -68,117 +51,32 @@
     "D": "Topping"
    },
    "stage": "Ready",
-   "score": 71.2,
+   "score": 77.6,
    "grade": "A",
    "trigger": 3429.0,
    "stop": null,
-   "detail": "2.4% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.6x usual \u00b7 RS 95 \u00b7 Delivery 54% vs 55% before"
+   "detail": "1.7% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 0.6x usual \u00b7 RS 96 \u00b7 Delivery 54% vs 55% before"
   },
   {
-   "symbol": "LGEINDIA",
-   "close": 1818.4,
-   "trend": "",
+   "symbol": "LTTS",
+   "close": 4245.2,
+   "trend": "Early turn",
    "setup": "Base Breakout",
    "states": {
-    "M": "No data",
+    "M": "Bottoming",
     "W": "Impulse",
-    "D": "Impulse"
+    "D": "Bearish"
    },
    "stage": "Ready",
-   "score": 65.9,
-   "grade": "B",
-   "trigger": 1836.0,
+   "score": 75.5,
+   "grade": "A",
+   "trigger": 4316.9,
    "stop": null,
-   "detail": "1.0% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 1.4x usual \u00b7 RS 84 \u00b7 Delivery 63% vs 53% before"
+   "detail": "1.7% below the breakout level \u00b7 Base 7% deep \u00b7 Volume in base 0.3x usual \u00b7 RS 87 \u00b7 Delivery 40% vs 35% before"
   },
   {
-   "symbol": "WELSPUNLIV",
-   "close": 276.57,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Impulse",
-    "D": "Impulse"
-   },
-   "stage": "Ready",
-   "score": 62.2,
-   "grade": "B",
-   "trigger": 278.99,
-   "stop": null,
-   "detail": "0.9% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 100 \u00b7 Delivery 27% vs 31% before"
-  },
-  {
-   "symbol": "PVRINOX",
-   "close": 1709.3,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Bullish",
-    "W": "Impulse",
-    "D": "Topping"
-   },
-   "stage": "Ready",
-   "score": 61.0,
-   "grade": "B",
-   "trigger": 1747.0,
-   "stop": null,
-   "detail": "2.2% below the breakout level \u00b7 Base 14% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 99 \u00b7 Delivery 49% vs 49% before"
-  },
-  {
-   "symbol": "CEMPRO",
-   "close": 1414.7,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Bottoming",
-    "D": "Topping"
-   },
-   "stage": "Ready",
-   "score": 60.5,
-   "grade": "B",
-   "trigger": 1457.2,
-   "stop": null,
-   "detail": "2.9% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 97 \u00b7 Delivery 50% vs 48% before"
-  },
-  {
-   "symbol": "GRAPHITE",
-   "close": 794.45,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Bullish"
-   },
-   "stage": "Ready",
-   "score": 56.3,
-   "grade": "B",
-   "trigger": 807.7,
-   "stop": null,
-   "detail": "1.6% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 75 \u00b7 Delivery 44% vs 38% before"
-  },
-  {
-   "symbol": "LALPATHLAB",
-   "close": 2028.3,
-   "trend": "With trend",
-   "setup": "Base Breakout",
-   "states": {
-    "M": "Impulse",
-    "W": "Topping",
-    "D": "Topping"
-   },
-   "stage": "Ready",
-   "score": 52.4,
-   "grade": "C",
-   "trigger": 2079.0,
-   "stop": null,
-   "detail": "2.4% below the breakout level \u00b7 Base 10% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 82 \u00b7 Delivery 58% vs 58% before"
-  },
-  {
-   "symbol": "ITCHOTELS",
-   "close": 186.5,
+   "symbol": "JSWINFRA",
+   "close": 365.65,
    "trend": "",
    "setup": "Base Breakout",
    "states": {
@@ -187,11 +85,147 @@
     "D": "Impulse"
    },
    "stage": "Ready",
-   "score": 51.3,
+   "score": 61.6,
+   "grade": "B",
+   "trigger": 368.0,
+   "stop": null,
+   "detail": "0.6% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 88 \u00b7 Delivery 55% vs 54% before"
+  },
+  {
+   "symbol": "LALPATHLAB",
+   "close": 2037.9,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 60.8,
+   "grade": "B",
+   "trigger": 2079.0,
+   "stop": null,
+   "detail": "2.0% below the breakout level \u00b7 Base 9% deep \u00b7 Volume in base 0.7x usual \u00b7 RS 84 \u00b7 Delivery 58% vs 58% before"
+  },
+  {
+   "symbol": "WELSPUNLIV",
+   "close": 280.35,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 59.5,
+   "grade": "B",
+   "trigger": 284.5,
+   "stop": null,
+   "detail": "1.5% below the breakout level \u00b7 Base 16% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 100 \u00b7 Delivery 26% vs 32% before"
+  },
+  {
+   "symbol": "ANTHEM",
+   "close": 975.5,
+   "trend": "",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "No data",
+    "W": "Impulse",
+    "D": "Bullish"
+   },
+   "stage": "Ready",
+   "score": 57.0,
+   "grade": "B",
+   "trigger": 989.1,
+   "stop": null,
+   "detail": "1.4% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.6x usual \u00b7 RS 86 \u00b7 Delivery 54% vs 53% before"
+  },
+  {
+   "symbol": "GRAPHITE",
+   "close": 791.75,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Topping",
+    "D": "Bullish"
+   },
+   "stage": "Ready",
+   "score": 54.7,
+   "grade": "C",
+   "trigger": 807.7,
+   "stop": null,
+   "detail": "2.0% below the breakout level \u00b7 Base 12% deep \u00b7 Volume in base 0.5x usual \u00b7 RS 74 \u00b7 Delivery 42% vs 39% before"
+  },
+  {
+   "symbol": "ITCHOTELS",
+   "close": 186.1,
+   "trend": "",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "No data",
+    "W": "Bullish",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 50.8,
    "grade": "C",
    "trigger": 190.19,
    "stop": null,
-   "detail": "1.9% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.5x usual \u00b7 RS 83 \u00b7 Delivery 55% vs 51% before"
+   "detail": "2.2% below the breakout level \u00b7 Base 11% deep \u00b7 Volume in base 1.5x usual \u00b7 RS 83 \u00b7 Delivery 55% vs 51% before"
+  },
+  {
+   "symbol": "CRAFTSMAN",
+   "close": 11860.0,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Impulse"
+   },
+   "stage": "Ready",
+   "score": 50.3,
+   "grade": "C",
+   "trigger": 12210.0,
+   "stop": null,
+   "detail": "2.9% below the breakout level \u00b7 Base 17% deep \u00b7 Volume in base 0.8x usual \u00b7 RS 90 \u00b7 Delivery 49% vs 50% before"
+  },
+  {
+   "symbol": "CEMPRO",
+   "close": 1425.0,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Bottoming",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 48.2,
+   "grade": "C",
+   "trigger": 1457.2,
+   "stop": null,
+   "detail": "2.2% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 0.9x usual \u00b7 RS 97 \u00b7 Delivery 49% vs 48% before"
+  },
+  {
+   "symbol": "RKFORGE",
+   "close": 787.85,
+   "trend": "With trend",
+   "setup": "Base Breakout",
+   "states": {
+    "M": "Impulse",
+    "W": "Impulse",
+    "D": "Topping"
+   },
+   "stage": "Ready",
+   "score": 47.6,
+   "grade": "C",
+   "trigger": 804.0,
+   "stop": null,
+   "detail": "2.0% below the breakout level \u00b7 Base 15% deep \u00b7 Volume in base 1.0x usual \u00b7 RS 89 \u00b7 Delivery 48% vs 49% before"
   }
  ],
  "notes": []
