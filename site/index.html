@@ -759,7 +759,7 @@ const PAGES = [
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
-  ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"]]],
+  ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"],["lab-trap","Trapped shorts"]]],
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
@@ -1334,7 +1334,7 @@ document.addEventListener("submit", e => {
 });
 
 /* ============================================================ VK Experimentals (lab scanners) */
-const LAB_TABS = [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"]];
+const LAB_TABS = [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"],["lab-trap","Trapped shorts"]];
 const LAB_INFO = {
   lab: {t:"Chup-chap kharidari", sub:"Delivery absorption: big money buying quietly",
     how:"Price stayed flat (−1% to +1.5%) while the value of shares taken into delivery was 2× or more its 20-day average and delivery % was 55 or higher. Funds that buy in size avoid pushing the price, so the footprint shows up in delivery before it shows up in price.",
@@ -1345,6 +1345,9 @@ const LAB_INFO = {
   "lab-iv": {t:"Squeeze + cheap volatility", sub:"Coiled price and cheap options together",
     how:"Daily squeeze ON (Bollinger Bands inside Keltner Channels) for 5+ days and 20-day historical volatility (HV) in the bottom 25% of its 1-year range. Weekly not bearish. ATM option IV is saved every day for these stocks; after 40 days of history the IV rank is shown and used.",
     use:"Option buyers: premiums are cheap when volatility is low, so a breakout lifts them more. Wait for the squeeze to fire (momentum turning, price out of the range). Futures/cash traders: same trigger as Squeeze Break."},
+  "lab-trap": {t:"Trapped shorts in an uptrend", sub:"Shorts built into a dip while the big trend is still up",
+    how:"A pullback setup graded ! Warning: futures OI rose while the price dipped, so traders sold short into the dip. But the Monthly trend is still Impulse/Bullish, the Weekly is not bearish, and VK says Buy now or Almost ready. If the dip ends, those shorts have to buy back, which can make a sharp move. Found from MCX: listed this way on 25 Nov, up about 8% on 26 Nov.",
+    use:"Wait for the turn: the setup moving to Ready/Triggered or the Daily flipping to Impulse. Prefer VK Buy now, 🟢 Good entry zone and a bullish option chain. Stop under the pullback low: if the shorts are right, the fall continues. Updated every hourly scan."},
   "lab-expiry": {t:"Expiry short squeeze", sub:"Trapped shorts near the monthly expiry",
     how:"Earlier in this series futures OI rose 8%+ while price fell (shorts built). In the last 3 sessions price is rising and above its 20 EMA, near-month OI is falling (shorts closing), and the futures premium over spot is improving. Rollover = next-month share of OI: low rollover means shorts are closing, not carrying over.",
     use:"Only meaningful in the last 5 sessions before the monthly expiry. Short, sharp trades: enter on strength, tight stop under the day's low, exit into expiry day."}
@@ -1357,7 +1360,7 @@ async function pageLab(){
     <section class="card fade labinfo"><div class="ct"><h2>${esc(info.t)}<em>${esc(info.sub)}</em></h2></div><span class="chip" style="--c:var(--warn);margin:-4px 0 8px">🧪 Experimental · not tested yet</span>
       <div class="lab2"><div><div class="lbl">How it works</div><p>${esc(info.how)}</p></div><div><div class="lbl">How to use it</div><p>${esc(info.use)}</p></div></div>
       <div class="muted" style="font-size:11.5px">Every evening's top 10 are logged, so after a few weeks we can see if this scanner actually works. Runs at 8:30 pm on trading days.</div></section>`;
-  if(!x) return head + `<div class="empty" style="margin-top:12px">The first run arrives after tonight's 8:30 pm scan.</div>`;
+  if(!x && key !== "lab-trap") return head + `<div class="empty" style="margin-top:12px">The first run arrives after tonight's 8:30 pm scan.</div>`;
   const fo = r => r.fo === false ? chip("Cash", "var(--muted)") : chip("F&O", "var(--info)");
   const table = (cols, rows, empty) => rows.length ? `<section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div><div class="tw"><table class="t labt"><tr>${cols.map(c => `<th class="${c[2] || ""}">${c[0]}</th>`).join("")}</tr>
     ${rows.map(row => `<tr>${cols.map(c => `<td class="${c[2] || ""}">${c[1](row)}</td>`).join("")}</tr>`).join("")}</table></div></section>`
@@ -1378,6 +1381,16 @@ async function pageLab(){
       ["RS new high", r => `${r.rs_days} of 10 days`, "n"], ["3 months", r => `${pct(r.r3)} <span class="muted">vs Nifty ${pct(r.n3)}</span>`, "n"],
       ["200 DMA", r => r.a200 ? chip("Above", "var(--up)") : chip("Below", "var(--down)")], ["RS line, 3 months", r => spark(r.spark)], ["Chase", r => chaseCell(r.s)]],
     x.rs_lead || [], "No stock has its RS line at a 52-week high right now.") + `<div class="muted" style="font-size:11.5px;margin-top:8px"><b>RS leads price</b> = the real signal (price still 3%+ under its high). <b>Price at high too</b> = strong, but the move is already visible. When the market falls, the lead list grows.</div>`;
+  if(key === "lab-trap"){ const t = S().trapped || [];
+    const st = v => !v ? "—" : chip(v === "Impulse" ? "Imp" : (MTF_PH[v] || [v])[0], v === "Impulse" ? "var(--up)" : (MTF_PH[v] || [0, "var(--muted)"])[1]);
+    return head + table([
+      ["Stock", r => `<div class="symrow">${symLink(r.s, 13.5, false)}${starBtn(r.s)}</div>`], ["Price", r => { const q = livePx(r.s); return `${fmt(q ? q.close : r.close)}${q ? ` <b class="${cls(q.chg)}" style="font-size:11px">${pct(q.chg, 1)}</b>` : ""}`; }, "n"], ["Setup", r => `${esc(r.setup)} <span class="muted">${esc(r.stage)}</span>`],
+      ["Shorts in the dip", r => r.oi_pb != null ? `OI <b class="down">${pct(r.oi_pb, 0)}</b>` : "—", "n"], ["VK", r => vkChip(r.vk)],
+      ["M / W / D", r => st(r.M) + st(r.W) + st(r.D)], ["Strength", r => r.rank ? `#${r.rank}` : "—", "n"],
+      ["5 days", r => `<span class="${cls(r.px5)}">${pct(r.px5)}</span>${r.oi5 != null ? ` <span class="muted">OI ${pct(r.oi5, 0)}</span>` : ""}`, "n"],
+      ["Option chain", r => r.chain ? chip(r.chain, /ullish/.test(r.chain) ? "var(--up)" : /earish/.test(r.chain) ? "var(--down)" : "var(--muted)") : "—"],
+      ["Chase", r => chaseCell(r.s)], ["Score", r => `<b>${r.score}</b>`, "n"]],
+      t, "No trapped-short setups in an uptrend right now.") + `<div class="muted" style="font-size:11.5px;margin-top:8px">From the hourly F&amp;O scan · ${esc(when(S().generated_ist))}. Every day's list is logged to test it.</div>`; }
   if(key === "lab-iv") return head + table([
       ["Stock", stock], ["Price", px, "n"], ["Squeeze", r => `${r.sq_days} days${r.turning ? ` <span class="up" title="Momentum turning up">▲</span>` : ""}`, "n"],
       ["HV 20d", r => `${nn(r.hv)}%`, "n"], ["HV rank (1 yr)", r => `<b class="${r.hv_rank <= 10 ? "up" : ""}">${r.hv_rank}%</b>`, "n"],
@@ -2557,7 +2570,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;

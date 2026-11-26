@@ -1087,6 +1087,68 @@ def log_hits(hits, lv, now):
         print("site_data: hits log skipped:", ex)
 
 
+# ---------------------------------------------------------------- Trapped shorts in an uptrend (VK Experimentals)
+TRAP_LOG = os.path.join(DATA, "trapped_log.csv")
+
+
+def trapped_shorts(fo, sj, five, out, now):
+    """Pullbacks graded Warning (futures OI rose while price dipped = shorts built) in stocks whose big
+    trend is still up and whose momentum is turning back up. If the dip ends, those shorts must cover."""
+    import re
+    mtf = fo.get("mtf") or {}
+    vk = {}
+    for lab, items in (fo.get("vk_labels") or {}).items():
+        for x in items:
+            vk[x["symbol"]] = lab
+    strong = {x["symbol"]: x for x in sj.get("strongest_fo") or []}
+    lv = out.get("levels") or {}
+    try:
+        with open(os.path.join(DATA, "chain_screen.json")) as f:
+            chains = {r["s"]: r for r in json.load(f).get("rows", [])}
+    except Exception:
+        chains = {}
+    best = {}
+    for r in setup_rows(fo):
+        if r.get("grade") != "Warning" or r.get("stage") not in ("Watch", "Ready", "Triggered"):
+            continue
+        s = r["symbol"]
+        st = mtf.get(s) or [None, None, None]
+        M, W, D = st
+        if W not in ("Impulse", "Bullish", "Topping") or M not in ("Impulse", "Bullish"):
+            continue                                       # the big trend must still be up
+        v = vk.get(s)
+        if v not in ("BUY NOW", "ALMOST READY (Bullish)"):
+            continue
+        L = lv.get(s) or {}
+        x = (L["c"] - L["e20"]) / L["a"] if L.get("c") and L.get("e20") and L.get("a") else None
+        if x is not None and x > 2.5:
+            continue                                       # already ran: too late
+        m = re.search(r"([+-]\d+)% in pullback", r.get("detail") or "")
+        oi_pb = int(m.group(1)) if m else None
+        f5 = five.get(s) or {}
+        ch = chains.get(s) or {}
+        score = (3 if v == "BUY NOW" else 1) + (2 if x is not None and -1.5 <= x <= 1 else 0) \
+            + min(4, (oi_pb or 0) / 8) + (1 if M == "Impulse" else 0) + (2 if W == "Impulse" else 0) + (1 if D in ("Impulse", "Bullish") else 0) \
+            + (1 if (f5.get("px5") or 0) > 0 else 0) + (1 if ch.get("score", 0) >= 1 else -1 if ch.get("score", 0) <= -1 else 0)
+        sg = strong.get(s) or {}
+        row = {"s": s, "setup": r["setup"], "stage": r["stage"], "detail": r.get("detail"), "oi_pb": oi_pb, "vk": v,
+               "M": M, "W": W, "D": D, "chase": round(x, 1) if x is not None else None, "rank": sg.get("rank"),
+               "oi5": f5.get("oi5"), "px5": f5.get("px5"), "chain": ch.get("bias"), "close": L.get("c"), "score": round(score, 1)}
+        if s not in best or row["score"] > best[s]["score"]:
+            best[s] = row
+    rows = sorted(best.values(), key=lambda r: -r["score"])
+    try:                                                   # today's list, rewritten each run, to test later
+        day = now.strftime("%Y-%m-%d")
+        log = pd.read_csv(TRAP_LOG) if os.path.exists(TRAP_LOG) else pd.DataFrame(columns=["date"])
+        log = log[log["date"].astype(str) != day]
+        new = pd.DataFrame([{"date": day, "symbol": r["s"], "score": r["score"], "close": r["close"], "vk": r["vk"]} for r in rows])
+        pd.concat([log, new], ignore_index=True).to_csv(TRAP_LOG, index=False)
+    except Exception as ex:
+        print("site_data: trapped log skipped:", ex)
+    print(f"site_data: trapped shorts {len(rows)}")
+    return rows
+
+
 # ---------------------------------------------------------------- build
 def run(now=None):
     global SECTORS
@@ -1276,6 +1338,10 @@ def run(now=None):
         out["mtf_eq"] = {s: st for s, st in (eq.get("mtf") or {}).items() if s not in fos}
     except Exception as ex:
         print("site_data: mtf failed:", ex)
+    try:
+        out["trapped"] = trapped_shorts(fo, sj, five, out, now)
+    except Exception as ex:
+        print("site_data: trapped shorts failed:", ex)
     hits = {}
     try:
         hits = scan_hits(fo, eq or {}, sj, uj, ue or {}, five, out, now)
