@@ -1,0 +1,40 @@
+name: Option chain
+
+# Started by the site when someone opens a stock whose option chain it does not have yet.
+# The chain goes to the site (not to this repo).
+on:
+  workflow_dispatch:
+    inputs:
+      symbol:
+        description: "NSE symbol, e.g. SBIN"
+        required: true
+      expiry:
+        description: "Expiry, e.g. 29-Dec-2026 (blank = nearest)"
+        required: false
+        default: ""
+
+concurrency:
+  group: chain-${{ inputs.symbol }}
+  cancel-in-progress: true
+
+jobs:
+  chain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            chain_scan.py
+            intraday_scan.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests pandas numpy
+      - name: Fetch the chain
+        env:
+          INGEST_KEY: ${{ secrets.INGEST_KEY }}
+          SYMBOL: ${{ inputs.symbol }}
+          EXPIRY: ${{ inputs.expiry }}
+        run: python chain_scan.py "$SYMBOL" $EXPIRY

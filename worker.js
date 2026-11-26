@@ -1,3 +1,4 @@
+import { getChain, ingestChains } from "./chain.js";
 import { alertsGet, alertsPut, alertsLog, checkAlerts, testAlert, eveningDigest, channels, STRATS } from "./alerts.js";
 import { publicPage } from "./public.js";
 import { isPublicPage, servePublicPage } from "./pages.js";
@@ -437,6 +438,7 @@ const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favico
 async function api(req, env, url, user, ctx) {
   const p = url.pathname, admin = user.role === "admin";
   if (p === "/api/me") { const lv = logVisit(env, req, user).catch(() => null); if (ctx) ctx.waitUntil(lv); else await lv; return json({ email: user.email, name: user.name, picture: user.picture || "", role: user.role, full: await hasFull(env, user), open: await openAll(env) }); }
+  if (p === "/api/chain" && req.method === "GET") return json(await getChain(env, url.searchParams.get("s"), url.searchParams.get("exp") || "", gh));
   if (p === "/api/live" && req.method === "GET") {           // today's prices for the dashboard (no levels)
     const v = env.USERS ? await env.USERS.get("live:latest") : null;
     return new Response(v || "{}", { headers: { "content-type": "application/json", "cache-control": "private, max-age=60" } });
@@ -532,6 +534,11 @@ export default {
         }
         if (d.watch) ctx.waitUntil(checkAlerts(env, d).then(r => console.log("alerts", JSON.stringify(r))).catch(e => console.log("alerts failed", e.message)));
         return json({ ok: true, bytes: body.length });
+      }
+      if (p === "/api/ingest/chain" && req.method === "POST") {      // chain.yml sends a stock's option chain here
+        const want = env.INGEST_KEY || (env.SESSION_SECRET ? await hmac(env, "ingest:intraday") : "");
+        if (!want || !(await sameText(env, req.headers.get("x-ingest-key") || "", want))) return json({ error: "Not allowed." }, 403);
+        return json(await ingestChains(env, await req.json().catch(() => ({}))));
       }
       if (p === "/api/kite/token") {                     // for scans and the VM, with their own key
         if (!env.KITE_PULL_KEY || req.headers.get("x-kite-key") !== env.KITE_PULL_KEY) return json({ error: "Not allowed." }, 403);
