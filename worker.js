@@ -409,11 +409,11 @@ async function kiteReminder(env) {
 
 // ------------------------------------------------------------------ scan timetable
 // GitHub's own cron runs hours late or not at all at busy times, so the site starts the scans itself.
-// Cloudflare calls scheduled() every 15 minutes; times below are IST, weekdays only.
+// Cloudflare calls scheduled() every 5 minutes; times below are IST, weekdays only.
 const IST_DAY = t => new Date(t + 5.5 * 3600e3);
 const at = (h, m) => h * 60 + m;
 const TIMETABLE = {
-  "intraday.yml": m => m >= at(9, 15) && m <= at(15, 30),
+  "intraday.yml": m => m >= at(9, 15) && m <= at(15, 30) && ((m - at(9, 15)) % 10 === 0 || m === at(15, 30)),   // every 10 min, plus the close
   "scan.yml":     m => [at(10, 15), at(11, 15), at(12, 15), at(13, 15), at(14, 15), at(15, 15), at(16, 15), at(19, 30)].includes(m),
   "unusual.yml":  m => [at(10, 30), at(11, 30), at(12, 30), at(13, 30), at(14, 30), at(15, 30), at(16, 30), at(19, 45)].includes(m),
   "sector.yml":   m => m === at(16, 45),
@@ -424,7 +424,7 @@ const TIMETABLE = {
 };
 async function runSchedule(env, when) {
   const d = IST_DAY(when || Date.now());
-  const wd = d.getUTCDay(), m = Math.round((d.getUTCHours() * 60 + d.getUTCMinutes()) / 15) * 15;
+  const wd = d.getUTCDay(), m = Math.round((d.getUTCHours() * 60 + d.getUTCMinutes()) / 5) * 5;
   const jobs = [];
   if (wd !== 0 && wd !== 6) {
     if (m === at(8, 45)) jobs.push(kiteReminder(env));
@@ -546,7 +546,7 @@ export default {
           const t = String(d.at || "").slice(11, 16);
           if (!hist.length || hist[hist.length - 1].at !== t)
             hist.push({ at: t, rows: d.live.map(r => [r[0], r[2], r[6] ?? null, r[5] ?? null]) });
-          await env.USERS.put(key, JSON.stringify(hist.slice(-40)), { expirationTtl: 60 * 60 * 24 * 3 });
+          await env.USERS.put(key, JSON.stringify(hist.slice(-48)), { expirationTtl: 60 * 60 * 24 * 3 });
         }
         if (d.final && d.session) {                      // keep the day's last BTST / STBT list to check next morning
           await env.USERS.put("btst:" + d.session, JSON.stringify({ session: d.session, at: d.at,

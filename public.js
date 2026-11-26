@@ -256,7 +256,7 @@ ${body}
 }
 
 
-// Money flow (sectors only): value-weighted move of each sector against the whole F&O market, from the 15-minute live rows.
+// Money flow (sectors only): value-weighted move of each sector against the whole F&O market, from the 10-minute live rows.
 function flowSectors(live) {
   const rows = ((live && live.rows) || []).filter(r => r[2] != null && r[3] && r[3] !== "Unclassified" && r[3] !== "Others");
   if (rows.length < 20) return null;
@@ -273,7 +273,7 @@ const FLOW_JS = `(function go(n){var cv=document.getElementById("flowc");if(!cv)
 var d=JSON.parse(document.getElementById("flowd").textContent);
 river(cv,{nodes:d.nodes.map(function(x){return{id:x.n,name:x.n,rel:x.r,chg:x.c,size:x.s}}),mkt:d.mkt,label:"F&O MARKET"});})(0);`;
 export function renderPublic(s, sj, live) {
-  // During the day, the 15-minute scan's prices replace last session's movers and advance/decline.
+  // During the day, the 10-minute scan's prices replace last session's movers and advance/decline.
   const todayIST = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
   if (live && live.session === todayIST && (live.rows || []).length) {
     const rows = live.rows.filter(r => r[2] != null).map(([symbol, close, chg, sector]) => ({ symbol, close, chg, sector: sector || "" }));
@@ -353,7 +353,7 @@ export function renderPublic(s, sj, live) {
     const ins = f.nodes.filter(n => n.r > 0.15).slice(0, 5), outs = f.nodes.filter(n => n.r < -0.15).slice(-5).reverse();
     const isToday = f.session === todayIST, chipL = (n, c) => `<span class="chip" style="--c:${c}">${esc(n.n)}<small>${pct(n.r, 2)}</small></span>`;
     return `<section class="blk">
-    <div class="sh"><h2>Money flow ${isToday ? `<span class="live" style="font-size:12px;vertical-align:middle"><i></i>${esc(f.at)} IST</span>` : ""}</h2><p>${isToday ? "Where money is moving between sectors right now, updated every 15 minutes in market hours." : "Where money moved between sectors in the last session."} Left: sectors money is leaving. Right: where it is going. Thicker band = bigger shift.</p></div>
+    <div class="sh"><h2>Money flow ${isToday ? `<span class="live" style="font-size:12px;vertical-align:middle"><i></i>${esc(f.at)} IST</span>` : ""}</h2><p>${isToday ? "Where money is moving between sectors right now, updated every 10 minutes in market hours." : "Where money moved between sectors in the last session."} Left: sectors money is leaving. Right: where it is going. Thicker band = bigger shift.</p></div>
     <div class="card flowcard"><canvas id="flowc" aria-label="Animated money flow between NSE sectors: money leaving on the left, arriving on the right"></canvas></div>
     <div class="card flowfoot">
       <div class="stage" style="--c:var(--up)"><h3>Money coming in</h3><div class="chips">${ins.map(n => chipL(n, "var(--up)")).join("") || `<span class="muted sm">None standing out</span>`}</div></div>

@@ -1,4 +1,4 @@
-// Alert watchlist: the admin's own 10-15 stocks, checked every 15 minutes in market hours.
+// Alert watchlist: the admin's own 10-15 stocks, checked every 10 minutes in market hours.
 // When a stock "wakes up" (price crosses a level, volume or OI jumps, a setup turns Ready,
 // the trend flips) it sends one email (Cloudflare Email Routing) and one Telegram message.
 // The list, settings and state live in KV only, never in the public repo.
@@ -96,7 +96,7 @@ function scanView(site, s) {
     ban: ((site.heads_up || {}).ban || []).includes(s), res: ((site.heads_up || {}).results || {})[s] || null };
 }
 
-// Called with each 15-minute intraday result (d), and by the hourly tick with d = null.
+// Called with each 10-minute intraday result (d), and by the hourly tick with d = null.
 export async function checkAlerts(env, d) {
   const cfg = await alertsGet(env);
   if (!cfg.on || !cfg.items.length) return { sent: 0 };

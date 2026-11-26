@@ -1,6 +1,6 @@
 """Intraday + BTST scanner for TradeReady (admin only).
 
-Runs every 15 minutes in market hours from GitHub Actions. Free data:
+Runs every 10 minutes in market hours from GitHub Actions. Free data:
   - yfinance 5-minute candles for every F&O stock and Nifty / Bank Nifty (a few minutes late)
   - NSE live OI spurts (intraday futures + options OI change per stock)
   - NSE option chain (Nifty, Bank Nifty, and the top stock candidates)

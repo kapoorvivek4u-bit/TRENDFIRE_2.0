@@ -103,7 +103,7 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
 <tr><th>What</th><th>When (IST, trading days)</th></tr>
 <tr><td>Setups scan (F&amp;O)</td><td>Every hour 10:15 to 15:15, then 16:15 and 19:30</td></tr>
 <tr><td>Unusual activity</td><td>Every hour 10:30 to 15:30, then 16:30 and 19:45</td></tr>
-<tr><td>Live index and stock prices</td><td>Every 15 minutes, 9:15 to 15:30 (a few minutes late)</td></tr>
+<tr><td>Live index and stock prices</td><td>Every 10 minutes, 9:15 to 15:30 (a few minutes late)</td></tr>
 <tr><td>Sectors</td><td>16:45</td></tr>
 <tr><td>Bulk and block deals, FII footprint</td><td>19:00</td></tr>
 <tr><td>Equity (cash) scan</td><td>19:45</td></tr>
@@ -379,7 +379,7 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
 </ul>
 
 <h3>⚡ Money flow</h3>
-<p>Market → <b>⚡ Money flow</b>. A "river" view: sectors where money is leaving on the left (red), sectors where it is arriving on the right (green), joined by bands with particles flowing across. Thicker band = bigger shift; the % beside each name is its move compared with the market, weighted by traded value, with extra weight where futures OI is building. Hover to highlight one sector's flows. Tap a sector to see its stocks the same way, with "Most money in" and "Most money out" lists; tap a stock for its panel. Data updates every 15 minutes in market hours (the animation runs continuously); drag the slider to replay the day. A big version also sits on the Today page. The flow lines are a reading of the data, not an exchange record of money moving between stocks.</p>
+<p>Market → <b>⚡ Money flow</b>. A "river" view: sectors where money is leaving on the left (red), sectors where it is arriving on the right (green), joined by bands with particles flowing across. Thicker band = bigger shift; the % beside each name is its move compared with the market, weighted by traded value, with extra weight where futures OI is building. Hover to highlight one sector's flows. Tap a sector to see its stocks the same way, with "Most money in" and "Most money out" lists; tap a stock for its panel. Data updates every 10 minutes in market hours (the animation runs continuously); drag the slider to replay the day. A big version also sits on the Today page. The flow lines are a reading of the data, not an exchange record of money moving between stocks.</p>
 <h3>Strongest</h3>
 <figure><img src="/guide/11-strongest.jpg" alt="Strongest stocks ranked by score with reason chips" width="1300" height="1000" loading="lazy"></figure>
 <p>Every F&amp;O stock (and Nifty 50) ranked by a 0 to 100 strength score: 3-month and 1-month return against Nifty (relative strength), distance from the 52-week high, and trend. The chips under each stock say why it scores high.</p>
@@ -492,7 +492,7 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
 <!-- ============================================================ 13 -->
 <h2 id="faq">13. Common questions</h2>
 <h4>Why does a chart show yesterday's candle during the day?</h4>
-<p>Setups are found on completed candles only, so they don't flicker. Prices, index cards, movers and the heatmap are overlaid live (every 15 minutes, a few minutes late) and marked <code>live</code>.</p>
+<p>Setups are found on completed candles only, so they don't flicker. Prices, index cards, movers and the heatmap are overlaid live (every 10 minutes, a few minutes late) and marked <code>live</code>.</p>
 <h4>Why don't I see Buy above / Stop / Target?</h4>
 <p>Trade levels are shown only to accounts with full access. Everyone sees the same setups, stages, grades and states.</p>
 <h4>A stock is Ready. Should I buy?</h4>

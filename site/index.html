@@ -602,7 +602,7 @@ async function netJSON(name){
   return await r.json();
 }
 const S = () => CACHE["site.json"];
-/* Live prices (every 15 min in market hours) laid over the last-session heatmap, movers and advance/decline. */
+/* Live prices (every 10 min in market hours) laid over the last-session heatmap, movers and advance/decline. */
 let LIVE = null;
 async function loadLive(){
   if(window.SNAP) return;
@@ -1313,7 +1313,7 @@ async function pageAlerts(){
       <td>${x.rd ? chip(`${x.rd.setup} ${x.rd.stage}`, SETUP_STAGE_C[x.rd.stage] || "var(--muted)") : `<span class="muted">—</span>`}</td>
       <td><button class="hx" data-adel="${esc(it.s)}" title="Remove">✕</button></td></tr>`; };
   const chs = `${chip(ch.mail ? "Email ready" : "Email not set up", ch.mail ? "var(--up)" : "var(--warn)")} ${chip(ch.tg ? "Telegram ready" : "Telegram not set up", ch.tg ? "var(--up)" : "var(--warn)")}`;
-  return pageHead("Alert watchlist", "Your 10–15 stocks, checked every 15 minutes in market hours. One email + Telegram per event, no repeats in a day.") + subnav() + `
+  return pageHead("Alert watchlist", "Your 10–15 stocks, checked every 10 minutes in market hours. One email + Telegram per event, no repeats in a day.") + subnav() + `
     <section class="card fade"><div class="ct"><h2>Settings<em>${a.on ? "Alerts ON" : "Alerts paused"}</em></h2><span style="display:flex;gap:6px;flex-wrap:wrap">${chs}</span></div>
       <form id="aform-cfg" class="hform" autocomplete="off" style="margin-top:4px">
         <input id="a-email" type="email" placeholder="Email for alerts (must be verified in Cloudflare)" value="${esc(a.email || "")}">
@@ -1751,7 +1751,7 @@ async function pageOScreen(){
     <div class="muted" style="font-size:11.5px;margin-top:8px">Nearest expiry. "Calls above" = % change of call OI over the 5 strikes above the price (negative = writers covering). "Puts below" = % change of put OI over the 5 strikes under the price (positive = put writing). NSE data, read hourly in market hours and once after the close.</div></section>`;
 }
 
-/* ============================================================ Money flow: live sector and stock flow (every 15 min, animation always on) */
+/* ============================================================ Money flow: live sector and stock flow (every 10 min, animation always on) */
 let FLOW = null, FLOW_RAF = null;
 async function flowData(){
   if(FLOW && Date.now() - FLOW._t < 60e3) return FLOW;
@@ -1805,7 +1805,7 @@ function flowMiniWatch(){
 function flowMiniStart(){
   flowData().then(d => { const live = d && d.live, rows = (live && live.rows) || [], box = document.getElementById("flowmini-box");
     if(!box) return; if(!d){ const cv = document.getElementById("flowmini"); if(cv) setTimeout(() => delete cv.dataset.on, 5000); return; }
-    if(!rows.length){ box.innerHTML = `<div class="empty">Fills in during market hours (every 15 min from 9:15).</div>`; return; }
+    if(!rows.length){ box.innerHTML = `<div class="empty">Fills in during market hours (every 10 min from 9:15).</div>`; return; }
     const {nodes, mkt} = flowNodes(rows.map(r => [r[0], r[2], r[6], r[5], r[3]]));
     const ins = nodes.filter(n => n.rel > 0.15).slice(0, 3), outs = nodes.filter(n => n.rel < -0.15).slice(-3).reverse();
     const el = document.getElementById("flowmini-txt");
@@ -1814,7 +1814,7 @@ function flowMiniStart(){
     .catch(() => { const cv = document.getElementById("flowmini"); if(cv) delete cv.dataset.on; });
 }
 function flowMiniHTML(){
-  return `<section class="card fade"><div class="ct"><h2>⚡ Money flow<em>live, every 15 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
+  return `<section class="card fade"><div class="ct"><h2>⚡ Money flow<em>live, every 10 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
     <div id="flowmini-box"><div class="flowstage flowmini"><canvas id="flowmini" aria-label="Money flow between sectors"></canvas></div>
     <div id="flowmini-txt" class="flowminitxt"></div></div>
     <div class="muted" style="font-size:11.5px;margin-top:6px">Left: sectors money is leaving. Right: where it is going. Band thickness = size of the shift. Tap to open the full view and see the stocks.</div></section>`;
@@ -1823,7 +1823,7 @@ async function pageFlow(){
   const d = await flowData();
   const head = pageHead("⚡ Money flow", "Where money is moving today, between sectors and inside each sector") + subnav();
   const live = d && d.live, rows0 = (live && live.rows) || [];
-  if(!rows0.length) return head + `<div class="empty">Money flow fills in during market hours (every 15 minutes from 9:15).</div>`;
+  if(!rows0.length) return head + `<div class="empty">Money flow fills in during market hours (every 10 minutes from 9:15).</div>`;
   const secOf = Object.fromEntries(rows0.map(r => [r[0], r[3]]));
   const hist = (d.hist || []).filter(h => h.rows && h.rows.length);
   const idx = UI.flowIdx != null && UI.flowIdx < hist.length ? UI.flowIdx : null;
@@ -1837,7 +1837,7 @@ async function pageFlow(){
   const money = sec ? [...nodes].sort((a, b) => b.money - a.money) : null;
   const li = (n, c) => `<div class="li" ${sec ? `data-fsym="${esc(n.id)}"` : `data-fsec="${esc(n.id)}"`} style="cursor:pointer"><div style="min-width:0"><b>${esc(n.name)}</b>${sec && n.tv ? `<div class="muted" style="font-size:11.5px">₹${fmt(n.tv, 0)} Cr traded${n.oi != null ? ` · OI ${pct(n.oi, 1)}` : ""}</div>` : sec ? "" : `<div class="muted" style="font-size:11.5px">${n.n} stocks · ₹${fmt(n.size, 0)} Cr traded</div>`}</div>
     <div class="r"><b class="${c}">${n.rel > 0 ? "+" : ""}${n.rel.toFixed(2)}%</b><div class="muted" style="font-size:10.5px">vs ${sec ? "sector" : "market"} · move ${n.chg > 0 ? "+" : ""}${n.chg.toFixed(1)}%</div><div class="bar2" style="width:${Math.min(100, Math.abs(n.rel) * 30)}%;background:var(--${c === "up" ? "up" : "down"})"></div></div></div>`;
-  const nextAt = (() => { const [h, m] = at.split(":").map(Number); const t = h * 60 + m + 15; return t > 930 ? "tomorrow 9:15" : `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`; })();
+  const nextAt = (() => { const [h, m] = at.split(":").map(Number); const t = Math.min(h * 60 + m + 10, 930); return h * 60 + m >= 930 ? "tomorrow 9:15" : `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`; })();
   return head + `<div class="flowgrid">
     <section class="flowstage"><div class="flowtop">${sec ? `<button class="btn2" data-fback="1" style="padding:5px 10px;font-size:12px">← All sectors</button>` : ""}
         <span class="flowlive"><i></i>${isToday && idx == null ? "LIVE" : idx != null ? "REPLAY" : "LAST SESSION"} ${esc(at)}</span>
@@ -2622,7 +2622,7 @@ async function pageIntraday(){
   if(!INTRA_TIMER) INTRA_TIMER = setInterval(async () => { if(route() === "intraday" && document.visibilityState === "visible"){ await intraLoad(true); rerender(); } }, 120e3);
   const res = await intraLoad();
   const d = res && res.latest;
-  if(!d) return pageHead("Intraday & BTST", "") + `<div class="empty">${esc((res && res.error) || "No intraday scan yet. It runs every 15 minutes from 9:15 am on trading days.")}</div>`;
+  if(!d) return pageHead("Intraday & BTST", "") + `<div class="empty">${esc((res && res.error) || "No intraday scan yet. It runs every 10 minutes from 9:15 am on trading days.")}</div>`;
   const today = istDay(Date.now()), live = d.session === today;
   const tab = UI.itab || "long", chains = d.chains || {};
   const tabs = [["long", `Long · ${d.longs.length}`], ["short", `Short · ${d.shorts.length}`], ["btst", `BTST · ${d.btst.length}`], ["stbt", `STBT · ${d.stbt.length}`], ["oi", "OI build-up"], ["chain", "Option chains"]];
