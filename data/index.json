@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-26 11:19",
+ "generated_ist": "2026-11-26 11:42",
  "oi_asof": "2026-11-25",
  "indexes": [
   {
@@ -1305,7 +1305,7 @@
      "symbol": "BANKBARODA",
      "vk": "NO SIGNAL",
      "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "C",
+     "grade": "B",
      "oi": {
       "oi_pct": -20.0,
       "px_pct": 0.8,
@@ -2315,7 +2315,7 @@
    "setups": [
     {
      "symbol": "FINNIFTY",
-     "close": 28924.7,
+     "close": 28925.4,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
@@ -3287,7 +3287,7 @@
      "symbol": "BANKBARODA",
      "vk": "NO SIGNAL",
      "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "C",
+     "grade": "B",
      "oi": {
       "oi_pct": -20.0,
       "px_pct": 0.8,
