@@ -1382,7 +1382,7 @@ async function pageLab(){
   if(key === "lab-rs") return head + (x.nifty_dd != null ? `<div class="muted" style="margin:12px 0 0;font-size:12.5px">Nifty is ${pct(x.nifty_dd)} from its 52-week high.</div>` : "") + table([
       ["Stock", stock], ["", fo], ["Price", px, "n"], ["Under its high", r => `<b class="${r.lead ? "down" : "muted"}">${pct(r.below)}</b>`, "n"], ["", r => r.lead ? chip("RS leads price", "var(--up)") : chip("Price at high too", "var(--muted)")],
       ["RS new high", r => `${r.rs_days} of 10 days`, "n"], ["3 months", r => `${pct(r.r3)} <span class="muted">vs Nifty ${pct(r.n3)}</span>`, "n"],
-      ["200 DMA", r => r.a200 ? chip("Above", "var(--up)") : chip("Below", "var(--down)")], ["RS line, 3 months", r => spark(r.spark)], ["Chase", r => chaseCell(r.s)]],
+      ["200 DMA", r => r.a200 ? chip("Above", "var(--up)") : chip("Below", "var(--down)")], ["RS line, 3 months", r => rsSpark(r.spark)], ["Chase", r => chaseCell(r.s)]],
     x.rs_lead || [], "No stock has its RS line at a 52-week high right now.") + `<div class="muted" style="font-size:11.5px;margin-top:8px"><b>RS leads price</b> = the real signal (price still 3%+ under its high). <b>Price at high too</b> = strong, but the move is already visible. When the market falls, the lead list grows.</div>`;
   if(key === "lab-trap"){ const t = S().trapped || [];
     const st = v => !v ? "—" : chip(v === "Impulse" ? "Imp" : (MTF_PH[v] || [v])[0], v === "Impulse" ? "var(--up)" : (MTF_PH[v] || [0, "var(--muted)"])[1]);
@@ -1418,7 +1418,7 @@ async function pageLab(){
       ["Rollover", r => r.roll != null ? `${r.roll}%` : "—", "n"], ["Futures premium", r => `${r.basis0 != null ? pct(r.basis0, 2) + " → " : ""}<b>${pct(r.basis, 2)}</b>`, "n"], ["Chase", r => chaseCell(r.s)]],
     e.rows || [], "No trapped-short setups in this series.");
 }
-function spark(v){
+function rsSpark(v){
   if(!v || v.length < 2) return "—";
   const mn = Math.min(...v), mx = Math.max(...v), w = 110, h = 26, f = i => (i / (v.length - 1)) * w, g = y => h - 2 - ((y - mn) / (mx - mn || 1)) * (h - 4);
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-label="RS line"><polyline fill="none" stroke="var(--up)" stroke-width="1.6" points="${v.map((y, i) => `${f(i).toFixed(1)},${g(y).toFixed(1)}`).join(" ")}"/></svg>`;
