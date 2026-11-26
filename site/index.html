@@ -1359,7 +1359,7 @@ async function pageLab(){
   const head = pageHead("VK Experimentals", `New scanners under test${x ? ` · scanned ${esc(when(x.generated_ist))}` : ""}`) + tabs + `
     <section class="card fade labinfo"><div class="ct"><h2>${esc(info.t)}<em>${esc(info.sub)}</em></h2></div><span class="chip" style="--c:var(--warn);margin:-4px 0 8px">🧪 Experimental · not tested yet</span>
       <div class="lab2"><div><div class="lbl">How it works</div><p>${esc(info.how)}</p></div><div><div class="lbl">How to use it</div><p>${esc(info.use)}</p></div></div>
-      <div class="muted" style="font-size:11.5px">Every evening's top 10 are logged, so after a few weeks we can see if this scanner actually works. Runs at 8:30 pm on trading days.</div></section>`;
+      <div class="muted" style="font-size:11.5px">${key === "lab-trap" ? "Every day's list is logged, so after a few weeks we can see if this scanner actually works. Updated with every hourly scan." : "Every evening's top 10 are logged, so after a few weeks we can see if this scanner actually works. Runs at 8:30 pm on trading days."}</div></section>`;
   if(!x && key !== "lab-trap") return head + `<div class="empty" style="margin-top:12px">The first run arrives after tonight's 8:30 pm scan.</div>`;
   const fo = r => r.fo === false ? chip("Cash", "var(--muted)") : chip("F&O", "var(--info)");
   const table = (cols, rows, empty) => rows.length ? `<section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div><div class="tw"><table class="t labt"><tr>${cols.map(c => `<th class="${c[2] || ""}">${c[0]}</th>`).join("")}</tr>
