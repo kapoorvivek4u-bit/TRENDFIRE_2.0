@@ -1,0 +1,52 @@
+name: Social kit
+
+# Daily money-flow video, cover, picture post and captions, made after the close.
+# Started by the site (worker.js runSchedule) at 15:40 IST on weekdays. Sends the kit to the
+# site (Admin -> Social kit) and emails the admin. Commits nothing to this repo.
+on:
+  workflow_dispatch:
+    inputs:
+      dry:
+        description: "Dry run: keep the kit as a download instead of sending it"
+        type: boolean
+        default: false
+      force:
+        description: "Send even if the checks would hold it (old data, before the close)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: social-kit
+  cancel-in-progress: true
+
+jobs:
+  kit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            social
+            site/river.js
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-inter fonts-jetbrains-mono > /dev/null
+          npm i --no-save --silent playwright@1.49.1
+          npx playwright install --with-deps chromium > /dev/null
+      - name: Make the kit
+        env:
+          INGEST_KEY: ${{ secrets.INGEST_KEY }}
+          DRY_RUN: ${{ inputs.dry && '1' || '' }}
+        run: node social/make_kit.js ${{ inputs.force && '--force' || '' }}
+      - if: ${{ inputs.dry }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: social-kit
+          path: social/out/
+          retention-days: 3

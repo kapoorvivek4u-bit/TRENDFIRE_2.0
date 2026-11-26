@@ -63,7 +63,7 @@ async function sendTg(env, text) {
     body: JSON.stringify({ chat_id: chat, text, parse_mode: "HTML", disable_web_page_preview: true }) }).catch(e => ({ ok: false, status: e.message }));
   return r.ok ? "ok" : "Telegram failed " + r.status;
 }
-async function sendMail(env, to, subject, html, text) {
+export async function sendMail(env, to, subject, html, text) {
   if (!env.MAIL) return "Email not set (MAIL binding missing)";
   if (!to) return "No email address saved";
   const from = env.ALERT_FROM || "alerts@tradeready.in";

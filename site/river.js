@@ -6,9 +6,9 @@ function river(cv, o) {
   var SH = {"Consumer Durables":"Cons. Durables","Construction Materials":"Cons. Materials","Capital Goods":"Cap. Goods","Consumer Services":"Cons. Services","Metals & Mining":"Metals","Healthcare Services":"Health Svcs"};
   var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var MONO = "\"JetBrains Mono\",ui-monospace,Menlo,monospace", SANS = "Inter,system-ui,sans-serif";
-  var outs = [], ins = [], L = [], P = [], G = {};
+  var outs = [], ins = [], L = [], P = [], G = {}, FS = o.fs || 1;   // fs, max, lab, minH, top: bigger layout for videos
   function pick() {
-    var max = W < 560 ? 7 : 9;
+    var max = o.max || (W < 560 ? 7 : 9);
     outs = o.nodes.filter(function (n) { return n.rel < -0.15; }).sort(function (a, b) { return a.rel - b.rel; }).slice(0, max);
     ins = o.nodes.filter(function (n) { return n.rel > 0.15; }).sort(function (a, b) { return b.rel - a.rel; }).slice(0, max);
     var all = [];
@@ -20,7 +20,7 @@ function river(cv, o) {
   function layout() {
     var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
     pick();
-    var narrow = W < 560, colW = narrow ? 7 : 10, lab = narrow ? 104 : Math.min(210, W * 0.17), top = narrow ? 48 : 40, gap = narrow ? 8 : 12, minH = narrow ? 28 : 32;
+    var narrow = W < 560, colW = narrow ? 7 : 10, lab = o.lab || (narrow ? 104 : Math.min(210, W * 0.17)), top = o.top || (narrow ? 48 : 40), gap = narrow ? 8 : 12, minH = o.minH || (narrow ? 28 : 32);
     G = {narrow: narrow, colW: colW, lx: lab, rx: W - lab - colW, top: top};
     function place(arr, key) {
       if (!arr.length) return;
@@ -41,16 +41,17 @@ function river(cv, o) {
   function lit(l) { return !hover || l.o === hover || l.i === hover; }
   function frame() {
     if (dead || !cv.isConnected) return;
+    if (o.focus !== undefined) hover = outs.concat(ins).filter(function (n) { return n.id === o.focus; })[0] || null;   // set by the video maker
     var r = cv.getBoundingClientRect();
     if (!r.width) { if (++tries < 120) raf = requestAnimationFrame(frame); return; }
     if (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2) layout();
     g.clearRect(0, 0, W, H);
     var x0 = G.lx + G.colW, x1 = G.rx, m = (x0 + x1) / 2;
-    g.textAlign = "center"; g.fillStyle = "#7d8590"; g.font = "600 11px " + SANS;
-    var hy = G.narrow ? 34 : 16;
+    g.textAlign = "center"; g.fillStyle = "#7d8590"; g.font = "600 " + 11 * FS + "px " + SANS;
+    var hy = G.narrow ? 34 : 16 * FS + 4;
     g.textAlign = G.narrow ? "left" : "center"; g.fillText("← MONEY LEAVING", G.narrow ? 4 : G.lx + G.colW / 2 - 60, hy);
     g.textAlign = G.narrow ? "right" : "center"; g.fillText("MONEY ARRIVING →", G.narrow ? W - 4 : G.rx + G.colW / 2 + 60, hy);
-    g.textAlign = "center"; g.fillStyle = "#c6ff3d"; g.font = "700 12px " + SANS; g.fillText((o.label || "MARKET") + "  " + (o.mkt >= 0 ? "+" : "") + o.mkt.toFixed(2) + "%", W / 2, 14);
+    g.textAlign = "center"; g.fillStyle = "#c6ff3d"; g.font = "700 " + 12 * FS + "px " + SANS; g.fillText((o.label || "MARKET") + "  " + (o.mkt >= 0 ? "+" : "") + o.mkt.toFixed(2) + "%", W / 2, 14);
     if (!L.length) { g.fillStyle = "#7d8590"; g.font = "500 14px " + SANS; g.fillText("Calm: no strong flows right now", W / 2, H / 2); raf = requestAnimationFrame(frame); return; }
     L.forEach(function (l) {
       var on = lit(l), gr = g.createLinearGradient(x0, 0, x1, 0), a = hover ? (on ? 0.55 : 0.07) : 0.3;
@@ -68,12 +69,12 @@ function river(cv, o) {
         g.globalAlpha = dim ? 0.35 : 1;
         g.fillStyle = c; g.fillRect(x, n.y, G.colW, n.h);
         var cy = n.y + n.h / 2, tx = left ? G.lx - 10 : G.rx + G.colW + 10;
-        g.textAlign = left ? "right" : "left"; g.fillStyle = hover === n ? "#ffffff" : "#e6edf3"; g.font = (hover === n ? "700 " : "500 ") + (G.narrow ? 11.5 : 14) + "px " + SANS;
+        g.textAlign = left ? "right" : "left"; g.fillStyle = hover === n ? "#ffffff" : "#e6edf3"; g.font = (hover === n ? "700 " : o.fs ? "600 " : "500 ") + (G.narrow ? 11.5 : 14) * FS + "px " + SANS;
         var room = (left ? G.lx : W - G.rx - G.colW) - 16, nm = n.name;
         if (g.measureText(nm).width > room) nm = SH[n.name] || nm;
         while (nm.length > 4 && g.measureText(nm).width > room) nm = nm.slice(0, -2) + "…";
         g.fillText(nm, tx, cy - 2);
-        g.fillStyle = c; g.font = "700 " + (G.narrow ? 10.5 : 12) + "px " + MONO; g.fillText((n.rel > 0 ? "+" : "") + n.rel.toFixed(2) + "%", tx, cy + (G.narrow ? 12 : 15));
+        g.fillStyle = c; g.font = "700 " + (G.narrow ? 10.5 : 12) * FS + "px " + MONO; g.fillText((n.rel > 0 ? "+" : "") + n.rel.toFixed(2) + "%", tx, cy + (G.narrow ? 12 : 15) * FS);
         g.globalAlpha = 1;
       });
     }
@@ -89,5 +90,5 @@ function river(cv, o) {
   cv.onmouseleave = function () { hover = null; };
   cv.onclick = function (e) { if (o.onPick) o.onPick(hit(e)); };
   layout(); frame();
-  return {stop: function () { dead = true; cancelAnimationFrame(raf); }};
+  return {stop: function () { dead = true; cancelAnimationFrame(raf); }, focus: function (id) { o.focus = id; }};
 }

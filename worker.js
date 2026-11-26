@@ -1,6 +1,7 @@
 import { getChain, ingestChains } from "./chain.js";
 import { alertsGet, alertsPut, alertsLog, checkAlerts, testAlert, eveningDigest, channels, STRATS } from "./alerts.js";
 import { publicPage } from "./public.js";
+import { socialIngest, socialFileIngest, socialList, socialFile } from "./social.js";
 import { isPublicPage, servePublicPage } from "./pages.js";
 // tradeready.in server (Cloudflare Worker). It does four jobs:
 //  1. Sign-in. Users sign in with Google (any Google account). The admin signs in at /admin
@@ -434,6 +435,7 @@ const TIMETABLE = {
   "deals.yml":    m => m === at(19, 0),
   "equity.yml":   m => m === at(19, 45),
   "experimental.yml": m => m === at(20, 30),
+  "social.yml":   m => m === at(15, 40),                           // daily social kit after the close
   "chains.yml":   m => [at(10, 45), at(11, 45), at(12, 45), at(13, 45), at(14, 45), at(15, 45)].includes(m),
 };
 async function runSchedule(env, when) {
@@ -494,6 +496,8 @@ async function api(req, env, url, user, ctx) {
     return json({ ...(await alertsGet(env)), log: (await alertsLog(env)).slice(0, 60), ch: await channels(env),
       strats: Object.fromEntries(Object.entries(STRATS).map(([k, v]) => [k, v.name])) });
   }
+  if (p === "/api/admin/social") return admin ? json(await socialList(env)) : json({ error: "Admin only." }, 403);
+  if (p === "/api/admin/social/file") return admin ? await socialFile(env, url) : json({ error: "Admin only." }, 403);
   if (p === "/api/admin/open") {
     if (!admin) return json({ error: "Admin only." }, 403);
     if (req.method === "POST") { const b = await req.json().catch(() => ({})); await env.USERS.put("open:all", b.on ? "1" : "0"); OPEN_CACHE = { at: Date.now(), v: !!b.on }; }
@@ -569,6 +573,15 @@ export default {
         }
         if (d.watch) ctx.waitUntil(checkAlerts(env, d).then(r => console.log("alerts", JSON.stringify(r))).catch(e => console.log("alerts failed", e.message)));
         return json({ ok: true, bytes: body.length });
+      }
+      if ((p === "/api/ingest/social" || p === "/api/ingest/social-file" || p === "/api/social/source")) {   // social/make_kit.js (social.yml)
+        const want = env.INGEST_KEY || (env.SESSION_SECRET ? await hmac(env, "ingest:intraday") : "");
+        if (!want || !(await sameText(env, req.headers.get("x-ingest-key") || "", want))) return json({ error: "Not allowed." }, 403);
+        if (p === "/api/social/source") return json({ live: await env.USERS.get("live:latest", "json") });
+        if (req.method !== "POST") return json({ error: "POST only." }, 405);
+        if (p === "/api/ingest/social-file") return json(await socialFileIngest(env, req, url));
+        let b; try { b = await req.json(); } catch (e) { return json({ error: "Bad JSON." }, 400); }
+        return json(await socialIngest(env, b));
       }
       if (p === "/api/ingest/chain" && req.method === "POST") {      // chain.yml sends a stock's option chain here
         const want = env.INGEST_KEY || (env.SESSION_SECRET ? await hmac(env, "ingest:intraday") : "");

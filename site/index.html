@@ -527,6 +527,13 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .flowside{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));align-items:start}.flowside .card{margin:0}.bar2{height:4px;border-radius:3px;margin:4px 0 0 auto;max-width:100%}
 @media (max-width:600px){.flowstage{padding:12px 8px}.flowstage canvas{height:560px}}
 .flowmini canvas{height:clamp(440px,60vh,560px)!important;cursor:pointer}.flowminitxt{font-size:12.5px;line-height:1.6;margin-top:8px}
+.sockgrid{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}@media (max-width:760px){.sockgrid{grid-template-columns:1fr 1fr}.sockgrid .sockmedia:first-child{grid-column:1/-1}}
+.sockmedia{display:grid;gap:8px;align-content:start}.sockmedia video,.sockmedia img{width:100%;border-radius:12px;background:#0d1117;display:block;max-height:520px;object-fit:contain}
+.sockmedia .btn2{justify-content:center;text-align:center}
+.sockcaps{display:grid;gap:10px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
+.sockh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:13px}
+.sockcap textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:13px/1.45 var(--f-ui,Inter),sans-serif;background:var(--surface2);color:var(--ink);resize:vertical}
+.sockheld{background:color-mix(in srgb,var(--warn) 14%,transparent);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 .newver .btn2{padding:5px 12px;font-size:12px}
 .bearban{border-left:4px solid var(--down);background:color-mix(in srgb,var(--down) 7%,var(--surface));font-size:13.5px}
@@ -776,7 +783,7 @@ const PAGES = [
   ["market","Market","market", [["market","Sectors"],["market-flow","⚡ Money flow"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-alerts","Alerts"],["admin-scorecard","Scorecard"]]]]
+const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-alerts","Alerts"],["admin-social","📣 Social kit"],["admin-scorecard","Scorecard"]]]]
   : PRO() && USER ? [["intraday","Intraday","bolt",[]],["admin","My tools","users",[["admin-holdings","My holdings"],["admin-scorecard","Scorecard"],["intraday","Intraday"]]]] : []);
 const route = () => (location.hash || "#today").slice(1) || "today";
 const pageOf = r => r.split("-")[0];
@@ -1819,6 +1826,33 @@ function flowMiniHTML(){
     <div id="flowmini-txt" class="flowminitxt"></div></div>
     <div class="muted" style="font-size:11.5px;margin-top:6px">Left: sectors money is leaving. Right: where it is going. Band thickness = size of the shift. Tap to open the full view and see the stocks.</div></section>`;
 }
+/* ============================================================ Admin: daily social kit (video, pictures, captions) */
+async function pageSocial(){
+  const head = pageHead("📣 Social kit", "Today's money-flow video, pictures and captions, ready to post. Made at 3:40 pm on trading days, kept 7 days.") + subnav();
+  const r = await fetch("/api/admin/social", {cache:"no-store"}).then(r => r.json()).catch(() => null);
+  const days = (r && r.days) || [];
+  if(!days.length) return head + `<div class="empty">The first kit arrives after the next trading day's close (about 3:45 pm). You'll get an email when it's ready.</div>`;
+  const file = (d, f, dl) => `/api/admin/social/file?d=${d}&f=${f}${dl ? "&dl=1" : ""}`;
+  const box = (id, label, text) => `<div class="sockcap"><div class="sockh"><b>${label}</b><button class="btn2" data-sockcopy="${id}" style="padding:4px 10px;font-size:12px">Copy</button></div><textarea id="${id}" readonly rows="${Math.min(9, text.split("\n").length + 1)}">${esc(text)}</textarea></div>`;
+  const day = (m, i) => { const d = m.date, k = d.replace(/-/g, "");
+    const when = new Date(d + "T00:00:00+05:30").toLocaleDateString("en-IN", {weekday:"short", day:"numeric", month:"short", timeZone:"Asia/Kolkata"});
+    return `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>${i === 0 ? "Latest kit" : "Earlier"}<em>${esc(when)} · data ${esc(m.at || "")} IST</em></h2></div>
+      ${(m.held || []).length ? `<div class="sockheld">⚠️ Held for a check: ${m.held.map(esc).join(" ")} You can still post it if it looks right.</div>` : ""}
+      <p style="font-size:17px;font-weight:700;margin:0 0 12px">${esc(m.headline || "")} <span class="muted" style="font-weight:500;font-size:13px">· F&amp;O market ${m.mkt > 0 ? "+" : ""}${m.mkt}%</span></p>
+      <div class="sockgrid">
+        <div class="sockmedia"><video src="${file(d, "video")}" controls playsinline preload="${i === 0 ? "metadata" : "none"}" poster="${file(d, "cover")}"></video>
+          <a class="btn2" href="${file(d, "video", 1)}" download>⬇ Video (Reel / Short)</a></div>
+        <div class="sockmedia"><img src="${file(d, "cover")}" alt="Cover" loading="lazy"><a class="btn2" href="${file(d, "cover", 1)}" download>⬇ Cover</a></div>
+        <div class="sockmedia"><img src="${file(d, "post")}" alt="Picture post" loading="lazy"><a class="btn2" href="${file(d, "post", 1)}" download>⬇ Picture post</a></div>
+      </div>
+      <div class="sockcaps">${box("ig" + k, "Instagram caption", m.instagram || "")}${box("yt" + k, "YouTube title", m.youtube_title || "")}${box("yd" + k, "YouTube description", m.youtube_desc || "")}${box("x" + k, "X (Twitter)", m.x || "")}${box("wa" + k, "WhatsApp", m.whatsapp || "")}</div>
+    </section>`; };
+  return head + `<div class="muted" style="font-size:12.5px;margin-bottom:4px">How to post: download the video → open Instagram → Reel → pick it → paste the caption → add a trending sound at low volume → share. Same video for YouTube Shorts.</div>` + days.map(day).join("");
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-sockcopy]"); if(!b) return;
+  const t = document.getElementById(b.dataset.sockcopy); if(!t) return;
+  const done = () => { b.textContent = "Copied ✓"; setTimeout(() => b.textContent = "Copy", 1600); };
+  (navigator.clipboard ? navigator.clipboard.writeText(t.value) : Promise.reject()).then(done, () => { t.select(); document.execCommand("copy"); done(); }); });
 async function pageFlow(){
   const d = await flowData();
   const head = pageHead("⚡ Money flow", "Where money is moving today, between sectors and inside each sector") + subnav();
@@ -2706,7 +2740,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2725,7 +2759,7 @@ async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const adminOnly = r === "watchlist" || r === "admin" || r === "admin-alerts";
+  const adminOnly = r === "watchlist" || r === "admin" || r === "admin-alerts" || r === "admin-social";
   const proOnly = r === "intraday" || r.startsWith("admin-") || r.endsWith("scorecard");   // admin, or everyone while features are opened
   const fn = adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
     : proOnly && !PRO() ? pageDashboard : (VIEWS[r] || pageDashboard);

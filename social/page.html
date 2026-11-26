@@ -1,0 +1,96 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Filmed by social/make_kit.js. ?mode=video (720x1280), cover (720x1280) or post (720x900); shot at 1.5x. -->
+<style>
+*{box-sizing:border-box}html,body{margin:0;overflow:hidden;background:#0d1117;color:#e6edf3;font-family:Inter,"Inter Display",system-ui,sans-serif}
+body{width:720px;height:1280px;position:relative}body.post{height:900px}
+.mono{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace}
+.top{position:absolute;left:36px;right:36px;top:44px;display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#6d5efc,#4f46e5);display:grid;place-items:center}
+.brand{font-weight:800;font-size:24px;letter-spacing:-.02em}.brand b{color:#8b7dff}
+.when{margin-left:auto;font-weight:600;font-size:15px;color:#7d8590}
+.cap{position:absolute;left:36px;right:36px;top:118px;height:150px}
+.cap div{position:absolute;inset:0;opacity:0}
+.cap h1{margin:0;font-size:42px;line-height:1.12;letter-spacing:-.03em;font-weight:800}
+.cap p{margin:10px 0 0;font-size:21px;color:#9aa4b2}
+.dn{color:#f85149}.up{color:#3fb950}.lime{color:#c6ff3d}
+.intro{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 50px;opacity:0}
+.intro h1{font-size:64px;line-height:1.05;letter-spacing:-.04em;margin:0;font-weight:800}.intro p{font-size:24px;color:#9aa4b2;margin-top:18px}
+canvas{position:absolute;left:14px;top:290px;width:692px;height:880px;opacity:0}
+.foot{position:absolute;left:36px;right:36px;bottom:44px;font-size:15px;color:#6e7681;display:flex;justify-content:space-between}
+.out{position:absolute;inset:0;background:#0d1117;opacity:0;padding:150px 44px 0}
+.out h2{font-size:46px;letter-spacing:-.03em;margin:0 0 34px;font-weight:800}
+.out h3{font-size:16px;letter-spacing:.14em;margin:28px 0 12px;color:#7d8590}
+.row{display:flex;justify-content:space-between;font-size:30px;font-weight:600;padding:12px 0;border-bottom:1px solid #21262d}
+.row span:last-child{font-weight:700}
+.cta{margin-top:56px;background:#c6ff3d;color:#0d1117;border-radius:20px;padding:26px 28px;font-size:30px;font-weight:800;line-height:1.2}
+.cta small{display:block;font-size:19px;font-weight:600;margin-top:6px;opacity:.75}
+.dis{margin-top:26px;font-size:16px;color:#6e7681;line-height:1.4}
+/* cover */
+body.cover canvas{opacity:.55;top:600px;height:600px}
+.cv{position:absolute;left:40px;right:40px;top:150px;display:none}
+body.cover .cv{display:block}
+.cv .k{font-size:22px;font-weight:700;letter-spacing:.12em;color:#c6ff3d}
+.cv h1{font-size:76px;line-height:1.02;letter-spacing:-.045em;margin:18px 0 0;font-weight:800}
+.cv .arrow{display:block;font-size:60px;color:#7d8590;margin:6px 0}
+.cv p{font-size:26px;color:#9aa4b2;margin-top:20px}
+/* post */
+body.post canvas{top:196px;height:540px;opacity:1}
+body.post .cap{top:104px;height:90px}body.post .cap div{opacity:1}
+body.post .cap h1{font-size:34px}body.post .cap p{font-size:18px;margin-top:6px}
+body.post .foot{bottom:20px;font-size:14px}
+.pl{position:absolute;left:36px;right:36px;top:748px;display:none;grid-template-columns:1fr 1fr;gap:18px;font-size:17px}
+body.post .pl{display:grid}
+.pl b{display:block;font-size:12.5px;letter-spacing:.12em;color:#7d8590;margin-bottom:4px}
+</style></head><body>
+<div class="top"><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+<div class="brand">Trade<b>Ready</b></div><div class="when mono" id="when"></div></div>
+<div class="intro" id="intro"><div><h1 id="hook"></h1><p>NSE F&amp;O · sector by sector</p></div></div>
+<div class="cap" id="cap"></div>
+<div class="cv" id="cover"></div>
+<canvas id="cv"></canvas>
+<div class="pl" id="pl"></div>
+<div class="foot"><span>tradeready.in</span><span>Not investment advice</span></div>
+<div class="out" id="out"></div>
+<script>
+// the maker steps the animation itself, one frame at a time
+window.__cbs = []; window.requestAnimationFrame = cb => { __cbs.push(cb); return 1; }; window.cancelAnimationFrame = () => {};
+window.__step = () => { const c = __cbs; __cbs = []; c.forEach(f => f(0)); };
+</script>
+<script src="../site/river.js"></script>
+<script>
+const D = window.__DATA, mode = new URLSearchParams(location.search).get("mode") || "video";
+document.body.className = mode;
+const f = x => (x > 0 ? "+" : "") + x.toFixed(2) + "%";
+const N = D.nodes, ins = N.filter(n => n.rel > .15), outs = N.filter(n => n.rel < -.15).reverse(), TP = ins[0], BT = outs[0];
+document.getElementById("when").textContent = D.dateLabel.toUpperCase() + " · " + D.at + " IST";
+document.getElementById("hook").textContent = D.hook;
+const caps = !TP || !BT ? [[2.6, 16, `<h1>A calm day</h1><p>No sector stood out against the F&amp;O market (${f(D.mkt)})</p>`]] : [
+  [2.6, 6.2, `<h1>Today's money flow</h1><p>F&amp;O market <b class="lime">${f(D.mkt)}</b> · left = leaving, right = arriving</p>`],
+  [6.2, 9.6, `<h1>Money left <span class="dn">${BT.name}</span></h1><p>${f(BT.rel)} vs the market</p>`],
+  [9.6, 13, `<h1>…and went into <span class="up">${TP.name}</span></h1><p>${f(TP.rel)} vs the market${TP.lead ? " · led by " + TP.lead : ""}</p>`],
+  [13, 16, `<h1>Thicker band = bigger shift</h1><p>${ins.length} sectors pulled money in, ${outs.length} lost it</p>`]];
+document.getElementById("cap").innerHTML = mode === "post"
+  ? `<div><h1>${TP && BT ? `<span class="dn">${BT.name}</span> → <span class="up">${TP.name}</span>` : "A calm day"}</h1><p>Where money moved today · F&amp;O market ${f(D.mkt)}</p></div>`
+  : caps.map(c => `<div>${c[2]}</div>`).join("");
+document.getElementById("cover").innerHTML = `<div class="k">${D.dateLabel.toUpperCase()} · MONEY FLOW</div>${TP && BT
+  ? `<h1><span class="dn">${BT.name}</span><span class="arrow">↓</span><span class="up">${TP.name}</span></h1>` : `<h1>A calm day</h1>`}<p>${D.hook}</p>`;
+const row = (n, c) => `<div class="row"><span>${n.name}</span><span class="mono ${c}">${f(n.rel)}</span></div>`;
+document.getElementById("out").innerHTML = `<h2>Today in one screen</h2><h3>MONEY COMING IN</h3>${ins.slice(0, 3).map(n => row(n, "up")).join("") || "<p>None standing out</p>"}
+  <h3>MONEY GOING OUT</h3>${outs.slice(0, 3).map(n => row(n, "dn")).join("") || "<p>None standing out</p>"}
+  <div class="cta">Watch it live, free<br>tradeready.in<small>Money flow updates through the market day</small></div>
+  <div class="dis">% = sector move compared with the whole F&amp;O market, weighted by traded value. A study of market data, not a tip or advice.</div>`;
+document.getElementById("pl").innerHTML = `<div><b class="up">MONEY COMING IN</b>${ins.slice(0, 3).map(n => `${n.name} <span class="mono up">${f(n.rel)}</span>`).join("<br>") || "—"}</div>
+  <div><b class="dn">MONEY GOING OUT</b>${outs.slice(0, 3).map(n => `${n.name} <span class="mono dn">${f(n.rel)}</span>`).join("<br>") || "—"}</div>`;
+const R = river(document.getElementById("cv"), mode === "post"
+  ? {nodes: N, mkt: D.mkt, label: "MARKET", fs: 1.3, max: 6, lab: 200, minH: 40, top: 54}
+  : {nodes: N, mkt: D.mkt, label: "MARKET", fs: 1.55, max: 7, lab: 205, minH: 58, top: 62});
+const fade = (t, a, b, e = .4) => Math.max(0, Math.min(1, (t - a) / e, (b - t) / e));
+window.setT = t => {
+  if (mode !== "video") return;
+  const intro = document.getElementById("intro"); intro.style.opacity = fade(t, -1, 2.4); intro.style.transform = `scale(${1 + t * .015})`;
+  document.getElementById("cv").style.opacity = Math.min(1, Math.max(0, (t - 2.2) / .8));
+  [...document.querySelectorAll("#cap div")].forEach((el, i) => { const o = fade(t, caps[i][0], caps[i][1]); el.style.opacity = o; el.style.transform = `translateY(${(1 - o) * 14}px)`; });
+  R.focus(TP && BT ? (t >= 6.4 && t < 9.6 ? BT.id : t >= 9.8 && t < 13 ? TP.id : null) : null);
+  const o = fade(t, 16, 99, .6), out = document.getElementById("out"); out.style.opacity = o; out.style.transform = `translateY(${(1 - o) * 30}px)`;
+};
+</script></body></html>
