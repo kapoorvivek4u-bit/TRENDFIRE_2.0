@@ -119,7 +119,9 @@ def bear_setups(E, sym, df, oi):
                 out.append({"setup": "Bear Pullback", "stage": stage, "grade": grade(vol_ok, oi_ok, warn),
                             "entry": trig, "stop": stop, "target_level": float(l[lo_i]),
                             "detail": f"Rally gave back {depth * 100:.0f}% of the fall · Volume {rally_v / leg_v:.1f}x in rally" if leg_v and rally_v else f"Rally gave back {depth * 100:.0f}% of the fall",
-                            "oi": f"OI {oi_leg:+.0f}% in the fall" + (f", {oi_rally:+.0f}% in the rally" if oi_rally is not None else "") if oi_leg is not None else "OI n/a"})
+                            "oi": ", ".join([t for t in (f"OI {oi_leg:+.0f}% in the fall" if oi_leg is not None else None,
+                                                         f"OI {oi_rally:+.0f}% in the rally" if oi_rally is not None else None) if t]) or "OI n/a",
+                            "oi_rally": r1(oi_rally)})
 
     # --- Breakdown
     if W["state"] in ("Bearish", "Topping", "Bottoming") and not W["impulse"]:
@@ -296,6 +298,44 @@ def bottom5(setups, weak, daily, ctx):
     return list(best.values())[:5], len(best)
 
 
+# ------------------------------------------------------------------ trapped longs
+def trapped_longs(rows, vk, sectors, five):
+    """Bounces graded Warning (futures OI rose during the rally = longs bought the bounce) in stocks whose
+    big trend is down and whose VK reading is bearish. If the bounce fails, those longs must sell."""
+    try:
+        with open(os.path.join(DATA, "chain_screen.json")) as f:
+            chains = {r["s"]: r for r in json.load(f).get("rows", [])}
+    except Exception:
+        chains = {}
+    best = {}
+    for r in rows:
+        if r["grade"] != "Warning" or r["stage"] not in ("Watch", "Ready", "Triggered"):
+            continue
+        s, st = r["symbol"], r["states"]
+        if st.get("M") not in ("Bearish", "Topping") or st.get("W") in ("Impulse", "Bullish"):
+            continue                                       # the big trend must be down
+        v = vk.get(s)
+        if v not in ("SELL NOW", "ALMOST READY (Bearish)", "COMING CLOSE TO READY (Bearish)"):
+            continue
+        x = r.get("ext")
+        if x is not None and x < -2.5:
+            continue                                       # already fell: too late
+        f5 = five.get(s) or {}
+        ch = chains.get(s) or {}
+        score = (3 if v == "SELL NOW" else 2 if v == "ALMOST READY (Bearish)" else 1) + (2 if x is not None and -1 <= x <= 1.5 else 0) \
+            + min(4, (r.get("oi_rally") or 0) / 8) + (1 if st.get("M") == "Bearish" else 0) + (2 if st.get("W") == "Bearish" else 0) \
+            + (1 if st.get("D") in ("Bearish", "Topping") else 0) + (1 if (f5.get("px5") or 0) < 0 else 0) \
+            + (1 if ch.get("score", 0) <= -1 else -1 if ch.get("score", 0) >= 1 else 0)
+        row = {"s": s, "setup": r["setup"], "stage": r["stage"], "detail": r.get("detail"), "oi_rally": r.get("oi_rally"), "vk": v,
+               "M": st.get("M"), "W": st.get("W"), "D": st.get("D"), "chase": x, "oi5": f5.get("oi5"), "px5": f5.get("px5"),
+               "chain": ch.get("bias"), "sector": (sectors.get(s) or {}).get("sector"), "close": r["close"], "score": round(score, 1)}
+        if s not in best or row["score"] > best[s]["score"]:
+            best[s] = row
+    out = sorted(best.values(), key=lambda r: -r["score"])
+    print(f"trapped longs: {len(out)}")
+    return out
+
+
 # ------------------------------------------------------------------ run
 def main():
     E = _load("setups_scan", "setups_scan.py")
@@ -340,6 +380,12 @@ def main():
     ctx = {"ban": set(hu.get("ban") or []), "results": hu.get("results") or {}, "today": now.date(), "sectors": sectors, "five": five,
            "fii_dist": {x["symbol"] for x in fii.get("distribution") or []}, "fii_acc": {x["symbol"] for x in fii.get("accumulation") or []},
            "unusual": {r["symbol"]: r.get("bias") for r in uj.get("rows") or []}, "vk": vk, "levels": site.get("levels") or {}}
+    mtf = setups.get("mtf") or {}
+    for r in rows:                                         # the main scan has 5 years of bars: use its M / W / D
+        st = mtf.get(r["symbol"])
+        if st:
+            r["states"] = {"M": st[0], "W": st[1], "D": st[2]}
+    longs = trapped_longs(rows, vk, sectors, five)
     b5, considered = bottom5(rows, weak, daily, ctx)
     weather = (site.get("strength") or {}).get("score")
     turn = (site.get("market") or {}).get("turn")
@@ -347,7 +393,7 @@ def main():
            "bear_mode": bool(weather is not None and (weather < 40 or (weather < 50 and turn in ("Falling", "Still falling")))),
            "weather": weather, "turn": turn,
            "setups": rows, "counts": {st: sum(1 for r in rows if r["stage"] == st) for st in ("Ready", "Triggered", "Watch")},
-           "weakest": weak[:60], "bottom5": {"picks": b5, "considered": considered}}
+           "weakest": weak[:60], "bottom5": {"picks": b5, "considered": considered}, "trapped_longs": longs}
     with open(os.path.join(DATA, "bear.json"), "w") as f:
         json.dump(res, f, separators=(",", ":"), allow_nan=False, default=str)
     try:
@@ -359,6 +405,14 @@ def main():
             pd.concat([log, new], ignore_index=True).to_csv(path, index=False)
     except Exception as ex:
         print("bear log skipped:", ex)
+    try:                                                   # today's trapped-longs list, rewritten each run, to test later
+        path, day = os.path.join(DATA, "trapped_longs_log.csv"), now.strftime("%Y-%m-%d")
+        log = pd.read_csv(path) if os.path.exists(path) else pd.DataFrame(columns=["date"])
+        log = log[log["date"].astype(str) != day]
+        new = pd.DataFrame([{"date": day, "symbol": r["s"], "score": r["score"], "close": r["close"], "vk": r["vk"]} for r in longs])
+        pd.concat([log, new], ignore_index=True).to_csv(path, index=False)
+    except Exception as ex:
+        print("trapped longs log skipped:", ex)
     print(f"bear: {len(rows)} setups ({res['counts']}), weakest {len(weak)}, bottom 5 from {considered}, bear mode {res['bear_mode']}")
 
 

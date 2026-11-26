@@ -759,7 +759,7 @@ const PAGES = [
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
-  ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"],["lab-trap","Trapped shorts"]]],
+  ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]]],
   ["market","Market","market", [["market","Sectors"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
@@ -1334,7 +1334,7 @@ document.addEventListener("submit", e => {
 });
 
 /* ============================================================ VK Experimentals (lab scanners) */
-const LAB_TABS = [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"],["lab-trap","Trapped shorts"]];
+const LAB_TABS = [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]];
 const LAB_INFO = {
   lab: {t:"Chup-chap kharidari", sub:"Delivery absorption: big money buying quietly",
     how:"Price stayed flat (−1% to +1.5%) while the value of shares taken into delivery was 2× or more its 20-day average and delivery % was 55 or higher. Funds that buy in size avoid pushing the price, so the footprint shows up in delivery before it shows up in price.",
@@ -1348,6 +1348,9 @@ const LAB_INFO = {
   "lab-trap": {t:"Trapped shorts in an uptrend", sub:"Shorts built into a dip while the big trend is still up",
     how:"A pullback setup graded ! Warning: futures OI rose while the price dipped, so traders sold short into the dip. But the Monthly trend is still Impulse/Bullish, the Weekly is not bearish, and VK says Buy now or Almost ready. If the dip ends, those shorts have to buy back, which can make a sharp move. Found from MCX: listed this way on 25 Nov, up about 8% on 26 Nov.",
     use:"Wait for the turn: the setup moving to Ready/Triggered or the Daily flipping to Impulse. Prefer VK Buy now, 🟢 Good entry zone and a bullish option chain. Stop under the pullback low: if the shorts are right, the fall continues. Updated every hourly scan."},
+  "lab-tlong": {t:"Trapped longs in a downtrend", sub:"Longs bought into a bounce while the big trend is down",
+    how:"A bounce in a downtrend (a Bear Pullback setup) graded ! Warning: futures OI rose while the price bounced, so traders bought the bounce. But the Monthly trend is Bearish or Topping, the Weekly is not bullish, and VK reads Sell now, Almost ready or Coming close (bearish). If the bounce fails, those longs have to sell, which can make a sharp fall. The mirror of Trapped shorts.",
+    use:"For shorts through futures or puts. Wait for the bounce to fail: the setup moving to Ready/Triggered (a close under the rally's low). Prefer VK Sell now, 🟢 Good short zone and a bearish option chain. Stop above the bounce high. Updated every hourly scan."},
   "lab-expiry": {t:"Expiry short squeeze", sub:"Trapped shorts near the monthly expiry",
     how:"Earlier in this series futures OI rose 8%+ while price fell (shorts built). In the last 3 sessions price is rising and above its 20 EMA, near-month OI is falling (shorts closing), and the futures premium over spot is improving. Rollover = next-month share of OI: low rollover means shorts are closing, not carrying over.",
     use:"Only meaningful in the last 5 sessions before the monthly expiry. Short, sharp trades: enter on strength, tight stop under the day's low, exit into expiry day."}
@@ -1359,8 +1362,8 @@ async function pageLab(){
   const head = pageHead("VK Experimentals", `New scanners under test${x ? ` · scanned ${esc(when(x.generated_ist))}` : ""}`) + tabs + `
     <section class="card fade labinfo"><div class="ct"><h2>${esc(info.t)}<em>${esc(info.sub)}</em></h2></div><span class="chip" style="--c:var(--warn);margin:-4px 0 8px">🧪 Experimental · not tested yet</span>
       <div class="lab2"><div><div class="lbl">How it works</div><p>${esc(info.how)}</p></div><div><div class="lbl">How to use it</div><p>${esc(info.use)}</p></div></div>
-      <div class="muted" style="font-size:11.5px">${key === "lab-trap" ? "Every day's list is logged, so after a few weeks we can see if this scanner actually works. Updated with every hourly scan." : "Every evening's top 10 are logged, so after a few weeks we can see if this scanner actually works. Runs at 8:30 pm on trading days."}</div></section>`;
-  if(!x && key !== "lab-trap") return head + `<div class="empty" style="margin-top:12px">The first run arrives after tonight's 8:30 pm scan.</div>`;
+      <div class="muted" style="font-size:11.5px">${key === "lab-trap" || key === "lab-tlong" ? "Every day's list is logged, so after a few weeks we can see if this scanner actually works. Updated with every hourly scan." : "Every evening's top 10 are logged, so after a few weeks we can see if this scanner actually works. Runs at 8:30 pm on trading days."}</div></section>`;
+  if(!x && key !== "lab-trap" && key !== "lab-tlong") return head + `<div class="empty" style="margin-top:12px">The first run arrives after tonight's 8:30 pm scan.</div>`;
   const fo = r => r.fo === false ? chip("Cash", "var(--muted)") : chip("F&O", "var(--info)");
   const table = (cols, rows, empty) => rows.length ? `<section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div><div class="tw"><table class="t labt"><tr>${cols.map(c => `<th class="${c[2] || ""}">${c[0]}</th>`).join("")}</tr>
     ${rows.map(row => `<tr>${cols.map(c => `<td class="${c[2] || ""}">${c[1](row)}</td>`).join("")}</tr>`).join("")}</table></div></section>`
@@ -1391,6 +1394,16 @@ async function pageLab(){
       ["Option chain", r => r.chain ? chip(r.chain, /ullish/.test(r.chain) ? "var(--up)" : /earish/.test(r.chain) ? "var(--down)" : "var(--muted)") : "—"],
       ["Chase", r => chaseCell(r.s)], ["Score", r => `<b>${r.score}</b>`, "n"]],
       t, "No trapped-short setups in an uptrend right now.") + `<div class="muted" style="font-size:11.5px;margin-top:8px">From the hourly F&amp;O scan · ${esc(when(S().generated_ist))}. Every day's list is logged to test it.</div>`; }
+  if(key === "lab-tlong"){ const b = await getJSON("bear.json").catch(() => null), t = (b && b.trapped_longs) || [];
+    const st = v => !v ? "—" : chip(v === "Impulse" ? "Imp" : (MTF_PH[v] || [v])[0], v === "Impulse" ? "var(--up)" : (MTF_PH[v] || [0, "var(--muted)"])[1]);
+    return head + table([
+      ["Stock", r => `<div class="symrow">${symLink(r.s, 13.5, false)}${starBtn(r.s)}</div>`], ["Price", r => { const q = livePx(r.s); return `${fmt(q ? q.close : r.close)}${q ? ` <b class="${cls(q.chg)}" style="font-size:11px">${pct(q.chg, 1)}</b>` : ""}`; }, "n"],
+      ["Setup", r => `${esc(r.setup)} <span class="muted">${esc(r.stage)}</span>`], ["Longs in the bounce", r => r.oi_rally != null ? `OI <b class="down">${pct(r.oi_rally, 0)}</b>` : "—", "n"],
+      ["VK", r => vkChip(r.vk)], ["M / W / D", r => st(r.M) + st(r.W) + st(r.D)],
+      ["5 days", r => `<span class="${cls(r.px5)}">${pct(r.px5)}</span>${r.oi5 != null ? ` <span class="muted">OI ${pct(r.oi5, 0)}</span>` : ""}`, "n"],
+      ["Option chain", r => r.chain ? chip(r.chain, /ullish/.test(r.chain) ? "var(--up)" : /earish/.test(r.chain) ? "var(--down)" : "var(--muted)") : "—"],
+      ["Short chase", r => chaseBearChip(r.s) || "—"], ["Score", r => `<b>${r.score}</b>`, "n"]],
+      t, "No trapped-long setups in a downtrend right now. They show up when the market is weak.") + `<div class="muted" style="font-size:11.5px;margin-top:8px">From the hourly bearish scan${b ? " · " + esc(when(b.generated_ist)) : ""}. Shorts only through futures or puts.</div>`; }
   if(key === "lab-iv") return head + table([
       ["Stock", stock], ["Price", px, "n"], ["Squeeze", r => `${r.sq_days} days${r.turning ? ` <span class="up" title="Momentum turning up">▲</span>` : ""}`, "n"],
       ["HV 20d", r => `${nn(r.hv)}%`, "n"], ["HV rank (1 yr)", r => `<b class="${r.hv_rank <= 10 ? "up" : ""}">${r.hv_rank}%</b>`, "n"],
@@ -2570,7 +2583,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
