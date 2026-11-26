@@ -84,10 +84,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "LODHA": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "LT": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -109,6 +105,10 @@
    "confirmed": "Not confirmed"
   },
   "PETRONET": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "PIDILITIND": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -692,6 +692,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "LODHA": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "MANKIND": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -724,10 +728,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "PIDILITIND": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "PRESTIGE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -738,7 +738,7 @@
   },
   "SUNPHARMA": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "TITAN": {
    "final": "BUY NOW",
@@ -757,6 +757,10 @@
    "confirmed": "Not confirmed"
   },
   "LTM": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "PAGEIND": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -817,10 +821,6 @@
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "KPITTECH": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "PAGEIND": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
