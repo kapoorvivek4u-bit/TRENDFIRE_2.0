@@ -40,7 +40,7 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Unusual scan $(date -u +%FT%H:%MZ)"
           for i in 1 2 3 4; do
-            git pull --rebase && git push && exit 0
+            git pull --rebase -X theirs && git push && exit 0
             sleep 7
           done
           exit 1
