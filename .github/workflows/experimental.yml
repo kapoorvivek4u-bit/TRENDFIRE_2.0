@@ -1,0 +1,43 @@
+name: VK Experimentals
+
+on:
+  # Started by the site (worker.js runSchedule) every evening after the equity scan.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: setups-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: pip install yfinance pandas numpy requests
+
+      - name: Run experimental scanners
+        run: python experimental_scan.py
+
+      - name: Save results to the repo
+        run: |
+          git config user.name "setups-bot"
+          git config user.email "setups-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && exit 0
+          git commit -m "VK Experimentals $(date -u +%FT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase && git push && exit 0
+            git rebase --abort 2>/dev/null
+            sleep $((i * 6))
+          done
+          exit 1

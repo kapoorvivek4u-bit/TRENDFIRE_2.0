@@ -401,6 +401,7 @@ const TIMETABLE = {
   "sector.yml":   m => m === at(16, 45),
   "deals.yml":    m => m === at(19, 0),
   "equity.yml":   m => m === at(19, 45),
+  "experimental.yml": m => m === at(20, 30),
 };
 async function runSchedule(env, when) {
   const d = IST_DAY(when || Date.now());
