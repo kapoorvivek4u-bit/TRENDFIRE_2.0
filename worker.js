@@ -191,7 +191,8 @@ async function db(env) {
     await env.DB.batch([
       env.DB.prepare("CREATE TABLE IF NOT EXISTS hits (ts INTEGER, day TEXT, email TEXT, page TEXT)"),
       env.DB.prepare("CREATE INDEX IF NOT EXISTS hits_day ON hits(day)"),
-      env.DB.prepare("CREATE TABLE IF NOT EXISTS online (email TEXT PRIMARY KEY, name TEXT, picture TEXT, ts INTEGER, page TEXT, device TEXT)")]);
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS online (email TEXT PRIMARY KEY, name TEXT, picture TEXT, ts INTEGER, page TEXT, device TEXT)"),
+      env.DB.prepare("CREATE TABLE IF NOT EXISTS active (day TEXT, email TEXT, secs INTEGER, PRIMARY KEY (day, email))")]);
     DB_READY = true;
   }
   return env.DB;
@@ -207,6 +208,9 @@ async function hit(env, req, user) {             // a page opened, or a 2-minute
                           "ON CONFLICT(email) DO UPDATE SET name=?2, picture=?3, ts=?4, page=COALESCE(?5,page), device=?6")
                  .bind(email, user.name || "", user.picture || "", now, page, device(req))];
     if (page) st.push(d.prepare("INSERT INTO hits (ts,day,email,page) VALUES (?1,?2,?3,?4)").bind(now, istDay(now), email, page));
+    const hb = Math.min(120, Math.max(0, Math.round(+b.hb || 0)));            // seconds on the site since the last ping (tab visible)
+    if (hb) st.push(d.prepare("INSERT INTO active (day,email,secs) VALUES (?1,?2,?3) ON CONFLICT(day,email) DO UPDATE SET secs = secs + ?3")
+                     .bind(istDay(now), email, hb));
     await d.batch(st);
   } catch (e) { console.log("hit failed", e.message); }
   return json({ ok: true });
@@ -217,13 +221,17 @@ async function adminStats(env, ctx) {
   const now = Date.now(), since = istDay(now - 29 * 864e5), today = istDay(now);
   const prune = d.prepare("DELETE FROM hits WHERE ts < ?").bind(now - 120 * 864e5).run().catch(() => null);   // housekeeping, not waited on
   if (ctx) ctx.waitUntil(prune); else await prune;
-  const [daily, pages, perUser, todayRows, online] = await d.batch([
+  const [daily, pages, perUser, todayRows, online, actToday, act30] = await d.batch([
     d.prepare("SELECT day, COUNT(DISTINCT email) AS users, COUNT(*) AS views FROM hits WHERE day >= ? GROUP BY day ORDER BY day").bind(since),
     d.prepare("SELECT page, COUNT(*) AS views, COUNT(DISTINCT email) AS users FROM hits WHERE day >= ? GROUP BY page ORDER BY views DESC").bind(since),
     d.prepare("SELECT email, page, COUNT(*) AS views FROM hits WHERE day >= ? GROUP BY email, page ORDER BY views DESC").bind(since),
     d.prepare("SELECT email, COUNT(*) AS views, MIN(ts) AS first, MAX(ts) AS last FROM hits WHERE day = ? GROUP BY email ORDER BY last DESC").bind(today),
-    d.prepare("SELECT email, name, picture, ts, page, device FROM online WHERE ts > ? ORDER BY ts DESC").bind(now - 5 * 60e3)]);
-  return { since, today, daily: daily.results, pages: pages.results, per_user: perUser.results, today_users: todayRows.results, online: online.results };
+    d.prepare("SELECT email, name, picture, ts, page, device FROM online WHERE ts > ? ORDER BY ts DESC").bind(now - 5 * 60e3),
+    d.prepare("SELECT email, secs FROM active WHERE day = ?").bind(today),
+    d.prepare("SELECT email, SUM(secs) AS secs, COUNT(*) AS days FROM active WHERE day >= ? GROUP BY email").bind(since)]);
+  return { since, today, daily: daily.results, pages: pages.results, per_user: perUser.results, today_users: todayRows.results, online: online.results,
+           time_today: Object.fromEntries(actToday.results.map(r => [r.email, r.secs])),
+           time_30: Object.fromEntries(act30.results.map(r => [r.email, { secs: r.secs, days: r.days }])) };
 }
 
 

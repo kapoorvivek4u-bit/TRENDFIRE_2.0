@@ -2353,8 +2353,10 @@ async function pageAdmin(){
   const noDb = `<div class="muted" style="font-size:12.5px">Page tracking starts once the D1 database is connected in Cloudflare.</div>`;
   const onlineCard = `<section class="card fade"><div class="ct"><h2><span class="up" style="font-size:12px">●</span> Online now<em>${online.length}</em></h2></div>
     ${!hasStats ? noDb : online.length ? online.map(o => person(o.email, `<div style="text-align:right;font-size:12px"><b>${esc(pageLabel(o.page || ""))}</b><div class="muted">${esc(o.device || "")}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody right now. Online means the site is open on their screen, checked every 2 minutes.</div>`}</section>`;
-  const todayCard = `<section class="card fade"><div class="ct"><h2>Opened today<em>${todayUsers.length}</em></h2></div>
-    ${todayUsers.length ? todayUsers.map(t => person(t.email, `<div style="text-align:right;font-size:12px;white-space:nowrap">${t.views ? `<b>${t.views} pages</b>` : ""}<div class="muted">last ${ago(new Date(t.last).toISOString())}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody yet today.</div>`}</section>`;
+  const tt = (st && st.time_today) || {}, t30 = (st && st.time_30) || {};
+  const dur = s => !s ? "" : s < 60 ? "<1 min" : s < 3600 ? `${Math.round(s / 60)} min` : `${Math.floor(s / 3600)} h ${Math.round(s % 3600 / 60)} min`;
+  const todayCard = `<section class="card fade"><div class="ct"><h2>Opened today<em>${todayUsers.length}</em></h2><span class="muted" style="font-size:11.5px">⏱ time on site today · 30 days</span></div>
+    ${todayUsers.length ? todayUsers.map(t => person(t.email, `<div style="text-align:right;font-size:12px;white-space:nowrap">${tt[t.email] ? `<b>⏱ ${dur(tt[t.email])}</b> · ` : ""}${t.views ? `<b>${t.views} pages</b>` : ""}<div class="muted">last ${ago(new Date(t.last).toISOString())}${t30[t.email] ? ` · 30d ${dur(t30[t.email].secs)}` : ""}</div></div>`)).join("") : `<div class="muted" style="font-size:12.5px">Nobody yet today.</div>`}</section>`;
   const pages = hasStats ? (st.pages || []) : [], pmax = Math.max(1, ...pages.map(p => p.views));
   const pagesCard = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>Popular pages<em>last 30 days</em></h2></div>
     ${!hasStats ? noDb : pages.length ? `<div class="tw"><table class="t"><tr><th>Page</th><th style="width:45%"></th><th class="n">Views</th><th class="n">People</th></tr>
@@ -2561,7 +2563,15 @@ function track(p){       // tells the admin page which pages people open (not co
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
   try{ navigator.sendBeacon("/api/hit", new Blob([JSON.stringify({p})], {type:"text/plain"})); }catch(e){}
 }
-setInterval(() => { if(USER && !isAdmin() && document.visibilityState === "visible") fetch("/api/hit", {method:"POST", body:"{}", keepalive:true}).catch(() => {}); }, 120000);
+let HB_AT = Date.now();            // time on site: count only while the tab is visible, ping once a minute
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") HB_AT = Date.now(); else ping(); });
+function ping(){
+  if(!USER || isAdmin()) return;
+  const secs = Math.min(120, Math.round((Date.now() - HB_AT) / 1000)); HB_AT = Date.now();
+  if(secs < 5) return;
+  try{ navigator.sendBeacon("/api/hit", new Blob([JSON.stringify({hb: secs})], {type:"text/plain"})); }catch(e){}
+}
+setInterval(() => { if(document.visibilityState === "visible") ping(); }, 60000);
 async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
