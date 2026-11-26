@@ -505,7 +505,13 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 @media (max-width:560px){.t5{grid-template-columns:auto 1fr}.t5 .r{grid-column:2;text-align:left;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.t5 .r>div{margin:0!important}}
 .mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
 .mtft td{vertical-align:middle;white-space:nowrap}
-.sheetc{width:min(860px,100%);max-height:88vh}
+.hitpop.sheetp{place-items:center;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.hitcard.sheetc{width:min(1180px,100%);height:min(94vh,100%);max-height:none;display:flex;flex-direction:column;overflow:auto;padding:16px 20px}
+.sheetc>.ct:first-child{position:sticky;top:-16px;z-index:2;background:var(--surface);margin:-16px -20px 8px;padding:14px 20px 10px;border-bottom:1px solid var(--line)}
+.sheetc>*{flex:none}.sheetc .tw{overflow-x:auto}.sheetc .chaint{min-width:760px;width:100%}
+.chaint .cshort,.chaint .chgm{display:none}
+@media (max-width:640px){.sheetc .chaint{min-width:0;font-size:11.5px}.chaint .ltp,.chaint .chgc,.chaint .cfull{display:none}.chaint .cshort{display:inline}.chaint .chgm{display:block;font-size:10.5px}.chaint td,.chaint th{padding:5px 4px}.chaint .chip{font-size:10px;padding:2px 6px}.hitpop.sheetp{padding:0}.hitcard.sheetc{width:100%;height:100%;border-radius:0;border:0;padding:12px 12px calc(16px + env(safe-area-inset-bottom,0px))}
+.sheetc>.ct:first-child{top:-12px;margin:-12px -12px 8px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px}}
 .chainread{margin:10px 0;padding:10px 14px;border-radius:12px;background:var(--surface2);font-size:13.5px}.chainread ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
 .chaint{font-size:12.5px;min-width:720px}.chaint td,.chaint th{white-space:nowrap;padding:5px 7px}.chaint .k{text-align:center;background:var(--surface2)}
 .chaint tr.atm td{background:color-mix(in srgb,var(--accent) 9%,transparent)}.chaint tr.itmc td:nth-child(-n+4){background:color-mix(in srgb,var(--warn) 6%,transparent)}.chaint tr.itmp td:nth-child(n+6){background:color-mix(in srgb,var(--warn) 6%,transparent)}
@@ -1595,13 +1601,14 @@ function chainTable(c){
   const bar = (v, col, right) => `<span class="oib" style="--w:${(v || 0) / mx * 100}%;--c:${col};${right ? "margin-left:auto" : ""}"></span>`;
   const ch = v => v ? `<span class="${v > 0 ? "up" : "down"}">${v > 0 ? "+" : ""}${fmt(v, 0)}</span>` : `<span class="muted">0</span>`;
   const lt = o => o ? `${fmt(o.ltp)} <small class="${cls(o.lc)}">${o.lc > 0 ? "+" : ""}${fmt(o.lc)}</small>` : "—";
-  const tag = a => a ? `<span class="chip" style="--c:${a[1]}">${a[0]}</span>` : "";
+  const SHORT = {"Call writing":"Writing","Call buying":"Buying","Writers covering":"Covering","Call unwinding":"Unwind","Put writing":"Writing","Put buying":"Buying","Put writers exit":"Exit","Put unwinding":"Unwind"};
+  const tag = a => a ? `<span class="chip" style="--c:${a[1]}"><span class="cfull">${a[0]}</span><span class="cshort">${SHORT[a[0]] || a[0]}</span></span>` : "";
   let spotDone = false;
-  return `<div class="tw"><table class="t chaint"><tr><th class="n">Call OI</th><th class="n">Chg</th><th class="n">LTP</th><th>Call action</th><th class="n k">Strike</th><th>Put action</th><th class="n">LTP</th><th class="n">Chg</th><th class="n">Put OI</th></tr>
-    ${c.rows.map(r => { const ce = r.ce || {}, pe = r.pe || {};
+  return `<div class="tw"><table class="t chaint"><tr><th class="n">Call OI</th><th class="n chgc">Chg</th><th class="n ltp">LTP</th><th>Call action</th><th class="n k">Strike</th><th>Put action</th><th class="n ltp">LTP</th><th class="n chgc">Chg</th><th class="n">Put OI</th></tr>
+    ${c.rows.filter(r => ((r.ce || {}).oi || 0) + ((r.pe || {}).oi || 0) > 0 || r.k === c.atm).map(r => { const ce = r.ce || {}, pe = r.pe || {};
       const line = !spotDone && r.k > c.spot ? (spotDone = true, `<tr class="spotl"><td colspan="9">Price ₹${fmt(c.spot)}</td></tr>`) : "";
-      return line + `<tr class="${r.k === c.atm ? "atm" : ""} ${r.k <= c.spot ? "itmc" : "itmp"}"><td class="n">${fmt(ce.oi, 0)}${bar(ce.oi, "var(--down)", true)}</td><td class="n">${ch(ce.chg)}</td><td class="n">${lt(r.ce)}</td><td>${tag(chainAct("ce", r.ce))}</td>
-        <td class="n k"><b>${fmt(r.k, 0)}</b></td><td>${tag(chainAct("pe", r.pe))}</td><td class="n">${lt(r.pe)}</td><td class="n">${ch(pe.chg)}</td><td class="n">${fmt(pe.oi, 0)}${bar(pe.oi, "var(--up)")}</td></tr>`; }).join("")}</table></div>`;
+      return line + `<tr class="${r.k === c.atm ? "atm" : ""} ${r.k <= c.spot ? "itmc" : "itmp"}"><td class="n">${fmt(ce.oi, 0)}<span class="chgm">${ch(ce.chg)}</span>${bar(ce.oi, "var(--down)", true)}</td><td class="n chgc">${ch(ce.chg)}</td><td class="n ltp">${lt(r.ce)}</td><td>${tag(chainAct("ce", r.ce))}</td>
+        <td class="n k"><b>${fmt(r.k, 0)}</b></td><td>${tag(chainAct("pe", r.pe))}</td><td class="n ltp">${lt(r.pe)}</td><td class="n chgc">${ch(pe.chg)}</td><td class="n">${fmt(pe.oi, 0)}<span class="chgm">${ch(pe.chg)}</span>${bar(pe.oi, "var(--up)")}</td></tr>`; }).join("")}</table></div>`;
 }
 function sheetHtml(){
   const s = SHEET.s, site = S() || {}, m = (site.mtf || []).find(r => r.s === s), rd = (site.ready || []).find(r => r.symbol === s);
