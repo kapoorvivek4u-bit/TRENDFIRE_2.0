@@ -1,6 +1,6 @@
 {
- "generated_ist": "2026-11-25 16:15",
- "oi_asof": null,
+ "generated_ist": "2026-11-26 08:28",
+ "oi_asof": "2026-11-25",
  "indexes": [
   {
    "key": "NIFTY",
@@ -98,31 +98,191 @@
    ],
    "setups": [],
    "futures": {
-    "oi": 16796130.0,
-    "price": 25349.65,
-    "date": "2026-11-23",
+    "oi": 13013910.0,
+    "price": 25937.0,
+    "date": "2026-11-25",
     "day": {
      "sessions": 1,
-     "oi_pct": 11.0,
-     "px_pct": -1.65,
-     "word": "Short build-up",
-     "side": -1
+     "oi_pct": -22.5,
+     "px_pct": 2.32,
+     "word": "Short covering",
+     "side": 1
     },
     "week": {
      "sessions": 5,
-     "oi_pct": 22.1,
-     "px_pct": 0.22,
-     "word": "Big positions building",
-     "side": 0
+     "oi_pct": -8.5,
+     "px_pct": 2.05,
+     "word": "Short covering",
+     "side": 1
     },
     "pcr_hist": [
-     0.94,
      1.0,
      0.85,
      1.47,
      1.67,
-     0.74
+     0.74,
+     0.91
     ]
+   },
+   "options": {
+    "expiry": "2026-12-01",
+    "spot": 25819.25,
+    "pcr": 0.91,
+    "max_pain": 25700.0,
+    "resistance": [
+     {
+      "strike": 26000.0,
+      "oi": 8568885.0
+     },
+     {
+      "strike": 26500.0,
+      "oi": 8164325.0
+     },
+     {
+      "strike": 27000.0,
+      "oi": 8111025.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 25500.0,
+      "oi": 6804785.0
+     },
+     {
+      "strike": 25000.0,
+      "oi": 6283160.0
+     },
+     {
+      "strike": 24000.0,
+      "oi": 5650840.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 26500.0,
+      "type": "CE",
+      "chg_oi": 3111290.0
+     },
+     {
+      "strike": 25500.0,
+      "type": "PE",
+      "chg_oi": 3098940.0
+     },
+     {
+      "strike": 25700.0,
+      "type": "PE",
+      "chg_oi": 2889900.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 25300.0,
+      "ce": 811005.0,
+      "pe": 3720990.0
+     },
+     {
+      "strike": 25350.0,
+      "ce": 234260.0,
+      "pe": 1305655.0
+     },
+     {
+      "strike": 25400.0,
+      "ce": 1998230.0,
+      "pe": 4398030.0
+     },
+     {
+      "strike": 25450.0,
+      "ce": 263185.0,
+      "pe": 1285635.0
+     },
+     {
+      "strike": 25500.0,
+      "ce": 2598960.0,
+      "pe": 6804785.0
+     },
+     {
+      "strike": 25550.0,
+      "ce": 356460.0,
+      "pe": 765310.0
+     },
+     {
+      "strike": 25600.0,
+      "ce": 1306175.0,
+      "pe": 3449550.0
+     },
+     {
+      "strike": 25650.0,
+      "ce": 489775.0,
+      "pe": 1205230.0
+     },
+     {
+      "strike": 25700.0,
+      "ce": 2509000.0,
+      "pe": 4287400.0
+     },
+     {
+      "strike": 25750.0,
+      "ce": 1513135.0,
+      "pe": 1704690.0
+     },
+     {
+      "strike": 25800.0,
+      "ce": 5010915.0,
+      "pe": 4394325.0
+     },
+     {
+      "strike": 25850.0,
+      "ce": 1594385.0,
+      "pe": 918060.0
+     },
+     {
+      "strike": 25900.0,
+      "ce": 3913845.0,
+      "pe": 1784120.0
+     },
+     {
+      "strike": 25950.0,
+      "ce": 1643590.0,
+      "pe": 458705.0
+     },
+     {
+      "strike": 26000.0,
+      "ce": 8568885.0,
+      "pe": 2427685.0
+     },
+     {
+      "strike": 26050.0,
+      "ce": 1150500.0,
+      "pe": 147355.0
+     },
+     {
+      "strike": 26100.0,
+      "ce": 2504060.0,
+      "pe": 354510.0
+     },
+     {
+      "strike": 26150.0,
+      "ce": 1416740.0,
+      "pe": 94900.0
+     },
+     {
+      "strike": 26200.0,
+      "ce": 6190210.0,
+      "pe": 397085.0
+     },
+     {
+      "strike": 26250.0,
+      "ce": 2063165.0,
+      "pe": 73905.0
+     },
+     {
+      "strike": 26300.0,
+      "ce": 3383900.0,
+      "pe": 898950.0
+     }
+    ],
+    "tot_ce": 126795565.0,
+    "tot_pe": 115996075.0
    },
    "board": [
     {
@@ -131,9 +291,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 21.5,
-      "px_pct": 5.5,
-      "word": "Long build-up",
+      "oi_pct": -10.8,
+      "px_pct": 6.9,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -143,10 +303,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 0.9,
-      "px_pct": -1.0,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -6.3,
+      "px_pct": 1.1,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -155,10 +315,10 @@
      "setup": "Trend Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 0.3,
-      "px_pct": -3.2,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -10.2,
+      "px_pct": -1.5,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -167,10 +327,10 @@
      "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": 10.4,
-      "px_pct": 0.1,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -8.3,
+      "px_pct": 1.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -179,9 +339,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 13.9,
-      "px_pct": 7.7,
-      "word": "Long build-up",
+      "oi_pct": -10.8,
+      "px_pct": 7.1,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -191,9 +351,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 5.4,
-      "px_pct": -2.3,
-      "word": "Short build-up",
+      "oi_pct": -8.3,
+      "px_pct": -0.0,
+      "word": "Long unwinding",
       "side": -1
      }
     },
@@ -203,9 +363,9 @@
      "setup": "Weekly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": 4.2,
-      "px_pct": -0.3,
-      "word": "Big positions building",
+      "oi_pct": -2.5,
+      "px_pct": 3.9,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -213,12 +373,12 @@
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
      "setup": "Swing Pullback \u00b7 Ready",
-     "grade": "B",
+     "grade": "C",
      "oi": {
-      "oi_pct": 4.3,
-      "px_pct": 0.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -5.9,
+      "px_pct": 2.8,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -227,22 +387,22 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 19.1,
-      "px_pct": -0.4,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -15.5,
+      "px_pct": 2.2,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "TITAN",
      "vk": "BUY NOW",
      "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "B",
+     "grade": "A",
      "oi": {
-      "oi_pct": 14.9,
-      "px_pct": -4.7,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -0.3,
+      "px_pct": -4.0,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -251,9 +411,9 @@
      "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": 9.6,
-      "px_pct": 1.1,
-      "word": "Long build-up",
+      "oi_pct": -4.1,
+      "px_pct": 0.9,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -261,10 +421,10 @@
      "symbol": "AXISBANK",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Daily Cup \u00b7 Triggered",
-     "grade": "A",
+     "grade": "B",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 3.6,
+      "oi_pct": -9.8,
+      "px_pct": 4.3,
       "word": "Short covering",
       "side": 1
      }
@@ -275,10 +435,10 @@
      "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": -0.0,
-      "px_pct": -0.8,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -15.5,
+      "px_pct": -0.2,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -287,8 +447,8 @@
      "setup": "Trend Pullback \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": -7.4,
-      "px_pct": -1.3,
+      "oi_pct": -12.7,
+      "px_pct": -2.1,
       "word": "Long unwinding",
       "side": -1
      }
@@ -299,21 +459,21 @@
      "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 1.6,
-      "px_pct": 2.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -10.9,
+      "px_pct": 2.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "LT",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Daily Flag \u00b7 Ready",
-     "grade": "B",
+     "grade": "A",
      "oi": {
-      "oi_pct": 8.7,
-      "px_pct": -1.0,
-      "word": "Big positions building",
+      "oi_pct": -1.5,
+      "px_pct": 0.4,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -323,10 +483,10 @@
      "setup": "Weekly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": -3.1,
-      "px_pct": -0.5,
-      "word": "Long unwinding",
-      "side": -1
+      "oi_pct": -17.8,
+      "px_pct": 1.5,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -335,10 +495,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -0.9,
-      "px_pct": 3.0,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -8.3,
+      "px_pct": 4.4,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -347,8 +507,8 @@
      "setup": "Squeeze Break \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": -5.5,
-      "px_pct": 0.2,
+      "oi_pct": -11.9,
+      "px_pct": 2.6,
       "word": "Short covering",
       "side": 1
      }
@@ -359,8 +519,8 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 1.7,
-      "px_pct": 0.4,
+      "oi_pct": 0.2,
+      "px_pct": -2.1,
       "word": "No big change",
       "side": 0
      }
@@ -371,21 +531,21 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 22.5,
-      "px_pct": -0.1,
-      "word": "Big positions building",
+      "oi_pct": -1.6,
+      "px_pct": 0.8,
+      "word": "No big change",
       "side": 0
      }
     },
     {
      "symbol": "BAJAJ-AUTO",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "B",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "A",
      "oi": {
-      "oi_pct": 17.7,
-      "px_pct": -0.5,
-      "word": "Big positions building",
+      "oi_pct": -1.6,
+      "px_pct": 1.2,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -395,8 +555,8 @@
      "setup": "Hourly Range \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": 17.2,
-      "px_pct": 1.5,
+      "oi_pct": 11.5,
+      "px_pct": 3.5,
       "word": "Long build-up",
       "side": 1
      }
@@ -407,10 +567,10 @@
      "setup": "Daily Range \u00b7 Ready",
      "grade": "A",
      "oi": {
-      "oi_pct": 1.3,
-      "px_pct": -1.4,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -4.2,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -419,32 +579,32 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 2.2,
-      "px_pct": 0.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -3.5,
+      "px_pct": 3.7,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "COALINDIA",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "C",
+     "grade": "B",
      "oi": {
-      "oi_pct": 6.0,
-      "px_pct": -4.1,
-      "word": "Short build-up",
+      "oi_pct": -10.4,
+      "px_pct": -1.4,
+      "word": "Long unwinding",
       "side": -1
      }
     },
     {
      "symbol": "HCLTECH",
      "vk": "NO SIGNAL",
-     "setup": "Daily Overspill \u00b7 Triggered",
+     "setup": "Daily Overspill \u00b7 Ready",
      "grade": "Warning",
      "oi": {
-      "oi_pct": 0.6,
-      "px_pct": -1.4,
+      "oi_pct": -2.2,
+      "px_pct": 2.0,
       "word": "No big change",
       "side": 0
      }
@@ -455,8 +615,8 @@
      "setup": "Swing Pullback \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 0.4,
+      "oi_pct": -18.6,
+      "px_pct": 4.3,
       "word": "Short covering",
       "side": 1
      }
@@ -467,10 +627,10 @@
      "setup": "Hourly Cup \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": 11.2,
-      "px_pct": -5.0,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -1.7,
+      "px_pct": 1.9,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -479,8 +639,8 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 14.5,
-      "px_pct": -2.9,
+      "oi_pct": 13.8,
+      "px_pct": -3.9,
       "word": "Short build-up",
       "side": -1
      }
@@ -491,9 +651,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 11.4,
-      "px_pct": 1.0,
-      "word": "Long build-up",
+      "oi_pct": -7.3,
+      "px_pct": 6.8,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -501,12 +661,12 @@
      "symbol": "INFY",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "A",
      "oi": {
-      "oi_pct": 4.6,
-      "px_pct": -3.6,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -3.8,
+      "px_pct": 0.8,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -515,9 +675,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 8.0,
-      "px_pct": 2.1,
-      "word": "Long build-up",
+      "oi_pct": -19.8,
+      "px_pct": 5.9,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -527,9 +687,9 @@
      "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 11.9,
-      "px_pct": 4.7,
-      "word": "Long build-up",
+      "oi_pct": -9.3,
+      "px_pct": 3.3,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -539,8 +699,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 42.6,
-      "px_pct": 11.2,
+      "oi_pct": 6.1,
+      "px_pct": 12.6,
       "word": "Long build-up",
       "side": 1
      }
@@ -551,8 +711,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -4.3,
-      "px_pct": 8.1,
+      "oi_pct": -9.8,
+      "px_pct": 5.1,
       "word": "Short covering",
       "side": 1
      }
@@ -563,8 +723,8 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": -4.3,
-      "px_pct": 0.9,
+      "oi_pct": -10.5,
+      "px_pct": 5.3,
       "word": "Short covering",
       "side": 1
      }
@@ -575,8 +735,8 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 1.7,
-      "px_pct": -1.5,
+      "oi_pct": -0.9,
+      "px_pct": -0.6,
       "word": "No big change",
       "side": 0
      }
@@ -587,20 +747,20 @@
      "setup": "Daily Range \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": -0.7,
-      "px_pct": -1.8,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -5.4,
+      "px_pct": -0.5,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
      "symbol": "POWERGRID",
      "vk": "NO SIGNAL",
      "setup": "Daily Rectangle \u00b7 Ready",
-     "grade": "C",
+     "grade": "B",
      "oi": {
-      "oi_pct": -10.1,
-      "px_pct": 1.2,
+      "oi_pct": -18.8,
+      "px_pct": 3.3,
       "word": "Short covering",
       "side": 1
      }
@@ -611,8 +771,8 @@
      "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": 23.6,
-      "px_pct": 0.6,
+      "oi_pct": 9.7,
+      "px_pct": 0.8,
       "word": "Big positions building",
       "side": 0
      }
@@ -620,13 +780,13 @@
     {
      "symbol": "SBILIFE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "C",
      "oi": {
-      "oi_pct": 13.4,
-      "px_pct": -1.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -11.3,
+      "px_pct": 1.7,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -635,8 +795,8 @@
      "setup": "Daily Cup \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": -7.9,
-      "px_pct": 4.0,
+      "oi_pct": -21.3,
+      "px_pct": 3.6,
       "word": "Short covering",
       "side": 1
      }
@@ -645,11 +805,11 @@
      "symbol": "SHRIRAMFIN",
      "vk": "NO SIGNAL",
      "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "B",
+     "grade": "A",
      "oi": {
-      "oi_pct": 4.8,
-      "px_pct": 1.9,
-      "word": "Long build-up",
+      "oi_pct": -9.8,
+      "px_pct": 0.4,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -659,10 +819,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -2.5,
-      "px_pct": 1.5,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -9.8,
+      "px_pct": 6.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -671,8 +831,8 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "Warning",
      "oi": {
-      "oi_pct": 15.7,
-      "px_pct": -10.5,
+      "oi_pct": 5.0,
+      "px_pct": -12.1,
       "word": "Short build-up",
       "side": -1
      }
@@ -681,11 +841,11 @@
      "symbol": "TCS",
      "vk": "NO SIGNAL",
      "setup": "Squeeze Break \u00b7 Ready",
-     "grade": "A",
+     "grade": "B",
      "oi": {
-      "oi_pct": 4.8,
-      "px_pct": 2.4,
-      "word": "Long build-up",
+      "oi_pct": -7.7,
+      "px_pct": 4.8,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -695,10 +855,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -0.6,
-      "px_pct": 0.2,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -9.0,
+      "px_pct": 5.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -707,10 +867,10 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 0.2,
-      "px_pct": -3.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -6.9,
+      "px_pct": -1.9,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -719,10 +879,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 2.5,
-      "px_pct": -1.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -3.7,
+      "px_pct": 2.0,
+      "word": "Short covering",
+      "side": 1
      }
     }
    ]
@@ -887,48 +1047,208 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63413.98,
+     "trigger": 63413.83,
      "stop": 62444.16
     }
    ],
    "futures": {
-    "oi": 2285520.0,
-    "price": 62585.35,
-    "date": "2026-11-23",
+    "oi": 1618290.0,
+    "price": 63946.8,
+    "date": "2026-11-25",
     "day": {
      "sessions": 1,
-     "oi_pct": -7.4,
-     "px_pct": -3.05,
-     "word": "Long unwinding",
-     "side": -1
+     "oi_pct": -29.2,
+     "px_pct": 2.18,
+     "word": "Short covering",
+     "side": 1
     },
     "week": {
      "sessions": 5,
-     "oi_pct": -4.0,
-     "px_pct": 1.87,
+     "oi_pct": -32.1,
+     "px_pct": 2.62,
      "word": "Short covering",
      "side": 1
     },
     "pcr_hist": [
-     1.24,
      1.34,
      1.18,
      1.36,
      1.37,
-     0.71
+     0.71,
+     0.87
     ]
+   },
+   "options": {
+    "expiry": "2026-12-29",
+    "spot": 63703.25,
+    "pcr": 0.87,
+    "max_pain": 63500.0,
+    "resistance": [
+     {
+      "strike": 66000.0,
+      "oi": 1473150.0
+     },
+     {
+      "strike": 65000.0,
+      "oi": 1129500.0
+     },
+     {
+      "strike": 67000.0,
+      "oi": 717120.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 60000.0,
+      "oi": 619770.0
+     },
+     {
+      "strike": 63000.0,
+      "oi": 590490.0
+     },
+     {
+      "strike": 62000.0,
+      "oi": 524970.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 66000.0,
+      "type": "PE",
+      "chg_oi": 588000.0
+     },
+     {
+      "strike": 66000.0,
+      "type": "CE",
+      "chg_oi": 151320.0
+     },
+     {
+      "strike": 64000.0,
+      "type": "PE",
+      "chg_oi": 120270.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 62700.0,
+      "ce": 11790.0,
+      "pe": 23580.0
+     },
+     {
+      "strike": 62800.0,
+      "ce": 11850.0,
+      "pe": 23970.0
+     },
+     {
+      "strike": 62900.0,
+      "ce": 30150.0,
+      "pe": 29550.0
+     },
+     {
+      "strike": 63000.0,
+      "ce": 517260.0,
+      "pe": 590490.0
+     },
+     {
+      "strike": 63100.0,
+      "ce": 33540.0,
+      "pe": 31200.0
+     },
+     {
+      "strike": 63200.0,
+      "ce": 28410.0,
+      "pe": 23820.0
+     },
+     {
+      "strike": 63300.0,
+      "ce": 39690.0,
+      "pe": 32400.0
+     },
+     {
+      "strike": 63400.0,
+      "ce": 32490.0,
+      "pe": 40050.0
+     },
+     {
+      "strike": 63500.0,
+      "ce": 376110.0,
+      "pe": 333630.0
+     },
+     {
+      "strike": 63600.0,
+      "ce": 55740.0,
+      "pe": 49140.0
+     },
+     {
+      "strike": 63700.0,
+      "ce": 63360.0,
+      "pe": 33540.0
+     },
+     {
+      "strike": 63800.0,
+      "ce": 88980.0,
+      "pe": 52950.0
+     },
+     {
+      "strike": 63900.0,
+      "ce": 79200.0,
+      "pe": 61620.0
+     },
+     {
+      "strike": 64000.0,
+      "ce": 665700.0,
+      "pe": 448080.0
+     },
+     {
+      "strike": 64100.0,
+      "ce": 86100.0,
+      "pe": 45750.0
+     },
+     {
+      "strike": 64200.0,
+      "ce": 99630.0,
+      "pe": 47160.0
+     },
+     {
+      "strike": 64300.0,
+      "ce": 52020.0,
+      "pe": 24750.0
+     },
+     {
+      "strike": 64400.0,
+      "ce": 40980.0,
+      "pe": 27660.0
+     },
+     {
+      "strike": 64500.0,
+      "ce": 228720.0,
+      "pe": 90330.0
+     },
+     {
+      "strike": 64600.0,
+      "ce": 50010.0,
+      "pe": 18810.0
+     },
+     {
+      "strike": 64700.0,
+      "ce": 38040.0,
+      "pe": 8820.0
+     }
+    ],
+    "tot_ce": 11878740.0,
+    "tot_pe": 10368540.0
    },
    "board": [
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
      "setup": "Swing Pullback \u00b7 Ready",
-     "grade": "B",
+     "grade": "C",
      "oi": {
-      "oi_pct": 4.3,
-      "px_pct": 0.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -5.9,
+      "px_pct": 2.8,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -937,8 +1257,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -5.4,
-      "px_pct": 4.9,
+      "oi_pct": -6.7,
+      "px_pct": 5.1,
       "word": "Short covering",
       "side": 1
      }
@@ -947,10 +1267,10 @@
      "symbol": "AXISBANK",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Daily Cup \u00b7 Triggered",
-     "grade": "A",
+     "grade": "B",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 3.6,
+      "oi_pct": -9.8,
+      "px_pct": 4.3,
       "word": "Short covering",
       "side": 1
      }
@@ -958,11 +1278,11 @@
     {
      "symbol": "FEDERALBNK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "A",
+     "setup": null,
+     "grade": null,
      "oi": {
-      "oi_pct": -4.9,
-      "px_pct": -0.8,
+      "oi_pct": -10.3,
+      "px_pct": -2.2,
       "word": "Long unwinding",
       "side": -1
      }
@@ -973,10 +1293,10 @@
      "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 1.6,
-      "px_pct": 2.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -10.9,
+      "px_pct": 2.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -985,10 +1305,10 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "B",
      "oi": {
-      "oi_pct": -4.1,
-      "px_pct": 3.8,
-      "word": "Short covering",
-      "side": 1
+      "oi_pct": -18.8,
+      "px_pct": -0.8,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -997,10 +1317,10 @@
      "setup": "Swing Pullback \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": 2.6,
-      "px_pct": 1.4,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -3.0,
+      "px_pct": 3.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1009,8 +1329,8 @@
      "setup": "Weekly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": -9.6,
-      "px_pct": 1.6,
+      "oi_pct": -20.0,
+      "px_pct": 1.1,
       "word": "Short covering",
       "side": 1
      }
@@ -1021,8 +1341,8 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "B",
      "oi": {
-      "oi_pct": -6.9,
-      "px_pct": 1.9,
+      "oi_pct": -20.0,
+      "px_pct": 0.8,
       "word": "Short covering",
       "side": 1
      }
@@ -1033,10 +1353,10 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "A",
      "oi": {
-      "oi_pct": 3.1,
-      "px_pct": 1.1,
-      "word": "Long build-up",
-      "side": 1
+      "oi_pct": -1.9,
+      "px_pct": -0.4,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -1045,8 +1365,8 @@
      "setup": "Swing Pullback \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 0.4,
+      "oi_pct": -18.6,
+      "px_pct": 4.3,
       "word": "Short covering",
       "side": 1
      }
@@ -1054,11 +1374,11 @@
     {
      "symbol": "INDUSINDBK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "B",
+     "setup": null,
+     "grade": null,
      "oi": {
-      "oi_pct": -7.5,
-      "px_pct": 5.6,
+      "oi_pct": -12.2,
+      "px_pct": 5.0,
       "word": "Short covering",
       "side": 1
      }
@@ -1069,8 +1389,8 @@
      "setup": "Daily Cup \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": -7.9,
-      "px_pct": 4.0,
+      "oi_pct": -21.3,
+      "px_pct": 3.6,
       "word": "Short covering",
       "side": 1
      }
@@ -1081,8 +1401,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -4.1,
-      "px_pct": -1.4,
+      "oi_pct": -6.8,
+      "px_pct": -0.6,
       "word": "Long unwinding",
       "side": -1
      }
@@ -1467,42 +1787,202 @@
     }
    ],
    "futures": {
-    "oi": 2309160.0,
-    "price": 14199.6,
-    "date": "2026-11-23",
+    "oi": 1840560.0,
+    "price": 14284.9,
+    "date": "2026-11-25",
     "day": {
      "sessions": 1,
-     "oi_pct": -7.4,
-     "px_pct": -0.69,
-     "word": "Long unwinding",
-     "side": -1
+     "oi_pct": -20.3,
+     "px_pct": 0.6,
+     "word": "Short covering",
+     "side": 1
     },
     "week": {
      "sessions": 5,
-     "oi_pct": 5.4,
-     "px_pct": -0.38,
-     "word": "Big positions building",
-     "side": 0
+     "oi_pct": -18.0,
+     "px_pct": 0.11,
+     "word": "Short covering",
+     "side": 1
     },
     "pcr_hist": [
-     1.02,
      0.98,
      0.83,
      0.93,
      0.96,
-     1.01
+     1.01,
+     0.73
     ]
+   },
+   "options": {
+    "expiry": "2026-12-29",
+    "spot": 14236.1,
+    "pcr": 0.73,
+    "max_pain": 14300.0,
+    "resistance": [
+     {
+      "strike": 14500.0,
+      "oi": 763320.0
+     },
+     {
+      "strike": 15000.0,
+      "oi": 550080.0
+     },
+     {
+      "strike": 14300.0,
+      "oi": 308520.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 14000.0,
+      "oi": 342000.0
+     },
+     {
+      "strike": 13500.0,
+      "oi": 314520.0
+     },
+     {
+      "strike": 14200.0,
+      "oi": 265680.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 14500.0,
+      "type": "CE",
+      "chg_oi": 252720.0
+     },
+     {
+      "strike": 14200.0,
+      "type": "PE",
+      "chg_oi": 151080.0
+     },
+     {
+      "strike": 13500.0,
+      "type": "PE",
+      "chg_oi": 100680.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 13975.0,
+      "ce": 120.0,
+      "pe": 1920.0
+     },
+     {
+      "strike": 14000.0,
+      "ce": 301680.0,
+      "pe": 342000.0
+     },
+     {
+      "strike": 14025.0,
+      "ce": 0.0,
+      "pe": 3240.0
+     },
+     {
+      "strike": 14050.0,
+      "ce": 240.0,
+      "pe": 1680.0
+     },
+     {
+      "strike": 14075.0,
+      "ce": 480.0,
+      "pe": 1920.0
+     },
+     {
+      "strike": 14100.0,
+      "ce": 29520.0,
+      "pe": 92160.0
+     },
+     {
+      "strike": 14125.0,
+      "ce": 720.0,
+      "pe": 2040.0
+     },
+     {
+      "strike": 14150.0,
+      "ce": 5520.0,
+      "pe": 11280.0
+     },
+     {
+      "strike": 14175.0,
+      "ce": 2640.0,
+      "pe": 4200.0
+     },
+     {
+      "strike": 14200.0,
+      "ce": 142800.0,
+      "pe": 265680.0
+     },
+     {
+      "strike": 14225.0,
+      "ce": 9600.0,
+      "pe": 5520.0
+     },
+     {
+      "strike": 14250.0,
+      "ce": 25920.0,
+      "pe": 20520.0
+     },
+     {
+      "strike": 14275.0,
+      "ce": 19440.0,
+      "pe": 8880.0
+     },
+     {
+      "strike": 14300.0,
+      "ce": 308520.0,
+      "pe": 223560.0
+     },
+     {
+      "strike": 14325.0,
+      "ce": 7560.0,
+      "pe": 7080.0
+     },
+     {
+      "strike": 14350.0,
+      "ce": 22680.0,
+      "pe": 17520.0
+     },
+     {
+      "strike": 14375.0,
+      "ce": 7920.0,
+      "pe": 6600.0
+     },
+     {
+      "strike": 14400.0,
+      "ce": 142320.0,
+      "pe": 102840.0
+     },
+     {
+      "strike": 14425.0,
+      "ce": 3240.0,
+      "pe": 3480.0
+     },
+     {
+      "strike": 14450.0,
+      "ce": 7920.0,
+      "pe": 3600.0
+     },
+     {
+      "strike": 14475.0,
+      "ce": 2520.0,
+      "pe": 3000.0
+     }
+    ],
+    "tot_ce": 3409680.0,
+    "tot_pe": 2490960.0
    },
    "board": [
     {
      "symbol": "AUROPHARMA",
      "vk": "BUY NOW",
-     "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "C",
+     "setup": "Daily VCP \u00b7 Watch",
+     "grade": "B",
      "oi": {
-      "oi_pct": 3.0,
-      "px_pct": 0.3,
-      "word": "Big positions building",
+      "oi_pct": -1.5,
+      "px_pct": 3.3,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -1512,10 +1992,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 4.5,
-      "px_pct": 3.6,
-      "word": "Long build-up",
-      "side": 1
+      "oi_pct": -0.6,
+      "px_pct": 8.0,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -1524,22 +2004,22 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 6.6,
-      "px_pct": 0.9,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -6.3,
+      "px_pct": 2.2,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "MCX",
      "vk": "BUY NOW",
      "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "Warning",
+     "grade": "C",
      "oi": {
-      "oi_pct": 9.3,
-      "px_pct": -3.8,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": 0.5,
+      "px_pct": -3.6,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -1548,22 +2028,22 @@
      "setup": "Daily Overspill \u00b7 Watch",
      "grade": "Warning",
      "oi": {
-      "oi_pct": 16.7,
-      "px_pct": -8.5,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -0.0,
+      "px_pct": -9.3,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
      "symbol": "PERSISTENT",
      "vk": "BUY NOW",
-     "setup": "Daily Overspill \u00b7 Watch",
-     "grade": "A",
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "B",
      "oi": {
-      "oi_pct": -1.0,
-      "px_pct": 5.3,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -14.5,
+      "px_pct": 4.2,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1572,8 +2052,8 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": 6.3,
-      "px_pct": -3.2,
+      "oi_pct": 3.6,
+      "px_pct": -3.4,
       "word": "Short build-up",
       "side": -1
      }
@@ -1581,11 +2061,11 @@
     {
      "symbol": "FEDERALBNK",
      "vk": "ALMOST READY (Bullish)",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "A",
+     "setup": null,
+     "grade": null,
      "oi": {
-      "oi_pct": -4.9,
-      "px_pct": -0.8,
+      "oi_pct": -10.3,
+      "px_pct": -2.2,
       "word": "Long unwinding",
       "side": -1
      }
@@ -1596,10 +2076,10 @@
      "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 3.0,
-      "px_pct": 2.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -9.3,
+      "px_pct": 0.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1608,22 +2088,22 @@
      "setup": "Hourly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 9.1,
-      "px_pct": 0.0,
-      "word": "Big positions building",
+      "oi_pct": -2.5,
+      "px_pct": -0.5,
+      "word": "No big change",
       "side": 0
      }
     },
     {
      "symbol": "ASHOKLEY",
      "vk": "NO SIGNAL",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "C",
+     "setup": "Daily Range \u00b7 Watch",
+     "grade": "B",
      "oi": {
-      "oi_pct": 23.4,
-      "px_pct": -5.0,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": 1.8,
+      "px_pct": -1.0,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -1632,8 +2112,8 @@
      "setup": "Weekly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": -9.6,
-      "px_pct": 1.6,
+      "oi_pct": -20.0,
+      "px_pct": 1.1,
       "word": "Short covering",
       "side": 1
      }
@@ -1644,10 +2124,10 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 6.3,
-      "px_pct": 0.2,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -4.4,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1656,10 +2136,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -4.5,
-      "px_pct": 4.1,
-      "word": "Short covering",
-      "side": 1
+      "oi_pct": -19.5,
+      "px_pct": -1.2,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -1668,8 +2148,8 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": -7.5,
-      "px_pct": -3.0,
+      "oi_pct": -13.9,
+      "px_pct": -5.4,
       "word": "Long unwinding",
       "side": -1
      }
@@ -1677,11 +2157,11 @@
     {
      "symbol": "INDUSINDBK",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "B",
+     "setup": null,
+     "grade": null,
      "oi": {
-      "oi_pct": -7.5,
-      "px_pct": 5.6,
+      "oi_pct": -12.2,
+      "px_pct": 5.0,
       "word": "Short covering",
       "side": 1
      }
@@ -1692,21 +2172,21 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 4.4,
-      "px_pct": -3.7,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": 0.8,
+      "px_pct": -2.4,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
      "symbol": "LICI",
      "vk": "NO SIGNAL",
      "setup": "Daily Falling Wedge \u00b7 Triggered",
-     "grade": "A",
+     "grade": "B",
      "oi": {
-      "oi_pct": 8.3,
-      "px_pct": 1.6,
-      "word": "Long build-up",
+      "oi_pct": -14.0,
+      "px_pct": 2.4,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -1716,9 +2196,9 @@
      "setup": "Hourly Range \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": 3.2,
-      "px_pct": 0.1,
-      "word": "Big positions building",
+      "oi_pct": 0.5,
+      "px_pct": 2.9,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -1728,10 +2208,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 0.8,
-      "px_pct": 1.3,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -6.3,
+      "px_pct": 4.1,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1740,8 +2220,8 @@
      "setup": "Hourly Range \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": -10.9,
-      "px_pct": 0.9,
+      "oi_pct": -11.2,
+      "px_pct": 8.1,
       "word": "Short covering",
       "side": 1
      }
@@ -1752,10 +2232,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -2.2,
-      "px_pct": 1.7,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -7.0,
+      "px_pct": 2.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1764,8 +2244,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -12.6,
-      "px_pct": -3.9,
+      "oi_pct": -20.1,
+      "px_pct": -2.5,
       "word": "Long unwinding",
       "side": -1
      }
@@ -1776,8 +2256,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -4.1,
-      "px_pct": -1.4,
+      "oi_pct": -6.8,
+      "px_pct": -0.6,
       "word": "Long unwinding",
       "side": -1
      }
@@ -1788,10 +2268,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 5.3,
-      "px_pct": -7.4,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -1.5,
+      "px_pct": -5.4,
+      "word": "No big change",
+      "side": 0
      }
     }
    ]
@@ -1927,31 +2407,191 @@
     }
    ],
    "futures": {
-    "oi": 23520.0,
-    "price": 28153.5,
-    "date": "2026-11-23",
+    "oi": 10260.0,
+    "price": 28911.1,
+    "date": "2026-11-25",
     "day": {
      "sessions": 1,
-     "oi_pct": -21.1,
-     "px_pct": -2.33,
-     "word": "Long unwinding",
-     "side": -1
+     "oi_pct": -56.4,
+     "px_pct": 2.69,
+     "word": "Short covering",
+     "side": 1
     },
     "week": {
      "sessions": 5,
-     "oi_pct": -22.2,
-     "px_pct": 0.75,
+     "oi_pct": -64.7,
+     "px_pct": 2.68,
      "word": "Short covering",
      "side": 1
     },
     "pcr_hist": [
-     1.2,
      1.45,
      1.4,
      1.53,
      1.54,
-     1.02
+     1.02,
+     0.91
     ]
+   },
+   "options": {
+    "expiry": "2026-12-29",
+    "spot": 28764.95,
+    "pcr": 0.91,
+    "max_pain": 28750.0,
+    "resistance": [
+     {
+      "strike": 30000.0,
+      "oi": 9000.0
+     },
+     {
+      "strike": 29000.0,
+      "oi": 7200.0
+     },
+     {
+      "strike": 31000.0,
+      "oi": 5760.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 28500.0,
+      "oi": 8580.0
+     },
+     {
+      "strike": 28000.0,
+      "oi": 4080.0
+     },
+     {
+      "strike": 27000.0,
+      "oi": 2880.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 30000.0,
+      "type": "CE",
+      "chg_oi": 9000.0
+     },
+     {
+      "strike": 29000.0,
+      "type": "CE",
+      "chg_oi": 3720.0
+     },
+     {
+      "strike": 28500.0,
+      "type": "PE",
+      "chg_oi": 3360.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 28250.0,
+      "ce": 120.0,
+      "pe": 840.0
+     },
+     {
+      "strike": 28300.0,
+      "ce": 0.0,
+      "pe": 1260.0
+     },
+     {
+      "strike": 28350.0,
+      "ce": 60.0,
+      "pe": 960.0
+     },
+     {
+      "strike": 28400.0,
+      "ce": 1620.0,
+      "pe": 1680.0
+     },
+     {
+      "strike": 28450.0,
+      "ce": 60.0,
+      "pe": 480.0
+     },
+     {
+      "strike": 28500.0,
+      "ce": 3780.0,
+      "pe": 8580.0
+     },
+     {
+      "strike": 28550.0,
+      "ce": 60.0,
+      "pe": 420.0
+     },
+     {
+      "strike": 28600.0,
+      "ce": 1140.0,
+      "pe": 1560.0
+     },
+     {
+      "strike": 28650.0,
+      "ce": 0.0,
+      "pe": 480.0
+     },
+     {
+      "strike": 28700.0,
+      "ce": 540.0,
+      "pe": 1200.0
+     },
+     {
+      "strike": 28750.0,
+      "ce": 600.0,
+      "pe": 720.0
+     },
+     {
+      "strike": 28800.0,
+      "ce": 2100.0,
+      "pe": 1800.0
+     },
+     {
+      "strike": 28850.0,
+      "ce": 240.0,
+      "pe": 120.0
+     },
+     {
+      "strike": 28900.0,
+      "ce": 960.0,
+      "pe": 1380.0
+     },
+     {
+      "strike": 28950.0,
+      "ce": 660.0,
+      "pe": 1140.0
+     },
+     {
+      "strike": 29000.0,
+      "ce": 7200.0,
+      "pe": 3060.0
+     },
+     {
+      "strike": 29050.0,
+      "ce": 180.0,
+      "pe": 720.0
+     },
+     {
+      "strike": 29100.0,
+      "ce": 1800.0,
+      "pe": 2280.0
+     },
+     {
+      "strike": 29150.0,
+      "ce": 420.0,
+      "pe": 600.0
+     },
+     {
+      "strike": 29200.0,
+      "ce": 660.0,
+      "pe": 1140.0
+     },
+     {
+      "strike": 29250.0,
+      "ce": 240.0,
+      "pe": 120.0
+     }
+    ],
+    "tot_ce": 60720.0,
+    "tot_pe": 55140.0
    },
    "board": [
     {
@@ -1960,10 +2600,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 0.9,
-      "px_pct": -1.0,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -6.3,
+      "px_pct": 1.1,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -1972,32 +2612,32 @@
      "setup": "Trend Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 0.3,
-      "px_pct": -3.2,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -10.2,
+      "px_pct": -1.5,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
      "symbol": "ICICIBANK",
      "vk": "BUY NOW",
      "setup": "Swing Pullback \u00b7 Ready",
-     "grade": "B",
+     "grade": "C",
      "oi": {
-      "oi_pct": 4.3,
-      "px_pct": 0.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -5.9,
+      "px_pct": 2.8,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "AXISBANK",
      "vk": "ALMOST READY (Bullish)",
      "setup": "Daily Cup \u00b7 Triggered",
-     "grade": "A",
+     "grade": "B",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 3.6,
+      "oi_pct": -9.8,
+      "px_pct": 4.3,
       "word": "Short covering",
       "side": 1
      }
@@ -2008,10 +2648,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -12.4,
-      "px_pct": -0.4,
-      "word": "Long unwinding",
-      "side": -1
+      "oi_pct": -29.3,
+      "px_pct": 0.3,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2020,10 +2660,10 @@
      "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 1.6,
-      "px_pct": 2.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -10.9,
+      "px_pct": 2.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2032,8 +2672,8 @@
      "setup": "Hourly Range \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": 17.2,
-      "px_pct": 1.5,
+      "oi_pct": 11.5,
+      "px_pct": 3.5,
       "word": "Long build-up",
       "side": 1
      }
@@ -2044,8 +2684,8 @@
      "setup": "Swing Pullback \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 0.4,
+      "oi_pct": -18.6,
+      "px_pct": 4.3,
       "word": "Short covering",
       "side": 1
      }
@@ -2056,10 +2696,10 @@
      "setup": "Hourly Cup \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": 11.2,
-      "px_pct": -5.0,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -1.7,
+      "px_pct": 1.9,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -2068,22 +2708,22 @@
      "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": -2.0,
-      "px_pct": 2.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -16.0,
+      "px_pct": 3.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "LICHSGFIN",
      "vk": "NO SIGNAL",
      "setup": "Swing Pullback \u00b7 Watch",
-     "grade": "Warning",
+     "grade": "B",
      "oi": {
-      "oi_pct": -1.3,
-      "px_pct": -0.0,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -8.2,
+      "px_pct": -3.0,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2092,8 +2732,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -13.8,
-      "px_pct": 0.5,
+      "oi_pct": -18.3,
+      "px_pct": 1.7,
       "word": "Short covering",
       "side": 1
      }
@@ -2104,8 +2744,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 36.2,
-      "px_pct": -8.3,
+      "oi_pct": 18.1,
+      "px_pct": -7.2,
       "word": "Short build-up",
       "side": -1
      }
@@ -2116,10 +2756,10 @@
      "setup": "Daily Range \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -1.3,
-      "px_pct": -1.3,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -5.0,
+      "px_pct": 1.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2128,22 +2768,22 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 1.3,
-      "px_pct": -1.6,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -5.7,
+      "px_pct": 0.7,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "SBILIFE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Swing Pullback \u00b7 Watch",
+     "grade": "C",
      "oi": {
-      "oi_pct": 13.4,
-      "px_pct": -1.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -11.3,
+      "px_pct": 1.7,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2152,8 +2792,8 @@
      "setup": "Daily Cup \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": -7.9,
-      "px_pct": 4.0,
+      "oi_pct": -21.3,
+      "px_pct": 3.6,
       "word": "Short covering",
       "side": 1
      }
@@ -2162,11 +2802,11 @@
      "symbol": "SHRIRAMFIN",
      "vk": "NO SIGNAL",
      "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "B",
+     "grade": "A",
      "oi": {
-      "oi_pct": 4.8,
-      "px_pct": 1.9,
-      "word": "Long build-up",
+      "oi_pct": -9.8,
+      "px_pct": 0.4,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -2176,10 +2816,10 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 0.2,
-      "px_pct": -3.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -6.9,
+      "px_pct": -1.9,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2188,10 +2828,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -2.5,
-      "px_pct": 0.3,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -7.2,
+      "px_pct": 3.6,
+      "word": "Short covering",
+      "side": 1
      }
     }
    ]
@@ -2327,41 +2967,196 @@
     }
    ],
    "futures": {
-    "oi": 16150.0,
-    "price": 72245.4,
-    "date": "2026-11-23",
+    "oi": 14275.0,
+    "price": 72902.0,
+    "date": "2026-11-25",
     "day": {
      "sessions": 1,
-     "oi_pct": -1.8,
-     "px_pct": -0.94,
-     "word": "No big change",
-     "side": 0
+     "oi_pct": -11.6,
+     "px_pct": 0.91,
+     "word": "Short covering",
+     "side": 1
     },
     "week": {
      "sessions": 5,
-     "oi_pct": -10.3,
-     "px_pct": -0.02,
-     "word": "Long unwinding",
-     "side": -1
+     "oi_pct": -19.6,
+     "px_pct": 0.55,
+     "word": "Short covering",
+     "side": 1
     },
     "pcr_hist": [
-     0.4,
      0.39,
      0.42,
      0.45,
      0.56,
-     0.42
+     0.42,
+     0.0
     ]
+   },
+   "options": {
+    "expiry": "2026-12-29",
+    "spot": 72788.05,
+    "pcr": 0.0,
+    "max_pain": 56000.0,
+    "resistance": [
+     {
+      "strike": 73000.0,
+      "oi": 100.0
+     },
+     {
+      "strike": 72800.0,
+      "oi": 0.0
+     },
+     {
+      "strike": 72900.0,
+      "oi": 0.0
+     }
+    ],
+    "support": [
+     {
+      "strike": 67000.0,
+      "oi": 0.0
+     },
+     {
+      "strike": 67100.0,
+      "oi": 0.0
+     },
+     {
+      "strike": 67200.0,
+      "oi": 0.0
+     }
+    ],
+    "new_oi": [
+     {
+      "strike": 71000.0,
+      "type": "CE",
+      "chg_oi": 100.0
+     },
+     {
+      "strike": 73000.0,
+      "type": "CE",
+      "chg_oi": 100.0
+     }
+    ],
+    "ladder": [
+     {
+      "strike": 71800.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 71900.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72000.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72100.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72200.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72300.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72400.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72500.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72600.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72700.0,
+      "ce": 50.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72800.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 72900.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73000.0,
+      "ce": 100.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73100.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73200.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73300.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73400.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73500.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73600.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73700.0,
+      "ce": 0.0,
+      "pe": 0.0
+     },
+     {
+      "strike": 73800.0,
+      "ce": 0.0,
+      "pe": 0.0
+     }
+    ],
+    "tot_ce": 300.0,
+    "tot_pe": 0.0
    },
    "board": [
     {
      "symbol": "DIVISLAB",
      "vk": "BUY NOW",
      "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "Warning",
+     "grade": "B",
      "oi": {
-      "oi_pct": 11.0,
-      "px_pct": 1.3,
+      "oi_pct": 4.3,
+      "px_pct": 5.5,
       "word": "Long build-up",
       "side": 1
      }
@@ -2372,9 +3167,9 @@
      "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 4.7,
-      "px_pct": 3.3,
-      "word": "Long build-up",
+      "oi_pct": -6.6,
+      "px_pct": 6.0,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -2384,10 +3179,10 @@
      "setup": "Trend Pullback \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -2.0,
-      "px_pct": 0.6,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -3.1,
+      "px_pct": 3.1,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2396,10 +3191,10 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": -0.4,
-      "px_pct": 1.4,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -8.1,
+      "px_pct": -5.2,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2408,10 +3203,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 10.1,
-      "px_pct": -0.7,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -5.7,
+      "px_pct": -4.5,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2420,10 +3215,10 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -3.0,
-      "px_pct": 1.4,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -8.5,
+      "px_pct": -0.5,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2432,8 +3227,8 @@
      "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
-      "oi_pct": -6.9,
-      "px_pct": 0.2,
+      "oi_pct": -23.5,
+      "px_pct": 0.5,
       "word": "Short covering",
       "side": 1
      }
@@ -2444,10 +3239,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -12.4,
-      "px_pct": -0.4,
-      "word": "Long unwinding",
-      "side": -1
+      "oi_pct": -29.3,
+      "px_pct": 0.3,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2456,10 +3251,10 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": -2.0,
-      "px_pct": -0.6,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -6.4,
+      "px_pct": 0.2,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2468,10 +3263,10 @@
      "setup": "Daily Range \u00b7 Ready",
      "grade": "B",
      "oi": {
-      "oi_pct": 1.2,
-      "px_pct": 2.0,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -8.0,
+      "px_pct": 1.5,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2480,10 +3275,10 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "B",
      "oi": {
-      "oi_pct": -4.1,
-      "px_pct": 3.8,
-      "word": "Short covering",
-      "side": 1
+      "oi_pct": -18.8,
+      "px_pct": -0.8,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2492,9 +3287,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 16.3,
-      "px_pct": 1.8,
-      "word": "Long build-up",
+      "oi_pct": -3.2,
+      "px_pct": 3.5,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -2504,22 +3299,22 @@
      "setup": "Swing Pullback \u00b7 Ready",
      "grade": "C",
      "oi": {
-      "oi_pct": 2.6,
-      "px_pct": 1.4,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -3.0,
+      "px_pct": 3.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "HAL",
      "vk": "COMING CLOSE TO READY (Bullish)",
-     "setup": "Daily Overspill \u00b7 Triggered",
-     "grade": "Warning",
+     "setup": "Weekly Overspill \u00b7 Triggered",
+     "grade": "B",
      "oi": {
-      "oi_pct": 9.4,
-      "px_pct": -0.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -5.6,
+      "px_pct": 4.7,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2528,10 +3323,10 @@
      "setup": "Weekly Overspill \u00b7 Triggered",
      "grade": "Warning",
      "oi": {
-      "oi_pct": -19.0,
-      "px_pct": -0.1,
-      "word": "Long unwinding",
-      "side": -1
+      "oi_pct": -24.9,
+      "px_pct": 2.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2540,8 +3335,8 @@
      "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 5.9,
-      "px_pct": 2.4,
+      "oi_pct": 3.6,
+      "px_pct": 1.4,
       "word": "Long build-up",
       "side": 1
      }
@@ -2552,8 +3347,8 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "B",
      "oi": {
-      "oi_pct": -6.9,
-      "px_pct": 1.9,
+      "oi_pct": -20.0,
+      "px_pct": 0.8,
       "word": "Short covering",
       "side": 1
      }
@@ -2564,9 +3359,9 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 10.1,
-      "px_pct": 0.2,
-      "word": "Big positions building",
+      "oi_pct": 1.8,
+      "px_pct": 1.7,
+      "word": "No big change",
       "side": 0
      }
     },
@@ -2576,9 +3371,9 @@
      "setup": "Hourly Range \u00b7 Triggered",
      "grade": "B",
      "oi": {
-      "oi_pct": 3.1,
-      "px_pct": 1.8,
-      "word": "Long build-up",
+      "oi_pct": -15.4,
+      "px_pct": 7.9,
+      "word": "Short covering",
       "side": 1
      }
     },
@@ -2588,10 +3383,10 @@
      "setup": "Hourly Overspill \u00b7 Ready",
      "grade": "A",
      "oi": {
-      "oi_pct": 3.1,
-      "px_pct": 1.1,
-      "word": "Long build-up",
-      "side": 1
+      "oi_pct": -1.9,
+      "px_pct": -0.4,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -2600,10 +3395,10 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "Warning",
      "oi": {
-      "oi_pct": -1.9,
-      "px_pct": -3.2,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -14.1,
+      "px_pct": -2.5,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2612,10 +3407,10 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 8.9,
-      "px_pct": -4.1,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -13.5,
+      "px_pct": 1.0,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2624,20 +3419,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -2.1,
-      "px_pct": 5.3,
-      "word": "No big change",
-      "side": 0
-     }
-    },
-    {
-     "symbol": "GODREJCP",
-     "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
-     "oi": {
-      "oi_pct": -5.8,
-      "px_pct": 2.1,
+      "oi_pct": -10.5,
+      "px_pct": 4.7,
       "word": "Short covering",
       "side": 1
      }
@@ -2648,8 +3431,8 @@
      "setup": "Daily Rectangle \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": 1.9,
-      "px_pct": 1.0,
+      "oi_pct": -2.1,
+      "px_pct": -0.5,
       "word": "No big change",
       "side": 0
      }
@@ -2658,11 +3441,11 @@
      "symbol": "HINDZINC",
      "vk": "NO SIGNAL",
      "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "Warning",
+     "grade": "A",
      "oi": {
-      "oi_pct": 21.2,
-      "px_pct": -3.7,
-      "word": "Short build-up",
+      "oi_pct": -22.7,
+      "px_pct": -5.4,
+      "word": "Long unwinding",
       "side": -1
      }
     },
@@ -2672,8 +3455,8 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -0.1,
-      "px_pct": -4.6,
+      "oi_pct": -1.5,
+      "px_pct": -4.7,
       "word": "No big change",
       "side": 0
      }
@@ -2684,10 +3467,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 9.0,
-      "px_pct": 1.0,
-      "word": "Big positions building",
-      "side": 0
+      "oi_pct": -6.2,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2696,8 +3479,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -11.1,
-      "px_pct": -1.6,
+      "oi_pct": -22.9,
+      "px_pct": -1.0,
       "word": "Long unwinding",
       "side": -1
      }
@@ -2705,11 +3488,11 @@
     {
      "symbol": "JINDALSTEL",
      "vk": "NO SIGNAL",
-     "setup": "Daily Rectangle \u00b7 Watch",
+     "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -0.6,
-      "px_pct": -0.5,
+      "oi_pct": -1.9,
+      "px_pct": -1.8,
       "word": "No big change",
       "side": 0
      }
@@ -2720,8 +3503,8 @@
      "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": -17.3,
-      "px_pct": -3.9,
+      "oi_pct": -24.6,
+      "px_pct": -2.1,
       "word": "Long unwinding",
       "side": -1
      }
@@ -2732,8 +3515,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 36.2,
-      "px_pct": -8.3,
+      "oi_pct": 18.1,
+      "px_pct": -7.2,
       "word": "Short build-up",
       "side": -1
      }
@@ -2744,44 +3527,44 @@
      "setup": "Daily Range \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -1.3,
-      "px_pct": -1.3,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -5.0,
+      "px_pct": 1.9,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "POLYCAB",
      "vk": "NO SIGNAL",
-     "setup": "Daily Range \u00b7 Watch",
-     "grade": "C",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "B",
      "oi": {
-      "oi_pct": 10.9,
-      "px_pct": -6.4,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": 2.6,
+      "px_pct": -3.9,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
      "symbol": "POWERINDIA",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
+     "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "B",
      "oi": {
-      "oi_pct": 5.9,
-      "px_pct": -1.9,
-      "word": "Short build-up",
+      "oi_pct": -13.4,
+      "px_pct": -2.3,
+      "word": "Long unwinding",
       "side": -1
      }
     },
     {
      "symbol": "SIEMENS",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "A",
      "oi": {
-      "oi_pct": -14.2,
-      "px_pct": 0.3,
+      "oi_pct": -22.1,
+      "px_pct": 1.0,
       "word": "Short covering",
       "side": 1
      }
@@ -2792,8 +3575,8 @@
      "setup": "Weekly Overspill \u00b7 Watch",
      "grade": "A",
      "oi": {
-      "oi_pct": -11.9,
-      "px_pct": -3.5,
+      "oi_pct": -17.1,
+      "px_pct": -3.1,
       "word": "Long unwinding",
       "side": -1
      }
@@ -2804,8 +3587,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 17.7,
-      "px_pct": -5.4,
+      "oi_pct": 13.2,
+      "px_pct": -5.8,
       "word": "Short build-up",
       "side": -1
      }
@@ -2814,24 +3597,24 @@
      "symbol": "TORNTPHARM",
      "vk": "NO SIGNAL",
      "setup": "Weekly Overspill \u00b7 Triggered",
-     "grade": "Warning",
+     "grade": "A",
      "oi": {
-      "oi_pct": 4.1,
-      "px_pct": 1.7,
-      "word": "Long build-up",
-      "side": 1
+      "oi_pct": -0.7,
+      "px_pct": 5.2,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
      "symbol": "VBL",
      "vk": "NO SIGNAL",
      "setup": "Daily Range \u00b7 Ready",
-     "grade": "A",
+     "grade": "B",
      "oi": {
-      "oi_pct": 2.3,
-      "px_pct": -2.1,
-      "word": "No big change",
-      "side": 0
+      "oi_pct": -5.2,
+      "px_pct": 1.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -2840,10 +3623,10 @@
      "setup": "Daily Range \u00b7 Watch",
      "grade": "C",
      "oi": {
-      "oi_pct": 15.9,
-      "px_pct": -6.9,
-      "word": "Short build-up",
-      "side": -1
+      "oi_pct": -0.7,
+      "px_pct": -8.8,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -2852,8 +3635,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -6.7,
-      "px_pct": -3.1,
+      "oi_pct": -7.6,
+      "px_pct": -0.6,
       "word": "Long unwinding",
       "side": -1
      }
@@ -2876,8 +3659,8 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 29.2,
-      "px_pct": -3.8,
+      "oi_pct": 17.6,
+      "px_pct": -1.2,
       "word": "Short build-up",
       "side": -1
      }
@@ -2888,10 +3671,10 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": 10.6,
-      "px_pct": 3.5,
-      "word": "Long build-up",
-      "side": 1
+      "oi_pct": -16.8,
+      "px_pct": -2.0,
+      "word": "Long unwinding",
+      "side": -1
      }
     },
     {
@@ -2921,20 +3704,32 @@
      "setup": null,
      "grade": null,
      "oi": {
-      "oi_pct": -3.0,
-      "px_pct": -1.2,
-      "word": "Long unwinding",
-      "side": -1
+      "oi_pct": -12.8,
+      "px_pct": 3.8,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
+     "symbol": "GODREJCP",
+     "vk": "COMING CLOSE TO READY (Bearish)",
+     "setup": null,
+     "grade": null,
+     "oi": {
+      "oi_pct": -18.7,
+      "px_pct": 7.7,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
      "symbol": "LTM",
      "vk": "ALMOST READY (Bearish)",
      "setup": "Daily Range \u00b7 Watch",
-     "grade": "B",
+     "grade": "A",
      "oi": {
-      "oi_pct": -3.6,
-      "px_pct": 0.5,
+      "oi_pct": -17.0,
+      "px_pct": 4.0,
       "word": "Short covering",
       "side": 1
      }

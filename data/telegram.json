@@ -152,6 +152,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "APARINDS": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "APLAPOLLO": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -181,10 +185,6 @@
    "confirmed": "Not confirmed"
   },
   "BANKINDIA": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "BDL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -281,10 +281,6 @@
    "confirmed": "Not confirmed"
   },
   "GODFRYPHLP": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "GODREJCP": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -612,6 +608,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "ACUTAAS": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
   "ANANDRATHI": {
    "final": "BUY NOW",
    "confirmed": "Not confirmed"
@@ -800,11 +800,11 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "ICICILIFE": {
+  "GODREJCP": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "IEX": {
+  "ICICILIFE": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
