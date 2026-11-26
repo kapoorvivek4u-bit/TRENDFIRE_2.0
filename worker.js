@@ -442,7 +442,7 @@ async function runSchedule(env, when) {
 // pages and files anyone may open without signing in
 const OPEN = new Set(["/login", "/login.html", "/admin", "/admin.html", "/favicon.svg", "/apple-touch-icon.png",
   "/icon-192.png", "/icon-512.png", "/manifest.webmanifest", "/robots.txt",
-  "/privacy", "/privacy.html", "/terms", "/terms.html", "/guide", "/guide.html", "/sitemap.xml", "/og-image.png", "/sw.js"]);
+  "/privacy", "/privacy.html", "/terms", "/terms.html", "/guide", "/guide.html", "/sitemap.xml", "/og-image.png", "/sw.js", "/river.js"]);
 
 async function api(req, env, url, user, ctx) {
   const p = url.pathname, admin = user.role === "admin";

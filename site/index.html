@@ -517,16 +517,16 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .chaint tr.atm td{background:color-mix(in srgb,var(--accent) 9%,transparent)}.chaint tr.itmc td:nth-child(-n+4){background:color-mix(in srgb,var(--warn) 6%,transparent)}.chaint tr.itmp td:nth-child(n+6){background:color-mix(in srgb,var(--warn) 6%,transparent)}
 .chaint tr.spotl td{padding:2px 7px;font-size:11px;font-weight:700;color:var(--accent);border-top:2px solid var(--accent);background:transparent!important}
 .oib{display:block;height:4px;width:var(--w);background:var(--c);border-radius:3px;margin-top:3px;opacity:.7;max-width:100%}
-.flowgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start}
-.flowstage{position:relative;background:radial-gradient(ellipse at center,#151528 0%,#0b0b12 72%);border:1px solid #262636;border-radius:18px;overflow:hidden;padding:10px 12px 12px;color:#e6e6f0}
-.flowstage canvas{display:block;width:100%;aspect-ratio:1.45;cursor:default}
+.flowgrid{display:grid;grid-template-columns:1fr;gap:14px}
+.flowstage{position:relative;background:#0d1117;border:1px solid #21262d;border-radius:18px;overflow:hidden;padding:14px 16px 14px;color:#e6edf3}
+.flowstage canvas{display:block;width:100%;height:clamp(520px,72vh,680px);margin-top:6px}
 .flowtop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:30px}.flowhint{margin-left:auto;font-size:11.5px;color:#9a9ab0}
 .flowlive{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#3ef0a0;background:rgba(62,240,160,.1);padding:4px 10px;border-radius:999px}
 .flowlive i{width:7px;height:7px;border-radius:50%;background:#3ef0a0;box-shadow:0 0 10px #3ef0a0;animation:flowp 1.2s infinite}@keyframes flowp{50%{opacity:.3}}
 .flowslide{display:flex;align-items:center;gap:10px;font-size:11.5px;color:#9a9ab0;margin-top:6px}.flowslide input{flex:1;accent-color:#c6ff3d}
-.flowside{display:grid;gap:12px}.flowside .card{margin:0}.bar2{height:4px;border-radius:3px;margin:4px 0 0 auto;max-width:100%}
-@media (max-width:900px){.flowgrid{grid-template-columns:1fr}.flowstage canvas{aspect-ratio:1}}
-.flowmini canvas{aspect-ratio:1.35!important;cursor:pointer}.flowminitxt{font-size:12.5px;line-height:1.6;margin-top:8px}
+.flowside{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));align-items:start}.flowside .card{margin:0}.bar2{height:4px;border-radius:3px;margin:4px 0 0 auto;max-width:100%}
+@media (max-width:600px){.flowstage{padding:12px 8px}.flowstage canvas{height:560px}}
+.flowmini canvas{height:clamp(440px,60vh,560px)!important;cursor:pointer}.flowminitxt{font-size:12.5px;line-height:1.6;margin-top:8px}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 .newver .btn2{padding:5px 12px;font-size:12px}
 .bearban{border-left:4px solid var(--down);background:color-mix(in srgb,var(--down) 7%,var(--surface));font-size:13.5px}
@@ -557,6 +557,7 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 <header class="top" id="top"></header>
 <main id="main"></main>
 <nav class="tabbar" id="tabbar" aria-label="Pages"></nav>
+<script src="/river.js"></script>
 <script>
 /* ============================================================ TradeReady web app */
 const DATA_BASE = "https://raw.githubusercontent.com/kapoorvivek4u-bit/trendfire_2.0/main/data/";
@@ -1779,58 +1780,15 @@ function flowLinks(nodes){
   L.sort((a, b) => b.w - a.w); const top = L.slice(0, 18), mx = top.length ? top[0].w : 1;
   top.forEach(f => f.k = f.w / mx); return top;
 }
+let FLOW_RIVER = null;
 function flowAnimate(state, id = "flowc"){
-  cancelAnimationFrame(FLOW_RAF);
+  if(FLOW_RIVER) FLOW_RIVER.stop();
   const cv = document.getElementById(id);
-  if(!cv || !cv.getBoundingClientRect().width){ state.tries = (state.tries || 0) + 1; if(state.tries < 60) FLOW_RAF = requestAnimationFrame(() => flowAnimate(state, id)); return; }
-  const g = cv.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
-  let W, H;
-  const size = () => { const r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0); };
-  size();
-  const {nodes, links, mkt, label} = state;
-  const mxs = Math.max(1, ...nodes.map(n => n.size));
-  nodes.forEach((n, i) => n.a = -Math.PI / 2 + i * 2 * Math.PI / nodes.length);
-  const R = () => Math.min(W, H) * (state.mini ? 0.36 : W < 520 ? 0.25 : 0.37);
-  const SHORTN = {"Consumer Durables":"Cons. Durables","Construction Materials":"Cons. Materials","Capital Goods":"Cap. Goods","Metals & Mining":"Metals","Consumer Services":"Cons. Svcs"};
-  const nm = n => W < 520 ? (SHORTN[n.name] || n.name) : n.name;
-  const pos = n => [W / 2 + Math.cos(n.a) * R(), H / 2 + Math.sin(n.a) * R()];
-  const rad = n => state.mini ? 4 + Math.sqrt(n.size / mxs) * 8 : (W < 520 ? 6 : 9) + Math.sqrt(n.size / mxs) * (W < 520 ? 11 : 22);
-  const parts = []; links.forEach(f => { for(let j = 0; j < Math.max(2, Math.round(f.k * 14)); j++) parts.push({f, t: Math.random(), sp: 0.002 + Math.random() * 0.003}); });
-  const col = v => v > 0.15 ? [62,240,160] : v < -0.15 ? [255,92,108] : [154,154,176];
-  const ctrl = (a, b) => [W / 2 + (a[0] + b[0] - W) / 2 * 0.25, H / 2 + (a[1] + b[1] - H) / 2 * 0.25];
-  state.hit = (x, y) => nodes.find(n => { const [px, py] = pos(n); return Math.hypot(px - x, py - y) <= rad(n) + 6; });
-  const frame = () => {
-    if(!document.getElementById(id)){ cancelAnimationFrame(FLOW_RAF); return; }
-    const r = cv.getBoundingClientRect(); if(Math.abs(r.width - W) > 2) size();
-    g.clearRect(0, 0, W, H);
-    for(const f of links){ const a = pos(f.o), b = pos(f.i), c = ctrl(a, b), gr = g.createLinearGradient(a[0], a[1], b[0], b[1]);
-      gr.addColorStop(0, "rgba(255,92,108,.16)"); gr.addColorStop(1, "rgba(62,240,160,.2)");
-      g.strokeStyle = gr; g.lineWidth = 0.8 + f.k * 5; g.beginPath(); g.moveTo(a[0], a[1]); g.quadraticCurveTo(c[0], c[1], b[0], b[1]); g.stroke(); }
-    g.globalCompositeOperation = "lighter";
-    for(const p of parts){ p.t += p.sp; if(p.t > 1) p.t = 0; const a = pos(p.f.o), b = pos(p.f.i), c = ctrl(a, b), u = 1 - p.t;
-      const x = u * u * a[0] + 2 * u * p.t * c[0] + p.t * p.t * b[0], y = u * u * a[1] + 2 * u * p.t * c[1] + p.t * p.t * b[1];
-      const m = p.t, rr = 255 * (1 - m) + 62 * m | 0, gg = 92 * (1 - m) + 240 * m | 0, bb = 108 * (1 - m) + 160 * m | 0;
-      const gl = g.createRadialGradient(x, y, 0, x, y, 8); gl.addColorStop(0, `rgba(${rr},${gg},${bb},.95)`); gl.addColorStop(1, `rgba(${rr},${gg},${bb},0)`);
-      g.fillStyle = gl; g.beginPath(); g.arc(x, y, 8, 0, 7); g.fill(); g.fillStyle = "#fff"; g.beginPath(); g.arc(x, y, 1.4, 0, 7); g.fill(); }
-    g.globalCompositeOperation = "source-over";
-    const tm = performance.now() / 1000;
-    for(const n of nodes){ const [x, y] = pos(n), r0 = rad(n), c = col(n.rel), pl = 1 + 0.06 * Math.sin(tm * 3 + n.a * 4);
-      const halo = g.createRadialGradient(x, y, r0 * .6, x, y, r0 * 2.2 * pl); halo.addColorStop(0, `rgba(${c},.32)`); halo.addColorStop(1, `rgba(${c},0)`);
-      g.fillStyle = halo; g.beginPath(); g.arc(x, y, r0 * 2.2 * pl, 0, 7); g.fill();
-      g.fillStyle = "#14141d"; g.strokeStyle = `rgba(${c},.95)`; g.lineWidth = 2; g.beginPath(); g.arc(x, y, r0, 0, 7); g.fill(); g.stroke();
-      g.fillStyle = `rgb(${c})`; g.font = `700 ${W < 520 ? 9 : 11}px Inter,system-ui`; g.textAlign = "center"; if(!state.mini) g.fillText((n.chg > 0 ? "+" : "") + n.chg.toFixed(1) + "%", x, y + 4);
-      const lr = R() + r0 + (W < 520 ? 6 : 16), lx = W / 2 + Math.cos(n.a) * lr, ly = H / 2 + Math.sin(n.a) * lr;
-      g.fillStyle = "#e6e6f0"; g.font = `600 ${W < 520 ? 9.5 : 12}px Inter,system-ui`; g.textAlign = Math.cos(n.a) > .2 ? "left" : Math.cos(n.a) < -.2 ? "right" : "center"; g.fillText(nm(n), lx, ly + 4); }
-    g.fillStyle = "rgba(198,255,61,.9)"; g.font = "700 13px Inter"; g.textAlign = "center"; g.fillText(label, W / 2, H / 2 - 4);
-    g.fillStyle = "#9a9ab0"; g.font = "12px Inter"; if(!state.mini) g.fillText(`${mkt >= 0 ? "+" : ""}${mkt.toFixed(2)}% (value-weighted)`, W / 2, H / 2 + 14);
-    FLOW_RAF = requestAnimationFrame(frame);
-  };
-  frame();
-  cv.onclick = e => { const r = cv.getBoundingClientRect(), n = state.hit(e.clientX - r.left, e.clientY - r.top);
-    if(state.mini){ UI.flowSec = n ? n.id : null; location.hash = "market-flow"; return; }
+  if(!cv || typeof river !== "function"){ state.tries = (state.tries || 0) + 1; if(state.tries < 60) setTimeout(() => flowAnimate(state, id), 100); return; }
+  FLOW_RIVER = river(cv, {nodes: state.nodes, mkt: state.mkt, label: state.label, mini: state.mini, onPick: n => {
+    if(state.mini){ UI.flowSec = null; location.hash = "market-flow"; return; }
     if(!n) return;
-    if(UI.flowSec) openSheet(n.id); else { UI.flowSec = n.id; rerender(); } };
-  cv.onmousemove = e => { const r = cv.getBoundingClientRect(); cv.style.cursor = state.hit(e.clientX - r.left, e.clientY - r.top) ? "pointer" : "default"; };
+    if(UI.flowSec) openSheet(n.id); else { UI.flowSec = n.id; rerender(); } }});
 }
 /* small live version for the Today page */
 function flowMiniCard(){
@@ -1841,10 +1799,10 @@ function flowMiniCard(){
     const el = document.getElementById("flowmini-txt");
     if(el) el.innerHTML = `<div><span class="up">▲ In:</span> ${ins.map(n => esc(n.name)).join(", ") || "—"}</div><div><span class="down">▼ Out:</span> ${outs.map(n => esc(n.name)).join(", ") || "—"}</div><div class="muted">as of ${esc(String(live.at || "").slice(11, 16))} IST</div>`;
     flowAnimate({nodes, links: flowLinks(nodes), mkt, label: "MARKET", mini: true}, "flowmini"); }).catch(() => null), 0);
-  return `<section class="card s7 fade"><div class="ct"><h2>⚡ Money flow<em>live, every 15 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
+  return `<section class="card fade"><div class="ct"><h2>⚡ Money flow<em>live, every 15 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
     <div id="flowmini-box"><div class="flowstage flowmini"><canvas id="flowmini" aria-label="Money flow between sectors"></canvas></div>
     <div id="flowmini-txt" class="flowminitxt"></div></div>
-    <div class="muted" style="font-size:11.5px;margin-top:6px">Green sectors pulling money in, red losing it. Tap to open the full view and see the stocks.</div></section>`;
+    <div class="muted" style="font-size:11.5px;margin-top:6px">Left: sectors money is leaving. Right: where it is going. Band thickness = size of the shift. Tap to open the full view and see the stocks.</div></section>`;
 }
 async function pageFlow(){
   const d = await flowData();
@@ -1863,7 +1821,7 @@ async function pageFlow(){
   const ins = nodes.filter(n => n.rel > 0.15).slice(0, 6), outs = nodes.filter(n => n.rel < -0.15).slice(-6).reverse();
   const money = sec ? [...nodes].sort((a, b) => b.money - a.money) : null;
   const li = (n, c) => `<div class="li" ${sec ? `data-fsym="${esc(n.id)}"` : `data-fsec="${esc(n.id)}"`} style="cursor:pointer"><div style="min-width:0"><b>${esc(n.name)}</b>${sec && n.tv ? `<div class="muted" style="font-size:11.5px">₹${fmt(n.tv, 0)} Cr traded${n.oi != null ? ` · OI ${pct(n.oi, 1)}` : ""}</div>` : sec ? "" : `<div class="muted" style="font-size:11.5px">${n.n} stocks · ₹${fmt(n.size, 0)} Cr traded</div>`}</div>
-    <div class="r"><b class="${c}">${n.chg > 0 ? "+" : ""}${n.chg.toFixed(2)}%</b><div class="bar2" style="width:${Math.min(100, Math.abs(n.rel) * 30)}%;background:var(--${c === "up" ? "up" : "down"})"></div></div></div>`;
+    <div class="r"><b class="${c}">${n.rel > 0 ? "+" : ""}${n.rel.toFixed(2)}%</b><div class="muted" style="font-size:10.5px">vs ${sec ? "sector" : "market"} · move ${n.chg > 0 ? "+" : ""}${n.chg.toFixed(1)}%</div><div class="bar2" style="width:${Math.min(100, Math.abs(n.rel) * 30)}%;background:var(--${c === "up" ? "up" : "down"})"></div></div></div>`;
   const nextAt = (() => { const [h, m] = at.split(":").map(Number); const t = h * 60 + m + 15; return t > 930 ? "tomorrow 9:15" : `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`; })();
   return head + `<div class="flowgrid">
     <section class="flowstage"><div class="flowtop">${sec ? `<button class="btn2" data-fback="1" style="padding:5px 10px;font-size:12px">← All sectors</button>` : ""}
@@ -1878,7 +1836,7 @@ async function pageFlow(){
         <section class="card"><div class="ct"><h2>Money going out</h2></div><div class="list">${outs.map(n => li(n, "down")).join("") || `<div class="muted">No clear outflow.</div>`}</div></section>`}
       <section class="card"><div class="ct"><h2>Biggest flows now</h2></div><div class="list">${links.slice(0, 5).map(f => `<div class="li"><span><span class="down">${esc(f.o.name)}</span> → <span class="up">${esc(f.i.name)}</span></span></div>`).join("") || `<div class="muted">Calm: no strong flows.</div>`}</div></section>
     </div></div>
-    <div class="muted" style="font-size:11.5px;margin-top:10px">Updated ${esc(at)} IST${isToday ? ` · next about ${nextAt}` : ""}. Circle size = traded value today; colour = moving better (green) or worse (red) than the ${sec ? "sector" : "market"} average, weighted by traded value, with extra weight where futures OI is building. The flow lines are a reading of where money is leaving and arriving, not an exchange record of money moving from one stock to another. Prices a few minutes late.</div>`;
+    <div class="muted" style="font-size:11.5px;margin-top:10px">Updated ${esc(at)} IST${isToday ? ` · next about ${nextAt}` : ""}. Left: moving worse than the ${sec ? "sector" : "market"} average (money leaving). Right: moving better (money arriving). Band thickness = size of the shift, scaled by traded value. Colours compare with the average, weighted by traded value, with extra weight where futures OI is building. The flow lines are a reading of where money is leaving and arriving, not an exchange record of money moving from one stock to another. Prices a few minutes late.</div>`;
 }
 
 /* ============================================================ Top 5 positional (full access only) */

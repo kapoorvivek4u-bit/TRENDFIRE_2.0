@@ -110,7 +110,9 @@ h1 em{font-style:normal;color:var(--up)} h1 s{text-decoration:none;color:var(--d
 .sp{height:34px;margin-top:6px}.sp svg{width:100%;height:100%;display:block}
 
 section.blk{margin-top:34px}
-.card.flowcard{background:radial-gradient(ellipse at center,#151528 0%,#0b0b12 72%);border-color:#262636;padding:6px}.flowcard canvas{width:100%;aspect-ratio:1.45;display:block}@media (max-width:560px){.flowcard canvas{aspect-ratio:1.1}}
+.card.flowcard{background:#0d1117;border-color:#21262d;padding:16px 18px}.flowcard canvas{width:100%;height:clamp(520px,70vh,660px);display:block}
+.flowfoot{margin-top:14px;display:grid;gap:16px;grid-template-columns:1fr}@media (min-width:920px){.flowfoot{grid-template-columns:1fr 1fr 1.1fr;align-items:start}}.flowfoot .stage{margin:0}.flowcta{display:grid;gap:12px;justify-items:start}
+@media (max-width:560px){.card.flowcard{padding:12px 6px}.flowcard canvas{height:560px}}
 .sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
 .sh h2{font-family:var(--f-head);font-size:clamp(21px,2.6vw,27px);letter-spacing:-.025em;margin:0;text-wrap:balance}
 .sh p{margin:0;color:var(--muted);font-size:13.5px;max-width:62ch}
@@ -267,27 +269,9 @@ function flowSectors(live) {
   }).sort((a, b) => b.r - a.r);
   return { mkt: +mkt.toFixed(2), nodes, at: String(live.at || "").slice(11, 16), session: live.session };
 }
-const FLOW_JS = `(()=>{const d=JSON.parse(document.getElementById("flowd").textContent),cv=document.getElementById("flowc");if(!cv)return;
-const g=cv.getContext("2d"),dpr=Math.min(2,devicePixelRatio||1);let W,H;const size=()=>{const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;g.setTransform(dpr,0,0,dpr,0,0)};
-const N=d.nodes,mx=Math.max(1,...N.map(n=>n.s));N.forEach((n,i)=>n.a=-Math.PI/2+i*2*Math.PI/N.length);
-const ins=N.filter(n=>n.r>.15),outs=N.filter(n=>n.r<-.15),L=[];for(const o of outs)for(const i of ins)L.push({o,i,w:(-o.r)*i.r*Math.sqrt(Math.min(o.s,i.s)+1)});
-L.sort((a,b)=>b.w-a.w);const T=L.slice(0,18),top=T.length?T[0].w:1;T.forEach(f=>f.k=f.w/top);
-const P=[];T.forEach(f=>{for(let j=0;j<Math.max(2,Math.round(f.k*14));j++)P.push({f,t:Math.random(),sp:.002+Math.random()*.003})});
-const sm=()=>W<560,R=()=>Math.min(W,H)*(sm()?.3:.36),pos=n=>[W/2+Math.cos(n.a)*R(),H/2+Math.sin(n.a)*R()],rad=n=>(sm()?4:7)+Math.sqrt(n.s/mx)*(sm()?9:18);
-const SH={"Consumer Durables":"Cons. Durables","Construction Materials":"Cons. Materials","Capital Goods":"Cap. Goods","Metals & Mining":"Metals","Consumer Services":"Cons. Svcs"};
-const col=v=>v>.15?"62,240,160":v<-.15?"255,92,108":"154,154,176",ctl=(a,b)=>[W/2+(a[0]+b[0]-W)/8,H/2+(a[1]+b[1]-H)/8];
-const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function fr(){const r=cv.getBoundingClientRect();if(!r.width){requestAnimationFrame(fr);return}if(Math.abs(r.width-W)>2||!W)size();g.clearRect(0,0,W,H);
-for(const f of T){const a=pos(f.o),b=pos(f.i),c=ctl(a,b),gr=g.createLinearGradient(a[0],a[1],b[0],b[1]);gr.addColorStop(0,"rgba(255,92,108,.16)");gr.addColorStop(1,"rgba(62,240,160,.2)");g.strokeStyle=gr;g.lineWidth=.8+f.k*5;g.beginPath();g.moveTo(a[0],a[1]);g.quadraticCurveTo(c[0],c[1],b[0],b[1]);g.stroke()}
-g.globalCompositeOperation="lighter";for(const p of P){if(!still){p.t+=p.sp;if(p.t>1)p.t=0}const a=pos(p.f.o),b=pos(p.f.i),c=ctl(a,b),u=1-p.t,x=u*u*a[0]+2*u*p.t*c[0]+p.t*p.t*b[0],y=u*u*a[1]+2*u*p.t*c[1]+p.t*p.t*b[1],m=p.t,rr=255*(1-m)+62*m|0,gg=92*(1-m)+240*m|0,bb=108*(1-m)+160*m|0;
-const gl=g.createRadialGradient(x,y,0,x,y,8);gl.addColorStop(0,"rgba("+rr+","+gg+","+bb+",.95)");gl.addColorStop(1,"rgba("+rr+","+gg+","+bb+",0)");g.fillStyle=gl;g.beginPath();g.arc(x,y,8,0,7);g.fill();g.fillStyle="#fff";g.beginPath();g.arc(x,y,1.4,0,7);g.fill()}
-g.globalCompositeOperation="source-over";const tm=performance.now()/1e3;
-for(const n of N){const[x,y]=pos(n),r0=rad(n),c=col(n.r),pl=1+.06*Math.sin(tm*3+n.a*4),h=g.createRadialGradient(x,y,r0*.6,x,y,r0*2.2*pl);h.addColorStop(0,"rgba("+c+",.32)");h.addColorStop(1,"rgba("+c+",0)");g.fillStyle=h;g.beginPath();g.arc(x,y,r0*2.2*pl,0,7);g.fill();
-g.fillStyle="#14141d";g.strokeStyle="rgba("+c+",.95)";g.lineWidth=2;g.beginPath();g.arc(x,y,r0,0,7);g.fill();g.stroke();
-if(!sm()){g.fillStyle="rgb("+c+")";g.font="700 10.5px Inter,system-ui";g.textAlign="center";g.fillText((n.c>0?"+":"")+n.c.toFixed(1)+"%",x,y+4)}
-const lr=R()+r0+(sm()?6:14),lx=W/2+Math.cos(n.a)*lr,ly=H/2+Math.sin(n.a)*lr;g.fillStyle="#e6e6f0";g.font="600 "+(sm()?9.5:12)+"px Inter,system-ui";g.textAlign=Math.cos(n.a)>.2?"left":Math.cos(n.a)<-.2?"right":"center";g.fillText(sm()?(SH[n.n]||n.n):n.n,lx,ly+4)}
-g.fillStyle="rgba(198,255,61,.9)";g.font="700 13px Inter,system-ui";g.textAlign="center";g.fillText("F&O MARKET",W/2,H/2-4);g.fillStyle="#9a9ab0";g.font="12px Inter,system-ui";g.fillText((d.mkt>=0?"+":"")+d.mkt.toFixed(2)+"%",W/2,H/2+14);
-requestAnimationFrame(fr)}fr()})();`;
+const FLOW_JS = `(function go(n){var cv=document.getElementById("flowc");if(!cv)return;if(typeof river!=="function"){if(n<50)setTimeout(function(){go(n+1)},100);return}
+var d=JSON.parse(document.getElementById("flowd").textContent);
+river(cv,{nodes:d.nodes.map(function(x){return{id:x.n,name:x.n,rel:x.r,chg:x.c,size:x.s}}),mkt:d.mkt,label:"F&O MARKET"});})(0);`;
 export function renderPublic(s, sj, live) {
   // During the day, the 15-minute scan's prices replace last session's movers and advance/decline.
   const todayIST = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
@@ -367,17 +351,17 @@ export function renderPublic(s, sj, live) {
 
   ${(() => { const f = flowSectors(live); if (!f) return "";
     const ins = f.nodes.filter(n => n.r > 0.15).slice(0, 5), outs = f.nodes.filter(n => n.r < -0.15).slice(-5).reverse();
-    const isToday = f.session === todayIST, chipL = (n, c) => `<span class="chip" style="--c:${c}">${esc(n.n)}<small>${pct(n.c, 1)}</small></span>`;
+    const isToday = f.session === todayIST, chipL = (n, c) => `<span class="chip" style="--c:${c}">${esc(n.n)}<small>${pct(n.r, 2)}</small></span>`;
     return `<section class="blk">
-    <div class="sh"><h2>Money flow ${isToday ? `<span class="live" style="font-size:12px;vertical-align:middle"><i></i>${esc(f.at)} IST</span>` : ""}</h2><p>${isToday ? "Where money is moving between sectors right now, updated every 15 minutes in market hours." : "Where money moved between sectors in the last session."} Each circle is a sector of F&amp;O stocks; bigger means more traded. Green pulls money in, red loses it.</p></div>
-    <div class="two">
-      <div class="card flowcard"><canvas id="flowc" aria-label="Animated money flow between NSE sectors"></canvas></div>
-      <div class="card"><div class="stage" style="--c:var(--up)"><h3>Money coming in</h3><div class="chips">${ins.map(n => chipL(n, "var(--up)")).join("") || `<span class="muted sm">None standing out</span>`}</div></div>
-        <div class="stage" style="--c:var(--down)"><h3>Money going out</h3><div class="chips">${outs.map(n => chipL(n, "var(--down)")).join("") || `<span class="muted sm">None standing out</span>`}</div></div>
-        <div class="muted sm" style="margin-bottom:14px">Sector move weighted by traded value, compared with the whole F&amp;O market (${pct(f.mkt, 2)}). A read of today's money, not a tip.</div>
+    <div class="sh"><h2>Money flow ${isToday ? `<span class="live" style="font-size:12px;vertical-align:middle"><i></i>${esc(f.at)} IST</span>` : ""}</h2><p>${isToday ? "Where money is moving between sectors right now, updated every 15 minutes in market hours." : "Where money moved between sectors in the last session."} Left: sectors money is leaving. Right: where it is going. Thicker band = bigger shift.</p></div>
+    <div class="card flowcard"><canvas id="flowc" aria-label="Animated money flow between NSE sectors: money leaving on the left, arriving on the right"></canvas></div>
+    <div class="card flowfoot">
+      <div class="stage" style="--c:var(--up)"><h3>Money coming in</h3><div class="chips">${ins.map(n => chipL(n, "var(--up)")).join("") || `<span class="muted sm">None standing out</span>`}</div></div>
+      <div class="stage" style="--c:var(--down)"><h3>Money going out</h3><div class="chips">${outs.map(n => chipL(n, "var(--down)")).join("") || `<span class="muted sm">None standing out</span>`}</div></div>
+      <div class="flowcta"><div class="muted sm">Each sector compared with the whole F&amp;O market (${pct(f.mkt, 2)}), weighted by traded value. A read of today's money, not a tip.</div>
         <a class="gbtn" style="white-space:normal" href="/auth/google">${G}See the stocks inside each sector</a></div>
     </div>
-    <script type="application/json" id="flowd">${JSON.stringify(f).replace(/</g, "\\u003c")}</script><script>${FLOW_JS}</script>
+    <script type="application/json" id="flowd">${JSON.stringify(f).replace(/</g, "\\u003c")}</script><script src="/river.js" defer></script><script>${FLOW_JS}</script>
   </section>`; })()}
 
   <section class="blk">
@@ -451,7 +435,7 @@ export function renderPublic(s, sj, live) {
 
 // Cached for 5 minutes so Google and visitors share one copy.
 export async function publicPage(env, ctx) {
-  const key = new Request("https://tradeready.cache/public-v2");
+  const key = new Request("https://tradeready.cache/public-v3");
   // The browser must not keep this copy: "/" is the dashboard once someone signs in.
   const out = html => new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-cache, private", "vary": "cookie" } });
   const hit = await caches.default.match(key);
