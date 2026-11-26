@@ -96,10 +96,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "NAVINFLUOR": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "NYKAA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -289,6 +285,10 @@
    "confirmed": "Not confirmed"
   },
   "GODFRYPHLP": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "GODREJCP": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -628,10 +628,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "AUROPHARMA": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "BAJFINANCE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -708,6 +704,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "NAVINFLUOR": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "OBEROIRLTY": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -781,10 +781,6 @@
    "confirmed": "Not confirmed"
   },
   "DMART": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "GODREJCP": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
