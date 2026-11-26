@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-26 11:30",
+ "generated_ist": "2026-11-26 12:30",
  "oi_asof": "2026-11-25",
  "squeeze": [
   {
@@ -40,8 +40,7 @@
    "above": 6.2,
    "cover": -4.5,
    "notes": [
-    "1 day of absorption volume",
-    "Hourly Range Triggered"
+    "1 day of absorption volume"
    ]
   },
   {
@@ -55,9 +54,7 @@
    "kept": 100,
    "above": 3.3,
    "cover": 5.4,
-   "notes": [
-    "Hourly Range Ready"
-   ]
+   "notes": []
   },
   {
    "symbol": "SAGILITY",
@@ -100,7 +97,7 @@
    "above": 19.4,
    "cover": -6.7,
    "notes": [
-    "1 day of absorption volume"
+    "2 days of absorption volume"
    ]
   },
   {
@@ -196,7 +193,7 @@
    "events": [
     {
      "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 8.8x at 10:15, absorption",
+     "text": "2 hours of unusual volume, peak 8.8x at 10:15, absorption",
      "side": 0
     },
     {
@@ -220,48 +217,13 @@
      "side": -1
     }
    ],
-   "close": 1479.2,
-   "move_pct": -31.1,
+   "close": 1478.0,
+   "move_pct": -31.2,
    "moved": true,
-   "vs_high": "36.0% below its 20-day high",
+   "vs_high": "36.1% below its 20-day high",
    "states": {
     "W": "Topping",
     "D": "Bearish"
-   }
-  },
-  {
-   "symbol": "BAJAJFINSV",
-   "score": 6.3,
-   "bias": "Mixed",
-   "events": [
-    {
-     "when": "Wed 25",
-     "text": "5 hours of unusual volume, peak 10.1x at 11:15",
-     "side": -1
-    },
-    {
-     "when": "Wed 25",
-     "text": "OI +10% in 7 sessions, price +3.8%: big positions building, direction not clear yet",
-     "side": 0
-    },
-    {
-     "when": "Wed 25",
-     "text": "Day's volume 4.7x usual",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "Range 2.4x normal, closed +2.4%",
-     "side": 1
-    }
-   ],
-   "close": 1899.1,
-   "move_pct": 0.7,
-   "moved": true,
-   "vs_high": "0.9% below its 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Bullish"
    }
   },
   {
@@ -295,7 +257,7 @@
      "side": -1
     }
    ],
-   "close": 3545.0,
+   "close": 3546.0,
    "move_pct": 1.3,
    "moved": true,
    "vs_high": "At a 20-day high",
@@ -306,12 +268,12 @@
   },
   {
    "symbol": "DABUR",
-   "score": 5.9,
+   "score": 6.1,
    "bias": "Buying",
    "events": [
     {
      "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 4.3x at 10:15",
+     "text": "2 hours of unusual volume, peak 5.2x at 11:15, flush absorbed",
      "side": 1
     },
     {
@@ -335,8 +297,8 @@
      "side": 1
     }
    ],
-   "close": 423.0,
-   "move_pct": 8.3,
+   "close": 419.6,
+   "move_pct": 7.4,
    "moved": true,
    "vs_high": "At a 20-day high",
    "states": {
@@ -344,6 +306,41 @@
     "D": "Bullish"
    },
    "setup": "Swing Pullback \u00b7 Watch"
+  },
+  {
+   "symbol": "KFINTECH",
+   "score": 6.1,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Thu 26",
+     "text": "2 hours of unusual volume, peak 13.7x at 10:15, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI -32% in a day, price +1.3%: short covering",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI -40% in 7 sessions, price -0.8%: positions closing on both sides, interest fading",
+     "side": 0
+    },
+    {
+     "when": "Mon 23",
+     "text": "OI -4% in a day, price -0.4%: long unwinding",
+     "side": -1
+    }
+   ],
+   "close": 985.0,
+   "move_pct": 5.6,
+   "moved": false,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Topping"
+   }
   },
   {
    "symbol": "TATASTEEL",
@@ -367,8 +364,8 @@
     },
     {
      "when": "Mon 23",
-     "text": "4 hours of unusual volume, peak 13.3x at 12:15, absorption",
-     "side": -1
+     "text": "3 hours of unusual volume, peak 13.3x at 12:15, absorption",
+     "side": 1
     },
     {
      "when": "Mon 23",
@@ -376,49 +373,31 @@
      "side": -1
     }
    ],
-   "close": 162.55,
-   "move_pct": -10.1,
+   "close": 163.2,
+   "move_pct": -9.8,
    "moved": true,
-   "vs_high": "16.2% below its 20-day high",
+   "vs_high": "15.9% below its 20-day high",
    "states": {
     "W": "Bearish",
     "D": "Bearish"
    }
   },
   {
-   "symbol": "KFINTECH",
-   "score": 5.1,
-   "bias": "Buying",
+   "symbol": "BAJAJFINSV",
+   "score": 4.9,
+   "bias": "Selling",
    "events": [
     {
-     "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 13.7x at 10:15",
-     "side": 1
-    },
-    {
      "when": "Wed 25",
-     "text": "OI -32% in a day, price +1.3%: short covering",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "OI -40% in 7 sessions, price -0.8%: positions closing on both sides, interest fading",
-     "side": 0
-    },
-    {
-     "when": "Mon 23",
-     "text": "OI -4% in a day, price -0.4%: long unwinding",
+     "text": "5 hours of unusual volume, peak 10.1x at 11:15",
      "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI +10% in 7 sessions, price +3.8%: big positions building, direction not clear yet",
+     "side": 0
     }
-   ],
-   "close": 990.5,
-   "move_pct": 6.2,
-   "moved": false,
-   "vs_high": "At a 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Topping"
-   }
+   ]
   },
   {
    "symbol": "HINDUNILVR",
@@ -427,7 +406,7 @@
    "events": [
     {
      "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 4.0x at 10:15",
+     "text": "2 hours of unusual volume, peak 4.0x at 10:15",
      "side": 1
     },
     {
@@ -451,9 +430,39 @@
      "side": 1
     }
    ],
-   "close": 2165.6,
+   "close": 2164.5,
    "move_pct": 4.4,
    "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
+   }
+  },
+  {
+   "symbol": "GODREJCP",
+   "score": 4.7,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Thu 26",
+     "text": "1 hour of unusual volume, peak 8.2x at 11:15, flush absorbed",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "3 hours of unusual volume, peak 19.2x at 13:15, absorption",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI -13% in a day, price +5.4%: short covering",
+     "side": 1
+    }
+   ],
+   "close": 947.0,
+   "move_pct": 5.6,
+   "moved": false,
    "vs_high": "At a 20-day high",
    "states": {
     "W": "Bottoming",
@@ -486,10 +495,10 @@
      "side": -1
     }
    ],
-   "close": 602.8,
-   "move_pct": 4.5,
+   "close": 602.15,
+   "move_pct": 4.3,
    "moved": true,
-   "vs_high": "1.1% below its 20-day high",
+   "vs_high": "1.2% below its 20-day high",
    "states": {
     "W": "Bullish",
     "D": "Bullish"
@@ -518,7 +527,7 @@
     },
     {
      "when": "Mon 23",
-     "text": "3 hours of unusual volume, peak 3.9x at 12:15, absorption",
+     "text": "2 hours of unusual volume, peak 3.9x at 12:15, absorption",
      "side": -1
     },
     {
@@ -527,10 +536,10 @@
      "side": -1
     }
    ],
-   "close": 2713.0,
-   "move_pct": -6.1,
+   "close": 2694.0,
+   "move_pct": -6.8,
    "moved": false,
-   "vs_high": "23.7% below its 20-day high",
+   "vs_high": "24.3% below its 20-day high",
    "states": {
     "W": "Bearish",
     "D": "Bearish"
@@ -557,8 +566,8 @@
      "side": 1
     }
    ],
-   "close": 286.74,
-   "move_pct": 4.2,
+   "close": 284.38,
+   "move_pct": 3.3,
    "moved": true,
    "vs_high": "At a 20-day high",
    "states": {
@@ -573,7 +582,7 @@
    "events": [
     {
      "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 9.3x at 10:15",
+     "text": "2 hours of unusual volume, peak 10.7x at 11:15",
      "side": 1
     },
     {
@@ -588,7 +597,7 @@
     },
     {
      "when": "Mon 23",
-     "text": "5 hours of unusual volume, peak 8.0x at 13:15, absorption",
+     "text": "4 hours of unusual volume, peak 8.0x at 13:15, absorption",
      "side": -1
     },
     {
@@ -597,8 +606,8 @@
      "side": 0
     }
    ],
-   "close": 1756.5,
-   "move_pct": 6.1,
+   "close": 1767.2,
+   "move_pct": 6.8,
    "moved": false,
    "vs_high": "At a 20-day high",
    "states": {
@@ -607,42 +616,62 @@
    }
   },
   {
-   "symbol": "POLICYBZR",
-   "score": 4.1,
-   "bias": "Mixed",
+   "symbol": "ANANDRATHI",
+   "score": 4.0,
+   "bias": "Buying",
    "events": [
     {
-     "when": "Wed 25",
-     "text": "3 hours of unusual volume, peak 3.8x at 12:15",
-     "side": -1
-    },
-    {
-     "when": "Wed 25",
-     "text": "Day's volume 4.5x usual",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "Gap up 5.9%, held",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "OI -3% in a day, price +4.0%: long build-up",
+     "when": "Thu 26",
+     "text": "1 hour of unusual volume, peak 7.2x at 11:15",
      "side": 1
     },
     {
      "when": "Mon 23",
-     "text": "3 hours of unusual volume, peak 6.8x at 13:15",
+     "text": "OI -7% in a day, price -0.9%: long unwinding",
      "side": -1
     }
    ],
-   "close": 1171.8,
-   "move_pct": 15.4,
+   "close": 2402.9,
+   "move_pct": 1.4,
+   "moved": false,
+   "vs_high": "0.3% below its 20-day high",
+   "states": {
+    "W": "Bullish",
+    "D": "Topping"
+   }
+  },
+  {
+   "symbol": "BRITANNIA",
+   "score": 4.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Thu 26",
+     "text": "2 hours of unusual volume, peak 7.7x at 11:15",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "2 hours of unusual volume, peak 4.8x at 10:15, absorption",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 2.5x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI -15% in a day, price +5.1%: short covering",
+     "side": 1
+    }
+   ],
+   "close": 5207.8,
+   "move_pct": 7.0,
    "moved": true,
    "vs_high": "At a 20-day high",
    "states": {
-    "W": "Bearish",
+    "W": "Bottoming",
     "D": "Bullish"
    }
   },
@@ -667,7 +696,7 @@
      "side": -1
     }
    ],
-   "close": 870.4,
+   "close": 869.95,
    "move_pct": 5.9,
    "moved": true,
    "vs_high": "At a 20-day high",
@@ -702,13 +731,53 @@
      "side": 1
     }
    ],
-   "close": 1468.6,
-   "move_pct": 3.5,
-   "moved": true,
+   "close": 1458.8,
+   "move_pct": 2.8,
+   "moved": false,
    "vs_high": "At a 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Topping"
+   }
+  },
+  {
+   "symbol": "POLICYBZR",
+   "score": 3.6,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Wed 25",
+     "text": "3 hours of unusual volume, peak 3.8x at 12:15",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Day's volume 4.5x usual",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Gap up 5.9%, held",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI -3% in a day, price +4.0%: long build-up",
+     "side": 1
+    },
+    {
+     "when": "Mon 23",
+     "text": "2 hours of unusual volume, peak 6.8x at 13:15",
+     "side": -1
+    }
+   ],
+   "close": 1163.8,
+   "move_pct": 14.7,
+   "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Bullish"
    }
   },
   {
@@ -732,38 +801,13 @@
      "side": -1
     }
    ],
-   "close": 2585.9,
-   "move_pct": -0.4,
+   "close": 2563.0,
+   "move_pct": -1.2,
    "moved": false,
-   "vs_high": "3.0% below its 20-day high",
+   "vs_high": "3.8% below its 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Topping"
-   }
-  },
-  {
-   "symbol": "GODREJCP",
-   "score": 3.5,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Wed 25",
-     "text": "3 hours of unusual volume, peak 19.2x at 13:15, absorption",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "OI -13% in a day, price +5.4%: short covering",
-     "side": 1
-    }
-   ],
-   "close": 944.0,
-   "move_pct": 5.3,
-   "moved": false,
-   "vs_high": "At a 20-day high",
-   "states": {
-    "W": "Bottoming",
-    "D": "Bullish"
    }
   },
   {
@@ -783,7 +827,7 @@
     },
     {
      "when": "Mon 23",
-     "text": "2 hours of unusual volume, peak 8.0x at 14:15, flush absorbed",
+     "text": "1 hour of unusual volume, peak 8.0x at 14:15, flush absorbed",
      "side": 1
     },
     {
@@ -797,13 +841,48 @@
      "side": -1
     }
    ],
-   "close": 30740.0,
+   "close": 30735.0,
    "move_pct": -0.2,
    "moved": false,
    "vs_high": "17.3% below its 20-day high",
    "states": {
     "W": "Bearish",
     "D": "Bearish"
+   }
+  },
+  {
+   "symbol": "CONCOR",
+   "score": 3.4,
+   "bias": "Selling",
+   "events": [
+    {
+     "when": "Thu 26",
+     "text": "1 hour of unusual volume, peak 5.9x at 11:15",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "2 hours of unusual volume, peak 3.0x at 12:15",
+     "side": -1
+    },
+    {
+     "when": "Wed 25",
+     "text": "OI -3% in a day, price +0.6%: long build-up",
+     "side": 1
+    },
+    {
+     "when": "Wed 25",
+     "text": "Delivery 57% vs 40% usual",
+     "side": -1
+    }
+   ],
+   "close": 428.2,
+   "move_pct": -2.0,
+   "moved": false,
+   "vs_high": "7.4% below its 20-day high",
+   "states": {
+    "W": "Bearish",
+    "D": "Topping"
    }
   },
   {
@@ -827,10 +906,10 @@
      "side": 1
     }
    ],
-   "close": 639.8,
-   "move_pct": -3.2,
+   "close": 644.4,
+   "move_pct": -2.5,
    "moved": false,
-   "vs_high": "12.3% below its 20-day high",
+   "vs_high": "11.6% below its 20-day high",
    "states": {
     "W": "Topping",
     "D": "Topping"
@@ -862,10 +941,10 @@
      "side": -1
     }
    ],
-   "close": 1371.9,
-   "move_pct": -3.7,
+   "close": 1365.2,
+   "move_pct": -4.2,
    "moved": false,
-   "vs_high": "7.2% below its 20-day high",
+   "vs_high": "7.7% below its 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Topping"
@@ -892,47 +971,12 @@
      "side": 1
     }
    ],
-   "close": 1815.6,
-   "move_pct": 2.9,
+   "close": 1807.6,
+   "move_pct": 2.5,
    "moved": false,
-   "vs_high": "0.2% below its 20-day high",
+   "vs_high": "0.7% below its 20-day high",
    "states": {
     "W": "Bullish",
-    "D": "Bullish"
-   }
-  },
-  {
-   "symbol": "BRITANNIA",
-   "score": 3.1,
-   "bias": "Buying",
-   "events": [
-    {
-     "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 3.9x at 10:15",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "2 hours of unusual volume, peak 4.8x at 10:15, absorption",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "Day's volume 2.5x usual",
-     "side": 1
-    },
-    {
-     "when": "Wed 25",
-     "text": "OI -15% in a day, price +5.1%: short covering",
-     "side": 1
-    }
-   ],
-   "close": 5099.3,
-   "move_pct": 4.8,
-   "moved": false,
-   "vs_high": "At a 20-day high",
-   "states": {
-    "W": "Bottoming",
     "D": "Bullish"
    }
   },
@@ -957,10 +1001,10 @@
      "side": 1
     }
    ],
-   "close": 5642.0,
-   "move_pct": 3.1,
+   "close": 5649.2,
+   "move_pct": 3.2,
    "moved": false,
-   "vs_high": "1.2% below its 20-day high",
+   "vs_high": "1.1% below its 20-day high",
    "states": {
     "W": "Bullish",
     "D": "Topping"
@@ -992,8 +1036,8 @@
      "side": 1
     }
    ],
-   "close": 309.45,
-   "move_pct": 2.8,
+   "close": 308.3,
+   "move_pct": 2.4,
    "moved": false,
    "vs_high": "At a 20-day high",
    "states": {
@@ -1027,8 +1071,8 @@
      "side": 1
     }
    ],
-   "close": 1169.3,
-   "move_pct": 2.2,
+   "close": 1168.2,
+   "move_pct": 2.1,
    "moved": true,
    "vs_high": "At a 20-day high",
    "states": {
@@ -1043,14 +1087,14 @@
    "events": [
     {
      "when": "Thu 26",
-     "text": "1 hour of unusual volume, peak 9.5x at 10:15",
+     "text": "2 hours of unusual volume, peak 9.5x at 10:15",
      "side": 1
     }
    ],
-   "close": 3140.8,
-   "move_pct": 5.9,
+   "close": 3105.0,
+   "move_pct": 4.7,
    "moved": false,
-   "vs_high": "2.5% below its 20-day high",
+   "vs_high": "3.6% below its 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Topping"
@@ -1077,13 +1121,38 @@
      "side": -1
     }
    ],
-   "close": 2235.6,
-   "move_pct": -0.6,
+   "close": 2226.0,
+   "move_pct": -1.0,
    "moved": false,
-   "vs_high": "4.8% below its 20-day high",
+   "vs_high": "5.2% below its 20-day high",
    "states": {
     "W": "Bottoming",
     "D": "Topping"
+   }
+  },
+  {
+   "symbol": "TORNTPHARM",
+   "score": 3.0,
+   "bias": "Buying",
+   "events": [
+    {
+     "when": "Thu 26",
+     "text": "2 hours of unusual volume, peak 9.8x at 11:15",
+     "side": 1
+    },
+    {
+     "when": "Mon 23",
+     "text": "1 hour of unusual volume, peak 5.5x at 12:15",
+     "side": 0
+    }
+   ],
+   "close": 4986.6,
+   "move_pct": 8.1,
+   "moved": true,
+   "vs_high": "At a 20-day high",
+   "states": {
+    "W": "Bottoming",
+    "D": "Bullish"
    }
   },
   {
@@ -1102,10 +1171,10 @@
      "side": 0
     }
    ],
-   "close": 1208.6,
-   "move_pct": 0.5,
+   "close": 1204.0,
+   "move_pct": 0.1,
    "moved": false,
-   "vs_high": "4.6% below its 20-day high",
+   "vs_high": "4.9% below its 20-day high",
    "states": {
     "W": "Bullish",
     "D": "Topping"
