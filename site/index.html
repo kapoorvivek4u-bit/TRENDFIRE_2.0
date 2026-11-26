@@ -755,7 +755,7 @@ function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : nu
 /* ============================================================ routes */
 const PAGES = [
   ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["scanner-bear","🐻 Bearish"],["lab","🧪 VK Experimentals"]]],
+  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["scanner-chains","⛓ Option screener"],["scanner-bear","🐻 Bearish"],["lab","🧪 VK Experimentals"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
@@ -1655,6 +1655,46 @@ document.addEventListener("click", e => {                          // tap a stoc
   e.preventDefault(); e.stopPropagation(); openSheet(s);
 }, true);
 
+/* ============================================================ Option screener: every F&O chain, filtered by what writers are doing */
+const OSIG = {cover:["🟢 Call writers covering","var(--up)","Call OI falling just above the price with premiums rising: sellers are leaving, the upside is opening."],
+  pstrong:["🟢 Puts strong","var(--up)","Fresh put writing just under the price: sellers are defending that level."],
+  both:["🟢🟢 Covering + puts strong","var(--up)","Both at once: call writers leaving above and put writers defending below. The strongest bullish chain reading."],
+  cbuy:["Calls being bought","var(--info)","Call OI and premiums rising above the price: traders betting on a rise."],
+  cwrite:["🔴 Fresh call writing","var(--down)","Sellers adding calls just above the price: they are capping the upside."],
+  pexit:["🔴 Put writers exiting","var(--down)","Put OI falling under the price with premiums rising: support is getting weaker."],
+  pbuy:["🔴 Puts being bought","var(--down)","Put OI and premiums rising under the price: hedging or bets on a fall."],
+  bull:["Bullish bias","var(--up)","Overall chain reading Bullish or Mildly bullish."],
+  bear:["Bearish bias","var(--down)","Overall chain reading Bearish or Mildly bearish."],
+  pcrhi:["PCR 1.2+","var(--up)","Put-heavy chain: a supportive floor."],
+  pcrlo:["PCR under 0.7","var(--down)","Call-heavy chain: the upside is crowded with sellers."]};
+const oMatch = (k, r) => k === "all" ? true : k === "both" ? r.sig.includes("cover") && r.sig.includes("pstrong")
+  : k === "bull" ? r.score >= 1 : k === "bear" ? r.score <= -1 : k === "pcrhi" ? (r.pcr || 0) >= 1.2 : k === "pcrlo" ? r.pcr != null && r.pcr < 0.7 : r.sig.includes(k);
+async function pageOScreen(){
+  const x = await getJSON("chain_screen.json").catch(() => null);
+  const head = pageHead("Option screener", `What option writers are doing in every F&O stock${x ? ` · ${esc(when(x.generated_ist))} · ${x.checked} chains` : ""}`) + subnav();
+  if(!x || !x.rows) return head + `<div class="empty">The first full chain scan runs in market hours (hourly from 10:45).</div>`;
+  const f = UI.osig || "cover", all = x.rows;
+  const strong = s => { const m = (S().mtf || []).find(r => r.s === s), h = hitsOf(s); return (m && m.M === "Impulse" && m.W === "Impulse") || (h && h.n >= 3); };
+  const rows = all.filter(r => oMatch(f, r) && (!UI.ostrong || strong(r.s))).sort((a, b) => f === "cwrite" || f === "pexit" || f === "pbuy" || f === "bear" || f === "pcrlo" ? a.score - b.score : b.score - a.score);
+  const sigChip = k => OSIG[k] ? chip(OSIG[k][0].replace(/^🟢🟢 |^🟢 |^🔴 /, ""), OSIG[k][1]) : "";
+  return head + `<section class="card fade"><div class="filters">${Object.keys(OSIG).map(k => `<button data-osig="${k}" class="${f === k ? "on" : ""}" title="${esc(OSIG[k][2])}">${OSIG[k][0]}<i>${all.filter(r => oMatch(k, r)).length}</i></button>`).join("")}</div>
+      <div class="filters" style="margin-top:6px"><button data-ostrong="1" class="${UI.ostrong ? "on" : ""}" title="Monthly + Weekly Impulse, or in 3+ scans">📈 Strong chart only</button></div>
+      <div class="muted" style="font-size:12px;margin-top:8px"><b>${esc(OSIG[f][0])}</b>: ${esc(OSIG[f][2])} Tap a stock to open its full chain.</div></section>
+    <section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div>
+    ${rows.length ? `<div class="tw"><table class="t labt"><tr><th>Stock</th><th>Bias</th><th>What writers are doing</th><th class="n">Calls above</th><th class="n">Puts below</th><th class="n">PCR</th><th>Range (support – resistance)</th><th class="n">Max pain</th><th>Chase</th></tr>
+      ${rows.map(r => { const q = livePx(r.s), px = q ? q.close : r.spot;
+        return `<tr><td><div class="symrow">${symLink(r.s, 13.5)}</div><div class="muted" style="font-size:11.5px">${fmt(px)}${q ? ` <span class="${cls(q.chg)}">${pct(q.chg, 1)}</span>` : ""}</div></td>
+        <td><span class="hcat" style="--c:${r.score >= 1 ? "var(--up)" : r.score <= -1 ? "var(--down)" : "var(--muted)"}">${esc(r.bias)}</span></td>
+        <td style="white-space:normal;min-width:170px"><div class="chips">${r.sig.map(sigChip).join("") || `<span class="muted">—</span>`}</div></td>
+        <td class="n ${r.cover_pct < 0 ? "up" : r.cover_pct > 0 ? "down" : "muted"}" title="Change in call OI over the 5 strikes above the price (negative = writers covering: good for bulls)">${pct(r.cover_pct)}</td>
+        <td class="n ${cls(r.put_add_pct)}" title="Change in put OI over the 5 strikes under the price">${pct(r.put_add_pct)}</td>
+        <td class="n">${r.pcr ?? "—"}${r.chg_pcr != null ? `<div class="muted" style="font-size:11px">today ${r.chg_pcr}</div>` : ""}</td>
+        <td>${r.sup != null ? fmt(r.sup, 0) : "—"} – ${r.res != null ? fmt(r.res, 0) : "—"}<div class="muted" style="font-size:11px">${r.sup && r.res ? `${pct((r.sup / r.spot - 1) * 100)} / ${pct((r.res / r.spot - 1) * 100)}` : ""}</div></td>
+        <td class="n">${r.max_pain != null ? fmt(r.max_pain, 0) : "—"}<div class="muted" style="font-size:11px">${r.max_pain ? pct((r.max_pain / r.spot - 1) * 100) : ""}</div></td>
+        <td>${chaseCell(r.s)}</td></tr>`; }).join("")}</table></div>` : `<div class="empty">No stock shows this right now.</div>`}
+    <div class="muted" style="font-size:11.5px;margin-top:8px">Nearest expiry. "Calls above" = % change of call OI over the 5 strikes above the price (negative = writers covering). "Puts below" = % change of put OI over the 5 strikes under the price (positive = put writing). NSE data, read hourly in market hours and once after the close.</div></section>`;
+}
+
 /* ============================================================ Top 5 positional (full access only) */
 function top5Card(){
   const t = S().top5; if(!FULL() || !t || !(t.picks || []).length) return "";
@@ -1841,7 +1881,7 @@ function prefetch(){
   ("requestIdleCallback" in window) ? requestIdleCallback(go, {timeout:3000}) : setTimeout(go, 1500);
 }
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
-  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
+  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-chains":["chain_screen.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
 
 
@@ -2500,7 +2540,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2574,6 +2614,8 @@ document.addEventListener("click", e => {
   if(d.beartab){ UI.bearTab = d.beartab; return rerender(); }
   if(d.bearset){ UI.bearSet = d.bearset === "All" ? null : d.bearset; return rerender(); }
   if(d.bearstage){ UI.bearStage = d.bearstage; return rerender(); }
+  if(d.osig){ UI.osig = d.osig; return rerender(); }
+  if(d.ostrong){ UI.ostrong = !UI.ostrong; return rerender(); }
   if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
   if(d.hitearly){ UI.hitEarly = !UI.hitEarly; return rerender(); }
   if(d.hitgood){ UI.hitGood = !UI.hitGood; return rerender(); }

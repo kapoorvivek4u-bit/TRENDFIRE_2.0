@@ -78,6 +78,58 @@ def raw_chain(nse, symbol, expiry=None, band=12):
             "rows": [rows[k] for k in keep]}
 
 
+def read_chain(c):
+    """Plain reading of a chain (same rules as the site's panel). Returns signals and numbers."""
+    S0, rows = c["spot"], c["rows"]
+    above = [r for r in rows if r["k"] > S0]
+    below = [r for r in rows if r["k"] <= S0]
+    g = lambda r, sd, f: ((r.get(sd) or {}).get(f) or 0)
+    res = max(above, key=lambda r: g(r, "ce", "oi"), default=None)
+    sup = max(below, key=lambda r: g(r, "pe", "oi"), default=None)
+    ca, pb = above[:5], below[-5:]
+    cchg = sum(g(r, "ce", "chg") for r in ca)
+    coi = sum(g(r, "ce", "oi") for r in ca) or 1
+    cup = sum(1 for r in ca if g(r, "ce", "lc") > 0)
+    pchg = sum(g(r, "pe", "chg") for r in pb)
+    poi = sum(g(r, "pe", "oi") for r in pb) or 1
+    pdn = sum(1 for r in pb if g(r, "pe", "lc") < 0)
+    pup = sum(1 for r in pb if g(r, "pe", "lc") > 0)
+    sig, score = [], 0
+    if cchg < 0 and cup >= len(ca) / 2:
+        sig.append("cover"); score += 2
+    elif cchg > 0 and cup < len(ca) / 2:
+        sig.append("cwrite"); score -= 2
+    elif cchg > 0:
+        sig.append("cbuy"); score += 1
+    if pchg > 0 and pdn >= len(pb) / 2:
+        sig.append("pstrong"); score += 2
+    elif pchg < 0 and pup >= len(pb) / 2:
+        sig.append("pexit"); score -= 2
+    elif pchg > 0:
+        sig.append("pbuy"); score -= 1
+    elif pchg < 0:
+        score -= 1
+    t = c.get("tot") or {}
+    pcr = t["pe_oi"] / t["ce_oi"] if t.get("ce_oi") else None
+    cp = t["pe_chg"] / t["ce_chg"] if (t.get("ce_chg") or 0) > 0 and (t.get("pe_chg") or 0) > 0 else None
+    if pcr is not None:
+        score += 1 if pcr >= 1.2 else -1 if pcr < 0.7 else 0
+    if cp is not None:
+        score += 1 if cp > 1.2 else -1 if cp < 0.8 else 0
+    pain = None
+    if c.get("all"):
+        pain = min((k for k, _, _ in c["all"]),
+                   key=lambda K: sum(co * max(0, K - k) + po * max(0, k - K) for k, co, po in c["all"]))
+    atm = next((r for r in rows if r["k"] == c["atm"]), None)
+    ivs = [x for x in (g(atm, "ce", "iv"), g(atm, "pe", "iv")) if x] if atm else []
+    bias = "Bullish" if score >= 3 else "Mildly bullish" if score >= 1 else "Bearish" if score <= -3 else "Mildly bearish" if score <= -1 else "Neutral"
+    rnd = lambda x, n=1: None if x is None else round(x, n)
+    return {"s": c["s"], "spot": c["spot"], "expiry": c["expiry"], "at": c["at"], "sig": sig, "score": score, "bias": bias,
+            "cover_pct": rnd(cchg / coi * 100), "put_add_pct": rnd(pchg / poi * 100), "pcr": rnd(pcr, 2), "chg_pcr": rnd(cp, 2),
+            "res": res["k"] if res else None, "sup": sup["k"] if sup else None, "max_pain": pain,
+            "iv": rnd(sum(ivs) / len(ivs)) if ivs else None}
+
+
 def post(chains):
     if not KEY:
         print("INGEST_KEY is not set; not sending.")
