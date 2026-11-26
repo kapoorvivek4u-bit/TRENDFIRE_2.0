@@ -1555,7 +1555,14 @@ async function pageBear(){
 
 /* ============================================================ stock panel: tap a stock name -> its facts + option chain */
 const isFO = s => !!((S() || {}).closes || {})[s] || (S().mtf || []).some(r => r.s === s);
-let SHEET = null;                                   // {s, exp, data, tries, timer}
+let SHEET = null;
+/* TradingView writes BAJAJ-AUTO as BAJAJ_AUTO and M&M as M_M: map the chart name back to the NSE symbol */
+function realSym(t){
+  if(!t.includes("_")) return t;
+  const site = S() || {}, known = new Set([...Object.keys(site.closes || {}), ...Object.keys(site.levels || {}), ...(site.mtf || []).map(r => r.s), ...Object.keys(CACHE["names.json"] || {})]);
+  for(const k of known) if(k.replace(/[&-]/g, "_") === t) return k;
+  return t.replace(/_/g, "-");
+}                                   // {s, exp, data, tries, timer}
 function chainAct(sd, o, oiTot){
   if(!o || (!o.chg && !o.lc)) return null;
   if(Math.abs(o.chg) < Math.max(1, (o.oi || 0) * 0.04)) return null;          // ignore tiny changes
@@ -1650,8 +1657,9 @@ function closeSheet(){ if(SHEET && SHEET.timer) clearTimeout(SHEET.timer); SHEET
 document.addEventListener("click", e => {                          // tap a stock name: open its panel (Ctrl/⌘-click still opens the chart)
   const a = e.target.closest && e.target.closest('a[href*="tradingview.com/chart/?symbol=NSE:"]');
   if(!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0 || a.closest(".sheetp")) return;
-  const s = decodeURIComponent((a.getAttribute("href").split("NSE:")[1] || "").split(/[&#]/)[0]);
-  if(!s) return;
+  const t = decodeURIComponent((a.getAttribute("href").split("NSE:")[1] || "").split(/[&#]/)[0]);
+  if(!t) return;
+  const s = realSym(t);
   e.preventDefault(); e.stopPropagation(); openSheet(s);
 }, true);
 
