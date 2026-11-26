@@ -1,9 +1,9 @@
 {
- "generated_ist": "2026-11-26 16:15",
+ "generated_ist": "2026-11-26 19:30",
  "oi_asof": "2026-11-25",
- "stocks": 218,
+ "stocks": 217,
  "market": {
-  "weekly_bull_pct": 37,
+  "weekly_bull_pct": 36,
   "monthly_bull_pct": 53,
   "vix": 16.8,
   "regime": "Weak",
@@ -27842,7 +27842,6 @@
    "BHARTIARTL",
    "BOSCHLTD",
    "CANBK",
-   "CDSL",
    "DRREDDY",
    "ETERNAL",
    "FORCEMOT",
@@ -28061,7 +28060,6 @@
    "ANANDRATHI",
    "ANGELONE",
    "BSE",
-   "CDSL",
    "GAIL",
    "MARICO",
    "NAVINFLUOR",
@@ -28990,22 +28988,6 @@
     "signal": "ALL 3 ALIGNED BULLISH",
     "ma": "Mixed - No Clear Signal",
     "advice": "Sab bullish hain \u2014 entry le sakte ho, SL recent low ke neeche",
-    "daily": "No signal yet",
-    "hourly": "No signal yet",
-    "confirmed": "Not confirmed"
-   },
-   {
-    "symbol": "CDSL",
-    "close": 1441.0,
-    "states": {
-     "M": "Bottoming",
-     "W": "Bullish",
-     "D": "Topping",
-     "H": "Impulse"
-    },
-    "signal": "W+D BULLISH (M lagging)",
-    "ma": "Mixed - No Clear Signal",
-    "advice": "Valid Buy \u2014 W/D bullish, Monthly bottoming kar raha",
     "daily": "No signal yet",
     "hourly": "No signal yet",
     "confirmed": "Not confirmed"
@@ -31470,7 +31452,9 @@
    }
   ]
  },
- "notes": [],
+ "notes": [
+  "1 stocks skipped (too little price history or no data)."
+ ],
  "mtf": {
   "360ONE": [
    "Impulse",
@@ -31684,11 +31668,6 @@
   ],
   "CANBK": [
    "Topping",
-   "Bullish",
-   "Topping"
-  ],
-  "CDSL": [
-   "Bottoming",
    "Bullish",
    "Topping"
   ],
@@ -32907,14 +32886,6 @@
    "d200": 131.48,
    "w20": 126.97,
    "w50": 128.1
-  },
-  "CDSL": {
-   "c": 1441.0,
-   "e20": 1380.4,
-   "a": 43.05,
-   "d200": 1305.75,
-   "w20": 1343.66,
-   "w50": 1351.44
   },
   "CGPOWER": {
    "c": 782.0,
