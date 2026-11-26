@@ -504,7 +504,11 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .t5w{margin:0 0 10px;padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn);font-size:12.5px}
 @media (max-width:560px){.t5{grid-template-columns:auto 1fr}.t5 .r{grid-column:2;text-align:left;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.t5 .r>div{margin:0!important}}
 .mtfbar{display:flex;flex-wrap:wrap;gap:14px 22px}.mtfg{display:grid;gap:6px}.mtfg .seg i{font-style:normal;opacity:.6;margin-left:5px;font-size:11px}
-.mtft td{vertical-align:middle;white-space:nowrap}.labt td{vertical-align:middle;white-space:nowrap}.labinfo p{margin:4px 0 10px;font-size:13.5px;line-height:1.55;max-width:70ch}.lab2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:4px 22px}
+.mtft td{vertical-align:middle;white-space:nowrap}
+.hitn{border:0;cursor:pointer;font:700 11px/1 inherit;padding:3px 6px;margin-left:4px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);vertical-align:middle;flex:none}
+.hitpop{position:fixed;inset:0;z-index:60;background:rgba(15,12,40,.35);display:grid;place-items:end center;padding:16px max(16px,env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px))}
+.hitcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;width:min(520px,100%);max-height:80vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+@media (min-width:700px){.hitpop{place-items:center}}.labt td{vertical-align:middle;white-space:nowrap}.labinfo p{margin:4px 0 10px;font-size:13.5px;line-height:1.55;max-width:70ch}.lab2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:4px 22px}
 .cdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin:0 2px 0 5px;vertical-align:middle;flex:none;cursor:help}.mtfph{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.mtfph button{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:transparent;color:var(--c);border-radius:999px;padding:3px 9px;font:600 11.5px inherit;cursor:pointer}.mtfph button.on{background:color-mix(in srgb,var(--c) 16%,transparent)}.mtfph i{font-style:normal;opacity:.65;margin-left:4px}.mtft .sh{display:none}
 @media (max-width:640px){.mtft .hs{display:none}.mtft .sh{display:inline}.mtft .symrow{flex-wrap:nowrap}.mtft td,.mtft th{padding-left:3px;padding-right:3px}.mtft .symrow a{font-size:12.5px!important}.mtft td.n{font-size:11.5px!important}.mtft .chip{font-size:10.5px;padding:2px 5px}.mtft td.n{font-size:12px}.mtft button.star{display:none}}
 .hsum{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end}.hbig{font:800 34px/1 var(--head,inherit);margin:4px 0 6px}
@@ -729,14 +733,14 @@ const I = {
 };
 const ico = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
 const starBtn = s => !isAdmin() ? "" : `<button class="star ${inWatch(s) ? "on" : ""}" data-star="${esc(s)}" aria-label="${inWatch(s) ? "Remove from" : "Add to"} watchlist" title="Watchlist">${ico("watch")}</button>`;
-const symLink = (s, size=16, dot=true) => `<a class="sym" style="font-size:${size}px" href="${tv(s)}" target="_blank" rel="noopener">${esc(s)}</a>${dot ? chaseDot(s) : ""}`;
+const symLink = (s, size=16, dot=true) => `<a class="sym" style="font-size:${size}px" href="${tv(s)}" target="_blank" rel="noopener">${esc(s)}</a>${dot ? chaseDot(s) : ""}${dot !== null && typeof hitTag === "function" ? hitTag(s) : ""}`;
 function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : null;
   return c ? `<i class="cdot" style="--c:${c.color}" title="${c.icon} ${esc(c.label)}: ${c.x >= 0 ? "+" : ""}${c.x.toFixed(1)} ATR from the 20 EMA"></i>` : ""; }catch(e){ return ""; } }
 
 /* ============================================================ routes */
 const PAGES = [
   ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["lab","🧪 VK Experimentals"]]],
+  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["lab","🧪 VK Experimentals"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
@@ -1087,7 +1091,7 @@ async function pageDashboard(){
     ${subnav()}${bellStrip()}${headsUpCard()}${indexStrip()}
     <div class="grid">
       ${weatherCard()}${newsCard()}
-      ${top5Card()}
+      ${top5Card()}${mostScannedCard()}
       ${tradesCard()}
       ${partsCard()}${vkCard()}
       ${strongestCard()}${readyCard()}
@@ -1177,6 +1181,8 @@ function rateHolding(h){
   if(un && un.bias === "Selling") add("Unusual activity: selling", -4, "Unusual selling to stop");
   const vk = (s.vk || {})[sym];
   if(vk === "BUY NOW") add("VK Buy now", 3); else if(vk === "SELL NOW") add("VK Sell now", -5, "VK sell signal to clear");
+  const hh = (s.hits || {})[sym];
+  if(hh && hh.e.length) add(`Early scan hits: ${hh.e.slice(0, 3).join(", ")}${hh.e.length > 3 ? "…" : ""}`, Math.min(8, 2 * hh.e.length));
   const rd = (s.ready || []).find(r => r.symbol === sym && (r.stage === "Ready" || r.stage === "Triggered"));
   if(rd) add(`Fresh ${rd.setup} setup (${rd.stage}): good place to add`, 5);
   const hu = s.heads_up || {};
@@ -1375,6 +1381,53 @@ function spark(v){
   if(!v || v.length < 2) return "—";
   const mn = Math.min(...v), mx = Math.max(...v), w = 110, h = 26, f = i => (i / (v.length - 1)) * w, g = y => h - 2 - ((y - mn) / (mx - mn || 1)) * (h - 4);
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-label="RS line"><polyline fill="none" stroke="var(--up)" stroke-width="1.6" points="${v.map((y, i) => `${f(i).toFixed(1)},${g(y).toFixed(1)}`).join(" ")}"/></svg>`;
+}
+
+/* ============================================================ Scan hits: how many scans a stock is in today */
+const HIT_C = n => n >= 7 ? "var(--down)" : n >= 5 ? "var(--warn)" : n >= 3 ? "var(--accent2)" : "var(--muted)";
+const hitsOf = s => ((S() || {}).hits || {})[s] || null;
+function hitTag(s){ const h = hitsOf(s); if(!h || h.n < 3) return "";
+  return `<button class="hitn" data-hits="${esc(s)}" style="--c:${HIT_C(h.n)}" title="In ${h.n} scans today (${h.e.length} early). Tap for the list.">🔥${h.n}</button>`; }
+function hitsSheet(s){
+  const h = hitsOf(s); if(!h) return;
+  document.querySelector(".hitpop")?.remove();
+  const el = document.createElement("div"); el.className = "hitpop";
+  el.innerHTML = `<div class="hitcard" role="dialog" aria-label="Scans for ${esc(s)}"><div class="ct"><h2>${esc(s)}<em>in ${h.n} scans today</em></h2><button class="hx" data-hitclose="1" aria-label="Close">✕</button></div>
+    ${h.e.length ? `<div class="lbl">Early signals (before the move) · ${h.e.length}</div><div class="chips">${h.e.map(x => chip(x, "var(--up)")).join("")}</div>` : ""}
+    ${h.s.length ? `<div class="lbl" style="margin-top:10px">Strength signals (already moving) · ${h.s.length}</div><div class="chips">${h.s.map(x => chip(x, "var(--info)")).join("")}</div>` : ""}
+    ${h.w && h.w.length ? `<div class="hwarn" style="margin-top:10px">⚠️ ${esc(h.w.join(" · "))}</div>` : ""}
+    <div style="margin-top:10px">${chaseChip(s) || ""}</div>
+    <div class="muted" style="font-size:11.5px;margin-top:10px">Many scans + 🟢 Good entry zone is the best mix. Many scans + 🔴 Don't chase: wait for the dip.</div></div>`;
+  document.body.appendChild(el);
+}
+function mostScannedCard(){
+  const h = Object.entries((S() || {}).hits || {}).filter(([, v]) => v.n >= 3).slice(0, 10);
+  if(!h.length) return "";
+  return `<section class="card s5 fade"><div class="ct"><h2>Most scanned today<em>in 3+ scans</em></h2><a class="more" href="#scanner-hits">All ›</a></div>
+    <div class="list">${h.map(([s, v]) => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(s, 14)}</div>
+      <div class="muted" style="font-size:12px;margin-top:2px">${v.e.length} early · ${v.s.length} strength${v.w.length ? " · ⚠️ " + esc(v.w.join(", ")) : ""}</div></div>
+      <div class="r"><span class="hcat" style="--c:${HIT_C(v.n)}">🔥 ${v.n}</span></div></div>`).join("")}</div></section>`;
+}
+function pageHits(){
+  const all = Object.entries((S() || {}).hits || {});
+  UI.hitMin = UI.hitMin || 3;
+  const rows = all.filter(([s, v]) => v.n >= UI.hitMin && (!UI.hitEarly || v.e.length >= 2) && (!UI.hitGood || (chase(s) || {}).label === "Good entry zone"));
+  const cnt = m => all.filter(([, v]) => v.n >= m).length;
+  const lv = (S() || {}).levels || {};
+  return pageHead("Most scanned", `How many scans each stock is in today · ${esc(when(S().generated_ist))}`) + subnav() + `
+    <section class="card fade"><div class="filters">${[3,5,7].map(m => `<button data-hitmin="${m}" class="${UI.hitMin === m ? "on" : ""}">${m}+ scans<i>${cnt(m)}</i></button>`).join("")}
+      <button data-hitearly="1" class="${UI.hitEarly ? "on" : ""}" title="At least 2 early signals">2+ early signals</button>
+      <button data-hitgood="1" class="${UI.hitGood ? "on" : ""}">🟢 Good entry zone only</button></div>
+      <div class="muted" style="font-size:11.5px;margin-top:8px">15 scans count, 1 point each. <b class="up">Early</b> = setup Ready/Triggered, squeeze coiling, Chup-chap kharidari, RS lead, squeeze + cheap vol, VK Almost ready, FII footprint, fund/star buying. <b style="color:var(--info)">Strength</b> = M + W Impulse, Strongest top 40, VK Buy now, Unusual buying, OI long build-up, sector Leading/Improving, Top 5. Every evening's 3+ list is logged to test whether more scans really means bigger moves.</div></section>
+    <section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div>
+    ${rows.length ? `<div class="tw"><table class="t labt"><tr><th>Stock</th><th>Scans</th><th>Early signals</th><th>Strength signals</th><th>Chase</th><th class="n">Price</th></tr>
+      ${rows.map(([s, v]) => { const q = livePx(s);
+        return `<tr><td><div class="symrow">${symLink(s, 13.5, null)}${starBtn(s)}</div>${v.w.length ? `<div class="hwarn" style="margin:0;font-size:11px">⚠️ ${esc(v.w.join(", "))}</div>` : ""}</td>
+        <td><span class="hcat" style="--c:${HIT_C(v.n)}">🔥 ${v.n}<i>${v.e.length}E</i></span></td>
+        <td style="white-space:normal;min-width:180px"><div class="chips">${v.e.map(x => chip(x, "var(--up)")).join("") || `<span class="muted">—</span>`}</div></td>
+        <td style="white-space:normal;min-width:180px"><div class="chips">${v.s.map(x => chip(x, "var(--info)")).join("") || `<span class="muted">—</span>`}</div></td>
+        <td>${chaseCell(s)}</td><td class="n">${fmt(q ? q.close : (lv[s] || {}).c)}</td></tr>`; }).join("")}</table></div>`
+      : `<div class="empty">No stock matches these filters right now.</div>`}</section>`;
 }
 
 /* ============================================================ Top 5 positional (full access only) */
@@ -2222,7 +2275,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2262,6 +2315,7 @@ async function fullChange(body){
 }
 
 document.addEventListener("click", e => {
+  if(e.target.classList && e.target.classList.contains("hitpop")){ e.target.remove(); return; }
   const oa = e.target.closest("[data-openall]");
   if(oa){ fetch("/api/admin/open", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({on: oa.dataset.openall === "1"})})
     .then(r => r.json()).then(j => { USER.open = !!j.on; toast(j.on ? "All features are open to everyone" : "Back to the normal member view"); rerender(); }).catch(() => toast("Could not reach the server.")); return; }
@@ -2270,7 +2324,7 @@ document.addEventListener("click", e => {
   const sc = e.target.closest("[data-sharecard]");
   if(sc){ e.stopPropagation(); shareCard(sc.dataset.sharecard); return; }
   const fc = e.target.closest("[data-flip]");
-  if(fc && !e.target.closest("a, button.star")){ fc.classList.toggle("flip"); return; }
+  if(fc && !e.target.closest("a, button.star, button.hitn")){ fc.classList.toggle("flip"); return; }
   const b = e.target.closest("button, a[data-go], a[data-setup]"); if(!b) return;
   const d = b.dataset;
   if(d.act === "theme") return flip();
@@ -2287,6 +2341,11 @@ document.addEventListener("click", e => {
   if(d.atest){ toast("Sending test…"); alrCall({test: true}).then(r => { toast(`Email: ${r.mail || r.error} · Telegram: ${r.tg || "—"}`); alrCall().then(() => rerender()); }); return; }
   if(d.hdel){ if(HOLD) holdSave((HOLD.items || []).filter(i => i.s !== d.hdel)); return; }
   if(d.hadd){ holdAdd({s: d.hadd}); return; }
+  if(d.hits){ e.preventDefault(); hitsSheet(d.hits); return; }
+  if(d.hitclose){ document.querySelector(".hitpop")?.remove(); return; }
+  if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
+  if(d.hitearly){ UI.hitEarly = !UI.hitEarly; return rerender(); }
+  if(d.hitgood){ UI.hitGood = !UI.hitGood; return rerender(); }
   if(d.mtfgood){ UI.mtfGood = !UI.mtfGood; return rerender(); }
   if(d.mtfp){ const v = d.mtfp.split("|"); UI.mtf = {M:v[0], W:v[1], D:v[2]}; return rerender(); }
   if(d.fii){ UI.fiiTab = d.fii; return rerender(); }

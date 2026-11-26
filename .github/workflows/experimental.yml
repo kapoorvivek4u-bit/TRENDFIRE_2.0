@@ -28,6 +28,9 @@ jobs:
       - name: Run experimental scanners
         run: python experimental_scan.py
 
+      - name: Refresh the dashboard file (Most scanned uses tonight's lab results)
+        run: python site_data.py || echo "site_data failed; lab results are still saved"
+
       - name: Save results to the repo
         run: |
           git config user.name "setups-bot"

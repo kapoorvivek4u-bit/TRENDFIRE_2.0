@@ -883,7 +883,7 @@ def live_indexes():
 TOP_LOG = os.path.join(DATA, "top5_log.csv")
 
 
-def top5(fo, sj, uj, out, five, now):
+def top5(fo, sj, uj, out, five, now, hits=None):
     """Rank every Ready / Triggered F&O setup on everything the site knows and keep the best five.
     Each pick carries its checklist, so the score can be read line by line."""
     hu = out.get("heads_up") or {}
@@ -966,6 +966,9 @@ def top5(fo, sj, uj, out, five, now):
         add(f"Risk {risk:.1f}% to the stop", 3 if risk <= 5 else 0 if risk <= 8 else -5)
         if c.get("ext") is not None and c["ext"] > 4:
             add(f"Stretched: {c['ext']} ranges above the 50 EMA", -4)
+        hh = (hits or {}).get(s)
+        if hh and hh["e"]:
+            add(f"Early scan hits: {', '.join(hh['e'][:4])}", min(8, 2 * len(hh["e"])))
         score = round(sum(x["p"] for x in chk), 1)
         picks.append({**{k: c.get(k) for k in ("symbol", "setup", "stage", "grade", "close", "entry", "stop", "target", "rr",
                                                  "target_word", "sector", "sector_stage", "states", "vk", "detail")},
@@ -988,6 +991,100 @@ def top5(fo, sj, uj, out, five, now):
     except Exception as ex:
         print("site_data: top5 log skipped:", ex)
     return {"picks": top, "considered": len(best), "weather": weather, "note": note, "at": now.strftime("%Y-%m-%d %H:%M")}
+
+
+# ---------------------------------------------------------------- Scan hits: how many scans each stock is in today
+HITS_LOG = os.path.join(DATA, "hits_log.csv")
+HIT_NAMES = {   # key -> label; "e" = early (before the move), "s" = strength (already moving)
+    "setup": ("e", "Setup Ready/Triggered"), "coil": ("e", "Squeeze coiling (Prime Setup)"), "deliv": ("e", "Chup-chap kharidari"),
+    "rslead": ("e", "RS lead"), "cheapvol": ("e", "Squeeze + cheap vol"), "vkready": ("e", "VK Almost ready"),
+    "fii": ("e", "FII footprint buying"), "funds": ("e", "Fund / star buying (Deals)"),
+    "imp": ("s", "M + W Impulse"), "strong": ("s", "Strongest top 40"), "vkbuy": ("s", "VK Buy now"), "unusual": ("s", "Unusual: Buying"),
+    "oi": ("s", "OI long build-up"), "sector": ("s", "Sector Leading/Improving"), "top5": ("s", "Top 5 positional")}
+
+
+def scan_hits(fo, eq, sj, uj, ue, five, out, now):
+    hits = {}
+
+    def add(s, k, why=None):
+        if s:
+            hits.setdefault(s, {})[k] = why or HIT_NAMES[k][1]
+
+    for res in (fo, eq):
+        for r in setup_rows(res):
+            if r.get("stage") in ("Ready", "Triggered") and r.get("grade") != "Warning":
+                add(r["symbol"], "setup", f"{r['setup']} {r['stage']}")
+        for s in (res.get("old_labels") or {}).get("🏆 Prime Setup", []):
+            add(s, "coil")
+        for s, st in (res.get("mtf") or {}).items():
+            if st and st[0] == "Impulse" and st[1] == "Impulse":
+                add(s, "imp")
+        for lab, items in (res.get("vk_labels") or {}).items():
+            for x in items:
+                if lab == "BUY NOW":
+                    add(x["symbol"], "vkbuy")
+                elif lab == "ALMOST READY (Bullish)":
+                    add(x["symbol"], "vkready")
+    lab = jload("experimental.json")
+    for k, key in (("delivery", "deliv"), ("squeeze_iv", "cheapvol")):
+        for x in lab.get(k) or []:
+            add(x["s"], key)
+    for x in lab.get("rs_lead") or []:
+        if x.get("lead"):
+            add(x["s"], "rslead")
+    for x in jload("fii.json").get("accumulation") or []:
+        add(x["symbol"], "fii")
+    for s, d in (jload("deals.json").get("stocks") or {}).items():
+        if (d.get("mf_net_cr") or 0) > 0 or d.get("stars"):
+            add(s, "funds", d.get("text") or HIT_NAMES["funds"][1])
+    for x in sj.get("strongest_fo") or []:
+        if x.get("rank") and x["rank"] <= 40:
+            add(x["symbol"], "strong", f"Strongest #{x['rank']}")
+    for u in (uj, ue):
+        for r in u.get("rows") or []:
+            if r.get("bias") == "Buying":
+                add(r["symbol"], "unusual")
+    for s, f in five.items():
+        if (f.get("oi5") or 0) >= 3 and (f.get("px5") or 0) > 0:
+            add(s, "oi", f"OI long build-up {f['oi5']:+.0f}% in 5 days")
+    for s in list(hits):                                  # sector counts only alongside something else
+        st = (SECTORS.get(s) or {}).get("stage")
+        if st in ("Leading", "Improving"):
+            add(s, "sector", f"Sector {st.lower()}")
+    hu = out.get("heads_up") or {}
+    ban, results = set(hu.get("ban") or []), hu.get("results") or {}
+    rows = {}
+    for s, h in hits.items():
+        e = [v for k, v in h.items() if HIT_NAMES[k][0] == "e"]
+        g = [v for k, v in h.items() if HIT_NAMES[k][0] == "s"]
+        warn = []
+        if s in ban:
+            warn.append("F&O ban")
+        if results.get(s):
+            try:
+                if (dt.date.fromisoformat(results[s]) - now.date()).days <= 7:
+                    warn.append(f"Results {results[s]}")
+            except Exception:
+                pass
+        rows[s] = {"n": len(h), "e": e, "s": g, "w": warn}
+    print(f"site_data: scan hits for {len(rows)} stocks, {sum(1 for v in rows.values() if v['n'] >= 3)} with 3+")
+    return rows
+
+
+def log_hits(hits, lv, now):
+    """Today's 3+ list, rewritten on every run, so we can later check how they moved."""
+    try:
+        day = now.strftime("%Y-%m-%d")
+        log = pd.read_csv(HITS_LOG) if os.path.exists(HITS_LOG) else pd.DataFrame(columns=["date"])
+        log = log[log["date"].astype(str) != day]
+        new = pd.DataFrame([{"date": day, "symbol": s, "n": v["n"], "early": len(v["e"]), "close": (lv.get(s) or {}).get("c")}
+                            for s, v in hits.items() if v["n"] >= 3])
+        log = pd.concat([log, new], ignore_index=True)
+        for c in ("n", "early"):
+            log[c] = pd.to_numeric(log[c], errors="coerce").fillna(0).astype(int)
+        log.to_csv(HITS_LOG, index=False)
+    except Exception as ex:
+        print("site_data: hits log skipped:", ex)
 
 
 # ---------------------------------------------------------------- build
@@ -1179,10 +1276,24 @@ def run(now=None):
         out["mtf_eq"] = {s: st for s, st in (eq.get("mtf") or {}).items() if s not in fos}
     except Exception as ex:
         print("site_data: mtf failed:", ex)
+    hits = {}
     try:
-        out["top5"] = top5(fo, sj, uj, out, five, now)
+        hits = scan_hits(fo, eq or {}, sj, uj, ue or {}, five, out, now)
+    except Exception as ex:
+        print("site_data: scan hits failed:", ex)
+    try:
+        out["top5"] = top5(fo, sj, uj, out, five, now, hits)
     except Exception as ex:
         print("site_data: top5 failed:", ex)
+    try:
+        for p in (out.get("top5") or {}).get("picks") or []:
+            h = hits.setdefault(p["symbol"], {"n": 0, "e": [], "s": [], "w": []})
+            if HIT_NAMES["top5"][1] not in h["s"]:
+                h["s"].append(HIT_NAMES["top5"][1]); h["n"] += 1
+        out["hits"] = dict(sorted(((k, v) for k, v in hits.items() if v["n"] >= 2), key=lambda kv: (-kv[1]["n"], -len(kv[1]["e"]), kv[0])))
+        log_hits(out["hits"], out.get("levels") or {}, now)
+    except Exception as ex:
+        print("site_data: hits finish failed:", ex)
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), allow_nan=False, default=str)
     write_names()
