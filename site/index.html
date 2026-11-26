@@ -1423,7 +1423,7 @@ function pageHits(){
     ${rows.length ? `<div class="tw"><table class="t labt"><tr><th>Stock</th><th>Scans</th><th>Early signals</th><th>Strength signals</th><th>Chase</th><th class="n">Price</th></tr>
       ${rows.map(([s, v]) => { const q = livePx(s);
         return `<tr><td><div class="symrow">${symLink(s, 13.5, null)}${starBtn(s)}</div>${v.w.length ? `<div class="hwarn" style="margin:0;font-size:11px">⚠️ ${esc(v.w.join(", "))}</div>` : ""}</td>
-        <td><span class="hcat" style="--c:${HIT_C(v.n)}">🔥 ${v.n}<i>${v.e.length}E</i></span></td>
+        <td><span class="hcat" style="--c:${HIT_C(v.n)}" title="${v.n} scans, of which ${v.e.length} are early signals">🔥 ${v.n}<i>${v.e.length} early</i></span></td>
         <td style="white-space:normal;min-width:180px"><div class="chips">${v.e.map(x => chip(x, "var(--up)")).join("") || `<span class="muted">—</span>`}</div></td>
         <td style="white-space:normal;min-width:180px"><div class="chips">${v.s.map(x => chip(x, "var(--info)")).join("") || `<span class="muted">—</span>`}</div></td>
         <td>${chaseCell(s)}</td><td class="n">${fmt(q ? q.close : (lv[s] || {}).c)}</td></tr>`; }).join("")}</table></div>`
