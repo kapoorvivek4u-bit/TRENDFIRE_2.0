@@ -10,7 +10,7 @@
   },
   "ADANIPOWER": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ANANDRATHI": {
    "final": "BUY NOW",
@@ -33,10 +33,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "DIVISLAB": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "DRREDDY": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -72,6 +68,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "KALYANKJIL": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "LAURUSLABS": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -101,10 +101,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PAYTM": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "PETRONET": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -612,10 +608,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ADANIENSOL": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "ADANIGREEN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -656,6 +648,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "DRREDDY": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "EICHERMOT": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -673,10 +669,6 @@
    "confirmed": "Not confirmed"
   },
   "INDHOTEL": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "KALYANKJIL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -709,6 +701,10 @@
    "confirmed": "Not confirmed"
   },
   "PERSISTENT": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "PETRONET": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -753,6 +749,10 @@
    "confirmed": "Not confirmed"
   },
   "ASTRAL": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "INOXWIND": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -823,10 +823,6 @@
   "TECHM": {
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
-  },
-  "INOXWIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "KAYNES": {
    "final": "SELL NOW",
