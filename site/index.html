@@ -535,6 +535,13 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .sockcap textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:13px/1.45 var(--f-ui,Inter),sans-serif;background:var(--surface2);color:var(--ink);resize:vertical}
 .radr{padding:12px 0;border-bottom:1px solid var(--line)}.radr:last-child{border:0}.radh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.radsc{margin-left:auto;font-size:20px;font-weight:800}
 .radparts{margin:8px 0 0 30px;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.dkgate{display:flex;gap:16px;align-items:center;border-left:5px solid var(--c)}.dkgi{font-size:40px}.dkgw{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.dk{padding:14px 0;border-bottom:1px solid var(--line)}.dk:last-of-type{border-bottom:0}.dkh{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dkn{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--surface2);font-weight:800;font-size:13px}
+.dkplan{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0 36px;font-size:13.5px}.dkplan i{font-style:normal}.dkwhy{margin:6px 0 0 36px;font-size:13px}
+.dkban{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 16px;margin:0 0 14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);text-decoration:none;color:inherit;box-shadow:var(--shadow);font-size:14px}
+.dkban .more{margin-left:auto}
+@media (max-width:600px){.dkplan,.dkwhy{margin-left:0}}
 .socktut{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
 .sockheld{background:color-mix(in srgb,var(--warn) 14%,transparent);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
@@ -777,7 +784,7 @@ function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : nu
 
 /* ============================================================ routes */
 const PAGES = [
-  ["today","Today","today", [["today","Dashboard"],["today-strategies","Strategies"],["today-alist","A list"]]],
+  ["today","Today","today", [["today","Dashboard"],["today-desk","🎯 My Desk"],["today-strategies","Strategies"],["today-alist","A list"]]],
   ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["scanner-chains","⛓ Option screener"],["scanner-bear","🐻 Bearish"],["lab","🧪 VK Experimentals"]]],
   ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
   ["search","Search","search", []],
@@ -1146,6 +1153,117 @@ async function pageRadar(){
     + tabs + `<section class="card fade">${list.map(row).join("") || `<div class="empty">No sectors in this group today.</div>`}</section>` + track
     + `<p class="foot-note" style="margin-top:10px">A reading of market data, not a forecast or advice. Sectors can turn on news.</p>`;
 }
+/* ============================================================ 🎯 My Desk: one page for 3-5 day positional F&O trades
+   Pulls every scan into: should I trade today, where to look, max 5 stocks (one status each), and my open trades. */
+function deskGate(){
+  const st = (S() || {}).strength || {}, sc = st.score ?? 50, bear = BEAR() && BEAR().bear_mode;
+  if(bear || sc < 40) return {icon:"🔴", word:"Stay out of new longs", color:"var(--down)", size:"No new long positions. Manage open trades only.", sc};
+  if(sc < 55) return {icon:"🟡", word:"Selective, half size", color:"#e0a400", size:"Only ✅ Ready names. Keep it to about half your normal size (≤10 lots).", sc};
+  return {icon:"🟢", word:"Trade longs, normal size", color:"var(--up)", size:"Up to your 18–20 lot cap. Still only the names below.", sc};
+}
+function deskPicks(){
+  const s = S() || {}, st = CACHE["setups.json"] || {}, rad = CACHE["radar.json"] || {}, cs = CACHE["chain_screen.json"] || {};
+  const radG = Object.fromEntries((rad.sectors || []).map(x => [x.name, x.group]));
+  const chain = Object.fromEntries((cs.rows || []).map(r => [r.s, r]));
+  const mt = Object.fromEntries((s.mtf || []).map(r => [r.s, r]));
+  const hu = s.heads_up || {}, ban = new Set(hu.ban || []), res = hu.results || {};
+  const today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
+  const daysTo = d => Math.round((new Date(d + "T00:00:00Z") - new Date(today + "T00:00:00Z")) / 864e5);
+  const pool = {}; [...(st.rows || []), ...(st.overspill || [])].forEach(r => { const k = r.symbol; if(!pool[k] || (r.grade === "A" && pool[k].grade !== "A")) pool[k] = r; });
+  const out = [];
+  for(const r of Object.values(pool)){
+    const sym = r.symbol, S4 = r.states || {}, m = mt[sym] || {}, lv = (s.levels || {})[sym] || {};
+    if(!["A","B"].includes(r.grade)) continue;
+    if(ban.has(sym)) continue;
+    if(res[sym] && daysTo(res[sym]) >= 0 && daysTo(res[sym]) <= 6) continue;                 // results inside the 3-5 day hold
+    const bigUp = ["Impulse","Bullish"].includes(S4.M) && (["Impulse","Bullish"].includes(S4.W) || (r.setup === "Weekly Overspill" && S4.W !== "Bearish"));
+    if(!bigUp) continue;                                                                       // Monthly + Weekly behind you
+    if(S4.D === "Bearish") continue;
+    const c = chase(sym); if(!c || c.x > 2.5 || c.x < -1.5) continue;                          // not stretched, not broken
+    const ch = chain[sym] || {}, g = radG[m.sec] || "", hits = ((s.hits || {})[sym] || {});
+    const why = [], P = (n, t) => { if(t) why.push(t); return n; };
+    let sc = 0;
+    sc += r.grade === "A" ? 20 : 10;
+    sc += {Triggered:15, Ready:12, Watch:4}[r.stage] || 0;
+    sc += P({"Weekly Overspill":8, "Trend Pullback":6, "Swing Pullback":4, "Squeeze Break":4}[r.setup] || 2, `${r.setup} · grade ${r.grade} · ${r.stage}`);
+    sc += S4.D === "Bottoming" ? P(8, "Daily turning up: a fresh leg can start") : S4.D === "Impulse" ? P(6, "Daily in impulse") : 2;
+    if(S4.H === "Bottoming") sc += P(5, "Hourly bottoming (good timing)"); else if(S4.H === "Impulse") sc += 3;
+    sc += c.x <= 1 ? P(10, `${c.icon} near the 20 EMA (${c.x >= 0 ? "+" : ""}${c.x.toFixed(1)} ATR)`) : P(0, `${c.icon} a bit stretched (+${c.x.toFixed(1)} ATR)`);
+    sc += g === "Gaining steam" ? P(10, `${m.sec} gaining steam`) : g === "Possible turnaround" ? P(5, `${m.sec} possible turnaround`) : g === "Leading but tired" ? -5 : g === "Avoid" ? P(-10, `⚠️ ${m.sec} weak on the radar`) : 0;
+    const b = ch.bias || "";
+    sc += b === "Bullish" ? P(6, "option writers bullish") : b === "Mildly bullish" ? 3 : b === "Bearish" ? P(-6, "⚠️ option writers bearish") : 0;
+    if((ch.sig || []).includes("cover")) sc += P(4, "call writers covering");
+    const early = (hits.e || []).length; if(early) sc += P(Math.min(9, early * 3), `${early} early scan hit${early > 1 ? "s" : ""}`);
+    if((m.oi5 || 0) > 3 && (m.d5 || 0) > 0) sc += P(4, "long build-up (5 days)");
+    const q = livePx(sym), px = q ? q.close : r.close, atr = lv.a || null;
+    const entry = r.stage === "Watch" ? (r.trigger || null) : (r.trigger || px);
+    const stop = r.stop || (lv.e20 && atr ? lv.e20 - atr : null);
+    const room = atr ? 2 * atr : null;                                                         // a normal 3-5 day leg ~ 2 ATR
+    const base = entry || px, risk = base && stop ? base - stop : null, rr = risk > 0 && room ? room / risk : null;
+    if(rr != null && rr < 0.8) continue;
+    const status = (r.stage === "Triggered" || r.stage === "Ready") && c.x <= 1 ? "ready" : c.x > 1 ? "dip" : "watch";
+    out.push({sym, sec: m.sec, sc: Math.round(sc), why: why.slice(0, 5), status, px, entry, stop, room, rr, risk, setup: r.setup, grade: r.grade, chase: c, states: S4});
+  }
+  out.sort((a, b) => b.sc - a.sc);
+  return out;
+}
+const DESK_ST = {ready:["✅","Ready now","var(--up)","Setup has triggered and price is near the 20 EMA. Can enter on the plan below."],
+  dip:["⏳","Wait for a dip","#e0a400","Good stock, but a little stretched. Set an alert nearer the 20 EMA."],
+  watch:["👀","Just watch","var(--info)","Setup still forming. Set an alert at the trigger."]};
+function deskPositions(){
+  const items = (HOLD && HOLD.items) || [], lv = (S() || {}).levels || {};
+  const tdays = d => { if(!d) return null; let n = 0; for(let t = new Date(d + "T00:00:00Z").getTime() + 864e5; t <= Date.now(); t += 864e5){ const w = new Date(t).getUTCDay(); if(w && w < 6) n++; } return n; };
+  return items.map(h => { const r = rateHolding(h), l = lv[h.s] || {}, a = l.a, px = r.px, days = tdays(h.added);
+    const gain = h.avg && px ? (px - h.avg) : null, gainPct = gain != null ? gain / h.avg * 100 : null;
+    let act, why, col;
+    if(!r.known){ act = "Check"; why = "Not in the F&O scan"; col = "var(--muted)"; }
+    else if(r.cat === "Exit"){ act = "Exit"; why = "Trend has turned against it"; col = "var(--down)"; }
+    else if((r.stopAt && px != null && px < r.stopAt.v) || (gain != null && a && gain <= -2 * a)){ act = "Exit: stop hit"; why = `${gainPct != null ? gainPct.toFixed(1) + "%" : ""}${r.stopAt ? ` · below ${r.stopAt.n} ₹${fmt(r.stopAt.v)}` : ` · more than 2 ATR against you`}. Cut it, don't average.`; col = "var(--down)"; }
+    else if(days != null && days >= 5 && (gainPct == null || gainPct < 2)){ act = "Time up: exit"; why = `${days} trading days with ${gainPct != null ? (gainPct >= 0 ? "+" : "") + gainPct.toFixed(1) + "%" : "no clear gain"}. Dead money, free the capital.`; col = "var(--down)"; }
+    else if(gain != null && a && gain >= 1.5 * a){ act = "Tighten stop"; why = `Up ${gainPct.toFixed(1)}% (${(gain / a).toFixed(1)} ATR). Move the stop to ${l.e20 && l.e20 > h.avg ? "the 20 EMA ₹" + fmt(l.e20) : "entry ₹" + fmt(h.avg)}.`; col = "#e0a400"; }
+    else if(r.cat === "Weak"){ act = "Tighten stop"; why = "Weakening: keep the stop close"; col = "#e0a400"; }
+    else { act = "Hold"; why = `${r.cat}${days != null ? ` · day ${days} of 5` : ""}${gainPct != null ? ` · ${(gainPct >= 0 ? "+" : "") + gainPct.toFixed(1)}%` : ""}`; col = "var(--up)"; }
+    return {h, act, why, col, r}; });
+}
+async function pageDesk(){
+  await Promise.all([holdLoad().catch(() => null), getJSON("radar.json").catch(() => null), getJSON("chain_screen.json").catch(() => null), getJSON("bear.json").catch(() => null)]);
+  const g = deskGate(), rad = CACHE["radar.json"] || {}, picks = deskPicks(), top = picks.slice(0, 5);
+  const secs = (rad.sectors || []).filter(x => x.group === "Gaining steam").slice(0, 3), turn = (rad.sectors || []).filter(x => x.group === "Possible turnaround").slice(0, 2);
+  const pos = deskPositions();
+  const head = pageHead("🎯 My Desk", `3–5 day positional F&O · scan ${esc(when((S() || {}).generated_ist))}`) + subnav();
+  const card = (p, i) => { const [ic, lab, col, help] = DESK_ST[p.status];
+    return `<div class="dk"><div class="dkh"><span class="dkn">${i + 1}</span>${symLink(p.sym, 17)}<span class="muted" style="font-size:12.5px">${esc(p.sec || "")}</span>
+        <span class="chip" style="--c:${col};margin-left:auto">${ic} ${lab}</span></div>
+      <div class="dkplan">${p.entry ? `<span>Entry <b class="mono">₹${fmt(p.entry)}</b></span>` : `<span>Entry <b>on trigger</b></span>`}
+        ${p.stop ? `<span>Stop <b class="mono">₹${fmt(p.stop)}</b>${p.risk && p.entry ? ` <i class="muted">(${(p.risk / p.entry * 100).toFixed(1)}%)</i>` : ""}</span>` : ""}
+        ${p.room ? `<span>3–5 day room <b class="mono">~₹${fmt(p.room, p.room >= 20 ? 0 : 1)}</b> <i class="muted">(${(p.room / (p.entry || p.px) * 100).toFixed(1)}%)</i></span>` : ""}
+        ${p.rr ? `<span>Reward:risk <b class="mono" style="color:${p.rr >= 1.5 ? "var(--up)" : "#e0a400"}">${p.rr.toFixed(1)}</b></span>` : ""}</div>
+      <div class="dkwhy">${p.why.map(esc).join(" · ")}</div><div class="muted" style="font-size:11.5px;margin-top:4px">${help}</div></div>`; };
+  return head + `
+    <section class="card fade dkgate" style="--c:${g.color}"><div class="dkgi">${g.icon}</div><div><div class="lbl">Should I trade today?</div>
+      <div class="dkgw" style="color:${g.color}">${g.word}</div><div style="font-size:13.5px;margin-top:2px">${g.size}</div>
+      <div class="muted" style="font-size:12px;margin-top:4px">Market weather ${g.sc}/100${BEAR() && BEAR().bear_mode ? " · bear mode on" : ""}</div></div></section>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Where to look<em>from the Sector radar</em></h2><a class="more" href="#market-radar">Radar ›</a></div>
+      <div class="chips">${secs.map(x => `<span class="chip" style="--c:var(--up)">🟢 ${esc(x.name)} <b class="mono">${x.score}</b></span>`).join("") || `<span class="muted">No sector gaining steam today</span>`}
+        ${turn.map(x => `<span class="chip" style="--c:var(--info)">🔄 ${esc(x.name)}</span>`).join("")}</div></section>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Today's ${top.length || ""} for 3–5 days<em>max 5 · F&amp;O only · ${picks.length} passed the rules</em></h2></div>
+      ${g.icon === "🔴" ? `<div class="hwarn" style="margin-bottom:10px">Market says stay out of new longs. The list is for watching only.</div>` : ""}
+      ${top.map(card).join("") || `<div class="empty">Nothing passes all the rules today. That's a valid answer: no trade is a position.</div>`}
+      <details class="t5d" style="margin-top:10px"><summary>The rules every stock must pass</summary><ul>
+        <li>F&amp;O stock with a grade A or B setup (pullback, Weekly overspill, squeeze break)</li><li>Monthly and Weekly trend up (Weekly overspill allowed)</li>
+        <li>Daily not bearish · price within −1.5 to +2.5 ATR of the 20 EMA</li><li>Not in the F&amp;O ban · no results in the next 6 days</li>
+        <li>Reward:risk at least 0.8 for a normal 3–5 day move (about 2 ATR)</li>
+        <li>Then ranked by stage, setup, Daily/Hourly turn, chase meter, sector radar, option writers, early scan hits and OI</li></ul></details></section>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>My open trades<em>${pos.length} · from My holdings</em></h2><a class="more" href="#admin-holdings">Edit ›</a></div>
+      ${pos.length ? `<div class="list">${pos.map(x => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(x.h.s, 15)}</div><div class="muted" style="font-size:12px">${esc(x.why)}</div></div>
+        <span class="chip" style="--c:${x.col}">${esc(x.act)}</span></div>`).join("")}</div>` : `<div class="empty">Add your open trades in My holdings (with buy price) and they'll show here with Hold, Tighten stop or Exit, plus a 5-day time check.</div>`}</section>
+    <p class="foot-note" style="margin-top:12px">Your routine: evening, 10 minutes here, pick 1–2 and set alerts. Next day, act only when an alert fires. A reading of your scans, not advice.</p>`;
+}
+function deskBanner(){
+  if(!PRO() || !USER) return "";
+  const g = deskGate(); let n = 0; try { n = deskPicks().filter(p => p.status === "ready").length; } catch(e) {}
+  return `<a class="dkban fade" href="#today-desk" style="--c:${g.color}"><b>🎯 My Desk</b><span>${g.icon} ${g.word}</span><span>${n ? `✅ ${n} ready` : "Open your 5"}</span><span class="more">Open ›</span></a>`;
+}
 function sectorCard(){
   const secs = (S().sectors || []).slice().sort((a,b) => (b.r1 ?? -99) - (a.r1 ?? -99));
   const mx = Math.max(1, ...secs.map(s => Math.abs(s.r1 || 0)));
@@ -1169,7 +1287,7 @@ function greet(){ const h = +new Date().toLocaleString("en-US", {hour:"numeric",
 async function pageDashboard(){
   return `<div class="head"><div><h1>${greet()}, Trader</h1><div class="sub">Here's the market before you trade. <a href="/guide" target="_blank" rel="noopener" style="font-weight:700">New here? How to use TradeReady ›</a></div></div>
       <div class="stamp"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST · refreshes hourly</div></div>
-    ${subnav()}
+    ${subnav()}${deskBanner()}
     <div class="grid">${flowMiniCard()}${weatherCard()}${newsCard()}</div>
     <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
     <div class="grid">
@@ -2124,7 +2242,7 @@ function prefetch(){
   ("requestIdleCallback" in window) ? requestIdleCallback(go, {timeout:3000}) : setTimeout(go, 1500);
 }
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
-  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-chains":["chain_screen.json"], "market-radar":["radar.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
+  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-chains":["chain_screen.json"], "market-radar":["radar.json"], "today-desk":["setups.json","radar.json","chain_screen.json","bear.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
 
 
@@ -2790,7 +2908,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRadar, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRadar, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, "today-desk":pageDesk, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2810,6 +2928,7 @@ async function render(){
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
   const adminOnly = r === "watchlist" || r === "admin" || r === "admin-alerts" || r === "admin-social";
+  if(r === "today-desk" && !PRO()) return pageDashboard;
   const proOnly = r === "intraday" || r.startsWith("admin-") || r.endsWith("scorecard");   // admin, or everyone while features are opened
   const fn = adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
     : proOnly && !PRO() ? pageDashboard : (VIEWS[r] || pageDashboard);
