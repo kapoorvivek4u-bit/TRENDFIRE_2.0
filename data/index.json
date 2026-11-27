@@ -1,5 +1,5 @@
 {
- "generated_ist": "2026-11-27 11:15",
+ "generated_ist": "2026-11-27 12:15",
  "oi_asof": "2026-11-26",
  "indexes": [
   {
@@ -99,7 +99,7 @@
    "setups": [
     {
      "symbol": "NIFTY",
-     "close": 25748.1,
+     "close": 25720.6,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
@@ -128,7 +128,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 25766.0,
+     "trigger": 25761.68,
      "stop": 25293.61
     }
    ],
@@ -359,7 +359,7 @@
     {
      "symbol": "INDIGO",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "C",
      "oi": {
       "oi_pct": -20.1,
@@ -731,7 +731,7 @@
     {
      "symbol": "MARUTI",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Ready",
+     "setup": "Swing Pullback \u00b7 Watch",
      "grade": "B",
      "oi": {
       "oi_pct": 4.8,
@@ -803,8 +803,8 @@
     {
      "symbol": "RELIANCE",
      "vk": "NO SIGNAL",
-     "setup": null,
-     "grade": null,
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "C",
      "oi": {
       "oi_pct": 9.7,
       "px_pct": 3.2,
@@ -827,8 +827,8 @@
     {
      "symbol": "SBIN",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "B",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "A",
      "oi": {
       "oi_pct": -18.0,
       "px_pct": 0.8,
@@ -887,8 +887,8 @@
     {
      "symbol": "TRENT",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "C",
+     "setup": "Hourly Overspill \u00b7 Triggered",
+     "grade": "B",
      "oi": {
       "oi_pct": -6.8,
       "px_pct": 3.3,
@@ -932,7 +932,7 @@
     "M": "Impulse",
     "W": "Impulse",
     "D": "Topping",
-    "H": "Bullish"
+    "H": "Topping"
    },
    "vk": {
     "final": "BUY NOW",
@@ -946,10 +946,10 @@
      "M": "BULLISH RUN",
      "W": "BULLISH RUN",
      "D": "TOPPING",
-     "H": "BULLISH RUN"
+     "H": "TOPPING"
     }
    },
-   "old": "\u26a0\ufe0f Extended (Gaining)",
+   "old": "\u26a0\ufe0f Extended",
    "ma": "Bullish",
    "squeeze": false,
    "ext": 4.7,
@@ -1019,17 +1019,17 @@
    "setups": [
     {
      "symbol": "BANKNIFTY",
-     "close": 63397.4,
+     "close": 63339.3,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
       "W": "Impulse",
       "D": "Topping",
-      "H": "Bullish"
+      "H": "Topping"
      },
      "setup": "Hourly Overspill",
-     "stage": "Ready",
-     "old": "\u26a0\ufe0f Extended (Gaining)",
+     "stage": "Watch",
+     "old": "\u26a0\ufe0f Extended",
      "ext": 4.7,
      "vk": {
       "final": "BUY NOW",
@@ -1043,12 +1043,12 @@
        "M": "BULLISH RUN",
        "W": "BULLISH RUN",
        "D": "TOPPING",
-       "H": "BULLISH RUN"
+       "H": "TOPPING"
       }
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 63552.66,
+     "trigger": 63532.34,
      "stop": 62444.16
     }
    ],
@@ -1243,7 +1243,7 @@
     {
      "symbol": "IDFCFIRSTB",
      "vk": "BUY NOW",
-     "setup": "Hourly Range \u00b7 Ready",
+     "setup": "Hourly Range \u00b7 Watch",
      "grade": "C",
      "oi": {
       "oi_pct": -4.4,
@@ -1339,7 +1339,7 @@
     {
      "symbol": "BANKBARODA",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": -20.3,
@@ -1387,8 +1387,8 @@
     {
      "symbol": "SBIN",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "B",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "A",
      "oi": {
       "oi_pct": -18.0,
       "px_pct": 0.8,
@@ -1508,7 +1508,7 @@
    "setups": [
     {
      "symbol": "MIDCAP",
-     "close": 17988.9,
+     "close": 17963.55,
      "trend": "With trend",
      "states": {
       "M": "Topping",
@@ -1542,7 +1542,7 @@
     },
     {
      "symbol": "MIDCAP",
-     "close": 17988.9,
+     "close": 17963.55,
      "trend": "With trend",
      "states": {
       "M": "Topping",
@@ -1571,9 +1571,9 @@
      "ext": 2.0,
      "detail": "8-week range under a flat top, 3 touches, 12% deep \u00b7 broke out Fri 27 \u00b7 Breakout volume 1.0x",
      "grade": "B",
-     "trigger": 17957.8,
-     "stop": 17815.59,
-     "target": 20062.2,
+     "trigger": 17957.72,
+     "stop": 17814.93,
+     "target": 20065.09,
      "chart": {
       "h": [
        18109.45,
@@ -1628,7 +1628,8 @@
        17964.1,
        17866.0,
        17953.35,
-       18051.85
+       18051.85,
+       17991.35
       ],
       "l": [
        17950.15,
@@ -1683,7 +1684,8 @@
        17681.3,
        17704.25,
        17671.2,
-       17849.5
+       17849.5,
+       17933.9
       ],
       "c": [
        18001.5,
@@ -1738,7 +1740,8 @@
        17774.1,
        17797.95,
        17931.05,
-       17988.9
+       17988.9,
+       17963.55
       ],
       "lines": {
        "top": [
@@ -1747,8 +1750,8 @@
          17979.65
         ],
         [
-         52.86,
-         17957.8
+         53.0,
+         17957.72
         ]
        ],
        "floor": [
@@ -1955,18 +1958,6 @@
    },
    "board": [
     {
-     "symbol": "AUROPHARMA",
-     "vk": "BUY NOW",
-     "setup": "Trend Pullback \u00b7 Watch",
-     "grade": "C",
-     "oi": {
-      "oi_pct": -1.9,
-      "px_pct": 1.4,
-      "word": "No big change",
-      "side": 0
-     }
-    },
-    {
      "symbol": "BHEL",
      "vk": "BUY NOW",
      "setup": "Weekly Overspill \u00b7 Watch",
@@ -2005,7 +1996,7 @@
     {
      "symbol": "MARICO",
      "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": -13.4,
@@ -2036,6 +2027,18 @@
       "px_pct": -6.0,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "AUROPHARMA",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Trend Pullback \u00b7 Watch",
+     "grade": "C",
+     "oi": {
+      "oi_pct": -1.9,
+      "px_pct": 1.4,
+      "word": "No big change",
+      "side": 0
      }
     },
     {
@@ -2209,8 +2212,8 @@
     {
      "symbol": "SRF",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Range \u00b7 Triggered",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": -6.9,
       "px_pct": 3.7,
@@ -2353,7 +2356,7 @@
    "setups": [
     {
      "symbol": "FINNIFTY",
-     "close": 28529.8,
+     "close": 28490.1,
      "trend": "Early turn",
      "states": {
       "M": "Bottoming",
@@ -2382,7 +2385,7 @@
      },
      "detail": "Dipped into the 20-50 EMA zone \u00b7 Volume 1.0x in pullback \u00b7 OI n/a",
      "grade": "C",
-     "trigger": 28667.74,
+     "trigger": 28650.83,
      "stop": 28084.57
     }
    ],
@@ -2697,7 +2700,7 @@
     {
      "symbol": "LICHSGFIN",
      "vk": "NO SIGNAL",
-     "setup": "Swing Pullback \u00b7 Watch",
+     "setup": "Swing Pullback \u00b7 Ready",
      "grade": "A",
      "oi": {
       "oi_pct": -6.9,
@@ -2746,7 +2749,7 @@
      "symbol": "RECLTD",
      "vk": "NO SIGNAL",
      "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
+     "grade": "B",
      "oi": {
       "oi_pct": -2.4,
       "px_pct": 2.9,
@@ -2769,8 +2772,8 @@
     {
      "symbol": "SBIN",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Ready",
-     "grade": "B",
+     "setup": "Daily Cup \u00b7 Triggered",
+     "grade": "A",
      "oi": {
       "oi_pct": -18.0,
       "px_pct": 0.8,
@@ -2913,7 +2916,7 @@
    "setups": [
     {
      "symbol": "NEXT50",
-     "close": 73020.45,
+     "close": 72953.55,
      "trend": "With trend",
      "states": {
       "M": "Impulse",
@@ -3130,6 +3133,18 @@
    },
    "board": [
     {
+     "symbol": "ADANIPOWER",
+     "vk": "BUY NOW",
+     "setup": "Weekly Overspill \u00b7 Watch",
+     "grade": "A",
+     "oi": {
+      "oi_pct": -8.7,
+      "px_pct": 2.5,
+      "word": "Short covering",
+      "side": 1
+     }
+    },
+    {
      "symbol": "BOSCHLTD",
      "vk": "BUY NOW",
      "setup": "Hourly Overspill \u00b7 Triggered",
@@ -3163,30 +3178,6 @@
       "px_pct": -0.6,
       "word": "Long unwinding",
       "side": -1
-     }
-    },
-    {
-     "symbol": "MOTHERSON",
-     "vk": "BUY NOW",
-     "setup": "Daily Overspill \u00b7 Watch",
-     "grade": "A",
-     "oi": {
-      "oi_pct": -8.6,
-      "px_pct": 5.6,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
-     "symbol": "TVSMOTOR",
-     "vk": "BUY NOW",
-     "setup": "Hourly Overspill \u00b7 Watch",
-     "grade": "B",
-     "oi": {
-      "oi_pct": -3.8,
-      "px_pct": 5.2,
-      "word": "Short covering",
-      "side": 1
      }
     },
     {
@@ -3226,18 +3217,6 @@
      }
     },
     {
-     "symbol": "ADANIPOWER",
-     "vk": "ALMOST READY (Bullish)",
-     "setup": "Weekly Overspill \u00b7 Watch",
-     "grade": "A",
-     "oi": {
-      "oi_pct": -8.7,
-      "px_pct": 2.5,
-      "word": "Short covering",
-      "side": 1
-     }
-    },
-    {
      "symbol": "CHOLAFIN",
      "vk": "ALMOST READY (Bullish)",
      "setup": null,
@@ -3247,6 +3226,18 @@
       "px_pct": -1.0,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "MOTHERSON",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Daily Overspill \u00b7 Watch",
+     "grade": "A",
+     "oi": {
+      "oi_pct": -8.6,
+      "px_pct": 5.6,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -3271,6 +3262,18 @@
       "px_pct": -1.0,
       "word": "Long unwinding",
       "side": -1
+     }
+    },
+    {
+     "symbol": "TVSMOTOR",
+     "vk": "ALMOST READY (Bullish)",
+     "setup": "Hourly Overspill \u00b7 Watch",
+     "grade": "B",
+     "oi": {
+      "oi_pct": -3.8,
+      "px_pct": 5.2,
+      "word": "Short covering",
+      "side": 1
      }
     },
     {
@@ -3324,7 +3327,7 @@
     {
      "symbol": "BANKBARODA",
      "vk": "NO SIGNAL",
-     "setup": "Hourly Overspill \u00b7 Watch",
+     "setup": "Hourly Overspill \u00b7 Triggered",
      "grade": "B",
      "oi": {
       "oi_pct": -20.3,
@@ -3648,8 +3651,8 @@
     {
      "symbol": "ENRIN",
      "vk": null,
-     "setup": "Hourly Range \u00b7 Watch",
-     "grade": "C",
+     "setup": null,
+     "grade": null,
      "oi": {
       "oi_pct": 23.4,
       "px_pct": 4.0,

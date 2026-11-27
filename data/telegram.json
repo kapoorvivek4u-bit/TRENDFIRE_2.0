@@ -8,15 +8,15 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "ADANIPOWER": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "ANANDRATHI": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ANGELONE": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "AUROPHARMA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -62,7 +62,7 @@
   },
   "INDIANB": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "INDIGO": {
    "final": "BUY NOW",
@@ -70,7 +70,7 @@
   },
   "JSWSTEEL": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "LAURUSLABS": {
    "final": "BUY NOW",
@@ -89,10 +89,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "MCX": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "MOTHERSON": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -116,13 +112,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "RADICO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "RBLBANK": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "SONACOMS": {
    "final": "BUY NOW",
@@ -132,13 +124,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "TVSMOTOR": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "UNIONBANK": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "UNOMINDA": {
    "final": "BUY NOW",
@@ -636,11 +624,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ADANIPOWER": {
+  "APOLLOHOSP": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "APOLLOHOSP": {
+  "AUROPHARMA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -708,6 +696,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "MOTHERSON": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "MOTILALOFS": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -736,7 +728,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "RADICO": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "TITAN": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "TVSMOTOR": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
