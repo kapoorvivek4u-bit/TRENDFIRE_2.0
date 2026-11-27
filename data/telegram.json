@@ -24,10 +24,6 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "BOSCHLTD": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "BSE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -38,13 +34,9 @@
   },
   "FEDERALBNK": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
-  },
-  "GLENMARK": {
-   "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "GRASIM": {
+  "GLENMARK": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -96,6 +88,10 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "PERSISTENT": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "PRESTIGE": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
@@ -116,7 +112,7 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "UNOMINDA": {
+  "TORNTPHARM": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -384,6 +380,10 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
+  "LTM": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
   "LUPIN": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -560,10 +560,6 @@
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
-  "TORNTPHARM": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
   "TRENT": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
@@ -577,10 +573,6 @@
    "confirmed": "Not confirmed"
   },
   "VBL": {
-   "final": "NO SIGNAL",
-   "confirmed": "Not confirmed"
-  },
-  "VEDL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -660,6 +652,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "GRASIM": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "ICICIBANK": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -704,10 +700,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "PERSISTENT": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "PETRONET": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -748,7 +740,7 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "ZYDUSLIFE": {
+  "UNOMINDA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -784,6 +776,10 @@
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
+  "VEDL": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
   "BANDHANBNK": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -808,10 +804,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "LTM": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "SBICARD": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -820,11 +812,19 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
+  "BOSCHLTD": {
+   "final": "COMING CLOSE TO READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "HAL": {
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "TECHM": {
+   "final": "COMING CLOSE TO READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "ZYDUSLIFE": {
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
   },
