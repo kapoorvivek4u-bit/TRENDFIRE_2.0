@@ -2,7 +2,7 @@
  "last": {
   "360ONE": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "ACUTAAS": {
    "final": "BUY NOW",
@@ -21,6 +21,10 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "BHEL": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "BOSCHLTD": {
    "final": "BUY NOW",
    "confirmed": "Not confirmed"
   },
@@ -100,9 +104,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "PHOENIXLTD": {
+  "PETRONET": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
   "PRESTIGE": {
    "final": "BUY NOW",
@@ -111,6 +115,10 @@
   "RADICO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "SONACOMS": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "SUNPHARMA": {
    "final": "BUY NOW",
@@ -217,6 +225,10 @@
    "confirmed": "Not confirmed"
   },
   "CANBK": {
+   "final": "NO SIGNAL",
+   "confirmed": "Not confirmed"
+  },
+  "CDSL": {
    "final": "NO SIGNAL",
    "confirmed": "Not confirmed"
   },
@@ -636,10 +648,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "BOSCHLTD": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "CHOLAFIN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -708,7 +716,7 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "PETRONET": {
+  "PHOENIXLTD": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -725,10 +733,6 @@
    "confirmed": "Not confirmed"
   },
   "RBLBANK": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "SONACOMS": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -749,10 +753,6 @@
    "confirmed": "Not confirmed"
   },
   "ASTRAL": {
-   "final": "ALMOST READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
-  "JUBLFOOD": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -785,6 +785,10 @@
    "confirmed": "Not confirmed"
   },
   "ICICILIFE": {
+   "final": "COMING CLOSE TO READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "JUBLFOOD": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
