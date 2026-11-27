@@ -26,7 +26,7 @@
   },
   "BOSCHLTD": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "BSE": {
    "final": "BUY NOW",
@@ -56,17 +56,21 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "ICICIBANK": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "IDFCFIRSTB": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
+  "INDIANB": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
+  },
   "INDIGO": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "JSWSTEEL": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "LAURUSLABS": {
    "final": "BUY NOW",
@@ -106,7 +110,7 @@
   },
   "PETRONET": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "PRESTIGE": {
    "final": "BUY NOW",
@@ -116,9 +120,13 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "SONACOMS": {
+  "RBLBANK": {
    "final": "BUY NOW",
    "confirmed": "Not confirmed"
+  },
+  "SONACOMS": {
+   "final": "BUY NOW",
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "SUNPHARMA": {
    "final": "BUY NOW",
@@ -128,9 +136,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "UNITDSPR": {
+  "UNIONBANK": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
   "UNOMINDA": {
    "final": "BUY NOW",
@@ -672,15 +680,11 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "ICICIBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "INDHOTEL": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "INDIANB": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "JSWSTEEL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -732,10 +736,6 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "RBLBANK": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
   "TITAN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -744,7 +744,7 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "UNIONBANK": {
+  "UNITDSPR": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -761,6 +761,18 @@
    "confirmed": "Not confirmed"
   },
   "PIIND": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "RVNL": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "SUPREMEIND": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "TMPV": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -821,18 +833,6 @@
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "KPITTECH": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "RVNL": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "SUPREMEIND": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "TMPV": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   }
