@@ -1734,7 +1734,7 @@ const oMatch = (k, r) => k === "all" ? true : k.startsWith("b:") ? r.bias === k.
 async function pageOScreen(){
   const x = await getJSON("chain_screen.json").catch(() => null);
   const head = pageHead("Option screener", `What option writers are doing in every F&O stock${x ? ` · ${esc(when(x.generated_ist))} · ${x.checked} chains` : ""}`) + subnav();
-  if(!x || !x.rows) return head + `<div class="empty">The first full chain scan runs in market hours (hourly from 10:45).</div>`;
+  if(!x || !x.rows) return head + `<div class="empty">The first full chain scan runs in market hours (9:30, then hourly from 10:45).</div>`;
   const f = UI.osig || "cover", all = x.rows;
   const strong = s => { const m = (S().mtf || []).find(r => r.s === s), h = hitsOf(s); return (m && m.M === "Impulse" && m.W === "Impulse") || (h && h.n >= 3); };
   const rows = all.filter(r => oMatch(f, r) && (!UI.ostrong || strong(r.s))).sort((a, b) => ["cwrite","pexit","pbuy","bear","pcrlo","b:Mildly bearish","b:Bearish"].includes(f) ? a.score - b.score : b.score - a.score);
