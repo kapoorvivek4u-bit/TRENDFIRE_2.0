@@ -36,9 +36,9 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "GAIL": {
+  "FEDERALBNK": {
    "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
+   "confirmed": "Not confirmed"
   },
   "GLENMARK": {
    "final": "BUY NOW",
@@ -49,10 +49,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "HEROMOTOCO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
-  "IDFCFIRSTB": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -117,10 +113,6 @@
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "TITAN": {
-   "final": "BUY NOW",
-   "confirmed": "Not confirmed"
-  },
-  "UNIONBANK": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
@@ -664,11 +656,15 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
-  "FEDERALBNK": {
+  "GAIL": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
   "ICICIBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
+  "IDFCFIRSTB": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -744,6 +740,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "UNIONBANK": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "UNITDSPR": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -757,6 +757,10 @@
    "confirmed": "Not confirmed"
   },
   "INOXWIND": {
+   "final": "ALMOST READY (Bearish)",
+   "confirmed": "Not confirmed"
+  },
+  "KAYNES": {
    "final": "ALMOST READY (Bearish)",
    "confirmed": "Not confirmed"
   },
@@ -825,10 +829,6 @@
    "confirmed": "Not confirmed"
   },
   "JUBLFOOD": {
-   "final": "SELL NOW",
-   "confirmed": "CONFIRMED \u2014 Sell ON"
-  },
-  "KAYNES": {
    "final": "SELL NOW",
    "confirmed": "CONFIRMED \u2014 Sell ON"
   },
