@@ -435,6 +435,7 @@ const TIMETABLE = {
   "deals.yml":    m => m === at(19, 0),
   "equity.yml":   m => m === at(19, 45),
   "experimental.yml": m => m === at(20, 30),
+  "radar.yml":    m => m === at(17, 0) || m === at(20, 45),           // sector radar after the sector and lab scans
   "social.yml":   m => m === at(15, 40),                           // daily social kit after the close
   "chains.yml":   m => [at(9, 30), at(10, 45), at(11, 45), at(12, 45), at(13, 45), at(14, 45), at(15, 45)].includes(m),
 };

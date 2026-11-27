@@ -533,6 +533,8 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .sockcaps{display:grid;gap:10px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
 .sockh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:13px}
 .sockcap textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:13px/1.45 var(--f-ui,Inter),sans-serif;background:var(--surface2);color:var(--ink);resize:vertical}
+.radr{padding:12px 0;border-bottom:1px solid var(--line)}.radr:last-child{border:0}.radh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.radsc{margin-left:auto;font-size:20px;font-weight:800}
+.radparts{margin:8px 0 0 30px;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
 .socktut{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
 .sockheld{background:color-mix(in srgb,var(--warn) 14%,transparent);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
@@ -781,7 +783,7 @@ const PAGES = [
   ["search","Search","search", []],
   ["watchlist","Watchlist","watch", []],
   ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]]],
-  ["market","Market","market", [["market","Sectors"],["market-flow","⚡ Money flow"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
+  ["market","Market","market", [["market","Sectors"],["market-flow","⚡ Money flow"],["market-radar","🧭 Sector radar"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
 ];
 const TABS_ALL = ["today","scanner","index","watchlist","market"];
 const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-alerts","Alerts"],["admin-social","📣 Social kit"],["admin-scorecard","Scorecard"]]]]
@@ -1101,6 +1103,49 @@ function moversCard(){
     <div><div class="sub-h" style="margin-top:0">Losers</div>${S().losers.slice(0,6).map(row).join("")}</div></div></section>`;
 }
 function divBar(v, mx, c){ const w = Math.abs(v||0)/mx*50; return `<span class="dv"><i style="--c:${c};left:${v >= 0 ? 50 : 50-w}%;width:${w}%"></i></span>`; }
+/* ============================================================ Sector radar: which sectors look set to beat Nifty next */
+const RADAR_G = {"Gaining steam":["🟢","var(--up)","Momentum, scans and option writers lining up"],
+  "Possible turnaround":["🔄","var(--info)","Still weak on price, but option writers are turning bullish"],
+  "Leading but tired":["🟡","#e0a400","Doing well, but writers or momentum disagree"],
+  "Neutral":["⚪","var(--muted)","No clear edge"], "Avoid":["🔴","var(--down)","Weak on most readings"]};
+const RADAR_ORDER = ["Gaining steam","Possible turnaround","Leading but tired","Neutral","Avoid"];
+function radarCard(){
+  const r = CACHE["radar.json"]; if(!r){ if(!radarCard.asked){ radarCard.asked = 1; getJSON("radar.json").then(x => { if(x && route() === "today") rerender(); }).catch(() => null); } return ""; }
+  const g = k => (r.sectors || []).filter(x => x.group === k);
+  const line = k => { const l = g(k); if(!l.length) return ""; const [ic, c, sub] = RADAR_G[k];
+    return `<div class="li"><div style="min-width:0"><b style="color:${c}">${ic} ${k}</b><div style="font-size:13px;margin-top:2px">${l.slice(0, 5).map(x => esc(x.name)).join(", ")}</div><div class="muted" style="font-size:11.5px">${sub}</div></div><span class="muted" style="font-size:12px">${l.length}</span></div>`; };
+  return `<section class="card s5 fade"><div class="ct"><h2>🧭 Sector radar<em>next 1–5 days · ${esc(r.asof || "")}</em></h2><a class="more" href="#market-radar">Open ›</a></div>
+    <div class="list">${line("Gaining steam")}${line("Possible turnaround")}${line("Leading but tired")}</div></section>`;
+}
+async function pageRadar(){
+  const r = await getJSON("radar.json").catch(() => null);
+  const head = pageHead("🧭 Sector radar", "Which sectors look set to do better or worse than Nifty over the next 1–5 days") + subnav();
+  if(!r || !(r.sectors || []).length) return head + `<div class="empty">The radar fills in after this evening's scans.</div>`;
+  UI.radarG = UI.radarG || "All";
+  const all = r.sectors, list = UI.radarG === "All" ? all : all.filter(x => x.group === UI.radarG);
+  const cnt = k => all.filter(x => x.group === k).length;
+  const tabs = `<div class="filters" style="margin-bottom:12px">${["All", ...RADAR_ORDER].map(k => `<button data-radarg="${esc(k)}" class="${UI.radarG === k ? "on" : ""}">${k === "All" ? "All" : RADAR_G[k][0] + " " + k} <span class="muted">${k === "All" ? all.length : cnt(k)}</span></button>`).join("")}</div>`;
+  const STC = {Leading:"var(--up)", Improving:"var(--info)", Weakening:"var(--warn)", Lagging:"var(--down)"};
+  const PN = {rotation:"Rotation", writers:"Option writers", trend:"Trend", early:"Early scans", oi:"OI", breadth:"Breadth"};
+  const row = x => { const [ic, c] = RADAR_G[x.group] || RADAR_G.Neutral, sc = x.score >= 60 ? "var(--up)" : x.score >= 45 ? "#e0a400" : "var(--down)";
+    return `<div class="radr"><div class="radh"><span class="muted mono" style="width:22px">${x.rank}</span><b style="font-size:15.5px">${esc(x.name)}</b>
+        <span class="chip" style="--c:${STC[x.stage] || "var(--muted)"}">${esc(x.stage)}${x.was && x.was !== x.stage ? ` <span style="opacity:.7">(was ${esc(x.was)})</span>` : ""}</span>
+        <span class="chip" style="--c:${c}">${ic} ${esc(x.group)}</span>
+        <span class="radsc mono" style="color:${sc}">${x.score}</span></div>
+      <div class="meter" style="margin:6px 0 6px 30px;max-width:none"><i style="width:${x.score}%;background:${sc}"></i></div>
+      <div style="margin-left:30px;font-size:13px">${(x.why || []).map(esc).join(" · ")}</div>
+      <div class="radparts">${Object.entries(x.parts || {}).map(([k, v]) => `<span title="${PN[k]} reading, 0–100">${PN[k]} <b class="mono" style="color:${v >= 60 ? "var(--up)" : v >= 40 ? "var(--muted)" : "var(--down)"}">${v}</b></span>`).join("")}</div></div>`; };
+  const t = r.track || {}, tr = k => { const x = t["top3_vs_bottom3_" + k] || {}; return x.days ? `<b class="mono">${x.rate}%</b> <span class="muted">(${x.wins}/${x.days} days)</span>` : `<span class="muted">waiting for data</span>`; };
+  const gr = (k, h) => { const x = ((t.groups || {})[k] || {})[h] || {}; return x.calls ? `<b class="mono">${x.rate}%</b> <span class="muted">of ${x.calls}</span>` : `<span class="muted">—</span>`; };
+  const track = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>How the radar has done<em>${t.since ? "tracking since " + esc(t.since) : "tracking starts today"}</em></h2></div>
+    <div class="tw"><table class="t"><tr><th></th><th>Next day</th><th>Next 3 days</th><th>Next 5 days</th></tr>
+      <tr><td>Top 3 beat bottom 3</td><td>${tr("r1")}</td><td>${tr("r3")}</td><td>${tr("r5")}</td></tr>
+      ${["Gaining steam","Possible turnaround","Leading but tired","Avoid"].map(k => `<tr><td>${RADAR_G[k][0]} ${k} ${k === "Gaining steam" || k === "Possible turnaround" ? "beat Nifty" : "lagged Nifty"}</td><td>${gr(k, "r1")}</td><td>${gr(k, "r3")}</td><td>${gr(k, "r5")}</td></tr>`).join("")}</table></div>
+    <div class="muted" style="font-size:12px;margin-top:8px">Each evening's call is checked against each sector's actual move vs Nifty 1, 3 and 5 trading days later. Give it 3–4 weeks before trusting the numbers; 50% is a coin toss.</div></section>`;
+  return head + `<div class="muted" style="font-size:12.5px;margin:-4px 0 12px">Scores each sector 0–100 from rotation momentum (30%), option writers vs the market (25%), Daily/Weekly impulse (15%), stocks early in the scans (15%), 5-day OI build-up (10%) and breadth (5%). Data ${esc(r.asof || "")}${r.chains_at ? `, option chains ${esc(String(r.chains_at).slice(11))}` : ""}. Option writers market-wide: ${(r.market || {}).writers_bull ?? "—"}% bullish, ${(r.market || {}).writers_bear ?? "—"}% bearish.</div>`
+    + tabs + `<section class="card fade">${list.map(row).join("") || `<div class="empty">No sectors in this group today.</div>`}</section>` + track
+    + `<p class="foot-note" style="margin-top:10px">A reading of market data, not a forecast or advice. Sectors can turn on news.</p>`;
+}
 function sectorCard(){
   const secs = (S().sectors || []).slice().sort((a,b) => (b.r1 ?? -99) - (a.r1 ?? -99));
   const mx = Math.max(1, ...secs.map(s => Math.abs(s.r1 || 0)));
@@ -1128,7 +1173,7 @@ async function pageDashboard(){
     <div class="grid">${flowMiniCard()}${weatherCard()}${newsCard()}</div>
     <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
     <div class="grid">
-      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${top5Card()}${mostScannedCard()}
+      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${radarCard()}${top5Card()}${mostScannedCard()}
       ${tradesCard()}
       ${partsCard()}${vkCard()}
       ${strongestCard()}${readyCard()}
@@ -2079,7 +2124,7 @@ function prefetch(){
   ("requestIdleCallback" in window) ? requestIdleCallback(go, {timeout:3000}) : setTimeout(go, 1500);
 }
 const NEEDS = {scanner:["setups.json"], "scanner-equity":["equity.json"], index:["index.json"], "index-bank":["index.json"], "index-fin":["index.json"], "index-midcap":["index.json"], "index-next50":["index.json"],
-  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-chains":["chain_screen.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
+  market:["sectors.json"], "market-unusual":["unusual.json"], "market-deals":["deals.json"], "market-stars":["stars.json"], "market-fii":["fii.json"], "scanner-options":["options.json"], "scanner-chains":["chain_screen.json"], "market-radar":["radar.json"], "scanner-bear":["bear.json"], "today-alist":["setups.json","equity.json"], watchlist:["setups.json"], search:["names.json"]};
 const skeleton = () => `<div class="skel"><i style="height:44px;width:40%"></i><i style="height:38px;width:70%"></i><div class="cards"><i style="height:220px"></i><i style="height:220px"></i><i style="height:220px"></i></div></div>`;
 
 
@@ -2745,7 +2790,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRadar, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -2836,6 +2881,7 @@ document.addEventListener("click", e => {
   if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
   if(d.hitearly){ UI.hitEarly = !UI.hitEarly; return rerender(); }
   if(d.hitgood){ UI.hitGood = !UI.hitGood; return rerender(); }
+  if(d.radarg){ UI.radarG = d.radarg; return rerender(); }
   if(d.mtfgood){ UI.mtfGood = !UI.mtfGood; return rerender(); }
   if(d.mtfp){ const v = d.mtfp.split("|"); UI.mtf = {M:v[0], W:v[1], D:v[2]}; return rerender(); }
   if(d.fii){ UI.fiiTab = d.fii; return rerender(); }
