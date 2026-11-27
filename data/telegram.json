@@ -60,17 +60,13 @@
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
-  "INDIGO": {
-   "final": "BUY NOW",
-   "confirmed": "CONFIRMED \u2014 Buy ON"
-  },
   "JSWSTEEL": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "KALYANKJIL": {
    "final": "BUY NOW",
-   "confirmed": "Not confirmed"
+   "confirmed": "CONFIRMED \u2014 Buy ON"
   },
   "LAURUSLABS": {
    "final": "BUY NOW",
@@ -119,6 +115,10 @@
   "SUNPHARMA": {
    "final": "BUY NOW",
    "confirmed": "CONFIRMED \u2014 Buy ON"
+  },
+  "TITAN": {
+   "final": "BUY NOW",
+   "confirmed": "Not confirmed"
   },
   "UNIONBANK": {
    "final": "BUY NOW",
@@ -608,6 +608,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "ADANIENSOL": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "ADANIGREEN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -672,6 +676,10 @@
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
+  "INDIGO": {
+   "final": "ALMOST READY (Bullish)",
+   "confirmed": "Not confirmed"
+  },
   "KARURVYSYA": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
@@ -725,10 +733,6 @@
    "confirmed": "Not confirmed"
   },
   "RADICO": {
-   "final": "ALMOST READY (Bullish)",
-   "confirmed": "Not confirmed"
-  },
-  "TITAN": {
    "final": "ALMOST READY (Bullish)",
    "confirmed": "Not confirmed"
   },
@@ -800,10 +804,6 @@
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
   },
-  "JUBLFOOD": {
-   "final": "COMING CLOSE TO READY (Bearish)",
-   "confirmed": "Not confirmed"
-  },
   "LTM": {
    "final": "COMING CLOSE TO READY (Bearish)",
    "confirmed": "Not confirmed"
@@ -823,6 +823,10 @@
   "TECHM": {
    "final": "COMING CLOSE TO READY (Bullish)",
    "confirmed": "Not confirmed"
+  },
+  "JUBLFOOD": {
+   "final": "SELL NOW",
+   "confirmed": "CONFIRMED \u2014 Sell ON"
   },
   "KAYNES": {
    "final": "SELL NOW",
