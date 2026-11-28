@@ -534,6 +534,10 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .sockh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:13px}
 .sockcap textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:13px/1.45 var(--f-ui,Inter),sans-serif;background:var(--surface2);color:var(--ink);resize:vertical}
 .radr{padding:12px 0;border-bottom:1px solid var(--line)}.radr:last-child{border:0}.radh{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.radsc{margin-left:auto;font-size:20px;font-weight:800}
+.radtap{cursor:pointer}.radr.on{background:color-mix(in srgb,var(--accent) 4%,transparent);margin:0 -16px;padding:12px 16px}.radmore{margin-left:auto;color:var(--accent);font-weight:700}
+.radstk{margin-top:10px}.radsg{margin:12px 0 4px 30px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.radsr{display:flex;gap:10px;align-items:center;padding:9px 0 9px 30px;border-top:1px solid var(--line)}.radss{font-size:17px}
+@media (max-width:600px){.radsr,.radsg{padding-left:0;margin-left:0}}
 .radparts{margin:8px 0 0 30px;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
 .dkgate{display:flex;gap:16px;align-items:center;border-left:5px solid var(--c)}.dkgi{font-size:40px}.dkgw{font-size:24px;font-weight:800;letter-spacing:-.02em}
 .dk{padding:14px 0;border-bottom:1px solid var(--line)}.dk:last-of-type{border-bottom:0}.dkh{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -1124,8 +1128,50 @@ function radarCard(){
   return `<section class="card s5 fade"><div class="ct"><h2>🧭 Sector radar<em>next 1–5 days · ${esc(r.asof || "")}</em></h2><a class="more" href="#market-radar">Open ›</a></div>
     <div class="list">${line("Gaining steam")}${line("Possible turnaround")}${line("Leading but tired")}</div></section>`;
 }
+/* stocks inside one sector, ranked the same way as the radar ranks sectors */
+const RSTK_G = {"Strongest":["🟢","var(--up)"], "Possible turnaround":["🔄","var(--info)"], "Tired":["🟡","#e0a400"], "Weak":["🔴","var(--down)"]};
+function radarStocks(sec){
+  const s = S() || {}, cs = CACHE["chain_screen.json"] || {}, rad = CACHE["radar.json"] || {};
+  const ch = Object.fromEntries((cs.rows || []).map(r => [r.s, r])), mb = ((rad.market || {}).writers_bull ?? 33) / 100, mbr = ((rad.market || {}).writers_bear ?? 50) / 100;
+  const up = v => v === "Impulse" || v === "Bullish";
+  return (s.mtf || []).filter(r => r.sec === sec).map(r => {
+    const c = ch[r.s] || {}, b = c.bias || "", sig = c.sig || [], hit = ((s.hits || {})[r.s] || {}), early = (hit.e || []).length, cz = chase(r.s);
+    const why = []; let sc = 0;
+    sc += (r.M === "Impulse" ? 16 : up(r.M) ? 10 : 0) + (r.W === "Impulse" ? 16 : up(r.W) ? 10 : r.W === "Bottoming" ? 5 : 0) + (r.D === "Impulse" ? 10 : r.D === "Bottoming" ? 7 : 0);
+    const str = r.sc ?? 50; sc += str / 100 * 14;                                          // the stock's own strength score (0-100)
+    const wb = b === "Bullish" ? 1 : b === "Mildly bullish" ? .6 : b === "Bearish" ? -1 : b === "Mildly bearish" ? -.6 : 0;
+    sc += 8 + wb * 8 + (sig.includes("cover") ? 5 : 0) + (sig.includes("pstrong") ? 3 : 0);
+    sc += Math.min(12, early * 4);
+    sc += (r.oi5 || 0) > 3 && (r.d5 || 0) > 0 ? 6 : (r.oi5 || 0) > 3 && (r.d5 || 0) < 0 ? -4 : 0;
+    sc += cz ? (cz.x >= -1.5 && cz.x <= 1 ? 8 : cz.x > 2.5 ? -6 : 0) : 0;
+    sc = Math.max(0, Math.min(100, Math.round(sc)));
+    if(up(r.M) && up(r.W)) why.push("Monthly + Weekly up"); else if(r.W === "Bottoming" || r.D === "Bottoming") why.push(`${r.W === "Bottoming" ? "Weekly" : "Daily"} bottoming`);
+    if(str >= 75) why.push(`strong (score ${str})`); else if(str < 35) why.push(`weak (score ${str})`);
+    if(wb > 0) why.push(`option writers ${b.toLowerCase()}`); else if(wb < 0) why.push(`⚠️ writers ${b.toLowerCase()}`);
+    if(sig.includes("cover")) why.push("call writers covering");
+    if(early) why.push(`${early} early scan hit${early > 1 ? "s" : ""}`);
+    if((r.oi5 || 0) > 3 && (r.d5 || 0) > 0) why.push("long build-up");
+    const bullW = wb > 0 || sig.includes("cover");
+    const grp = up(r.M) && up(r.W) && str >= 55 && wb >= 0 && sc >= 55 ? "Strongest"
+      : (!up(r.W) || r.D === "Bottoming" || str < 55) && (bullW || (r.D === "Bottoming" && early)) && sc >= 30 ? "Possible turnaround"
+      : sc >= 45 ? "Tired" : "Weak";
+    return {s: r.s, sc, grp, why: why.slice(0, 4), r, b, cz};
+  }).sort((a, b) => ["Strongest","Possible turnaround","Tired","Weak"].indexOf(a.grp) - ["Strongest","Possible turnaround","Tired","Weak"].indexOf(b.grp) || b.sc - a.sc);
+}
+function radarStockList(sec){
+  const L = radarStocks(sec); if(!L.length) return `<div class="muted" style="padding:10px 0 4px 30px">No F&amp;O stocks found for this sector.</div>`;
+  const ph = v => v === "Impulse" ? "Imp" : (MTF_PH[v] || [v])[0];
+  const stc = v => v === "Impulse" ? "var(--up)" : v === "Bearish" ? "var(--down)" : (MTF_PH[v] || [0, "var(--muted)"])[1];
+  let last = "";
+  return `<div class="radstk">${L.map(x => { const [ic, col] = RSTK_G[x.grp], head = x.grp !== last ? (last = x.grp, `<div class="radsg" style="color:${col}">${ic} ${x.grp}</div>`) : "";
+    return head + `<div class="radsr"><div style="min-width:0;flex:1"><div class="symrow">${symLink(x.s, 15)}<span class="muted mono" style="font-size:12px">₹${fmt(x.r.c)}</span></div>
+      <div class="chips" style="margin-top:4px">${["M","W","D"].map(k => `<span class="chip" style="--c:${stc(x.r[k])}">${k} ${esc(ph(x.r[k]) || "—")}</span>`).join("")}${x.cz ? chaseChip(x.s, true) : ""}</div>
+      <div class="muted" style="font-size:12px;margin-top:3px">${x.why.map(esc).join(" · ") || "no strong signal"}</div></div>
+      <b class="mono radss" style="color:${x.sc >= 60 ? "var(--up)" : x.sc >= 45 ? "#e0a400" : "var(--down)"}">${x.sc}</b></div>`; }).join("")}
+    <div class="muted" style="font-size:11.5px;margin:8px 0 0 30px">Ranked by trend (M/W/D), the stock's strength score, option writers, early scan hits, OI build-up and the chase meter. Tap a name for its chart and option chain.</div></div>`;
+}
 async function pageRadar(){
-  const r = await getJSON("radar.json").catch(() => null);
+  const [r] = await Promise.all([getJSON("radar.json").catch(() => null), getJSON("chain_screen.json").catch(() => null)]);
   const head = pageHead("🧭 Sector radar", "Which sectors look set to do better or worse than Nifty over the next 1–5 days") + subnav();
   if(!r || !(r.sectors || []).length) return head + `<div class="empty">The radar fills in after this evening's scans.</div>`;
   UI.radarG = UI.radarG || "All";
@@ -1135,13 +1181,16 @@ async function pageRadar(){
   const STC = {Leading:"var(--up)", Improving:"var(--info)", Weakening:"var(--warn)", Lagging:"var(--down)"};
   const PN = {rotation:"Rotation", writers:"Option writers", trend:"Trend", early:"Early scans", oi:"OI", breadth:"Breadth"};
   const row = x => { const [ic, c] = RADAR_G[x.group] || RADAR_G.Neutral, sc = x.score >= 60 ? "var(--up)" : x.score >= 45 ? "#e0a400" : "var(--down)";
-    return `<div class="radr"><div class="radh"><span class="muted mono" style="width:22px">${x.rank}</span><b style="font-size:15.5px">${esc(x.name)}</b>
+    const open = UI.radarSec === x.name;
+    return `<div class="radr${open ? " on" : ""}"><div class="radtap" data-radsec="${esc(x.name)}" role="button" aria-expanded="${open}"><div class="radh"><span class="muted mono" style="width:22px">${x.rank}</span><b style="font-size:15.5px">${esc(x.name)}</b>
         <span class="chip" style="--c:${STC[x.stage] || "var(--muted)"}">${esc(x.stage)}${x.was && x.was !== x.stage ? ` <span style="opacity:.7">(was ${esc(x.was)})</span>` : ""}</span>
         <span class="chip" style="--c:${c}">${ic} ${esc(x.group)}</span>
         <span class="radsc mono" style="color:${sc}">${x.score}</span></div>
       <div class="meter" style="margin:6px 0 6px 30px;max-width:none"><i style="width:${x.score}%;background:${sc}"></i></div>
       <div style="margin-left:30px;font-size:13px">${(x.why || []).map(esc).join(" · ")}</div>
-      <div class="radparts">${Object.entries(x.parts || {}).map(([k, v]) => `<span title="${PN[k]} reading, 0–100">${PN[k]} <b class="mono" style="color:${v >= 60 ? "var(--up)" : v >= 40 ? "var(--muted)" : "var(--down)"}">${v}</b></span>`).join("")}</div></div>`; };
+      <div class="radparts">${Object.entries(x.parts || {}).map(([k, v]) => `<span title="${PN[k]} reading, 0–100">${PN[k]} <b class="mono" style="color:${v >= 60 ? "var(--up)" : v >= 40 ? "var(--muted)" : "var(--down)"}">${v}</b></span>`).join("")}
+        <span class="radmore">${open ? "Hide stocks ▲" : `See its ${x.n || ""} stocks ▼`}</span></div></div>
+      ${open ? radarStockList(x.name) : ""}</div>`; };
   const t = r.track || {}, tr = k => { const x = t["top3_vs_bottom3_" + k] || {}; return x.days ? `<b class="mono">${x.rate}%</b> <span class="muted">(${x.wins}/${x.days} days)</span>` : `<span class="muted">waiting for data</span>`; };
   const gr = (k, h) => { const x = ((t.groups || {})[k] || {})[h] || {}; return x.calls ? `<b class="mono">${x.rate}%</b> <span class="muted">of ${x.calls}</span>` : `<span class="muted">—</span>`; };
   const track = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>How the radar has done<em>${t.since ? "tracking since " + esc(t.since) : "tracking starts today"}</em></h2></div>
@@ -2963,6 +3012,8 @@ document.addEventListener("click", e => {
   const oa = e.target.closest("[data-openall]");
   if(oa){ fetch("/api/admin/open", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({on: oa.dataset.openall === "1"})})
     .then(r => r.json()).then(j => { USER.open = !!j.on; toast(j.on ? "All features are open to everyone" : "Back to the normal member view"); rerender(); }).catch(() => toast("Could not reach the server.")); return; }
+  const rs = e.target.closest("[data-radsec]");
+  if(rs && !e.target.closest("a")){ UI.radarSec = UI.radarSec === rs.dataset.radsec ? null : rs.dataset.radsec; render.keepScroll = true; rerender(); return; }
   const fr = e.target.closest("[data-fullrm]");
   if(fr){ fullChange({email: fr.dataset.fullrm, remove: true}); return; }
   const sc = e.target.closest("[data-sharecard]");
