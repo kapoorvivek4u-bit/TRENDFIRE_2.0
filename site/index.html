@@ -657,6 +657,70 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .hx{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 4px}
 .hdo{margin-top:8px;font-size:13px;padding:7px 10px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 8%,transparent);border-radius:0 8px 8px 0}
 .hwarn{margin-top:6px;font-size:12px;color:var(--warn)}.hfix{margin-top:6px;font-size:12px;color:var(--muted)}.hfix b{color:inherit}
+
+/* ---------- Classy layer (Nov 2026): gradient hairline borders, depth, accent headers. Remove this block to go back. ---------- */
+:root{--r:22px;--bg:#efece4;--card-in:linear-gradient(180deg,#ffffff 0%,#fbfaff 100%);
+  --card-edge:linear-gradient(140deg,rgba(79,70,229,.45) 0%,rgba(79,70,229,.06) 28%,rgba(30,27,75,.05) 60%,rgba(124,58,237,.35) 100%);
+  --card-shadow:0 1px 1px rgba(30,27,75,.04),0 6px 14px -6px rgba(30,27,75,.10),0 26px 48px -26px rgba(46,38,140,.34);
+  --card-shadow-h:0 1px 1px rgba(30,27,75,.05),0 10px 20px -8px rgba(30,27,75,.14),0 34px 60px -26px rgba(46,38,140,.45);
+  --hd-line:rgba(30,27,75,.07)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0c0c0e;--card-in:linear-gradient(180deg,#1c1c21 0%,#151518 100%);
+  --card-edge:linear-gradient(140deg,rgba(198,255,61,.40) 0%,rgba(255,255,255,.05) 30%,rgba(255,255,255,.03) 60%,rgba(34,211,238,.32) 100%);
+  --card-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 22px 44px -24px rgba(0,0,0,.85);--card-shadow-h:0 1px 0 rgba(255,255,255,.05) inset,0 0 28px -6px rgba(198,255,61,.16),0 26px 50px -24px rgba(0,0,0,.9);--hd-line:rgba(255,255,255,.06)}}
+:root[data-theme="dark"]{--bg:#0c0c0e;--card-in:linear-gradient(180deg,#1c1c21 0%,#151518 100%);
+  --card-edge:linear-gradient(140deg,rgba(198,255,61,.40) 0%,rgba(255,255,255,.05) 30%,rgba(255,255,255,.03) 60%,rgba(34,211,238,.32) 100%);
+  --card-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 22px 44px -24px rgba(0,0,0,.85);--card-shadow-h:0 1px 0 rgba(255,255,255,.05) inset,0 0 28px -6px rgba(198,255,61,.16),0 26px 50px -24px rgba(0,0,0,.9);--hd-line:rgba(255,255,255,.06)}
+body{background:radial-gradient(1000px 460px at 88% -10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 65%),
+  radial-gradient(800px 420px at -8% 35%,color-mix(in srgb,var(--accent2) 9%,transparent),transparent 62%),
+  radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--ink) 6%,transparent) 1px,transparent 1.3px) 0 0/22px 22px,var(--bg);background-attachment:fixed}
+.card,.sc,.bell,.rrail .rp{border:1px solid transparent!important;background:var(--card-in) padding-box,var(--card-edge) border-box!important;box-shadow:var(--card-shadow);border-radius:var(--r)}
+.rtile,.twb,.dkban{background:var(--card-in);box-shadow:var(--card-shadow);border-top:1px solid var(--hd-line);border-right:1px solid var(--hd-line);border-bottom:1px solid var(--hd-line)}
+.card,.sc,.rtile,.twb,.dkban,.bell{transition:box-shadow .3s ease,transform .3s ease}
+@media (hover:hover){.card:hover,.sc:hover,.rtile:hover,.twb:hover{box-shadow:var(--card-shadow-h);transform:translateY(-3px)}}
+.arranging>.card:hover,.sheetc:hover{transform:none}
+.card>.ct:first-child{margin:-4px -16px 14px;padding:0 16px 12px;border-bottom:1px solid var(--hd-line)}
+.ct h2{display:flex;align-items:center;gap:9px;letter-spacing:.12em;font-size:11px;color:var(--ink)}
+.ct h2:before{content:"";flex:none;width:8px;height:8px;border-radius:3px;transform:rotate(45deg);background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 12px color-mix(in srgb,var(--accent) 55%,transparent)}
+.ct h2 em{font-weight:600;font-size:11px;letter-spacing:.05em;color:var(--muted);text-transform:none}
+.ct .more{font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent);transition:background .2s,transform .2s}
+.ct .more:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.chip{border:1px solid color-mix(in srgb,var(--c, var(--muted)) 22%,transparent)}
+.subnav a.on{box-shadow:0 8px 18px -8px color-mix(in srgb,var(--accent) 70%,transparent)}
+.head h1{letter-spacing:-.025em}
+.rail{background:color-mix(in srgb,var(--surface) 70%,transparent);backdrop-filter:blur(14px)}
+
+/* mood: the site's glow follows the market score */
+:root{--m1:#4f46e5;--m2:#10b981}
+:root[data-mood="caution"]{--m1:#d97706;--m2:#f43f5e}
+:root[data-mood="weak"]{--m1:#e11d48;--m2:#9333ea}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--m1:#c6ff3d;--m2:#22d3ee}:root:not([data-theme="light"])[data-mood="caution"]{--m1:#fbbf24;--m2:#fb7185}:root:not([data-theme="light"])[data-mood="weak"]{--m1:#fb7185;--m2:#c084fc}}
+:root[data-theme="dark"]{--m1:#c6ff3d;--m2:#22d3ee}:root[data-theme="dark"][data-mood="caution"]{--m1:#fbbf24;--m2:#fb7185}:root[data-theme="dark"][data-mood="weak"]{--m1:#fb7185;--m2:#c084fc}
+:root{--card-edge:linear-gradient(140deg,color-mix(in srgb,var(--m1) 50%,transparent) 0%,color-mix(in srgb,var(--m1) 6%,transparent) 28%,color-mix(in srgb,var(--ink) 5%,transparent) 60%,color-mix(in srgb,var(--m2) 42%,transparent) 100%)!important}
+body{background:radial-gradient(1000px 460px at 88% -10%,color-mix(in srgb,var(--m1) 16%,transparent),transparent 65%),
+  radial-gradient(800px 420px at -8% 35%,color-mix(in srgb,var(--m2) 10%,transparent),transparent 62%),
+  radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--ink) 6%,transparent) 1px,transparent 1.3px) 0 0/22px 22px,var(--bg);background-attachment:fixed}
+.ct h2:before{background:linear-gradient(135deg,var(--m1),var(--m2));box-shadow:0 0 12px color-mix(in srgb,var(--m1) 55%,transparent)}
+.ct h2.hasic:before{display:none}
+.hic{flex:none;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;color:var(--m1);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--m1) 16%,transparent),color-mix(in srgb,var(--m2) 14%,transparent));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--m1) 22%,transparent)}
+.hic svg{width:15px;height:15px}
+/* ticker tape */
+.ticker{position:relative;overflow:hidden;margin:-6px 0 18px;border-radius:14px;height:38px;display:flex;align-items:center;
+  background:var(--card-in) padding-box,var(--card-edge) border-box;border:1px solid transparent;box-shadow:var(--card-shadow);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tkmove{display:flex;align-items:center;gap:18px;white-space:nowrap;padding-left:18px;animation:tkroll 60s linear infinite;will-change:transform}
+.ticker:hover .tkmove{animation-play-state:paused}
+@keyframes tkroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{display:inline-flex;align-items:baseline;gap:8px;font-size:12.5px}.tk b{font-weight:700;color:var(--muted);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+.tk .num{font-family:var(--f-num);font-weight:700}.tk i{font-style:normal;font-family:var(--f-num);font-weight:700;font-size:12px}
+.tksep{color:var(--m1);font-size:8px;opacity:.7}
+@media (prefers-reduced-motion:reduce){.tkmove{animation:none}}
+/* live cards: a slow light running round the edge */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+.card.liveedge{background:var(--card-in) padding-box,conic-gradient(from var(--ang),color-mix(in srgb,var(--m1) 10%,transparent) 0deg,color-mix(in srgb,var(--m1) 10%,transparent) 250deg,var(--m1) 300deg,var(--m2) 330deg,color-mix(in srgb,var(--m2) 10%,transparent) 360deg) border-box!important;
+  border:1.5px solid transparent!important;animation:edgespin 7s linear infinite}
+@keyframes edgespin{to{--ang:360deg}}
+@media (prefers-reduced-motion:reduce){.card.liveedge{animation:none}}
 </style>
 </head>
 <body>
@@ -1570,7 +1634,7 @@ function rotSnapshotCard(){
   if(typeof rotGraph !== "function"){ rotLoadScript(); return rotFallback(rotLoadScript.why || "loading the graph"); }
   const secs = rotSecs(); if(!secs.length) return rotFallback("sector data has no rotation positions");
   const cnt = st => secs.filter(x => x.stage === st).length;
-  return `<a class="card fade rsnap s7" href="#market-radar"><div class="ct"><h2>🧭 Sector rotation<em>tap for the full view</em></h2><span class="more">Open ›</span></div>
+  return `<a class="card fade rsnap s7 liveedge" href="#market-radar"><div class="ct"><h2>🧭 Sector rotation<em>tap for the full view</em></h2><span class="more">Open ›</span></div>
     <div class="rsnapc">${ROT_ST.map(st => `<span style="--c:${ROT_LC[st]}"><b>${cnt(st)}</b> ${st}</span>`).join("")}</div>
     ${rotGraph(secs, {w: 560, h: 340, mini: true})}</a>`;
 }
@@ -1840,6 +1904,73 @@ function decisionPanel(s, live){
         <div class="dpat ${d.o.stale ? "stale" : ""}">${d.o.at ? `Chain ${esc(d.o.at)}` : "Live chain"} ${d.o.stale ? "⚠️ older session" : "✓ fresh"}</div>` : `<div class="dpval muted">No data</div><ul><li>${isFO(s) ? "Not in the last chain scan" : "Not an F&O stock"}</li></ul>`}</div></div>
     ${d.lv ? `<div class="dplv"><div><small>Entry above</small><b>${fmt(d.lv.e)}</b></div><div><small>Stop</small><b class="down">${fmt(d.lv.s)}</b></div><div><small>Target</small><b class="up">${fmt(d.lv.t)}</b></div><div><small>Risk : reward</small><b>1 : ${d.lv.rr.toFixed(1)}</b></div></div>` : ""}
     ${d.note ? `<div class="dpnote">${d.note}</div>` : ""}</div>`;
+}
+
+
+/* ============================================================ Look: market-mood tint, ticker tape, title icons */
+function setMood(){
+  const st = S() && S().strength; if(!st) return;
+  const m = st.score >= 55 ? "pos" : st.score >= 45 ? "caution" : "weak";
+  if(document.documentElement.dataset.mood !== m) document.documentElement.dataset.mood = m;
+}
+function tickerHtml(){
+  const s = S(); if(!s) return "";
+  const it = (s.indexes || []).map(x => { const lx = s._live && LIVE && LIVE.index ? LIVE.index[x.key] : null;
+    const c = lx && lx.close != null ? lx.close : x.close, ch = lx && lx.chg != null ? lx.chg : x.chg1;
+    return `<span class="tk"><b>${esc(x.name)}</b><span class="num">${fmt(c)}</span><i class="${cls(ch)}">${ch >= 0 ? "▲" : "▼"} ${pct(ch, 2)}</i></span>`; });
+  const m = s.market || {}, st = s.strength || {};
+  if(m.vix != null) it.push(`<span class="tk"><b>India VIX</b><span class="num">${m.vix}</span></span>`);
+  if(m.adv != null) it.push(`<span class="tk"><b>F&amp;O breadth</b><i class="up">${m.adv} up</i><i class="down">${m.dec} down</i></span>`);
+  if(st.score != null) it.push(`<span class="tk"><b>Market</b><span>${esc(st.label || "")} · ${st.score}/100</span></span>`);
+  const one = it.join('<span class="tksep">◆</span>');
+  return `<div class="tkmove">${one}<span class="tksep">◆</span>${one}<span class="tksep">◆</span></div>`;
+}
+function mountTicker(main){
+  const h = tickerHtml(); if(!h) return;
+  const el = document.createElement("div"); el.className = "ticker"; el.setAttribute("aria-label", "Index ticker"); el.innerHTML = h;
+  const mv = el.firstChild; mv.style.animationDelay = `-${(Date.now() / 1000) % 60}s`;   // keeps moving smoothly across page redraws
+  main.prepend(el);
+}
+const TI = {
+  compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>',
+  eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8"/>',
+  flame:'<path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-8.5z"/>',
+  trend:'<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+  coins:'<ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7"/><path d="M9 15v2c0 1.7 2.7 3 6 3s6-1.3 6-3v-5c0-1.7-2.7-3-6-3"/>',
+  swap:'<path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  news:'<path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 16h4"/>',
+  gauge:'<path d="M4 16a8 8 0 1 1 16 0"/><path d="m12 16 4-5"/>',
+  case:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 12h18"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  bell:'<path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 19a2 2 0 0 0 4 0"/>',
+  chain:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  chart:'<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-6"/>',
+  bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+  down:'<path d="M3 7l6 6 4-4 8 8M21 11v6h-6"/>',
+  book:'<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3"/><path d="M20 4v14h-7"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>'
+};
+const TI_EMOJI = {"🧭":"compass","⚡":"bolt","🏆":"trophy","🔥":"flame","🔔":"bell","💡":"bulb","📚":"book","🐻":"down","🎯":"target","💰":"coins","📈":"chart","📊":"chart","⛓":"chain","👁":"eye","📰":"news","☀️":"sun","🌤":"sun","👥":"users","📣":"bell","🔭":"eye","🧪":"spark","⭐":"eye"};
+const TI_WORD = [[/money flow/i,"bolt"],[/sector|rotation|radar/i,"compass"],[/watch/i,"eye"],[/top 5|leaders|prime/i,"trophy"],[/most scanned|hot/i,"flame"],[/strong/i,"trend"],
+  [/ready|setup|desk/i,"target"],[/big money|fii|deal|star|smart/i,"coins"],[/mover|gainer|loser/i,"swap"],[/heat/i,"grid"],[/news/i,"news"],[/score|pulse|breadth|weather/i,"gauge"],
+  [/trade|holding|position/i,"case"],[/vk/i,"spark"],[/alert/i,"bell"],[/option|chain|oi\b/i,"chain"],[/index|nifty/i,"chart"],[/weak|bear/i,"down"],[/user|sign/i,"users"],[/kite|setting/i,"gear"]];
+function iconTitles(root){
+  root.querySelectorAll(".ct h2:not([data-ic])").forEach(h => {
+    h.dataset.ic = "1";
+    const t = h.firstChild; let key = null;
+    if(t && t.nodeType === 3){ const m = /^\s*(\p{Extended_Pictographic}️?)\s*/u.exec(t.nodeValue);
+      if(m){ key = TI_EMOJI[m[1]] || TI_EMOJI[m[1].replace(/️/g, "")] || null; t.nodeValue = t.nodeValue.slice(m[0].length); } }
+    if(!key){ const txt = (t && t.nodeType === 3 ? t.nodeValue : h.textContent) || ""; const w = TI_WORD.find(([re]) => re.test(txt)); key = w ? w[1] : null; }
+    if(!key) return;
+    const sp = document.createElement("span"); sp.className = "hic"; sp.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${TI[key]}</svg>`;
+    h.prepend(sp); h.classList.add("hasic");
+  });
 }
 
 /* ============================================================ Monthly / Weekly / Daily: Impulse or Corrective */
@@ -2534,7 +2665,7 @@ function flowMiniStart(){
     .catch(() => { const cv = document.getElementById("flowmini"); if(cv) delete cv.dataset.on; });
 }
 function flowMiniHTML(){
-  return `<section class="card fade"><div class="ct"><h2>⚡ Money flow<em>live, every 10 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
+  return `<section class="card fade liveedge"><div class="ct"><h2>⚡ Money flow<em>live, every 10 min</em></h2><a class="more" href="#market-flow">Open ›</a></div>
     <div id="flowmini-box"><div class="flowstage flowmini"><canvas id="flowmini" aria-label="Money flow between sectors"></canvas></div>
     <div id="flowmini-txt" class="flowminitxt"></div></div>
     <div class="muted" style="font-size:11.5px;margin-top:6px">Left: sectors money is leaving. Right: where it is going. Band thickness = size of the shift. Tap to open the full view and see the stocks.</div></section>`;
@@ -3524,6 +3655,7 @@ async function render(){
   const paint = () => {
     if(id !== RENDER_ID) return;            // a newer render already painted (the page-change animation can run late)
     main.innerHTML = html + `<p class="foot-note">For study and tracking only. Not investment advice.</p>`;
+    try{ setMood(); mountTicker(main); iconTitles(main); }catch(e){}
     main.querySelectorAll(".subnav").forEach(n => { const on = n.querySelector(".on"); if(on && n.scrollWidth > n.clientWidth) n.scrollLeft = on.offsetLeft - (n.clientWidth - on.offsetWidth) / 2; });   // keep the active tab in view on phones
     if(keep){ scrollTo(0, y); render.keepScroll = false; } else countUps(main);
   };
