@@ -9,6 +9,35 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function stageOf(r, m) { return r >= 1 && m >= 0 ? "Leading" : r >= 1 ? "Weakening" : m >= 0 ? "Improving" : "Lagging"; }
 
+  /* Hook: a sector on the strong (right) side dips into Weakening and turns back up into Leading without falling to Lagging.
+     "hooked" = back in Leading within the last 5 sessions; "forming" = still Weakening, right side, momentum rising 2 sessions running. */
+  function hooks(secs) {
+    var out = {};
+    secs.forEach(function (s) {
+      if (s.ratio == null || s.mom == null) return;
+      var t = (s.trail || []).filter(function (p) { return p.ratio != null && p.mom != null; });
+      var last = t[t.length - 1];
+      if (!last || last.ratio !== s.ratio || last.mom !== s.mom) t = t.concat([{ ratio: s.ratio, mom: s.mom, stage: s.stage }]);
+      var n = t.length, now = t[n - 1], stg = function (p) { return p.stage || stageOf(p.ratio, p.mom); };
+      if (n < 3) return;
+      if (stg(now) === "Leading") {
+        for (var i = n - 2; i >= Math.max(0, n - 6); i--) {
+          if (stg(t[i]) === "Weakening") {
+            var right = true;
+            for (var j = i; j < n; j++) if (t[j].ratio < 0.997) right = false;
+            if (right) { var k = i; while (k + 1 < n - 1 && stg(t[k + 1]) === "Weakening") k++; out[s.name] = { kind: "hooked", ago: n - 2 - k }; }
+            break;
+          }
+        }
+      } else if (stg(now) === "Weakening") {
+        var a = t[n - 3], b = t[n - 2];
+        if (a.ratio >= 0.997 && b.ratio >= 0.997 && ((now.mom > b.mom && b.mom > a.mom) || now.mom - a.mom >= 0.008)) out[s.name] = { kind: "forming", ago: 0 };
+      }
+    });
+    return out;
+  }
+  window.rotHooks = hooks;
+
   window.rotGraph = function (secs, o) {
     o = o || {};
     var W = o.w || 900, H = o.h || 560, mini = !!o.mini, P = mini ? 18 : 46, TR = mini ? 5 : 8;
@@ -44,19 +73,21 @@
       g.push('<text transform="translate(16 ' + (H / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" fill="#8b93a7">Momentum →</text>');
     }
     var sel = o.sel || null;
+    var HK = o.hooks === false ? {} : hooks(S);
     // trails
     S.forEach(function (s) {
       if (s._pts.length < 2) return;
       var c = C[s.stage] || "#94a3b8", d = s._pts.map(function (p, i) { return (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1); }).join(" ");
-      var op = sel ? (s.name === sel ? 0.95 : 0.14) : 0.5;
-      g.push('<path d="' + d + '" fill="none" stroke="' + c + '" stroke-width="' + (s.name === sel ? 2.6 : 1.6) + '" stroke-dasharray="4 4" stroke-opacity="' + op + '" marker-end="url(#rgA)"/>');
+      var hk = HK[s.name], op = sel ? (s.name === sel ? 0.95 : 0.14) : hk ? 0.95 : 0.5;
+      if (hk) c = "#fbbf24";
+      g.push('<path d="' + d + '" fill="none" stroke="' + c + '" stroke-width="' + (s.name === sel ? 2.6 : hk ? 2.4 : 1.6) + '" stroke-dasharray="' + (hk ? "6 3" : "4 4") + '" stroke-opacity="' + op + '" marker-end="url(#rgA)"/>');
       s._pts.slice(0, -1).forEach(function (p) { g.push('<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="' + (mini ? 1.4 : 2) + '" fill="' + c + '" fill-opacity="' + op + '"/>'); });
     });
     // dots + labels (placed so names never overlap)
     var fs = mini ? 10 : 12.5, pts = S.map(function (s) { return { s: s, x: X(s.ratio), y: Y(s.mom), r: (mini ? 4 : 6) + Math.sqrt(s.n || 4) * (mini ? 0.9 : 1.6) }; })
       .sort(function (a, b) { return a.y - b.y; }), placed = [];
     pts.forEach(function (p) {
-      var nm = (mini || W < 700 ? SH[p.s.name] : 0) || p.s.name, w = nm.length * fs * 0.6 + 6, best = null;
+      var nm = ((mini || W < 700 ? SH[p.s.name] : 0) || p.s.name) + (HK[p.s.name] ? " 🪝" : ""), w = nm.length * fs * 0.6 + 6, best = null;
       var dy = [0, -1, 1, -2, 2, -3, 3, -4, 4, -5, 5];
       for (var i = 0; i < dy.length && !best; i++) {
         var sides = p.x < W - 160 ? [1, -1] : [-1, 1];

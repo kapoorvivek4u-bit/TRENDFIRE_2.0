@@ -109,6 +109,7 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 .nws .nwsrc{font-size:12px;color:var(--muted);margin:4px 0 8px}
 .nws .nwl a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);color:var(--ink);font-size:13.5px;font-weight:600;line-height:1.35}
 .nws .nwl small{flex:none;color:var(--muted);font-size:11px;font-weight:600;white-space:nowrap}
+.hookli{background:color-mix(in srgb,#fbbf24 12%,transparent);border-radius:9px;padding-inline:8px!important}
 .dgrid.dense{grid-auto-flow:row dense}
 @media (min-width:1024px){.dgrid>.w4{grid-column:span 4!important}.dgrid>.w6{grid-column:span 6!important}.dgrid>.w8{grid-column:span 8!important}.dgrid>.w12{grid-column:span 12!important}}
 .dgrid{margin-top:14px}.dstrip{grid-column:span 12}
@@ -1439,10 +1440,16 @@ function rotAlerts(secs){
       const ago = t.length - 1 - i; out.push({x, from: t[i - 1].stage, to: t[i].stage, ago, good: ["Improving","Leading"].includes(t[i].stage)}); break; } }
   out.sort((a, b) => a.ago - b.ago || (b.good - a.good));
   const fast = secs.slice().sort((a, b) => b.mom - a.mom)[0];
+  const HK = typeof rotHooks === "function" ? rotHooks(secs) : {};
+  const hooks = Object.entries(HK).sort((a, b) => (a[1].kind === "hooked" ? 0 : 1) - (b[1].kind === "hooked" ? 0 : 1) || a[1].ago - b[1].ago).map(([name, h]) => {
+    const x = secs.find(s => s.name === name) || {};
+    return `<div class="li hookli" data-rotsel="${esc(name)}" style="cursor:pointer"><span>🪝 <b>${esc(name)}</b> ${h.kind === "hooked" ? `hooked back to <b style="color:${ROT_LC.Leading}">Leading</b>` : `turning up inside Weakening <span class="muted">(hook forming)</span>`}</span><span class="muted" style="font-size:12px;white-space:nowrap">${h.kind === "hooked" ? (h.ago ? h.ago + "d ago" : "latest") : "watch"}</span></div>`; }).join("");
+  const hookSet = new Set(Object.keys(HK));
   const ico = a => a.to === "Leading" ? "🟢" : a.to === "Improving" ? "🔵" : a.to === "Weakening" ? "🟠" : "🔴";
-  return `<section class="card fade rside"><div class="ct"><h2>🔔 Rotation alerts<em>last 3 sessions</em></h2></div><div class="list">
+  return `<section class="card fade rside"><div class="ct"><h2>🔔 Rotation alerts<em>last 3 sessions</em></h2><span class="muted" style="font-size:11.5px" title="A strong sector that dipped into Weakening and turned back up to Leading without falling to Lagging. Gold trail on the graph.">🪝 = hook</span></div><div class="list">
     ${fast ? `<div class="li" data-rotsel="${esc(fast.name)}" style="cursor:pointer"><span>⚡ <b>${esc(fast.name)}</b> has the fastest momentum</span><span class="muted" style="font-size:12px">${esc(fast.stage)}</span></div>` : ""}
-    ${out.slice(0, 6).map(a => `<div class="li" data-rotsel="${esc(a.x.name)}" style="cursor:pointer"><span>${ico(a)} <b>${esc(a.x.name)}</b>: ${a.from} → <b style="color:${ROT_LC[a.to]}">${a.to}</b></span><span class="muted" style="font-size:12px;white-space:nowrap">${a.ago ? a.ago + "d ago" : "latest"}</span></div>`).join("") || `<div class="muted">No stage changes in the last 3 sessions.</div>`}</div></section>`;
+    ${hooks}
+    ${out.filter(a => !(hookSet.has(a.x.name) && a.to === "Leading")).slice(0, 6).map(a => `<div class="li" data-rotsel="${esc(a.x.name)}" style="cursor:pointer"><span>${ico(a)} <b>${esc(a.x.name)}</b>: ${a.from} → <b style="color:${ROT_LC[a.to]}">${a.to}</b></span><span class="muted" style="font-size:12px;white-space:nowrap">${a.ago ? a.ago + "d ago" : "latest"}</span></div>`).join("") || `<div class="muted">No stage changes in the last 3 sessions.</div>`}</div></section>`;
 }
 function rotLeaders(secs){
   const rad = CACHE["radar.json"] || {}, by = Object.fromEntries(secs.map(x => [x.name, x]));
@@ -1486,7 +1493,7 @@ async function pageRotation(){
       return `<button class="rpill" data-rotsel="${esc(x.name)}"><span><b>${esc(x.name)}</b>${nw ? `<em>NEW</em>` : ""}<span class="rdots">${t.slice(-6).map(p => `<i class="rdot" style="background:${ROT_LC[p.stage] || "var(--muted)"}"></i>`).join("")}</span></span><span class="mono ${cls(x.r1)}">${pct(x.r1, 1)}</span></button>`; }).join("") || `<div class="muted" style="font-size:12px">None</div>`}</div>`; }).join("")}</div>`;
   const graph = typeof rotGraph === "function" ? rotGraph(secs, innerWidth < 600 ? {w: 380, h: 420, mini: true, sel: UI.rotSel, tap: true} : {w: 640, h: 540, sel: UI.rotSel, tap: true}) : "";
   return head + rotTiles(secs) + `
-    <div class="rgrid"><section class="rmain fade"><div class="rhead"><b>📈 Relative rotation graph</b><span class="muted">dotted trail = last 8 sessions · dot size = number of stocks</span>
+    <div class="rgrid"><section class="rmain fade"><div class="rhead"><b>📈 Relative rotation graph</b><span class="muted">dotted trail = last 8 sessions · dot size = number of stocks · <span style="color:#fbbf24">gold trail 🪝 = hook back to Leading</span></span>
         <span class="rtog"><button data-rotview="graph" class="${UI.rotView === "graph" ? "on" : ""}">Graph</button><button data-rotview="lanes" class="${UI.rotView === "lanes" ? "on" : ""}">Lanes</button></span></div>
       ${UI.rotView === "lanes" ? lanes() : graph}
       <div class="muted" style="font-size:11.5px;margin-top:8px;color:#8b93a7">Sectors usually move clockwise: Improving → Leading → Weakening → Lagging. Right = stronger than Nifty, up = gaining speed.</div></section>
