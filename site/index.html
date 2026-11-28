@@ -110,6 +110,32 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 .nws .nwl a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);color:var(--ink);font-size:13.5px;font-weight:600;line-height:1.35}
 .nws .nwl small{flex:none;color:var(--muted);font-size:11px;font-weight:600;white-space:nowrap}
 .hookli{background:color-mix(in srgb,#fbbf24 12%,transparent);border-radius:9px;padding-inline:8px!important}
+
+.twhero{position:relative;overflow:hidden;border-radius:22px;padding:22px 24px;margin-top:14px;color:#eef1f8;background:radial-gradient(120% 140% at 0% 0%,#2b2366 0%,#141a2e 45%,#0d1220 100%);box-shadow:0 14px 40px rgba(15,20,40,.25)}
+.twhero:after{content:"";position:absolute;right:-60px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(124,108,255,.35),transparent 65%);pointer-events:none}
+.twtitle{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.twtitle h1{margin:0;font-family:var(--f-head);font-size:30px;letter-spacing:-.5px;color:#fff}.twtitle p{margin:4px 0 0;color:#aab3cc;font-size:13.5px}
+.twscan{font-size:12px;color:#aab3cc;display:flex;align-items:center;gap:6px}
+.twcounts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px;position:relative;z-index:1}
+.twcnt{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-top:3px solid var(--c);color:#fff;text-decoration:none}
+.twcnt b{font-family:var(--f-num);font-size:28px;line-height:1;color:var(--c);text-shadow:0 0 18px color-mix(in srgb,var(--c) 55%,transparent)}.twcnt span{font-size:12.5px;color:#cfd5e6;font-weight:600}
+.twcnt:hover{background:rgba(255,255,255,.1)}
+.twchgs{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;position:relative;z-index:1}
+.twchg{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:#cfd5e6}.twchg.up{color:#4ade80;background:rgba(34,197,94,.14)}.twchg.dn{color:#fca5a5;background:rgba(248,113,113,.14)}
+.twb{margin-top:16px;border-radius:18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);padding:14px 16px 6px}
+.twbh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}.twbh h2{margin:0;font-size:16px;font-family:var(--f-head)}.twbh h2 em{font-style:normal;font-size:12px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);padding:2px 8px;border-radius:999px;margin-left:4px}
+.twbh .muted{font-size:12.5px;flex:1}.twtog{padding:5px 12px;font-size:12px}
+.twrow{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) 120px 74px 30px 14px;gap:12px;align-items:center;padding:11px 6px;border-top:1px solid var(--line);cursor:pointer;border-radius:10px}
+.twrow:first-child{border-top:0}.twrow:hover,.twrow.open{background:color-mix(in srgb,var(--c) 7%,transparent)}
+.twa{min-width:0;display:flex;flex-direction:column;gap:3px}.twsym{font-family:var(--f-num);font-size:15px;letter-spacing:.3px}
+.twsec{font-size:11px;font-weight:700;color:var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.twwhy{font-size:13.5px;font-weight:600;min-width:0}.twpx{white-space:nowrap;font-size:13.5px;text-align:right}.twwhy{text-align:left}
+.twimps{display:flex;gap:4px;align-items:center}.twimp{font-style:normal;font-size:10.5px;font-weight:800;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;background:var(--surface2);color:var(--muted)}.twimp.on{background:color-mix(in srgb,var(--up) 18%,transparent);color:var(--up)}
+.twbell{border:0;background:transparent;font-size:16px;cursor:pointer;padding:2px 4px;opacity:.55}.twbell.on{opacity:1}.twcar{color:var(--muted);font-size:12px}
+.twdet{padding:4px 8px 14px 8px}
+@media (max-width:700px){.twcounts{grid-template-columns:repeat(2,minmax(0,1fr))}.twtitle h1{font-size:25px}.twhero{padding:18px 16px}
+  .twrow{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"a px bell" "why why why" "imp imp car";row-gap:6px}
+  .twa{grid-area:a}.twpx{grid-area:px}.twbell{grid-area:bell}.twwhy{grid-area:why;font-size:13px}.twimps{grid-area:imp}.twcar{grid-area:car;justify-self:end}}
 .dgrid.dense{grid-auto-flow:row dense}
 @media (min-width:1024px){.dgrid>.w4{grid-column:span 4!important}.dgrid>.w6{grid-column:span 6!important}.dgrid>.w8{grid-column:span 8!important}.dgrid>.w12{grid-column:span 12!important}}
 .dgrid{margin-top:14px}.dstrip{grid-column:span 12}
@@ -856,7 +882,7 @@ function navSections(){
     ["market","Sectors","market", [["market-radar","🧭 Sector radar"]]],
     ["more","More","menu", []]];
   const S = [
-    ["today","Today","today", [["today","Dashboard"], ...(pro ? [["today-desk","🎯 My Desk"]] : [])]],
+    ["today","Today","today", [["today","Dashboard"], ...(pro ? [["today-desk","🎯 My Desk"]] : []), ...(adm ? [["today-tower","🔭 Watchtower"]] : [])]],
     ["scanner","Stocks","scanner", [["@picks","Setups"],["scanner-equity","Midcap & smallcap"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["market-strongest","Strongest"],["scanner-bear","🐻 Bearish"],
       ...(pro ? [["intraday","⚡ Intraday & BTST"]] : []),["@lab","🧪 Lab"]]],
     ["options","Options","bolt", [["scanner-chains","⛓ Option screener"],["scanner-options","📈 Option ideas"]]],
@@ -1641,6 +1667,93 @@ document.addEventListener("dragover", e => { if(!DRAG_EL) return; const over = e
 document.addEventListener("dragend", () => { if(!DRAG_EL) return; DRAG_EL.classList.remove("dragging"); DRAG_EL = null;
   if(UI.arrange) UI.arrange.order = arrOrderFromDom(); });
 
+
+
+/* ============================================================ 🔭 Watchtower: the watchlist sorted by what needs attention, updated with every scan */
+const TW_B = [
+  ["act", "Act now", "🟢", "#22c55e", "Ready, Buy now or above its trigger"],
+  ["close", "Getting close", "🟡", "#f5b301", "Within 3% of its entry, or about to be Ready"],
+  ["wait", "Waiting", "⚪", "#94a3b8", "No setup yet. Nothing to do today"],
+  ["weak", "Weak: remove?", "🔴", "#f87171", "Weak stock in a weak sector, or VK Sell now"]];
+function towerRead(w, b, hooks){
+  const sym = w.symbol, r = b.rows[0] || null, q = livePx(sym), px = q ? q.close : b.close, chg = q ? q.chg : null;
+  const m = ((S().mtf || []).find(x => x.s === sym)) || {}, t = ((CACHE["sectors.json"] || {}).map || {})[sym] || null;
+  const vk = b.vk ? b.vk.final : "", c = chase(sym), hk = t && hooks[t.sector];
+  const trig = r && r.trigger, dist = trig && px ? (trig - px) / px * 100 : null;
+  const secW = t && (t.stage === "Lagging" || (t.stage === "Weakening" && !hk));
+  const dWeak = m.D && m.D !== "Impulse" && m.W && m.W !== "Impulse";
+  let k = "wait", why = "", pri = -(m.sc || 0);
+  const ready = (r && r.stage === "Ready") || vk === "BUY NOW", above = dist != null && dist <= 0 && r && r.stage === "Watch";
+  const trig2 = r && r.stage === "Triggered", hot = c && c.x > 2.5, inZone = !c || c.x <= 1, secLag = t && t.stage === "Lagging";
+  const label = r && r.stage === "Ready" ? `${r.setup} Ready` : vk === "BUY NOW" ? "VK Buy now" : r ? r.setup : "";
+  const weakWhy = vk === "SELL NOW" ? "VK Sell now" : secW && dWeak ? `Corrective, ${t.sector} ${t.stage.toLowerCase()}` : secW && c && c.x < -1.5 ? `Below its 20 EMA, ${t.sector} ${t.stage.toLowerCase()}`
+    : b.old === "❌ Avoid" && (dWeak || secLag) ? `Avoid list${secLag ? `, ${t.sector} lagging` : ", no impulse on Daily or Weekly"}` : "";
+  if(vk === "SELL NOW"){ k = "weak"; why = weakWhy; pri = m.sc || 0; }
+  else if((ready || above) && !hot && !secLag){
+    k = "act"; why = above ? `Above its trigger ₹${fmt(trig)}` : label; if(hk) why += " · sector hook 🪝";
+    pri = -(m.sc || 0) - (r && r.stage === "Ready" ? 50 : 0) - (inZone ? 30 : 0) - (hk ? 20 : 0) - (t && (t.stage === "Improving" || t.stage === "Leading") ? 20 : 0); }
+  else if(trig2 && inZone && !secLag){ k = "act"; why = `${r.setup} triggered, still in the entry zone`; pri = -(m.sc || 0); }
+  else if((ready || above) && hot){ k = "close"; why = `${label || "Ready"}, but stretched: wait for a dip`; pri = 6 + c.x; }
+  else if(dist != null && dist > 0 && dist <= 3 && !secLag){ k = "close"; why = dist < 0.15 ? `Right at its trigger ₹${fmt(trig)}` : `${dist.toFixed(1)}% to trigger ₹${fmt(trig)}`; pri = dist; }
+  else if(/^(ALMOST READY|COMING CLOSE TO READY) \(Bullish\)/.test(vk) && !secLag){ k = "close"; why = vk.startsWith("ALMOST") ? "VK almost ready" : "VK coming close"; pri = vk.startsWith("ALMOST") ? 4 : 5; }
+  else if((ready || above || trig2) && secLag){ why = `${label || "Setup"} ready, but ${t.sector} is lagging`; }
+  else if(weakWhy){ k = "weak"; why = weakWhy; pri = m.sc || 0; }
+  else if(trig2){ why = `${r.setup} already moved: wait for the next entry`; }
+  else { why = r ? `${r.setup} · ${r.stage}` : b.other ? b.other : m.D ? `Daily ${m.D}` : "No setup"; }
+  return {sym, k, why, pri, px, chg, dist, trig, r, m, t, hk, c, vk, b, w};
+}
+function towerRow(x){
+  const open = UI.twOpen === x.sym;
+  const sec = x.t ? `<span class="twsec" style="--c:${ROT_LC[x.t.stage] || "var(--muted)"}">${esc(x.t.sector)} · ${esc(x.t.stage)}${x.hk ? " 🪝" : ""}</span>` : "";
+  const imp = ["W", "D"].map(f => x.m[f] ? `<i class="twimp ${x.m[f] === "Impulse" ? "on" : ""}" title="${f === "W" ? "Weekly" : "Daily"}: ${esc(x.m[f])}">${f}</i>` : "").join("");
+  const bell = (() => { const on = ((ALR || {}).items || []).some(i => i.s === x.sym); return `<button class="twbell ${on ? "on" : ""}" data-wbell="${esc(x.sym)}" title="${on ? "Email alerts on" : "Email alerts off"}">${on ? "🔔" : "🔕"}</button>`; })();
+  const det = open ? `<div class="twdet">
+      ${x.r && (x.r.trigger || x.r.stop) ? levels(x.r.trigger, x.r.stop, x.r.target, x.r.stage === "Watch" ? "Above" : "Buy above") : ""}
+      <div class="chips" style="margin-top:8px">${x.b.rows.slice(0, 3).map(r => chip(`${r.setup} · ${r.stage} · ${r.grade}`, SETUP_STAGE_C[r.stage])).join("")}${x.vk ? vkChip(x.vk) : ""}${chaseChip(x.sym)}${x.b.old ? chip(x.b.old) : ""}</div>
+      ${x.r && x.r.detail ? `<div class="muted" style="font-size:12.5px;margin-top:8px">${esc(x.r.detail)}</div>` : ""}
+      ${x.b.vk && x.b.vk.advice ? `<div style="font-size:13px;margin-top:6px">💬 ${esc(x.b.vk.advice)}</div>` : ""}
+      ${x.w.note ? `<div style="font-size:13px;margin-top:6px">📝 ${esc(x.w.note)}</div>` : ""}
+      <div style="margin-top:10px;display:flex;gap:14px;font-size:12.5px;font-weight:700"><a href="${tv(x.sym)}" target="_blank" rel="noopener">Chart ›</a><a href="#search" data-go="${esc(x.sym)}">Everything on ${esc(x.sym)} ›</a><a href="#watchlist">Edit note ›</a></div></div>` : "";
+  return `<div class="twrow${open ? " open" : ""}" data-twopen="${esc(x.sym)}">
+    <div class="twa"><b class="twsym">${esc(x.sym)}</b>${sec}</div>
+    <div class="twwhy">${esc(x.why)}</div>
+    <div class="twpx"><span class="num">${x.px ? fmt(x.px) : "—"}</span>${x.chg != null ? ` <b class="num ${cls(x.chg)}">${pct(x.chg, 1)}</b>` : ""}</div>
+    <div class="twimps">${imp}${x.c ? `<span title="${esc(x.c.label)}">${x.c.icon}</span>` : ""}</div>
+    ${bell}<span class="twcar">${open ? "▴" : "▾"}</span></div>${det}`;
+}
+async function pageTower(){
+  await Promise.all(["setups.json","equity.json","breakout.json","sectors.json"].map(f => getJSON(f).catch(() => null)).concat(isAdmin() && !ALR ? [alrCall().catch(() => null)] : []));
+  const hooks = typeof rotHooks === "function" ? rotHooks(rotSecs()) : {};
+  const list = [];
+  for(const w of WATCH) list.push(towerRead(w, await brief(w.symbol), hooks));
+  const by = Object.fromEntries(TW_B.map(([k]) => [k, list.filter(x => x.k === k).sort((a, b) => a.pri - b.pri)]));
+  // what changed since the last day you looked (kept on this device)
+  const today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10), cur = Object.fromEntries(list.map(x => [x.sym, x.k]));
+  let mem = {}; try{ mem = JSON.parse(localStorage.getItem("tr-tower") || "{}"); }catch(e){}
+  if(mem.date !== today){ mem = {date: today, prev: mem.cur || null, cur}; } else mem.cur = cur;
+  try{ localStorage.setItem("tr-tower", JSON.stringify(mem)); }catch(e){}
+  const rank = {act: 0, close: 1, wait: 2, weak: 3}, prev = mem.prev || {};
+  const up = list.filter(x => prev[x.sym] && rank[x.k] < rank[prev[x.sym]]), down = list.filter(x => prev[x.sym] && rank[x.k] > rank[prev[x.sym]]);
+  const changes = mem.prev ? (up.length || down.length ? `${up.map(x => `<span class="twchg up">▲ ${esc(x.sym)} → ${TW_B.find(b => b[0] === x.k)[1]}</span>`).join("")}${down.map(x => `<span class="twchg dn">▼ ${esc(x.sym)} → ${TW_B.find(b => b[0] === x.k)[1]}</span>`).join("")}` : `<span class="twchg">No moves between groups since your last visit</span>`) : `<span class="twchg">Changes since your last visit will show here from tomorrow</span>`;
+  const hero = `<section class="twhero">
+    <div class="twtitle"><div><h1>🔭 Watchtower</h1><p>Your ${WATCH.length} stocks, sorted by what needs you. Re-sorts itself with every scan.</p></div>
+      <div class="twscan"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST${S()._live ? ` · live ${esc(S()._live)}` : ""}</div></div>
+    <div class="twcounts">${TW_B.map(([k, n, ic, c]) => `<a href="#tw-${k}" class="twcnt" style="--c:${c}"><b>${by[k].length}</b><span>${ic} ${n}</span></a>`).join("")}</div>
+    <div class="twchgs">${changes}</div></section>`;
+  const block = ([k, n, ic, c, sub]) => { const l = by[k]; if(!l.length) return "";
+    const shut = k === "wait" && !UI.twWait;
+    return `<section class="twb" id="tw-${k}" style="--c:${c}"><div class="twbh"><h2>${ic} ${n} <em>${l.length}</em></h2><span class="muted">${sub}</span>
+      ${k === "wait" ? `<button class="btn2 twtog" data-twwait="1">${shut ? "Show" : "Hide"}</button>` : ""}</div>
+      ${shut ? "" : `<div class="twlist">${l.map(towerRow).join("")}</div>`}</section>`; };
+  return subnav() + hero + (WATCH.length ? TW_B.map(block).join("") : `<div class="empty">Your watchlist is empty. Tap ☆ next to any stock to add it.</div>`)
+    + `<p class="foot-note">Act now: Ready setup, VK Buy now, or price above the setup's trigger. Getting close: within 3% of the trigger, or VK almost ready. Weak: not in impulse on Daily or Weekly and its sector is Lagging (or Weakening without a hook). Tap a row for levels and notes.</p>`;
+}
+document.addEventListener("click", e => {
+  const tw = e.target.closest && e.target.closest("[data-twopen]");
+  if(tw && !e.target.closest("button,a")){ UI.twOpen = UI.twOpen === tw.dataset.twopen ? null : tw.dataset.twopen; render.keepScroll = true; render(); return; }
+  const ww = e.target.closest && e.target.closest("[data-twwait]");
+  if(ww){ UI.twWait = !UI.twWait; render.keepScroll = true; render(); }
+});
 
 /* ============================================================ Monthly / Weekly / Daily: Impulse or Corrective */
 const MTF_TF = [["M","Monthly"],["W","Weekly"],["D","Daily"]];
@@ -3279,7 +3392,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRotation, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, more:pageMore, "today-desk":pageDesk, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRotation, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, more:pageMore, "today-desk":pageDesk, "today-tower":pageTower, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -3300,7 +3413,7 @@ async function render(){
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
-  const adminOnly = r === "watchlist" || r === "admin" || r === "admin-alerts" || r === "admin-social";
+  const adminOnly = r === "watchlist" || r === "today-tower" || r === "admin" || r === "admin-alerts" || r === "admin-social";
   const proOnly = r === "intraday" || r.startsWith("admin-") || r.endsWith("scorecard");   // admin, or everyone while features are opened
   const fn = r === "today-desk" && !PRO() ? pageDashboard : adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
     : proOnly && !PRO() ? pageDashboard : (VIEWS[r] || pageDashboard);
