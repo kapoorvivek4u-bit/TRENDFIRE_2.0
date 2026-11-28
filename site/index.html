@@ -125,17 +125,19 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 .twb{margin-top:16px;border-radius:18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);padding:14px 16px 6px}
 .twbh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}.twbh h2{margin:0;font-size:16px;font-family:var(--f-head)}.twbh h2 em{font-style:normal;font-size:12px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);padding:2px 8px;border-radius:999px;margin-left:4px}
 .twbh .muted{font-size:12.5px;flex:1}.twtog{padding:5px 12px;font-size:12px}
-.twrow{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) 120px 74px 30px 14px;gap:12px;align-items:center;padding:11px 6px;border-top:1px solid var(--line);cursor:pointer;border-radius:10px}
+.twrow{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) 120px 74px auto 14px;gap:12px;align-items:center;padding:11px 6px;border-top:1px solid var(--line);cursor:pointer;border-radius:10px}
 .twrow:first-child{border-top:0}.twrow:hover,.twrow.open{background:color-mix(in srgb,var(--c) 7%,transparent)}
 .twa{min-width:0;display:flex;flex-direction:column;gap:3px}.twsym{font-family:var(--f-num);font-size:15px;letter-spacing:.3px}
 .twsec{font-size:11px;font-weight:700;color:var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .twwhy{font-size:13.5px;font-weight:600;min-width:0}.twpx{white-space:nowrap;font-size:13.5px;text-align:right}.twwhy{text-align:left}
 .twimps{display:flex;gap:4px;align-items:center}.twimp{font-style:normal;font-size:10.5px;font-weight:800;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;background:var(--surface2);color:var(--muted)}.twimp.on{background:color-mix(in srgb,var(--up) 18%,transparent);color:var(--up)}
 .twbell{border:0;background:transparent;font-size:16px;cursor:pointer;padding:2px 4px;opacity:.55}.twbell.on{opacity:1}.twcar{color:var(--muted);font-size:12px}
-.twdet{padding:4px 8px 14px 8px}
+.twdet{padding:4px 8px 14px 8px}.twr{display:flex;gap:4px;align-items:center;justify-content:flex-end}
+.twdel{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:8px;padding:3px 9px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.twdel:hover{color:var(--down);border-color:var(--down)}.twdel.sure{background:var(--down);border-color:var(--down);color:#fff}
 @media (max-width:700px){.twcounts{grid-template-columns:repeat(2,minmax(0,1fr))}.twtitle h1{font-size:25px}.twhero{padding:18px 16px}
   .twrow{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"a px bell" "why why why" "imp imp car";row-gap:6px}
-  .twa{grid-area:a}.twpx{grid-area:px}.twbell{grid-area:bell}.twwhy{grid-area:why;font-size:13px}.twimps{grid-area:imp}.twcar{grid-area:car;justify-self:end}}
+  .twa{grid-area:a}.twpx{grid-area:px}.twr{grid-area:bell}.twwhy{grid-area:why;font-size:13px}.twimps{grid-area:imp}.twcar{grid-area:car;justify-self:end}}
 .dgrid.dense{grid-auto-flow:row dense}
 @media (min-width:1024px){.dgrid>.w4{grid-column:span 4!important}.dgrid>.w6{grid-column:span 6!important}.dgrid>.w8{grid-column:span 8!important}.dgrid>.w12{grid-column:span 12!important}}
 .dgrid{margin-top:14px}.dstrip{grid-column:span 12}
@@ -1702,6 +1704,11 @@ function towerRead(w, b, hooks){
   else { why = r ? `${r.setup} · ${r.stage}` : b.other ? b.other : m.D ? `Daily ${m.D}` : "No setup"; }
   return {sym, k, why, pri, px, chg, dist, trig, r, m, t, hk, c, vk, b, w};
 }
+/* remove from the watchlist: first tap asks, second tap removes */
+function twDelBtn(sym, big){
+  return UI.twDel === sym ? `<button class="twdel sure" data-unwatch="${esc(sym)}">Remove ${esc(sym)}?</button><button class="twdel" data-twdel="">Keep</button>`
+    : `<button class="twdel" data-twdel="${esc(sym)}" title="Remove from watchlist">${big ? "🗑 Remove" : "✕"}</button>`;
+}
 function towerRow(x){
   const open = UI.twOpen === x.sym;
   const sec = x.t ? `<span class="twsec" style="--c:${ROT_LC[x.t.stage] || "var(--muted)"}">${esc(x.t.sector)} · ${esc(x.t.stage)}${x.hk ? " 🪝" : ""}</span>` : "";
@@ -1713,13 +1720,13 @@ function towerRow(x){
       ${x.r && x.r.detail ? `<div class="muted" style="font-size:12.5px;margin-top:8px">${esc(x.r.detail)}</div>` : ""}
       ${x.b.vk && x.b.vk.advice ? `<div style="font-size:13px;margin-top:6px">💬 ${esc(x.b.vk.advice)}</div>` : ""}
       ${x.w.note ? `<div style="font-size:13px;margin-top:6px">📝 ${esc(x.w.note)}</div>` : ""}
-      <div style="margin-top:10px;display:flex;gap:14px;font-size:12.5px;font-weight:700"><a href="${tv(x.sym)}" target="_blank" rel="noopener">Chart ›</a><a href="#search" data-go="${esc(x.sym)}">Everything on ${esc(x.sym)} ›</a><a href="#watchlist">Edit note ›</a></div></div>` : "";
+      <div style="margin-top:10px;display:flex;gap:14px;font-size:12.5px;font-weight:700"><a href="${tv(x.sym)}" target="_blank" rel="noopener">Chart ›</a><a href="#search" data-go="${esc(x.sym)}">Everything on ${esc(x.sym)} ›</a><a href="#watchlist">Edit note ›</a><span style="flex:1"></span>${twDelBtn(x.sym, true)}</div></div>` : "";
   return `<div class="twrow${open ? " open" : ""}" data-twopen="${esc(x.sym)}">
     <div class="twa"><b class="twsym">${esc(x.sym)}</b>${sec}</div>
     <div class="twwhy">${esc(x.why)}</div>
     <div class="twpx"><span class="num">${x.px ? fmt(x.px) : "—"}</span>${x.chg != null ? ` <b class="num ${cls(x.chg)}">${pct(x.chg, 1)}</b>` : ""}</div>
     <div class="twimps">${imp}${x.c ? `<span title="${esc(x.c.label)}">${x.c.icon}</span>` : ""}</div>
-    ${bell}<span class="twcar">${open ? "▴" : "▾"}</span></div>${det}`;
+    <span class="twr">${x.k === "weak" ? twDelBtn(x.sym) : ""}${bell}</span><span class="twcar">${open ? "▴" : "▾"}</span></div>${det}`;
 }
 async function pageTower(){
   await Promise.all(["setups.json","equity.json","breakout.json","sectors.json"].map(f => getJSON(f).catch(() => null)).concat(isAdmin() && !ALR ? [alrCall().catch(() => null)] : []));
@@ -1751,6 +1758,8 @@ async function pageTower(){
 document.addEventListener("click", e => {
   const tw = e.target.closest && e.target.closest("[data-twopen]");
   if(tw && !e.target.closest("button,a")){ UI.twOpen = UI.twOpen === tw.dataset.twopen ? null : tw.dataset.twopen; render.keepScroll = true; render(); return; }
+  const dl = e.target.closest && e.target.closest("[data-twdel]");
+  if(dl){ UI.twDel = dl.dataset.twdel || null; render.keepScroll = true; render(); return; }
   const ww = e.target.closest && e.target.closest("[data-twwait]");
   if(ww){ UI.twWait = !UI.twWait; render.keepScroll = true; render(); }
 });
