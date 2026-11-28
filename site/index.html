@@ -104,6 +104,11 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 /* ---------- cards ---------- */
 .grid{display:grid;gap:14px;grid-template-columns:repeat(12,minmax(0,1fr))}
 .grid>*{grid-column:span 12;min-width:0}
+.nws .nwtop{display:block;font-family:var(--f-head);font-size:21px;line-height:1.25;font-weight:800;color:var(--ink);margin-top:10px;text-wrap:balance}
+.nws .nwtop:hover,.nws .nwl a:hover span{color:var(--accent)}
+.nws .nwsrc{font-size:12px;color:var(--muted);margin:4px 0 8px}
+.nws .nwl a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);color:var(--ink);font-size:13.5px;font-weight:600;line-height:1.35}
+.nws .nwl small{flex:none;color:var(--muted);font-size:11px;font-weight:600;white-space:nowrap}
 .dgrid.dense{grid-auto-flow:row dense}
 @media (min-width:1024px){.dgrid>.w4{grid-column:span 4!important}.dgrid>.w6{grid-column:span 6!important}.dgrid>.w8{grid-column:span 8!important}.dgrid>.w12{grid-column:span 12!important}}
 .dgrid{margin-top:14px}.dstrip{grid-column:span 12}
@@ -1525,19 +1530,19 @@ function loadLayout(){
   try{ const c = localStorage.getItem("tr-lay"); if(c) DLAY = JSON.parse(c); }catch(e){}
   return fetch("/api/layout", {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(j => { if(j){ DLAY = j; try{ localStorage.setItem("tr-lay", JSON.stringify(j)); }catch(e){} } }).catch(() => null);
 }
-const DB_NAMES = {flow:"Money flow", weather:"Market weather", news:"News", strip:"Alerts & indexes strip", bear:"Bear mode", bottom5:"Bottom 5", weakest:"Weakest",
-  radar:"Sector radar", rot:"Sector rotation", top5:"Top 5 positional", most:"Most scanned", trades:"Trades", parts:"Market score parts", vk:"VK setups",
-  strongest:"Strongest", ready:"Ready", money:"Big money", movers:"Movers", heat:"Heatmap", watch:"Watchlist"};
+const DB_NAMES = {flow:"Money flow", rot:"Sector rotation", weather:"Market weather", news:"News", strip:"Indexes snapshot", heat:"Heatmap", bear:"Bear mode", bottom5:"Bottom 5", weakest:"Weakest",
+  radar:"Sector radar", top5:"Top 5 positional", most:"Most scanned", trades:"Trades", parts:"Market score parts", vk:"VK setups",
+  strongest:"Strongest", ready:"Ready", money:"Big money", movers:"Movers", watch:"Watchlist"};
 function dashBlocks(){
   const bear = BEAR() && BEAR().bear_mode;
-  return [["flow", flowMiniCard()], ["weather", weatherCard()], ["news", newsCard()],
-    ["strip", (() => { const h = bellStrip() + headsUpCard() + indexStrip(); return h.trim() ? `<div class="dstrip">${h}</div>` : ""; })()],
+  return [["flow", flowMiniCard()], ["rot", rotSnapshotCard()], ["weather", weatherCard()], ["news", newsCard()],
+    ["strip", (() => { const h = bellStrip() + headsUpCard() + indexStrip(); return h.trim() ? `<div class="dstrip">${h}</div>` : ""; })()], ["heat", heatCard()],
     ["bear", bear ? bearBanner() : ""], ["bottom5", bear ? bottom5Card() : ""], ["weakest", bear ? weakestCard() : ""],
-    ["radar", radarCard()], ["rot", rotSnapshotCard()], ["top5", top5Card()], ["most", mostScannedCard()], ["trades", tradesCard()],
-    ["parts", partsCard()], ["vk", vkCard()], ["strongest", strongestCard()], ["ready", readyCard()], ["money", moneyCard()], ["movers", moversCard()], ["heat", heatCard()],
+    ["radar", radarCard()], ["top5", top5Card()], ["most", mostScannedCard()], ["trades", tradesCard()],
+    ["parts", partsCard()], ["vk", vkCard()], ["strongest", strongestCard()], ["ready", readyCard()], ["money", moneyCard()], ["movers", moversCard()],
     ["watch", `<div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>`]];
 }
-const DB_DEFAULT = Object.keys(DB_NAMES);
+const DB_DEFAULT = Object.keys(DB_NAMES), LAY_V = 2, DB_SIZE = {flow: 6, rot: 6, weather: 6, news: 6, heat: 12};   // v2: owner's order (Nov 2026); older saved layouts are ignored
 /* keys missing from `order` (a card that was not on screen when it was saved, or a new card) go right after the card before them in `ref` */
 function mergeOrder(order, ref){
   const out = (order || []).slice();
@@ -1561,7 +1566,7 @@ function keyBlock(k, html, arr, hid, w){            // put data-k (and the drag 
 async function pageDashboard(){
   const arr = !!(UI.arrange && DESKTOP_ARR());
   const blocks = dashBlocks().filter(([, h]) => h && h.trim()), def = blocks.map(b => b[0]);
-  const lay = arr ? UI.arrange : (DLAY || {}), order = lay.order || [], hidden = new Set(lay.hidden || []);
+  const lay = arr ? UI.arrange : (DLAY && DLAY.v === LAY_V ? DLAY : {size: DB_SIZE}), order = lay.order || [], hidden = new Set(lay.hidden || []);
   const seq = mergeOrder(order, DB_DEFAULT), pos = k => seq.indexOf(k);
   const list = blocks.slice().sort((a, b) => pos(a[0]) - pos(b[0])).filter(([k]) => arr || !hidden.has(k));
   const custom = !!(order.length || hidden.size || Object.keys(lay.size || {}).length);
@@ -1587,11 +1592,11 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-arr]"); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   const act = b.dataset.arr;
-  if(act === "start"){ UI.arrange = {order: (DLAY && DLAY.order) || [], hidden: (DLAY && DLAY.hidden) || [], size: {...((DLAY && DLAY.size) || {})}}; }
+  if(act === "start"){ const L = DLAY && DLAY.v === LAY_V ? DLAY : {size: DB_SIZE}; UI.arrange = {order: L.order || [], hidden: L.hidden || [], size: {...(L.size || {})}}; }
   else if(act === "cancel"){ UI.arrange = null; }
   else if(act === "reset"){ UI.arrange = null; DLAY = {}; try{ localStorage.removeItem("tr-lay"); }catch(e){}
     fetch("/api/layout", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({reset: true})}).then(() => toast("Back to the default layout")).catch(() => toast("Could not reach the server.")); }
-  else if(act === "save"){ const lay = {order: mergeOrder(arrOrderFromDom(), mergeOrder((DLAY && DLAY.order) || [], DB_DEFAULT)), hidden: UI.arrange.hidden, size: UI.arrange.size || {}}; DLAY = lay; UI.arrange = null;
+  else if(act === "save"){ const lay = {order: mergeOrder(arrOrderFromDom(), mergeOrder((DLAY && DLAY.v === LAY_V && DLAY.order) || [], DB_DEFAULT)), hidden: UI.arrange.hidden, size: UI.arrange.size || {}, v: LAY_V}; DLAY = lay; UI.arrange = null;
     try{ localStorage.setItem("tr-lay", JSON.stringify(lay)); }catch(e){}
     fetch("/api/layout", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(lay)})
       .then(r => toast(r.ok ? "Layout saved ✓" : "Saved on this computer only")).catch(() => toast("Saved on this computer only")); }
@@ -2416,7 +2421,27 @@ function weatherCard(){
       <div class="say">${esc(st.advice || `${st.label} market · ${st.trend || ""}`)}</div>
       <div class="wxstats" style="margin-top:12px">${st.parts.map(x => `<span title="${esc(x.why)}">${esc(x.name)} ${x.value}</span>`).join("")}</div></div></section>`;
 }
+let NEWS = null;
 function newsCard(){
+  if(!NEWS && !newsCard.asked){ newsCard.asked = 1;
+    fetch("/api/news").then(r => r.ok ? r.json() : null).then(j => { if(j && j.items && j.items.length){ NEWS = j; if(route() === "today" && !UI.arrange) rerender(); } }).catch(() => null);
+    setInterval(() => { newsCard.asked = 0; NEWS = null; }, 30 * 60e3); }   // look again every 30 min (the server pulls new headlines every 2 hours)
+  if(NEWS) return newsHeadlines();
+  return newsSummary();
+}
+function newsAgo(t){ const m = Math.round((Date.now() - t) / 60e3); return m < 60 ? `${Math.max(1, m)}m ago` : m < 1440 ? `${Math.round(m / 60)}h ago` : `${Math.round(m / 1440)}d ago`; }
+function newsHeadlines(){
+  const it = NEWS.items.slice(0, 9), top = it[0];
+  const dt = new Date().toLocaleDateString("en-IN", {weekday:"long", day:"numeric", month:"long", timeZone:"Asia/Kolkata"});
+  const up = new Date(NEWS.fetched).toLocaleTimeString("en-IN", {hour:"numeric", minute:"2-digit", timeZone:"Asia/Kolkata"});
+  return `<section class="card s7 fade news nws">
+    <div class="date"><b>📰 ${esc(dt)}</b><span class="muted" style="font-size:12px">Market news · updated ${esc(up)}</span></div>
+    <a class="nwtop" href="${esc(top.l)}" target="_blank" rel="noopener">${esc(top.t)}</a>
+    <div class="nwsrc">${esc(top.src)} · ${newsAgo(top.at)}</div>
+    <div class="nwl">${it.slice(1).map(x => `<a href="${esc(x.l)}" target="_blank" rel="noopener"><span>${esc(x.t)}</span><small>${esc(x.src)} · ${newsAgo(x.at)}</small></a>`).join("")}</div>
+    <div class="muted" style="font-size:11px;margin-top:8px">Headlines from Economic Times, Mint, Business Standard and BusinessLine. New ones every 2 hours. Tap to read on their site.</div></section>`;
+}
+function newsSummary(){
   const s = S(), secs = (s.sectors || []).slice().filter(x => x.r1 != null).sort((a,b) => b.r1 - a.r1);
   if(!secs.length) return "";
   const best = secs[0], worst = secs[secs.length-1];
@@ -3260,6 +3285,7 @@ async function render(){
   if(id !== RENDER_ID) return;
   const y = scrollY, keep = render.keepScroll;
   const paint = () => {
+    if(id !== RENDER_ID) return;            // a newer render already painted (the page-change animation can run late)
     main.innerHTML = html + `<p class="foot-note">For study and tracking only. Not investment advice.</p>`;
     main.querySelectorAll(".subnav").forEach(n => { const on = n.querySelector(".on"); if(on && n.scrollWidth > n.clientWidth) n.scrollLeft = on.offsetLeft - (n.clientWidth - on.offsetWidth) / 2; });   // keep the active tab in view on phones
     if(keep){ scrollTo(0, y); render.keepScroll = false; } else countUps(main);
@@ -3378,7 +3404,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
     return;
   }
   if(USER) loadLayout().then(() => { if(route() === "today" && !UI.arrange) rerender(); });
-  getJSON("sectors.json").catch(() => null);
+  getJSON("sectors.json").then(() => { if(route() === "today" && !UI.arrange) rerender(); }).catch(() => null);   // the new rotation card replaces the old one once this arrives
   getJSON("bear.json").then(b => { if(b && b.bear_mode && route() === "today") rerender(); }).catch(() => null);
   if(FULL()) getJSON("options.json").then(() => { if(route() === "today" || route().startsWith("scanner")) rerender(); }).catch(() => null);
   render();

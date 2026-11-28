@@ -1,3 +1,4 @@
+import { getNews } from "./news.js";
 import { getChain, ingestChains } from "./chain.js";
 import { alertsGet, alertsPut, alertsLog, checkAlerts, testAlert, eveningDigest, channels, STRATS } from "./alerts.js";
 import { publicPage } from "./public.js";
@@ -530,6 +531,7 @@ async function api(req, env, url, user, ctx) {
   }
   if (p === "/api/scans" && req.method === "GET") return json(admin ? await latestRuns(env) : {});
   if (p === "/api/admin/log" && req.method === "GET") return admin ? json(await adminLog(env)) : json({ error: "Admin only." }, 403);
+  if (p === "/api/news" && req.method === "GET") return new Response(JSON.stringify(await getNews(env, ctx)), { headers: { "content-type": "application/json", "cache-control": "private, max-age=300" } });
   if (p === "/api/layout") {                              // each person's own Today layout (desktop arrange): order + hidden cards
     const key = "lay:" + user.email.toLowerCase();
     if (req.method === "GET") return json((await env.USERS.get(key, "json")) || {});
@@ -539,7 +541,7 @@ async function api(req, env, url, user, ctx) {
       if (b.reset) { await env.USERS.delete(key); return json({ ok: true }); }
       const size = {};
       for (const [k, v] of Object.entries(b.size || {}).slice(0, 60)) if (/^[a-z0-9]{1,20}$/.test(k) && [4, 6, 8, 12].includes(+v)) size[k] = +v;
-      await env.USERS.put(key, JSON.stringify({ order: clean(b.order), hidden: clean(b.hidden), size }));
+      await env.USERS.put(key, JSON.stringify({ order: clean(b.order), hidden: clean(b.hidden), size, v: +b.v || 1 }));
       return json({ ok: true });
     }
   }
