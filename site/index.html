@@ -138,6 +138,21 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 @media (max-width:700px){.twcounts{grid-template-columns:repeat(2,minmax(0,1fr))}.twtitle h1{font-size:25px}.twhero{padding:18px 16px}
   .twrow{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"a px bell" "why why why" "imp imp car";row-gap:6px}
   .twa{grid-area:a}.twpx{grid-area:px}.twr{grid-area:bell}.twwhy{grid-area:why;font-size:13px}.twimps{grid-area:imp}.twcar{grid-area:car;justify-self:end}}
+
+.dpanel{margin-top:12px;border:2px solid var(--c);border-radius:14px;padding:12px 14px;background:color-mix(in srgb,var(--c) 7%,var(--surface))}
+.dpv{display:flex;gap:10px;align-items:flex-start}.dpv>span{font-size:22px;line-height:1}.dpv b{font-size:15px;font-family:var(--f-head)}.dps{font-size:12.5px;color:var(--muted);margin-top:2px}
+.dp2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.dpb{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-width:0}
+.dpb h4{margin:0 0 4px;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}.dpval{font-weight:800;font-size:14px}
+.dpb ul{margin:4px 0 0;padding-left:15px;font-size:12px;line-height:1.45}.dpat{font-size:11px;color:var(--muted);margin-top:4px}.dpat.stale{color:var(--warn);font-weight:700}
+.dplv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
+.dplv div,.ckeys div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px;text-align:center;min-width:0}
+.dplv small,.ckeys small{display:block;font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}.dplv b,.ckeys b{font-family:var(--f-num);font-size:13.5px}
+.dpnote{margin-top:8px;font-size:12.5px;background:var(--surface);border-left:3px solid var(--c);padding:6px 10px;border-radius:6px}
+.ckeys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0}.ckeys b{font-size:16px}
+details.chainread summary{cursor:pointer;list-style:none}details.chainread summary::-webkit-details-marker{display:none}
+.dpi{font-size:13px}
+@media (max-width:480px){.dp2{grid-template-columns:1fr}.dplv,.ckeys{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dgrid.dense{grid-auto-flow:row dense}
 @media (min-width:1024px){.dgrid>.w4{grid-column:span 4!important}.dgrid>.w6{grid-column:span 6!important}.dgrid>.w8{grid-column:span 8!important}.dgrid>.w12{grid-column:span 12!important}}
 .dgrid{margin-top:14px}.dstrip{grid-column:span 12}
@@ -1715,21 +1730,21 @@ function towerRow(x){
   const imp = ["W", "D"].map(f => x.m[f] ? `<i class="twimp ${x.m[f] === "Impulse" ? "on" : ""}" title="${f === "W" ? "Weekly" : "Daily"}: ${esc(x.m[f])}">${f}</i>` : "").join("");
   const bell = (() => { const on = ((ALR || {}).items || []).some(i => i.s === x.sym); return `<button class="twbell ${on ? "on" : ""}" data-wbell="${esc(x.sym)}" title="${on ? "Email alerts on" : "Email alerts off"}">${on ? "🔔" : "🔕"}</button>`; })();
   const det = open ? `<div class="twdet">
-      ${x.r && (x.r.trigger || x.r.stop) ? levels(x.r.trigger, x.r.stop, x.r.target, x.r.stage === "Watch" ? "Above" : "Buy above") : ""}
+      ${decisionPanel(x.sym) || (x.r && (x.r.trigger || x.r.stop) ? levels(x.r.trigger, x.r.stop, x.r.target, x.r.stage === "Watch" ? "Above" : "Buy above") : "")}
       <div class="chips" style="margin-top:8px">${x.b.rows.slice(0, 3).map(r => chip(`${r.setup} · ${r.stage} · ${r.grade}`, SETUP_STAGE_C[r.stage])).join("")}${x.vk ? vkChip(x.vk) : ""}${chaseChip(x.sym)}${x.b.old ? chip(x.b.old) : ""}</div>
       ${x.r && x.r.detail ? `<div class="muted" style="font-size:12.5px;margin-top:8px">${esc(x.r.detail)}</div>` : ""}
       ${x.b.vk && x.b.vk.advice ? `<div style="font-size:13px;margin-top:6px">💬 ${esc(x.b.vk.advice)}</div>` : ""}
       ${x.w.note ? `<div style="font-size:13px;margin-top:6px">📝 ${esc(x.w.note)}</div>` : ""}
       <div style="margin-top:10px;display:flex;gap:14px;font-size:12.5px;font-weight:700"><a href="${tv(x.sym)}" target="_blank" rel="noopener">Chart ›</a><a href="#search" data-go="${esc(x.sym)}">Everything on ${esc(x.sym)} ›</a><a href="#watchlist">Edit note ›</a><span style="flex:1"></span>${twDelBtn(x.sym, true)}</div></div>` : "";
   return `<div class="twrow${open ? " open" : ""}" data-twopen="${esc(x.sym)}">
-    <div class="twa"><b class="twsym">${esc(x.sym)}</b>${sec}</div>
+    <div class="twa"><b class="twsym">${dpIcon(x.sym)} ${esc(x.sym)}</b>${sec}</div>
     <div class="twwhy">${esc(x.why)}</div>
     <div class="twpx"><span class="num">${x.px ? fmt(x.px) : "—"}</span>${x.chg != null ? ` <b class="num ${cls(x.chg)}">${pct(x.chg, 1)}</b>` : ""}</div>
     <div class="twimps">${imp}${x.c ? `<span title="${esc(x.c.label)}">${x.c.icon}</span>` : ""}</div>
     <span class="twr">${x.k === "weak" ? twDelBtn(x.sym) : ""}${bell}</span><span class="twcar">${open ? "▴" : "▾"}</span></div>${det}`;
 }
 async function pageTower(){
-  await Promise.all(["setups.json","equity.json","breakout.json","sectors.json"].map(f => getJSON(f).catch(() => null)).concat(isAdmin() && !ALR ? [alrCall().catch(() => null)] : []));
+  await Promise.all(["setups.json","equity.json","breakout.json","sectors.json","chain_screen.json"].map(f => getJSON(f).catch(() => null)).concat(isAdmin() && !ALR ? [alrCall().catch(() => null)] : []));
   const hooks = typeof rotHooks === "function" ? rotHooks(rotSecs()) : {};
   const list = [];
   for(const w of WATCH) list.push(towerRead(w, await brief(w.symbol), hooks));
@@ -1763,6 +1778,69 @@ document.addEventListener("click", e => {
   const ww = e.target.closest && e.target.closest("[data-twwait]");
   if(ww){ UI.twWait = !UI.twWait; render.keepScroll = true; render(); }
 });
+
+
+/* ============================================================ Decision panel: chart vs option writers, one verdict. Never forces a call when they disagree. */
+function setupRows(s){
+  const fo = CACHE["setups.json"] || {}, rank = {Ready:0, Triggered:1, Watch:2};
+  return ["rows","overspill","ranges"].flatMap(k => (fo[k] || []).filter(r => r.symbol === s)).sort((a, b) => (rank[a.stage] ?? 9) - (rank[b.stage] ?? 9));
+}
+function vkOf(s){ for(const [lab, xs] of Object.entries((CACHE["setups.json"] || {}).vk_labels || {})){ const x = xs.find(x => x.symbol === s); if(x) return {...x, final: lab}; } return null; }
+function decide(s, live){
+  const m = (S().mtf || []).find(r => r.s === s) || {}, rows = setupRows(s), r = rows[0] || null, vk = vkOf(s), V = vk ? vk.final : "";
+  const t = ((CACHE["sectors.json"] || {}).map || {})[s], hk = t && typeof rotHooks === "function" ? (rotHooks(rotSecs())[t.sector] || null) : null;
+  const q = livePx(s), px = q ? q.close : m.c;
+  let sc = 0; const cp = [];
+  if(r){ sc += r.stage === "Ready" ? 2 : 1; cp.push(`${r.setup} ${r.stage}${r.grade ? ` (${r.grade})` : ""}`); }
+  if(V === "BUY NOW"){ sc += 2; cp.push("VK Buy now"); } else if(V === "ALMOST READY (Bullish)"){ sc += 1; cp.push("VK almost ready"); } else if(V === "COMING CLOSE TO READY (Bullish)"){ sc += .5; cp.push("VK coming close"); }
+  else if(V === "SELL NOW"){ sc -= 2; cp.push("VK Sell now"); } else if(/Bearish/.test(V)){ sc -= 1; cp.push("VK leaning bearish"); }
+  const ph = k => m[k] ? (m[k] === "Impulse" ? "impulse" : m[k].toLowerCase()) : null;
+  if(m.W === "Impulse") sc += 1; if(m.D === "Impulse") sc += 1; if(m.M === "Impulse") sc += .5;
+  if(m.W && m.D && m.W !== "Impulse" && m.D !== "Impulse" && m.D !== "Bottoming") sc -= 1;
+  if(m.M) cp.push(`Monthly ${ph("M")}, Weekly ${ph("W")}, Daily ${ph("D")}`);
+  if(t){ if(t.stage === "Lagging") sc -= 1; else if(t.stage === "Improving" || t.stage === "Leading") sc += hk ? 1 : .5;
+    cp.push(`Sector ${t.sector} ${t.stage}${hk ? " 🪝" : ""}`); }
+  const chart = sc >= 2.5 ? "Bullish" : sc <= -1 ? "Bearish" : "Neutral";
+  // option writers: the live chain if the popup has it, else the hourly chain scan
+  const row = ((CACHE["chain_screen.json"] || {}).rows || []).find(x => x.s === s);
+  let o = null;
+  if(live) o = {bias: live.bias[0], res: live.res, sup: live.sup, pain: live.pain, pcr: live.pcr, tags: live.tags, at: live.at, stale: false};
+  else if(row){ const scanDay = (S().generated_ist || "").slice(0, 10), d = (row.at || "").slice(0, 10);
+    o = {bias: row.bias, res: row.res, sup: row.sup, pain: row.max_pain, pcr: row.pcr, at: row.at, stale: !!(d && scanDay && d < scanDay),
+         tags: (row.sig || []).map(k => OSIG[k] ? OSIG[k][0].replace(/^🟢🟢 |^🟢 |^🔴 /, "") : "").filter(Boolean)}; }
+  const ob = !o ? null : /bullish/i.test(o.bias) ? "Bullish" : /bearish/i.test(o.bias) ? "Bearish" : "Neutral";
+  let kind, title, sub;
+  const trig = r && r.trigger;
+  if(chart === "Bullish" && ob === "Bullish"){ kind = "ok"; title = "Aligned: chart and option writers both bullish"; sub = "Both sides agree. This is the cleaner kind of trade."; }
+  else if(chart === "Bullish" && ob === "Bearish"){ kind = "warn"; title = "Conflict: chart says go, option writers say wait"; sub = `Do not force it.${trig ? ` Take it only above ₹${fmt(trig)} once the writers turn.` : " Wait for the writers to turn."}`; }
+  else if(chart === "Bullish"){ kind = "lean"; title = o ? "Chart bullish, option writers neutral" : "Chart bullish (no option data)"; sub = "The chart setup stands on its own; options are not adding to it."; }
+  else if(chart === "Bearish" && ob === "Bullish"){ kind = "warn"; title = "Conflict: writers lean up, chart is weak"; sub = "Mixed picture. No long until the chart turns."; }
+  else if(chart === "Bearish"){ kind = "bear"; title = ob === "Bearish" ? "Weak: chart and option writers both bearish" : "Weak chart"; sub = "No long here."; }
+  else { kind = "none"; title = "No setup: nothing to do"; sub = o ? `Option writers are ${String(o.bias).toLowerCase()}. Wait for a setup.` : "Wait for a setup."; }
+  if(o && o.stale && kind !== "none") sub += " Option data is from an older session.";
+  // levels (full access only: the data has them) and the one thing to watch
+  const lv = r && r.trigger && r.stop ? {e: r.trigger, s: r.stop, t: r.target || r.trigger + 2 * (r.trigger - r.stop)} : null;
+  if(lv) lv.rr = (lv.t - lv.e) / Math.max(.01, lv.e - lv.s);
+  let note = "";
+  if(o && o.res && px && chart !== "Bearish"){
+    if(trig && o.res >= px && o.res <= trig * 1.01) note = `🧱 Call wall at <b>₹${fmt(o.res, 0)}</b> sits at the entry. Price has to clear it first.`;
+    else if(o.res > px && (o.res - px) / px < .015) note = `🧱 Call wall at <b>₹${fmt(o.res, 0)}</b>, only ${pct((o.res / px - 1) * 100)} above the price.`; }
+  if(!note && o && o.sup && lv && o.sup > lv.s && o.sup < px) note = `🛡 Put support at <b>₹${fmt(o.sup, 0)}</b> sits above your stop.`;
+  return {kind, title, sub, chart, cp, o, ob, lv, note};
+}
+const DP_K = {ok:["✅","#22c55e"], warn:["⚠️","#f5b301"], lean:["🟡","#eab308"], bear:["🔻","#f87171"], none:["⏸","#94a3b8"]};
+function dpIcon(s){ try{ const d = decide(s); return `<span class="dpi" title="${esc(d.title)}">${DP_K[d.kind][0]}</span>`; }catch(e){ return ""; } }
+function decisionPanel(s, live){
+  if(!FULL()) return "";
+  const d = decide(s, live), [ic, c] = DP_K[d.kind], col = v => v === "Bullish" ? "up" : v === "Bearish" ? "down" : "muted";
+  return `<div class="dpanel" style="--c:${c}">
+    <div class="dpv"><span>${ic}</span><div><b>${esc(d.title)}</b><div class="dps">${esc(d.sub)}</div></div></div>
+    <div class="dp2"><div class="dpb"><h4>📈 Chart</h4><div class="dpval ${col(d.chart)}">${d.chart}</div><ul>${d.cp.map(x => `<li>${esc(x)}</li>`).join("") || "<li>No data</li>"}</ul></div>
+      <div class="dpb"><h4>⛓ Option writers</h4>${d.o ? `<div class="dpval ${col(d.ob)}">${esc(d.o.bias)}</div><ul>${(d.o.tags || []).map(x => `<li>${esc(x)}</li>`).join("")}${d.o.pcr != null ? `<li>PCR ${(+d.o.pcr).toFixed(2)}${d.o.pain ? ` · max pain ₹${fmt(d.o.pain, 0)}` : ""}</li>` : ""}</ul>
+        <div class="dpat ${d.o.stale ? "stale" : ""}">${d.o.at ? `Chain ${esc(d.o.at)}` : "Live chain"} ${d.o.stale ? "⚠️ older session" : "✓ fresh"}</div>` : `<div class="dpval muted">No data</div><ul><li>${isFO(s) ? "Not in the last chain scan" : "Not an F&O stock"}</li></ul>`}</div></div>
+    ${d.lv ? `<div class="dplv"><div><small>Entry above</small><b>${fmt(d.lv.e)}</b></div><div><small>Stop</small><b class="down">${fmt(d.lv.s)}</b></div><div><small>Target</small><b class="up">${fmt(d.lv.t)}</b></div><div><small>Risk : reward</small><b>1 : ${d.lv.rr.toFixed(1)}</b></div></div>` : ""}
+    ${d.note ? `<div class="dpnote">${d.note}</div>` : ""}</div>`;
+}
 
 /* ============================================================ Monthly / Weekly / Daily: Impulse or Corrective */
 const MTF_TF = [["M","Monthly"],["W","Weekly"],["D","Daily"]];
@@ -2275,7 +2353,9 @@ function readChain(c){
   if(atm){ const iv = [atm.ce && atm.ce.iv, atm.pe && atm.pe.iv].filter(Boolean); if(iv.length) out.push(`ATM IV <b>${(iv.reduce((a, b) => a + b, 0) / iv.length).toFixed(1)}%</b>.`); }
   const sc = score.reduce((a, b) => a + b, 0);
   const bias = sc >= 3 ? ["Bullish","var(--up)"] : sc >= 1 ? ["Mildly bullish","var(--up)"] : sc <= -3 ? ["Bearish","var(--down)"] : sc <= -1 ? ["Mildly bearish","var(--down)"] : ["Neutral","var(--muted)"];
-  return {out, bias, sc};
+  return {out, bias, sc, res: res ? res.k : null, sup: sup ? sup.k : null, pcr, pain: (c.all || []).length ? (() => { const all = c.all; return all.reduce((best, [K]) => { const v = all.reduce((t, [k, co, po]) => t + co * Math.max(0, K - k) + po * Math.max(0, k - K), 0); return !best || v < best[1] ? [K, v] : best; }, null)[0]; })() : null,
+    tags: [cchg < 0 && cl >= ca.length / 2 ? "Call writers covering" : cchg > 0 && cl < ca.length / 2 ? "Fresh call writing above" : cchg > 0 ? "Calls being bought" : "",
+      pchg > 0 && pl >= pb.length / 2 ? "Put writers defending below" : pchg < 0 && pb.filter(r => r.pe && r.pe.lc > 0).length >= pb.length / 2 ? "Put writers leaving" : pchg > 0 ? "Puts being bought" : pchg < 0 ? "Put OI being cut" : ""].filter(Boolean)};
 }
 function chainTable(c){
   const mx = Math.max(1, ...c.rows.map(r => Math.max((r.ce || {}).oi || 0, (r.pe || {}).oi || 0)));
@@ -2302,13 +2382,19 @@ function sheetHtml(){
     else if(c){ const r = readChain(c);
       body = `<div class="ct" style="margin-top:14px"><h2>Option chain<em>expiry ${esc(c.expiry)} · ${esc(c.at)} IST${d.pending ? " · updating…" : ""}</em></h2><span class="hcat" style="--c:${r.bias[1]}">${r.bias[0]}</span></div>
         ${(c.expiries || []).length > 1 ? `<div class="filters">${c.expiries.map(e => `<button data-sexp="${esc(e)}" class="${e === c.expiry ? "on" : ""}">${esc(e)}</button>`).join("")}</div>` : ""}
-        <div class="chainread"><div class="lbl">What is happening</div><ul>${r.out.map(x => `<li>${x}</li>`).join("")}</ul></div>
+        <div class="ckeys"><div><small>Resistance</small><b class="down">${r.res != null ? fmt(r.res, 0) : "—"}</b></div><div><small>Support</small><b class="up">${r.sup != null ? fmt(r.sup, 0) : "—"}</b></div><div><small>Max pain</small><b>${r.pain != null ? fmt(r.pain, 0) : "—"}</b></div><div><small>PCR</small><b>${r.pcr != null ? r.pcr.toFixed(2) : "—"}</b></div></div>
+        <details class="chainread"><summary class="lbl">What is happening ▾</summary><ul>${r.out.map(x => `<li>${x}</li>`).join("")}</ul></details>
         ${chainTable(c)}
         <div class="muted" style="font-size:11px;margin-top:8px">Writing = OI up, premium down (sellers). Buying = OI up, premium up. Covering = OI down, premium up (sellers leaving). Unwinding = OI down, premium down. Call OI is resistance, put OI is support. NSE data, a few minutes late.</div>`; }
     else body = `<div class="empty" style="margin-top:12px">${d && d.error ? esc(d.error) : `Reading the option chain from NSE… The first time for a stock this can take up to a minute.`}</div>`; }
   return `<div class="hitcard sheetc" role="dialog" aria-label="${esc(s)}"><div class="ct"><h2 style="font-size:20px">${esc(s)}<em>${fmt(px)}${q ? ` <span class="${cls(q.chg)}">${pct(q.chg, 2)}</span>` : ""}</em></h2>
       <span style="display:flex;gap:6px;align-items:center"><a class="btn2" href="${tv(s)}" target="_blank" rel="noopener" style="padding:5px 10px;font-size:12px">Chart ↗</a><button class="hx" data-sheetclose="1" aria-label="Close">✕</button></span></div>
-    <div class="chips">${chaseChip(s)}${hitTag(s)}${st}${rd ? chip(`${rd.setup} ${rd.stage}`, SETUP_STAGE_C[rd.stage] || "var(--muted)") : ""}${optChip(s)}</div>${body}</div>`;
+    <div class="chips">${chaseChip(s)}${hitTag(s)}${st}${rd ? chip(`${rd.setup} ${rd.stage}`, SETUP_STAGE_C[rd.stage] || "var(--muted)") : ""}${optChip(s)}</div>${sheetDecision(s)}${body}</div>`;
+}
+function sheetDecision(s){
+  if(!FULL() || !S()) return "";
+  const c = SHEET && SHEET.data && SHEET.data.chain, live = c && !c.error ? {...readChain(c), at: c.at} : null;
+  try{ return decisionPanel(s, live); }catch(e){ return ""; }
 }
 function paintSheet(){ const el = document.querySelector(".sheetp"); if(el && SHEET) el.innerHTML = sheetHtml(); }
 async function loadChain(){
@@ -2326,6 +2412,7 @@ function openSheet(s, exp){
   let el = document.querySelector(".sheetp");
   if(!el){ el = document.createElement("div"); el.className = "hitpop sheetp"; document.body.appendChild(el); }
   el.innerHTML = sheetHtml(); loadChain();
+  if(FULL()) Promise.all(["setups.json","chain_screen.json","sectors.json"].map(f => getJSON(f).catch(() => null))).then(() => { if(SHEET && SHEET.s === s) paintSheet(); });
 }
 function closeSheet(){ if(SHEET && SHEET.timer) clearTimeout(SHEET.timer); SHEET = null; document.querySelector(".sheetp")?.remove(); }
 document.addEventListener("click", e => {                          // tap a stock name: open its panel (Ctrl/⌘-click still opens the chart)
