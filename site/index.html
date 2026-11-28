@@ -804,7 +804,7 @@ const NAV_GROUPS = {
   lab:     [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]],
   picks:   [["scanner","F&O setups"],["today-alist","A list"],["today-strategies","By strategy"]],
 };
-const DESK_FIRST = () => !!(USER && isAdmin());          // the owner's own view: Desk first, the rest under More
+const DESK_FIRST = () => false;                          // owner view with Desk first: switched off (the full dashboard felt better)
 function navSections(){
   const pro = !!(PRO() && USER), adm = !!(isAdmin() && USER);
   if(DESK_FIRST()) return [
@@ -1338,10 +1338,9 @@ function deskPositions(){
     return {h, act, why, col, r}; });
 }
 async function pageDesk(){
-  await Promise.all([holdLoad().catch(() => null), getJSON("setups.json").catch(() => null), getJSON("radar.json").catch(() => null), getJSON("chain_screen.json").catch(() => null), getJSON("bear.json").catch(() => null)]);
+  await Promise.all([getJSON("setups.json").catch(() => null), getJSON("radar.json").catch(() => null), getJSON("chain_screen.json").catch(() => null), getJSON("bear.json").catch(() => null)]);
   const g = deskGate(), rad = CACHE["radar.json"] || {}, picks = deskPicks(), top = picks.slice(0, 5);
   const secs = (rad.sectors || []).filter(x => x.group === "Gaining steam").slice(0, 3), turn = (rad.sectors || []).filter(x => x.group === "Possible turnaround").slice(0, 2);
-  const pos = deskPositions();
   const head = pageHead("🎯 My Desk", `3–5 day positional F&O · scan ${esc(when((S() || {}).generated_ist))}`) + subnav();
   const card = (p, i) => { const [ic, lab, col, help] = DESK_ST[p.status];
     return `<div class="dk"><div class="dkh"><span class="dkn">${i + 1}</span>${symLink(p.sym, 17)}<span class="muted" style="font-size:12.5px">${esc(p.sec || "")}</span>
@@ -1366,10 +1365,7 @@ async function pageDesk(){
         <li>Daily not bearish · price within −1.5 to +2.5 ATR of the 20 EMA</li><li>Not in the F&amp;O ban · no results in the next 6 days</li>
         <li>Reward:risk at least 0.8 for a normal 3–5 day move (about 2 ATR)</li>
         <li>Then ranked by stage, setup, Daily/Hourly turn, chase meter, sector radar, option writers, early scan hits and OI</li></ul></details></section>
-    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>My open trades<em>${pos.length} · from My holdings</em></h2><a class="more" href="#admin-holdings">Edit ›</a></div>
-      ${pos.length ? `<div class="list">${pos.map(x => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(x.h.s, 15)}</div><div class="muted" style="font-size:12px">${esc(x.why)}</div></div>
-        <span class="chip" style="--c:${x.col}">${esc(x.act)}</span></div>`).join("")}</div>` : `<div class="empty">Add your open trades in My holdings (with buy price) and they'll show here with Hold, Tighten stop or Exit, plus a 5-day time check.</div>`}</section>
-    <p class="foot-note" style="margin-top:12px">Your routine: evening, 10 minutes here, pick 1–2 and set alerts. Next day, act only when an alert fires. A reading of your scans, not advice.</p>`;
+    <p class="foot-note" style="margin-top:12px">Evening: 10 minutes here, pick 1–2 and set alerts. Next day, act only when an alert fires. A reading of your scans, not advice.</p>`;
 }
 function deskBanner(){
   if(!PRO() || !USER) return "";
@@ -1404,12 +1400,13 @@ async function pageDashboard(){
     <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
     <div class="grid">
       ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${radarCard()}${top5Card()}${mostScannedCard()}
+      ${tradesCard()}
+      ${partsCard()}${vkCard()}
+      ${strongestCard()}${readyCard()}
       ${moneyCard()}${moversCard()}
-    </div>
-    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Go deeper</h2></div><div class="golinks">
-      ${[["#scanner","🔍","Stock setups","Every F&O setup, graded"],["#scanner-mtf","📊","Impulse table","Monthly · Weekly · Daily trend"],["#scanner-chains","⛓","Option screener","What writers are doing"],
-         ["#market-radar","🧭","Sectors","Radar, rotation, stocks inside"],["#market-fii","💰","Smart money","FII, deals, star investors"],["#index","📈","Indexes","Nifty, Bank Nifty and more"]]
-        .map(([h, i, t, d]) => `<a href="${h}"><span>${i}</span><b>${t}</b><small>${d}</small></a>`).join("")}</div></section>`;
+      ${heatCard()}
+      ${sectorCard()}<div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
+    </div>`;
 }
 
 
