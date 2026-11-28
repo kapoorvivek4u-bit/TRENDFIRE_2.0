@@ -1,7 +1,7 @@
 // Public pages for Google, built on the server from data/seo.json (written by site_data.py after each scan):
 //   /stocks, /stock/SYMBOL, /oi-buildup, /fo-ban-list, /sector-rotation, /strongest-stocks and /sitemap.xml.
 // Data only: no setups, no buy/stop/target levels, no scorecard.
-import { shell, esc, num, pct, cls, rrg, STAGE_C } from "./public.js";
+import { shell, esc, num, pct, cls, rrg, rotLive, STAGE_C } from "./public.js";
 
 const Q = { long: ["Long build-up", "var(--up)", "price up, OI up: fresh long positions"],
             short: ["Short build-up", "var(--down)", "price down, OI up: fresh short positions"],
@@ -168,7 +168,7 @@ export function sectorPage(d) {
   <div class="kicker">${asOf(d)}</div>
   <h1 class="ph">Sector rotation: which sectors lead Nifty</h1>
   <p class="lede">Right of centre is stronger than Nifty; above centre is gaining strength. Sectors usually travel clockwise: Improving → Leading → Weakening → Lagging.</p>
-  <div class="two" style="margin-top:14px"><div class="card">${rrg(secs)}</div>
+  <div class="two" style="margin-top:14px"><div class="card rotcard">${rotLive(secs)}</div>
     <div class="card">${["Leading", "Improving", "Weakening", "Lagging"].map(g => `<div class="stage" style="--c:${STAGE_C[g]}"><h3>${g}</h3><div class="chips">${secs.filter(x => x.stage === g).map(x => `<a class="chip" href="#s-${encodeURIComponent(x.name)}" style="--c:${STAGE_C[g]}">${esc(x.name)}<small>${pct(x.r1)}</small></a>`).join("") || `<span class="muted sm">None</span>`}</div></div>`).join("")}</div></div>
   <section class="blk"><div class="sh"><h2>All sectors vs Nifty</h2><p>Relative strength over 1 week, 2 weeks and 1 month, and the share of each sector's stocks bullish on the Daily chart.</p></div>
     <div class="card"><div class="tw"><table><thead><tr><th>Sector</th><th>Stage</th><th class="n">1W</th><th class="n">2W</th><th class="n">1M</th><th class="n">Daily bullish</th><th>F&amp;O stocks</th></tr></thead><tbody>
@@ -211,7 +211,7 @@ export function isPublicPage(p) {
 }
 export async function servePublicPage(env, ctx, url) {
   const p = url.pathname.replace(/\/+$/, "") || "/";
-  const key = new Request("https://tradeready.cache/pg-v1" + p);
+  const key = new Request("https://tradeready.cache/pg-v2" + p);
   const hit = await caches.default.match(key);
   if (hit) return hit;
   const r = await fetch(`https://raw.githubusercontent.com/${env.REPO}/main/data/seo.json`, { cf: { cacheTtl: 300, cacheEverything: true } });

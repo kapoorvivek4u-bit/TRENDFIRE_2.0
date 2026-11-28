@@ -36,6 +36,24 @@ export function rrg(secs) {
     <text x="12" y="${H / 2}" text-anchor="middle" font-size="10" fill="var(--muted)" transform="rotate(-90 12 ${H / 2})">Momentum →</text>${dots}</svg>`;
 }
 
+// Live rotation graph (the app's design, /rotgraph.js): tap a sector to light up its 8-session path. Old chart is the fallback.
+export function rotLive(secs, id = "rotp") {
+  const d = secs.filter(s => s.ratio != null && s.mom != null).map(s => ({ name: s.name, stage: s.stage, n: s.n, ratio: s.ratio, mom: s.mom, r1: s.r1,
+    trail: (s.trail || []).slice(-8).map(t => ({ stage: t.stage, ratio: t.ratio, mom: t.mom })) }));
+  if (!d.length) return rrg(secs);
+  return `<div id="${id}" class="rotlive">${rrg(secs)}</div><div id="${id}i" class="rotinfo muted sm">Tap any sector to see the path it took over the last 8 sessions.</div>
+  <script type="application/json" id="${id}d">${JSON.stringify(d).replace(/</g, "\\u003c")}</script>
+  <script>(function go(n){var el=document.getElementById("${id}");if(!el)return;if(typeof rotGraph!=="function"){if(n<60)setTimeout(function(){go(n+1)},100);return}
+  var S=JSON.parse(document.getElementById("${id}d").textContent),sel=null,info=document.getElementById("${id}i");
+  function f(v){return v==null?"—":(v>0?"+":"")+v.toFixed(1)+"%"}
+  function draw(){var m=innerWidth<600;el.innerHTML=rotGraph(S,m?{w:380,h:420,mini:true,sel:sel,tap:true}:{w:640,h:500,sel:sel,tap:true});
+    if(!sel){info.innerHTML="Tap any sector to see the path it took over the last 8 sessions.";return}
+    var s=S.filter(function(x){return x.name===sel})[0],was=s.trail.length?s.trail[0].stage:s.stage,c=(window.ROT_C||{})[s.stage]||"inherit";
+    info.innerHTML="<b>"+s.name+"</b>: <b style=\\"color:"+c+"\\">"+s.stage+"</b>"+(was!==s.stage?" (was "+was+" 8 sessions ago)":"")+" · 1 month vs Nifty <b>"+f(s.r1)+"</b> · "+s.n+" F&amp;O stocks. <a href=\\"/auth/google\\">See its strongest stocks ›</a>"}
+  el.addEventListener("click",function(e){var g=e.target.closest("[data-rotsel]");var nm=g?g.getAttribute("data-rotsel"):null;sel=(nm&&nm!==sel)?nm:null;draw()});
+  var w0=innerWidth;addEventListener("resize",function(){if((innerWidth<600)!==(w0<600)){w0=innerWidth;draw()}});draw()})(0)</script><script src="/rotgraph.js" defer></script>`;
+}
+
 const SKY = {
   sun: `<circle cx="70" cy="50" r="22" fill="#fbbf24"/><g stroke="#fbbf24" stroke-width="4" stroke-linecap="round">${[0, 45, 90, 135, 180, 225, 270, 315].map(a => { const r = a * Math.PI / 180; return `<line x1="${70 + Math.cos(r) * 31}" y1="${50 + Math.sin(r) * 31}" x2="${70 + Math.cos(r) * 39}" y2="${50 + Math.sin(r) * 39}"/>`; }).join("")}</g>`,
   partly: `<circle cx="58" cy="42" r="20" fill="#fbbf24"/><path d="M40 82h52a16 16 0 0 0 0-32 22 22 0 0 0-42 6 13 13 0 0 0-10 26z" fill="#fff" stroke="#c7cbe0" stroke-width="2"/>`,
@@ -119,7 +137,7 @@ section.blk{margin-top:34px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);min-width:0}
 .two{display:grid;gap:14px;grid-template-columns:1fr}
 @media (min-width:920px){.two{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}}
-.rrg{width:100%;height:auto;display:block;font-family:Inter,sans-serif}
+.rrg{width:100%;height:auto;display:block;font-family:Inter,sans-serif}.rotcard{padding:10px}.rotlive [data-rotsel]{cursor:pointer}.rotinfo{padding:10px 6px 2px;line-height:1.5}
 .stage{margin-bottom:14px}
 .stage h3{margin:0 0 7px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -367,7 +385,7 @@ export function renderPublic(s, sj, live) {
   <section class="blk">
     <div class="sh"><h2><a href="/sector-rotation">Sector rotation ›</a></h2><p>Where money is moving. Right of centre beats Nifty; above centre is gaining strength. Sectors usually travel clockwise: Improving → Leading → Weakening → Lagging.</p></div>
     <div class="two">
-      <div class="card">${rrg(secsFull)}</div>
+      <div class="card rotcard">${rotLive(secsFull)}</div>
       <div class="card">${byStage.map(([gname, list]) => `<div class="stage" style="--c:${STAGE_C[gname]}"><h3>${gname} · ${list.length}</h3><div class="chips">${list.map(x => `<span class="chip" style="--c:${STAGE_C[gname]}">${esc(x.name)}<small>${pct(x.r1)}</small></span>`).join("") || `<span class="muted sm">None today</span>`}</div></div>`).join("")}
         <div class="muted sm">Figures are 1 month vs Nifty.</div></div>
     </div>
@@ -435,7 +453,7 @@ export function renderPublic(s, sj, live) {
 
 // Cached for 5 minutes so Google and visitors share one copy.
 export async function publicPage(env, ctx) {
-  const key = new Request("https://tradeready.cache/public-v3");
+  const key = new Request("https://tradeready.cache/public-v4");
   // The browser must not keep this copy: "/" is the dashboard once someone signs in.
   const out = html => new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-cache, private", "vary": "cookie" } });
   const hit = await caches.default.match(key);
