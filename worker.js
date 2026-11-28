@@ -537,7 +537,9 @@ async function api(req, env, url, user, ctx) {
       let b = {}; try { b = await req.json(); } catch (e) {}
       const clean = a => (Array.isArray(a) ? a : []).filter(x => typeof x === "string" && /^[a-z0-9]{1,20}$/.test(x)).slice(0, 60);
       if (b.reset) { await env.USERS.delete(key); return json({ ok: true }); }
-      await env.USERS.put(key, JSON.stringify({ order: clean(b.order), hidden: clean(b.hidden) }));
+      const size = {};
+      for (const [k, v] of Object.entries(b.size || {}).slice(0, 60)) if (/^[a-z0-9]{1,20}$/.test(k) && [4, 6, 8, 12].includes(+v)) size[k] = +v;
+      await env.USERS.put(key, JSON.stringify({ order: clean(b.order), hidden: clean(b.hidden), size }));
       return json({ ok: true });
     }
   }

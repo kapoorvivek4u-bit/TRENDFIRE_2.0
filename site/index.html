@@ -105,17 +105,18 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 .grid{display:grid;gap:14px;grid-template-columns:repeat(12,minmax(0,1fr))}
 .grid>*{grid-column:span 12;min-width:0}
 .dgrid.dense{grid-auto-flow:row dense}
+@media (min-width:1024px){.dgrid>.w4{grid-column:span 4!important}.dgrid>.w6{grid-column:span 6!important}.dgrid>.w8{grid-column:span 8!important}.dgrid>.w12{grid-column:span 12!important}}
 .dgrid{margin-top:14px}.dstrip{grid-column:span 12}
 .arrbtn{margin-left:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
 .arrbtn:hover{border-color:var(--accent)}
 @media (max-width:1023px),(pointer:coarse){.arrbtn,.arrbar{display:none!important}}
 .arrbar{position:sticky;top:8px;z-index:30;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--surface);border:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.12)}
-.arrbar .muted{font-size:12.5px}.arrbar .btn2{padding:8px 14px}.arrbar .arrdone{background:var(--accent);border-color:var(--accent);color:#fff}
+.arrbar .muted{font-size:12.5px;flex:1 1 220px;min-width:0}.arrbar .btn2{padding:8px 14px}.arrbar .arrdone{background:var(--accent);border-color:var(--accent);color:#fff}
 .arranging>[data-k]{position:relative;outline:2px dashed color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:3px;cursor:grab}
 .arranging>[data-k] *{pointer-events:none}.arranging>[data-k] .dbar,.arranging>[data-k] .dbar *{pointer-events:auto}
 .arranging>.dragging{opacity:.4}
 .arranging>.dhid{opacity:.35}
-.dbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-4px -4px 10px;padding:6px 10px;border-radius:9px;background:var(--accent);color:#fff;font-size:12px;font-weight:800;cursor:grab;grid-column:1/-1}
+.dbar{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-4px -4px 10px;padding:6px 10px;border-radius:9px;background:var(--accent);color:#fff;font-size:12px;font-weight:800;cursor:grab;grid-column:1/-1}
 .dbar button{border:0;border-radius:7px;padding:3px 9px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.2);color:#fff}
 .dbar button:hover{background:rgba(255,255,255,.35)}
 
@@ -1544,14 +1545,16 @@ function mergeOrder(order, ref){
     out.splice(j >= 0 ? out.indexOf(ref[j]) + 1 : 0, 0, k); });
   return out;
 }
-function keyBlock(k, html, arr, hid){            // put data-k (and the drag bar in arrange mode) on the block's first element
+const DB_W = {4:"⅓ width", 6:"½ width", 8:"⅔ width", 12:"Full width"}, DB_NEXT = {4:6, 6:8, 8:12, 12:4};
+function keyBlock(k, html, arr, hid, w){            // put data-k (and the drag bar in arrange mode) on the block's first element
   const m = /^\s*<([a-zA-Z0-9]+)/.exec(html); if(!m) return html;
   const i = html.indexOf(">", m.index); if(i < 0) return html;
   let open = html.slice(0, i), rest = html.slice(i + 1);
   open = open.replace(/^(\s*<[a-zA-Z0-9]+)/, `$1 data-k="${k}"${arr ? ` draggable="true"` : ""}`);
+  if(w) open = /class="/.test(open) ? open.replace(/class="/, `class="w${w} `) : open + ` class="w${w}"`;
   if(arr){
     open = /class="/.test(open.split(">")[0]) ? open.replace(/class="/, `class="dblk ${hid ? "dhid " : ""}`) : open + ` class="dblk${hid ? " dhid" : ""}"`;
-    rest = `<div class="dbar"><span>⠿ ${esc(DB_NAMES[k] || k)}</span><button data-dhide="${k}" title="${hid ? "Show this card" : "Hide this card"}">${hid ? "🙈 Hidden" : "👁 Shown"}</button></div>` + rest;
+    rest = `<div class="dbar"><span>⠿ ${esc(DB_NAMES[k] || k)}</span><span style="flex:1"></span><button data-dsize="${k}" title="Change the width">↔ ${w ? DB_W[w] : "Auto width"}</button><button data-dhide="${k}" title="${hid ? "Show this card" : "Hide this card"}">${hid ? "🙈 Hidden" : "👁 Shown"}</button></div>` + rest;
   }
   return open + ">" + rest;
 }
@@ -1561,29 +1564,34 @@ async function pageDashboard(){
   const lay = arr ? UI.arrange : (DLAY || {}), order = lay.order || [], hidden = new Set(lay.hidden || []);
   const seq = mergeOrder(order, DB_DEFAULT), pos = k => seq.indexOf(k);
   const list = blocks.slice().sort((a, b) => pos(a[0]) - pos(b[0])).filter(([k]) => arr || !hidden.has(k));
-  const custom = !!(order.length || hidden.size);
+  const custom = !!(order.length || hidden.size || Object.keys(lay.size || {}).length);
   const tools = DESKTOP_ARR() && USER ? (arr
-    ? `<div class="arrbar"><b>✏️ Arrange your dashboard</b><span class="muted">Drag a card by its top bar. 👁 hides it. Saved to your account.</span><span style="flex:1"></span><button class="btn2" data-arr="reset">Reset to default</button><button class="btn2" data-arr="cancel">Cancel</button><button class="btn2 arrdone" data-arr="save">Done</button></div>`
+    ? `<div class="arrbar"><b>✏️ Arrange your dashboard</b><span class="muted">Drag a card by its top bar. ↔ changes its width, 👁 hides it. Saved to your account.</span><button class="btn2" data-arr="reset">Reset to default</button><button class="btn2" data-arr="cancel">Cancel</button><button class="btn2 arrdone" data-arr="save">Done</button></div>`
     : `<button class="arrbtn" data-arr="start" title="Drag cards into your own order (desktop)">✏️ Arrange</button>`) : "";
   return `<div class="head"><div><h1>${greet()}, Trader</h1><div class="sub">Here's the market before you trade. <a href="/guide" target="_blank" rel="noopener" style="font-weight:700">New here? How to use TradeReady ›</a></div></div>
       <div class="stamp"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST · refreshes hourly ${arr ? "" : tools}</div></div>
     ${subnav()}${deskBanner()}${arr ? tools : ""}
-    <div class="grid dgrid${arr ? " arranging" : ""}${custom || arr ? " dense" : ""}">${list.map(([k, h]) => keyBlock(k, h, arr, hidden.has(k))).join("")}</div>`;
+    <div class="grid dgrid${arr ? " arranging" : ""}${custom || arr ? " dense" : ""}">${list.map(([k, h]) => keyBlock(k, h, arr, hidden.has(k), (lay.size || {})[k])).join("")}</div>`;
 }
 function arrOrderFromDom(){ return [...document.querySelectorAll(".dgrid > [data-k]")].map(el => el.dataset.k); }
 document.addEventListener("click", e => {
   if(e.target.closest(".arranging") && !e.target.closest("[data-dhide]") && !e.target.closest(".dbar")){ e.preventDefault(); e.stopPropagation(); return; }   // cards are not live while arranging
   const h = e.target.closest("[data-dhide]");
   if(h && UI.arrange){ e.preventDefault(); e.stopPropagation(); const k = h.dataset.dhide, s = new Set(UI.arrange.hidden);
-    s.has(k) ? s.delete(k) : s.add(k); UI.arrange = {order: arrOrderFromDom(), hidden: [...s]}; render.keepScroll = true; render(); return; }
+    s.has(k) ? s.delete(k) : s.add(k); UI.arrange = {...UI.arrange, order: arrOrderFromDom(), hidden: [...s]}; render.keepScroll = true; render(); return; }
+  const z = e.target.closest("[data-dsize]");
+  if(z && UI.arrange){ e.preventDefault(); e.stopPropagation(); const k = z.dataset.dsize, sz = {...(UI.arrange.size || {})};
+    const el = document.querySelector(`.dgrid>[data-k="${k}"]`), cur = sz[k] || (el ? Math.round(el.getBoundingClientRect().width / el.parentNode.getBoundingClientRect().width * 12) : 12);
+    sz[k] = DB_NEXT[[4, 6, 8, 12].reduce((a, b) => Math.abs(b - cur) < Math.abs(a - cur) ? b : a)];
+    UI.arrange = {...UI.arrange, order: arrOrderFromDom(), size: sz}; render.keepScroll = true; render(); return; }
   const b = e.target.closest("[data-arr]"); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   const act = b.dataset.arr;
-  if(act === "start"){ UI.arrange = {order: (DLAY && DLAY.order) || [], hidden: (DLAY && DLAY.hidden) || []}; }
+  if(act === "start"){ UI.arrange = {order: (DLAY && DLAY.order) || [], hidden: (DLAY && DLAY.hidden) || [], size: {...((DLAY && DLAY.size) || {})}}; }
   else if(act === "cancel"){ UI.arrange = null; }
   else if(act === "reset"){ UI.arrange = null; DLAY = {}; try{ localStorage.removeItem("tr-lay"); }catch(e){}
     fetch("/api/layout", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({reset: true})}).then(() => toast("Back to the default layout")).catch(() => toast("Could not reach the server.")); }
-  else if(act === "save"){ const lay = {order: mergeOrder(arrOrderFromDom(), mergeOrder((DLAY && DLAY.order) || [], DB_DEFAULT)), hidden: UI.arrange.hidden}; DLAY = lay; UI.arrange = null;
+  else if(act === "save"){ const lay = {order: mergeOrder(arrOrderFromDom(), mergeOrder((DLAY && DLAY.order) || [], DB_DEFAULT)), hidden: UI.arrange.hidden, size: UI.arrange.size || {}}; DLAY = lay; UI.arrange = null;
     try{ localStorage.setItem("tr-lay", JSON.stringify(lay)); }catch(e){}
     fetch("/api/layout", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(lay)})
       .then(r => toast(r.ok ? "Layout saved ✓" : "Saved on this computer only")).catch(() => toast("Saved on this computer only")); }
