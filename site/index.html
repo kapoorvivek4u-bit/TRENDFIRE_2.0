@@ -964,7 +964,7 @@ async function pollScans(){
 }
 async function refreshAll(quiet){
   for(const k of Object.keys(CACHE)) delete CACHE[k];
-  await Promise.all([getJSON("site.json").catch(() => null), loadWatch()]);
+  await Promise.all([getJSON("site.json").catch(() => null), getJSON("sectors.json").catch(() => null), loadWatch()]);
   render(); if(!quiet) toast("Data refreshed");
 }
 
@@ -1223,7 +1223,7 @@ const RADAR_G = {"Gaining steam":["🟢","var(--up)","Momentum, scans and option
   "Neutral":["⚪","var(--muted)","No clear edge"], "Avoid":["🔴","var(--down)","Weak on most readings"]};
 const RADAR_ORDER = ["Gaining steam","Possible turnaround","Leading but tired","Neutral","Avoid"];
 function radarCard(){
-  const r = CACHE["radar.json"]; if(!r){ if(!radarCard.asked){ radarCard.asked = 1; getJSON("radar.json").then(x => { if(x && route() === "today") rerender(); }).catch(() => null); } return ""; }
+  const r = CACHE["radar.json"]; if(!r){ needFile("radar.json"); return ""; }
   const g = k => (r.sectors || []).filter(x => x.group === k);
   const line = k => { const l = g(k); if(!l.length) return ""; const [ic, c, sub] = RADAR_G[k];
     return `<div class="li"><div style="min-width:0"><b style="color:${c}">${ic} ${k}</b><div style="font-size:13px;margin-top:2px">${l.slice(0, 5).map(x => esc(x.name)).join(", ")}</div><div class="muted" style="font-size:11.5px">${sub}</div></div><span class="muted" style="font-size:12px">${l.length}</span></div>`; };
@@ -1495,9 +1495,30 @@ async function pageRotation(){
     ${await pageRadar(true)}`;
 }
 /* small interactive snapshot for Today: tap anywhere to open the full page */
+/* if /rotgraph.js did not load with the page, fetch it again and redraw */
+/* a Today card needs a file that is not loaded (first visit, or after a data refresh cleared it): fetch it once at a time, then redraw */
+const NEED_ON = {}, NEED_ERR = {};
+function needFile(name){
+  if(NEED_ON[name]) return; NEED_ON[name] = 1;
+  getJSON(name).then(x => { delete NEED_ERR[name]; if(x && route() === "today" && !UI.arrange) rerender(); })
+    .catch(e => { NEED_ERR[name] = name + ": " + e.message; }).finally(() => { NEED_ON[name] = 0; });
+}
+function rotLoadScript(){
+  if(rotLoadScript.on) return; rotLoadScript.on = 1;
+  const sc = document.createElement("script"); sc.src = "/rotgraph.js?v=" + Date.now();
+  sc.onload = () => { if(typeof rotGraph === "function" && route() === "today") rerender(); else { rotLoadScript.why = "graph file loaded but empty"; rerender(); } };
+  sc.onerror = () => { rotLoadScript.why = "graph file could not load"; rerender(); };
+  document.head.appendChild(sc);
+}
+function rotFallback(why){            // the older strength card, with a small note for the admin on why the graph is missing
+  const h = sectorCard();
+  return isAdmin() ? h.replace("</h2>", ` <small class="muted" style="font-weight:600;text-transform:none;letter-spacing:0">· rotation graph: ${esc(why)}</small></h2>`) : h;
+}
 function rotSnapshotCard(){
-  const sj = CACHE["sectors.json"]; if(!sj){ if(!rotSnapshotCard.asked){ rotSnapshotCard.asked = 1; getJSON("sectors.json").then(x => { if(x && route() === "today") rerender(); }).catch(() => null); } return sectorCard(); }
-  const secs = rotSecs(); if(!secs.length || typeof rotGraph !== "function") return sectorCard();
+  const sj = CACHE["sectors.json"];
+  if(!sj){ needFile("sectors.json"); return rotFallback(NEED_ERR["sectors.json"] || "loading sector data"); }
+  if(typeof rotGraph !== "function"){ rotLoadScript(); return rotFallback(rotLoadScript.why || "loading the graph"); }
+  const secs = rotSecs(); if(!secs.length) return rotFallback("sector data has no rotation positions");
   const cnt = st => secs.filter(x => x.stage === st).length;
   return `<a class="card fade rsnap s7" href="#market-radar"><div class="ct"><h2>🧭 Sector rotation<em>tap for the full view</em></h2><span class="more">Open ›</span></div>
     <div class="rsnapc">${ROT_ST.map(st => `<span style="--c:${ROT_LC[st]}"><b>${cnt(st)}</b> ${st}</span>`).join("")}</div>
@@ -2423,9 +2444,9 @@ function weatherCard(){
 }
 let NEWS = null;
 function newsCard(){
-  if(!NEWS && !newsCard.asked){ newsCard.asked = 1;
-    fetch("/api/news").then(r => r.ok ? r.json() : null).then(j => { if(j && j.items && j.items.length){ NEWS = j; if(route() === "today" && !UI.arrange) rerender(); } }).catch(() => null);
-    setInterval(() => { newsCard.asked = 0; NEWS = null; }, 30 * 60e3); }   // look again every 30 min (the server pulls new headlines every 2 hours)
+  if((!NEWS || Date.now() - NEWS._t > 30 * 60e3) && !newsCard.on){ newsCard.on = 1;   // look again every 30 min (the server pulls new headlines every 2 hours)
+    fetch("/api/news").then(r => r.ok ? r.json() : null).then(j => { if(j && j.items && j.items.length){ const was = NEWS && NEWS.fetched; NEWS = {...j, _t: Date.now()}; if(was !== j.fetched && route() === "today" && !UI.arrange) rerender(); } })
+      .catch(() => null).finally(() => { newsCard.on = 0; if(NEWS) NEWS._t = NEWS._t || Date.now(); }); }
   if(NEWS) return newsHeadlines();
   return newsSummary();
 }
