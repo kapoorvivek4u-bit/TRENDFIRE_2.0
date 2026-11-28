@@ -1,8 +1,10 @@
 {
- "generated_ist": "2026-11-28 13:25",
+ "generated_ist": "2026-11-28 23:06",
  "quarter": "2026-09-30",
  "previous": "2026-06-30",
  "quarters": [
+  "2024-12-31",
+  "2025-03-31",
   "2025-06-30",
   "2025-09-30",
   "2025-12-31",
@@ -11,14 +13,39 @@
   "2026-09-30"
  ],
  "coverage": {
-  "2025-06-30": 1,
-  "2025-09-30": 1,
+  "2024-12-31": 1,
+  "2025-03-31": 1,
+  "2025-06-30": 2,
+  "2025-09-30": 2,
   "2025-12-31": 4,
-  "2026-03-31": 7,
-  "2026-06-30": 579,
-  "2026-09-30": 598
+  "2026-03-31": 9,
+  "2026-06-30": 766,
+  "2026-09-30": 789
  },
  "rows": [
+  {
+   "investor": "Ashish Dhawan",
+   "ambiguous": false,
+   "symbol": "EQUITASBNK",
+   "change": "New \u22651%",
+   "pct_now": 4.1,
+   "pct_before": null,
+   "delta": null,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    0.0,
+    4.1
+   ],
+   "since": "Sep 2026",
+   "shares": 46870000,
+   "filed": "2026-10-15",
+   "held_as": "ASHISH DHAWAN"
+  },
   {
    "investor": "Sunil Singhania (Abakkus)",
    "ambiguous": false,
@@ -28,6 +55,8 @@
    "pct_before": null,
    "delta": null,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -53,6 +82,8 @@
     null,
     null,
     null,
+    null,
+    null,
     0.0,
     1.15
    ],
@@ -70,6 +101,8 @@
    "pct_before": null,
    "delta": null,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -95,6 +128,8 @@
     null,
     null,
     null,
+    null,
+    null,
     16.06,
     24.09
    ],
@@ -116,6 +151,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.86,
     3.18
    ],
@@ -123,6 +160,29 @@
    "shares": 4250000,
    "filed": "2026-10-17",
    "held_as": "Abakkus Various Mutual Funds"
+  },
+  {
+   "investor": "Ashish Kacholia",
+   "ambiguous": false,
+   "symbol": "EMKAY",
+   "change": "Increased",
+   "pct_now": 26.43,
+   "pct_before": 25.36,
+   "delta": 1.07,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    25.36,
+    26.43
+   ],
+   "since": "Jun 2026",
+   "shares": 7380000,
+   "filed": "2026-10-21",
+   "held_as": "Prakash Kacholia, Priti Prakash Kacholia"
   },
   {
    "investor": "Mukul Agrawal",
@@ -137,6 +197,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.59,
     1.71
    ],
@@ -144,6 +206,29 @@
    "shares": 1400000,
    "filed": "2026-10-19",
    "held_as": "Mukul Mahavir Agrawal"
+  },
+  {
+   "investor": "Madhusudan Kela",
+   "ambiguous": false,
+   "symbol": "EMKAY",
+   "change": "Increased",
+   "pct_now": 1.08,
+   "pct_before": 1.06,
+   "delta": 0.02,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.06,
+    1.08
+   ],
+   "since": "Jun 2026",
+   "shares": 301685,
+   "filed": "2026-10-21",
+   "held_as": "Mahi Madhusudan Kela"
   },
   {
    "investor": "Akash / Vallabh Bhanshali",
@@ -158,6 +243,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.29,
     1.3
    ],
@@ -165,6 +252,29 @@
    "shares": 2117727,
    "filed": "2026-10-15",
    "held_as": "Akash Bhanshali"
+  },
+  {
+   "investor": "Madhusudan Kela",
+   "ambiguous": false,
+   "symbol": "GANESHCP",
+   "change": "Reduced",
+   "pct_now": 1.71,
+   "pct_before": 2.93,
+   "delta": -1.22,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.93,
+    1.71
+   ],
+   "since": "Jun 2026",
+   "shares": 690143,
+   "filed": "2026-10-13",
+   "held_as": "SINGULARITY EQUITY FUND I"
   },
   {
    "investor": "Porinju Veliyath",
@@ -175,6 +285,8 @@
    "pct_before": 6.05,
    "delta": -0.82,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -200,6 +312,8 @@
     null,
     null,
     null,
+    null,
+    null,
     3.52,
     2.72
    ],
@@ -217,6 +331,8 @@
    "pct_before": 1.82,
    "delta": -0.77,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -242,6 +358,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.91,
     4.43
    ],
@@ -259,6 +377,8 @@
    "pct_before": 7.01,
    "delta": -0.45,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -284,6 +404,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.52,
     1.25
    ],
@@ -301,6 +423,8 @@
    "pct_before": 1.28,
    "delta": -0.26,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -326,6 +450,8 @@
     null,
     null,
     null,
+    null,
+    null,
     5.44,
     5.35
    ],
@@ -337,12 +463,37 @@
   {
    "investor": "Ashish Kacholia",
    "ambiguous": false,
+   "symbol": "FAZE3Q",
+   "change": "Reduced",
+   "pct_now": 5.36,
+   "pct_before": 5.42,
+   "delta": -0.06,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    5.42,
+    5.36
+   ],
+   "since": "Jun 2026",
+   "shares": 1317554,
+   "filed": "2026-10-20",
+   "held_as": "ASHISH KACHOLIA"
+  },
+  {
+   "investor": "Ashish Kacholia",
+   "ambiguous": false,
    "symbol": "BALUFORGE",
    "change": "Reduced",
    "pct_now": 2.71,
    "pct_before": 2.75,
    "delta": -0.04,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -368,6 +519,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.42,
     1.38
    ],
@@ -389,6 +542,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.09,
     0.0
    ],
@@ -396,6 +551,29 @@
    "shares": null,
    "filed": "2026-07-14",
    "held_as": "ASHISH DHAWAN"
+  },
+  {
+   "investor": "Ashish Kacholia",
+   "ambiguous": false,
+   "symbol": "FCL",
+   "change": "Under 1% / exit",
+   "pct_now": null,
+   "pct_before": 2.06,
+   "delta": null,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.06,
+    0.0
+   ],
+   "since": null,
+   "shares": null,
+   "filed": "2026-07-13",
+   "held_as": "ASHISH KACHOLIA"
   },
   {
    "investor": "Sunil Singhania (Abakkus)",
@@ -406,6 +584,8 @@
    "pct_before": 1.08,
    "delta": null,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -431,6 +611,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.23,
     0.0
    ],
@@ -438,6 +620,29 @@
    "shares": null,
    "filed": "2026-07-20",
    "held_as": "ABAKKUS FLEXI CAP FUND"
+  },
+  {
+   "investor": "Sunil Singhania (Abakkus)",
+   "ambiguous": false,
+   "symbol": "EPACK",
+   "change": "Unchanged",
+   "pct_now": 23.68,
+   "pct_before": 23.69,
+   "delta": -0.01,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    23.69,
+    23.68
+   ],
+   "since": "Jun 2026",
+   "shares": 22787831,
+   "filed": "2026-10-21",
+   "held_as": "AJAY DD SINGHANIA, PINKY AJAY SINGHANIA, PREITY SINGHANIA, SANJAY SINGHANIA"
   },
   {
    "investor": "Mukul Agrawal",
@@ -448,6 +653,8 @@
    "pct_before": 3.92,
    "delta": -0.01,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -473,6 +680,8 @@
     null,
     null,
     null,
+    null,
+    null,
     3.8,
     3.79
    ],
@@ -480,6 +689,29 @@
    "shares": 400000,
    "filed": "2026-10-17",
    "held_as": "MUKUL MAHAVIR AGRAWAL"
+  },
+  {
+   "investor": "Jhunjhunwala (Rare)",
+   "ambiguous": false,
+   "symbol": "FEDERALBNK",
+   "change": "Unchanged",
+   "pct_now": 2.41,
+   "pct_before": 2.42,
+   "delta": -0.01,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.42,
+    2.41
+   ],
+   "since": "Jun 2026",
+   "shares": 59030060,
+   "filed": "2026-10-17",
+   "held_as": "REKHA JHUNJHUNWALA"
   },
   {
    "investor": "Radhakishan Damani",
@@ -494,6 +726,8 @@
     null,
     null,
     null,
+    null,
+    null,
     61.33,
     61.33
    ],
@@ -501,6 +735,29 @@
    "shares": 399875708,
    "filed": "2026-10-19",
    "held_as": "Bright Star Investments Private Limited, Gopikishan S. Damani And Radhakishan S. Damani (On behalf of Gulmohar Pvt Beneficiary Trust), Gopikishan S. Damani And Radhakishan S. Damani (On behalf of Karnikar Pvt Beneficiary Trust), Radhakishan S. Damani And Shrikantadevi Damani (On behalf of Bottle Palm Pvt Beneficiary Trust), Radhakishan S. Damani And Shrikantadevi Damani (On behalf of Mountain Glory Pvt Beneficiary Trust), Radhakishan S. Damani And Shrikantadevi Damani (On behalf of Royal Palm Pvt Beneficiary Trust), Radhakishan Shivkishan Damani, Shrikantadevi Radhakishan Damani"
+  },
+  {
+   "investor": "Sunil Singhania (Abakkus)",
+   "ambiguous": false,
+   "symbol": "EPACKPEB",
+   "change": "Unchanged",
+   "pct_now": 31.37,
+   "pct_before": 31.37,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    31.37,
+    31.37
+   ],
+   "since": "Jun 2026",
+   "shares": 31566844,
+   "filed": "2026-10-21",
+   "held_as": "AJAY DD SINGHANIA, ARAANYA SINGHANIA, ARSHIA SINGHANIA, AVISHI SINGHANIA, DIVISHA SINGHANIA, DRISHIKKA SINGHANIA, PINKY AJAY SINGHANIA, PREITY SINGHANIA, SANJAY SINGHANIA"
   },
   {
    "investor": "Jhunjhunwala (Rare)",
@@ -511,6 +768,8 @@
    "pct_before": 21.03,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -536,6 +795,8 @@
     null,
     null,
     null,
+    null,
+    null,
     20.91,
     20.91
    ],
@@ -553,6 +814,8 @@
    "pct_before": 19.67,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -578,6 +841,8 @@
     null,
     null,
     null,
+    null,
+    null,
     9.04,
     9.04
    ],
@@ -599,6 +864,8 @@
     null,
     null,
     null,
+    null,
+    null,
     7.21,
     7.21
    ],
@@ -606,6 +873,29 @@
    "shares": 16054833,
    "filed": "2026-10-21",
    "held_as": "MADHUSUDAN MURLIDHAR KELA"
+  },
+  {
+   "investor": "Jhunjhunwala (Rare)",
+   "ambiguous": false,
+   "symbol": "GEOJITFSL",
+   "change": "Unchanged",
+   "pct_now": 7.2,
+   "pct_before": 7.2,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    7.2,
+    7.2
+   ],
+   "since": "Jun 2026",
+   "shares": 20099400,
+   "filed": "2026-10-21",
+   "held_as": "Rekha Jhunjhunwala"
   },
   {
    "investor": "Mukul Agrawal",
@@ -616,6 +906,8 @@
    "pct_before": 6.85,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -641,6 +933,8 @@
     null,
     null,
     null,
+    null,
+    null,
     6.62,
     6.62
    ],
@@ -648,6 +942,29 @@
    "shares": 5600000,
    "filed": "2026-10-21",
    "held_as": "MUKUL MAHAVIR AGRAWAL"
+  },
+  {
+   "investor": "Akash / Vallabh Bhanshali",
+   "ambiguous": false,
+   "symbol": "GREENLAM",
+   "change": "Unchanged",
+   "pct_now": 6.61,
+   "pct_before": 6.61,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    6.61,
+    6.61
+   ],
+   "since": "Jun 2026",
+   "shares": 16860890,
+   "filed": "2026-10-18",
+   "held_as": "AKASH MANEK BHANSHALI, MEENU MANGAL BHANSHALI, VALLABH ROOPCHAND BHANSHALI"
   },
   {
    "investor": "Ashish Dhawan",
@@ -658,6 +975,8 @@
    "pct_before": 6.42,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -683,6 +1002,8 @@
     null,
     null,
     null,
+    null,
+    null,
     6.16,
     6.16
    ],
@@ -700,6 +1021,8 @@
    "pct_before": 5.68,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -725,6 +1048,8 @@
     null,
     null,
     null,
+    null,
+    null,
     5.5,
     5.5
    ],
@@ -742,6 +1067,8 @@
    "pct_before": 5.34,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -767,6 +1094,8 @@
     null,
     null,
     null,
+    null,
+    null,
     5.23,
     5.23
    ],
@@ -788,6 +1117,8 @@
     null,
     null,
     null,
+    null,
+    null,
     5.19,
     5.19
    ],
@@ -795,6 +1126,52 @@
    "shares": 3799000,
    "filed": "2026-10-21",
    "held_as": "REKHA JHUNJHUNWALA"
+  },
+  {
+   "investor": "Akash / Vallabh Bhanshali",
+   "ambiguous": false,
+   "symbol": "GFLLIMITED",
+   "change": "Unchanged",
+   "pct_now": 5.0,
+   "pct_before": 5.0,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    5.0,
+    5.0
+   ],
+   "since": "Jun 2026",
+   "shares": 5495182,
+   "filed": "2026-10-09",
+   "held_as": "MEENU BHANSHALI"
+  },
+  {
+   "investor": "Vijay Kedia",
+   "ambiguous": false,
+   "symbol": "GLOBALVECT",
+   "change": "Unchanged",
+   "pct_now": 4.86,
+   "pct_before": 4.86,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    4.86,
+    4.86
+   ],
+   "since": "Jun 2026",
+   "shares": 679218,
+   "filed": "2026-10-13",
+   "held_as": "Kedia Securities Private Limited, Vijay Kishanlal Kedia"
   },
   {
    "investor": "Ashish Dhawan",
@@ -809,6 +1186,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.79,
     4.79
    ],
@@ -816,6 +1195,29 @@
    "shares": 3100000,
    "filed": "2026-10-14",
    "held_as": "ASHISH DHAWAN"
+  },
+  {
+   "investor": "Akash / Vallabh Bhanshali",
+   "ambiguous": false,
+   "symbol": "FLUOROCHEM",
+   "change": "Unchanged",
+   "pct_now": 4.75,
+   "pct_before": 4.75,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    4.75,
+    4.75
+   ],
+   "since": "Jun 2026",
+   "shares": 5219505,
+   "filed": "2026-10-09",
+   "held_as": "Akash Bhanshali"
   },
   {
    "investor": "Jhunjhunwala (Rare)",
@@ -826,6 +1228,8 @@
    "pct_before": 4.63,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -851,6 +1255,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.61,
     4.61
    ],
@@ -872,6 +1278,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.6,
     4.6
    ],
@@ -883,12 +1291,37 @@
   {
    "investor": "Ashish Kacholia",
    "ambiguous": false,
+   "symbol": "EXCELSOFT",
+   "change": "Unchanged",
+   "pct_now": 4.34,
+   "pct_before": 4.34,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    4.34,
+    4.34
+   ],
+   "since": "Jun 2026",
+   "shares": 5000000,
+   "filed": "2026-10-14",
+   "held_as": "Bengal Finance And Investment Pvt Ltd"
+  },
+  {
+   "investor": "Ashish Kacholia",
+   "ambiguous": false,
    "symbol": "AEROFLEX",
    "change": "Unchanged",
    "pct_now": 4.33,
    "pct_before": 4.33,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -914,6 +1347,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.33,
     4.33
    ],
@@ -935,6 +1370,8 @@
     null,
     null,
     null,
+    null,
+    null,
     4.18,
     4.18
    ],
@@ -942,6 +1379,98 @@
    "shares": 3860018,
    "filed": "2026-10-19",
    "held_as": "RADHAKISHAN S DAMANI"
+  },
+  {
+   "investor": "Jhunjhunwala (Rare)",
+   "ambiguous": false,
+   "symbol": "FORTIS",
+   "change": "Unchanged",
+   "pct_now": 4.02,
+   "pct_before": 4.02,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    4.02,
+    4.02
+   ],
+   "since": "Jun 2026",
+   "shares": 30350152,
+   "filed": "2026-10-19",
+   "held_as": "REKHA JHUNJHUNWALA"
+  },
+  {
+   "investor": "Ashish Dhawan",
+   "ambiguous": false,
+   "symbol": "GREENLAM",
+   "change": "Unchanged",
+   "pct_now": 3.77,
+   "pct_before": 3.77,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    3.77,
+    3.77
+   ],
+   "since": "Jun 2026",
+   "shares": 9628420,
+   "filed": "2026-10-18",
+   "held_as": "ASHISH DHAWAN"
+  },
+  {
+   "investor": "Anil Kumar Goel",
+   "ambiguous": true,
+   "symbol": "GANESHBE",
+   "change": "Unchanged",
+   "pct_now": 3.75,
+   "pct_before": 3.75,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    3.75,
+    3.75
+   ],
+   "since": "Jun 2026",
+   "shares": 2700000,
+   "filed": "2026-10-18",
+   "held_as": "ANIL KUMAR GOEL"
+  },
+  {
+   "investor": "Sunil Singhania (Abakkus)",
+   "ambiguous": false,
+   "symbol": "ESTER",
+   "change": "Unchanged",
+   "pct_now": 3.64,
+   "pct_before": 3.64,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    3.64,
+    3.64
+   ],
+   "since": "Jun 2026",
+   "shares": 3797468,
+   "filed": "2026-10-09",
+   "held_as": "Arvind Singhania"
   },
   {
    "investor": "Sunil Singhania (Abakkus)",
@@ -952,6 +1481,8 @@
    "pct_before": 3.57,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -967,12 +1498,37 @@
   {
    "investor": "Mukul Agrawal",
    "ambiguous": false,
+   "symbol": "GAUDIUMIVF",
+   "change": "Unchanged",
+   "pct_now": 3.43,
+   "pct_before": 3.43,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    3.43,
+    3.43
+   ],
+   "since": "Jun 2026",
+   "shares": 2500000,
+   "filed": "2026-10-16",
+   "held_as": "MUKUL MAHAVIR AGRAWAL"
+  },
+  {
+   "investor": "Mukul Agrawal",
+   "ambiguous": false,
    "symbol": "APOLLOPIPE",
    "change": "Unchanged",
    "pct_now": 3.41,
    "pct_before": 3.41,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -998,6 +1554,8 @@
     null,
     null,
     null,
+    null,
+    null,
     3.32,
     3.32
    ],
@@ -1019,6 +1577,8 @@
     null,
     null,
     null,
+    null,
+    null,
     3.26,
     3.26
    ],
@@ -1026,6 +1586,29 @@
    "shares": 1042855,
    "filed": "2026-10-16",
    "held_as": "DEVAJ RAVI JHUNJHUNWALA"
+  },
+  {
+   "investor": "Akash / Vallabh Bhanshali",
+   "ambiguous": false,
+   "symbol": "GEECEE",
+   "change": "Unchanged",
+   "pct_now": 3.01,
+   "pct_before": 3.01,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    3.01,
+    3.01
+   ],
+   "since": "Jun 2026",
+   "shares": 629570,
+   "filed": "2026-10-19",
+   "held_as": "AKASH MANEK BHANSHALI"
   },
   {
    "investor": "Mukul Agrawal",
@@ -1036,6 +1619,8 @@
    "pct_before": 2.94,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1061,6 +1646,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.94,
     2.94
    ],
@@ -1068,6 +1655,29 @@
    "shares": 199728,
    "filed": "2026-10-15",
    "held_as": "ABAKKUS EMERGING OPPORTUNITIES FUND-1"
+  },
+  {
+   "investor": "Madhusudan Kela",
+   "ambiguous": false,
+   "symbol": "GRMOVER",
+   "change": "Unchanged",
+   "pct_now": 2.91,
+   "pct_before": 2.91,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.91,
+    2.91
+   ],
+   "since": "Jun 2026",
+   "shares": 6030000,
+   "filed": "2026-10-20",
+   "held_as": "SINGULARITY EQUITY FUND I"
   },
   {
    "investor": "Sunil Singhania (Abakkus)",
@@ -1078,6 +1688,8 @@
    "pct_before": 2.86,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1103,6 +1715,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.86,
     2.86
    ],
@@ -1120,6 +1734,8 @@
    "pct_before": 2.81,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1145,6 +1761,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.79,
     2.79
    ],
@@ -1162,6 +1780,8 @@
    "pct_before": 2.59,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1187,6 +1807,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.52,
     2.52
    ],
@@ -1208,6 +1830,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.38,
     2.38
    ],
@@ -1215,6 +1839,29 @@
    "shares": 444000,
    "filed": "2026-10-12",
    "held_as": "ANIL KUMAR GOEL"
+  },
+  {
+   "investor": "Madhusudan Kela",
+   "ambiguous": false,
+   "symbol": "GEECEE",
+   "change": "Unchanged",
+   "pct_now": 2.35,
+   "pct_before": 2.35,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.35,
+    2.35
+   ],
+   "since": "Jun 2026",
+   "shares": 491497,
+   "filed": "2026-10-19",
+   "held_as": "SINGULARITY HOLDINGS LIMITED"
   },
   {
    "investor": "Anil Kumar Goel",
@@ -1229,6 +1876,8 @@
     null,
     null,
     null,
+    null,
+    null,
     2.2,
     2.2
    ],
@@ -1236,6 +1885,29 @@
    "shares": 410000,
    "filed": "2026-10-08",
    "held_as": "ANIL KUMAR GOEL"
+  },
+  {
+   "investor": "Satpal Khattar",
+   "ambiguous": false,
+   "symbol": "GAYAHWS",
+   "change": "Unchanged",
+   "pct_now": 2.16,
+   "pct_before": 2.16,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.16,
+    2.16
+   ],
+   "since": "Jun 2026",
+   "shares": 5179335,
+   "filed": "2026-10-15",
+   "held_as": "SATPAL KHATTAR"
   },
   {
    "investor": "Sunil Singhania (Abakkus)",
@@ -1246,6 +1918,8 @@
    "pct_before": 1.95,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1271,6 +1945,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.93,
     1.93
    ],
@@ -1288,6 +1964,8 @@
    "pct_before": 1.91,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1313,6 +1991,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.9,
     1.9
    ],
@@ -1320,6 +2000,29 @@
    "shares": 460000,
    "filed": "2026-10-15",
    "held_as": "SINGULARITY EQUITY FUND I"
+  },
+  {
+   "investor": "Nemish Shah",
+   "ambiguous": true,
+   "symbol": "ELGIEQUIP",
+   "change": "Unchanged",
+   "pct_now": 1.69,
+   "pct_before": 1.69,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.69,
+    1.69
+   ],
+   "since": "Jun 2026",
+   "shares": 5360000,
+   "filed": "2026-10-19",
+   "held_as": "Nemish S Shah"
   },
   {
    "investor": "Ashish Dhawan",
@@ -1330,6 +2033,8 @@
    "pct_before": 1.57,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1355,6 +2060,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.57,
     1.57
    ],
@@ -1362,6 +2069,29 @@
    "shares": 8500000,
    "filed": "2026-10-21",
    "held_as": "Mukul Mahavir Agrawal"
+  },
+  {
+   "investor": "Satpal Khattar",
+   "ambiguous": false,
+   "symbol": "GAYAPROJ",
+   "change": "Unchanged",
+   "pct_now": 1.55,
+   "pct_before": 1.55,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.55,
+    1.55
+   ],
+   "since": "Jun 2026",
+   "shares": 7179335,
+   "filed": "2026-10-08",
+   "held_as": "SATPAL KHATTAR"
   },
   {
    "investor": "Mohnish Pabrai",
@@ -1372,6 +2102,8 @@
    "pct_before": 1.54,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1397,6 +2129,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.53,
     1.53
    ],
@@ -1404,6 +2138,29 @@
    "shares": 157270,
    "filed": "2026-10-08",
    "held_as": "Ravi Jhunjhunwala"
+  },
+  {
+   "investor": "Jhunjhunwala (Rare)",
+   "ambiguous": false,
+   "symbol": "ESCORTS",
+   "change": "Unchanged",
+   "pct_now": 1.53,
+   "pct_before": 1.53,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.53,
+    1.53
+   ],
+   "since": "Jun 2026",
+   "shares": 1708388,
+   "filed": "2026-10-21",
+   "held_as": "REKHA JHUNJHUNWALA"
   },
   {
    "investor": "Akash / Vallabh Bhanshali",
@@ -1414,6 +2171,8 @@
    "pct_before": 1.52,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1439,6 +2198,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.48,
     1.48
    ],
@@ -1446,6 +2207,29 @@
    "shares": 166700,
    "filed": "2026-10-14",
    "held_as": "BRIGHT STAR INVESTMENTS"
+  },
+  {
+   "investor": "Ashish Kacholia",
+   "ambiguous": false,
+   "symbol": "GANESHCP",
+   "change": "Unchanged",
+   "pct_now": 1.46,
+   "pct_before": 1.46,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.46,
+    1.46
+   ],
+   "since": "Jun 2026",
+   "shares": 589582,
+   "filed": "2026-10-13",
+   "held_as": "Bengal Finance And Investment Pvt Ltd"
   },
   {
    "investor": "Vijay Kedia",
@@ -1460,6 +2244,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.45,
     1.45
    ],
@@ -1467,6 +2253,29 @@
    "shares": 83930,
    "filed": "2026-10-09",
    "held_as": "Kedia Securities Private Limited"
+  },
+  {
+   "investor": "Porinju Veliyath",
+   "ambiguous": false,
+   "symbol": "GEOJITFSL",
+   "change": "Unchanged",
+   "pct_now": 1.43,
+   "pct_before": 1.43,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.43,
+    1.43
+   ],
+   "since": "Jun 2026",
+   "shares": 4000000,
+   "filed": "2026-10-21",
+   "held_as": "Equity Intelligence India Private Limited"
   },
   {
    "investor": "Sunil Singhania (Abakkus)",
@@ -1477,6 +2286,8 @@
    "pct_before": 1.31,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1502,6 +2313,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.2,
     1.2
    ],
@@ -1509,6 +2322,29 @@
    "shares": 375166,
    "filed": "2026-10-21",
    "held_as": "Nidhi Binani Singhania"
+  },
+  {
+   "investor": "Akash / Vallabh Bhanshali",
+   "ambiguous": false,
+   "symbol": "GENUSPOWER",
+   "change": "Unchanged",
+   "pct_now": 1.19,
+   "pct_before": 1.19,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.19,
+    1.19
+   ],
+   "since": "Jun 2026",
+   "shares": 3608418,
+   "filed": "2026-10-19",
+   "held_as": "AKASH BHANSHALI"
   },
   {
    "investor": "Mukul Agrawal",
@@ -1519,6 +2355,8 @@
    "pct_before": 1.19,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1544,6 +2382,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.19,
     1.19
    ],
@@ -1561,6 +2401,8 @@
    "pct_before": 1.18,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1586,6 +2428,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.15,
     1.15
    ],
@@ -1603,6 +2447,8 @@
    "pct_before": 1.14,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1628,6 +2474,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.1,
     1.1
    ],
@@ -1645,6 +2493,8 @@
    "pct_before": 1.07,
    "delta": 0.0,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1670,6 +2520,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.06,
     1.06
    ],
@@ -1691,6 +2543,8 @@
     null,
     null,
     null,
+    null,
+    null,
     1.01,
     1.01
    ],
@@ -1698,6 +2552,52 @@
    "shares": 381000,
    "filed": "2026-10-16",
    "held_as": "Radhakishan Shivkishan Damani"
+  },
+  {
+   "investor": "Vijay Kedia",
+   "ambiguous": false,
+   "symbol": "ELECON",
+   "change": "Unchanged",
+   "pct_now": 1.0,
+   "pct_before": 1.0,
+   "delta": 0.0,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    1.0,
+    1.0
+   ],
+   "since": "Jun 2026",
+   "shares": 2250000,
+   "filed": "2026-10-09",
+   "held_as": "Vijay Kishanlal Kedia"
+  },
+  {
+   "investor": "Mukul Agrawal",
+   "ambiguous": false,
+   "symbol": "ESDS",
+   "change": "Held",
+   "pct_now": 6.0,
+   "pct_before": null,
+   "delta": null,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    6.0
+   ],
+   "since": "Sep 2026",
+   "shares": 7032960,
+   "filed": "2026-10-17",
+   "held_as": "Mukul Mahavir Agrawal"
   },
   {
    "investor": "Sunil Singhania (Abakkus)",
@@ -1708,6 +2608,8 @@
    "pct_before": null,
    "delta": null,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1734,6 +2636,8 @@
     null,
     null,
     null,
+    null,
+    null,
     3.55
    ],
    "since": "Sep 2026",
@@ -1755,12 +2659,60 @@
     null,
     null,
     null,
+    null,
+    null,
     2.58
    ],
    "since": "Sep 2026",
    "shares": 8132174,
    "filed": "2026-10-15",
    "held_as": "ASHISH KACHOLIA, BENGAL FINANCE AND INVESTMENT PVT LTD"
+  },
+  {
+   "investor": "Sunil Singhania (Abakkus)",
+   "ambiguous": false,
+   "symbol": "GLASSWALL",
+   "change": "Held",
+   "pct_now": 2.19,
+   "pct_before": null,
+   "delta": null,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.19
+   ],
+   "since": "Sep 2026",
+   "shares": 1923113,
+   "filed": "2026-10-13",
+   "held_as": "Abakkus Growth Fund - Open Ended"
+  },
+  {
+   "investor": "Ashish Kacholia",
+   "ambiguous": false,
+   "symbol": "ESDS",
+   "change": "Held",
+   "pct_now": 2.05,
+   "pct_before": null,
+   "delta": null,
+   "trend": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2.05
+   ],
+   "since": "Sep 2026",
+   "shares": 2402000,
+   "filed": "2026-10-17",
+   "held_as": "Ashish Kacholia"
   },
   {
    "investor": "Ashish Dhawan",
@@ -1771,6 +2723,8 @@
    "pct_before": null,
    "delta": null,
    "trend": [
+    null,
+    null,
     null,
     null,
     null,
@@ -1788,17 +2742,24 @@
   "AMBER": "Akash / Vallabh Bhanshali 1.15%",
   "APTUS": "Akash / Vallabh Bhanshali 1.52%",
   "DBL": "Akash / Vallabh Bhanshali 1.30% (+0.01 pp)",
+  "FLUOROCHEM": "Akash / Vallabh Bhanshali 4.75%",
+  "GEECEE": "Akash / Vallabh Bhanshali 3.01% \u00b7 Madhusudan Kela 2.35%",
+  "GENUSPOWER": "Akash / Vallabh Bhanshali 1.19%",
+  "GFLLIMITED": "Akash / Vallabh Bhanshali 5.00%",
+  "GREENLAM": "Akash / Vallabh Bhanshali 6.61% \u00b7 Ashish Dhawan 3.77%",
   "AVADHSUGAR": "Anil Kumar Goel 5.35% (-0.09 pp)",
   "DALMIASUG": "Anil Kumar Goel 5.23%",
   "DBOL": "Anil Kumar Goel 9.04%",
   "DCM": "Anil Kumar Goel 2.20% \u00b7 Satpal Khattar 1.07%",
   "DCMNVL": "Anil Kumar Goel 2.38%",
   "DTIL": "Anil Kumar Goel 2.79%",
+  "GANESHBE": "Anil Kumar Goel 3.75%",
   "AGI": "Ashish Dhawan 4.79%",
   "AGL": "Ashish Dhawan 1.00%",
   "BLUSPRING": "Ashish Dhawan 6.42%",
   "DIGITIDE": "Ashish Dhawan exited (was 4.09%)",
   "DISHTV": "Ashish Dhawan 1.57%",
+  "EQUITASBNK": "Ashish Dhawan 4.10% NEW",
   "ADVAIT": "Ashish Kacholia 1.05% (-0.77 pp) \u00b7 Vijay Kedia 1.14%",
   "AEROFLEX": "Ashish Kacholia 4.33%",
   "AGARIND": "Ashish Kacholia 4.33%",
@@ -1807,6 +2768,12 @@
   "BALUFORGE": "Ashish Kacholia 2.71% (-0.04 pp)",
   "BETA": "Ashish Kacholia 4.43% (-0.48 pp)",
   "CARYSIL": "Ashish Kacholia 2.72% (-0.80 pp) \u00b7 Sunil Singhania (Abakkus) 5.34%",
+  "EMKAY": "Ashish Kacholia 26.43% (+1.07 pp) \u00b7 Madhusudan Kela 1.08% (+0.02 pp)",
+  "ESDS": "Ashish Kacholia 2.05% \u00b7 Mukul Agrawal 6.00%",
+  "EXCELSOFT": "Ashish Kacholia 4.34%",
+  "FAZE3Q": "Ashish Kacholia 5.36% (-0.06 pp)",
+  "FCL": "Ashish Kacholia exited (was 2.06%)",
+  "GANESHCP": "Ashish Kacholia 1.46% \u00b7 Madhusudan Kela 1.71% (-1.22 pp)",
   "CHENNPETRO": "Dolly Khanna 1.02% (-0.26 pp)",
   "ADVENTHTL": "Jhunjhunwala (Rare) 4.63%",
   "APTECHT": "Jhunjhunwala (Rare) 21.03% \u00b7 Madhusudan Kela 1.06%",
@@ -1817,11 +2784,16 @@
   "CONCORDBIO": "Jhunjhunwala (Rare) 24.09% (+8.03 pp)",
   "CRISIL": "Jhunjhunwala (Rare) 5.19%",
   "DBREALTY": "Jhunjhunwala (Rare) 4.61% \u00b7 Mukul Agrawal 1.57%",
+  "ESCORTS": "Jhunjhunwala (Rare) 1.53%",
+  "FEDERALBNK": "Jhunjhunwala (Rare) 2.41%",
+  "FORTIS": "Jhunjhunwala (Rare) 4.02%",
+  "GEOJITFSL": "Jhunjhunwala (Rare) 7.20% \u00b7 Porinju Veliyath 1.43%",
   "BOMDYEING": "Madhusudan Kela 1.25% (-0.27 pp)",
   "BUILDPRO": "Madhusudan Kela 1.90%",
   "CHOICEIN": "Madhusudan Kela 7.21%",
   "CSLFINANCE": "Madhusudan Kela 1.91%",
   "DIAMONDYD": "Madhusudan Kela 4.60%",
+  "GRMOVER": "Madhusudan Kela 2.91%",
   "EDELWEISS": "Mohnish Pabrai 1.54% \u00b7 Sunil Singhania (Abakkus) 1.32% NEW",
   "AJMERA": "Mukul Agrawal 1.93%",
   "ALLCARGO": "Mukul Agrawal 2.94%",
@@ -1833,8 +2805,10 @@
   "CAPACITE": "Mukul Agrawal 6.62%",
   "DCAL": "Mukul Agrawal 5.50%",
   "DEEPAKFERT": "Mukul Agrawal 1.19%",
+  "GAUDIUMIVF": "Mukul Agrawal 3.43%",
   "ASAHIINDIA": "Nemish Shah 5.68%",
   "BANARISUG": "Nemish Shah 2.59%",
+  "ELGIEQUIP": "Nemish Shah 1.69%",
   "APOLSINHOT": "Porinju Veliyath 2.52%",
   "AURUM": "Porinju Veliyath 5.23% (-0.82 pp)",
   "3MINDIA": "Radhakishan Damani 1.48%",
@@ -1843,6 +2817,8 @@
   "BHAGCHEM": "Radhakishan Damani 3.32%",
   "BLUEDART": "Radhakishan Damani 1.19%",
   "DMART": "Radhakishan Damani 61.33%",
+  "GAYAHWS": "Satpal Khattar 2.16%",
+  "GAYAPROJ": "Satpal Khattar 1.55%",
   "ADROITIND": "Sunil Singhania (Abakkus) 4.17%",
   "AETHER": "Sunil Singhania (Abakkus) 1.15% NEW",
   "ALLTIME": "Sunil Singhania (Abakkus) 6.16%",
@@ -1860,28 +2836,34 @@
   "DCMSRIND": "Sunil Singhania (Abakkus) 2.81%",
   "DSFCL": "Sunil Singhania (Abakkus) 2.86%",
   "DYNAMATECH": "Sunil Singhania (Abakkus) 2.94%",
+  "EPACK": "Sunil Singhania (Abakkus) 23.68%",
+  "EPACKPEB": "Sunil Singhania (Abakkus) 31.37%",
+  "ESTER": "Sunil Singhania (Abakkus) 3.64%",
+  "GLASSWALL": "Sunil Singhania (Abakkus) 2.19%",
   "AFFORDABLE": "Vijay Kedia 6.56% (-0.45 pp)",
   "ATULAUTO": "Vijay Kedia 20.91%",
-  "EIMCOELECO": "Vijay Kedia 1.45%"
+  "EIMCOELECO": "Vijay Kedia 1.45%",
+  "ELECON": "Vijay Kedia 1.00%",
+  "GLOBALVECT": "Vijay Kedia 4.86%"
  },
  "investors": {
-  "Sunil Singhania (Abakkus)": 17,
-  "Mukul Agrawal": 11,
-  "Jhunjhunwala (Rare)": 9,
-  "Ashish Kacholia": 8,
-  "Anil Kumar Goel": 6,
-  "Madhusudan Kela": 6,
+  "Sunil Singhania (Abakkus)": 21,
+  "Ashish Kacholia": 13,
+  "Jhunjhunwala (Rare)": 13,
+  "Mukul Agrawal": 13,
+  "Madhusudan Kela": 10,
+  "Akash / Vallabh Bhanshali": 8,
+  "Anil Kumar Goel": 7,
+  "Ashish Dhawan": 6,
   "Radhakishan Damani": 6,
-  "Ashish Dhawan": 4,
-  "Vijay Kedia": 4,
-  "Akash / Vallabh Bhanshali": 3,
-  "Nemish Shah": 2,
-  "Porinju Veliyath": 2,
+  "Vijay Kedia": 6,
+  "Nemish Shah": 3,
+  "Porinju Veliyath": 3,
+  "Satpal Khattar": 3,
   "Dolly Khanna": 1,
-  "Mohnish Pabrai": 1,
-  "Satpal Khattar": 1
+  "Mohnish Pabrai": 1
  },
  "companies": 3053,
- "left": 3030,
- "latest_done": 601
+ "left": 3018,
+ "latest_done": 797
 }
