@@ -1338,7 +1338,7 @@ function deskPositions(){
     return {h, act, why, col, r}; });
 }
 async function pageDesk(){
-  await Promise.all([holdLoad().catch(() => null), getJSON("radar.json").catch(() => null), getJSON("chain_screen.json").catch(() => null), getJSON("bear.json").catch(() => null)]);
+  await Promise.all([holdLoad().catch(() => null), getJSON("setups.json").catch(() => null), getJSON("radar.json").catch(() => null), getJSON("chain_screen.json").catch(() => null), getJSON("bear.json").catch(() => null)]);
   const g = deskGate(), rad = CACHE["radar.json"] || {}, picks = deskPicks(), top = picks.slice(0, 5);
   const secs = (rad.sectors || []).filter(x => x.group === "Gaining steam").slice(0, 3), turn = (rad.sectors || []).filter(x => x.group === "Possible turnaround").slice(0, 2);
   const pos = deskPositions();
@@ -3052,9 +3052,8 @@ async function render(){
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
   const adminOnly = r === "watchlist" || r === "admin" || r === "admin-alerts" || r === "admin-social";
-  if(r === "today-desk" && !PRO()) return pageDashboard;
   const proOnly = r === "intraday" || r.startsWith("admin-") || r.endsWith("scorecard");   // admin, or everyone while features are opened
-  const fn = adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
+  const fn = r === "today-desk" && !PRO() ? pageDashboard : adminOnly && !isAdmin() ? (r === "admin" && PRO() ? pageHoldings : pageDashboard)
     : proOnly && !PRO() ? pageDashboard : (VIEWS[r] || pageDashboard);
   let html;
   const need = (NEEDS[r] || []).filter(f => !CACHE[f]);
