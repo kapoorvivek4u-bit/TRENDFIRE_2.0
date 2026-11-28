@@ -194,7 +194,10 @@ def trail(idx, nifty, d_pos):
                     "rs": round(float(rs.iloc[i] / rs.iloc[len(idx) - k - 1]) * 100 - 100, 2)
                     if len(idx) > k else None,
                     "day": None if np.isnan(day_rel.iloc[i]) else round(float(day_rel.iloc[i]), 2),
-                    "d_bull": d_pos[i - len(idx)] if d_pos and len(d_pos) >= len(idx) - i else None})
+                    "d_bull": d_pos[i - len(idx)] if d_pos and len(d_pos) >= len(idx) - i else None,
+                    # rotation-graph position that day, for the trails on the Sectors page
+                    "ratio": None if np.isnan(ratio.iloc[i]) else round(float(ratio.iloc[i]), 4),
+                    "mom": None if np.isnan(mom.iloc[i]) else round(float(mom.iloc[i]), 4)})
     D = SCFG["dir_days"]
     chg = float(rs.iloc[-1] / rs.iloc[-1 - D] - 1) * 100 if len(rs) > D else np.nan
     direction = ("Sideways" if np.isnan(chg) or abs(chg) < SCFG["dir_flat_pct"] else
