@@ -530,6 +530,17 @@ async function api(req, env, url, user, ctx) {
   }
   if (p === "/api/scans" && req.method === "GET") return json(admin ? await latestRuns(env) : {});
   if (p === "/api/admin/log" && req.method === "GET") return admin ? json(await adminLog(env)) : json({ error: "Admin only." }, 403);
+  if (p === "/api/layout") {                              // each person's own Today layout (desktop arrange): order + hidden cards
+    const key = "lay:" + user.email.toLowerCase();
+    if (req.method === "GET") return json((await env.USERS.get(key, "json")) || {});
+    if (req.method === "POST") {
+      let b = {}; try { b = await req.json(); } catch (e) {}
+      const clean = a => (Array.isArray(a) ? a : []).filter(x => typeof x === "string" && /^[a-z0-9]{1,20}$/.test(x)).slice(0, 60);
+      if (b.reset) { await env.USERS.delete(key); return json({ ok: true }); }
+      await env.USERS.put(key, JSON.stringify({ order: clean(b.order), hidden: clean(b.hidden) }));
+      return json({ ok: true });
+    }
+  }
   if (req.method !== "POST") return json({ error: "Not found" }, 404);
   if (!admin) return json({ error: "Only the admin can change this." }, 403);
   let body = {};

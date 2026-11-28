@@ -104,6 +104,21 @@ main{padding-block:18px 110px;padding-left:max(16px,env(safe-area-inset-left,0px
 /* ---------- cards ---------- */
 .grid{display:grid;gap:14px;grid-template-columns:repeat(12,minmax(0,1fr))}
 .grid>*{grid-column:span 12;min-width:0}
+.dgrid.dense{grid-auto-flow:row dense}
+.dgrid{margin-top:14px}.dstrip{grid-column:span 12}
+.arrbtn{margin-left:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.arrbtn:hover{border-color:var(--accent)}
+@media (max-width:1023px),(pointer:coarse){.arrbtn,.arrbar{display:none!important}}
+.arrbar{position:sticky;top:8px;z-index:30;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--surface);border:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.arrbar .muted{font-size:12.5px}.arrbar .btn2{padding:8px 14px}.arrbar .arrdone{background:var(--accent);border-color:var(--accent);color:#fff}
+.arranging>[data-k]{position:relative;outline:2px dashed color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:3px;cursor:grab}
+.arranging>[data-k] *{pointer-events:none}.arranging>[data-k] .dbar,.arranging>[data-k] .dbar *{pointer-events:auto}
+.arranging>.dragging{opacity:.4}
+.arranging>.dhid{opacity:.35}
+.dbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-4px -4px 10px;padding:6px 10px;border-radius:9px;background:var(--accent);color:#fff;font-size:12px;font-weight:800;cursor:grab;grid-column:1/-1}
+.dbar button{border:0;border-radius:7px;padding:3px 9px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.2);color:#fff}
+.dbar button:hover{background:rgba(255,255,255,.35)}
+
 @media (min-width:760px){.s6{grid-column:span 6!important}}
 @media (min-width:1180px){.s4{grid-column:span 4!important}.s5{grid-column:span 5!important}.s7{grid-column:span 7!important}.s8{grid-column:span 8!important}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);min-width:0}
@@ -361,6 +376,8 @@ textarea.note{width:100%;min-height:64px;resize:vertical;font:inherit;font-size:
 .rail .foot .me img,.rail .foot .me .av{width:26px;height:26px;border-radius:50%;flex:none}
 .rail .foot .me .av{display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font-weight:800}
 .rail .foot .me a{color:var(--muted);display:grid;place-items:center}
+.rail .foot .me a.meadm{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-start;gap:6px;color:var(--ink);font-weight:700;padding:6px 8px;margin-left:-4px;border-radius:9px}
+.rail .foot .me a.meadm:hover{background:var(--surface)}.rail .foot .me a.meadm.on{background:var(--ink);color:var(--bg)}.rail .foot .me a.meadm svg{width:15px;height:15px}.rail .foot .me a.meadm span{flex:none;overflow:visible}
 .rail .foot .me a svg{width:17px;height:17px}
 a.tbtn{color:var(--ink)}
 .rail .foot .acts button{justify-content:center}
@@ -990,12 +1007,12 @@ function renderShell(){
   const brand = `<a class="brand" href="#today" aria-label="TradeReady home"><span class="mark"><svg viewBox="8 8 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 30h26M12 43h26" stroke-width="3" stroke-dasharray="1 6" opacity=".5"/><polyline points="12,38 18,33 24,40 30,34 36,39 42,30 51,17" stroke-width="5"/><polyline points="43,16 51,16 51,24" stroke-width="5"/></svg></span><span>Trade<b>Ready</b></span></a>`;
   const s = S();
   document.getElementById("rail").innerHTML = brand +
-    `<nav>${navSections().map(p => `<a href="#${sectionHref(p)}" class="${r===p[0]?"on":""}">${ico(p[2])}${p[1]}</a>`).join("")}<a href="/guide" target="_blank" rel="noopener">${ico("search")}How to use</a></nav>
+    `<nav>${navSections().filter(p => p[0] !== "admin").map(p => `<a href="#${sectionHref(p)}" class="${r===p[0]?"on":""}">${ico(p[2])}${p[1]}</a>`).join("")}<a href="/guide" target="_blank" rel="noopener">${ico("search")}How to use</a></nav>
      <div class="foot">${marketPill()}
        <div>Scan ${esc(s ? when(s.generated_ist) : "")} IST</div>${scanLine()}
        <div class="acts">${isAdmin() ? `<button data-act="refresh">${ico("refresh")}Refresh</button><button data-act="scan">${ico("play")}Scan all</button>` : `<button data-act="refresh" style="grid-column:span 2">${ico("refresh")}Refresh</button>`}</div>
        <button data-act="theme">${isDark() ? "Graphite & Neon" : "Sand & Indigo"} ${ico(isDark() ? "sun" : "moon")}</button>
-       ${USER ? `<div class="me">${USER.picture ? `<img src="${esc(USER.picture)}" alt="" referrerpolicy="no-referrer">` : `<span class="av">${esc((USER.name || USER.email || "?")[0].toUpperCase())}</span>`}<span>${esc(USER.name || USER.email)}</span><a href="/logout" title="Sign out" aria-label="Sign out" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700">${ico("logout")}Sign out</a></div>` : ""}</div>`;
+       ${USER ? `<div class="me">${USER.picture ? `<img src="${esc(USER.picture)}" alt="" referrerpolicy="no-referrer">` : `<span class="av">${esc((USER.name || USER.email || "?")[0].toUpperCase())}</span>`}${isAdmin() ? `<a class="meadm${r === "admin" ? " on" : ""}" href="#admin" title="Admin: users, social kit">${ico("users")}<span>Admin</span></a>` : `<span>${esc(USER.name || USER.email)}</span>`}<a href="/logout" title="Sign out" aria-label="Sign out" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700">${ico("logout")}Sign out</a></div>` : ""}</div>`;
   document.getElementById("top").innerHTML = brand +
     `<div class="top-r">${marketPill()}<button class="tbtn" data-act="refresh" aria-label="Refresh data">${ico("refresh")}</button><button class="tbtn" data-act="theme" aria-label="Switch theme">${ico(isDark() ? "sun" : "moon")}</button>${USER ? `<a class="tbtn" href="${isAdmin() ? "#admin" : "/logout"}" aria-label="${isAdmin() ? "Admin" : "Sign out"}">${ico(isAdmin() ? "users" : "logout")}</a>` : ""}</div>`;
   const TABS = DESK_FIRST() ? ["today","scanner","options","market","more"] : PRO() && USER ? ["today","scanner","options","market","my"] : ["today","scanner","options","market","search"];
@@ -1500,22 +1517,88 @@ function watchCard(){
 }
 function greet(){ const h = +new Date().toLocaleString("en-US", {hour:"numeric", hour12:false, timeZone:"Asia/Kolkata"});
   return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"; }
-async function pageDashboard(){
-  return `<div class="head"><div><h1>${greet()}, Trader</h1><div class="sub">Here's the market before you trade. <a href="/guide" target="_blank" rel="noopener" style="font-weight:700">New here? How to use TradeReady ›</a></div></div>
-      <div class="stamp"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST · refreshes hourly</div></div>
-    ${subnav()}${deskBanner()}
-    <div class="grid">${flowMiniCard()}${weatherCard()}${newsCard()}</div>
-    <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
-    <div class="grid">
-      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${radarCard()}${rotSnapshotCard()}${top5Card()}${mostScannedCard()}
-      ${tradesCard()}
-      ${partsCard()}${vkCard()}
-      ${strongestCard()}${readyCard()}
-      ${moneyCard()}${moversCard()}
-      ${heatCard()}
-      <div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
-    </div>`;
+/* Today cards as keyed blocks, so the owner can drag them into their own order on desktop (saved per account). */
+let DLAY = null;            // {order, hidden} from /api/layout
+const DESKTOP_ARR = () => matchMedia("(min-width:1024px) and (pointer:fine)").matches;
+function loadLayout(){
+  try{ const c = localStorage.getItem("tr-lay"); if(c) DLAY = JSON.parse(c); }catch(e){}
+  return fetch("/api/layout", {cache:"no-store"}).then(r => r.ok ? r.json() : null).then(j => { if(j){ DLAY = j; try{ localStorage.setItem("tr-lay", JSON.stringify(j)); }catch(e){} } }).catch(() => null);
 }
+const DB_NAMES = {flow:"Money flow", weather:"Market weather", news:"News", strip:"Alerts & indexes strip", bear:"Bear mode", bottom5:"Bottom 5", weakest:"Weakest",
+  radar:"Sector radar", rot:"Sector rotation", top5:"Top 5 positional", most:"Most scanned", trades:"Trades", parts:"Market score parts", vk:"VK setups",
+  strongest:"Strongest", ready:"Ready", money:"Big money", movers:"Movers", heat:"Heatmap", watch:"Watchlist"};
+function dashBlocks(){
+  const bear = BEAR() && BEAR().bear_mode;
+  return [["flow", flowMiniCard()], ["weather", weatherCard()], ["news", newsCard()],
+    ["strip", (() => { const h = bellStrip() + headsUpCard() + indexStrip(); return h.trim() ? `<div class="dstrip">${h}</div>` : ""; })()],
+    ["bear", bear ? bearBanner() : ""], ["bottom5", bear ? bottom5Card() : ""], ["weakest", bear ? weakestCard() : ""],
+    ["radar", radarCard()], ["rot", rotSnapshotCard()], ["top5", top5Card()], ["most", mostScannedCard()], ["trades", tradesCard()],
+    ["parts", partsCard()], ["vk", vkCard()], ["strongest", strongestCard()], ["ready", readyCard()], ["money", moneyCard()], ["movers", moversCard()], ["heat", heatCard()],
+    ["watch", `<div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>`]];
+}
+const DB_DEFAULT = Object.keys(DB_NAMES);
+/* keys missing from `order` (a card that was not on screen when it was saved, or a new card) go right after the card before them in `ref` */
+function mergeOrder(order, ref){
+  const out = (order || []).slice();
+  ref.forEach((k, i) => { if(out.includes(k)) return; let j = i - 1; while(j >= 0 && !out.includes(ref[j])) j--;
+    out.splice(j >= 0 ? out.indexOf(ref[j]) + 1 : 0, 0, k); });
+  return out;
+}
+function keyBlock(k, html, arr, hid){            // put data-k (and the drag bar in arrange mode) on the block's first element
+  const m = /^\s*<([a-zA-Z0-9]+)/.exec(html); if(!m) return html;
+  const i = html.indexOf(">", m.index); if(i < 0) return html;
+  let open = html.slice(0, i), rest = html.slice(i + 1);
+  open = open.replace(/^(\s*<[a-zA-Z0-9]+)/, `$1 data-k="${k}"${arr ? ` draggable="true"` : ""}`);
+  if(arr){
+    open = /class="/.test(open.split(">")[0]) ? open.replace(/class="/, `class="dblk ${hid ? "dhid " : ""}`) : open + ` class="dblk${hid ? " dhid" : ""}"`;
+    rest = `<div class="dbar"><span>⠿ ${esc(DB_NAMES[k] || k)}</span><button data-dhide="${k}" title="${hid ? "Show this card" : "Hide this card"}">${hid ? "🙈 Hidden" : "👁 Shown"}</button></div>` + rest;
+  }
+  return open + ">" + rest;
+}
+async function pageDashboard(){
+  const arr = !!(UI.arrange && DESKTOP_ARR());
+  const blocks = dashBlocks().filter(([, h]) => h && h.trim()), def = blocks.map(b => b[0]);
+  const lay = arr ? UI.arrange : (DLAY || {}), order = lay.order || [], hidden = new Set(lay.hidden || []);
+  const seq = mergeOrder(order, DB_DEFAULT), pos = k => seq.indexOf(k);
+  const list = blocks.slice().sort((a, b) => pos(a[0]) - pos(b[0])).filter(([k]) => arr || !hidden.has(k));
+  const custom = !!(order.length || hidden.size);
+  const tools = DESKTOP_ARR() && USER ? (arr
+    ? `<div class="arrbar"><b>✏️ Arrange your dashboard</b><span class="muted">Drag a card by its top bar. 👁 hides it. Saved to your account.</span><span style="flex:1"></span><button class="btn2" data-arr="reset">Reset to default</button><button class="btn2" data-arr="cancel">Cancel</button><button class="btn2 arrdone" data-arr="save">Done</button></div>`
+    : `<button class="arrbtn" data-arr="start" title="Drag cards into your own order (desktop)">✏️ Arrange</button>`) : "";
+  return `<div class="head"><div><h1>${greet()}, Trader</h1><div class="sub">Here's the market before you trade. <a href="/guide" target="_blank" rel="noopener" style="font-weight:700">New here? How to use TradeReady ›</a></div></div>
+      <div class="stamp"><span class="live"></span>Scan ${esc(when(S().generated_ist))} IST · refreshes hourly ${arr ? "" : tools}</div></div>
+    ${subnav()}${deskBanner()}${arr ? tools : ""}
+    <div class="grid dgrid${arr ? " arranging" : ""}${custom || arr ? " dense" : ""}">${list.map(([k, h]) => keyBlock(k, h, arr, hidden.has(k))).join("")}</div>`;
+}
+function arrOrderFromDom(){ return [...document.querySelectorAll(".dgrid > [data-k]")].map(el => el.dataset.k); }
+document.addEventListener("click", e => {
+  if(e.target.closest(".arranging") && !e.target.closest("[data-dhide]") && !e.target.closest(".dbar")){ e.preventDefault(); e.stopPropagation(); return; }   // cards are not live while arranging
+  const h = e.target.closest("[data-dhide]");
+  if(h && UI.arrange){ e.preventDefault(); e.stopPropagation(); const k = h.dataset.dhide, s = new Set(UI.arrange.hidden);
+    s.has(k) ? s.delete(k) : s.add(k); UI.arrange = {order: arrOrderFromDom(), hidden: [...s]}; render.keepScroll = true; render(); return; }
+  const b = e.target.closest("[data-arr]"); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  const act = b.dataset.arr;
+  if(act === "start"){ UI.arrange = {order: (DLAY && DLAY.order) || [], hidden: (DLAY && DLAY.hidden) || []}; }
+  else if(act === "cancel"){ UI.arrange = null; }
+  else if(act === "reset"){ UI.arrange = null; DLAY = {}; try{ localStorage.removeItem("tr-lay"); }catch(e){}
+    fetch("/api/layout", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({reset: true})}).then(() => toast("Back to the default layout")).catch(() => toast("Could not reach the server.")); }
+  else if(act === "save"){ const lay = {order: mergeOrder(arrOrderFromDom(), mergeOrder((DLAY && DLAY.order) || [], DB_DEFAULT)), hidden: UI.arrange.hidden}; DLAY = lay; UI.arrange = null;
+    try{ localStorage.setItem("tr-lay", JSON.stringify(lay)); }catch(e){}
+    fetch("/api/layout", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(lay)})
+      .then(r => toast(r.ok ? "Layout saved ✓" : "Saved on this computer only")).catch(() => toast("Saved on this computer only")); }
+  render.keepScroll = true; render();
+}, true);
+/* drag: move the card live under the pointer; the new order is read from the page on Done */
+let DRAG_EL = null;
+document.addEventListener("dragstart", e => { const el = e.target.closest && e.target.closest(".arranging > [data-k]"); if(!el) return;
+  DRAG_EL = el; el.classList.add("dragging"); try{ e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", el.dataset.k); }catch(x){} });
+document.addEventListener("dragover", e => { if(!DRAG_EL) return; const over = e.target.closest && e.target.closest(".arranging > [data-k]");
+  e.preventDefault(); if(!over || over === DRAG_EL) return;
+  const r = over.getBoundingClientRect(), before = (e.clientY - r.top) / r.height < 0.5 && (r.height > 160 || (e.clientX - r.left) / r.width < 0.5) || (e.clientX - r.left) / r.width < 0.25;
+  over.parentNode.insertBefore(DRAG_EL, before ? over : over.nextSibling); });
+document.addEventListener("dragend", () => { if(!DRAG_EL) return; DRAG_EL.classList.remove("dragging"); DRAG_EL = null;
+  if(UI.arrange) UI.arrange.order = arrOrderFromDom(); });
 
 
 /* ============================================================ Monthly / Weekly / Daily: Impulse or Corrective */
@@ -3286,6 +3369,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
     document.getElementById("main").innerHTML = `<div class="soon"><h1>No dashboard data yet</h1><p>The dashboard file is made by the Setups scan. Run that scan once on GitHub (Actions → Setups scan → Run workflow), then reload this page.</p></div>`;
     return;
   }
+  if(USER) loadLayout().then(() => { if(route() === "today" && !UI.arrange) rerender(); });
   getJSON("sectors.json").catch(() => null);
   getJSON("bear.json").then(b => { if(b && b.bear_mode && route() === "today") rerender(); }).catch(() => null);
   if(FULL()) getJSON("options.json").then(() => { if(route() === "today" || route().startsWith("scanner")) rerender(); }).catch(() => null);
