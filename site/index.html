@@ -547,6 +547,7 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .dkban .more{margin-left:auto}
 @media (max-width:600px){.dkplan,.dkwhy{margin-left:0}}
 .sub2{margin-top:-6px}.sub2 a{font-size:12.5px;padding:6px 12px}
+.golinks.mini{grid-template-columns:repeat(auto-fill,minmax(min(150px,44%),1fr))}.golinks.mini a{padding:10px 12px}
 .golinks{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}.golinks a{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit;background:var(--surface2)}.golinks span{grid-row:span 2;font-size:22px;align-self:center}.golinks small{color:var(--muted);font-size:12px}
 .socktut{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
 .sockheld{background:color-mix(in srgb,var(--warn) 14%,transparent);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
@@ -768,6 +769,8 @@ function miniChart(ch, sym){
 const I = {
   flask:'<path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
   bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>',
+  menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
   today:'<path d="M3 12l9-8 9 8M5 10v10h14V10"/>',
   scanner:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/>',
   index:'<path d="M3 17l5-6 4 3 5-7 4 4"/><path d="M3 21h18"/>',
@@ -779,6 +782,8 @@ const I = {
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',
   bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/>',
+  menu:'<path d="M4 6h16M4 12h16M4 18h16" stroke-width="2.4"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>',
   refresh:'<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',
   play:'<path d="M7 4l13 8-13 8z"/>'
 };
@@ -799,8 +804,15 @@ const NAV_GROUPS = {
   lab:     [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]],
   picks:   [["scanner","F&O setups"],["today-alist","A list"],["today-strategies","By strategy"]],
 };
+const DESK_FIRST = () => !!(USER && isAdmin());          // the owner's own view: Desk first, the rest under More
 function navSections(){
   const pro = !!(PRO() && USER), adm = !!(isAdmin() && USER);
+  if(DESK_FIRST()) return [
+    ["today","Desk","target", [["today-desk","🎯 My Desk"],["watchlist","⭐ Watchlist"],["admin-holdings","Holdings"],["intraday","⚡ Intraday"]]],
+    ["scanner","Impulse","scanner", [["scanner-mtf","Impulse table"]]],
+    ["options","Options","bolt", [["scanner-chains","⛓ Option screener"],["scanner-options","📈 Option ideas"]]],
+    ["market","Sectors","market", [["market-radar","🧭 Sector radar"]]],
+    ["more","More","menu", []]];
   const S = [
     ["today","Today","today", [["today","Dashboard"], ...(pro ? [["today-desk","🎯 My Desk"]] : [])]],
     ["scanner","Stocks","scanner", [["@picks","Setups"],["scanner-equity","Midcap & smallcap"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["market-strongest","Strongest"],["scanner-bear","🐻 Bearish"],
@@ -818,19 +830,44 @@ const tabHas = (t, r) => t[0][0] === "@" ? NAV_GROUPS[t[0].slice(1)].some(g => g
 const sectionHref = sec => sec[3].length ? tabHref(sec[3][0]) : sec[0];
 function sectionOf(r){
   const all = navSections();
-  return all.find(sec => sec[3].some(t => tabHas(t, r))) || all.find(sec => sec[0] === r) || all.find(sec => sec[0] === r.split("-")[0]) || all[0];
+  const hit = all.find(sec => sec[3].some(t => tabHas(t, r))) || all.find(sec => sec[0] === r && (!DESK_FIRST() || !sec[3].length));
+  if(hit) return hit;
+  if(DESK_FIRST()) return all.find(sec => sec[0] === "more");                  // everything else lives under More
+  return all.find(sec => sec[0] === r.split("-")[0]) || all[0];
 }
 const visiblePages = () => navSections();          // kept for older callers
-const route = () => (location.hash || "#today").slice(1) || "today";
+const route = () => (location.hash || (DESK_FIRST() ? "#today-desk" : "#today")).slice(1) || "today";
 const pageOf = r => sectionOf(r)[0];
 function subnav(){
   const r = route(), sec = sectionOf(r);
-  if(!sec || !sec[3].length) return "";
+  if(sec && sec[0] === "more"){                                                 // a page opened from More: a way back, plus its group row
+    if(r === "more") return "";
+    const g = Object.values(NAV_GROUPS).find(list => list.some(x => x[0] === r));
+    return `<nav class="subnav"><a href="#more">☰ More</a>${g ? g.map(([h, n]) => `<a href="#${h}" class="${r === h ? "on" : ""}">${n}</a>`).join("") : `<a class="on">${esc(MORE_NAME[r] || "")}</a>`}</nav>`;
+  }
+  if(!sec || sec[3].length < 2) return "";
   const tabs = `<nav class="subnav" aria-label="${sec[1]} views">${sec[3].map(t => `<a href="#${tabHref(t)}" class="${tabHas(t, r) ? "on" : ""}">${t[1]}</a>`).join("")}</nav>`;
   const grp = sec[3].find(t => t[0][0] === "@" && tabHas(t, r));
   return tabs + (grp ? `<nav class="subnav sub2" aria-label="${grp[1]}">${NAV_GROUPS[grp[0].slice(1)].map(([h, n]) => `<a href="#${h}" class="${r === h ? "on" : ""}">${n}</a>`).join("")}</nav>` : "");
 }
 
+
+/* ============================================================ More: everything that is not on the owner's daily bar */
+const MORE_LIST = [
+  ["Market", [["today","🏠 Dashboard","weather, money flow, indexes"],["market-flow","⚡ Money flow","live sector flow"],["market","🔄 Rotation chart","sectors on the quadrant"],
+    ["market-fii","💰 FII footprint",""],["market-deals","Bulk & block deals",""],["market-stars","Star investors",""],["market-unusual","Unusual activity",""],["index","📈 Indexes","Nifty, Bank Nifty, Fin, Midcap, Next 50"]]],
+  ["Stocks", [["scanner","Setups","every F&O setup, graded"],["today-alist","A list",""],["today-strategies","By strategy",""],["market-strongest","Strongest",""],
+    ["scanner-hits","🔥 Most scanned",""],["scanner-bear","🐻 Bearish",""],["scanner-equity","Midcap & smallcap","non-F&O stocks"]]],
+  ["Lab", [["lab","Chup-chap kharidari",""],["lab-rs","RS lead",""],["lab-iv","Squeeze + cheap vol",""],["lab-expiry","Expiry short squeeze",""],["lab-trap","Trapped shorts",""],["lab-tlong","Trapped longs",""]]],
+  ["Mine", [["admin-alerts","🔔 Alerts","email alerts list"],["admin-scorecard","📊 Track record","how setups and picks did"],["search","🔍 Search",""]]],
+  ["Admin", [["admin","👥 Users",""],["admin-social","📣 Social kit",""]]],
+];
+const MORE_NAME = Object.fromEntries(MORE_LIST.flatMap(([, l]) => l.map(([h, n]) => [h, n])));
+async function pageMore(){
+  return pageHead("More", "Everything that is not on your daily bar") + MORE_LIST.map(([g, l]) => `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>${g}</h2></div>
+    <div class="golinks mini">${l.map(([h, n, d]) => `<a href="#${h}"><b style="grid-column:span 2">${n}</b>${d ? `<small style="grid-column:span 2">${d}</small>` : ""}</a>`).join("")}</div></section>`).join("")
+    + `<p class="foot-note" style="margin-top:12px"><a href="/guide" target="_blank" rel="noopener">How to use TradeReady ›</a></p>`;
+}
 /* ============================================================ theme, PIN, scans */
 function isDark(){
   const t = document.documentElement.getAttribute("data-theme");
@@ -943,7 +980,7 @@ function renderShell(){
        ${USER ? `<div class="me">${USER.picture ? `<img src="${esc(USER.picture)}" alt="" referrerpolicy="no-referrer">` : `<span class="av">${esc((USER.name || USER.email || "?")[0].toUpperCase())}</span>`}<span>${esc(USER.name || USER.email)}</span><a href="/logout" title="Sign out" aria-label="Sign out" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700">${ico("logout")}Sign out</a></div>` : ""}</div>`;
   document.getElementById("top").innerHTML = brand +
     `<div class="top-r">${marketPill()}<button class="tbtn" data-act="refresh" aria-label="Refresh data">${ico("refresh")}</button><button class="tbtn" data-act="theme" aria-label="Switch theme">${ico(isDark() ? "sun" : "moon")}</button>${USER ? `<a class="tbtn" href="${isAdmin() ? "#admin" : "/logout"}" aria-label="${isAdmin() ? "Admin" : "Sign out"}">${ico(isAdmin() ? "users" : "logout")}</a>` : ""}</div>`;
-  const TABS = PRO() && USER ? ["today","scanner","options","market","my"] : ["today","scanner","options","market","search"];
+  const TABS = DESK_FIRST() ? ["today","scanner","options","market","more"] : PRO() && USER ? ["today","scanner","options","market","my"] : ["today","scanner","options","market","search"];
   document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = navSections().find(x => x[0]===k); if(!p) return "";
     return `<a href="#${sectionHref(p)}" class="${r===k?"on":""}">${ico(p[2])}${p[1]}</a>`; }).join("");
   rightRail();
@@ -1242,6 +1279,7 @@ function deskPicks(){
   const hu = s.heads_up || {}, ban = new Set(hu.ban || []), res = hu.results || {};
   const today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
   const daysTo = d => Math.round((new Date(d + "T00:00:00Z") - new Date(today + "T00:00:00Z")) / 864e5);
+  const top5 = new Set(((s.top5 || {}).picks || []).map(p => p.symbol));
   const pool = {}; [...(st.rows || []), ...(st.overspill || [])].forEach(r => { const k = r.symbol; if(!pool[k] || (r.grade === "A" && pool[k].grade !== "A")) pool[k] = r; });
   const out = [];
   for(const r of Object.values(pool)){
@@ -1268,6 +1306,7 @@ function deskPicks(){
     if((ch.sig || []).includes("cover")) sc += P(4, "call writers covering");
     const early = (hits.e || []).length; if(early) sc += P(Math.min(9, early * 3), `${early} early scan hit${early > 1 ? "s" : ""}`);
     if((m.oi5 || 0) > 3 && (m.d5 || 0) > 0) sc += P(4, "long build-up (5 days)");
+    if(top5.has(sym)) sc += P(8, "in Top 5 positional");
     const q = livePx(sym), px = q ? q.close : r.close, atr = lv.a || null;
     const entry = r.stage === "Watch" ? (r.trigger || null) : (r.trigger || px);
     const stop = r.stop || (lv.e20 && atr ? lv.e20 - atr : null);
@@ -2341,13 +2380,20 @@ function headsUpCard(){
   </section>`;
 }
 async function pageScorecard(){
+  const html = await pageScorecardBase(); const rad = await getJSON("radar.json").catch(() => null), t = rad && rad.track;
+  if(!t) return html;
+  const cell = k => { const x = t["top3_vs_bottom3_" + k] || {}; return x.days ? `${x.rate}% <span class="muted">(${x.wins}/${x.days})</span>` : `<span class="muted">waiting</span>`; };
+  return html + `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>🧭 Sector radar<em>${t.since ? "since " + esc(t.since) : ""}</em></h2><a class="more" href="#market-radar">Radar ›</a></div>
+    <div class="tw"><table class="t"><tr><th></th><th>Next day</th><th>3 days</th><th>5 days</th></tr><tr><td>Top 3 sectors beat bottom 3</td><td>${cell("r1")}</td><td>${cell("r3")}</td><td>${cell("r5")}</td></tr></table></div></section>`;
+}
+async function pageScorecardBase(){
   const sc = S().scorecard;
-  if(!sc || !sc.setups) return pageHead("Scorecard", "") + subnav() + `<div class="empty">The scorecard appears after the next scan.</div>`;
+  if(!sc || !sc.setups) return pageHead("📊 Track record", "") + subnav() + `<div class="empty">The scorecard appears after the next scan.</div>`;
   const since = new Date(sc.since + "T00:00:00+05:30").toLocaleDateString("en-IN", {day:"numeric", month:"short", timeZone:"Asia/Kolkata"});
   const rc = r => r == null ? "muted" : r > 0 ? "up" : r < 0 ? "down" : "muted";
   const fmtR = r => r == null ? "—" : (r > 0 ? "+" : "") + r.toFixed(2) + "R";
   const RES = {target:["Target hit","var(--up)"], stopped:["Stopped","var(--down)"], "time exit":["Time exit","var(--warn)"]};
-  return pageHead("Scorecard", `How every Ready signal did since ${esc(since)}. Entry when price crosses Buy above; then 2R target or stop, whichever comes first.`) + subnav() + `
+  return pageHead("📊 Track record", `How every Ready signal did since ${esc(since)}. Entry when price crosses Buy above; then 2R target or stop, whichever comes first.`) + subnav() + `
     <div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:14px">
       <div><small>Signals</small><b data-count="${sc.signals}">${sc.signals}</b></div><div><small>Finished</small><b>${sc.closed}</b></div>
       <div><small>Win rate</small><b class="${sc.win_pct >= 50 ? "up" : sc.win_pct != null ? "down" : ""}">${sc.win_pct == null ? "—" : sc.win_pct + "%"}</b></div>
@@ -2653,7 +2699,7 @@ async function brief(sym){
           old: Object.entries(home.old_labels || {}).find(([, xs]) => xs.includes(sym))?.[0], best: rows.length ? (rank[rows[0].stage] ?? 9) : 9};
 }
 async function pageWatchlist(){
-  await Promise.all(["setups.json","equity.json","breakout.json","sectors.json","deals.json","stars.json"].map(f => getJSON(f).catch(() => null)));
+  await Promise.all(["setups.json","equity.json","breakout.json","sectors.json","deals.json","stars.json"].map(f => getJSON(f).catch(() => null)).concat(isAdmin() && !ALR ? [alrCall().catch(() => null)] : []));
   const briefs = {};
   for(const w of WATCH) briefs[w.symbol] = await brief(w.symbol);
   const order = WATCH.slice().sort((a,b) => (briefs[a.symbol].best - briefs[b.symbol].best) || a.symbol.localeCompare(b.symbol));
@@ -2669,6 +2715,7 @@ async function pageWatchlist(){
       ${extraHtml(w.symbol)}
       <textarea class="note" id="note-${esc(w.symbol)}" placeholder="Remarks: your notes on this stock" maxlength="1000">${esc(w.note || "")}</textarea>
       <div class="acts"><span class="muted" style="font-size:11.5px;margin-right:auto;align-self:center">${w.added ? "Added " + esc(w.added) : ""}</span>
+        ${isAdmin() ? (() => { const on = ((ALR || {}).items || []).some(i => i.s === w.symbol); return `<button class="btn2" data-wbell="${esc(w.symbol)}" title="Email alerts for this stock" style="${on ? "color:var(--up);border-color:var(--up)" : ""}">${on ? "🔔 Alerts on" : "🔕 Alerts off"}</button>`; })() : ""}
         <button class="btn2 danger" data-unwatch="${esc(w.symbol)}">Remove</button><button class="btn2" data-note="${esc(w.symbol)}">Save note</button></div></article>`; };
   return pageHead("Watchlist", `${plural(WATCH.length, "stock")} · ${nReady} Ready now${WATCH_LIVE ? "" : " · read-only here"}`) + subnav() +
     `<form class="inrow" id="wl-add" style="margin-bottom:14px"><input class="in" id="wl-sym" list="syms" placeholder="Add a stock, e.g. INFY" autocomplete="off" autocapitalize="characters"><button class="btn">Add</button></form>
@@ -2983,7 +3030,7 @@ async function pageFII(){
 const VIEWS = {today:pageDashboard, "today-strategies":pageStrategies, "today-alist":pageAList, scanner:pageScanner, "scanner-equity":pageScanner,
   index:pageIndex, "index-bank":pageIndex, "index-fin":pageIndex, "index-midcap":pageIndex, "index-next50":pageIndex,
   "today-scorecard":pageScorecard, "admin-scorecard":pageScorecard, search:pageSearch, watchlist:pageWatchlist, market:pageSectors, "market-strongest":pageStrongest, "market-unusual":pageUnusual,
-  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRadar, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, "today-desk":pageDesk, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
+  "market-deals":pageDeals, "market-stars":pageStars, "market-fii":pageFII, "scanner-mtf":pageMTF, "scanner-hits":pageHits, "scanner-options":pageOptions, "scanner-chains":pageOScreen, "market-flow":pageFlow, "market-radar":pageRadar, "scanner-bear":pageBear, "admin-holdings":pageHoldings, "admin-alerts":pageAlerts, "admin-social":pageSocial, more:pageMore, "today-desk":pageDesk, lab:pageLab, "lab-rs":pageLab, "lab-iv":pageLab, "lab-expiry":pageLab, "lab-trap":pageLab, "lab-tlong":pageLab, admin:pageAdmin, intraday:pageIntraday};
 let RENDER_ID = 0, LAST_TRACK = "";
 function track(p){       // tells the admin page which pages people open (not counted for the admin)
   if(!USER || isAdmin() || p === LAST_TRACK) return; LAST_TRACK = p;
@@ -3080,6 +3127,9 @@ document.addEventListener("click", e => {
   if(d.hitmin){ UI.hitMin = +d.hitmin; return rerender(); }
   if(d.hitearly){ UI.hitEarly = !UI.hitEarly; return rerender(); }
   if(d.hitgood){ UI.hitGood = !UI.hitGood; return rerender(); }
+  if(d.wbell){ const sym = d.wbell, items = ((ALR || {}).items || []).slice(), on = items.some(i => i.s === sym);
+    alrSaveItems(on ? items.filter(i => i.s !== sym) : items.concat([{s: sym, strat: "Positional", level: null, note: ""}]));
+    toast(on ? `Alerts off for ${sym}` : `🔔 Alerts on for ${sym} (Positional). Change the style in More → Alerts.`); return; }
   if(d.radarg){ UI.radarG = d.radarg; return rerender(); }
   if(d.mtfgood){ UI.mtfGood = !UI.mtfGood; return rerender(); }
   if(d.mtfp){ const v = d.mtfp.split("|"); UI.mtf = {M:v[0], W:v[1], D:v[2]}; return rerender(); }
