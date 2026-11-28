@@ -1,0 +1,20 @@
+name: Feed check (temporary)
+on: workflow_dispatch
+jobs:
+  c:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in \
+            https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms \
+            https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms \
+            https://www.moneycontrol.com/rss/marketreports.xml \
+            https://www.moneycontrol.com/rss/buzzingstocks.xml \
+            https://www.livemint.com/rss/markets \
+            https://www.business-standard.com/rss/markets-106.rss \
+            https://www.thehindubusinessline.com/markets/feeder/default.rss \
+            https://feeds.feedburner.com/ndtvprofit-latest \
+            "https://news.google.com/rss/search?q=nifty+OR+sensex+OR+%22stock+market%22+when:1d&hl=en-IN&gl=IN&ceid=IN:en" ; do
+            echo "=== $u"; curl -sL -m 20 -A "Mozilla/5.0 TradeReady" "$u" -o f.xml -w "HTTP %{http_code} %{size_download}\n"
+            grep -o "<title>[^<]*</title>\|<title><!\[CDATA\[[^]]*" f.xml | sed -n 2,4p; grep -o "<pubDate>[^<]*" f.xml | head -1
+          done
