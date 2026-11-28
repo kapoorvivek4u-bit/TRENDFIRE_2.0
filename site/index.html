@@ -546,6 +546,8 @@ table.oc td{padding:5px 6px}table.oc tr.atm td{background:color-mix(in srgb,var(
 .dkban{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 16px;margin:0 0 14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);text-decoration:none;color:inherit;box-shadow:var(--shadow);font-size:14px}
 .dkban .more{margin-left:auto}
 @media (max-width:600px){.dkplan,.dkwhy{margin-left:0}}
+.sub2{margin-top:-6px}.sub2 a{font-size:12.5px;padding:6px 12px}
+.golinks{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}.golinks a{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit;background:var(--surface2)}.golinks span{grid-row:span 2;font-size:22px;align-self:center}.golinks small{color:var(--muted);font-size:12px}
 .socktut{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
 .sockheld{background:color-mix(in srgb,var(--warn) 14%,transparent);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:10px}
 .newver{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--ink);color:var(--bg);padding:10px 12px 10px 16px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
@@ -787,24 +789,46 @@ function chaseDot(s){ try{ const c = typeof chase === "function" ? chase(s) : nu
   return c ? `<i class="cdot" style="--c:${c.color}" title="${c.icon} ${esc(c.label)}: ${c.x >= 0 ? "+" : ""}${c.x.toFixed(1)} ATR from the 20 EMA"></i>` : ""; }catch(e){ return ""; } }
 
 /* ============================================================ routes */
-const PAGES = [
-  ["today","Today","today", [["today","Dashboard"],["today-desk","🎯 My Desk"],["today-strategies","Strategies"],["today-alist","A list"]]],
-  ["scanner","Scanner","scanner", [["scanner","F&O"],["scanner-equity","Equity"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["scanner-options","📈 Options"],["scanner-chains","⛓ Option screener"],["scanner-bear","🐻 Bearish"],["lab","🧪 VK Experimentals"]]],
-  ["index","Index","index", [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]]],
-  ["search","Search","search", []],
-  ["watchlist","Watchlist","watch", []],
-  ["lab","VK Experimentals","flask", [["lab","Chup-chap"],["lab-rs","RS lead"],["lab-iv","Squeeze + IV"],["lab-expiry","Expiry squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]]],
-  ["market","Market","market", [["market","Sectors"],["market-flow","⚡ Money flow"],["market-radar","🧭 Sector radar"],["market-strongest","Strongest"],["market-unusual","Unusual"],["market-fii","FII footprint"],["market-deals","Deals"],["market-stars","Stars"]]],
-];
-const TABS_ALL = ["today","scanner","index","watchlist","market"];
-const visiblePages = () => PAGES.filter(p => isAdmin() || p[0] !== "watchlist").concat(isAdmin() && USER ? [["intraday","Intraday","bolt",[]],["admin","Admin","users",[["admin","Users"],["admin-holdings","My holdings"],["admin-alerts","Alerts"],["admin-social","📣 Social kit"],["admin-scorecard","Scorecard"]]]]
-  : PRO() && USER ? [["intraday","Intraday","bolt",[]],["admin","My tools","users",[["admin-holdings","My holdings"],["admin-scorecard","Scorecard"],["intraday","Intraday"]]]] : []);
+/* ============================================================ navigation: 5 sections
+   Every old page keeps its #link; sections only group them. Some tabs hold a small group of pages
+   (Sectors, Smart money, Indexes, Lab) shown as a second row of chips. */
+const NAV_GROUPS = {
+  sectors: [["market-radar","🧭 Sector radar"],["market","Rotation chart"]],
+  smart:   [["market-fii","FII footprint"],["market-deals","Bulk & block deals"],["market-stars","Star investors"],["market-unusual","Unusual activity"]],
+  idx:     [["index","Nifty 50"],["index-bank","Bank Nifty"],["index-fin","Fin Nifty"],["index-midcap","Midcap Select"],["index-next50","Nifty Next 50"]],
+  lab:     [["lab","Chup-chap kharidari"],["lab-rs","RS lead"],["lab-iv","Squeeze + cheap vol"],["lab-expiry","Expiry short squeeze"],["lab-trap","Trapped shorts"],["lab-tlong","Trapped longs"]],
+  picks:   [["scanner","F&O setups"],["today-alist","A list"],["today-strategies","By strategy"]],
+};
+function navSections(){
+  const pro = !!(PRO() && USER), adm = !!(isAdmin() && USER);
+  const S = [
+    ["today","Today","today", [["today","Dashboard"], ...(pro ? [["today-desk","🎯 My Desk"]] : [])]],
+    ["scanner","Stocks","scanner", [["@picks","Setups"],["scanner-equity","Midcap & smallcap"],["scanner-mtf","Impulse table"],["scanner-hits","🔥 Most scanned"],["market-strongest","Strongest"],["scanner-bear","🐻 Bearish"],
+      ...(pro ? [["intraday","⚡ Intraday & BTST"]] : []),["@lab","🧪 Lab"]]],
+    ["options","Options","bolt", [["scanner-chains","⛓ Option screener"],["scanner-options","📈 Option ideas"]]],
+    ["market","Market","market", [["@sectors","🧭 Sectors"],["market-flow","⚡ Money flow"],["@smart","💰 Smart money"],["@idx","Indexes"]]],
+  ];
+  if(pro) S.push(["my","My trades","watch", [...(adm ? [["watchlist","⭐ Watchlist"],["admin-alerts","🔔 Alerts"]] : []),["admin-holdings","My holdings"],["admin-scorecard","Scorecard"]]]);
+  if(adm) S.push(["admin","Admin","users", [["admin","Users"],["admin-social","📣 Social kit"]]]);
+  S.push(["search","Search","search", []]);
+  return S;
+}
+const tabHref = t => t[0][0] === "@" ? NAV_GROUPS[t[0].slice(1)][0][0] : t[0];
+const tabHas = (t, r) => t[0][0] === "@" ? NAV_GROUPS[t[0].slice(1)].some(g => g[0] === r) : t[0] === r;
+const sectionHref = sec => sec[3].length ? tabHref(sec[3][0]) : sec[0];
+function sectionOf(r){
+  const all = navSections();
+  return all.find(sec => sec[3].some(t => tabHas(t, r))) || all.find(sec => sec[0] === r) || all.find(sec => sec[0] === r.split("-")[0]) || all[0];
+}
+const visiblePages = () => navSections();          // kept for older callers
 const route = () => (location.hash || "#today").slice(1) || "today";
-const pageOf = r => r.split("-")[0];
+const pageOf = r => sectionOf(r)[0];
 function subnav(){
-  const r = route(), p = visiblePages().find(x => x[0] === pageOf(r));
-  if(!p || !p[3].length) return "";
-  return `<nav class="subnav" aria-label="${p[1]} views">${p[3].map(([h, n]) => `<a href="#${h}" class="${r === h ? "on" : ""}">${n}</a>`).join("")}</nav>`;
+  const r = route(), sec = sectionOf(r);
+  if(!sec || !sec[3].length) return "";
+  const tabs = `<nav class="subnav" aria-label="${sec[1]} views">${sec[3].map(t => `<a href="#${tabHref(t)}" class="${tabHas(t, r) ? "on" : ""}">${t[1]}</a>`).join("")}</nav>`;
+  const grp = sec[3].find(t => t[0][0] === "@" && tabHas(t, r));
+  return tabs + (grp ? `<nav class="subnav sub2" aria-label="${grp[1]}">${NAV_GROUPS[grp[0].slice(1)].map(([h, n]) => `<a href="#${h}" class="${r === h ? "on" : ""}">${n}</a>`).join("")}</nav>` : "");
 }
 
 /* ============================================================ theme, PIN, scans */
@@ -911,7 +935,7 @@ function renderShell(){
   const brand = `<a class="brand" href="#today" aria-label="TradeReady home"><span class="mark"><svg viewBox="8 8 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 30h26M12 43h26" stroke-width="3" stroke-dasharray="1 6" opacity=".5"/><polyline points="12,38 18,33 24,40 30,34 36,39 42,30 51,17" stroke-width="5"/><polyline points="43,16 51,16 51,24" stroke-width="5"/></svg></span><span>Trade<b>Ready</b></span></a>`;
   const s = S();
   document.getElementById("rail").innerHTML = brand +
-    `<nav>${visiblePages().map(p => `<a href="#${p[0]}" class="${r===p[0]?"on":""}">${ico(p[2])}${p[1]}</a>`).join("")}<a href="/guide" target="_blank" rel="noopener">${ico("search")}How to use</a></nav>
+    `<nav>${navSections().map(p => `<a href="#${sectionHref(p)}" class="${r===p[0]?"on":""}">${ico(p[2])}${p[1]}</a>`).join("")}<a href="/guide" target="_blank" rel="noopener">${ico("search")}How to use</a></nav>
      <div class="foot">${marketPill()}
        <div>Scan ${esc(s ? when(s.generated_ist) : "")} IST</div>${scanLine()}
        <div class="acts">${isAdmin() ? `<button data-act="refresh">${ico("refresh")}Refresh</button><button data-act="scan">${ico("play")}Scan all</button>` : `<button data-act="refresh" style="grid-column:span 2">${ico("refresh")}Refresh</button>`}</div>
@@ -919,9 +943,9 @@ function renderShell(){
        ${USER ? `<div class="me">${USER.picture ? `<img src="${esc(USER.picture)}" alt="" referrerpolicy="no-referrer">` : `<span class="av">${esc((USER.name || USER.email || "?")[0].toUpperCase())}</span>`}<span>${esc(USER.name || USER.email)}</span><a href="/logout" title="Sign out" aria-label="Sign out" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700">${ico("logout")}Sign out</a></div>` : ""}</div>`;
   document.getElementById("top").innerHTML = brand +
     `<div class="top-r">${marketPill()}<button class="tbtn" data-act="refresh" aria-label="Refresh data">${ico("refresh")}</button><button class="tbtn" data-act="theme" aria-label="Switch theme">${ico(isDark() ? "sun" : "moon")}</button>${USER ? `<a class="tbtn" href="${isAdmin() ? "#admin" : "/logout"}" aria-label="${isAdmin() ? "Admin" : "Sign out"}">${ico(isAdmin() ? "users" : "logout")}</a>` : ""}</div>`;
-  const TABS = isAdmin() ? TABS_ALL : PRO() ? ["today","scanner","index","admin","market"] : ["today","scanner","index","search","market"];
-  document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = visiblePages().find(x => x[0]===k);
-    return `<a href="#${k}" class="${r===k?"on":""}">${ico(p[2])}${p[1]}</a>`; }).join("");
+  const TABS = PRO() && USER ? ["today","scanner","options","market","my"] : ["today","scanner","options","market","search"];
+  document.getElementById("tabbar").innerHTML = TABS.map(k => { const p = navSections().find(x => x[0]===k); if(!p) return "";
+    return `<a href="#${sectionHref(p)}" class="${r===k?"on":""}">${ico(p[2])}${p[1]}</a>`; }).join("");
   rightRail();
 }
 
@@ -1341,13 +1365,12 @@ async function pageDashboard(){
     <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
     <div class="grid">
       ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${radarCard()}${top5Card()}${mostScannedCard()}
-      ${tradesCard()}
-      ${partsCard()}${vkCard()}
-      ${strongestCard()}${readyCard()}
       ${moneyCard()}${moversCard()}
-      ${heatCard()}
-      ${sectorCard()}<div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
-    </div>`;
+    </div>
+    <section class="card fade" style="margin-top:14px"><div class="ct"><h2>Go deeper</h2></div><div class="golinks">
+      ${[["#scanner","🔍","Stock setups","Every F&O setup, graded"],["#scanner-mtf","📊","Impulse table","Monthly · Weekly · Daily trend"],["#scanner-chains","⛓","Option screener","What writers are doing"],
+         ["#market-radar","🧭","Sectors","Radar, rotation, stocks inside"],["#market-fii","💰","Smart money","FII, deals, star investors"],["#index","📈","Indexes","Nifty, Bank Nifty and more"]]
+        .map(([h, i, t, d]) => `<a href="${h}"><span>${i}</span><b>${t}</b><small>${d}</small></a>`).join("")}</div></section>`;
 }
 
 
@@ -1593,7 +1616,7 @@ const LAB_INFO = {
 async function pageLab(){
   const r = route(), key = LAB_INFO[r] ? r : "lab", info = LAB_INFO[key];
   const x = await getJSON("experimental.json").catch(() => null);
-  const tabs = `<nav class="subnav" aria-label="Lab scanners">${LAB_TABS.map(([h, n]) => `<a href="#${h}" class="${key === h ? "on" : ""}">${n}</a>`).join("")}</nav>`;
+  const tabs = subnav();                                     // Stocks tabs + the Lab scanners row
   const head = pageHead("VK Experimentals", `New scanners under test${x ? ` · scanned ${esc(when(x.generated_ist))}` : ""}`) + tabs + `
     <section class="card fade labinfo"><div class="ct"><h2>${esc(info.t)}<em>${esc(info.sub)}</em></h2></div><span class="chip" style="--c:var(--warn);margin:-4px 0 8px">🧪 Experimental · not tested yet</span>
       <div class="lab2"><div><div class="lbl">How it works</div><p>${esc(info.how)}</p></div><div><div class="lbl">How to use it</div><p>${esc(info.use)}</p></div></div>
@@ -2647,7 +2670,7 @@ async function pageWatchlist(){
       <textarea class="note" id="note-${esc(w.symbol)}" placeholder="Remarks: your notes on this stock" maxlength="1000">${esc(w.note || "")}</textarea>
       <div class="acts"><span class="muted" style="font-size:11.5px;margin-right:auto;align-self:center">${w.added ? "Added " + esc(w.added) : ""}</span>
         <button class="btn2 danger" data-unwatch="${esc(w.symbol)}">Remove</button><button class="btn2" data-note="${esc(w.symbol)}">Save note</button></div></article>`; };
-  return pageHead("Watchlist", `${plural(WATCH.length, "stock")} · ${nReady} Ready now${WATCH_LIVE ? "" : " · read-only here"}`) +
+  return pageHead("Watchlist", `${plural(WATCH.length, "stock")} · ${nReady} Ready now${WATCH_LIVE ? "" : " · read-only here"}`) + subnav() +
     `<form class="inrow" id="wl-add" style="margin-bottom:14px"><input class="in" id="wl-sym" list="syms" placeholder="Add a stock, e.g. INFY" autocomplete="off" autocapitalize="characters"><button class="btn">Add</button></form>
      <datalist id="syms">${syms.map(s => `<option value="${esc(s)}">`).join("")}</datalist>
      ${order.length ? `<div class="cards">${order.map(item).join("")}</div>` : `<div class="empty">Your watchlist is empty. Tap ☆ next to any stock, or add one above.</div>`}
@@ -2903,7 +2926,7 @@ async function pageIntraday(){
     body = keys.length ? `<div class="filters">${keys.map(k => `<button data-ich="${esc(k)}" class="${k === pick ? "on" : ""}">${esc(k)}</button>`).join("")}</div>${intraChainTable(chains[pick])}` : `<div class="empty">No option chains this run.</div>`;
   }
   const b = d.breadth || {};
-  return pageHead("Intraday & BTST", `${live ? "Today" : "Last session " + esc(d.session)} · scan ${esc(d.at)} IST · candles a few minutes late · refreshes every 2 min`) +
+  return pageHead("Intraday & BTST", `${live ? "Today" : "Last session " + esc(d.session)} · scan ${esc(d.at)} IST · candles a few minutes late · refreshes every 2 min`) + subnav() +
     (live ? "" : `<div class="empty" style="margin-bottom:12px;text-align:left">Market closed: showing the last session. The scan restarts at 9:15 am on the next trading day.</div>`) +
     `<div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:14px">
       <div><small>F&amp;O up / down</small><b><span class="up">${b.up ?? "—"}</span> / <span class="down">${b.down ?? "—"}</span></b></div>
@@ -2973,6 +2996,8 @@ function ping(){
 }
 setInterval(() => { if(document.visibilityState === "visible") ping(); }, 60000);
 async function render(){
+  { const r0 = route(), sec = navSections().find(x => x[0] === r0);            // a bare section link (#options, #my) opens its first tab
+    if(sec && !VIEWS[r0] && sec[3].length){ location.replace("#" + sectionHref(sec)); return; } }
   renderShell();
   const main = document.getElementById("main"), id = ++RENDER_ID, r = route();
   if(!S()){ main.innerHTML = `<div class="soon"><h1>Loading…</h1><p>Fetching the latest scan.</p></div>`; return; }
@@ -2991,6 +3016,7 @@ async function render(){
   const y = scrollY, keep = render.keepScroll;
   const paint = () => {
     main.innerHTML = html + `<p class="foot-note">For study and tracking only. Not investment advice.</p>`;
+    main.querySelectorAll(".subnav").forEach(n => { const on = n.querySelector(".on"); if(on && n.scrollWidth > n.clientWidth) n.scrollLeft = on.offsetLeft - (n.clientWidth - on.offsetWidth) / 2; });   // keep the active tab in view on phones
     if(keep){ scrollTo(0, y); render.keepScroll = false; } else countUps(main);
   };
   if(!keep && document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(paint); else paint();
