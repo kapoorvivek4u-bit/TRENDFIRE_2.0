@@ -1507,13 +1507,13 @@ async function pageDashboard(){
     <div class="grid">${flowMiniCard()}${weatherCard()}${newsCard()}</div>
     <div style="margin-top:14px">${bellStrip()}${headsUpCard()}${indexStrip()}</div>
     <div class="grid">
-      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${radarCard()}${top5Card()}${mostScannedCard()}
+      ${BEAR() && BEAR().bear_mode ? bearBanner() + bottom5Card() + weakestCard() : ""}${radarCard()}${rotSnapshotCard()}${top5Card()}${mostScannedCard()}
       ${tradesCard()}
       ${partsCard()}${vkCard()}
       ${strongestCard()}${readyCard()}
       ${moneyCard()}${moversCard()}
       ${heatCard()}
-      ${rotSnapshotCard()}<div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
+      <div class="s5" style="display:grid;gap:14px;align-content:start">${!isAdmin() ? moversCardSmall() : watchCard() || `<section class="card"><div class="ct"><h2>Watchlist</h2></div><div class="empty">Tap ☆ next to any stock to add it.</div></section>`}</div>
     </div>`;
 }
 
