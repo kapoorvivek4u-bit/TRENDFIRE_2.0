@@ -1310,7 +1310,7 @@ function radarStockList(sec){
   const stc = v => v === "Impulse" ? "var(--up)" : v === "Bearish" ? "var(--down)" : (MTF_PH[v] || [0, "var(--muted)"])[1];
   let last = "";
   return `<div class="radstk">${L.map(x => { const [ic, col] = RSTK_G[x.grp], head = x.grp !== last ? (last = x.grp, `<div class="radsg" style="color:${col}">${ic} ${x.grp}</div>`) : "";
-    return head + `<div class="radsr"><div style="min-width:0;flex:1"><div class="symrow">${symLink(x.s, 15)}<span class="muted mono" style="font-size:12px">₹${fmt(x.r.c)}</span></div>
+    return head + `<div class="radsr"><div style="min-width:0;flex:1"><div class="symrow">${symLink(x.s, 15)}${starBtn(x.s)}<span class="muted mono" style="font-size:12px">₹${fmt(x.r.c)}</span></div>
       <div class="chips" style="margin-top:4px">${["M","W","D"].map(k => `<span class="chip" style="--c:${stc(x.r[k])}">${k} ${esc(ph(x.r[k]) || "—")}</span>`).join("")}${x.cz ? chaseChip(x.s, true) : ""}</div>
       <div class="muted" style="font-size:12px;margin-top:3px">${x.why.map(esc).join(" · ") || "no strong signal"}</div></div>
       <b class="mono radss" style="color:${x.sc >= 60 ? "var(--up)" : x.sc >= 45 ? "#e0a400" : "var(--down)"}">${x.sc}</b></div>`; }).join("")}
@@ -1429,7 +1429,7 @@ async function pageDesk(){
   const secs = (rad.sectors || []).filter(x => x.group === "Gaining steam").slice(0, 3), turn = (rad.sectors || []).filter(x => x.group === "Possible turnaround").slice(0, 2);
   const head = pageHead("🎯 My Desk", `3–5 day positional F&O · scan ${esc(when((S() || {}).generated_ist))}`) + subnav();
   const card = (p, i) => { const [ic, lab, col, help] = DESK_ST[p.status];
-    return `<div class="dk"><div class="dkh"><span class="dkn">${i + 1}</span>${symLink(p.sym, 17)}<span class="muted" style="font-size:12.5px">${esc(p.sec || "")}</span>
+    return `<div class="dk"><div class="dkh"><span class="dkn">${i + 1}</span>${symLink(p.sym, 17)}${starBtn(p.sym)}<span class="muted" style="font-size:12.5px">${esc(p.sec || "")}</span>
         <span class="chip" style="--c:${col};margin-left:auto">${ic} ${lab}</span></div>
       <div class="dkplan">${p.entry ? `<span>Entry <b class="mono">₹${fmt(p.entry)}</b></span>` : `<span>Entry <b>on trigger</b></span>`}
         ${p.stop ? `<span>Stop <b class="mono">₹${fmt(p.stop)}</b>${p.risk && p.entry ? ` <i class="muted">(${(p.risk / p.entry * 100).toFixed(1)}%)</i>` : ""}</span>` : ""}
@@ -2018,7 +2018,7 @@ async function pageAlerts(){
   const st = s => { const m = (S().mtf || []).find(r => r.s === s), rd = (S().ready || []).find(r => r.symbol === s), q = livePx(s);
     return {m, rd, px: q ? q.close : m ? m.c : (S().closes || {})[s]}; };
   const row = it => { const x = st(it.s);
-    return `<tr><td><div class="symrow">${symLink(it.s, 13.5, false)}</div>${it.note ? `<div class="muted" style="font-size:11.5px">${esc(it.note)}</div>` : ""}</td>
+    return `<tr><td><div class="symrow">${symLink(it.s, 13.5, false)}${starBtn(it.s)}</div>${it.note ? `<div class="muted" style="font-size:11.5px">${esc(it.note)}</div>` : ""}</td>
       <td>${esc(it.strat)}</td><td class="n">${it.level ? "₹" + fmt(it.level) : "—"}</td><td class="n">${fmt(x.px)}</td><td>${chaseChip(it.s)}</td>
       <td>${x.m ? ["M","W","D"].map(k => { const v = x.m[k]; return !v || v === "No data" ? "" : chip(`${k} ${v === "Impulse" ? "Imp" : (MTF_PH[v]||[v])[0]}`, v === "Impulse" ? "var(--up)" : (MTF_PH[v]||[0,"var(--muted)"])[1]); }).join("") : `<span class="muted">—</span>`}</td>
       <td>${x.rd ? chip(`${x.rd.setup} ${x.rd.stage}`, SETUP_STAGE_C[x.rd.stage] || "var(--muted)") : `<span class="muted">—</span>`}</td>
@@ -2171,7 +2171,7 @@ function mostScannedCard(){
   const h = Object.entries((S() || {}).hits || {}).filter(([, v]) => v.n >= 3).slice(0, 10);
   if(!h.length) return "";
   return `<section class="card s5 fade"><div class="ct"><h2>Most scanned today<em>in 3+ scans</em></h2><a class="more" href="#scanner-hits">All ›</a></div>
-    <div class="list">${h.map(([s, v]) => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(s, 14)}</div>
+    <div class="list">${h.map(([s, v]) => `<div class="li"><div style="min-width:0"><div class="symrow">${symLink(s, 14)}${starBtn(s)}</div>
       <div class="muted" style="font-size:12px;margin-top:2px">${v.e.length} early · ${v.s.length} strength${v.w.length ? " · ⚠️ " + esc(v.w.join(", ")) : ""}</div></div>
       <div class="r"><span class="hcat" style="--c:${HIT_C(v.n)}">🔥 ${v.n}</span></div></div>`).join("")}</div></section>`;
 }
@@ -2276,7 +2276,7 @@ function bottom5Card(){
 function weakestCard(){
   const b = BEAR(); if(!b || !(b.weakest || []).length) return "";
   return `<section class="card s5 fade"><div class="ct"><h2>Weakest stocks<em>F&O · vs Nifty</em></h2><a class="more" href="#scanner-bear">All ›</a></div>
-    <div class="list">${b.weakest.slice(0, 8).map(x => `<div class="st"><span class="rk" style="color:var(--down)">#${x.rank}</span><div style="min-width:0"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${symLink(x.symbol, 14)}<span class="muted" style="font-size:12px">${esc(x.sector || "")} · ${fmt(x.close)}</span></div>
+    <div class="list">${b.weakest.slice(0, 8).map(x => `<div class="st"><span class="rk" style="color:var(--down)">#${x.rank}</span><div style="min-width:0"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${symLink(x.symbol, 14)}${starBtn(x.symbol)}<span class="muted" style="font-size:12px">${esc(x.sector || "")} · ${fmt(x.close)}</span></div>
       <div class="chips">${x.why.slice(0, 4).map(w => chip(w, "var(--down)")).join("")}</div></div><span class="scr" style="color:var(--down)">${x.score}</span></div>`).join("")}</div></section>`;
 }
 function bearBanner(){
@@ -2459,7 +2459,7 @@ async function pageOScreen(){
     <section class="card" style="margin-top:12px"><div class="ct"><h2>${plural(rows.length, "stock")}</h2></div>
     ${rows.length ? `<div class="tw"><table class="t labt"><tr><th>Stock</th><th>Bias</th><th>What writers are doing</th><th class="n">Calls above</th><th class="n">Puts below</th><th class="n">PCR</th><th>Range (support – resistance)</th><th class="n">Max pain</th><th>Chase</th></tr>
       ${rows.map(r => { const q = livePx(r.s), px = q ? q.close : r.spot;
-        return `<tr><td><div class="symrow">${symLink(r.s, 13.5)}</div><div class="muted" style="font-size:11.5px">${fmt(px)}${q ? ` <span class="${cls(q.chg)}">${pct(q.chg, 1)}</span>` : ""}</div></td>
+        return `<tr><td><div class="symrow">${symLink(r.s, 13.5)}${starBtn(r.s)}</div><div class="muted" style="font-size:11.5px">${fmt(px)}${q ? ` <span class="${cls(q.chg)}">${pct(q.chg, 1)}</span>` : ""}</div></td>
         <td><span class="hcat" style="--c:${r.score >= 1 ? "var(--up)" : r.score <= -1 ? "var(--down)" : "var(--muted)"}">${esc(r.bias)}</span></td>
         <td style="white-space:normal;min-width:170px"><div class="chips">${r.sig.map(sigChip).join("") || `<span class="muted">—</span>`}</div></td>
         <td class="n ${r.cover_pct < 0 ? "up" : r.cover_pct > 0 ? "down" : "muted"}" title="Change in call OI over the 5 strikes above the price (negative = writers covering: good for bulls)">${pct(r.cover_pct)}</td>
@@ -3369,7 +3369,7 @@ function intraCard(x, side, chains){
   const sc = side === "L" ? x.L : side === "S" ? x.S : side === "BL" ? x.bl : x.bs;
   const c = L ? "var(--up)" : "var(--down)";
   return `<article class="sc" style="--stc:${c}">
-    <div class="row1"><div class="symrow">${symLink(x.s)}<span class="px">${fmt(x.c)}</span><b class="num ${cls(x.chg)}" style="font-size:12.5px">${pct(x.chg, 2)}</b></div>
+    <div class="row1"><div class="symrow">${symLink(x.s)}${starBtn(x.s)}<span class="px">${fmt(x.c)}</span><b class="num ${cls(x.chg)}" style="font-size:12.5px">${pct(x.chg, 2)}</b></div>
       <span class="grade" style="background:color-mix(in srgb,${c} 16%,transparent);color:${c}" title="Score">${sc}</span></div>
     <div class="chips">${wallChips(x.s)}${x.sec ? chip(x.sec) : ""}${x.res ? chip("Results " + x.res, "var(--warn)") : ""}${x.oi != null ? chip(`OI ${pct(x.oi)}`, x.oi > 0 ? "var(--accent2)" : "var(--muted)") : ""}${x.rvol ? chip(`Vol ${x.rvol}x`, x.rvol >= 1.5 ? "var(--accent2)" : "var(--muted)") : ""}</div>
     ${intraChart(x)}
@@ -3421,14 +3421,14 @@ async function pageIntraday(){
     const past = (res.past || []).find(p => p.session < d.session);
     const review = past ? `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>${L ? "BTST" : "STBT"} from ${esc(past.session)}<em>how they did since</em></h2></div>
       ${(L ? past.btst : past.stbt).map(p => { const now = (d.prices || {})[p.s], ch = now && p.c ? (now / p.c - 1) * 100 * (L ? 1 : -1) : null;
-        return `<div class="mv"><span>${symLink(p.s, 14)} <span class="muted">at ${fmt(p.c)} · score ${p.score}</span></span><b class="${cls(ch)}">${ch == null ? "—" : pct(ch, 2)}</b></div>`; }).join("") || `<div class="muted">None that day.</div>`}
+        return `<div class="mv"><span>${symLink(p.s, 14)}${starBtn(p.s)} <span class="muted">at ${fmt(p.c)} · score ${p.score}</span></span><b class="${cls(ch)}">${ch == null ? "—" : pct(ch, 2)}</b></div>`; }).join("") || `<div class="muted">None that day.</div>`}
       <div class="muted" style="font-size:11.5px;margin-top:6px">${L ? "Gain" : "Gain on the short"} from that day's close to the latest price.</div></section>` : "";
     body = `<div class="muted" style="font-size:12.5px;margin-bottom:10px">${d.final ? "Final list for today (after 3:10 pm)." : "Early read. The list firms up after 3 pm; the final one is saved at 3:10 pm."} Stocks with results due are left out.</div>
       <div class="cards">${list.map(x => intraCard(x, L ? "BL" : "BS", chains)).join("") || `<div class="empty">Nothing scores 5 or more yet.</div>`}</div>${review}`;
   }
   if(tab === "oi") body = `<div class="muted" style="font-size:12.5px;margin-bottom:10px">Today's change in total F&amp;O open interest per stock (NSE, ${esc(d.oi_time || "")}) against today's price move.</div>
     <div class="cards">${Object.keys(IQ).map(k => `<section class="card"><div class="ct"><h2 style="color:${IQ[k][1]}">${IQ[k][0]}<em>${(d.board[k] || []).length}</em></h2></div>
-      ${(d.board[k] || []).map(r => `<div class="mv"><span>${symLink(r.s, 14)} <span class="muted" style="font-size:11.5px">${esc(r.sec || "")}</span></span><span class="num"><span class="muted">OI ${pct(r.oi)}</span> <b class="${cls(r.chg)}">${pct(r.chg, 2)}</b></span></div>`).join("") || `<div class="muted">None</div>`}</section>`).join("")}</div>`;
+      ${(d.board[k] || []).map(r => `<div class="mv"><span>${symLink(r.s, 14)}${starBtn(r.s)} <span class="muted" style="font-size:11.5px">${esc(r.sec || "")}</span></span><span class="num"><span class="muted">OI ${pct(r.oi)}</span> <b class="${cls(r.chg)}">${pct(r.chg, 2)}</b></span></div>`).join("") || `<div class="muted">None</div>`}</section>`).join("")}</div>`;
   if(tab === "chain"){
     const keys = Object.keys(chains), pick = keys.includes(UI.ich) ? UI.ich : keys[0];
     body = keys.length ? `<div class="filters">${keys.map(k => `<button data-ich="${esc(k)}" class="${k === pick ? "on" : ""}">${esc(k)}</button>`).join("")}</div>${intraChainTable(chains[pick])}` : `<div class="empty">No option chains this run.</div>`;
@@ -3468,7 +3468,7 @@ async function pageFII(){
     : `<section class="card fade"><div class="empty">FII positions from NSE will appear after the evening scan.</div></section>`;
   const deals = f.deals || [];
   const dealsCard = `<section class="card fade" style="margin-top:14px"><div class="ct"><h2>FII bulk and block deals<em>F&amp;O stocks · last 30 days</em></h2></div>
-    ${deals.length ? deals.map(x => `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;gap:8px">${symLink(x.symbol, 14)}<b class="num ${cls(x.net_cr)}">net ₹${fmt(x.net_cr, 1)} Cr</b></div>
+    ${deals.length ? deals.map(x => `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;gap:8px">${symLink(x.symbol, 14)}${starBtn(x.symbol)}<b class="num ${cls(x.net_cr)}">net ₹${fmt(x.net_cr, 1)} Cr</b></div>
       ${x.deals.map(dd => `<div class="muted" style="font-size:12px">${esc(dshort(dd.date))} · ${chip(dd.side === "BUY" ? "Buy" : "Sell", dd.side === "BUY" ? "var(--up)" : "var(--down)")} ${esc(dd.who)} · ₹${fmt(dd.value_cr, 1)} Cr at ${fmt(dd.price)}</div>`).join("")}</div>`).join("")
       : `<div class="muted" style="font-size:12.5px">No foreign institution bulk or block deals in F&amp;O stocks in the last 30 days. Big FIIs rarely buy F&amp;O stocks through bulk deals; their buying mostly shows in futures OI (below) and in quarterly holdings.</div>`}</section>`;
   const tab = UI.fiiTab || "acc", list = tab === "acc" ? (f.accumulation || []) : (f.distribution || []);
